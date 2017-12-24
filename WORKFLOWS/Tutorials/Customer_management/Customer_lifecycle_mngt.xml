@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Customer management</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Tenant ID" displayOrder="0" isMandatory="true" maxLength="100" name="params.operator_prefix" startIncrement="0" type="String"/>
+    <variable displayName="Customer Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.customer_name" startIncrement="0" type="String"/>
+    <variable displayName="Customer Reference" displayOrder="2" isUserLocked="true" maxLength="100" name="params.customer_reference" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Customer ID" displayOrder="3" isUserLocked="true" maxLength="100" name="params.customer_id" startIncrement="0" type="String"/>
+    <variable displayName="Device Name" displayOrder="4" isMandatory="true" maxLength="100" name="params.device_name" startIncrement="0" type="String"/>
+    <variable displayName="Device ID" displayOrder="5" isUserLocked="true" maxLength="100" name="params.device_id" startIncrement="0" type="String"/>
+    <variable displayName="Device IP" displayOrder="6" maxLength="100" name="params.device_mngt_ip" startIncrement="0" type="IpAddress"/>
+    <variable default="14020601" displayName="Manufacturer" displayOrder="7" isUserLocked="true" maxLength="100" name="params.device_manufacturer" startIncrement="0" type="Integer"/>
+    <variable default="14020601" displayName="Model" displayOrder="8" maxLength="100" name="params.device_model" startIncrement="0" type="Integer"/>
+    <variable default="root" displayName="Login" displayOrder="9" maxLength="100" name="params.device_login" startIncrement="0" type="String"/>
+    <variable displayName="Password" displayOrder="10" maxLength="100" name="params.device_password" startIncrement="0" type="Password"/>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/Tutorials/Customer_management/Process_deploy_customer">
+    <visibility>5</visibility>
+    <displayName>deploy_customer</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+    
+    
+  <task name="Task_Create_Customer.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Customer_management/Process_deploy_customer/Tasks/</processPath>
+      <displayName>Create Customer</displayName>
+    </task>
+    <task name="Task_Create_Device.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Customer_management/Process_deploy_customer/Tasks/</processPath>
+      <displayName>Create Linux</displayName>
+    </task>
+    <task name="Task_Activate_Device.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Customer_management/Process_deploy_customer/Tasks/</processPath>
+      <displayName>Activate Linux</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Customer_management/Process_undeploy_customer">
+    <visibility>5</visibility>
+    <displayName>undeploy_customer</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+    <task name="Task_Delete_Customer.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Customer_management/Process_undeploy_customer/Tasks/</processPath>
+      <displayName>Delete Customer</displayName>
+    </task>
+  </process>
+</ObjectDefinition>

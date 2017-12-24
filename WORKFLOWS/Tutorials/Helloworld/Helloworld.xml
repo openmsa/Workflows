@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Helloworld</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.name" startIncrement="0" type="String"/>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/Helloworld/Process_create_instance">
+    <visibility>5</visibility>
+    <displayName>create instance</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_init.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_create_instance/Tasks/</processPath>
+      <displayName>init</displayName>
+    </task>
+  </process>
+<process name="Process/Helloworld/Process_delete_instance">
+    <visibility>5</visibility>
+    <displayName>delete instance</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+    <task name="Task_delete.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_delete_instance/Tasks/</processPath>
+      <displayName>delete</displayName>
+    </task>
+  </process>
+<process name="Process/Helloworld/Process_print_message">
+    <visibility>5</visibility>
+    <displayName>print message</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_print.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_print_message/Tasks/</processPath>
+      <displayName>print</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
