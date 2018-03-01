@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+<information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Configuration SNMP</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Services</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Snmp</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>
+<example>
+    <content>set snmp host "4ef38ccf46" 10.21.1.0 255.255.255.0
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>get conf | include "set snmp"</operation>
+    <parser>
+      <section name="snmp">
+        <regexp>@set\s+snmp\s+host\s+"+(?&lt;snmpCommunity&gt;\S+)"+\s+(?&lt;object_id&gt;\S+)\s+(?&lt;snmpMask&gt;\S+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>set snmp community {$params.snmpCommunity} Read-Only Trap-off version any
+set snmp host {$params.snmpCommunity} {$params.object_id} {$params.snmpMask}
+</operation>
+  </command>
+  <command name="READ">
+    <output>set snmp host {$snmp.$object_id.snmpCommunity} {$snmp.$object_id.object_id} {$snmp.$object_id.snmpMask}
+</output>
+  </command>
+<command name="DELETE">
+    <operation>unset snmp host {$snmp.$object_id.snmpCommunity} {$snmp.$object_id.object_id} {$snmp.$object_id.snmpMask}
+unset snmp community {$params.snmpCommunity}</operation>
+  </command>
+<variables frozen="0">
+    <variable displayName="Server address or network" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Netmask" displayOrder="1" maxLength="100" name="params.snmpMask" startIncrement="0" type="IpMask"/>
+    <variable displayName="Community" displayOrder="2" maxLength="100" name="params.snmpCommunity" startIncrement="0" type="String"/>
+  </variables>
+</ObjectDefinition>
