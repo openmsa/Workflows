@@ -25,14 +25,14 @@
     <visibility>5</visibility>
   </information>
 <example>
-    <content>set snmp host "4ef38ccf46" 10.21.1.0 255.255.255.0
+    <content>set snmp host "ubiqube" 10.21.1.0 255.255.255.0
 </content>
   </example>
 <command name="IMPORT">
     <operation>get conf | include "set snmp"</operation>
     <parser>
       <section name="snmp">
-        <regexp>@set\s+snmp\s+host\s+"+(?&lt;snmpCommunity&gt;\S+)"+\s+(?&lt;object_id&gt;\S+)\s+(?&lt;snmpMask&gt;\S+)@</regexp>
+        <regexp>@set\s+snmp\s+host\s+"+(?&lt;SnmpCommunity&gt;\S+)"+\s+(?&lt;object_id&gt;(?&lt;objectIP&gt;\S+))\s+(?&lt;SnmpMask&gt;\S+)@</regexp>
         
         
       </section>
@@ -43,21 +43,25 @@
   <post_template/>
   </command>
 <command name="CREATE">
-    <operation>set snmp community {$params.snmpCommunity} Read-Only Trap-off version any
-set snmp host {$params.snmpCommunity} {$params.object_id} {$params.snmpMask}
+    <operation>set snmp community {$params.SnmpCommunity} Read-Only trap-off version any
+set snmp host {$params.SnmpCommunity} {$params.objectIP} {$params.SnmpMask}
 </operation>
   </command>
-  <command name="READ">
-    <output>set snmp host {$snmp.$object_id.snmpCommunity} {$snmp.$object_id.object_id} {$snmp.$object_id.snmpMask}
-</output>
-  </command>
+  
 <command name="DELETE">
-    <operation>unset snmp host {$snmp.$object_id.snmpCommunity} {$snmp.$object_id.object_id} {$snmp.$object_id.snmpMask}
-unset snmp community {$params.snmpCommunity}</operation>
+    <operation>{if $snmp.$object_id.SnmpMask == 'trap'}
+unset snmp host {$snmp.$object_id.SnmpCommunity} {$snmp.$object_id.objectIP}
+{/if}
+
+{if $snmp.$object_id.SnmpMask != 'trap'}
+unset snmp host {$snmp.$object_id.SnmpCommunity} {$snmp.$object_id.objectIP} {$snmp.$object_id.SnmpMask}
+{/if}
+</operation>
   </command>
 <variables frozen="0">
-    <variable displayName="Server address or network" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="IpAddress"/>
-    <variable displayName="Netmask" displayOrder="1" maxLength="100" name="params.snmpMask" startIncrement="0" type="IpMask"/>
-    <variable displayName="Community" displayOrder="2" maxLength="100" name="params.snmpCommunity" startIncrement="0" type="String"/>
+    <variable displayName="id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="AutoIncrement" visible="false"/>
+    <variable displayName="Snmp Community" displayOrder="1" maxLength="100" name="params.SnmpCommunity" startIncrement="0" type="String"/>
+    <variable displayName="object IP" displayOrder="2" maxLength="100" name="params.objectIP" startIncrement="0" type="String"/>
+    <variable displayName="Snmp Mask" displayOrder="3" maxLength="100" name="params.SnmpMask" startIncrement="0" type="String"/>
   </variables>
 </ObjectDefinition>
