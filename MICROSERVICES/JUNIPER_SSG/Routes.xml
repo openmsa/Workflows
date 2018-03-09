@@ -24,7 +24,7 @@
     <visibility>5</visibility>
   </information>  <variables frozen="0">
     <variable displayName="id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="AutoIncrement" visible="false"/>
-    <variable displayName="Rout IP" displayOrder="1" maxLength="100" name="params.RoutIP" startIncrement="0" type="String"/>
+    <variable displayName="Route IP" displayOrder="1" maxLength="100" name="params.RoutIP" startIncrement="0" type="String"/>
     <variable displayName="Route Interface" displayOrder="2" maxLength="100" name="params.RouteInterface" startIncrement="0" type="String"/>
     <variable displayName="Gateway" displayOrder="3" maxLength="100" name="params.Gateway" startIncrement="0" type="String"/>
   </variables>  <example>
