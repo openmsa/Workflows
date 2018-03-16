@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Description</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Networking</group>
+    <icon>/images/repository/CommandDefinition/icons/interface_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Admin Interface</name>
+    <order>1000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Port Name" displayOrder="0" editable="false" isMandatory="true" maxLength="100" name="params.object_id" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Port4">port4</value>
+        <value displayValue="Port5">port5</value>
+        <value displayValue="Port6">port6</value>
+        <value displayValue="Port7">port7</value>
+        <value displayValue="Port8">port8</value>
+        <value displayValue="Port9">port9</value>
+        <value displayValue="Port10">port10</value>
+      </values>
+    </variable>
+    <variable displayName="IP" displayOrder="1" groupDisplayName="IP / Netmask" isGrouped="true" maxLength="200" name="params.addressIP" startIncrement="0" type="IpMask"/>
+    <variable displayName="Netmask" displayOrder="2" groupDisplayName="IP / Netmask" groupSeparator="/" isGrouped="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
+    <variable default="false" displayName="Ping" displayOrder="3" maxLength="50" name="params.ping" startIncrement="0" type="Boolean"/>
+    <variable default="Up" displayName="Status" displayOrder="4" maxLength="50" name="params.status" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Down">down</value>
+        <value displayValue="Up">up</value>
+      </values>
+    </variable>
+    <variable default="1500" displayName="MTU" displayOrder="5" maxLength="100" name="params.mtu" startIncrement="0" type="Integer"/>
+    <variable cols="165" displayName="Comment" displayOrder="6" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="verifPing" displayOrder="7" maxLength="200" name="params.verifPing" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>edit "port8"
+        set vdom "root"
+        set mode static
+        set dhcp-relay-service disable
+        set ip 0.0.0.0 0.0.0.0
+        unset allowaccess
+        set fail-detect disable
+        set pptp-client disable
+        set arpforward enable
+        set broadcast-forward disable
+        set bfd global
+        set l2forward disable
+        set icmp-redirect enable
+        set vlanforward disable
+        set stpforward disable
+        set ips-sniffer-mode disable
+        set ident-accept disable
+        set ipmac disable
+        set subst disable
+        set status up
+        set netbios-forward disable
+        set wins-ip 0.0.0.0
+        set type physical
+        set netflow-sampler disable
+        set sflow-sampler disable
+        set sample-rate 2000
+        set polling-interval 20
+        set sample-direction both
+        set explicit-web-proxy disable
+        set explicit-ftp-proxy disable
+        set tcp-mss 0
+        set inbandwidth 0
+        set outbandwidth 0
+        set spillover-threshold 0
+        set weight 0
+        set external disable
+        set description ''
+        set alias ''
+        set security-mode none
+        set device-identification disable
+        set lldp-transmission vdom
+        set listen-forticlient-connection disable
+        set vrrp-virtual-mac disable
+        set snmp-index 8
+        set secondary-IP disable
+            config ipv6
+                set ip6-mode static
+                unset ip6-allowaccess
+                set ip6-reachable-time 0
+                set ip6-retrans-time 0
+                set ip6-hop-limit 0
+                set ip6-address ::/0
+                set ip6-send-adv disable
+                set autoconf disable
+                set dhcp6-relay-service disable
+            end
+        unset dhcp-relay-ip
+        set dhcp-relay-type regular
+        unset macaddr
+        set speed auto
+        set mtu-override disable
+        set wccp disable
+        set drop-overlapped-fragment disable
+        set drop-fragment disable
+    next
+</content>
+  </example>
+
+<command name="IMPORT">
+    <operation>show full-configuration system interface</operation>
+    <parser>
+      <section>
+        <regexp>@edit "(?&lt;object_id&gt;(port[4-9]|port10))"@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@ set @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ config @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ unset @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ next@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ end@</regexp>
+        </ignore>
+        <line>
+          <regexp>@set ip (?&lt;addressIP&gt;\S+) (?&lt;mask&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set allowaccess (?&lt;verifPing&gt;ping)@</regexp>
+        </line>
+        <line>
+          <regexp>@set mtu (?&lt;mtu&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set status (?&lt;status&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set description "(?&lt;comment&gt;[^"]+)"@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{if empty($params.verifPing)}
+{assign_object_variable var="ping" value="false"}
+{else}
+{assign_object_variable var="ping" value="true"}
+{/if}
+</post_template>
+  </command>
+
+<command name="UPDATE">
+    <operation>config system interface
+edit "{$params.object_id}"
+{if empty($params.addressIP) &amp;&amp; empty($params.mask)}
+unset ip
+{else}
+set ip {$params.addressIP} {$params.mask}
+{/if}
+set mtu-override enable
+set mtu {$params.mtu}
+{if isset($params.ping)}
+  {if $params.ping=="true" }
+    set allowaccess ping
+  {else}
+    unset allowaccess
+  {/if}
+{/if}
+set ident-accept enable
+set status {$params.status}
+{if empty($params.comment)}
+unset description
+{else}
+set description "{$params.comment}"
+{/if}
+end
+</operation>
+  </command>
+
+</ObjectDefinition>

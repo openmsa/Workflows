@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Networking</group>
+    <icon>/images/repository/CommandDefinition/icons/interface_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>999</maxInstances>
+    <name>Routing</name>
+    <order>1010</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="AutoIncrement"/>
+    <variable default="0.0.0.0" displayName="Destination IP" displayOrder="1" isMandatory="true" maxLength="200" name="params.ip_dest" startIncrement="0" type="IpMask"/>
+    <variable default="0.0.0.0" displayName="Subnet Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
+    <variable default="0.0.0.0" displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gw" startIncrement="0" type="IpMask"/>
+    <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.interface" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Port4">port4</value>
+        <value displayValue="Port5">port5</value>
+        <value displayValue="Port6">port6</value>
+        <value displayValue="Port7">port7</value>
+        <value displayValue="Port8">port8</value>
+        <value displayValue="Port9">port9</value>
+        <value displayValue="port10">port10</value>
+      </values>
+    </variable>
+    <variable cols="165" displayName="Comment" displayOrder="5" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>UBI-SITONECELL-MASTE~001 # show full-configuration route static 
+config router static
+    edit 1
+        set blackhole disable
+        set comment ''
+        set device "port1"
+        set distance 10
+        set dst 0.0.0.0 0.0.0.0
+        set dynamic-gateway disable
+        set gateway 10.30.19.254
+        set priority 0
+        set weight 0
+    next
+</content>
+  </example>
+<command name="CREATE">
+    <operation>{if $params.object_id &lt;1000}
+config router static
+edit {$params.object_id}
+set dst {$params.ip_dest} {$params.mask}
+set gateway {$params.gw}
+set device {$params.interface}
+{if empty($params.comment)}
+unset comment
+{else}
+set comment "{$params.comment}"
+{/if}
+next
+end
+{/if}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>show full-configuration router static </operation>
+    <parser>
+      <section>
+        <regexp>@edit (?!1000)(?&lt;object_id&gt;\d+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@set comment "(?&lt;comment&gt;[^"]+)"@</regexp>
+        </line>  
+        <ignore>
+          <regexp>@set @</regexp>
+        </ignore>
+        <line>
+          <regexp>@set device "(?&lt;interface&gt;\S+)"@</regexp>
+        </line>
+        <line>
+          <regexp>@set dst (?&lt;ip_dest&gt;\S+) (?&lt;mask&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set gateway (?&lt;gw&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="UPDATE">
+    <operation>config router static
+edit {$params.object_id}
+set dst {$params.ip_dest} {$params.mask}
+set gateway {$params.gw}
+set device {$params.interface}
+{if empty($params.comment)}
+unset comment
+{else}
+set comment "{$params.comment}"
+{/if}
+next
+end
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>config router static 
+delete "{$params.object_id}"
+end
+</operation>
+  </command>
+
+<command name="CONSTRAINT">
+    <operation>{if !empty($params.ip_dest) &amp;&amp; !empty($params.gw)}
+{if is_in_network($params.ip_dest, "100.64.0.0", "255.192.0.0") || is_in_network($params.gw, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
+{/if}
+{/if}
+
+</operation>
+  </command>
+</ObjectDefinition>
