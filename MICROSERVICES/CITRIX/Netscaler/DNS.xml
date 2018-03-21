@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Networking</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>DNS</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="object_id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="Index" visible="false"/>
+    <variable displayName="DNS IP" displayOrder="1" maxLength="100" name="params.dnsIP" startIncrement="0" type="String">
+      <indexVariables>
+        <var>DNS</var>
+      </indexVariables>
+    </variable>
+    <variable default="ENABLED" displayName="Status" displayOrder="2" maxLength="100" name="params.Status" startIncrement="0" type="String">
+      <values>
+        <value>ENABLED</value>
+        <value>DISABLED</value>
+      </values>
+    </variable>
+    <variable default="UDP" displayName="Protocol type" displayOrder="3" isUserLocked="true" maxLength="100" name="params.Protocoltype" startIncrement="0" type="String"/>
+    <variable displayName="DNS Profile Name" displayOrder="4" maxLength="100" name="params.DnsProfileName" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>1)       8.8.8.8 LOCAL -  State: UP     Protocol: UDP
+        DNS profile name: GooglePublicDN
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show dns nameServer</operation>
+    <parser>
+      <section>
+        
+        <regexp>@\d+\)\s+(?&lt;object_id&gt;(?&lt;dnsIP&gt;\S+))+\s+LOCAL+\s+\-+\s+State:\s(?&lt;Status&gt;[A-Z ]*\S+)+\s+Protocol:+\s+(?&lt;Protocoltype&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@DNS profile name:+\s+(?&lt;DnsProfileName&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="CREATE">
+    <operation>add dns profile {$params.DnsProfileName}
+add dns nameServer {$params.dnsIP} -local -state {$params.Status} -type {$params.Protocoltype} -dnsProfileName {$params.DnsProfileName}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>rm dns nameServer {$DNS.$object_id.dnsIP}
+</operation>
+  </command>
+</ObjectDefinition>
