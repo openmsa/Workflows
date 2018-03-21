@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Networking</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Route</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="object_id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="Index"/>
+    <variable displayName="Network" displayOrder="1" maxLength="100" name="params.network" startIncrement="0" type="String"/>
+    <variable displayName="Netmask" displayOrder="2" maxLength="100" name="params.netmask" startIncrement="0" type="String"/>
+    <variable displayName="Gateway IP" displayOrder="3" maxLength="100" name="params.gateway_ip" startIncrement="0" type="String"/>
+    <variable displayName="Status" displayOrder="4" isUserLocked="true" maxLength="100" name="params.status" startIncrement="0" type="String"/>
+    <variable displayName="Traffic domain" displayOrder="5" isUserLocked="true" maxLength="100" name="params.traffic_domain" startIncrement="0" type="Integer"/>
+    <variable displayName="Type" displayOrder="6" isUserLocked="true" maxLength="100" name="params.type" startIncrement="0" type="String"/>
+    <variable displayName="Distance" displayOrder="7" maxLength="100" name="params.distance" startIncrement="0" type="Integer"/>
+    <variable displayName="Weight" displayOrder="8" maxLength="100" name="params.weight" startIncrement="0" type="Integer"/>
+    <variable displayName="Protocol" displayOrder="9" maxLength="100" name="params.protocol" startIncrement="0" type="String">
+      <values>
+        <value>ISIS</value>
+        <value>RIP</value>
+        <value>BGP</value>
+        <value>OSPF</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>show route</operation>
+    <parser>
+      <section>
+        <regexp>@\s+(?&lt;object_id&gt;(?&lt;network&gt;\d+\.\d+\.\d+\.\d+)\s+(?&lt;netmask&gt;\d+\.\d+\.\d+\.\d+)\s+(?&lt;gateway_ip&gt;\d+\.\d+\.\d+\.\d+))\s+(?&lt;status&gt;\S+)\s+(?&lt;traffic_domain&gt;\d+)\s+(?&lt;type&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>add route {$params.network} {$params.netmask} {$params.gateway_ip} {if !empty($params.distance)}-distance {$params.distance}{/if} {if !empty($params.weight)}-weight {$params.weight}{/if} {if !empty($params.protocol)}-protocol {$params.protocol}{/if}</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>set route {$params.object_id} {if !empty($params.distance)}-distance {$params.distance}{/if} {if !empty($params.weight)}-weight {$params.weight}{/if} {if !empty($params.protocol)}-protocol {$params.protocol}{/if}</operation>
+  </command>
+  <command name="DELETE">
+    <operation>rm route {$params.object_id}
+</operation>
+  </command>
+</ObjectDefinition>
