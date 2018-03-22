@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>vpc_ref</displayField>
+    <dynamic>false</dynamic>
+    <group>EC2</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VPC</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="VPC Id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="CIDR Block" displayOrder="1" maxLength="100" name="params.cidr_block" startIncrement="0" type="String"/>
+    <variable displayName="State" displayOrder="2" maxLength="100" name="params.state" startIncrement="0" type="String"/>
+    <variable displayName="vpc_ref" displayOrder="3" maxLength="100" name="params.vpc_ref" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeVpcs</xpath>
+    <parser>
+      <section>
+        <xpath>//root/Vpcs/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>VpcId</xpath>
+          <regexp>@&lt;VpcId&gt;(?&lt;object_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>CidrBlock</xpath>
+          <regexp>@&lt;CidrBlock&gt;(?&lt;cidr_block&gt;.*)&lt;/CidrBlock&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{assign_object_variable var="vpc_ref" value="{$params.object_id} - {$params.cidr_block}"}</post_template>
+  </command>
+</ObjectDefinition>
