@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>EC2</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Security Groups</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="object_id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="from_port" displayOrder="2" maxLength="100" name="params.ip_permissions.0.from_port" startIncrement="0" type="String">
+      <sections>
+        <section>ip_permissions</section>
+      </sections>
+    </variable>
+    <variable displayName="ip_protocol" displayOrder="3" maxLength="100" name="params.ip_permissions.0.ip_protocol" startIncrement="0" type="String">
+      <sections>
+        <section>ip_permissions</section>
+      </sections>
+    </variable>
+    <variable displayName="group_name" displayOrder="5" isMandatory="true" maxLength="100" name="params.group_name" startIncrement="0" type="String"/>
+    <variable displayName="description" displayOrder="6" isMandatory="true" maxLength="100" name="params.description" startIncrement="0" type="String"/>
+    <variable displayName="vpcid" displayOrder="7" maxLength="100" name="params.vpcid" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeSecurityGroups</xpath>
+    <parser>
+      <section>
+        <xpath>//root/SecurityGroups/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>GroupId</xpath>
+          <regexp>@&lt;GroupId&gt;(?&lt;object_id&gt;.*)&lt;/GroupId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>GroupName</xpath>
+          <regexp>@&lt;GroupName&gt;(?&lt;group_name&gt;.*)&lt;/GroupName&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>Description</xpath>
+          <regexp>@&lt;Description&gt;(?&lt;description&gt;.*)&lt;/Description&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>VpcId</xpath>
+          <regexp>@&lt;VpcId&gt;(?&lt;vpcid&gt;.*)&lt;/VpcId&gt;@</regexp>
+        </line>
+        <line>
+          <array name="ip_permissions">
+            <xpath>IpPermissions/row</xpath>
+            <lines>
+              <line>
+                <xpath>FromPort</xpath>
+                <regexp>@&lt;FromPort&gt;(?&lt;from_port&gt;.*)&lt;/FromPort&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>IpProtocol</xpath>
+                <regexp>@&lt;IpProtocol&gt;(?&lt;ip_protocol&gt;.*)&lt;/IpProtocol&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createSecurityGroup
+</xpath>
+    <operation>{literal}{{/literal}
+"Description":"{$params.description}",
+"GroupName":"{$params.group_name}"
+{if !empty($params.vpcid)}
+,"VpcId":"{$params.vpcid}"
+{/if}
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

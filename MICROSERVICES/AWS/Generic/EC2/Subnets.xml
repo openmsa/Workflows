@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>EC2</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Subnets</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Subnet Id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="VPC Id" displayOrder="1" isMandatory="true" maxLength="100" name="params.vpc_id" startIncrement="0" type="String"/>
+    <variable displayName="CIDR" displayOrder="2" isMandatory="true" maxLength="100" name="params.cidr_block" startIncrement="0" type="String"/>
+    <variable displayName="Availability Zone" displayOrder="3" maxLength="100" name="params.availability_zone" startIncrement="0" type="String"/>
+    <variable displayName="Available Address Count" displayOrder="4" isUserLocked="true" maxLength="100" name="params.available_address_count" startIncrement="0" type="String"/>
+    <variable displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.state" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeSubnets</xpath>
+    <parser>
+      <section>
+        <xpath>//root/Subnets/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>SubnetId</xpath>
+          <regexp>@&lt;SubnetId&gt;(?&lt;object_id&gt;.*)&lt;/SubnetId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>VpcId</xpath>
+          <regexp>@&lt;VpcId&gt;(?&lt;vpc_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>CidrBlock</xpath>
+          <regexp>@&lt;CidrBlock&gt;(?&lt;cidr_block&gt;.*)&lt;/CidrBlock&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>AvailableIpAddressCount</xpath>
+          <regexp>@&lt;AvailableIpAddressCount&gt;(?&lt;available_address_count&gt;.*)&lt;/AvailableIpAddressCount&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>AvailabilityZone</xpath>
+          <regexp>@&lt;AvailabilityZone&gt;(?&lt;availability_zone&gt;.*)&lt;/AvailabilityZone&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createSubnet
+</xpath>
+    <operation>{literal}{{/literal}
+"VpcId":"{$params.vpc_id}",
+"CidrBlock":"{$params.cidr_block}"
+{if !empty($params.availability_zone)}
+,"AvailabilityZone":"{$params.availability_zone}",
+{/if}
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>
