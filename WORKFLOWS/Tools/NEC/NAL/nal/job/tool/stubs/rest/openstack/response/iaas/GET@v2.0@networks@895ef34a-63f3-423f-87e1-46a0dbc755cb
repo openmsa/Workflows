@@ -1,0 +1,1 @@
+{"network":{"id":"895ef34a-63f3-423f-87e1-46a0dbc755cb","project_id":"1de3cf1741674a0dadd15affdb2ffae2","name":"IaasNw20160520102529","admin_state_up":true,"shared":false,"mtu":0,"router:external":false,"status":"ACTIVE","subnets":["4c0c5973-47c5-4c04-af80-64df450f32f5"],"provider:network_type":null,"provider:segmentation_id":null,"provider:physical_network":null}}

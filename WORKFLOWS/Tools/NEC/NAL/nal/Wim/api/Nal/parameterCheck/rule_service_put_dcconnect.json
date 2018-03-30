@@ -1,0 +1,112 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "network_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "8"
+    },
+    {
+        "param": "IaaS_segmentation_id",
+        "rule": "STRING",
+        "require": [
+            {
+              "key":"IaaS_network_type",
+              "pattern" : "/^VLAN$/"
+            }
+        ],
+        "min": "",
+        "max": "9"
+    },
+    {
+        "param": "dc_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[12]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "service_type",
+        "rule": "MATCH",
+        "pattern" : "/^[1234]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "service_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "group_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    }
+]

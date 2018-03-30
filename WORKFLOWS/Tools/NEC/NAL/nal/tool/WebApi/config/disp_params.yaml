@@ -1,0 +1,13 @@
+// デフォルトチェック設定
+// デフォルトセレクト設定
+resource :
+ MOSSMEMBER     : MOSSMEMBER
+ MOSSMEMBERPWD  : MOSSMEMBERPWD
+ MOSSGAODNY     : MOSSGAODNY
+ MGMOSSMEMBER     : MGMOSSMEMBER
+ MGMOSSMEMBERPWD  : MGMOSSMEMBERPWD
+method :
+ POST           : POST
+ GET            : GET
+ PUT            : PUT
+ DELETE         : DELETE

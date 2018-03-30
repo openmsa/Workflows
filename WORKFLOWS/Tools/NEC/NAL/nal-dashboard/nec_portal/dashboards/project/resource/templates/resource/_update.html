@@ -1,0 +1,35 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+
+{% block modal-body %}
+  <div class="row">
+    <div class="col-sm-6">
+      <fieldset>
+        {% include "horizon/common/_form_fields.html" %}
+      </fieldset>
+    </div>
+  </div>
+  {% if text %}
+    <p>{{ text }}</p>
+  {% endif %}
+  
+<script type='text/javascript'>
+$(".sub_switchable").change(function () {
+
+    resource_type = $("#status").val();
+
+    $(".switched").each(function (index, switched) {
+        var $switched = $(switched),
+          data = $switched.data(resource_type);
+
+        if (typeof data === "undefined") {
+            $switched.closest('.form-group').hide();
+        } else {
+            $switched.closest('.form-group').show();
+        }
+    });
+
+}).change();
+</script>
+
+{% endblock %}

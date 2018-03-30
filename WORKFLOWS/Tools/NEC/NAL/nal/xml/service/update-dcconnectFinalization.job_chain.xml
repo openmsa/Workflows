@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfSrvUpdFinRegistDb" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdFinRegistDb" job="srvUpdFinRegistDb" next_state="bfSrvUpdFinReturnValue" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdFinReturnValue" job="srvUpdFinReturnValue" error_state="error" next_state="bfComLastCleanUp"/>
+
+    <job_chain_node  state="bfComLastCleanUp" job="/NAL/common/comLastCleanUp" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

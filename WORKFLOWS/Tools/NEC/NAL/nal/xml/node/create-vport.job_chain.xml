@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfNodeUpdateInit" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateInit" job="nodeUpdateInit" next_state="bfNodeUpdateAddPort" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateAddPort" job="nodeUpdateAddPort" error_state="error" next_state="bfNodeUpdateAddInstance"/>
+
+    <job_chain_node  state="bfNodeUpdateAddInstance" job="nodeUpdateAddInstance" error_state="error" next_state="bfNodeUpdateAddMsa"/>
+
+    <job_chain_node  state="bfNodeUpdateAddMsa" job="nodeUpdateAddMsa" next_state="bfNodeUpdateTerminate" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateTerminate" job="nodeUpdateTerminate" error_state="error" next_state="bfComLastCleanUp"/>
+
+    <job_chain_node  state="bfComLastCleanUp" job="/NAL/common/comLastCleanUp" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

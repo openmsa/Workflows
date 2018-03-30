@@ -1,0 +1,38 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+
+{% block modal-body-right %}
+  <h3>{% trans "Description:" %}</h3>
+  <p>{% trans "Create a new virtual firewall." %}</p>
+  
+<script type='text/javascript'>
+$(".sub_switchable").change(function () {
+
+    apl_type = $("#apl_type").val();
+    type = $("#type").val();
+
+    $(".device_class").each(function (index, device) {
+        var $device_type = $(device),
+          data = $device_type.data(apl_type + "-" + type);
+        if (typeof data === "undefined") {
+            $device_type.closest('.form-group').hide();
+        } else {
+            $device_type.closest('.form-group').show();
+            device_type = $device_type.val();
+        }
+    });
+
+    $(".switched").each(function (index, switched) {
+        var $switched = $(switched),
+          data = $switched.data(apl_type + "-" + type + "-" + device_type);
+
+        if (typeof data === "undefined") {
+            $switched.closest('.form-group').hide();
+        } else {
+            $switched.closest('.form-group').show();
+        }
+    });
+}).change();
+</script>
+  
+{% endblock %}

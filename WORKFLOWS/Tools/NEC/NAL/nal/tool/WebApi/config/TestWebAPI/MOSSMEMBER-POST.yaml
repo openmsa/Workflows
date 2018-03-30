@@ -1,0 +1,18 @@
+resource : "MOSSMEMBER"
+method   : "POST"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "3"
+ auth_type : "0"
+ auth_id : "administrator1@aa.moss-test1.com"
+ auth_pwd : "313131313131"
+ req_madr : "wetest_01"
+ #tetete
+ req_pwd : "746574657465"
+ item_free22 : "テスト性"
+ item_free23 : "テスト名"
+ item_free24 : "部署その１"
+ item_free25 : "082-222-2222"
+ item_free26 : "びこう。その１"
+ item_free27 : "びこう。その２"
+ item_free28 : "びこう。その３"

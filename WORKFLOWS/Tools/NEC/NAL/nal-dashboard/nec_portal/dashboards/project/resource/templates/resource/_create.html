@@ -1,0 +1,27 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+
+{% block modal-body-right %}
+  <h3>{% trans "Description:" %}</h3>
+  <p>{% trans "Create a new resource." %}</p>
+  
+<script type='text/javascript'>
+$(".sub_switchable").change(function () {
+
+    resource_kind = $("#resource_kind").val();
+
+    $(".switched").each(function (index, switched) {
+        var $switched = $(switched),
+          data = $switched.data(resource_kind);
+
+        if (typeof data === "undefined") {
+            $switched.closest('.form-group').hide();
+        } else {
+            $switched.closest('.form-group').show();
+        }
+    });
+
+}).change();
+</script>
+  
+{% endblock %}

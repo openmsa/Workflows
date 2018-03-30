@@ -1,0 +1,23 @@
+-- Table
+source create_NAL_APL_MNG.sql
+source create_NAL_CONFIG_MNG.sql
+source create_NAL_DEVICE_ENDPOINT_MNG.sql
+source create_NAL_GLOBAL_IP_MNG.sql
+source create_NAL_LICENSE_MNG.sql
+source create_NAL_MSA_VLAN_MNG.sql
+source create_NAL_PNF_VLAN_MNG.sql
+source create_NAL_POD_MNG.sql
+source create_NAL_PORT_MNG.sql
+source create_NAL_TENANT_CONTRACT_MNG.sql
+source create_NAL_TENANT_MNG.sql
+source create_NAL_THRESHOLD_MNG.sql
+source create_NAL_VIRTUAL_LAN_MNG.sql
+source create_NAL_VXLANGW_POD_MNG.sql
+source create_WIM_CONFIG_MNG.sql
+source create_WIM_DC_CONNECT_GROUP_MNG.sql
+source create_WIM_DC_CONNECT_MEMBER_MNG.sql
+source create_WIM_DC_MNG.sql
+source create_WIM_DC_SEGMENT_MNG.sql
+source create_WIM_DC_VLAN_MNG.sql
+source create_WIM_DEVICE_ENDPOINT_MNG.sql
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfSrvUpdWimInit" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdWimInit" job="srvUpdWimInit" next_state="bfSrvUpdWimUpdateVm" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdWimUpdateVm" job="srvUpdWimUpdateVm" error_state="error" next_state="bfSrvUpdWimCreateMsa"/>
+
+    <job_chain_node  state="bfSrvUpdWimCreateMsa" job="srvUpdWimCreateMsa" error_state="error" next_state="bfSrvUpdWimReturnValue"/>
+
+    <job_chain_node  state="bfSrvUpdWimReturnValue" job="srvUpdWimReturnValue" error_state="error" next_state="success"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

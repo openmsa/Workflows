@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfNodeCreateInit" error_state="error"/>
+
+    <job_chain_node  state="bfNodeCreateInit" job="nodeCreateInit" next_state="bfNodeCreatePort" error_state="error"/>
+
+    <job_chain_node  state="bfNodeCreatePort" job="nodeCreatePort" error_state="error" next_state="bfNodeCreateInstance"/>
+
+    <job_chain_node  state="bfNodeCreateInstance" job="nodeCreateInstance" error_state="error" next_state="bfNodeExecInitScript"/>
+
+    <job_chain_node  state="bfNodeExecInitScript" job="nodeCreateExecInitScript" error_state="error" next_state="bfNodeCreateMsa"/>
+
+    <job_chain_node  state="bfNodeCreateMsa" job="nodeCreateMsa" next_state="bfNodeCreateTerminate" error_state="error"/>
+
+    <job_chain_node  state="bfNodeCreateTerminate" job="nodeCreateTerminate" error_state="error" next_state="bfComLastCleanUp"/>
+
+    <job_chain_node  state="bfComLastCleanUp" job="/NAL/common/comLastCleanUp" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

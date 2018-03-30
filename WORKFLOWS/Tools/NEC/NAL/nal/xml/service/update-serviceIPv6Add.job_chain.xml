@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfSrvUpdIPv6PreInit" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdIPv6PreInit" job="srvUpdIPv6PreInit" next_state="bfSrvUpdIPv6PreRefDb" error_state="error"/>
+
+    <job_chain_node  state="bfSrvUpdIPv6PreRefDb" job="srvUpdIPv6PreRefDb" error_state="error" next_state="bfSrvUpdIPv6PreReturnValue"/>
+
+    <job_chain_node  state="bfSrvUpdIPv6PreReturnValue" job="srvUpdIPv6PreReturnValue" error_state="error" next_state="success"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

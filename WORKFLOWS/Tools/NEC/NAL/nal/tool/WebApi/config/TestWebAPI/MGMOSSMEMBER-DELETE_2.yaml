@@ -1,0 +1,7 @@
+resource : "MGMOSSMEMBER"
+method   : "DELETE"
+inpara   :
+ we_passwd : "aaa"
+ auth_id : "wetestmg_01@aa.moss-test1.com"
+ index_free4 : "10"
+ index_free_date3 : "20110630"

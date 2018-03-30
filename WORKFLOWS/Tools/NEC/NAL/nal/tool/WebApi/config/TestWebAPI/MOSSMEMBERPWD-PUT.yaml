@@ -1,0 +1,9 @@
+resource : "MOSSMEMBERPWD"
+method   : "PUT"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "1"
+ auth_type : "0"
+ auth_id : "wetest_03@aa.moss-test1.com"
+ auth_pwd : "313131313131"
+ req_pwd : "6161613132333435"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="scheduler_configuration_documentation.xsl"?> 
+<settings>
+    <job_chain name="create-vfw">
+        <note language="de"/>
+
+        <note language="en"/>
+
+        <order>
+            <params/>
+
+            <process state="error">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeCreateInit">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeCreatePort">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeCreateInstance">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeExecInitScript">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeCreateTerminate">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfReturnParam">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfComInit">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+        </order>
+    </job_chain>
+</settings>

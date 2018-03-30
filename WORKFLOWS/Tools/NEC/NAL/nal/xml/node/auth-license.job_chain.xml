@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfNodeUpdateInit" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateInit" job="nodeUpdateInit" next_state="bfNodeUpdateAuthLicense" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateAuthLicense" job="nodeUpdateAuthLicense" error_state="error" next_state="bfNodeUpdateTerminate"/>
+
+    <job_chain_node  state="bfNodeUpdateTerminate" job="nodeUpdateTerminate" error_state="error" next_state="bfComLastCleanUp"/>
+
+    <job_chain_node  state="bfComLastCleanUp" job="/NAL/common/comLastCleanUp" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

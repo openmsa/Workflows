@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfSrvDelWimRefDb" error_state="error"/>
+
+    <job_chain_node  state="bfSrvDelWimRefDb" job="srvDelWimRefDb" next_state="bfSrvDelWimDeleteMsa" error_state="error"/>
+
+    <job_chain_node  state="bfSrvDelWimDeleteMsa" job="srvDelWimDeleteMsa" error_state="error" next_state="bfSrvDelWimDeletePort"/>
+
+    <job_chain_node  state="bfSrvDelWimDeletePort" job="SrvDelWimDeletePort" error_state="error" next_state="bfSrvDelWimDeleteVm"/>
+
+    <job_chain_node  state="bfSrvDelWimDeleteVm" job="srvDelWimDeleteVm" error_state="error" next_state="bfSrvDelWimDeleteDcMember"/>
+
+    <job_chain_node  state="bfSrvDelWimDeleteDcMember" job="srvDelWimDeleteDcMember" error_state="error" next_state="bfSrvDelWimReturnValue"/>
+
+    <job_chain_node  state="bfSrvDelWimReturnValue" job="srvDelWimReturnValue" error_state="error" next_state="success"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

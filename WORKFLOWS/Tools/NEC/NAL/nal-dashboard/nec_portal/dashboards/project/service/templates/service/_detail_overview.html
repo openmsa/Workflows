@@ -1,0 +1,12 @@
+{% load i18n sizeformat %}
+
+<h3>{{ title|default:_("Service Detail") }}</h3>
+
+<div class="info detail">
+  <dl class="dl-horizontal">
+    {% for service_data in service %}
+      <dt>{{ service_data.0 }}</dt>
+      <dd>{{ service_data.1 }}</dd>
+    {% endfor %}
+  </dl>
+</div>

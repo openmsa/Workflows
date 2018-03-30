@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <return>
+    <status>OK</status>
+    <message>{"request":"GET&amp;xpath=/services/rest/V2.1/?method=authenticate&amp;username=*******&amp;password=*******&amp;format=json&amp;element=","response":{"http_code":200,"message":{"session_id":"644b9901bbf588f919fb5f33f66dfb"}}}</message>
+  </return>
+</response>

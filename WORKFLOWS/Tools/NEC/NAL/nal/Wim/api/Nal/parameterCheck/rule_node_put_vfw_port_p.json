@@ -1,0 +1,75 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "network_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "8"
+    },
+    {
+        "param": "IaaS_segmentation_id",
+        "rule": "STRING",
+        "require": [
+            {
+              "key":"IaaS_network_type",
+              "pattern" : "/^VLAN$/"
+            }
+        ],
+        "min": "",
+        "max": "9"
+    },
+    {
+        "param": "node_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[12345]$/",
+        "min": "1",
+        "max": "2"
+    }
+]

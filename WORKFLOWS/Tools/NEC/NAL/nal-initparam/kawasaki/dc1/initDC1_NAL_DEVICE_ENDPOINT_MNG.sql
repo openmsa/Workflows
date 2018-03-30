@@ -1,0 +1,75 @@
+insert into NAL_DEVICE_ENDPOINT_MNG
+(create_id, create_date, update_id, update_date, delete_flg, extension_info)
+values
+('system', now(), 'system', now(), 0,
+'{
+	"type":"1",
+	"dc_id":"system",
+	"pod_id":"pod0001",
+	"region_id":"",
+	"endpoint_info":"
+	{
+		"endpoint":"http://10.34.245.33:5000/v2.0",
+		"user_id":"admin",
+		"user_password":"admin",
+		"user_key":"c73d61c9202c43dcbb34223a4ec53326",
+		"role_id":"0cfac29f159841019cdebde38a18035c",
+		"admin_tenant_name":"admin",
+		"openstack_keystone_ip_address":"10.34.245.33",
+		"openstack_controller_node_ip_address":"10.34.245.33",
+		"openstack_controller_node_server_login_id":"heat-admin",
+		"openstack_controller_node_server_login_password":"P@ssw0rd",
+		"region_id":"regionOne"
+	}"
+}'),
+('system', now(), 'system', now(), 0,
+'{
+	"type":"2",
+	"dc_id":"system",
+	"pod_id":"",
+	"region_id":"RegionDC1",
+	"endpoint_info":"
+	{
+		"endpoint":"http://10.34.2.13:5000/v2.0",
+		"user_id":"admin",
+		"user_password":"f4c6ad669c65c12e6701f2af04b6b2d598b21ed3"
+	}"
+}'),
+('system', now(), 'system', now(), 0,
+'{
+	"type":"3",
+	"dc_id":"system",
+	"pod_id":"pod0001",
+	"region_id":"",
+	"endpoint_info":"
+	{
+		"endpoint":"https://10.34.245.64/webapi/%MSA_CLASS_NAME%?",
+		"user_id":"ncroot",
+		"user_password":"ubiqube",
+		"customer_create_endpoint":"UserWS",
+		"device_create_endpoint":"DeviceWS",
+		"init_provisioning_endpoint":"DeviceWS",
+		"object_attach_endpoint":"DeviceConfigurationWS",
+		"object_execute_endpoint":"OrderCommandWS",
+		"ip_address":"10.34.245.64",
+		"login_id":"root",
+		"login_password":"root123",
+		"nal_rsa_pub_dir":"/var/log/nal/job",
+		"generatekey_command_path":"/home/admin/generateKey.sh",
+		"movekey_command_path":"/home/admin/moveKey.sh"
+	}"
+}'),
+('system', now(), 'system', now(), 0,
+'{
+	"type":"4",
+	"dc_id":"system",
+	"pod_id":"",
+	"region_id":"RegionDC1",
+	"endpoint_info":"
+	{
+		"endpoint":"10.34.2.13",
+		"user_id":"necadmin",
+		"user_password":"P@ssw0rd",
+		"timeout":"300"
+	}"
+}');

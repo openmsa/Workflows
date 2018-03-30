@@ -1,0 +1,109 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "node_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[12345]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "port_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "ip_v6_ext_auto_set_flg",
+        "rule": "NUMBER",
+        "max": "1"
+    },
+    {
+        "param": "ip_v6_pub_auto_set_flg",
+        "rule": "NUMBER",
+        "max": "1"
+    },
+    {
+        "param": "fixed_ip_v6_pub",
+        "rule": "IP_ADDRESS_IPV6",
+        "require": [
+            {
+                "key":"ip_v6_pub_auto_set_flg",
+                "pattern" : "/^[0]$/"
+            }
+        ]
+    },
+    {
+        "param": "fixed_ip_v6_ext",
+        "rule": "IP_ADDRESS_IPV6",
+        "require": [
+            {
+                "key":"ip_v6_ext_auto_set_flg",
+                "pattern" : "/^[0]$/"
+            }
+        ]
+    },
+    {
+        "param": "static_route_ip_ipv6",
+        "rule": "IP_ADDRESS_IPV6"
+    }
+]
