@@ -1,0 +1,1 @@
+{"network":{"id":"78a6a973-e1f4-44ca-96d0-487dbf68c6ac","project_id":"1de3cf1741674a0dadd15affdb2ffae2","name":"Pub","admin_state_up":true,"shared":false,"mtu":0,"router:external":false,"status":"ACTIVE","subnets":["602f8a1e-9110-4944-89a6-61c7d17839b3"],"provider:network_type":"vxlan","provider:segmentation_id":null,"provider:physical_network":null}}

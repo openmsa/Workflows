@@ -1,0 +1,12 @@
+{% load i18n sizeformat %}
+
+<h3>{{ title|default:_("Resource Detail") }}</h3>
+
+<div class="info detail">
+  <dl class="dl-horizontal">
+    {% for resource_data in resource %}
+      <dt>{{ resource_data.0 }}</dt>
+      <dd>{{ resource_data.1 }}</dd>
+    {% endfor %}
+  </dl>
+</div>

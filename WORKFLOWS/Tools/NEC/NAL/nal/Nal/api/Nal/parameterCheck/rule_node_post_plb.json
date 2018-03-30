@@ -1,0 +1,202 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[1234]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "description",
+        "rule": "STRING",
+        "min": "",
+        "max": "1024"
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "network_name",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_type",
+        "rule": "STRING",
+        "min": "",
+        "max": "8"
+    },
+    {
+        "param": "IaaS_segmentation_id",
+        "rule": "STRING",
+        "require": [
+            {
+              "key":"IaaS_network_type",
+              "pattern" : "/^VLAN$/"
+            }
+        ],
+        "min": "",
+        "max": "9"
+    },
+    {
+        "param": "redundant_configuration_flg",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "partition_id",
+        "rule": "MATCH",
+        "pattern" : "/^[a-zA-Z][a-zA-Z0-9\\-\\_\\.]*$/",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "128"
+    },
+    {
+        "param": "route_domain_id",
+        "rule": "NUMBER",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "5"
+    },
+    {
+        "param": "partition_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "14"
+    },
+    {
+        "param": "mng_user_account_id",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "mng_account_password",
+        "rule": "MATCH",
+        "pattern" : "/^[^();!|$<>&'\"`\\\\{}]*$/",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": ""
+    },
+    {
+        "param": "certificate_user_account_id",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "certificate_account_password",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": ""
+    },
+    {
+        "param": "user_account_id",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "32"
+    },
+    {
+        "param": "account_password",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "fw_ip_address",
+        "rule": "IP_ADDRESS",
+        "min": "1"
+    }
+]

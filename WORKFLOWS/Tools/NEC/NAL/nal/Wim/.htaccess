@@ -1,0 +1,7 @@
+ForceType application/x-httpd-php
+php_value memory_limit 512M
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+) index.php [PT,QSA,L]
+RewriteBase /Wim/index.php

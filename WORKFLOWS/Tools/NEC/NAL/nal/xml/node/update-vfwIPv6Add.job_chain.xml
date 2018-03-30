@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfNodeUpdateIPv6Init" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateIPv6Init" job="nodeUpdateIPv6Init" next_state="bfNodeUpdateIPv6AddPort" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateIPv6AddPort" job="nodeUpdateIPv6AddPort" error_state="error" next_state="bfNodeUpdateIPv6AddInstance"/>
+
+    <job_chain_node  state="bfNodeUpdateIPv6AddInstance" job="nodeUpdateIPv6AddInstance" error_state="error" next_state="bfNodeUpdateIPv6AddMsa"/>
+
+    <job_chain_node  state="bfNodeUpdateIPv6AddMsa" job="nodeUpdateIPv6AddMsa" next_state="bfNodeUpdateIPv6Terminate" error_state="error"/>
+
+    <job_chain_node  state="bfNodeUpdateIPv6Terminate" job="nodeUpdateIPv6Terminate" error_state="error" next_state="bfComLastCleanUp"/>
+
+    <job_chain_node  state="bfComLastCleanUp" job="/NAL/common/comLastCleanUp" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

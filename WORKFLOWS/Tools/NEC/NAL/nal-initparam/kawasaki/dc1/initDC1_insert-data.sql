@@ -1,0 +1,13 @@
+source OUT_initDC1_NAL_APL_MNG.sql
+source OUT_initDC1_NAL_CONFIG_MNG.sql
+source OUT_initDC1_NAL_DEVICE_ENDPOINT_MNG.sql
+source OUT_initDC1_NAL_GLOBAL_IP_MNG.sql
+source OUT_initDC1_NAL_LICENSE_MNG.sql
+source OUT_initDC1_NAL_MSA_VLAN_MNG.sql
+source OUT_initDC1_NAL_POD_MNG.sql
+source OUT_initDC1_NAL_THRESHOLD_MNG.sql
+source OUT_initDC1_NAL_VXLANGW_POD_MNG.sql
+source OUT_initDC1_WIM_CONFIG_MNG.sql
+source OUT_initDC1_WIM_DC_MNG.sql
+source OUT_initDC1_WIM_DC_VLAN_MNG.sql
+source OUT_initDC1_WIM_DEVICE_ENDPOINT_MNG.sql

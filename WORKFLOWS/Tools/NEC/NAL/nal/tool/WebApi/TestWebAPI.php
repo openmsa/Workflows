@@ -1,0 +1,286 @@
+<?php
+// テスト用ツール
+
+ini_set('display_errors', 1 );
+
+$homeDir = realpath( dirname(__FILE__) );
+
+define( 'HOME_DIR', $homeDir );
+define( 'CONFIG_DIR', HOME_DIR. '/config' );
+define( 'TEMPLATE_DIR', HOME_DIR. '/template' );
+
+// メイン処理
+$p = new TestWebAPI();
+$p->exec();
+exit();
+
+class TestWebAPI{
+
+    /**
+     * コンストラクタ
+     *  in  : なし
+     *  out :
+     */
+    function __construct(){
+        // POSTパラメータ
+        $this->params['param'] = $_POST;
+    }
+
+    /**
+     * 処理実行
+     *  in  : なし
+     *  out :
+     */
+    function exec(){
+
+        // 初期設定
+        $page       = basename(__FILE__, '.php');
+        $param      = $this->params['param'];
+        $config_dir = CONFIG_DIR . "{$page}/";
+        $inp_flag   = 1;
+
+        // エラー用入力エリアクリア
+        $this->params['param']['inpara_err'] = '';
+
+        // 出力エリアクリア
+        $this->params['param']['outpara'] = '';
+        $this->params['param']['tat']     = '';
+
+        // 各ボタン別処理
+        $mode = isset( $param['mode'] ) ? $param['mode'] : '';
+        if( $mode == 1 ){
+            // 入力パラメータファイル変更
+            $this->params['outpara'] = '';
+        }elseif( $mode == 2 ){
+            // 入力パラメータファイル更新
+            $this->save_parafile( $config_dir, $param, $param['parafile'] );
+        }elseif( $mode == 3 ){
+            // 別名ファイル保存
+            $this->save_parafile( $config_dir, $param, $param['newfile_name'] );
+            $this->params['param']['parafile'] = $param['newfile_name'];
+        }elseif( $mode == 4 ){
+            // API実行
+            $this->execAPI( $this->params['param'] );
+            $inp_flag = 0;
+        }
+
+        include( TEMPLATE_DIR . "/{$page}/{$page}.tmpl" );
+
+    }
+
+    /**
+     * 入力パラメータファイル一覧設定
+     *  in  : config_dir … ディレクトリパス
+     *        param      … 入力パラメータ
+     *        flag       … 入力パラメータ置換フラグ(0:置換なし、1:置換あり)
+     *  out : なし
+     */
+    function set_parafile( $config_dir, $param, $flag=1 ){
+
+        // 存在する入力パラメータファイル一覧取得＆画面表示設定
+        $in_files = glob( $config_dir . "*.yaml" );
+        $this->params['disp']['parafile'] = array();
+        foreach( $in_files as $file ){
+            $key = basename( $file, '.yaml' );
+            $this->params['disp']['parafile'][$key] = $key;
+        }
+ 
+        if( $flag == 1 ){
+            // 選択中入力パラメータファイルのデータ読み込み＆設定
+            $parafile = ( isset( $param['parafile'] ) ) ? $param['parafile'] : basename( $in_files[0], '.yaml' );
+            $yaml = $this->apiCom->readYaml( "{$config_dir}{$parafile}.yaml" );
+            $this->params['param']['inpara'] = array();
+            foreach( $yaml as $key => $val ){
+                $this->params['param'][$key] = $val;
+            }
+        }else{
+            // 入力パラメータを表示用にJSONデコード
+            $this->params['param']['inpara'] = $this->inpara_jsondec( $param['inpara'] );
+        }
+
+        return;
+    }
+
+    /**
+     * 入力パラメータJSONデコード
+     *  in  : param      … 入力パラメータ
+     *  out : JSONデコードした文字列
+     */
+    function inpara_jsondec( $param ){
+
+        $ret = json_decode( $param, true );
+        if( !isset( $ret ) ){
+            $this->params['param']['inpara_err'] = $param;
+        }
+        return $ret;
+    }
+
+    /**
+     * 入力パラメータファイル保存
+     *  in  : config_dir … ディレクトリパス
+     *        param      … 入力パラメータ
+     *        file       … ファイル名
+     *  out : なし
+     */
+    function save_parafile( $config_dir, $param, $file ){
+
+        // JSONデコード
+        $inpara = $this->inpara_jsondec( $param['inpara'] );
+        if( $inpara == NULL ){ return; }
+
+        // パラメータ作成
+        $data = array( 'inpara'   => $inpara,
+                       'resource' => $param['resource'],
+                       'method'   => $param['method']
+                     );
+
+        // 保存データ作成
+        $tmpl_args = $this->get_tmplinfo( $config_dir, 'confyaml', $data, 2 ); 
+        $res = $this->tmpl->exec( $tmpl_args );
+
+        // ファイル出力
+        $f = fopen( "{$config_dir}{$file}.yaml", "wb" );
+        fwrite( $f, $res['string'] );
+        fclose( $f );
+
+        return;
+    }
+
+    /**
+     * テンプレート呼び出し用パラメータ取得
+     *  in  : config_dir … ディレクトリパス
+     *        file       … ファイル名(.tmpl除外)
+     *        params     … パラメータ
+     *        print_flg  … 出力フラグ(1：標準出力あり、2：標準出力なし)
+     *  out : なし
+     */
+    function get_tmplinfo( $config_dir, $file, $params, $print_flg = 1 ){
+
+        $page = basename(__FILE__, '.php');
+
+        // テンプレート情報設定
+        $tmpl_args = array( 'params'       => $params,
+                            'template_dir' => TEMPLATE_DIR . "{$page}/",
+                            'compile_dir'  => TEMPLATE_C_DIR . "{$page}/",
+                            'config_dir'   => $config_dir,
+                            'cache_dir'    => CACHE_DIR . "{$page}/",
+                            'filename'     => "{$file}.tmpl",
+                            'fromcode'     => 'utf-8',
+                            'tocode'       => 'utf-8',
+                            'print_flg'    => $print_flg,
+                          );
+        return $tmpl_args;
+    }
+
+    /**
+     * API実行
+     *  in  : params … 入力パラメータ
+     *  out : なし
+     */
+    function execAPI( $params ){
+
+        $method = $params['method'];
+	$proc = $params['parafile'];
+	$procpath = $proc;
+	if($proc === 'wimdcconnect'){
+		$serverurl=$params['serverurl2'];
+		$procpath = 'dcconnect';
+	} else {
+		$serverurl=$params['serverurl'];
+	}
+	$nalauth = base64_encode('u_nal:nal@admin');
+
+        if( $method === 'GET' ) {
+
+            $args = array('http' => array('method' => $method,
+                                        'header' => array("Accept-language: ja",
+                                                          "Content-type: text/html charset=UTF-8",
+                                                          "Authorization: Basic " . $nalauth,
+                                                          "Custom-Header: value"),
+                                                          'content' => $params['inpara']),
+                                        // ↓PHP5.6対応 SSL サーバー証明書(2016.03.01時点ではPHP5.4だが念のため入れておく)
+                                        'ssl' => array( 'verify_peer'       => false,
+                                                        'verify_peer_name'  => false,
+                                                        'allow_self_signed' => false )
+            );
+
+            //$getUrl = $params['serverurl'] . $params['parafile'] . "/";
+            //$getUrl = $serverurl . $params['parafile'] . "/";
+            $getUrl = $serverurl . $procpath . "/";
+            //$getUrl = $params['parafile'];
+            $jsonInpara = json_decode( $params['inpara'], true );
+            $i = 0;
+            foreach( $jsonInpara as $key => $val ) {
+                if( $i === 0 ) {
+                    $getUrl .= '?' . $key . '=' . $val;
+                } else {
+                    $getUrl .= '&' . $key . '=' . $val;
+                }
+                $i++;
+            }
+            $params['parafile'] = $getUrl;
+
+        } else {
+
+            $args = array('http' => array('method' => $method,
+                                        'header' => array("Accept-language: ja",
+                                                          "Content-type: text/html charset=UTF-8",
+                                                          "Authorization: Basic " . $nalauth,
+                                                          "X-HTTP-Method-Override: {$method}",
+                                                          "Custom-Header: value"),
+                                                          'content' => $params['inpara']),
+                                        // ↓PHP5.6対応 SSL サーバー証明書(2016.03.01時点ではPHP5.4だが念のため入れておく)
+                                        'ssl' => array( 'verify_peer'       => false,
+                                                        'verify_peer_name'  => false,
+                                                        'allow_self_signed' => false )
+            );
+            //$params['parafile'] = $params['serverurl'] . $params['parafile'] . "/";
+            //$params['parafile'] = $serverurl . $params['parafile'] . "/";
+            $params['parafile'] = $serverurl . $procpath . "/";
+
+        }
+
+        // URL作成
+
+// IPアドレスへの通信でないとできないようなので、IPアドレス直指定
+        $url = $params['parafile'];
+        $this->params['param']['API_name'] = htmlspecialchars($url);
+
+        // context作成
+        $context = stream_context_create( $args );
+
+        // 実行
+        $start = explode( ' ', microtime() );
+        $res   = file_get_contents($url, false, $context);
+        $end   = explode( ' ', microtime() );
+
+        // 実行結果設定＆表示設定
+        $this->params['param']['outpara'] = json_decode( $res, true );
+	$odata=json_decode( $res, true );
+	$credata = '';
+	if(isset($odata['job-id'])){
+		$credata = "\"operation-type\":\"check\",\n";
+		$credata .= "\"job-id\":\"" . strval($odata['job-id']) . "\",\n";
+	}
+	if(isset($odata['call-api-type'])){
+		if(isset($odata['request-id'])){
+			$credata .= "\"call-api-type\":\"" . strval($odata['call-api-type']) . "\",\n";
+		} else {
+			$credata .= "\"call-api-type\":\"" . strval($odata['call-api-type']) . "\"\n";
+		}
+	}
+	if(isset($odata['request-id'])){
+		$credata .= "\"request-id\":\"" . strval($odata['request-id']) . "\"\n";
+	}
+        $this->params['param']['newreq'] = "{\n" . $credata . "}\n";
+        $this->params['param']['proc'] = $proc;
+
+        // TAT計算
+        $stat = $start[0] + $start[1];
+        $etat = $end[0] + $end[1];
+        $this->params['param']['tat'] = $etat - $stat;
+
+    }
+
+}
+?>

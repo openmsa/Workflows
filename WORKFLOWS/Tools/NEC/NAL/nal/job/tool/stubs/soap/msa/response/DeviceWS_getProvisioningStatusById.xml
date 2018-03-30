@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<response>
+  <return>
+    <errorMsg/>
+    <rawJSONResult>{"sms_status":"OK","PROVISIONING_PROCESS":"OK","sms_result":[{"sms_status":"OK","sms_stage":"Lock Provisioning","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Initial Connection","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Initial Configuration","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"DNS Update","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Unlock Provisioning","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Save Configuration","sms_message":"OK\n"}]}</rawJSONResult>
+    <status>OK</status>
+<!--
+
+    <errorMsg/>
+    <rawJSONResult>{"sms_status":"OK","PROVISIONING_PROCESS":"OK","sms_result":[]}</rawJSONResult>
+    <status>OK</status>
+
+    <rawJSONResult>{"sms_status":"OK","PROVISIONING_PROCESS":"RUNNING","sms_result":[{"sms_status":"OK","sms_stage":"Lock Provisioning","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Initial Connection","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Initial Configuration","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"DNS Update","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Unlock Provisioning","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Save Configuration","sms_message":" OK\n"}]}</rawJSONResult>
+    <status>RUNNING</status>
+
+    <errorMsg>Initial Configuration: Command failed on the device</errorMsg>
+    <rawJSONResult>{"sms_status":"OK","errorMsg":"Initial Configuration: Command failed on the device\n","PROVISIONING_PROCESS":"FAIL","sms_result":[{"sms_status":"OK","sms_stage":"Lock Provisioning","sms_message":"OK\n"},{"sms_status":"OK","sms_stage":"Initial Connection","sms_message":"OK\n"},{"sms_status":"FAIL","sms_stage":"Initial Configuration","sms_message":"Command failed on the device\n"},{"sms_status":"NONE","sms_stage":"DNS Update","sms_message":""},{"sms_status":"NONE","sms_stage":"Unlock Provisioning","sms_message":""},{"sms_status":"NONE","sms_stage":"Save Configuration","sms_message":""}]}</rawJSONResult>
+    <status>FAIL</status>
+-->
+  </return>
+</response>

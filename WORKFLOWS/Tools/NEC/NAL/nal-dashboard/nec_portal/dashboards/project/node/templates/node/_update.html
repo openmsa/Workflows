@@ -1,0 +1,33 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+
+{% block modal-body-right %}
+
+  {% if description %}
+    <h3>{% trans "Description:" %}</h3>
+    <p>{{ description }}</p>
+  {% endif %}
+
+<script type='text/javascript'>
+
+$("input[name=ip_v6_ext_auto_set_flg]").change(function () {
+    if($("input[name=ip_v6_ext_auto_set_flg]:checked").val()) {
+        $("input[name=fixed_ip_v6_ext]").prop('disabled', true);
+    }
+    else {
+        $("input[name=fixed_ip_v6_ext]").prop('disabled', false);
+    }
+}).change();
+
+$("input[name=ip_v6_pub_auto_set_flg]").change(function () {
+    if($("input[name=ip_v6_pub_auto_set_flg]:checked").val()) {
+        $("input[name=fixed_ip_v6_pub]").prop('disabled', true);
+    }
+    else {
+        $("input[name=fixed_ip_v6_pub]").prop('disabled', false);
+    }
+}).change();
+
+</script>
+
+{% endblock %}

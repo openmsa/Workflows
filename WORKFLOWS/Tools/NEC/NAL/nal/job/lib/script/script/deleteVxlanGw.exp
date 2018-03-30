@@ -1,0 +1,72 @@
+#!/usr/bin/expect
+log_user 1
+
+for {set i 0} {$i <= 4} {incr i} {
+    if {[lindex $argv $i] == ""} {
+        puts "fatal error : argumenr is invalid."
+        exit 3
+    }
+}
+
+# set timeout
+if {[lindex $argv 4] != ""} {
+    set timeout [lindex $argv 4]
+} else {
+    set timeout 10
+}
+
+set ip [lindex $argv 0]
+set id [lindex $argv 1]
+set pw [lindex $argv 2]
+set uu_id [lindex $argv 3]
+
+set PROMPT_PW1 "\\\s*password\\\:\\\s*$"
+set PROMPT1 "\\\$\\\s$"
+set PROMPT2 "\\\#\\\s$"
+
+spawn ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/nsumsmgr/NAL/nwa/job/auth/id_rsa -l $id $ip
+
+#expect {
+#    default {
+#        puts "fatal error : unable to connect host."
+#        exit 9
+#    }
+#    -re $PROMPT_PW1 {send "$pw\n"}
+#}
+expect {
+    default {
+        puts "fatal error : incorrect password."
+        exit 9
+    }
+    -re $PROMPT1 {send "sudo su\n"}
+}
+expect {
+    default {
+        puts "fatal error : sudo command error."
+        exit 9
+    }
+    -re $PROMPT2 {send "source ~neutron/overcloudrc\n"}
+}
+expect {
+    default {
+        puts "fatal error : source command error."
+        exit 9
+    }
+    -re $PROMPT2 {send "/usr/bin/neutron-vxlangw vxlan-gateway-connection-delete $uu_id\n"}
+}
+expect {
+    default {
+        puts $expect_out(buffer)
+        exit 9
+    }
+    -re $PROMPT2 {send "exit\n"}
+}
+expect {
+    default {
+        puts $expect_out(buffer)
+        exit 9
+    }
+    -re $PROMPT1 {send "exit\n"}
+}
+
+exit 0

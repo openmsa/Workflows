@@ -1,0 +1,76 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "dc_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[2]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "group_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "service_type",
+        "rule": "MATCH",
+        "pattern" : "/^[234]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "service_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "bandwidth",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    }
+]

@@ -1,0 +1,10 @@
+resource : "MOSSMEMBER"
+method   : "GET"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "1"
+ auth_type : "0"
+ auth_id : "mng@dev-0000250118.mos-test.jp"
+ auth_pwd : "6d6e67303030"
+ hi_auth_id : ""
+ hi_op_auth_type : ""

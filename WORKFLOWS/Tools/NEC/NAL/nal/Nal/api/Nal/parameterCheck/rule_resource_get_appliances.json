@@ -1,0 +1,55 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "device_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "redundant_configuration_flg",
+        "rule": "NUMBER",
+        "require": [
+            {
+                "key":"apl_type",
+                "pattern" : "/^[2]$/"
+            },
+            {
+                "key":"device_type",
+                "pattern" : "/^[12]$/"
+            }
+        ],
+        "min": "",
+        "max": "2"
+    }
+]

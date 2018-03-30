@@ -1,0 +1,616 @@
+-- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: nal
+-- ------------------------------------------------------
+-- Server version	5.5.42-MariaDB-wsrep
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `NAL_APL_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_APL_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_APL_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `node_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_APL_MNG`
+--
+
+LOCK TABLES `NAL_APL_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_APL_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_APL_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_CONFIG_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_CONFIG_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_CONFIG_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_CONFIG_MNG`
+--
+
+LOCK TABLES `NAL_CONFIG_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_CONFIG_MNG` DISABLE KEYS */;
+INSERT INTO `NAL_CONFIG_MNG` VALUES ('system','2016-10-14 19:32:05','system','2016-10-14 19:32:05',0,83,'{\"region_id\": \"\", \"type\": 5, \"pod_id\": \"\", \"config_info\": \"{\\\"os_image_and_flavor_name_list\\\": {\\\"3\\\": {\\\"1\\\": {\\\"image_name\\\": \\\"vsrx-12.1x47_d20.7\\\", \\\"flavor_name\\\": \\\"vsrx-12.1x47_d20.7-M2D2E0S0C2F1.0P1\\\"}}, \\\"2\\\": {\\\"4\\\": {\\\"image_name\\\": \\\"vthunder-4.1.1\\\", \\\"flavor_name\\\": \\\"vthunder-4.1.1-M2D8E0S0C1F1.0P1\\\"}, \\\"3\\\": {\\\"image_name\\\": \\\"vthunder-4.0.1\\\", \\\"flavor_name\\\": \\\"vthunder-4.0.1-M2D8E0S0C1F1.0P1\\\"}, \\\"2\\\": {\\\"image_name\\\": \\\"big_ip-12.0.0.0.0.606\\\", \\\"flavor_name\\\": \\\"big_ip_ve-12.0.0.0.0.606-M4D139E0S0C2F1.0P1\\\"}, \\\"1\\\": {\\\"image_name\\\": \\\"intersecvm_lb-4.0\\\", \\\"flavor_name\\\": \\\"intersecvm_lb-4.0-M16D50E0S0C2F1.0P1\\\"}}, \\\"1\\\": {\\\"3\\\": {\\\"image_name\\\": \\\"paloalto_vm-7.0.5\\\", \\\"flavor_name\\\": \\\"paloalto_vm-7.0.5-M4D40E0S0C2F1.0P1\\\"}, \\\"2\\\": {\\\"image_name\\\": \\\"fortigate_vm-5.2.4\\\", \\\"flavor_name\\\": \\\"fortigate_vm-5.2.4-M1D30E0S0C1F1.0P1\\\"}, \\\"5\\\": {\\\"image_name\\\": \\\"fortigate_vm-5.2.4\\\", \\\"flavor_name\\\": \\\"fortigate_vm-5.2.4-M1D30E0S0C1F1.0P1\\\"}, \\\"1\\\": {\\\"image_name\\\": \\\"intersecvm_sg-v4.1\\\", \\\"flavor_name\\\": \\\"intersecvm_sg-v4.1-M4D30E0S0C2F1.0P1\\\"}, \\\"4\\\": {\\\"image_name\\\": \\\"intersecvm_sg-v4.1\\\", \\\"flavor_name\\\": \\\"intersecvm_sg-v4.1-M4D30E0S0C2F1.0P1\\\"}}}, \\\"os_vlan_name_list\\\": {\\\"msa_lan\\\": {\\\"name\\\": \\\"MSA\\\"}, \\\"pub_lan\\\": {\\\"name\\\": \\\"Pub\\\"}, \\\"ext_lan\\\": {\\\"name\\\": \\\"Ext\\\"}}, \\\"os_physical_network\\\": {\\\"name\\\": \\\"physnet\\\"}, \\\"nal_private_key\\\": {\\\"path\\\": \\\"/home/nsumsmgr/NAL/nwa/job/auth/id_rsa\\\"}, \\\"device_name_list\\\": {\\\"2\\\": {\\\"2\\\": {\\\"4\\\": {\\\"name\\\": \\\"thunder_share\\\"}, \\\"3\\\": {\\\"name\\\": \\\"bigip_share\\\"}, \\\"2\\\": {\\\"name\\\": \\\"thunder\\\"}, \\\"1\\\": {\\\"name\\\": \\\"bigip\\\"}}, \\\"1\\\": {\\\"4\\\": {\\\"name\\\": \\\"paloalto_share\\\"}, \\\"3\\\": {\\\"name\\\": \\\"fortigate_share\\\"}, \\\"2\\\": {\\\"name\\\": \\\"paloalto\\\"}, \\\"1\\\": {\\\"name\\\": \\\"fortigate\\\"}}}, \\\"1\\\": {\\\"3\\\": {\\\"1\\\": {\\\"name\\\": \\\"filefly\\\"}}, \\\"2\\\": {\\\"4\\\": {\\\"name\\\": \\\"vthunder_411\\\"}, \\\"3\\\": {\\\"name\\\": \\\"vthunder\\\"}, \\\"2\\\": {\\\"name\\\": \\\"bigip_ve\\\"}, \\\"1\\\": {\\\"name\\\": \\\"intersec_lb\\\"}}, \\\"1\\\": {\\\"3\\\": {\\\"name\\\": \\\"paloalto_vm\\\"}, \\\"2\\\": {\\\"name\\\": \\\"fortigate_vm\\\"}, \\\"1\\\": {\\\"name\\\": \\\"intersec_sg\\\"}, \\\"4\\\": {\\\"name\\\": \\\"intersec_sg\\\"}, \\\"5\\\": {\\\"name\\\": \\\"fortigate_vm_541\\\"}}}}}\", \"dc_id\": \"system\"}'),('system','2016-10-14 19:32:05','system','2016-10-14 19:32:05',0,84,'{\"region_id\": \"\", \"type\": 3, \"pod_id\": \"pod_unit_test3\", \"config_info\": \"{\\\"msa_config_for_device\\\": {\\\"thunder\\\": {\\\"model_id\\\": 80001, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"Thunder\\\", \\\"manufacturer_id\\\": 80000, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"admin_password\\\": \\\"neccs1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/A10ThunderPartition.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVLAN.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVRRP.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderStaticRoute.xml\\\"]}, \\\"thunder_share\\\": {\\\"model_id\\\": 80001, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"Thunder\\\", \\\"manufacturer_id\\\": 80000, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"admin_password\\\": \\\"neccs1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/A10ThunderPartition.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVLAN.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVRRP.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderStaticRoute.xml\\\"]}, \\\"filefly\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"filefly\\\", \\\"manufacturer_id\\\": 18, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ge-0/0/\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_System_Common.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_LAN_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_WAN_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_Loopback_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_BGP_Basic.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_BGP_Peer.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_VRRP.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_VRRP_Tracking.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_StaticRoute.xml\\\"], \\\"model_id\\\": 121, \\\"default_timezone\\\": \\\"GMT-9\\\", \\\"default_wan_interface_mtu\\\": 1400, \\\"default_device_name\\\": \\\"Firefly\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\"}, \\\"paloalto_share\\\": {\\\"model_id\\\": 136, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"PaloAlto\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ethernet1/11.\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_System_Vsys_Users.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_Interface_MngProfile.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_SubInterface.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_VirtualRouter.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Interface_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_vRouter_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone_mapping.xml\\\"]}, \\\"paloalto\\\": {\\\"model_id\\\": 136, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"PaloAlto\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ethernet1/11.\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_System_Vsys_Users.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_Interface_MngProfile.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_SubInterface.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_VirtualRouter.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Interface_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_vRouter_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone_mapping.xml\\\"]}, \\\"intersec_lb\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"intersec_lb\\\", \\\"manufacturer_id\\\": 70000, \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 70001, \\\"rsa_pub_key_path\\\": \\\"C:/tmp/rsa_pub_key\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/NEC/InterSecVMLB/lb_boot_complete_check.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_startup.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_nw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_reboot.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_zabbix.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_ntp.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_default_gw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_static_route.xml\\\"]}, \\\"paloalto_vm\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"admin\\\", \\\"device_name\\\": \\\"paloalto_vm\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 134, \\\"nic_prefix\\\": \\\"ethernet1/\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_Common.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Vsys_Zone_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_Interface.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_DNS.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_SNMP.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_SNMP_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_Syslog.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_Syslog_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_NTP.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_Users.xml\\\"]}, \\\"intersec_sg\\\": {\\\"ssh_port\\\": \\\"18022\\\", \\\"defaultgw_source_interface_ipv6\\\": \\\"eth1\\\",\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"intersec_sg\\\", \\\"manufacturer_id\\\": 70000, \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 70001, \\\"rsa_pub_key_path\\\": \\\"C:/tmp/rsa_pub_key\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/NEC/InterSecVMSG/sg_boot_complete_check.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_startup.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_nw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_reboot.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_zabbix.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_ntp.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_default_gw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_static_route.xml\\\"]}, \\\"bigip_ve\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"default\\\", \\\"device_name\\\": \\\"bigip_ve\\\", \\\"manufacturer_id\\\": 50000, \\\"user_id\\\": \\\"root\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 50001, \\\"default_route_name\\\": \\\"default\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_Common.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_VLAN.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_Self_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_DNS.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_NTP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_Routes.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_Admin_Account.xml\\\"]}, \\\"bigip_share\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"bigip\\\", \\\"manufacturer_id\\\": 50000, \\\"default_selfip_name\\\": \\\"management_ip\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 50001, \\\"nic_prefix\\\": \\\"1.\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_partition.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_default_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_vlan.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_physical_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VIP.xml\\\"]}, \\\"bigip\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"bigip\\\", \\\"manufacturer_id\\\": 50000, \\\"default_selfip_name\\\": \\\"management_ip\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 50001, \\\"nic_prefix\\\": \\\"1.\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_partition.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_default_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_vlan.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_physical_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VIP.xml\\\"]}, \\\"vthunder_411\\\": {\\\"dummy_vlan_id\\\": \\\"2\\\", \\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"a10\\\", \\\"device_name\\\": \\\"vthunder\\\", \\\"manufacturer_id\\\": 80000, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 80001, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/vThunder_System_Common.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_VLAN_and_Virtualinterface.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_DNS.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_trap.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_Enable.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Syslog.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_NTP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_Routes.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Admin_Account.xml\\\"]}, \\\"vthunder\\\": {\\\"dummy_vlan_id\\\": \\\"2\\\", \\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"a10\\\", \\\"device_name\\\": \\\"vthunder\\\", \\\"manufacturer_id\\\": 80000, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 80001, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/vThunder_System_Common.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_VLAN_and_Virtualinterface.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_DNS.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_trap.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_Enable.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Syslog.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_NTP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_Routes.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Admin_Account.xml\\\"]}, \\\"fortigate_vm\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"fortimanager_address\\\": \\\"110.0.0.1\\\", \\\"user_default_password\\\": \\\"\\\", \\\"default_language\\\": \\\"japanese\\\", \\\"device_name\\\": \\\"fortigate_vm_fw\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"admin\\\", \\\"admin_profile\\\": \\\"super_admin\\\", \\\"default_ntp_action\\\": \\\"enable\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_System_Common.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Interface.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Admin_Account.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_DNS.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_NTP.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Router_Static.xml\\\"], \\\"model_id\\\": 130, \\\"default_timezone\\\": \\\"60\\\", \\\"default_ntp_sync_interval\\\": \\\"60\\\", \\\"nic_prefix\\\": \\\"port\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"router_static_num\\\": 1}, \\\"fortigate_vm_541\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"fortimanager_address\\\": \\\"110.0.0.1\\\", \\\"user_default_password\\\": \\\"\\\", \\\"default_language\\\": \\\"japanese\\\", \\\"device_name\\\": \\\"fortigate_vm_fw\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"admin\\\", \\\"admin_profile\\\": \\\"super_admin\\\", \\\"default_ntp_action\\\": \\\"enable\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_System_Common.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Interface.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Admin_Account.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_DNS.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_NTP.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Router_Static.xml\\\"], \\\"model_id\\\": 130, \\\"default_timezone\\\": \\\"60\\\", \\\"default_ntp_sync_interval\\\": \\\"60\\\", \\\"nic_prefix\\\": \\\"port\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"router_static_num\\\": 1, \\\"user_new_password\\\": \\\"pass123\\\"}, \\\"fortigate_share\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"fortigate\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 130, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/FortiVdomProvPNF.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/FortiVlanProvPNF.xml\\\"]}, \\\"fortigate\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"fortigate\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 130, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/FortiVdomProvPNF.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/FortiVlanProvPNF.xml\\\"]}}, \\\"msa_config_for_common\\\": {\\\"svc_vlan_dns_primary_ip_address\\\": \\\"100.64.10.16\\\", \\\"svc_vlan_proxy_ip_address\\\": \\\"100.64.10.9\\\", \\\"ext_vlan_gateway\\\": \\\"202.247.10.158\\\", \\\"ext_vlan_gateway_ipv6\\\": \\\"dead:beaf::8\\\", \\\"pub_vlan_gateway\\\": \\\"100.65.255.254\\\", \\\"pub_vlan_gateway_ipv6\\\": \\\"dead:beaf::10\\\", \\\"msa_ip_address\\\": \\\"100.94.246.64\\\", \\\"svc_vlan_dns_secondary_ip_address\\\": \\\"100.64.10.17\\\", \\\"svc_vlan_proxy_port\\\": \\\"8080\\\", \\\"msa_server_device_id\\\": \\\"10\\\", \\\"tftp_server_ip_address\\\": \\\"100.94.246.64\\\", \\\"msa_customer_name_prefix\\\": \\\"c_tenant\\\", \\\"svc_vlan_ntp_primary_ip_address\\\": \\\"100.64.10.16\\\", \\\"svc_vlan_network_address\\\": \\\"100.64.0.0\\\", \\\"svc_vlan_network_address_ipv6\\\": \\\"dead:beaf::12\\\", \\\"svc_vlan_network_mask\\\": \\\"16\\\", \\\"svc_vlan_network_mask_ipv6\\\": 48, \\\"svc_vlan_ntp_secondary_ip_address\\\": \\\"100.64.10.17\\\"}}\", \"dc_id\": \"system\"}'),('system','2016-10-14 19:32:05','system','2016-10-14 19:32:05',0,85,'{\"region_id\": \"\", \"type\": 3, \"pod_id\": \"pod_unit_test1\", \"config_info\": \"{\\\"msa_config_for_device\\\": {\\\"thunder_share\\\": {\\\"model_id\\\": 80001, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"Thunder\\\", \\\"manufacturer_id\\\": 80000, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"admin_password\\\": \\\"neccs1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/A10ThunderPartition.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVLAN.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVRRP.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderStaticRoute.xml\\\"]}, \\\"thunder\\\": {\\\"model_id\\\": 80001, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"Thunder\\\", \\\"manufacturer_id\\\": 80000, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"admin_password\\\": \\\"neccs1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/A10ThunderPartition.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVLAN.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderVRRP.xml\\\", \\\"/CommandDefinition/A10/Thunder/A10ThunderStaticRoute.xml\\\"]}, \\\"filefly\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"filefly\\\", \\\"manufacturer_id\\\": 18, \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ge-0/0/\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_System_Common.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_LAN_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_WAN_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_Loopback_Interface.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_BGP_Basic.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_BGP_Peer.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_VRRP.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_VRRP_Tracking.xml\\\", \\\"/CommandDefinition/JUNIPER/junOS_generic/Firefly_VM_StaticRoute.xml\\\"], \\\"model_id\\\": 121, \\\"default_timezone\\\": \\\"GMT-9\\\", \\\"default_wan_interface_mtu\\\": 1400, \\\"default_device_name\\\": \\\"Firefly\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\"}, \\\"paloalto_share\\\": {\\\"model_id\\\": 136, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"PaloAlto\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ethernet1/11.\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_System_Vsys_Users.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_Interface_MngProfile.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_SubInterface.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_VirtualRouter.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Interface_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_vRouter_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone_mapping.xml\\\"]}, \\\"paloalto\\\": {\\\"model_id\\\": 136, \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"PaloAlto\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"nic_prefix\\\": \\\"ethernet1/11.\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_System_Vsys_Users.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_Interface_MngProfile.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_SubInterface.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_VirtualRouter.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Interface_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_vRouter_importing.xml\\\", \\\"/CommandDefinition/PALOALTO/Vsys/PaloAlto_Vsys_Zone_mapping.xml\\\"]}, \\\"intersec_lb\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"intersec_lb\\\", \\\"manufacturer_id\\\": 70000, \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 70001, \\\"rsa_pub_key_path\\\": \\\"C:/tmp/rsa_pub_key\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/NEC/InterSecVMLB/lb_boot_complete_check.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_startup.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_nw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_reboot.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_zabbix.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_ntp.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_default_gw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMLB/lb_static_route.xml\\\"]}, \\\"paloalto_vm\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"admin\\\", \\\"device_name\\\": \\\"paloalto_vm\\\", \\\"manufacturer_id\\\": 28, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 134, \\\"nic_prefix\\\": \\\"ethernet1/\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_Common.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Vsys_Zone.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Vsys_Zone_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_vRouter_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_Interface.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_DNS.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_SNMP.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_SNMP_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_Syslog.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Logsetting_Syslog_mapping.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_NTP.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_Network_StaticRoute.xml\\\", \\\"/CommandDefinition/PALOALTO/VA/PaloAlto_VM_System_Users.xml\\\"]}, \\\"intersec_sg\\\": {\\\"ssh_port\\\": \\\"18022\\\", \\\"defaultgw_source_interface_ipv6\\\": \\\"eth1\\\",\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"intersec_sg\\\", \\\"manufacturer_id\\\": 70000, \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 70001, \\\"rsa_pub_key_path\\\": \\\"C:/tmp/rsa_pub_key\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/NEC/InterSecVMSG/sg_boot_complete_check.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_startup.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_nw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_reboot.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_zabbix.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_ntp.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_default_gw.xml\\\", \\\"/CommandDefinition/NEC/InterSecVMSG/sg_static_route.xml\\\"]}, \\\"bigip_ve\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"default\\\", \\\"device_name\\\": \\\"bigip_ve\\\", \\\"manufacturer_id\\\": 50000, \\\"user_id\\\": \\\"root\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 50001, \\\"default_route_name\\\": \\\"default\\\", \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_Common.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_VLAN.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_Self_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_DNS.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_NTP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_Network_Routes.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VE_System_Admin_Account.xml\\\"]}, \\\"bigip_share\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"bigip\\\", \\\"manufacturer_id\\\": 50000, \\\"default_selfip_name\\\": \\\"management_ip\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 50001, \\\"nic_prefix\\\": \\\"1.\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_partition.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_default_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_vlan.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_physical_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VIP.xml\\\"]}, \\\"bigip\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"bigip\\\", \\\"manufacturer_id\\\": 50000, \\\"default_selfip_name\\\": \\\"management_ip\\\", \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 50001, \\\"nic_prefix\\\": \\\"1.\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/F5/BIG-IP/BIGIP_partition.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_default_route_domain.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_vlan.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_physical_IP.xml\\\", \\\"/CommandDefinition/F5/BIG-IP/BIGIP_VIP.xml\\\"]}, \\\"vthunder_411\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"a10\\\", \\\"device_name\\\": \\\"vthunder\\\", \\\"manufacturer_id\\\": 80000, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 80001, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/vThunder_System_Common.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_VLAN_and_Virtualinterface.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_DNS.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_trap.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_Enable.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Syslog.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_NTP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_Routes.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Admin_Account.xml\\\"]}, \\\"vthunder\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"user_default_password\\\": \\\"a10\\\", \\\"device_name\\\": \\\"vthunder\\\", \\\"manufacturer_id\\\": 80000, \\\"default_timezone\\\": \\\"Asia/Tokyo\\\", \\\"user_id\\\": \\\"admin\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"model_id\\\": 80001, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/A10/Thunder/vThunder_System_Common.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_VLAN_and_Virtualinterface.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_DNS.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_trap.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP_Enable.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_SNMP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Syslog.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_NTP.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_Network_Routes.xml\\\", \\\"/CommandDefinition/A10/Thunder/vThunder_System_Admin_Account.xml\\\"]}, \\\"fortigate_vm\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"fortimanager_address\\\": \\\"110.0.0.1\\\", \\\"user_default_password\\\": \\\"\\\", \\\"default_language\\\": \\\"japanese\\\", \\\"device_name\\\": \\\"fortigate_vm_fw\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"admin\\\", \\\"admin_profile\\\": \\\"super_admin\\\", \\\"default_ntp_action\\\": \\\"enable\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_System_Common.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Interface.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Admin_Account.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_DNS.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_NTP.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Router_Static.xml\\\"], \\\"model_id\\\": 130, \\\"default_timezone\\\": \\\"60\\\", \\\"default_ntp_sync_interval\\\": \\\"60\\\", \\\"nic_prefix\\\": \\\"port\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"router_static_num\\\": 1}, \\\"fortigate_vm_541\\\": {\\\"ssh_port\\\": \\\"22\\\", \\\"fortimanager_address\\\": \\\"110.0.0.1\\\", \\\"user_default_password\\\": \\\"\\\", \\\"default_language\\\": \\\"japanese\\\", \\\"device_name\\\": \\\"fortigate_vm_fw\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"admin\\\", \\\"admin_profile\\\": \\\"super_admin\\\", \\\"default_ntp_action\\\": \\\"enable\\\", \\\"user_new_password\\\": \\\"Passw0rd\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_System_Common.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Interface.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Admin_Account.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_DNS.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_NTP.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/Fortigate_VM_Router_Static.xml\\\"], \\\"model_id\\\": 130, \\\"default_timezone\\\": \\\"60\\\", \\\"default_ntp_sync_interval\\\": \\\"60\\\", \\\"nic_prefix\\\": \\\"port\\\", \\\"admin_password\\\": \\\"Passw0rd\\\", \\\"router_static_num\\\": 1, \\\"user_new_password\\\": \\\"pass456\\\"}, \\\"fortigate_share\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"fortigate\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 130, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/FortiVdomProvPNF.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/FortiVlanProvPNF.xml\\\"]}, \\\"fortigate\\\": {\\\"user_default_password\\\": \\\"\\\", \\\"device_name\\\": \\\"fortigate\\\", \\\"manufacturer_id\\\": 17, \\\"user_id\\\": \\\"msaadmin\\\", \\\"admin_password\\\": \\\"ms@pnf1234\\\", \\\"model_id\\\": 130, \\\"nic_prefix\\\": \\\"\\\", \\\"user_new_password\\\": \\\"ms@pnf1234\\\", \\\"object_attach_file\\\": [\\\"/CommandDefinition/FORTINET/Generic/FortiVdomProvPNF.xml\\\", \\\"/CommandDefinition/FORTINET/Generic/FortiVlanProvPNF.xml\\\"]}}, \\\"msa_config_for_common\\\": {\\\"svc_vlan_dns_primary_ip_address\\\": \\\"100.64.10.16\\\", \\\"svc_vlan_proxy_ip_address\\\": \\\"100.64.10.9\\\", \\\"ext_vlan_gateway\\\": \\\"202.247.10.158\\\", \\\"ext_vlan_gateway_ipv6\\\": \\\"dead:beaf::9\\\", \\\"pub_vlan_gateway\\\": \\\"100.65.255.254\\\", \\\"pub_vlan_gateway_ipv6\\\": \\\"dead:beaf::11\\\", \\\"msa_ip_address\\\": \\\"100.94.246.64\\\", \\\"svc_vlan_dns_secondary_ip_address\\\": \\\"100.64.10.17\\\", \\\"svc_vlan_proxy_port\\\": \\\"8080\\\", \\\"msa_server_device_id\\\": \\\"10\\\", \\\"tftp_server_ip_address\\\": \\\"100.94.246.64\\\", \\\"msa_customer_name_prefix\\\": \\\"c_tenant\\\", \\\"svc_vlan_ntp_primary_ip_address\\\": \\\"100.64.10.16\\\", \\\"svc_vlan_network_address\\\": \\\"100.64.0.0\\\", \\\"svc_vlan_network_address_ipv6\\\": \\\"dead:beaf::13\\\", \\\"svc_vlan_network_mask\\\": \\\"16\\\", \\\"svc_vlan_network_mask_ipv6\\\": 48, \\\"svc_vlan_ntp_secondary_ip_address\\\": \\\"100.64.10.17\\\"}}\", \"dc_id\": \"system\"}');
+/*!40000 ALTER TABLE `NAL_CONFIG_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_DC_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_DC_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_DC_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `dc_id` varchar(64) NOT NULL,
+  `dc_name` varchar(64) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_DC_MNG`
+--
+
+LOCK TABLES `NAL_DC_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_DC_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_DC_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_DEVICE_ENDPOINT_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_DEVICE_ENDPOINT_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_DEVICE_ENDPOINT_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_DEVICE_ENDPOINT_MNG`
+--
+
+LOCK TABLES `NAL_DEVICE_ENDPOINT_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_DEVICE_ENDPOINT_MNG` DISABLE KEYS */;
+INSERT INTO `NAL_DEVICE_ENDPOINT_MNG` VALUES ('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,1,'{\"type\":\"1\",\"dc_id\":\"system\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/min/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"admin\\\",\\\"user_key\\\":\\\"4f144157f53c40518d39099e4c3f0f80\\\",\\\"role_id\\\":\\\"f8e6eec3ccf3453b974e0521cf2cd9f2\\\",\\\"admin_tenant_name\\\":\\\"admin\\\",\\\"admin_tenant_id\\\":\\\"9ba7d56906cc4d0cbe055e06971b12a7\\\",\\\"openstack_keystone_ip_address\\\":\\\"10.169.245.1\\\",\\\"openstack_controller_node_ip_address\\\":\\\"10.169.245.1\\\",\\\"openstack_controller_node_server_login_id\\\":\\\"heat-admin\\\",\\\"openstack_controller_node_server_login_password\\\":\\\"P@ssw0rd\\\",\\\"region_id\\\":\\\"region_unit_test1\\\"}\"}'),('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,2,'{\"type\":\"2\",\"dc_id\":\"system\",\"region_id\":\"region_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/iaas/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"f4c6ad669c65c12e6701f2af04b6b2d598b21ed3\\\"}\"}'),('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,3,'{\"type\":\"3\",\"dc_id\":\"system\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\/webapi\\/%MSA_CLASS_NAME%?\\\",\\\"rest_endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\\",\\\"user_id\\\":\\\"ncroot\\\",\\\"user_password\\\":\\\"ubiqube\\\",\\\"customer_create_endpoint\\\":\\\"UserWS\\\",\\\"device_create_endpoint\\\":\\\"DeviceWS\\\",\\\"init_provisioning_endpoint\\\":\\\"DeviceWS\\\",\\\"object_attach_endpoint\\\":\\\"DeviceConfigurationWS\\\",\\\"object_execute_endpoint\\\":\\\"OrderCommandWS\\\",\\\"hostname_setting_endpoint\\\":\\\"DeviceFieldsWS\\\",\\\"ip_address\\\":\\\"10.169.245.64\\\",\\\"login_id\\\":\\\"root\\\",\\\"login_password\\\":\\\"root123\\\",\\\"nal_rsa_pub_dir\\\":\\\"\\/var\\/log\\/nal\\/job\\\",\\\"generatekey_command_path\\\":\\\"\\/home\\/admin\\/generateKey.sh\\\",\\\"movekey_command_path\\\":\\\"\\/home\\/admin\\/moveKey.sh\\\"}\"}'),('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,4,'{\"type\":\"4\",\"dc_id\":\"system\",\"region_id\":\"region_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"10.169.2.3\\\",\\\"user_id\\\":\\\"necadmin\\\",\\\"user_password\\\":\\\"P@ssw0rd\\\",\\\"timeout\\\":\\\"300\\\"}\"}'),('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,5,'{\"type\":\"1\",\"dc_id\":\"system\",\"pod_id\":\"pod_unit_test3\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/min/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"admin\\\",\\\"user_key\\\":\\\"4f144157f53c40518d39099e4c3f0f80\\\",\\\"role_id\\\":\\\"f8e6eec3ccf3453b974e0521cf2cd9f2\\\",\\\"admin_tenant_name\\\":\\\"admin\\\",\\\"admin_tenant_id\\\":\\\"9ba7d56906cc4d0cbe055e06971b12a7\\\",\\\"openstack_keystone_ip_address\\\":\\\"10.169.245.1\\\",\\\"openstack_controller_node_ip_address\\\":\\\"10.169.245.1\\\",\\\"openstack_controller_node_server_login_id\\\":\\\"heat-admin\\\",\\\"openstack_controller_node_server_login_password\\\":\\\"P@ssw0rd\\\",\\\"region_id\\\":\\\"region_unit_test3\\\"}\"}'),('system','2016-09-28 20:26:53','system','2016-09-28 20:26:53',0,6,'{\"type\":\"3\",\"dc_id\":\"system\",\"pod_id\":\"pod_unit_test3\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\/webapi\\/%MSA_CLASS_NAME%?\\\",\\\"rest_endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\\",\\\"user_id\\\":\\\"ncroot\\\",\\\"user_password\\\":\\\"ubiqube\\\",\\\"customer_create_endpoint\\\":\\\"UserWS\\\",\\\"device_create_endpoint\\\":\\\"DeviceWS\\\",\\\"init_provisioning_endpoint\\\":\\\"DeviceWS\\\",\\\"object_attach_endpoint\\\":\\\"DeviceConfigurationWS\\\",\\\"object_execute_endpoint\\\":\\\"OrderCommandWS\\\",\\\"hostname_setting_endpoint\\\":\\\"DeviceFieldsWS\\\",\\\"ip_address\\\":\\\"10.169.245.64\\\",\\\"login_id\\\":\\\"root\\\",\\\"login_password\\\":\\\"root123\\\",\\\"nal_rsa_pub_dir\\\":\\\"\\/var\\/log\\/nal\\/job\\\",\\\"generatekey_command_path\\\":\\\"\\/home\\/admin\\/generateKey.sh\\\",\\\"movekey_command_path\\\":\\\"\\/home\\/admin\\/moveKey.sh\\\"}\"}');
+
+/*!40000 ALTER TABLE `NAL_DEVICE_ENDPOINT_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_GLOBAL_IP_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_GLOBAL_IP_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_GLOBAL_IP_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `global_ip` varchar(15) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_GLOBAL_IP_MNG`
+--
+
+LOCK TABLES `NAL_GLOBAL_IP_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_GLOBAL_IP_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_GLOBAL_IP_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_LICENSE_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_LICENSE_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_LICENSE_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `license` varchar(256) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=716 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_LICENSE_MNG`
+--
+
+LOCK TABLES `NAL_LICENSE_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_LICENSE_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_LICENSE_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_MSA_VLAN_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_MSA_VLAN_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_MSA_VLAN_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=443 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_MSA_VLAN_MNG`
+--
+
+LOCK TABLES `NAL_MSA_VLAN_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_MSA_VLAN_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_MSA_VLAN_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_POD_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_POD_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_POD_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `pod_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=957 DEFAULT CHARSET=latin1;
+INSERT INTO `NAL_POD_MNG` (`create_id`, `create_date`, `update_id`, `update_date`, `delete_flg`, `ID`, `pod_id`, `extension_info`) VALUES
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 1, 'pod_unit_test0', '{"use_type": 1, "ops_version": 1, "weight": 0, "region_id": "region_unit_test0"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 2, 'pod_unit_test1', '{"use_type": 1, "ops_version": 1, "weight": 50, "region_id": "region_unit_test1"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 3, 'pod_unit_test2', '{"use_type": 2, "ops_version": 1, "weight": 50, "region_id": "region_unit_test2"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 4, 'pod_unit_test3', '{"use_type": 3, "ops_version": 1, "weight": 50, "region_id": "region_unit_test3"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 5, 'pod_unit_test4', '{"use_type": 1, "ops_version": 2, "weight": 60, "region_id": "region_unit_test4"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 6, 'pod_unit_test5', '{"use_type": 2, "ops_version": 2, "weight": 60, "region_id": "region_unit_test5"}'),
+('system', '2016-09-15 20:58:38', 'system', '2016-09-15 20:58:38', 0, 7, 'pod_unit_test6', '{"use_type": 3, "ops_version": 2, "weight": 60, "region_id": "region_unit_test6"}');
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_POD_MNG`
+--
+
+LOCK TABLES `NAL_POD_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_POD_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_POD_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_PORT_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_PORT_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_PORT_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `port_id` varchar(64) DEFAULT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1501 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_PORT_MNG`
+--
+
+LOCK TABLES `NAL_PORT_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_PORT_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_PORT_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_QUOTA_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_QUOTA_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_QUOTA_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_QUOTA_MNG`
+--
+
+LOCK TABLES `NAL_QUOTA_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_QUOTA_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_QUOTA_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_TENANT_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_TENANT_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_TENANT_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `tenant_name` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=362 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_TENANT_MNG`
+--
+
+LOCK TABLES `NAL_TENANT_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_TENANT_MNG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NAL_TENANT_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_VIRTUAL_LAN_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_VIRTUAL_LAN_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_VIRTUAL_LAN_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `network_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_VIRTUAL_LAN_MNG`
+--
+
+LOCK TABLES `NAL_VIRTUAL_LAN_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_VIRTUAL_LAN_MNG` DISABLE KEYS */;
+INSERT INTO `NAL_VIRTUAL_LAN_MNG` VALUES ('operation_id_001','2016-09-06 16:39:48','operation_id_001','2016-09-06 16:39:48',0,1,'d32019d3-bc6e-4319-9c1d-6722fc136a22','{\"IaaS_network_type\": \"VXLAN\", \"IaaS_region_id\": \"f5892461-fdb1-4f3f-bfdc-aaaaaaaaaaaa\", \"nal_vlan_info\": \"{\\\"provider:segmentation_id\\\": \\\"\\\", \\\"name\\\": \\\"private-network\\\", \\\"status\\\": \\\"ACTIVE\\\", \\\"router:external\\\": false, \\\"tenant_id\\\": \\\"4fd44f30292945e481c7b8a0c8908869\\\", \\\"qos_policy_id\\\": \\\"6a8454ade84346f59e8d40665f878b2e\\\", \\\"subnets\\\": [\\\"54d6f61d-db07-451c-9ab3-b9609b6b6f0b\\\"], \\\"admin_state_up\\\": true, \\\"updated_at\\\": \\\"2016-03-08T20:19:41\\\", \\\"port_security_enabled\\\": true, \\\"mtu\\\": 0, \\\"id\\\": \\\"d32019d3-bc6e-4319-9c1d-6722fc136a22\\\", \\\"created_at\\\": \\\"2016-03-08T20:19:41\\\", \\\"shared\\\": true}\", \"IaaS_segmentation_id\": \"segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"nal_tenant_id_001\", \"vxlangw_pod_id\": \"f5892461-fdb1-4f3f-bfdc-7cxxc97a36e7\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"IaaS_network_id_001\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test3\", \"vlan_id\": \"\"}'),('test_create_fortigate_user_001','2016-09-16 13:26:22','test_delete_fortigate_user_001','2016-09-16 13:30:31',1,65,'272a7340eb0628457c2c86d5e616d176','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"shared\\\": false, \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"mtu\\\": 0, \\\"admin_state_up\\\": true, \\\"router:external\\\": false, \\\"name\\\": \\\"network_name_AAA\\\", \\\"subnets\\\": [], \\\"provider:network_type\\\": \\\"vlan\\\", \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"id\\\": \\\"272a7340eb0628457c2c86d5e616d176\\\", \\\"status\\\": \\\"ACTIVE\\\", \\\"provider:physical_network\\\": \\\"physnet\\\"}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 13:32:39','test_delete_fortigate_user_001','2016-09-16 13:58:56',1,66,'787c4dc06aab62d99aa0e12c08b567bd','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"provider:network_type\\\": \\\"vlan\\\", \\\"id\\\": \\\"787c4dc06aab62d99aa0e12c08b567bd\\\", \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"mtu\\\": 0, \\\"admin_state_up\\\": true, \\\"shared\\\": false, \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"status\\\": \\\"ACTIVE\\\", \\\"router:external\\\": false, \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"name\\\": \\\"network_name_AAA\\\", \\\"subnets\\\": []}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 14:03:22','test_delete_fortigate_user_001','2016-09-16 14:16:23',1,67,'9315afa0129aa03bf675e0f1d8a750e5','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"status\\\": \\\"ACTIVE\\\", \\\"admin_state_up\\\": true, \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"mtu\\\": 0, \\\"router:external\\\": false, \\\"id\\\": \\\"9315afa0129aa03bf675e0f1d8a750e5\\\", \\\"shared\\\": false, \\\"name\\\": \\\"network_name_AAA\\\", \\\"subnets\\\": [], \\\"provider:network_type\\\": \\\"vlan\\\", \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\"}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 14:17:40','test_delete_fortigate_user_001','2016-09-16 14:18:52',1,68,'95bc4a8e8316753d3f0d87d576760dda','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"shared\\\": false, \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"provider:network_type\\\": \\\"vlan\\\", \\\"name\\\": \\\"network_name_AAA\\\", \\\"subnets\\\": [], \\\"id\\\": \\\"95bc4a8e8316753d3f0d87d576760dda\\\", \\\"admin_state_up\\\": true, \\\"router:external\\\": false, \\\"mtu\\\": 0, \\\"status\\\": \\\"ACTIVE\\\"}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 14:22:02','test_delete_fortigate_user_001','2016-09-16 14:23:19',1,69,'6b518df6c7fdd70ad2ab5150317ae84d','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"status\\\": \\\"ACTIVE\\\", \\\"mtu\\\": 0, \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"name\\\": \\\"network_name_AAA\\\", \\\"router:external\\\": false, \\\"shared\\\": false, \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"subnets\\\": [], \\\"admin_state_up\\\": true, \\\"provider:network_type\\\": \\\"vlan\\\", \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"id\\\": \\\"6b518df6c7fdd70ad2ab5150317ae84d\\\"}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 14:26:30','test_delete_fortigate_user_001','2016-09-16 14:27:52',1,70,'dd72e6f6568246ee06105c0de1d62399','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"status\\\": \\\"ACTIVE\\\", \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"router:external\\\": false, \\\"provider:network_type\\\": \\\"vlan\\\", \\\"admin_state_up\\\": true, \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"id\\\": \\\"dd72e6f6568246ee06105c0de1d62399\\\", \\\"subnets\\\": [], \\\"shared\\\": false, \\\"name\\\": \\\"network_name_AAA\\\", \\\"mtu\\\": 0}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}'),('test_create_fortigate_user_001','2016-09-16 14:32:26','test_delete_fortigate_user_001','2016-09-16 14:33:08',1,71,'323a3649fa51d064234dd27ee357bc58','{\"IaaS_network_type\": \"VLAN\", \"IaaS_region_id\": \"region_unit_test1\", \"nal_vlan_info\": \"{\\\"mtu\\\": 0, \\\"subnets\\\": [], \\\"name\\\": \\\"network_name_AAA\\\", \\\"provider:network_type\\\": \\\"vlan\\\", \\\"tenant_id\\\": \\\"ef5d2e187b9636f9a4811318069137a6\\\", \\\"provider:segmentation_id\\\": \\\"IaaS_segmentation_id_001\\\", \\\"shared\\\": false, \\\"id\\\": \\\"323a3649fa51d064234dd27ee357bc58\\\", \\\"admin_state_up\\\": true, \\\"router:external\\\": false, \\\"provider:physical_network\\\": \\\"physnet\\\", \\\"status\\\": \\\"ACTIVE\\\"}\", \"IaaS_segmentation_id\": \"IaaS_segmentation_id_001\", \"IaaS_tenant_id\": \"IaaS_tenant_id_001\", \"tenant_id\": \"ef5d2e187b9636f9a4811318069137a6\", \"vxlangw_pod_id\": \"\", \"tenant_name\": \"IaaS_tenant_id_001\", \"IaaS_network_id\": \"407813ca465219bf3e5ce04faa5f78bc\", \"rule_id\": \"\", \"pod_id\": \"pod_unit_test1\", \"vlan_id\": \"IaaS_segmentation_id_001\"}');
+/*!40000 ALTER TABLE `NAL_VIRTUAL_LAN_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NAL_VXLANGW_POD_MNG`
+--
+
+DROP TABLE IF EXISTS `NAL_VXLANGW_POD_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NAL_VXLANGW_POD_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `vxlangw_pod_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NAL_VXLANGW_POD_MNG`
+--
+
+LOCK TABLES `NAL_VXLANGW_POD_MNG` WRITE;
+/*!40000 ALTER TABLE `NAL_VXLANGW_POD_MNG` DISABLE KEYS */;
+INSERT INTO `NAL_VXLANGW_POD_MNG` VALUES ('system','2016-09-06 16:44:48','system','2016-09-06 16:44:48',0,1,'f5892461-fdb1-4f3f-bfdc-7c02297236e5','{\"IaaS_region_id\": \"region_unit_test1\", \"weight\": 0}'),('system','2016-09-06 16:44:48','system','2016-09-06 16:44:48',0,3,'f5892461-fdb1-4f3f-bfdc-7c02297236e5','{\"IaaS_region_id\": \"\", \"weight\": 30}'),('system','2016-09-06 16:44:48','system','2016-09-06 16:44:48',0,4,'f5892461-fdb1-4f3f-bfdc-7cxxc97a36e7','{\"IaaS_region_id\": \"aaaa\", \"weight\": 40}'),('system','2016-09-19 13:27:48','system','2016-09-19 13:27:48',0,10,'196c3f37-763c-4877-81ad-7c38e1c94eb7','{\"IaaS_region_id\": \"region_unit_test1\", \"weight\": 100}');
+/*!40000 ALTER TABLE `NAL_VXLANGW_POD_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wim_dc_connect_member_mng`
+--
+
+DROP TABLE IF EXISTS `wim_dc_connect_member_mng`;
+CREATE TABLE `wim_dc_connect_member_mng` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wim_dc_connect_group_mng`
+--
+
+DROP TABLE IF EXISTS `wim_dc_connect_group_mng`;
+CREATE TABLE `wim_dc_connect_group_mng` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+
+--
+-- Dumping data for table `wim_dc_connect_group_mng`
+--
+
+INSERT INTO `wim_dc_connect_group_mng` (`create_id`, `create_date`, `update_id`, `update_date`, `delete_flg`, `ID`, `group_id`, `extension_info`) VALUES
+('6bc68529b6714bde8dfb9a33c3644b6e', '2016-10-03 23:01:53', '6bc68529b6714bde8dfb9a33c3644b6e', '2016-10-03 23:01:53', 0, 34, 'group_4ghhdgv383joq', '{"task_status": "0", "group_type": "2", "tenant_name": "d4981e9e1654443b893cdf9f2cc3c729", "IaaS_tenant_id": "d4981e9e1654443b893cdf9f2cc3c729", "group_name": "nal_dccis01"}'),
+('6bc68529b6714bde8dfb9a33c3644b6e', '2016-10-04 16:55:48', '6bc68529b6714bde8dfb9a33c3644b6e', '2016-10-04 16:55:48', 0, 40, 'group_hdv9vh3g2l8tu', '{"task_status": "0", "group_type": "2", "tenant_name": "481cd6010b384f0a9b2be292e5d04bc0", "IaaS_tenant_id": "481cd6010b384f0a9b2be292e5d04bc0", "group_name": "nal_FT_dccis01"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wim_dc_connect_member_mng`
+--
+
+DROP TABLE IF EXISTS `wim_dc_connect_member_mng`;
+CREATE TABLE `wim_dc_connect_member_mng` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wim_dc_mng`
+--
+
+DROP TABLE IF EXISTS `wim_dc_mng`;
+CREATE TABLE `wim_dc_mng` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `dc_id` varchar(64) NOT NULL,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `wim_dc_mng`
+--
+
+INSERT INTO `wim_dc_mng` (`create_id`, `create_date`, `update_id`, `update_date`, `delete_flg`, `ID`, `dc_id`, `extension_info`) VALUES
+('system', '2016-10-04 14:18:35', 'system', '2016-10-04 14:18:35', 0, 1, 'dc01', '{"dc_name":"DC1","dc_number": "1"}'),
+('system', '2016-10-04 14:18:35', 'system', '2016-10-04 14:18:35', 0, 2, 'dc02', '{"dc_name":"DC2","dc_number": "2"}'),
+('system', '2016-10-04 14:18:35', 'system', '2016-10-04 14:18:35', 0, 3, 'dc03', '{"dc_name":"DC3","dc_number": "3"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wim_dc_vlan_mng`
+--
+
+DROP TABLE IF EXISTS `wim_dc_vlan_mng`;
+CREATE TABLE `wim_dc_vlan_mng` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `wim_dc_vlan_mng`
+--
+
+INSERT INTO `wim_dc_vlan_mng` (`create_id`, `create_date`, `update_id`, `update_date`, `delete_flg`, `ID`, `extension_info`) VALUES
+('system', '2016-09-15 20:58:57', 'system', '2016-10-04 16:55:48', 0, 1, '{"dc_id":"", "pod_id":"", "vlan_id":955, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-04 15:06:23', 0, 2, '{"dc_id":"", "pod_id":"", "vlan_id":956, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-04 15:27:48', 0, 3, '{"dc_id":"", "pod_id":"", "vlan_id":957, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-04 16:29:50', 0, 4, '{"dc_id":"", "pod_id":"", "vlan_id":958, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-03 23:01:53', 0, 5, '{"dc_id":"", "pod_id":"", "vlan_id":959, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-04 14:33:36', 0, 6, '{"dc_id":"", "pod_id":"", "vlan_id":960, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-01 16:08:02', 0, 7, '{"dc_id":"", "pod_id":"", "vlan_id":961, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-01 16:16:13', 0, 8, '{"dc_id":"", "pod_id":"", "vlan_id":962, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-10-03 13:23:54', 0, 9, '{"dc_id":"", "pod_id":"", "vlan_id":963, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 10, '{"dc_id":"", "pod_id":"", "vlan_id":964, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 11, '{"dc_id":"", "pod_id":"", "vlan_id":965, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 12, '{"dc_id":"", "pod_id":"", "vlan_id":966, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 13, '{"dc_id":"", "pod_id":"", "vlan_id":967, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 14, '{"dc_id":"", "pod_id":"", "vlan_id":968, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 15, '{"dc_id":"", "pod_id":"", "vlan_id":969, "status":0, "group_id":""}'),
+('system', '2016-09-15 20:58:57', 'system', '2016-09-15 20:58:57', 0, 16, '{"dc_id":"", "pod_id":"", "vlan_id":970, "status":0, "group_id":""}');
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `WIM_CONFIG_MNG`
+--
+
+DROP TABLE IF EXISTS `WIM_CONFIG_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `WIM_CONFIG_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `WIM_CONFIG_MNG`
+--
+
+LOCK TABLES `WIM_CONFIG_MNG` WRITE;
+/*!40000 ALTER TABLE `WIM_CONFIG_MNG` DISABLE KEYS */;
+INSERT INTO `WIM_CONFIG_MNG` VALUES ('system','2016-10-04 14:16:35','system','2016-10-04 14:16:35',0,1,'{\"type\":\"3\",\"dc_id\":\"dc02\",\"region_id\":\"\",\"pod_id\":\"pod_unit_test1\",\"config_info\":\"{\\\"msa_config_for_common\\\":{\\\"msa_ip_address\\\":\\\"10.169.245.64\\\",\\\"tftp_server_ip_address\\\":\\\"10.169.245.64\\\",\\\"pub_vlan_gateway\\\":\\\"100.96.1.254\\\",\\\"ext_vlan_gateway\\\":\\\"172.17.3.158\\\",\\\"svc_vlan_network_address\\\":\\\"100.96.0.0\\\",\\\"svc_vlan_network_mask\\\":\\\"24\\\",\\\"svc_vlan_dns_primary_ip_address\\\":\\\"100.96.0.12\\\",\\\"svc_vlan_dns_secondary_ip_address\\\":\\\"100.96.0.13\\\",\\\"svc_vlan_ntp_primary_ip_address\\\":\\\"100.96.0.12\\\",\\\"svc_vlan_ntp_secondary_ip_address\\\":\\\"100.96.0.13\\\",\\\"svc_vlan_proxy_ip_address\\\":\\\"100.96.0.14\\\",\\\"svc_vlan_proxy_port\\\":\\\"8080\\\",\\\"msa_customer_name_prefix\\\":\\\"c_tenant\\\",\\\"msa_server_device_id\\\":\\\"100\\\"},\\\"msa_config_for_device\\\":{\\\"filefly\\\":{\\\"manufacturer_id\\\":18,\\\"model_id\\\":121,\\\"object_attach_file\\\":[\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_System_Common.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_LAN_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_WAN_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_Loopback_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_BGP_Basic.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_BGP_Peer.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_VRRP.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_VRRP_Tracking.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_StaticRoute.xml\\\"],\\\"user_id\\\":\\\"admin\\\",\\\"user_default_password\\\":\\\"\\\",\\\"user_new_password\\\":\\\"Passw0rd\\\",\\\"admin_password\\\":\\\"Passw0rd\\\",\\\"nic_prefix\\\":\\\"ge-0\\/0\\/\\\",\\\"default_timezone\\\":\\\"GMT-9\\\",\\\"default_wan_interface_mtu\\\":\\\"1400\\\",\\\"device_name\\\":\\\"Firefly\\\",\\\"nic_for_msa\\\":\\\"0\\\",\\\"nic_for_wan\\\":\\\"1\\\",\\\"nic_for_first_lan\\\":\\\"2\\\"},\\\"csr1000v\\\":{\\\"ssh_port\\\":\\\"22\\\",\\\"msa_client_params\\\":{\\\"3\\\":{\\\"create_csr1000v_ipsec_basic_esp_gre_ipv4\\\":{\\\"ce01\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"encryption_transform\\\":\\\"esp-3des\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20},\\\"ce02\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"encryption_transform\\\":\\\"esp-3des\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20}}},\\\"4\\\":{\\\"create_csr1000v_ipsec_basic_ah_gre_ipv4\\\":{\\\"ce01\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20},\\\"ce02\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20}}}},\\\"manufacturer_id\\\":1,\\\"model_id\\\":113,\\\"object_attach_file\\\":[\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1SystemCommon.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1WanInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1LanInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1LoopbackInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1DefaultRoute.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1StaticRoute.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1BgpBasic.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1BgpPeer.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpPrimary.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpSecondary.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpTracking.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpInterfaceTracking.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Dns.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Snmp.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Syslog.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Ntp.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1License.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Throughput.xml\\\"],\\\"user_id\\\":\\\"admin\\\",\\\"user_default_password\\\":\\\"\\\",\\\"user_new_password\\\":\\\"Passw0rd\\\",\\\"admin_password\\\":\\\"Passw0rd\\\",\\\"nic_profile_tunnel\\\":\\\"VTI\\\",\\\"nic_prefix_tunnel\\\":\\\"Tunnel\\\",\\\"nic_prefix\\\":\\\"GigabitEthernet\\\",\\\"device_name\\\":\\\"CSR1000v\\\",\\\"default_timezone\\\":\\\"JST 9 0\\\",\\\"nic_for_msa\\\":\\\"1\\\",\\\"nic_for_wan\\\":\\\"2\\\",\\\"nic_for_pub\\\":\\\"3\\\",\\\"nic_for_first_lan\\\":\\\"4\\\",\\\"snmp_community_name\\\":\\\"Public\\\",\\\"snmp_trap_version\\\":\\\"2c\\\",\\\"syslog_facility\\\":\\\"local0\\\",\\\"syslog_severity\\\":\\\"warnings\\\",\\\"default_wan_interface_mtu\\\":1400,\\\"default_wan_interface_tcp_mss\\\":1380,\\\"default_wan_interface_tcp_mss_tunnel\\\":1360,\\\"ipsec_transform_set\\\":\\\"IPSEC\\\",\\\"loopback_interface_name\\\":\\\"Loopback0\\\",\\\"ce01\\\":{\\\"bgp_local_preference\\\":200,\\\"hsrp_priority\\\":120,\\\"hsrp_track_prioritycost\\\":10},\\\"ce02\\\":{\\\"bgp_local_preference\\\":110,\\\"hsrp_priority\\\":115,\\\"hsrp_track_prioritycost\\\":10},\\\"throughput\\\":{\\\"1\\\":10,\\\"2\\\":50,\\\"3\\\":100,\\\"4\\\":250,\\\"5\\\":500,\\\"6\\\":1000,\\\"7\\\":2500,\\\"8\\\":5000,\\\"9\\\":10000},\\\"static_route_dst_name\\\":\\\"static001\\\",\\\"static_route_for_dc\\\":\\\"static002\\\",\\\"license_key\\\":\\\"license_csr1000v\\\"}}}\"}'),('system','2016-10-05 22:24:01','system','2016-10-05 22:24:01',0,3,'{\"type\":\"3\",\"dc_id\":\"dc01\",\"region_id\":\"\",\"pod_id\":\"pod_unit_test1\",\"config_info\":\"{\\\"msa_config_for_common\\\":{\\\"msa_ip_address\\\":\\\"100.94.246.64\\\",\\\"tftp_server_ip_address\\\":\\\"100.94.246.64\\\",\\\"pub_vlan_gateway\\\":\\\"100.65.255.254\\\",\\\"ext_vlan_gateway\\\":\\\"171.17.1.158\\\",\\\"svc_vlan_network_address\\\":\\\"100.64.0.0\\\",\\\"svc_vlan_network_mask\\\":\\\"16\\\",\\\"svc_vlan_dns_primary_ip_address\\\":\\\"100.64.10.16\\\",\\\"svc_vlan_dns_secondary_ip_address\\\":\\\"100.64.10.17\\\",\\\"svc_vlan_ntp_primary_ip_address\\\":\\\"100.64.10.16\\\",\\\"svc_vlan_ntp_secondary_ip_address\\\":\\\"100.64.10.17\\\",\\\"svc_vlan_proxy_ip_address\\\":\\\"100.64.10.9\\\",\\\"svc_vlan_proxy_port\\\":\\\"8080\\\",\\\"msa_customer_name_prefix\\\":\\\"c_tenant\\\",\\\"msa_server_device_id\\\":\\\"100\\\"},\\\"msa_config_for_device\\\":{\\\"filefly\\\":{\\\"manufacturer_id\\\":18,\\\"model_id\\\":121,\\\"object_attach_file\\\":[\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_System_Common.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_LAN_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_WAN_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_Loopback_Interface.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_BGP_Basic.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_BGP_Peer.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_VRRP.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_VRRP_Tracking.xml\\\",\\\"\\/CommandDefinition\\/JUNIPER\\/junOS_generic\\/Firefly_VM_StaticRoute.xml\\\"],\\\"user_id\\\":\\\"admin\\\",\\\"user_default_password\\\":\\\"\\\",\\\"user_new_password\\\":\\\"Passw0rd\\\",\\\"admin_password\\\":\\\"Passw0rd\\\",\\\"nic_prefix\\\":\\\"ge-0\\/0\\/\\\",\\\"default_timezone\\\":\\\"GMT-9\\\",\\\"default_wan_interface_mtu\\\":\\\"1400\\\",\\\"device_name\\\":\\\"Firefly\\\",\\\"nic_for_msa\\\":\\\"0\\\",\\\"nic_for_wan\\\":\\\"1\\\",\\\"nic_for_first_lan\\\":\\\"2\\\"},\\\"csr1000v\\\":{\\\"ssh_port\\\":\\\"22\\\",\\\"msa_client_params\\\":{\\\"3\\\":{\\\"create_csr1000v_ipsec_basic_esp_gre_ipv4\\\":{\\\"ce01\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"encryption_transform\\\":\\\"esp-3des\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20},\\\"ce02\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"encryption_transform\\\":\\\"esp-3des\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20}}},\\\"4\\\":{\\\"create_csr1000v_ipsec_basic_ah_gre_ipv4\\\":{\\\"ce01\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20},\\\"ce02\\\":{\\\"priority\\\":1,\\\"encryption_algorithm\\\":\\\"3des\\\",\\\"hash_algorithm\\\":\\\"md5\\\",\\\"diffie_hellman_group\\\":2,\\\"transform_set\\\":\\\"IPSEC\\\",\\\"authentication_transform\\\":\\\"esp-md5-hmac\\\",\\\"profile_name\\\":\\\"VTI\\\",\\\"isakmp_sa_lifetime\\\":10,\\\"ipsec_sa_lifetime\\\":20}}}},\\\"manufacturer_id\\\":1,\\\"model_id\\\":113,\\\"object_attach_file\\\":[\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1SystemCommon.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1WanInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1LanInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1LoopbackInterface.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1DefaultRoute.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1StaticRoute.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1BgpBasic.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1BgpPeer.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpPrimary.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpSecondary.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpTracking.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1HsrpInterfaceTracking.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Dns.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Snmp.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Syslog.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Ntp.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1License.xml\\\",\\\"\\/CommandDefinition\\/CISCO\\/ISR\\/CiscoCsrStdIosXe3dot17dot1Throughput.xml\\\"],\\\"user_id\\\":\\\"admin\\\",\\\"user_default_password\\\":\\\"\\\",\\\"user_new_password\\\":\\\"Passw0rd\\\",\\\"admin_password\\\":\\\"Passw0rd\\\",\\\"nic_profile_tunnel\\\":\\\"VTI\\\",\\\"nic_prefix_tunnel\\\":\\\"Tunnel\\\",\\\"nic_prefix\\\":\\\"GigabitEthernet\\\",\\\"device_name\\\":\\\"CSR1000v\\\",\\\"default_timezone\\\":\\\"JST 9 0\\\",\\\"nic_for_msa\\\":\\\"1\\\",\\\"nic_for_wan\\\":\\\"2\\\",\\\"nic_for_pub\\\":\\\"3\\\",\\\"nic_for_first_lan\\\":\\\"4\\\",\\\"snmp_community_name\\\":\\\"Public\\\",\\\"snmp_trap_version\\\":\\\"2c\\\",\\\"syslog_facility\\\":\\\"local0\\\",\\\"syslog_severity\\\":\\\"warnings\\\",\\\"default_wan_interface_mtu\\\":1400,\\\"default_wan_interface_tcp_mss\\\":1380,\\\"default_wan_interface_tcp_mss_tunnel\\\":1360,\\\"ipsec_transform_set\\\":\\\"IPSEC\\\",\\\"loopback_interface_name\\\":\\\"Loopback0\\\",\\\"ce01\\\":{\\\"bgp_local_preference\\\":200,\\\"hsrp_priority\\\":120,\\\"hsrp_track_prioritycost\\\":10},\\\"ce02\\\":{\\\"bgp_local_preference\\\":110,\\\"hsrp_priority\\\":115,\\\"hsrp_track_prioritycost\\\":10},\\\"throughput\\\":{\\\"1\\\":10,\\\"2\\\":50,\\\"3\\\":100,\\\"4\\\":250,\\\"5\\\":500,\\\"6\\\":1000,\\\"7\\\":2500,\\\"8\\\":5000,\\\"9\\\":10000},\\\"static_route_dst_name\\\":\\\"static001\\\",\\\"static_route_for_dc\\\":\\\"static002\\\",\\\"license_key\\\":\\\"license_csr1000v\\\"}}}\"}'),('system','2016-10-05 22:32:29','system','2016-10-05 22:32:29',0,5,'{\"type\":\"5\",\"dc_id\":\"dc02\",\"region_id\":\"\",\"pod_id\":\"\",\"config_info\":\"{\\\"device_name_list\\\":{\\\"1\\\":{\\\"3\\\":{\\\"1\\\":{\\\"name\\\":\\\"filefly\\\"},\\\"2\\\":{\\\"name\\\":\\\"csr1000v\\\"}}}},\\\"os_image_and_flavor_name_list\\\":{\\\"3\\\":{\\\"1\\\":{\\\"flavor_name\\\":\\\"vsrx-12.1x47_d20.7-M2D2E0S0C2F1.0P1\\\",\\\"image_name\\\":\\\"vsrx-12.1x47_d20.7\\\"},\\\"2\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"},\\\"3\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"},\\\"4\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"}}},\\\"os_vlan_name_list\\\":{\\\"msa_lan\\\":{\\\"name\\\":\\\"MSA\\\"},\\\"pub_lan\\\":{\\\"name\\\":\\\"Pub\\\"},\\\"ext_lan\\\":{\\\"name\\\":\\\"Ext\\\"},\\\"idc_lan\\\":{\\\"name\\\":\\\"Idc\\\"}}, \\\"os_physical_network\\\": {\\\"name\\\": \\\"physnet\\\"}, \\\"nal_private_key\\\": {\\\"path\\\": \\\"/home/nsumsmgr/NAL/nwa/job/auth/id_rsa\\\"}, \\\"inter_dc_netowrk_info\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.129\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.1\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::1\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.130\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.2\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::2\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.133\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.3\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::3\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.134\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.4\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::4\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.137\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.5\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::5\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.138\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.6\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::6\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}}}, \\\"inter_dc_netowrk_info_for_tunnel\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.1\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::2\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::2\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.5\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.4\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::4\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::4\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.17\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.16\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::10\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::10\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.21\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.20\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::12\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::12\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.129\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.9\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.8\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::6\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::6\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.13\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.12\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::8\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::8\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.25\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.24\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::14\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::14\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.29\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.28\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::16\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::16\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.130\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\"}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.2\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::3\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::2\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.10\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.8\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::7\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::6\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.33\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.32\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::18\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::18\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.37\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.36\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::20\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::20\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.133\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.6\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.4\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::5\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::4\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.14\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.12\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::9\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::8\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.41\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.40\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::22\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::22\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.45\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.44\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::24\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::24\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.134\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\"}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.18\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.16\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::11\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::10\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.26\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.24\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::15\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::14\\\"}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.34\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.32\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::19\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::18\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.42\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.40\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::23\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::22\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.137\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.22\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.20\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::13\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::12\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.30\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.28\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::17\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::16\\\"}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.38\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.36\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::21\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::20\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.46\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.44\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::25\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::24\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.138\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\"}}}}\"}'),('system','2016-10-05 23:04:42','system','2016-10-05 23:04:42',0,7,'{\"type\":\"5\",\"dc_id\":\"dc01\",\"region_id\":\"\",\"pod_id\":\"\",\"config_info\":\"{\\\"device_name_list\\\":{\\\"1\\\":{\\\"3\\\":{\\\"1\\\":{\\\"name\\\":\\\"filefly\\\"},\\\"2\\\":{\\\"name\\\":\\\"csr1000v\\\"}}}},\\\"os_image_and_flavor_name_list\\\":{\\\"3\\\":{\\\"1\\\":{\\\"flavor_name\\\":\\\"vsrx-12.1x47_d20.7-M2D2E0S0C2F1.0P1\\\",\\\"image_name\\\":\\\"vsrx-12.1x47_d20.7\\\"},\\\"2\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"},\\\"3\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"},\\\"4\\\":{\\\"flavor_name\\\":\\\"csr1000v-03.17.01-M4D8E0S0C4F1.0P1\\\",\\\"image_name\\\":\\\"csr1000v-03.17.01\\\"}}},\\\"os_vlan_name_list\\\":{\\\"msa_lan\\\":{\\\"name\\\":\\\"MSA\\\"},\\\"pub_lan\\\":{\\\"name\\\":\\\"Pub\\\"},\\\"ext_lan\\\":{\\\"name\\\":\\\"Ext\\\"},\\\"idc_lan\\\":{\\\"name\\\":\\\"Idc\\\"}}, \\\"os_physical_network\\\": {\\\"name\\\": \\\"physnet\\\"}, \\\"nal_private_key\\\": {\\\"path\\\": \\\"/home/nsumsmgr/NAL/nwa/job/auth/id_rsa\\\"}, \\\"inter_dc_netowrk_info\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.129\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.1\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::1\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.130\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.2\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::2\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.133\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.3\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::3\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.134\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.4\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::4\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"loopback_ip\\\":\\\"100.80.251.137\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.5\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::5\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}},\\\"ce02\\\":{\\\"loopback_ip\\\":\\\"100.80.251.138\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\",\\\"wan\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.6\\\",\\\"netmask\\\":25,\\\"subnet_ip\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::6\\\",\\\"netmask\\\":64,\\\"subnet_ip\\\":\\\"fd00:cafe:10::\\\"}}}}}, \\\"inter_dc_netowrk_info_for_tunnel\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.1\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::2\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::2\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.5\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.4\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::4\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::4\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.17\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.16\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::10\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::10\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.21\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.20\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::12\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::12\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.129\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.9\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.8\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::6\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::6\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.13\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.12\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::8\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::8\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.25\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.24\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::14\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::14\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.29\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.28\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::16\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::16\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.130\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.128\\\"}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.2\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.0\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::3\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::2\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.10\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.8\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::7\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::6\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.33\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.32\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::18\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::18\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.37\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.36\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::20\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::20\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.133\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.6\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.4\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::5\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::4\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.14\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.12\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::9\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::8\\\"}}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.41\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.40\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::22\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::22\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.45\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.44\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::24\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::24\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.134\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.132\\\"}},\\\"dc03\\\":{\\\"ce01\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.18\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.16\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::11\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::10\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.26\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.24\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::15\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::14\\\"}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.34\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.32\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::19\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::18\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.42\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.40\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::23\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::22\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.137\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\"},\\\"ce02\\\":{\\\"tenant\\\":{\\\"dc01\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.22\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.20\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::13\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::12\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.30\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.28\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::17\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::16\\\"}}},\\\"dc02\\\":{\\\"ce01\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.38\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.36\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::21\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::20\\\"}},\\\"ce02\\\":{\\\"4\\\":{\\\"ip\\\":\\\"100.80.251.46\\\",\\\"netmask\\\":30,\\\"network\\\":\\\"100.80.251.44\\\"},\\\"6\\\":{\\\"ip\\\":\\\"fd00:cafe:10::25\\\",\\\"netmask\\\":127,\\\"network\\\":\\\"fd00:cafe:10::24\\\"}}}},\\\"loopback_ip\\\":\\\"100.80.251.138\\\",\\\"loopback_netmask\\\":30,\\\"loopback_seg\\\":\\\"100.80.251.136\\\"}}}}\"}');
+/*!40000 ALTER TABLE `WIM_CONFIG_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `WIM_DEVICE_ENDPOINT_MNG`
+--
+
+DROP TABLE IF EXISTS `WIM_DEVICE_ENDPOINT_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `WIM_DEVICE_ENDPOINT_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `WIM_DEVICE_ENDPOINT_MNG`
+--
+
+LOCK TABLES `WIM_DEVICE_ENDPOINT_MNG` WRITE;
+/*!40000 ALTER TABLE `WIM_DEVICE_ENDPOINT_MNG` DISABLE KEYS */;
+INSERT INTO `WIM_DEVICE_ENDPOINT_MNG` VALUES ('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,1,'{\"type\":\"1\",\"dc_id\":\"dc02\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/min/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"admin\\\",\\\"user_key\\\":\\\"4f144157f53c40518d39099e4c3f0f80\\\",\\\"role_id\\\":\\\"f8e6eec3ccf3453b974e0521cf2cd9f2\\\",\\\"admin_tenant_name\\\":\\\"admin\\\",\\\"admin_tenant_id\\\":\\\"9ba7d56906cc4d0cbe055e06971b12a7\\\",\\\"openstack_keystone_ip_address\\\":\\\"10.164.245.1\\\",\\\"openstack_controller_node_ip_address\\\":\\\"10.164.245.1\\\",\\\"openstack_controller_node_server_login_id\\\":\\\"heat-admin\\\",\\\"openstack_controller_node_server_login_password\\\":\\\"P@ssw0rd\\\",\\\"region_id\\\":\\\"region_unit_test1\\\"}\"}'),('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,2,'{\"type\":\"1\",\"dc_id\":\"dc01\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/min/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"admin\\\",\\\"user_key\\\":\\\"4f144157f53c40518d39099e4c3f0f80\\\",\\\"role_id\\\":\\\"f8e6eec3ccf3453b974e0521cf2cd9f2\\\",\\\"admin_tenant_name\\\":\\\"admin\\\",\\\"admin_tenant_id\\\":\\\"9ba7d56906cc4d0cbe055e06971b12a7\\\",\\\"openstack_keystone_ip_address\\\":\\\"10.39.246.100\\\",\\\"openstack_controller_node_ip_address\\\":\\\"10.39.246.100\\\",\\\"openstack_controller_node_server_login_id\\\":\\\"heat-admin\\\",\\\"openstack_controller_node_server_login_password\\\":\\\"P@ssw0rd\\\",\\\"region_id\\\":\\\"region_unit_test1\\\"}\"}'),('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,7,'{\"type\":\"2\",\"dc_id\":\"dc01\",\"region_id\":\"region_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/iaas/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"f4c6ad669c65c12e6701f2af04b6b2d598b21ed3\\\"}\"}'),('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,3,'{\"type\":\"2\",\"dc_id\":\"dc02\",\"region_id\":\"region_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http://localhost:80/rest_openstack/index.py/iaas/v3\\\",\\\"user_id\\\":\\\"admin\\\",\\\"user_password\\\":\\\"f4c6ad669c65c12e6701f2af04b6b2d598b21ed3\\\"}\"}'),('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,4,'{\"type\":\"3\",\"dc_id\":\"dc02\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\/webapi\\/%MSA_CLASS_NAME%?\\\",\\\"rest_endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\\",\\\"user_id\\\":\\\"ncroot\\\",\\\"user_password\\\":\\\"ubiqube\\\",\\\"customer_create_endpoint\\\":\\\"UserWS\\\",\\\"device_create_endpoint\\\":\\\"DeviceWS\\\",\\\"init_provisioning_endpoint\\\":\\\"DeviceWS\\\",\\\"object_attach_endpoint\\\":\\\"DeviceConfigurationWS\\\",\\\"object_execute_endpoint\\\":\\\"OrderCommandWS\\\",\\\"hostname_setting_endpoint\\\":\\\"DeviceFieldsWS\\\",\\\"ip_address\\\":\\\"10.169.245.64\\\",\\\"login_id\\\":\\\"root\\\",\\\"login_password\\\":\\\"root123\\\",\\\"nal_rsa_pub_dir\\\":\\\"\\/var\\/log\\/nal\\/job\\\",\\\"generatekey_command_path\\\":\\\"\\/home\\/admin\\/generateKey.sh\\\",\\\"movekey_command_path\\\":\\\"\\/home\\/admin\\/moveKey.sh\\\"}\"}'),('system','2016-10-05 16:07:50','system','2016-10-05 16:07:50',0,5,'{\"type\":\"4\",\"dc_id\":\"dc02\",\"region_id\":\"region_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"10.169.2.3\\\",\\\"user_id\\\":\\\"necadmin\\\",\\\"user_password\\\":\\\"P@ssw0rd\\\",\\\"timeout\\\":\\\"300\\\"}\"}'),('system','2016-10-05 23:27:06','system','2016-10-05 23:27:06',0,6,'{\"type\":\"3\",\"dc_id\":\"dc01\",\"pod_id\":\"pod_unit_test1\",\"endpoint_info\":\"{\\\"endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\/webapi\\/%MSA_CLASS_NAME%?\\\",\\\"rest_endpoint\\\":\\\"http:\\/\\/localhost:80\\/rest_msa\\/index.py\\\",\\\"user_id\\\":\\\"ncroot\\\",\\\"user_password\\\":\\\"ubiqube\\\",\\\"customer_create_endpoint\\\":\\\"UserWS\\\",\\\"device_create_endpoint\\\":\\\"DeviceWS\\\",\\\"init_provisioning_endpoint\\\":\\\"DeviceWS\\\",\\\"object_attach_endpoint\\\":\\\"DeviceConfigurationWS\\\",\\\"object_execute_endpoint\\\":\\\"OrderCommandWS\\\",\\\"hostname_setting_endpoint\\\":\\\"DeviceFieldsWS\\\",\\\"ip_address\\\":\\\"10.39.246.64\\\",\\\"login_id\\\":\\\"root\\\",\\\"login_password\\\":\\\"root123\\\",\\\"nal_rsa_pub_dir\\\":\\\"\\/var\\/log\\/nal\\/job\\\",\\\"generatekey_command_path\\\":\\\"\\/home\\/admin\\/generateKey.sh\\\",\\\"movekey_command_path\\\":\\\"\\/home\\/admin\\/moveKey.sh\\\"}\"}');
+/*!40000 ALTER TABLE `WIM_DEVICE_ENDPOINT_MNG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `WIM_DC_SEGMENT_MNG`
+--
+
+DROP TABLE IF EXISTS `WIM_DC_SEGMENT_MNG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `WIM_DC_SEGMENT_MNG` (
+  `create_id` varchar(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_id` varchar(64) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `delete_flg` decimal(1,0) NOT NULL DEFAULT '0',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_info` text,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,10 @@
+resource : "MOSSGAODNY"
+method   : "POST"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "1"
+ auth_type : "0"
+ auth_id : "wetest_01@aa.moss-test1.com"
+ auth_pwd : "746574657465"
+ dnyfil_type : "from_blank"
+ dnyfil_mode : "9"

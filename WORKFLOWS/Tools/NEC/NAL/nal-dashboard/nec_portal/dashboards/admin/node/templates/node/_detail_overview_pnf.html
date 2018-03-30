@@ -1,0 +1,24 @@
+{% load i18n sizeformat %}
+
+  <h4>{% trans "Master" %}</h4>
+
+  <hr class="header_rule">
+  <dl class="dl-horizontal">
+    {% for master_data in master %}
+      <dt>{{ master_data.0 }}</dt>
+      <dd>{{ master_data.1 }}</dd>
+    {% endfor %}
+  </dl>
+
+  {% if slave %}
+    <h4>{% trans "Slave" %}</h4>
+
+    <hr class="header_rule">
+    <dl class="dl-horizontal">
+      {% for slave_data in slave %}
+        <dt>{{ slave_data.0 }}</dt>
+        <dd>{{ slave_data.1 }}</dd>
+      {% endfor %}
+    </dl>
+  {% endif %}
+</div>

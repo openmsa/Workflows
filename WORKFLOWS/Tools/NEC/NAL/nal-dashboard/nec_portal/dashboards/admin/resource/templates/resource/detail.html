@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Resource Detail" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_domain_page_header.html" with title=page_title %}
+{% endblock page_header %}
+
+{% block main %}
+<div class="row">
+  <div class="col-sm-12">
+    {% include "admin/resource/_detail_overview.html" %}
+
+    <hr>
+    <div id="resources">
+      {{ table.render }}
+    </div>
+  </div>
+</div>
+{% endblock %}

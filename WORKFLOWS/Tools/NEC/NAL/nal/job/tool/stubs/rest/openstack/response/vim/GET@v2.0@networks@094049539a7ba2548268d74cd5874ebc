@@ -1,0 +1,1 @@
+{"network":{"id":"094049539a7ba2548268d74cd5874ebc","project_id":"1de3cf1741674a0dadd15affdb2ffae2","name":"NalNw","admin_state_up":true,"shared":false,"mtu":0,"router:external":false,"status":"ACTIVE","subnets":[],"provider:network_type":null,"provider:segmentation_id":null,"provider:physical_network":null}}

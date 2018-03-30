@@ -1,0 +1,8 @@
+resource : "MGMOSSMEMBER"
+method   : "POST"
+inpara   :
+ we_passwd : "aaa"
+ auth_domain : "aa.moss-test1.com"
+ req_madr : "wetestmg_01"
+ #tetete
+ req_pwd : "746574657465"

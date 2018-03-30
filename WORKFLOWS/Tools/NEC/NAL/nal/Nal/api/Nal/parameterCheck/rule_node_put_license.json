@@ -1,0 +1,69 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "node_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "device_type",
+        "case" : [
+            {
+                "case_param" : {
+                    "case_key" : "type",
+                    "case_pattern" : "/^[1]$/"
+                },
+                "rule": "MATCH",
+                "pattern" : "/^[3]$/",
+                "min" : "1",
+                "max" : "2"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "type",
+                    "case_pattern" : "/^[2]$/"
+                },
+                "rule": "MATCH",
+                "pattern" : "/^[34]$/",
+                "min" : "1",
+                "max" : "2"
+            }
+        ]
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    }
+]
