@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="scheduler_configuration_documentation.xsl"?> 
+<settings>
+    <job_chain name="update-bandwidth">
+        <note language="de"/>
+
+        <note language="en"/>
+
+        <order>
+            <params/>
+
+            <process state="bfSrvUpdBwPreReturnValue">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfSrvUpdBwPreRefDb">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfSrvUpdBwPreInit">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+        </order>
+    </job_chain>
+</settings>

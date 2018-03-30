@@ -1,0 +1,10 @@
+[
+    {
+        "param": "host_name",
+        "default" : {
+            "rule" : "ALPHABET",
+            "min" : "1",
+            "max" : "31"
+        }
+    }
+]

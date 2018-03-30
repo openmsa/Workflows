@@ -1,0 +1,10 @@
+resource : "MOSSMEMBER"
+method   : "GET"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "1"
+ auth_type : "0"
+ auth_id : "administrator1@aa.moss-test1.com"
+ auth_pwd : "7465746531323334"
+ hi_auth_id : ""
+ hi_op_auth_type : ""

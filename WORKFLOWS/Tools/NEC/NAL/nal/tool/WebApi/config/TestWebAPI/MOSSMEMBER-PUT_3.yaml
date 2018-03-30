@@ -1,0 +1,19 @@
+# 管理者認証 利用者
+
+resource : "MOSSMEMBER"
+method   : "PUT"
+inpara   :
+ we_passwd : "aaa"
+ auth_method_kbn : "2"
+ auth_type : "0"
+ auth_id : "administrator1@aa.moss-test1.com"
+ auth_pwd : "313131313131"
+ hi_auth_id : "wetest_02@aa.moss-test1.com"
+ req_madr : "wetest_04"
+ item_free22 : "テストなまえ"
+ item_free23 : "テストなまえ"
+ item_free24 : "管理者変更部署その１"
+ item_free25 : "03-1111-1111"
+ item_free26 : "管理者変更備考その１"
+ item_free27 : "管理者変更備考その２"
+ item_free28 : "管理者変更備考その３"

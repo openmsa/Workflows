@@ -1,0 +1,578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>NAL API 評価画面</TITLE>
+<script type="text/javascript" language="javascript">
+<!--
+function sel_file(){
+    document.fm1.mode.value = 1;
+    document.fm1.submit();
+    return;
+}
+
+function upd_file(){
+    ret = confirm('更新します。よろしいですか？');
+    if( !ret ){ return false; }
+    document.fm1.mode.value = 2;
+}
+
+function cre_file(){
+    document.fm1.mode.value = 3;
+    newfile_name=prompt("新しい入力パラメータファイル名を入力してください。");
+    if(newfile_name == ''||newfile_name == null) {
+        alert("キャンセルします。");
+        return false;
+    }
+    if (!chk_filename(newfile_name)){
+        alert('半角英数字(0-9,a-z,A-Z）と記号(-_.)でご入力ください。');
+        return false;
+    }
+    document.fm1.newfile_name.value = newfile_name;
+}
+
+function chk_filename(value){
+    var regex = /^[0-9a-zA-Z\-\_\.]+$/;
+    if (!value.match(regex)) return false;
+    return true;
+}
+
+function we_clear(){
+    cf = confirm('出力をクリアします。よろしいですか？');
+    if (cf) {
+        document.fm1.outpara.value='';
+    }
+    return;
+}
+
+function json_check(){
+	var data=document.fm1.inpara.value;
+	var jd;
+	var msg;
+	try {
+		jd=JSON.parse(data);
+	} catch (e) {
+		alert(e.message);
+		return;
+	}
+	alert('問題ありません');
+	return;
+}
+
+function exec(){
+    var obj = document.fm1.parafile;	// 入力データ域
+    var index = obj.selectedIndex;
+    var obj2 = document.fm1.method;		// メソッド選択
+    var index2 = obj2.selectedIndex;
+	var data=document.fm1.inpara.value;
+	var jd;
+	var msg;
+
+    switch(index){
+    case 0:// vFW
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 1:// vLB
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 2:// vPort
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 3:// pFW
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 4:// pLB
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 5:// pPort
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 6:// DC間接続(NAL)
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 7:// DC間接続(WIM)
+	if(index2 == 3){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    case 8:// GlobalIP
+	if(index2 == 0x2 ){
+		alert("更新処理は対応していません");
+		return false;
+	}
+	break;
+    }
+	try {
+		jd=JSON.parse(data);
+	} catch (e) {
+		alert(e.message);
+		return false;
+	}
+    document.fm1.mode.value = 4;
+}
+
+function mkval(indata, inval, mtd, inslct){
+	var val="";
+	var cnt;
+	var j=0;
+	cnt = indata.length;
+	for(var i=0; i < cnt; i++){
+		if((inslct[i] & mtd) == 0){
+			continue;
+		}
+		if(j == 0){
+			if(typeof inval[i] == "number"){
+				val = "\"" + indata[i] + "\":" + inval[i] + ""
+			} else {
+				val = "\"" + indata[i] + "\":\"" + inval[i] + "\""
+			}
+		} else {
+			if(typeof inval[i] == "number"){
+				val = val + ",\n\"" + indata[i] + "\":" + inval[i] + ""
+			} else {
+				val = val + ",\n\"" + indata[i] + "\":\"" + inval[i] + "\""
+			}
+		}
+		j++;
+	}
+	if(mtd == 0x1){
+		val = val + ",\n\"operation-type\":\"show\"";
+	} else if(mtd == 0x10){
+		val = val + ",\n\"operation-type\":\"list\"";
+	}
+	val = val + "\n";
+	return val;
+}
+
+function mkdescr(indata, indescr, mtd, inslct){
+	var val="";
+	var cnt;
+	var j=0;
+	var key="";
+	cnt = indata.length;
+	for(var i=0; i < cnt; i++){
+		if((inslct[i] & mtd) == 0){
+			continue;
+		}
+		key = indata[i] + "                    ";
+		key = key.substr(0,20);
+		//key = key.replace(/ /g, "&nbsp;");
+		if(j == 0){
+			//val = indata[i] + " : " + indescr[i] + "\n"
+			val = key + " : " + indescr[i] + "\n"
+		} else {
+			//val = val + indata[i] + " : " + indescr[i] + "\n"
+			val = val + key + " : " + indescr[i] + "\n"
+		}
+		j++;
+	}
+	if(mtd == 0x1){
+		val = val + "operation-type       : 詳細参照時の設定値\n";
+	} else if(mtd == 0x10){
+		val = val + "operation-type       : リスト参照時の設定値\n";
+	}
+	return val;
+}
+
+function chgproc(){
+	var obj = document.fm1.parafile;	// 入力データ域
+	var index = obj.selectedIndex;
+	var obj2 = document.fm1.method;		// メソッド選択
+	var index2 = obj2.selectedIndex;
+	var inp="";
+	var ind="";
+	var mtd=0x0;
+	var i = 0;
+	var indata = [ ];	// キーワード
+	var inval = [ ];	// 値
+	var indescr = [ ];	// 説明
+	var insl = [ ];		// methodにより使用するか否か
+	var spdat = "                       ";
+	var descript_c = [ 
+		// 共通
+		"操作者ID。操作している人のID",					// 0
+		"IaaSのテナントID",						// 1
+		"IaaSのテナント名",						// 2
+		"IaaSのリージョンID",						// 3
+		"1:FW",								// 4
+		"2:LB",								// 5
+		"IaaSのネットワークがVXLAN/VLANのどちらかを指定",		// 6
+		"IaaSのネットワークがVXLANの場合、IaaSのnetwork_idを指定",	// 7
+		"IaaSのネットワークがVLANの場合、IaaSのsegmentation_idを指定",	// 8
+		"ネットワーク種別。1: Internal 2:External",			// 9
+		"NALの仮想LANのnetwork_id。仮想LAN登録時の払い出しID又は、\n" + spdat + "外部接続共用LAN/内部接続共用LAN/事業者管理LANのnetwork_id",	//10
+		"ネットマスク(16,24形式)",	//11
+		"仮想LANの名前",	//12
+		"ノードIDを指定",	//13
+		"GlobalIPアドレスを指定",	//14
+		"NalのテナントID",		//15
+		"portのID(IaaSのOpenStackのport作成時のid)",				// 16
+		""
+	];	// 共通説明
+
+	var descript_v = [ 
+		// 仮想関連
+		"仮想APLのホスト名",							// 0
+		"MSAの設定で使用するデバイス名。NECCS使用モデル一覧の対象機器名を使用",	// 1
+		"1:InterSec 2:FortiGate 3:PaloAlto",					// 2
+		"1:InterSecVM/LB 2:BIG-IP 3:vThunder",					// 3
+		"仮想APLのノードID",							// 4
+		"ドメイン名",								// 5
+		"self_ip名",								// 6
+		"FWのIPアドレス",							// 7
+		"管理者アカウント",							// 8
+		"パスワード",								// 9
+		"timezone",								// 10
+		"APL種別　1:仮想",							// 11
+		"portのID(OpenStackのport作成時のid)",					// 12
+		"VRRPのIPアドレス",							// 13
+		"CEルータ#1のIPアドレス",						// 14
+		"CEルータ#2のIPアドレス",						// 15
+		"FGVM 管理者アカウント",						// 16
+		"FGVM 管理者アカウントのパスワード",					// 17
+		""
+	];	// 仮想説明
+	var descript_p = [ 
+		// 物理関連
+		"物理APLのホスト名",						// 0
+		"VDOM名",							// 1
+		"BIG-IPの場合、パーティション名、ルートドメイン番号",		// 2
+		"0:冗長構成 1:シングル",					// 3
+		"1:FortiGate",							// 4
+		"1:BIG-IP 2:Thunder",						// 5
+		"物理APLの装置ID",						// 6
+		"物理APLのデバイス名(FortiGate)",				// 7
+		"物理APLのデバイス名(BIG-IP)",					// 8
+		"APL種別　2:物理",						// 9
+		"パーティション名",						// 10
+		"ルートドメイン名",						// 11
+		"テナント名",							// 12
+		""
+	];	// 物理説明
+	var descript_dc = [ 
+		// DC間接続
+		"DCを識別するID",						// 0
+		"カスタマ名",							// 1
+		"カスタマID",							// 2
+		""
+	] ;	// DC間説明
+
+	switch(index2){	// メソッドの選択肢設定
+	case 0:	// GET(show)
+		mtd=0x1; break;
+	case 1: // GET(list)
+		mtd=0x10; break;
+	case 2:	// POST
+		mtd=0x2; break;
+	case 3:	// PUT
+		mtd=0x4; break;
+	case 4:	// DELETE
+		mtd=0x8; break;
+	case 5: // GET(check)
+		mtd=0x20; break;
+	}
+	i=0;
+	switch( index ){
+	case 0:	//仮想FW
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "host_name";		inval[i] = "";		indescr[i] = descript_v[0];	insl[i]=0x6;	i++;
+		indata[i] = "node_name";		inval[i] = "";		indescr[i] = descript_v[0];	insl[i]=0x11;	i++;
+		indata[i] = "device_name";		inval[i] = "";		indescr[i] = descript_v[1];	insl[i]=0x6;	i++;
+		indata[i] = "type";			inval[i] = 1;		indescr[i] = descript_c[4];	insl[i]=0x13;	i++;
+		indata[i] = "device_type";		inval[i] = 2;		indescr[i] = descript_v[2];	insl[i]=0x13;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		indata[i] = "node_id";			inval[i] = "";		indescr[i] = descript_c[13];	insl[i]=0x11;	i++;
+		indata[i] = "fw_id";			inval[i] = "";		indescr[i] = descript_c[13];	insl[i]=0xC;	i++;
+		indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x4;	i++;
+		indata[i] = "admin_id";			inval[i] = "";		indescr[i] = descript_v[16]; 	insl[i]=0x2;	i++;
+		indata[i] = "admin_pw";			inval[i] = "";		indescr[i] = descript_v[17]; 	insl[i]=0x2;	i++;
+		break;
+	case 1:	//仮想LB
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "host_name";		inval[i] = "";		indescr[i] = descript_v[0];	insl[i]=0x6;	i++;
+		indata[i] = "node_name";		inval[i] = "";		indescr[i] = descript_v[0];	insl[i]=0x11;	i++;
+		indata[i] = "device_name";		inval[i] = "";		indescr[i] = descript_v[1];	insl[i]=0x6;	i++;
+		indata[i] = "type";			inval[i] = 2;		indescr[i] = descript_c[5];	insl[i]=0x13;	i++;
+		indata[i] = "device_type";		inval[i] = 2;		indescr[i] = descript_v[3];	insl[i]=0x13;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		indata[i] = "node_id";			inval[i] = "";		indescr[i] = descript_c[13];	insl[i]=0x1D;	i++;
+		indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x4;	i++;
+		indata[i] = "domain_name";		inval[i] = "";		indescr[i] = descript_v[5]; 	insl[i]=0x2;	i++;
+		indata[i] = "self_ip_name";		inval[i] = "";		indescr[i] = descript_v[6]; 	insl[i]=0x2;	i++;
+		indata[i] = "fw_ip_address";		inval[i] = "";		indescr[i] = descript_v[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "admin_user_name";		inval[i] = "";		indescr[i] = descript_v[8]; 	insl[i]=0x2;	i++;
+		indata[i] = "admin_user_password";	inval[i] = "";		indescr[i] = descript_v[9]; 	insl[i]=0x2;	i++;
+		indata[i] = "timezone";			inval[i] = "";		indescr[i] = descript_v[10]; 	insl[i]=0x2;	i++;
+		break;
+	case 2:	//仮想ポート
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x1F;	i++;
+		indata[i] = "apl_id";			inval[i] = "";		indescr[i] = descript_v[4];	insl[i]=0x1F;	i++;
+		indata[i] = "apl_type";			inval[i] = 1;		indescr[i] = descript_v[11];	insl[i]=0x11;	i++;
+		indata[i] = "port_id";			inval[i] = "";		indescr[i] = descript_v[12];	insl[i]=0x11;	i++;
+		indata[i] = "IaaS_port_id";		inval[i] = "";		indescr[i] = descript_c[16];	insl[i]=0x11;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_type";		inval[i] = 1;		indescr[i] = descript_c[9];	insl[i]=0x17;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		break;
+	case 3: //物理FW
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "vdom_name";		inval[i] = "";		indescr[i] = descript_p[1];	insl[i]=0xE;	i++;
+		indata[i] = "device_user_name";		inval[i] = "";		indescr[i] = descript_p[1];	insl[i]=0x11;	i++;
+		indata[i] = "type";			inval[i] = 1;		indescr[i] = descript_c[4];	insl[i]=0x13;	i++;
+		indata[i] = "device_type";		inval[i] = 1;		indescr[i] = descript_p[4];	insl[i]=0x13;	i++;
+		indata[i] = "device_name";		inval[i] = "FortiGate";	indescr[i] = descript_p[7];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "redundant_configuration_flg";inval[i] = 0;		indescr[i] = descript_p[3];	insl[i]=0x13;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		indata[i] = "device_id";		inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x15;	i++;
+		indata[i] = "fw_id";			inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x8;	i++;
+		//indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x0;	i++;
+		indata[i] = "device_name_master";	inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x11;	i++;
+		indata[i] = "device_name_slave";	inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x11;	i++;
+		break;
+	case 4: //物理LB
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0xA;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "type";			inval[i] = 2;		indescr[i] = descript_c[5];	insl[i]=0x13;	i++;
+		indata[i] = "partition_id";		inval[i] = "";		indescr[i] = descript_p[10];	insl[i]=0x2;	i++;
+		indata[i] = "route_domain_id";		inval[i] = "";		indescr[i] = descript_p[11];	insl[i]=0x2;	i++;
+		indata[i] = "tenant_name";		inval[i] = "";		indescr[i] = descript_p[12];	insl[i]=0x2;	i++;
+		indata[i] = "device_name";		inval[i] = "BIG-IP";	indescr[i] = descript_p[8];	insl[i]=0x2;	i++;
+		indata[i] = "device_user_name";		inval[i] = "";		indescr[i] = descript_p[2];	insl[i]=0x15;	i++;
+		indata[i] = "device_type";		inval[i] = 1;		indescr[i] = descript_p[5];	insl[i]=0x13;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "redundant_configuration_flg";inval[i] = 0;		indescr[i] = descript_p[3];	insl[i]=0x13;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		indata[i] = "device_id";		inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x1D;	i++;
+		//indata[i] = "lb_id";			inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x0;	i++;
+		//indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x0;	i++;
+		indata[i] = "device_name_master";	inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x11;	i++;
+		indata[i] = "device_name_slave";	inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x11;	i++;
+		break;
+	case 5:	//物理ポート
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x15;	i++;
+		indata[i] = "apl_id";			inval[i] = "";		indescr[i] = descript_p[6];	insl[i]=0x1F;	i++;
+		indata[i] = "apl_type";			inval[i] = 2;		indescr[i] = descript_p[9];	insl[i]=0x11;	i++;
+		indata[i] = "IaaS_port_id";		inval[i] = "";		indescr[i] = descript_c[16];	insl[i]=0x11;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0xA;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_type";		inval[i] = 1;		indescr[i] = descript_c[9];	insl[i]=0x17;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		break;
+	case 6://DC間接続(NAL)
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1E;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0x1;	i++;
+		indata[i] = "dc_id";			inval[i] = "";		indescr[i] = descript_dc[0];	insl[i]=0x1F;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		break;
+	case 7://DC間接続(WIM)
+		indata[i] = "operation_id";		inval[i] = "";		indescr[i] = descript_c[0];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0xE;	i++;
+		indata[i] = "IaaS_tenant_name";		inval[i] = "";		indescr[i] = descript_c[2];	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_region_id";		inval[i] = "";		indescr[i] = descript_c[3];	insl[i]=0xE;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[15];	insl[i]=0xF;	i++;
+		indata[i] = "dc_id";			inval[i] = "";		indescr[i] = descript_dc[0];	insl[i]=0x1F;	i++;
+		indata[i] = "IaaS_network_type";	inval[i] = "VXLAN";	indescr[i] = descript_c[6]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_network_id";		inval[i] = "";		indescr[i] = descript_c[7]; 	insl[i]=0x2;	i++;
+		indata[i] = "IaaS_segmentation_id";	inval[i] = "";		indescr[i] = descript_c[8];	insl[i]=0x2;	i++;
+		indata[i] = "network_name";		inval[i] = "";		indescr[i] = descript_c[12];	insl[i]=0x2;	i++;
+		indata[i] = "network_id";		inval[i] = "";		indescr[i] = descript_c[10]; 	insl[i]=0x1F;	i++;
+		indata[i] = "customer_name";		inval[i] = "";		indescr[i] = descript_dc[1];	insl[i]=0x2;	i++;
+		indata[i] = "customer_id";		inval[i] = "";		indescr[i] = descript_dc[2];	insl[i]=0x2;	i++;
+		indata[i] = "vrrp_ip_address";		inval[i] = "";		indescr[i] = descript_v[13];	insl[i]=0x2;	i++;
+		indata[i] = "ce1_ip_address";		inval[i] = "";		indescr[i] = descript_v[14];	insl[i]=0x2;	i++;
+		indata[i] = "ce2_ip_address";		inval[i] = "";		indescr[i] = descript_v[15];	insl[i]=0x2;	i++;
+		break;
+	case 8:	//GlobalIP
+		indata[i] = "IaaS_tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x10;	i++;
+		indata[i] = "tenant_id";		inval[i] = "";		indescr[i] = descript_c[1];	insl[i]=0x1;	i++;
+		indata[i] = "global_ip";		inval[i] = "";		indescr[i] = descript_c[14];	insl[i]=0x11;	i++;
+	}
+	inp = mkval(indata, inval, mtd, insl);
+	ind = mkdescr(indata, indescr, mtd, insl);
+	//window.confirm(value);
+	document.fm1.inpara.value = "{\n" + inp + "}";
+	document.fm1.inlabel.value = ind;
+}
+
+-->
+</script>
+
+</head>
+<body>
+<form name="fm1" method="post">
+<input type="hidden" name="mode">
+<input type="hidden" name="newfile_name">
+<input type="hidden" name="serverurl" value="http://10.58.79.114/Nal/">
+<input type="hidden" name="serverurl2" value="http://10.58.79.114/Wim/">
+<!-- <input type="hidden" name="serverurl" value="http://10.37.11.6/Nal/">
+<input type="hidden" name="serverurl2" value="http://10.37.11.6/Wim/"> -->
+
+<div><B>入力URL又は、メソッドを変更すると、入力フィールドに入力パラメータを表示します。</B><BR><BR></div>
+<div>入力URL<BR>
+<select name="parafile" id="parafile" onChange="chgproc()">
+<?php
+//$pproc = ['vfw', 'vlb', 'vfwport', 'vlbport', 'vfwentry', 'vlbentry', 'pfw', 'plb', 'pfwport', 'plbport', 'pfwentry', 'plbentry', 'globalip', 'dcconnect', 'dcconnect', 'vrt' ];
+$pproc = [ 'vfw', 'vlb', 'vport', 'pfw', 'plb', 'pport', 'dcconnect', 'wimdcconnect', 'globalip' ];
+for ( $i = 0; $i < 9; $i++ ){
+	if( isset($this->params['param']['proc']) && $pproc[$i] === $this->params['param']['proc']){
+		print_r( "<option value=\"" . $pproc[$i] . "\" selected >" . $pproc[$i] . "</option>\n" );
+	} else {
+		print_r( "<option value=\"" . $pproc[$i] . "\" >" . $pproc[$i]. "</option>\n" );
+	}
+}
+?>
+</select>
+</div>
+
+<div>メソッド<BR>
+<select name="method" onChange="chgproc()">
+<?php
+	$mtdv = [ 'GET', 'GET', 'POST', 'PUT', 'DELETE', 'GET' ];
+	$mtds = [ 'GET(参照)', 'GET(一覧)', 'POST', 'PUT', 'DELETE', 'GET(状態チェック)' ];
+	for ( $i = 0; $i < 6; $i++ ){
+		if( isset($this->params['param']['proc'])){
+			if($i < 5){
+				print_r( "<option value=\"" . $mtdv[$i] . "\" >" . $mtds[$i]. "</option>\n" );
+			} else {
+				print_r( "<option value=\"" . $mtdv[$i] . "\" selected >" . $mtds[$i] . "</option>\n" );
+			}
+		} else {
+			if($i == 0){
+				print_r( "<option value=\"" . $mtdv[$i] . "\" selected >" . $mtds[$i] . "</option>\n" );
+			} else {
+				print_r( "<option value=\"" . $mtdv[$i] . "\" >" . $mtds[$i]. "</option>\n" );
+			}
+		}
+	}
+?>
+<!--
+  <option value="GET" >GET(参照)</option>
+  <option value="GET" >GET(一覧)</option>
+  <option value="POST" >POST</option>
+  <option value="PUT" >PUT</option>
+  <option value="DELETE" >DELETE</option>
+  <option value="GET" >GET(状態チェック)</option>
+-->
+</select> 参照/一覧/状態チェック：GET　作成：POST　更新：POST　削除：DELETE
+</div>
+
+<?php
+$str = "<div>実行URL<BR>";
+if( isset( $this->params['param']['API_name'] ) ) { print $str . $this->params['param']['API_name']; }
+?>
+</div>
+
+<div>
+入力とパラメータ説明
+</div>
+<table>
+  <tr>
+    <td id="leftside">
+<textarea cols="90%" rows="15" name="inpara" id="inpara">
+<?php
+if( isset( $this->params['param']['newreq'] ) ) {
+	print_r( $this->params['param']['newreq'] );
+}
+?>
+</textarea>
+    </td>
+    <td></td>
+    <td id="rightside">
+<textarea cols="90%" rows="15" style="background-color:#A6A6A6" name="inlabel" id="inlabel" readonly>
+</textarea>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td id="leftside">
+      <input type="submit" name="submit1" id="submit1" class="button" value="実行" onclick="return exec();">
+    </td>
+    <td></td>
+    <td id="rightside">
+      <input type="button" id="btn_clear" value="クリア" onclick="we_clear();">
+    </td>
+    <td>
+      <input type="button" value="チェック" onclick="json_check();">
+    </td>
+  </tr>
+</table>
+作成処理等で「実行」ボタンを押下して、出力に[job-id]が出力されたら、続けて「実行」ボタン押下で、ポーリング可能です。
+<div>
+出力
+</div>
+<textarea cols="90%" rows="20" name="outpara" id="outpara">
+<?php
+if( isset( $this->params['param']['outpara'] ) ) { print_r( $this->params['param']['outpara'] ); }
+?>
+</textarea>
+</form>
+</body>
+</html>

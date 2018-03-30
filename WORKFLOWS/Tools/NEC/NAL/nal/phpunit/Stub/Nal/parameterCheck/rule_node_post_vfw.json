@@ -1,0 +1,8 @@
+[
+  {
+      "param"   : "IaaS_tenant_id",
+      "min"     : "1",
+      "max"     : "20",
+      "rule"    : "NUM_ALPHA"
+  }
+]

@@ -1,0 +1,43 @@
+[
+    {
+        "param": "host_name",
+        "case" : [
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[1]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\_\\.\\s]*$/",
+                "min" : "1",
+                "max" : "53"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[2]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\_\\.!$%()=~+\\/]*$/",
+                "min" : "1",
+                "max" : "64"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[3]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\.()]*$/",
+                "min" : "1",
+                "max" : "31"
+            }
+        ]
+    },
+    {
+        "param"   : "IaaS_tenant_id",
+        "min"     : "1",
+        "max"     : "20",
+        "rule"    : "NUM_ALPHA"
+    }
+]

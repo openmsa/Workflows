@@ -1,0 +1,1 @@
+{"network":{"id":"6f8c9b7e-e12f-4939-8f1a-98b2940a3f98","project_id":"1de3cf1741674a0dadd15affdb2ffae2","name":"MSA","admin_state_up":true,"shared":false,"mtu":0,"router:external":false,"status":"ACTIVE","subnets":["91c355a8-5231-40c6-ba50-d9356c5175e6"],"provider:network_type":null,"provider:segmentation_id":null,"provider:physical_network":null}}

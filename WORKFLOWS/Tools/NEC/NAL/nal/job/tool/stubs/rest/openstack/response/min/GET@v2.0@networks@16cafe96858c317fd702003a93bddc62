@@ -1,0 +1,1 @@
+{"network":{"id":"16cafe96858c317fd702003a93bddc62","project_id":"1de3cf1741674a0dadd15affdb2ffae2","name":"Idc","admin_state_up":true,"shared":true,"mtu":0,"router:external":false,"status":"ACTIVE","subnets":["5a8fa71d48e412ce998d3e52c08ca07e"],"provider:network_type":null,"provider:segmentation_id":1000,"provider:physical_network":null}}

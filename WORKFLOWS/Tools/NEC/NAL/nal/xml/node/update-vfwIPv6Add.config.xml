@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<?xml-stylesheet type="text/xsl" href="scheduler_configuration_documentation.xsl"?> 
+<settings>
+    <job_chain name="update-vfwIPv6Add">
+        <note language="de"/>
+
+        <note language="en"/>
+
+        <order>
+            <params/>
+
+            <process state="bfNodeUpdateIPv6Terminate">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeUpdateIPv6AddMsa">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeUpdateIPv6AddInstance">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeUpdateIPv6AddPort">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+
+            <process state="bfNodeUpdateIPv6Init">
+                <note language="de"/>
+
+                <note language="en"/>
+
+                <params/>
+            </process>
+        </order>
+    </job_chain>
+</settings>

@@ -1,0 +1,5 @@
+resource : "MGMOSSMEMBER"
+method   : "GET"
+inpara   :
+ we_passwd : "aaa"
+ auth_id : "wetestmg_01@aa.moss-test1.com"

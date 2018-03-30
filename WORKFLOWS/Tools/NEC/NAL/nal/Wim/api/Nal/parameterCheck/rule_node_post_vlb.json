@@ -1,0 +1,253 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[1234]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "host_name",
+        "case" : [
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[1]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\_\\.\\s]*$/",
+                "min" : "1",
+                "max" : "53"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[2]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\_\\.!$%()=~+\\/]*$/",
+                "min" : "1",
+                "max" : "64"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[34]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^[a-zA-Z0-9\\-\\.()]*$/",
+                "min" : "1",
+                "max" : "31"
+            }
+        ]
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "network_name",
+        "case" : [
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[2]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^\\D/",
+                "min" : "1",
+                "max" : "53"
+            }
+        ],
+        "default" : {
+            "rule" : "STRING",
+            "min" : "1",
+            "max" : "64"
+        }
+    },
+    {
+        "param": "IaaS_network_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "8"
+    },
+    {
+        "param": "IaaS_segmentation_id",
+        "rule": "STRING",
+        "require": [
+            {
+              "key":"IaaS_network_type",
+              "pattern" : "/^VLAN$/"
+            }
+        ],
+        "min": "",
+        "max": "9"
+    },
+    {
+        "param": "description",
+        "rule": "STRING",
+        "min": "",
+        "max": "1024"
+    },
+    {
+        "param": "zabbix_vip_ip",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "zabbix_01_ip",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "zabbix_02_ip",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "fw_ip_address",
+        "rule": "IP_ADDRESS",
+        "min": "1"
+    },
+    {
+        "param": "domain_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[2]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "self_ip_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[2]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "admin_id",
+        "case" : [
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[2]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^(?!root$).+$/i",
+                "min" : "1",
+                "max" : "200"
+            },
+            {
+                "case_param" : {
+                    "case_key" : "device_type",
+                    "case_pattern" : "/^[234]$/"
+                },
+                "rule" : "MATCH",
+                "pattern" : "/^(?!admin$).+$/i",
+                "min" : "1",
+                "max" : "200"
+            }
+        ],
+        "default" : {
+            "rule" : "STRING",
+            "min" : "",
+            "max" : "200"
+        }
+    },
+    {
+        "param": "admin_pw",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[234]$/"
+            }
+        ],
+        "min": "",
+        "max": "200"
+    },
+    {
+        "param": "timezone",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[2]$/"
+            }
+        ],
+        "min": "",
+        "max": "200"
+    },
+    {
+        "param": "dns_server_primary",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "dns_server_secondary",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "ntp_server_primary",
+        "rule": "IP_ADDRESS"
+    },
+    {
+        "param": "ntp_server_secondary",
+        "rule": "IP_ADDRESS"
+    }
+]

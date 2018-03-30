@@ -1,0 +1,6 @@
+resource : "MGMOSSMEMBER"
+method   : "PUT"
+inpara   :
+ we_passwd : "aaa"
+ auth_id : "wetestmg_01@aa.moss-test1.com"
+ req_madr : "wetestmg_01_a"

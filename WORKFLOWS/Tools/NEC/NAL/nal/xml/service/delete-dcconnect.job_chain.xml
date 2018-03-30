@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="bfComInit" job="/NAL/common/comInit" next_state="bfSrvDelPreInit" error_state="error"/>
+
+    <job_chain_node  state="bfSrvDelPreInit" job="srvDelPreInit" next_state="bfSrvDelPreRefDb" error_state="error"/>
+
+    <job_chain_node  state="bfSrvDelPreRefDb" job="srvDelPreRefDb" error_state="error" next_state="bfSrvDelPreReturnValue"/>
+
+    <job_chain_node  state="bfSrvDelPreReturnValue" job="srvDelPreReturnValue" error_state="error" next_state="success"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

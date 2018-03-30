@@ -1,0 +1,195 @@
+[
+    {
+        "param": "function_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "operation_id",
+        "rule": "STRING",
+        "min": "",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_tenant_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_region_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "apl_type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "type",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "device_type",
+        "rule": "MATCH",
+        "pattern" : "/^[1234]$/",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "IaaS_subnet_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_id",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "network_name",
+        "rule": "STRING",
+        "min": "1",
+        "max": "64"
+    },
+    {
+        "param": "IaaS_network_type",
+        "rule": "STRING",
+        "min": "1",
+        "max": "8"
+    },
+    {
+        "param": "IaaS_segmentation_id",
+        "rule": "STRING",
+        "require": [
+            {
+              "key":"IaaS_network_type",
+              "pattern" : "/^VLAN$/"
+            }
+        ],
+        "min": "",
+        "max": "9"
+    },
+    {
+        "param": "description",
+        "rule": "STRING",
+        "min": "",
+        "max": "1024"
+    },
+    {
+        "param": "redundant_configuration_flg",
+        "rule": "NUMBER",
+        "min": "1",
+        "max": "2"
+    },
+    {
+        "param": "vdom_name",
+        "rule": "NUM_ALPHA",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "10"
+    },
+    {
+        "param": "vsys_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "zone_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "255"
+    },
+    {
+        "param": "admin_id",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "200"
+    },
+    {
+        "param": "admin_pw",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[24]$/"
+            }
+        ],
+        "min": "",
+        "max": "200"
+    },
+    {
+        "param": "admin_prof_name",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "35"
+    },
+    {
+        "param": "user_account_id",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "35"
+    },
+    {
+        "param": "account_password",
+        "rule": "STRING",
+        "require": [
+            {
+                "key":"device_type",
+                "pattern" : "/^[13]$/"
+            }
+        ],
+        "min": "",
+        "max": "64"
+    }
+]

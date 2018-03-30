@@ -1,0 +1,37 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+
+{% block modal-body-right %}
+
+  {% if description %}
+    <h3>{% trans "Description:" %}</h3>
+    <p>{{ description }}</p>
+  {% endif %}
+
+<script type='text/javascript'>
+
+$("input[name=snmp_server_delete_flg]").change(function () {
+    if($("input[name=snmp_server_delete_flg]:checked").val()) {
+        $("input[name=snmp_server_ip_address]").prop('disabled', true);
+        $("select[name=snmp_server_interface]").prop('disabled', true);
+    }
+    else {
+        $("input[name=snmp_server_ip_address]").prop('disabled', false);
+        $("select[name=snmp_server_interface]").prop('disabled', false);
+    }
+}).change();
+
+$("input[name=syslog_server_delete_flg]").change(function () {
+    if($("input[name=syslog_server_delete_flg]:checked").val()) {
+        $("input[name=syslog_server_ip_address]").prop('disabled', true);
+        $("select[name=syslog_server_interface]").prop('disabled', true);
+    }
+    else {
+        $("input[name=syslog_server_ip_address]").prop('disabled', false);
+        $("select[name=syslog_server_interface]").prop('disabled', false);
+    }
+}).change();
+
+</script>
+
+{% endblock %}

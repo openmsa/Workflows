@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Virtual Firewall Details"%}{% endblock %}
+
+<div class="col-xs-12 col-sm-3 text-right">
+  {% if actions %}
+    <form class='actions_column' action='{{ url }}' method="POST">
+      {% csrf_token %}
+      {{ actions }}
+    </form>
+  {% endif %}
+</div>
+
+{% block main %}
+<div class="row">
+  <div class="col-sm-12">
+    {% include "project/node/_detail_overview.html" %}
+
+    {% if master %}
+      {% include "project/node/_detail_overview_pnf.html" %}
+    {% endif %}
+    <hr>
+    <div id="networks">
+      {{ networks_table.render }}
+    </div>
+  </div>
+</div>
+{% endblock %}
