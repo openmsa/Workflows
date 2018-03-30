@@ -7,3 +7,5 @@ By collaborating with OpenMSA, NAL expands its function as MANO (Management and 
 
 ## Installation and Usage
 Under construction.
+
+Please see also [NECCS-NAL-Automation](https://github.com/NAL-SupportTeam/NECCS-NAL-Automation).
