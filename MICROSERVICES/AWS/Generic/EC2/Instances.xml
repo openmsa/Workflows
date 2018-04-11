@@ -23,91 +23,87 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="State" displayOrder="0" maxLength="100" name="params.Monitoring.0.state" onlyDetailView="true" startIncrement="0" type="String">
-      <sections>
-        <section>Monitoring</section>
-      </sections>
-    </variable>
-    <variable displayName="Availability Zone" displayOrder="0" maxLength="100" name="params.Placement.0.availability_zone" startIncrement="0" type="String">
-      <sections>
-        <section>Placement</section>
-      </sections>
-    </variable>
+    <variable displayName="Private DNS Name" displayOrder="0" maxLength="100" name="params.dns_name" startIncrement="0" type="String" visible="false"/>
     <variable displayName="Instance ID" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="Group Name" displayOrder="1" maxLength="100" name="params.Placement.0.group_name" startIncrement="0" type="String">
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.tag_value" startIncrement="0" type="String"/>
+    <variable displayName="availability_zone" displayOrder="1" maxLength="100" name="params.Placement.0.availability_zone" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="Tenancy" displayOrder="1" maxLength="100" name="params.Placement.0.tenancy" startIncrement="0" type="String">
+    <variable displayName="group_name" displayOrder="1" maxLength="100" name="params.Placement.0.group_name" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="Private DNS Name" displayOrder="1" maxLength="100" name="params.dns_name" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Instance Type" displayOrder="2" maxLength="100" name="params.instance_type" startIncrement="0" type="String"/>
-    <variable displayName="Public DNS Name" displayOrder="2" maxLength="100" name="params.public_dns_name" startIncrement="0" type="String"/>
-    <variable displayName="Image ID" displayOrder="3" maxLength="100" name="params.image_id" startIncrement="0" type="String"/>
-    <variable displayName="product_code_id" displayOrder="4" maxLength="100" name="params.ProductCodes.0.product_code_id" onlyDetailView="true" startIncrement="0" type="String">
+    <variable displayName="tenancy" displayOrder="1" maxLength="100" name="params.Placement.0.tenancy" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
-        <section>ProductCodes</section>
+        <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="Name" displayOrder="4" maxLength="100" name="params.State.0.Name" startIncrement="0" type="String">
-      <sections>
-        <section>State</section>
-      </sections>
-    </variable>
-    <variable displayName="code" displayOrder="4" maxLength="100" name="params.State.0.code" startIncrement="0" type="String">
-      <sections>
-        <section>State</section>
-      </sections>
-    </variable>
-    <variable displayName="Key Name" displayOrder="4" maxLength="100" name="params.key_name" startIncrement="0" type="String"/>
-    <variable displayName="Product Code Type" displayOrder="5" maxLength="100" name="params.ProductCodes.0.product_code_type" onlyDetailView="true" startIncrement="0" type="String">
-      <sections>
-        <section>ProductCodes</section>
-      </sections>
-    </variable>
-    <variable displayName="Ena Support" displayOrder="5" maxLength="100" name="params.ena_support" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Ami Launch Index" displayOrder="6" maxLength="100" name="params.ami_launch_index" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="State Transition Reason" displayOrder="6" maxLength="100" name="params.state_transition_reason" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Group Id" displayOrder="7" maxLength="100" name="params.SecurityGroups.0.group_id" startIncrement="0" type="String">
-      <sections>
-        <section>SecurityGroups</section>
-      </sections>
-    </variable>
-    <variable displayName="Group Name" displayOrder="7" maxLength="100" name="params.SecurityGroups.0.group_name" onlyDetailView="true" startIncrement="0" type="String">
-      <sections>
-        <section>SecurityGroups</section>
-      </sections>
-    </variable>
-    <variable displayName="code" displayOrder="8" maxLength="100" name="params.StateReason.0.code" onlyDetailView="true" startIncrement="0" type="String">
-      <sections>
-        <section>StateReason</section>
-      </sections>
-    </variable>
-    <variable displayName="message" displayOrder="9" maxLength="100" name="params.StateReason.0.message" onlyDetailView="true" startIncrement="0" type="String">
-      <sections>
-        <section>StateReason</section>
-      </sections>
-    </variable>
-    <variable displayName="Name" displayOrder="10" maxLength="100" name="params.Tags.0.tag_name" startIncrement="0" type="String">
+    <variable displayName="tag_name" displayOrder="1" maxLength="100" name="params.Tags.0.tag_name" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="Architecture" displayOrder="11" maxLength="100" name="params.architecture" startIncrement="0" type="String"/>
-    <variable displayName="Subnet ID" displayOrder="11" maxLength="100" name="params.subnet_id" startIncrement="0" type="String"/>
-    <variable displayName="Client Token" displayOrder="12" maxLength="100" name="params.client_token" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="VPC ID" displayOrder="12" maxLength="100" name="params.vpc_id" startIncrement="0" type="String"/>
-    <variable displayName="Launch Time" displayOrder="14" maxLength="100" name="params.launch_time" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Private IP Address" displayOrder="16" maxLength="100" name="params.private_ip_address" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Hypervisor" displayOrder="18" maxLength="100" name="params.hypervisor" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Root Device Name" displayOrder="21" maxLength="100" name="params.root_device_name" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Root Device Type" displayOrder="21" maxLength="100" name="params.root_device_type" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Source Dest Check" displayOrder="24" maxLength="100" name="params.source_dest_check" onlyDetailView="true" startIncrement="0" type="String"/>
-    <variable displayName="Virtualization Type" displayOrder="25" maxLength="100" name="params.virtualization_type" onlyDetailView="true" startIncrement="0" type="String"/>
+    <variable default="eu-west-1a" displayName="Availability Zone " displayOrder="2" maxLength="100" name="params.availability_zone" startIncrement="0" type="String"/>
+    <variable default="ami-c75abbbe" displayName="Image ID" displayOrder="2" maxLength="100" name="params.image_id" startIncrement="0" type="String"/>
+    <variable default="m3.medium" displayName="Instance Type" displayOrder="2" maxLength="100" name="params.instance_type" startIncrement="0" type="String"/>
+    <variable default="1" displayName="Max Count" displayOrder="2" maxLength="100" name="params.max_count" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable default="1" displayName="Min Count" displayOrder="2" maxLength="100" name="params.min_count" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable displayName="Security Groups" displayOrder="3" maxLength="100" name="params.security_groups" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="State" displayOrder="3" isUserLocked="true" maxLength="100" name="params.state_name" startIncrement="0" type="String">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="state_name" displayOrder="4" maxLength="100" name="params.State.0.state_name" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>State</section>
+      </sections>
+    </variable>
+    <variable displayName="_color" displayOrder="4" maxLength="100" name="params._color" startIncrement="0" type="String" visible="false"/>
+    <variable default="Name" displayName="Tag Key" displayOrder="4" maxLength="100" name="params.tag_key" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Key" displayOrder="6" maxLength="100" name="params.Tags.0.tag_key" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="6" maxLength="100" name="params.Tags.0.tag_value" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="State Transition Reason" displayOrder="6" maxLength="100" name="params.state_transition_reason" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="group_id" displayOrder="7" maxLength="100" name="params.SecurityGroups.0.group_id" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>SecurityGroups</section>
+      </sections>
+    </variable>
+    <variable displayName="Group Name" displayOrder="8" maxLength="100" name="params.SecurityGroups.0.group_name" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>SecurityGroups</section>
+      </sections>
+    </variable>
+    <variable displayName="Key Name" displayOrder="12" maxLength="100" name="params.key_name" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Subnet ID" displayOrder="12" maxLength="100" name="params.subnet_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>Subnets</class>
+      </classes>
+    </variable>
+    <variable displayName="VPC ID" displayOrder="14" maxLength="100" name="params.vpc_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+    <variable displayName="Launch Time" displayOrder="16" maxLength="100" name="params.launch_time" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Private IP Address" displayOrder="18" maxLength="100" name="params.private_ip_address" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Public DNS Name" displayOrder="21" maxLength="100" name="params.public_dns_name" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Virtualization Type" displayOrder="27" maxLength="100" name="params.virtualization_type" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>&lt;?xml version="1.0"?&gt;
 &lt;root&gt;
@@ -232,7 +228,8 @@
 			&lt;/Instances&gt;
 		&lt;/row&gt;
 	&lt;/Reservations&gt;
-&lt;/root&gt;</content>
+&lt;/root&gt;
+</content>
   </example>
   <command name="IMPORT">
     <operation>Aws\Ec2\Ec2Client</operation>
@@ -242,10 +239,7 @@
         <xpath>//root/Reservations/row/Instances/row</xpath>
       </section>
       <lines>
-        <line>
-          <xpath>enaSupport</xpath>
-          <regexp>@&lt;enaSupport&gt;(?&lt;ena_support&gt;.*)&lt;/enaSupport&gt;@</regexp>
-        </line>
+        
         <line>
           <xpath>InstanceId</xpath>
           <regexp>@&lt;InstanceId&gt;(?&lt;object_id&gt;.*)&lt;/InstanceId&gt;@</regexp>
@@ -258,13 +252,10 @@
           <array name="State">
             <xpath>State</xpath>
             <lines>
-              <line>
-                <xpath>Code</xpath>
-                <regexp>@&lt;Code&gt;(?&lt;code&gt;.*)&lt;/Code&gt;@</regexp>
-              </line>
+              
               <line>
                 <xpath>Name</xpath>
-                <regexp>@&lt;Name&gt;(?&lt;Name&gt;.*)&lt;/Name&gt;@</regexp>
+                <regexp>@&lt;Name&gt;(?&lt;state_name&gt;.*)&lt;/Name&gt;@</regexp>
               </line>
             </lines>
           </array>
@@ -285,33 +276,13 @@
           <xpath>KeyName</xpath>
           <regexp>@&lt;KeyName&gt;(?&lt;key_name&gt;.*)&lt;/KeyName&gt;@</regexp>
         </line>
-        <line>
-          <xpath>AmiLaunchIndex</xpath>
-          <regexp>@&lt;AmiLaunchIndex&gt;(?&lt;ami_launch_index&gt;.*)&lt;/AmiLaunchIndex&gt;@</regexp>
-        </line>
-        <line>
-          <array name="ProductCodes">
-            <xpath>ProductCodes/row</xpath>
-            <lines>
-              <line>
-                <xpath>ProductCodeId</xpath>
-                <regexp>@&lt;ProductCodeId&gt;(?&lt;product_code_id&gt;.*)&lt;/ProductCodeId&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>ProductCodeType</xpath>
-                <regexp>@&lt;ProductCodeType&gt;(?&lt;product_code_type&gt;.*)&lt;/ProductCodeType&gt;@</regexp>
-              </line>
-            </lines>
-          </array>
-        </line>
+        
+        
         <line>
           <xpath>InstanceType</xpath>
           <regexp>@&lt;InstanceType&gt;(?&lt;instance_type&gt;.*)&lt;/InstanceType&gt;@</regexp>
         </line>
-        <line>
-          <xpath>LaunchTime</xpath>
-          <regexp>@&lt;LaunchTime&gt;(?&lt;launch_time&gt;.*)&lt;/LaunchTime&gt;@</regexp>
-        </line>
+        
         <line>
           <array name="Placement">
             <xpath>Placement</xpath>
@@ -331,17 +302,7 @@
             </lines>
           </array>
         </line>
-        <line>
-          <array name="Monitoring">
-            <xpath>Monitoring</xpath>
-            <lines>
-              <line>
-                <xpath>State</xpath>
-                <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
-              </line>
-            </lines>
-          </array>
-        </line>
+        
         
         
         
@@ -358,41 +319,15 @@
           <xpath>PrivateIpAddress</xpath>
           <regexp>@&lt;PrivateIpAddress&gt;(?&lt;private_ip_address&gt;.*)&lt;/PrivateIpAddress&gt;@</regexp>
         </line>
-        <line>
-          <array name="StateReason">
-            <xpath>StateReason</xpath>
-            <lines>
-              <line>
-                <xpath>Code</xpath>
-                <regexp>@&lt;Code&gt;(?&lt;code&gt;.*)&lt;/Code&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>Message</xpath>
-                <regexp>@&lt;Message&gt;(?&lt;message&gt;.*)&lt;/Message&gt;@</regexp>
-              </line>
-            </lines>
-          </array>
-        </line>
-        <line>
-          <xpath>Architecture</xpath>
-          <regexp>@&lt;Architecture&gt;(?&lt;architecture&gt;.*)&lt;/Architecture&gt;@</regexp>
-        </line>
-        <line>
-          <xpath>RootDeviceType</xpath>
-          <regexp>@&lt;RootDeviceType&gt;(?&lt;root_device_type&gt;.*)&lt;/RootDeviceType&gt;@</regexp>
-        </line>
-        <line>
-          <xpath>RootDeviceName</xpath>
-          <regexp>@&lt;RootDeviceName&gt;(?&lt;root_device_name&gt;.*)&lt;/RootDeviceName&gt;@</regexp>
-        </line>
+        
+        
+        
+        
         <line>
           <xpath>VirtualizationType</xpath>
           <regexp>@&lt;VirtualizationType&gt;(?&lt;virtualization_type&gt;.*)&lt;/VirtualizationType&gt;@</regexp>
         </line>
-        <line>
-          <xpath>ClientToken</xpath>
-          <regexp>@&lt;ClientToken&gt;(?&lt;client_token&gt;.*)&lt;/ClientToken&gt;@</regexp>
-        </line>
+        
         <line>
           <array name="SecurityGroups">
             <xpath>SecurityGroups/row</xpath>
@@ -414,15 +349,12 @@
             <lines>
               <line>
                 <xpath>Value</xpath>
-                <regexp>@&lt;Value&gt;(?&lt;tag_name&gt;.*)&lt;/Value&gt;@</regexp>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
               </line>
             </lines>
           </array>
         </line>
-        <line>
-          <xpath>SourceDestCheck</xpath>
-          <regexp>@&lt;SourceDestCheck&gt;(?&lt;source_dest_check&gt;.*)&lt;/SourceDestCheck&gt;@</regexp>
-        </line>
+        
         <line>
           <xpath>Hypervisor</xpath>
           <regexp>@&lt;Hypervisor&gt;(?&lt;hypervisor&gt;.*)&lt;/Hypervisor&gt;@</regexp>
@@ -436,6 +368,43 @@
         
       </lines>
     </parser>
-    <post_template/>
+    <post_template>{assign_object_variable var="availability_zone" value=$params.Placement.0.availability_zone}
+{assign_object_variable var="state_name" value=$params.State.0.state_name}
+{assign_object_variable var="security_groups" value=$params.SecurityGroups.0.group_id}
+{assign_object_variable var="tag_value" value=$params.Tags.0.tag_value}
+
+
+{if  $params.State.0.state_name == running }
+      {assign_object_variable var="_color" value=green}
+{/if}
+{if  $params.State.0.state_name == stopped }
+      {assign_object_variable var="_color" value=red}
+{/if}</post_template>
   </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>RunInstances
+</xpath>
+    <operation>{literal}{{/literal}
+"ImageId":"{$params.image_id}",
+"InstanceType":"{$params.instance_type}",
+"MaxCount":"{$params.max_count}",
+"MinCount":"{$params.min_count}",
+"Placement.AvailabilityZone":"{$params.availability_zone}",
+"TagSpecifications":{literal}[[{{/literal}"Tags":{literal}[[{{/literal}"key":"{$params.tag_key}"{literal}}{/literal},{literal}{{/literal}"value":"{$params.tag_value}"{literal}}{/literal}
+{literal}]]}]]}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>TerminateInstances
+</xpath>
+    <operation>{literal}{{/literal}
+"InstanceIds":{literal}[{/literal}"{$params.object_id}"{literal}]{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+
 </ObjectDefinition>
