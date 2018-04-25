@@ -35,5 +35,4 @@ clock timezone MSA 4 0
     <operation>!{$params.timezone}
 </operation>
   </command>
-<command name="DELETE"/>
 </ObjectDefinition>
