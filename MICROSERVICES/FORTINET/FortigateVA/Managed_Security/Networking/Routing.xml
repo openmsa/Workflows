@@ -76,7 +76,7 @@ end
     <operation>show full-configuration router static </operation>
     <parser>
       <section>
-        <regexp>@edit (?!1000)(?&lt;object_id&gt;\d+)@</regexp>
+        <regexp>@edit (?&lt;object_id&gt;\d+)@</regexp>
       </section>
       <lines>
         <line>
@@ -125,7 +125,6 @@ end
 {if is_in_network($params.ip_dest, "100.64.0.0", "255.192.0.0") || is_in_network($params.gw, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
 {/if}
 {/if}
-
 </operation>
   </command>
 </ObjectDefinition>

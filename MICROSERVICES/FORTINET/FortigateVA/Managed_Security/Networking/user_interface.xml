@@ -118,7 +118,7 @@
     <operation>show full-configuration system interface</operation>
     <parser>
       <section>
-        <regexp>@edit "(?&lt;object_id&gt;(port[4-9]|port10))"@</regexp>
+        <regexp>@edit "(?&lt;object_id&gt;(port[1-9]|port10))"@</regexp>
       </section>
       <lines>
         <ignore>
