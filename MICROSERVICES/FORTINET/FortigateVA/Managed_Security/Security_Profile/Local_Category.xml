@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security Profile|Web Filter</group>
+    <icon>/images/repository/CommandDefinition/icons/webfilter_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Local_Category</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Category Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Category Id" displayOrder="1" maxLength="200" name="params.category_id" startIncrement="0" type="String"/>
+    <variable displayName="Category Name" displayOrder="2" maxLength="200" name="params.category_name" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>show full-configuration webfilter ftgd-local-cat</operation>
+    <parser>
+      <section>
+        <regexp>@edit "(?&lt;object_id&gt;[^"]+)"@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@ end@</regexp>
+          <regexp>@ next@</regexp>
+        </ignore>
+        <line>
+          <regexp>@set id (?&lt;category_id&gt;\d+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+
+</ObjectDefinition>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Security Profile|Spam Filter</group>
+    <icon>/images/repository/CommandDefinition/icons/spamfilter_fortinet.png</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>SpamFilterBWL</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable cols="8" displayName="ID" displayOrder="0" maxLength="50" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" isMandatory="true" maxLength="200" name="params.name" startIncrement="0" type="String"/>
+    <variable displayName="ID" displayOrder="2" maxLength="100" name="params.ids.0.id" startIncrement="0" type="String">
+      <sections>
+        <section>Address List</section>
+      </sections>
+    </variable>
+    <variable displayName="Type" displayOrder="3" editable="false" maxLength="200" name="params.ids.0.type" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Wildcard">wildcard</value>
+        <value displayValue="Regular Expression">regexp</value>
+      </values>
+      <sections>
+        <section>Address List</section>
+      </sections>
+    </variable>
+    <variable displayName="Action" displayOrder="4" editable="false" maxLength="200" name="params.ids.0.action" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Spam">spam</value>
+        <value displayValue="Clear">clear</value>
+      </values>
+      <sections>
+        <section>Address List</section>
+      </sections>
+    </variable>
+    <variable displayName="Pattern Type" displayOrder="5" maxLength="100" name="params.ids.0.patterntype" startIncrement="0" type="String">
+      <sections>
+        <section>Address List</section>
+      </sections>
+    </variable>
+    <variable displayName="Mail Address" displayOrder="6" maxLength="200" name="params.ids.0.email" startIncrement="0" type="String">
+      <sections>
+        <section>Address List</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>FGVM020000034713 # show spamfilter bwl
+config spamfilter bwl
+    edit 1
+        set name "dmaf"
+            config entries
+                edit 1
+                    set type email
+                    set action clear
+                    set pattern-type regexp
+                    set email-pattern "didi@ntt.com"
+                next
+                edit 2
+                    set type email
+                    set action clear
+                    set email-pattern "didi.com"
+                next
+                edit 3
+                    set type email
+                    set action clear
+                    set pattern-type regexp
+                    set email-pattern "ddd"
+                next
+            end
+    next
+</content>
+  </example>
+
+<command name="IMPORT">
+    <operation>show full-configuration spamfilter bwl</operation>
+    <parser>
+      <section>
+        <regexp>@edit (?&lt;object_id&gt;\d+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@set @</regexp>
+        </ignore>
+        
+        <ignore>
+          <regexp>@next@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@config @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@end@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@unset @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\s{10}next@</regexp>
+        </ignore>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <line>
+          <regexp>@set name (?!"default")"(?&lt;name&gt;[^"]+)"@</regexp>
+        </line>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <line>
+          <array name="ids">
+            <regexp>@config entries@</regexp>
+            <regexp>@^\s{16}edit (?&lt;id&gt;\d+)@</regexp>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          <lines>
+              
+              <ignore>
+                <regexp>@\s{16}set @</regexp>
+              </ignore>
+              <line>
+                <regexp>@set type (?&lt;type&gt;\S+)@</regexp>
+              </line>
+              <line>
+                <regexp>@set action (?&lt;action&gt;\S+)@</regexp>
+              </line>
+              <line>
+                <regexp>@set email-pattern "(?&lt;email&gt;[^"]+)"@</regexp>
+              </line>
+              <line>
+                <regexp>@set pattern-type (?&lt;patterntype&gt;\S+)@</regexp>
+              </line>
+              
+            </lines>
+          </array>
+        </line>
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+
+  
+
+</ObjectDefinition>

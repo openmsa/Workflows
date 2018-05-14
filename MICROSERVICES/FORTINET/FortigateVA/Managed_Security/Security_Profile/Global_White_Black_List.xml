@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Security Profile|Web Filter</group>
+    <icon>/images/repository/CommandDefinition/icons/webfilter_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Global URL List</name>
+    <order>20010</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" type="String" visible="false"/>
+    <variable default="GlobalURLList" displayName="Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.name" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="action" displayOrder="2" maxLength="200" name="params.url.0.action" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>url</section>
+      </sections>
+    </variable>
+    <variable displayName="url" displayOrder="3" maxLength="200" name="params.url.0.url" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>url</section>
+      </sections>
+    </variable>
+    <variable cols="150" displayName="URL Blacklist" displayOrder="4" maxLength="200" name="params.blacklist.0.url" type="String"/>
+    <variable cols="150" displayName="URL Whitelist" displayOrder="5" maxLength="200" name="params.whitelist.0.url" type="String"/>
+    <variable default="http://www.fortiguard.com/static/webfiltering.html" displayName="Rating Site" displayOrder="6" isUserLocked="true" maxLength="200" name="params.Rating" onlyDetailView="true" startIncrement="0" type="Link"/>
+  </variables>  <example>
+    <content>config webfilter profile
+    edit "default"
+        set comment "Default web filtering."
+        set post-action comfort
+            config ftgd-wf
+                    config filters
+                        edit 77
+                            set category 81
+                        next
+                        edit 78
+                            set category 84
+                        next
+                        edit 79
+                        next
+                    end
+            end
+        set log-all-url enable
+        set web-content-log disable
+        set web-filter-activex-log disable
+        set web-filter-command-block-log disable
+        set web-filter-cookie-log disable
+        set web-filter-applet-log disable
+        set web-filter-jscript-log disable
+        set web-filter-js-log disable
+        set web-filter-vbs-log disable
+        set web-filter-unknown-log disable
+        set web-filter-referer-log disable
+        set web-filter-cookie-removal-log disable
+        set web-url-log disable
+        set web-invalid-domain-log disable
+        set web-ftgd-err-log disable
+        set web-ftgd-quota-usage disable
+end
+</content>
+  </example>
+  
+
+  
+
+<command name="IMPORT">
+    <operation>show webfilter ftgd-local-rating</operation>
+    <parser>
+      <section>
+        <regexp>@config webfilter (?&lt;object_id&gt;ftgd-local-rating)@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@next@</regexp>
+        </ignore>
+        <line>
+          <array name="url">
+            <regexp>@edit "(?&lt;url&gt;[^"]+)"@</regexp>
+            <regexp>@set rating (?&lt;action&gt;\d+)@</regexp>
+          </array>
+        </line>
+        
+        
+        
+        
+        
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template>{assign var="bindex" value=0}
+{assign var="windex" value=0}
+
+{foreach $params.url as $url}
+
+{if !empty($url.url)}
+{assign var="currurl" value=$url.url}
+{/if}
+
+{if !empty($url.action)}
+{if $url.action=="143"}
+{assign_object_variable var="blacklist.{$bindex}.url" value=$currurl}
+{assign var="bindex" value=$bindex+1}
+{else}
+{assign_object_variable var="whitelist.{$windex}.url" value=$currurl}
+{assign var="windex" value=$windex+1}
+{/if}
+{/if}
+
+{/foreach}
+{assign_object_variable var="name" value="GlobalURLList"}</post_template>
+  </command>
+
+<command name="UPDATE">
+    <operation>config webfilter ftgd-local-rating
+      purge
+ {foreach $params.blacklist as $black_url}
+    edit "{$black_url.url}"
+    	set status enable
+    	set rating 143
+    next
+ {/foreach}
+ {foreach $params.whitelist as $white_url}
+    edit "{$white_url.url}"
+    	set status enable
+    	set rating 142
+     next
+ {/foreach}
+end
+
+{$parmas.Rating}
+</operation>
+  </command>
+  
+</ObjectDefinition>
