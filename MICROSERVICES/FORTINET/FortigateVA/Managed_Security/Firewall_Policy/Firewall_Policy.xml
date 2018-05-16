@@ -41,16 +41,22 @@ The position is effective when the changes are applied to the device.</descripti
       </behaviors>
     </variable>
     <variable default="true" displayName="Enable" displayOrder="3" maxLength="50" name="params.status" startIncrement="0" type="Boolean"/>
-    <variable displayName="Incoming Interface" displayOrder="4" editable="false" groupDisplayName="Source" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="300" name="params.srcintf" startIncrement="0" type="String">
+    <variable displayName="Incoming Interface" displayOrder="4" editable="false" groupDisplayName="Source" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="300" name="params.srcintf" startIncrement="0" type="ObjectRef">
       <values>
-        <value displayValue="Port4">4</value>
-        <value displayValue="Port5">5</value>
-        <value displayValue="Port6">6</value>
-        <value displayValue="Port7">7</value>
-        <value displayValue="Port8">8</value>
-        <value displayValue="Port9">9</value>
-        <value displayValue="Port10">10</value>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+        <value>7</value>
+        <value>8</value>
+        <value>9</value>
+        <value>10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable displayName="Source Address" displayOrder="5" editable="false" groupDisplayName="Source" groupSeparator="-" isGrouped="true" isMandatory="true" localVarNameMatch="srcintf" maxLength="200" name="params.srcaddr" remoteVarNameMatch="port" startIncrement="0" type="ObjectRef">
       <classes>
@@ -58,16 +64,22 @@ The position is effective when the changes are applied to the device.</descripti
         <class>AddressGroup</class>
       </classes>
     </variable>
-    <variable displayName="Outgoing Interface" displayOrder="6" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="300" name="params.dstintf" startIncrement="0" type="String">
+    <variable displayName="Outgoing Interface" displayOrder="6" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="300" name="params.dstintf" startIncrement="0" type="ObjectRef">
       <values>
-        <value displayValue="Port4">4</value>
-        <value displayValue="Port5">5</value>
-        <value displayValue="Port6">6</value>
-        <value displayValue="Port7">7</value>
-        <value displayValue="Port8">8</value>
-        <value displayValue="Port9">9</value>
-        <value displayValue="Port10">10</value>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+        <value>7</value>
+        <value>8</value>
+        <value>9</value>
+        <value>10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable default="address" displayCols="4" displayName="Destination Address Type" displayOrder="7" displayType="alt" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="200" name="params.dstaddr_selector" onlyDetailView="true" startIncrement="0" type="String">
       <values>

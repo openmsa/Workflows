@@ -26,13 +26,16 @@
     <variable displayName="Name" displayOrder="1" isUserLocked="true" maxLength="100" name="params.alias" startIncrement="0" type="String"/>
     <variable displayName="Port" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.object_id" startIncrement="0" type="String">
       <values>
-        <value displayValue="Port4">port4</value>
-        <value displayValue="Port5">port5</value>
-        <value displayValue="Port6">port6</value>
-        <value displayValue="Port7">port7</value>
-        <value displayValue="Port8">port8</value>
-        <value displayValue="Port9">port9</value>
-        <value displayValue="Port10">port10</value>
+        <value>port1</value>
+        <value>port8</value>
+        <value>port9</value>
+        <value>port6</value>
+        <value>port7</value>
+        <value>port4</value>
+        <value>port5</value>
+        <value>port2</value>
+        <value>port3</value>
+        <value>port10</value>
       </values>
     </variable>
     <variable displayName="IP" displayOrder="2" groupDisplayName="IP / Netmask" isGrouped="true" maxLength="200" name="params.addressIP" startIncrement="0" type="IpMask"/>
