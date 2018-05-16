@@ -29,13 +29,16 @@
     <variable default="0.0.0.0" displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gw" startIncrement="0" type="IpMask"/>
     <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.interface" startIncrement="0" type="String">
       <values>
-        <value displayValue="Port4">port4</value>
-        <value displayValue="Port5">port5</value>
-        <value displayValue="Port6">port6</value>
-        <value displayValue="Port7">port7</value>
-        <value displayValue="Port8">port8</value>
-        <value displayValue="Port9">port9</value>
-        <value displayValue="port10">port10</value>
+        <value>port1</value>
+        <value>port8</value>
+        <value>port9</value>
+        <value>port6</value>
+        <value>port7</value>
+        <value>port4</value>
+        <value>port5</value>
+        <value>port2</value>
+        <value>port3</value>
+        <value>port10</value>
       </values>
     </variable>
     <variable cols="165" displayName="Comment" displayOrder="5" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
