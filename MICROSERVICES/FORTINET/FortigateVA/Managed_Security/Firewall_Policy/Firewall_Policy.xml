@@ -41,33 +41,45 @@ The position is effective when the changes are applied to the device.</descripti
       </behaviors>
     </variable>
     <variable default="true" displayName="Enable" displayOrder="3" maxLength="50" name="params.status" startIncrement="0" type="Boolean"/>
-    <variable displayName="Incoming Interface" displayOrder="4" editable="false" groupDisplayName="Source" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="300" name="params.srcintf" startIncrement="0" type="String">
+    <variable displayName="Incoming Interface" displayOrder="4" editable="false" groupDisplayName="Source" groupSeparator=" - " isGrouped="true" isMandatory="true" maxLength="300" name="params.srcintf" startIncrement="0" type="ObjectRef">
       <values>
-        <value displayValue="Port4">4</value>
-        <value displayValue="Port5">5</value>
-        <value displayValue="Port6">6</value>
-        <value displayValue="Port7">7</value>
-        <value displayValue="Port8">8</value>
-        <value displayValue="Port9">9</value>
-        <value displayValue="Port10">10</value>
+        <value displayValue="1">1</value>
+        <value displayValue="2">2</value>
+        <value displayValue="3">3</value>
+        <value displayValue="4">4</value>
+        <value displayValue="5">5</value>
+        <value displayValue="6">6</value>
+        <value displayValue="7">7</value>
+        <value displayValue="8">8</value>
+        <value displayValue="9">9</value>
+        <value displayValue="10">10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
-    <variable displayName="Source Address" displayOrder="5" editable="false" groupDisplayName="Source" groupSeparator="-" isGrouped="true" isMandatory="true" localVarNameMatch="srcintf" maxLength="200" name="params.srcaddr" remoteVarNameMatch="port" startIncrement="0" type="ObjectRef">
+    <variable displayName="Source Address" displayOrder="5" editable="false" groupDisplayName="Source" groupSeparator=" - " isGrouped="true" isMandatory="true" localVarNameMatch="srcintf" maxLength="200" name="params.srcaddr" remoteVarNameMatch="port" startIncrement="0" type="ObjectRef">
       <classes>
         <class>AddressObject</class>
         <class>AddressGroup</class>
       </classes>
     </variable>
-    <variable displayName="Outgoing Interface" displayOrder="6" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="300" name="params.dstintf" startIncrement="0" type="String">
+    <variable displayName="Outgoing Interface" displayOrder="6" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="300" name="params.dstintf" startIncrement="0" type="ObjectRef">
       <values>
-        <value displayValue="Port4">4</value>
-        <value displayValue="Port5">5</value>
-        <value displayValue="Port6">6</value>
-        <value displayValue="Port7">7</value>
-        <value displayValue="Port8">8</value>
-        <value displayValue="Port9">9</value>
-        <value displayValue="Port10">10</value>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+        <value>7</value>
+        <value>8</value>
+        <value>9</value>
+        <value>10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable default="address" displayCols="4" displayName="Destination Address Type" displayOrder="7" displayType="alt" editable="false" groupDisplayName="Destination" isGrouped="true" isMandatory="true" maxLength="200" name="params.dstaddr_selector" onlyDetailView="true" startIncrement="0" type="String">
       <values>
@@ -246,10 +258,10 @@ end
           <regexp>@set action (?&lt;action&gt;\S+)@</regexp>
         </line>
         <line>
-          <regexp>@set srcintf "port(?&lt;srcintf&gt;\d+)"@</regexp>
+          <regexp>@set srcintf "(?&lt;srcintf&gt;[^"]+)"@</regexp>
         </line>
         <line>
-          <regexp>@set dstintf "port(?&lt;dstintf&gt;\d+)"@</regexp>
+          <regexp>@set dstintf "(?&lt;dstintf&gt;[^"]+)"@</regexp>
         </line>
         <line>
           <regexp>@set srcaddr "(?&lt;srcaddr&gt;[^"]+)"@</regexp>
@@ -316,8 +328,8 @@ end
 <command name="CREATE">
     <operation>config firewall policy					
     edit {$params.object_id}					
-        set srcintf port{$params.srcintf}					
-        set dstintf port{$params.dstintf}					
+        set srcintf {$params.srcintf}					
+        set dstintf {$params.dstintf}					
         set srcaddr "{$params.srcaddr}"
         set match-vip disable
 	{if empty($params.dstaddr)}
@@ -371,8 +383,8 @@ end
 <command name="UPDATE">
     <operation>config firewall policy					
     edit {$params.object_id}					
-        set srcintf port{$params.srcintf}					
-        set dstintf port{$params.dstintf}					
+        set srcintf {$params.srcintf}					
+        set dstintf {$params.dstintf}					
         set srcaddr "{$params.srcaddr}"
         set match-vip disable
 	{if empty($params.dstaddr)}

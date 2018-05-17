@@ -105,12 +105,6 @@
         <value displayValue="enable">enable</value>
       </values>
     </variable>
-    <variable default="disable" displayName="CSV" displayOrder="11" editable="false" groupDisplayName="Syslogd3" maxLength="200" name="params.syslogd3_csv" type="String" visible="false">
-      <values>
-        <value displayValue="enable">enable</value>
-        <value displayValue="disable">disable</value>
-      </values>
-    </variable>
     <variable displayName="Server IP Address" displayOrder="12" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_server_ip" selector="params.syslogd3_status" type="Composite">
       <behaviors>
         <behavior displayName="syslogd3_server_ip" displayOrder="0" maxLength="200" name="params.syslogd3_server_ip" selectorValue="disable" type="String" visible="false"/>
@@ -135,7 +129,6 @@ end
 config log syslogd3 setting
 
 set status {$params.syslogd3_status}
-set csv {$params.syslogd3_csv}
 
 {if !empty($params.syslogd3_facility_name)}
 set facility {$params.syslogd3_facility_name}
@@ -159,7 +152,7 @@ end
     <operation>config log syslogd3 setting
 {if $params.syslogd3_status=="enable"}
 set status enable
-set csv {$params.syslogd3_csv}
+
 {if !empty($params.syslogd3_facility_name)}
 set facility {$params.syslogd3_facility_name}
 {/if}

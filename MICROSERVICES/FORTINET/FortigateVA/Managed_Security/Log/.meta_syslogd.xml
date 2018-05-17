@@ -11,7 +11,7 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1457357826609</value>
+            <value>1526464667183</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -33,12 +33,12 @@
             <value></value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>syslogd.xml</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>syslogd.xml</value>
         </entry>
     </map>
 </metadata>
