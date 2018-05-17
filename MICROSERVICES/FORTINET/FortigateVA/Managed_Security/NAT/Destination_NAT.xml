@@ -26,7 +26,7 @@
     <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
     <variable displayName="External IP Address" displayOrder="1" maxLength="200" name="params.extIP" startIncrement="0" type="IpMask"/>
     <variable displayName="Mapped IP Address" displayOrder="2" maxLength="200" name="params.mapIP" startIncrement="0" type="IpMask"/>
-    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" startIncrement="0" type="String">
+    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" startIncrement="0" type="ObjectRef">
       <values>
         <value>1</value>
         <value>2</value>
@@ -39,6 +39,9 @@
         <value>9</value>
         <value>10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable default="false" displayName="Port Forward" displayOrder="4" maxLength="200" name="params.portFor" startIncrement="0" type="Boolean"/>
     <variable displayName="Protocol" displayOrder="5" isMandatory="true" maxLength="200" name="params.proto" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
@@ -95,7 +98,7 @@ end
 edit "{$params.object_id}"
 set comment "{$params.comment}"
 set extip {$params.extIP}
-set extintf "port{$params.port}"
+set extintf "{$params.port}"
 set arp-reply enable
 set mappedip "{$params.mapIP}"
 {if $params.portFor=="true"}
@@ -127,7 +130,7 @@ end
           <regexp>@set extip (?&lt;extIP&gt;\S+)@</regexp>
         </line>
         <line>
-          <regexp>@set extintf "port(?&lt;port&gt;\S+)"@</regexp>
+          <regexp>@set extintf "(?&lt;port&gt;[^"]+)"@</regexp>
         </line>
         <line>
           <regexp>@set portforward (?&lt;statusPortForward&gt;\S+)@</regexp>
@@ -163,7 +166,7 @@ end
 edit "{$params.object_id}"
 set comment "{$params.comment}"
 set extip {$params.extIP}
-set extintf "port{$params.port}"
+set extintf "{$params.port}"
 set arp-reply enable
 set mappedip "{$params.mapIP}"
 {if $params.portFor=="true"}
