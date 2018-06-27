@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Manage linux users</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>System</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>User</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="comment" displayOrder="0" maxLength="100" name="params.comment" startIncrement="0" type="String"/>
+    <variable displayName="group_id" displayOrder="1" maxLength="100" name="params.group_id" startIncrement="0" type="String"/>
+    <variable displayName="login" displayOrder="1" maxLength="100" name="params.login" startIncrement="0" type="String"/>
+    <variable displayName="home_dir" displayOrder="2" maxLength="100" name="params.home_dir" startIncrement="0" type="String"/>
+    <variable displayName="object_id" displayOrder="3" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="password" displayOrder="4" maxLength="100" name="params.password" startIncrement="0" type="String"/>
+    <variable displayName="shell" displayOrder="5" maxLength="100" name="params.shell" startIncrement="0" type="String"/>
+    <variable displayName="user_id" displayOrder="6" maxLength="100" name="params.user_id" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>[root@managed-linux ~]# cat /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+...
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+oprofile:x:16:16:Special user account to be used by OProfile:/home/oprofile:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>cat /etc/passwd</operation>
+    <parser>
+      <section>
+        <regexp>@(?&lt;object_id&gt;[^:]+):(?&lt;password&gt;[^:]+):(?&lt;user_id&gt;[^:]+):(?&lt;group_id&gt;[^:]+):(?&lt;comment&gt;[^:]*):(?&lt;home_dir&gt;[^:]+):(?&lt;shell&gt;[^:]+)@</regexp>
+      </section>
+      <lines/>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>useradd -m -d {$params.home_dir} -c {$params.comment} -p {$params.password} {$params.login}
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>userdel -f -r {$users.$object_id.object_id}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>userdel -f -r {$users.$object_id.object_id}
+useradd -m -d {$params.home_dir} -c {$params.comment} -p {$params.password} {$params.login}
+</operation>
+  </command>
+</ObjectDefinition>

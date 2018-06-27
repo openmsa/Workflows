@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>IP/port based access filtering with iptables</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Simple Firewall</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="AutoIncrement"/>
+    <variable displayName="Source IP" displayOrder="1" maxLength="100" name="params.src_ip" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Destination Port" displayOrder="2" maxLength="100" name="params.dst_port" startIncrement="0" type="Integer"/>
+  </variables>  <example>
+    <content>1    DROP       tcp  --  192.168.1.2          0.0.0.0/0           tcp dpt:80 
+2    DROP       tcp  --  192.168.1.4          0.0.0.0/0           tcp dpt:443
+</content>
+  </example>
+<command name="CREATE">
+    <operation>sudo iptables -A INPUT -p tcp --dport {$params.dst_port} -s {$params.src_ip} -j DROP
+sudo iptables -A FORWARD -p tcp --dport {$params.dst_port} -s {$params.src_ip}  -j DROP
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>sudo iptables -D INPUT -p tcp --dport {$simple_firewall.$object_id.dst_port} -s {$simple_firewall.$object_id.src_ip} -j DROP
+sudo iptables -D FORWARD -p tcp --dport {$simple_firewall.$object_id.dst_port} -s {$simple_firewall.$object_id.src_ip} -j DROP
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>iptables --line-numbers -L INPUT -n | grep -v Chain | grep -v num</operation>
+    <parser>
+      <section>
+        <regexp>@(?&lt;object_id&gt;\d+)    DROP       tcp  --  (?&lt;src_ip&gt;([0-9]{1,3}\.){3}[0-9]{1,3})[^:]+:(?&lt;dst_port&gt;\d+)@</regexp>
+      </section>
+      <lines/>
+    </parser>
+    <post_template/>
+  </command>
+</ObjectDefinition>
