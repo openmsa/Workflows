@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>display_var</displayField>
+    <dynamic>false</dynamic>
+    <group>vCenter</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Folder</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="100" name="params.name" startIncrement="0" type="String"/>
+    <variable displayName="Type" displayOrder="2" maxLength="100" name="params.type" startIncrement="0" type="String"/>
+    <variable displayName="display_var" displayOrder="3" maxLength="100" name="params.display_var" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>vcenter</operation>
+    <xpath>folder</xpath>
+    <parser>
+      <section>
+        <xpath>//root/value/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>folder</xpath>
+          <regexp>@&lt;folder&gt;(?&lt;object_id&gt;.*)&lt;/folder&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>type</xpath>
+          <regexp>@&lt;type&gt;(?&lt;type&gt;.*)&lt;/type&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{assign_object_variable var="display_var" value="{$params.name} - {$params.object_id}"}</post_template>
+  </command>
+</ObjectDefinition>
