@@ -54,7 +54,7 @@
         <behavior displayName="End IP Address" displayOrder="0" groupSeparator="-" maxLength="200" name="params.endIp" selectorValue="iprange" startIncrement="0" type="IpMask"/>
       </behaviors>
     </variable>
-    <variable displayName="Interface" displayOrder="7" editable="false" isMandatory="true" maxLength="100" name="params.port" startIncrement="0" type="String">
+    <variable displayName="Interface" displayOrder="7" editable="false" isMandatory="true" maxLength="100" name="params.port" startIncrement="0" type="ObjectRef">
       <values>
         <value displayValue="Port4">4</value>
         <value displayValue="Port5">5</value>
@@ -64,6 +64,9 @@
         <value displayValue="Port9">9</value>
         <value displayValue="Port10">10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
   </variables>  <example>
@@ -150,7 +153,7 @@ end
           <regexp>@set @</regexp>
         </ignore>
         <line>
-          <regexp>@set associated-interface "port(?&lt;port&gt;([4-9]|10))"@</regexp>
+          <regexp>@set associated-interface "(?&lt;port&gt;[^"]+)"@</regexp>
         </line>
         <line>
           <regexp>@set type (?&lt;type&gt;\S+)@</regexp>
@@ -174,17 +177,5 @@ end
     <post_template/>
   </command>
 
-<command name="CONSTRAINT">
-    <operation>{if $params.type=="ipmask"}
-{if !empty($params.address)}
-{if is_in_network($params.address, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
-{/if}
-{/if}
-{else}
-{if !empty($params.startIp) &amp;&amp; !empty($params.endIp)}
-{if is_in_network($params.startIp, "100.64.0.0", "255.192.0.0") || is_in_network($params.endIp, "100.64.0.0", "255.192.0.0") || is_overlapping($params.startIp, $params.endIp, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
-{/if}
-{/if}
-{/if}</operation>
-  </command>
+
 </ObjectDefinition>

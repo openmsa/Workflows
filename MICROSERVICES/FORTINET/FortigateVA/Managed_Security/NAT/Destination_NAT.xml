@@ -26,16 +26,22 @@
     <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
     <variable displayName="External IP Address" displayOrder="1" maxLength="200" name="params.extIP" startIncrement="0" type="IpMask"/>
     <variable displayName="Mapped IP Address" displayOrder="2" maxLength="200" name="params.mapIP" startIncrement="0" type="IpMask"/>
-    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" startIncrement="0" type="String">
+    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" startIncrement="0" type="ObjectRef">
       <values>
-        <value displayValue="Port4">4</value>
-        <value displayValue="Port5">5</value>
-        <value displayValue="Port6">6</value>
-        <value displayValue="Port7">7</value>
-        <value displayValue="Port8">8</value>
-        <value displayValue="Port9">9</value>
-        <value displayValue="Port10">10</value>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+        <value>7</value>
+        <value>8</value>
+        <value>9</value>
+        <value>10</value>
       </values>
+      <classes>
+        <class>Interface</class>
+      </classes>
     </variable>
     <variable default="false" displayName="Port Forward" displayOrder="4" maxLength="200" name="params.portFor" startIncrement="0" type="Boolean"/>
     <variable displayName="Protocol" displayOrder="5" isMandatory="true" maxLength="200" name="params.proto" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
@@ -92,7 +98,7 @@ end
 edit "{$params.object_id}"
 set comment "{$params.comment}"
 set extip {$params.extIP}
-set extintf "port{$params.port}"
+set extintf "{$params.port}"
 set arp-reply enable
 set mappedip "{$params.mapIP}"
 {if $params.portFor=="true"}
@@ -124,7 +130,7 @@ end
           <regexp>@set extip (?&lt;extIP&gt;\S+)@</regexp>
         </line>
         <line>
-          <regexp>@set extintf "port(?&lt;port&gt;\S+)"@</regexp>
+          <regexp>@set extintf "(?&lt;port&gt;[^"]+)"@</regexp>
         </line>
         <line>
           <regexp>@set portforward (?&lt;statusPortForward&gt;\S+)@</regexp>
@@ -160,7 +166,7 @@ end
 edit "{$params.object_id}"
 set comment "{$params.comment}"
 set extip {$params.extIP}
-set extintf "port{$params.port}"
+set extintf "{$params.port}"
 set arp-reply enable
 set mappedip "{$params.mapIP}"
 {if $params.portFor=="true"}
@@ -175,11 +181,5 @@ next
 end
 </operation>
   </command>
-<command name="CONSTRAINT">
-    <operation>{if !empty($params.extIP) &amp;&amp; !empty($params.mapIP)}
-{if is_in_network($params.extIP, "100.64.0.0", "255.192.0.0") || is_in_network($params.mapIP, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
-{/if}
-{/if}
-</operation>
-  </command>
+
 </ObjectDefinition>

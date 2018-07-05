@@ -3,15 +3,10 @@
     <map>
         <entry>
             <key>MODEL</key>
-            <value>Generic</value>
-        </entry>
-        <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1526465185805</value>
+            <value>1357290149135</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -19,26 +14,25 @@
         </entry>
         <entry>
             <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1452154251025</value>
+            <value>1357290149103</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>CONFIGURATION_FILTER</key>
-            <value></value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>DIRECTORY</value>
         </entry>
         <entry>
             <key>TAG</key>
-            <value>FW</value>
+            <value></value>
         </entry>
     </map>
 </metadata>
+

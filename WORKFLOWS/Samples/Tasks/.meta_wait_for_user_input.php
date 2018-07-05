@@ -2,16 +2,20 @@
 <metadata>
     <map>
         <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1325774519502</value>
+            <value>1485772929476</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1325774519449</value>
+            <value>1484668454734</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>MANUFACTURER</value>
+            <value>FILE</value>
         </entry>
     </map>
 </metadata>

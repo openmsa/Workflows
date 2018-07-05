@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security Profile|Web Filter</group>
+    <icon>/images/repository/CommandDefinition/icons/webfilter_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importRank>2</importRank>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Web Filter</name>
+    <order>13020</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>4</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable displayName="Profile Name" displayOrder="0" isMandatory="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayCols="4" displayName="Blocked Categories" displayOrder="1" displayType="alt" editable="false" maxLength="200" name="params.categories.0.id" type="Index">
+      <values>
+        <value displayValue="Abortion">7</value>
+        <value displayValue="Advertising">17</value>
+        <value displayValue="Advocacy Organizations">9</value>
+        <value displayValue="Alcohol">64</value>
+        <value displayValue="Alternative Beliefs">2</value>
+        <value displayValue="Armed Forces">53</value>
+        <value displayValue="Arts and Culture">29</value>
+        <value displayValue="Brokerage and Trading">18</value>
+        <value displayValue="Business">49</value>
+        <value displayValue="Child Abuse">83</value>
+        <value displayValue="Child Education">77</value>
+        <value displayValue="Content Servers">82</value>
+        <value displayValue="Dating">15</value>
+        <value displayValue="Digital Postcards">71</value>
+        <value displayValue="Discrimination">5</value>
+        <value displayValue="Domain Parking">85</value>
+        <value displayValue="Drug Abuse">1</value>
+        <value displayValue="Dynamic Content">54</value>
+        <value displayValue="Education">30</value>
+        <value displayValue="Entertainment">28</value>
+        <value displayValue="Explicit Violence">6</value>
+        <value displayValue="Extremist Groups">12</value>
+        <value displayValue="File Sharing and Storage">24</value>
+        <value displayValue="Finance and Banking">31</value>
+        <value displayValue="Folklore">58</value>
+        <value displayValue="Freeware Downloads">19</value>
+        <value displayValue="Gambling">11</value>
+        <value displayValue="Games">20</value>
+        <value displayValue="General Organizations">43</value>
+        <value displayValue="Global Religion">40</value>
+        <value displayValue="Government and Legal Organisation">51</value>
+        <value displayValue="Hacking">3</value>
+        <value displayValue="Health and Wellness">33</value>
+        <value displayValue="Illegal or Unethical">4</value>
+        <value displayValue="Information and Computer Security">50</value>
+        <value displayValue="Information Technology">52</value>
+        <value displayValue="Instant Messaging">69</value>
+        <value displayValue="Internet Radio and TV">75</value>
+        <value displayValue="Internet Telephony">76</value>
+        <value displayValue="Job Search">34</value>
+        <value displayValue="Lingerie and Swimsuit">66</value>
+        <value displayValue="Malicious Websites">26</value>
+        <value displayValue="Marijuana">57</value>
+        <value displayValue="Meaningless Content">55</value>
+        <value displayValue="Medicine">35</value>
+        <value displayValue="News and Media">36</value>
+        <value displayValue="Newsgroups and Message Boards">70</value>
+        <value displayValue="Nudity and Risque">13</value>
+        <value displayValue="Other Adult Materials">8</value>
+        <value displayValue="Peer-to-peer File Sharing">72</value>
+        <value displayValue="Personal Privacy">87</value>
+        <value displayValue="Personal Vehicles">48</value>
+        <value displayValue="Personal Websites and Blogs">80</value>
+        <value displayValue="Phishing">61</value>
+        <value displayValue="Plagiarism">62</value>
+        <value displayValue="Political Organizations">38</value>
+        <value displayValue="Pornography">14</value>
+        <value displayValue="Proxy Avoidance">59</value>
+        <value displayValue="Real Estate">78</value>
+        <value displayValue="Reference">39</value>
+        <value displayValue="Restaurant and Dining">79</value>
+        <value displayValue="Search Engines and Portals">41</value>
+        <value displayValue="Secure Websites">81</value>
+        <value displayValue="Sex Education">63</value>
+        <value displayValue="Shopping and Auction">42</value>
+        <value displayValue="Social Networking">37</value>
+        <value displayValue="Society and Lifestyles">44</value>
+        <value displayValue="Spam URLs">86</value>
+        <value displayValue="Sports">46</value>
+        <value displayValue="Sports Hunting and War Games">67</value>
+        <value displayValue="Streaming Media and Download">25</value>
+        <value displayValue="Tobacco">65</value>
+        <value displayValue="Travel">47</value>
+        <value displayValue="Unrated">0</value>
+        <value displayValue="Weapons (sales)">16</value>
+        <value displayValue="Web-based Applications">84</value>
+        <value displayValue="Web-based Email">23</value>
+        <value displayValue="Web Chat">68</value>
+        <value displayValue="Web Hosting">56</value>
+      </values>
+    </variable>
+    <variable default="false" displayName="URL Filter" displayOrder="2" maxLength="80" name="params.url_filter_status" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable displayName="URL Filter ID" displayOrder="3" isMandatory="true" isUserLocked="true" maxLength="200" name="params.filter_id" onlyDetailView="true" type="AutoIncrement" visible="false"/>
+    <variable displayName="ID" displayOrder="5" isUserLocked="true" maxLength="200" name="params.urlfilter.0.url_id" selector="params.url_filter_status" type="Composite">
+      <sections>
+        <section>URL Filters</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="url_id" displayOrder="0" maxLength="100" name="params.urlfilter.0.url_id" selectorValue="false" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>urlfilter</section>
+          </sections>
+        </behavior>
+        <behavior displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.urlfilter.0.url_id" selectorValue="true" type="AutoIncrement">
+          <sections>
+            <section>URL Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="URL" displayOrder="6" maxLength="200" name="params.urlfilter.0.url" selector="params.url_filter_status" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>URL Filters</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="url" displayOrder="0" maxLength="100" name="params.urlfilter.0.url" selectorValue="false" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>urlfilter</section>
+          </sections>
+        </behavior>
+        <behavior cols="150" displayName="URL" displayOrder="0" isMandatory="true" maxLength="200" name="params.urlfilter.0.url" selectorValue="true" startIncrement="0" type="String">
+          <sections>
+            <section>URL Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Type" displayOrder="7" editable="false" maxLength="200" name="params.urlfilter.0.type" selector="params.url_filter_status" startIncrement="0" type="Composite" visible="false">
+      <values>
+        <value displayValue="simple">simple</value>
+        <value displayValue="wildcard">wildcard</value>
+        <value displayValue="regex">regex</value>
+      </values>
+      <sections>
+        <section>URL Filters</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="type" displayOrder="0" maxLength="100" name="params.urlfilter.0.type" selectorValue="false" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>urlfilter</section>
+          </sections>
+        </behavior>
+        <behavior default="simple" displayName="Type" displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.urlfilter.0.type" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="simple">simple</value>
+            <value displayValue="wildcard">wildcard</value>
+          </values>
+          <sections>
+            <section>URL Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Action" displayOrder="8" editable="false" maxLength="200" name="params.urlfilter.0.action" selector="params.url_filter_status" startIncrement="0" type="Composite" visible="false">
+      <values>
+        <value displayValue="exempt">exempt</value>
+        <value displayValue="block">block</value>
+      </values>
+      <sections>
+        <section>URL Filters</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="action" displayOrder="0" maxLength="100" name="params.urlfilter.0.action" selectorValue="false" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>urlfilter</section>
+          </sections>
+        </behavior>
+        <behavior default="block" displayName="Action" displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.urlfilter.0.action" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="block">block</value>
+            <value displayValue="exempt">exempt</value>
+          </values>
+          <sections>
+            <section>URL Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable cols="150" displayName="Comments" displayOrder="9" maxLength="200" name="params.comment" startIncrement="0" type="String"/>
+    <variable default="http://www.fortiguard.com/static/webfiltering.html" displayName="Rating" displayOrder="10" isUserLocked="true" maxLength="250" name="params.rating" onlyDetailView="true" type="Link"/>
+  </variables>  <example>
+    <content>config webfilter profile
+    edit "default"
+        set comment "Default web filtering."
+        set post-action comfort
+            config ftgd-wf
+                    config filters
+                        edit 77
+                            set category 81
+                        next
+                        edit 78
+                            set category 84
+                        next
+                        edit 79
+                        next
+                    end
+            end
+        set log-all-url enable
+        set web-content-log disable
+        set web-filter-activex-log disable
+        set web-filter-command-block-log disable
+        set web-filter-cookie-log disable
+        set web-filter-applet-log disable
+        set web-filter-jscript-log disable
+        set web-filter-js-log disable
+        set web-filter-vbs-log disable
+        set web-filter-unknown-log disable
+        set web-filter-referer-log disable
+        set web-filter-cookie-removal-log disable
+        set web-url-log disable
+        set web-invalid-domain-log disable
+        set web-ftgd-err-log disable
+        set web-ftgd-quota-usage disable
+end
+</content>
+  </example>
+  <command name="CREATE">
+    <operation>config webfilter urlfilter
+        edit {$params.filter_id}
+	set name "{$params.object_id}"
+        config entries
+        {foreach $params.urlfilter as $filter}
+		edit {$filter.url_id}
+			set url "{$filter.url}"
+			set type {$filter.type}
+			set action {$filter.action}
+  			{if $filter.action == "exempt"}
+			set exempt web-content activex-java-cookie dlp fortiguard range-block
+			{/if}
+   			set status enable
+		next
+	{/foreach}
+        end
+     next
+end
+
+config webfilter profile
+	edit "{$params.object_id}"
+        set comment "{$params.comment}"
+                config override
+                        set ovrd-user-group ""
+                end
+                config web
+                	{if empty($params.filter_id)}
+                        unset urlfilter-table
+                        {else}
+ 			set urlfilter-table {$params.filter_id}
+			{/if}
+		end
+		config ftgd-wf
+			set options error-allow
+			set category-override 140 141 142 143
+			config filters
+				{foreach $params.categories as $category}
+				{if isset($category.id) &amp;&amp; $category.id !== ""}
+				{if $category.id === "0"}
+				edit 144
+				{else}
+				edit {$category.id}
+				{/if}
+					set category {$category.id}
+					set action block
+   					set log enable
+				next
+				{/if}
+				{/foreach}
+				edit 143
+					set category 143
+					set action block
+					set log enable
+				next
+			end
+		end
+		set log-all-url disable
+	next
+end
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>config webfilter urlfilter
+        edit {$params.filter_id}
+	set name "{$params.object_id}"
+	config entries
+        purge
+        {foreach $params.urlfilter as $filter}
+		edit {$filter.url_id}
+			set url "{$filter.url}"
+			set type {$filter.type}
+			set action {$filter.action}
+  			{if $filter.action == "exempt"}
+			set exempt web-content activex-java-cookie dlp fortiguard range-block
+			{/if}
+   			set status enable
+		next
+	{/foreach}
+        end
+     next
+end
+
+
+config webfilter profile
+	edit "{$params.object_id}"
+	set comment "{$params.comment}"
+		config override
+                        set ovrd-user-group ""
+                end		
+		config web
+                	{if empty($params.filter_id)}
+                        unset urlfilter-table
+                        {else}
+ 			set urlfilter-table {$params.filter_id}
+			{/if}
+		end
+		config ftgd-wf
+			set options error-allow
+			set category-override 140 141 142 143
+			config filters
+				purge
+				{foreach $params.categories as $category}
+				{if isset($category.id) &amp;&amp; $category.id !== ""}
+				{if $category.id === "0"}
+				edit 144
+				{else}
+				edit {$category.id}
+				{/if}
+					set category {$category.id}
+					set action block
+					set log enable
+				next
+				{/if}
+				{/foreach}
+				edit 143
+					set category 143
+					set action block
+					set log enable
+				next
+			end
+		end
+		set log-all-url disable
+	next
+end
+</operation>
+  </command>
+  
+
+<command name="IMPORT">
+    <operation>show full-configuration webfilter profile</operation>
+    <parser>
+      <section>
+        <regexp>@edit(?! "(default)") "(?&lt;object_id&gt;[^"]+)"@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@set urlfilter-table (?&lt;filter_id&gt;\d+)@</regexp>
+        </line>
+        
+        <line>
+          <regexp>@set comment "(?&lt;comment&gt;.*)"@</regexp>
+        </line>
+        
+        
+        
+        <ignore>
+          <regexp>@end@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@set @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@config @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@unset @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@edit \d@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@next@</regexp>
+        </ignore>
+        
+        <line>
+          <array name="categories">
+            <regexp>@set category(?! 143) (?&lt;id&gt;\d+)@</regexp>
+          </array>
+        </line>
+        
+      </lines>
+    </parser>
+  <post_template>{assign_object_variable var="url_filter_status" value="false"}
+{foreach $URL_Filter|sortby:_order  as $filter}
+	{if isset($params.filter_id) &amp;&amp; $params.filter_id == $filter.object_id}
+		{assign_object_variable var="url_filter_status" value="true"}
+		{assign_object_variable var="filter_id" value=$filter.object_id}
+ 		{assign_object_variable var="filter_name" value=$filter.filter_name}
+		{if !empty($filter.urls)}
+		  {foreach $filter.urls as  $index => $url}
+			  {assign_object_variable var="urlfilter.{$index}.url_id" value=$url.url_id}
+			  {assign_object_variable var="urlfilter.{$index}.url" value=$url.url}
+			  {assign_object_variable var="urlfilter.{$index}.action" value=$url.action}
+			  {assign_object_variable var="urlfilter.{$index}.type" value=$url.type}
+    		  {/foreach}
+		{/if}
+		{break}
+	{/if}
+{/foreach}
+{if $params.object_id == "default"}
+{assign_object_variable var="_readonly" value="true"}
+{else}
+{assign_object_variable var="_readonly" value="false"}
+{/if}</post_template>
+  </command>
+
+<command name="DELETE">
+    <operation>{assign var="params" value=$Web_Filter.$object_id}
+config webfilter profile
+  delete "{$params.object_id}"
+end
+config webfilter urlfilter
+  delete {$params.filter_id}
+end
+</operation>
+  </command>
+</ObjectDefinition>

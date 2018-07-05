@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -7,7 +7,7 @@
     <description>Manage linux users</description>
     <displayField>object_id</displayField>
     <dynamic>false</dynamic>
-    <group>Default</group>
+    <group>System</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <importonce>false</importonce>
@@ -56,10 +56,12 @@ tcpdump:x:72:72::/:/sbin/nologin
 </operation>
   </command>
 <command name="DELETE">
-    <operation>userdel -f -r {$users.$object_id.object_id}</operation>
+    <operation>userdel -f -r {$users.$object_id.object_id}
+</operation>
   </command>
   <command name="UPDATE">
     <operation>userdel -f -r {$users.$object_id.object_id}
-useradd -m -d {$params.home_dir} -c {$params.comment} -p {$params.password} {$params.login}</operation>
+useradd -m -d {$params.home_dir} -c {$params.comment} -p {$params.password} {$params.login}
+</operation>
   </command>
 </ObjectDefinition>
