@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>SERVICEINSTANCEREFERENCE</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>VMWare|vRO</group>
+    <icon>/images/repository/CommandDefinition/icons/web browser.jpg</icon>
+    <name>vRO Onboard</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>true</showVariables>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable default="10.31.1.19" displayName="vRO IP Address" displayOrder="0" maxLength="100" name="params.vro_ip_address" startIncrement="0" type="String"/>
+    <variable default="8281" displayName="vRO Port" displayOrder="1" maxLength="100" name="params.vro_port" startIncrement="0" type="Integer"/>
+    <variable default="10.31.1.7" displayName="vCenter FQDN" displayOrder="2" maxLength="100" name="params.vcenter_fqdn" startIncrement="0" type="String"/>
+    <variable default="administrator@vsphere.local" displayName="vCenter Username" displayOrder="3" maxLength="100" name="params.vcenter_username" startIncrement="0" type="String"/>
+    <variable default="Ub!qube38" displayName="vCenter Password" displayOrder="4" maxLength="100" name="params.vcenter_password" startIncrement="0" type="Password"/>
+    <variable displayName="vCenter Device Id" displayOrder="10" isUserLocked="true" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+      <sdTypes>
+        <sdType manId="24" modId="17010303"/>
+      </sdTypes>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/VMWare/vRO_Onboard/Process_Onboard_vRO">
+    <visibility>5</visibility>
+    <displayName>Onboard vRO</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+  
+    
+    
+    
+  <task name="/opt/fmc_repository/Process/VMWare/vRO_Onboard/Process_Onboard_vRO/Tasks/Task_msa_vcenter_device_create.php">
+      <processPath/>
+      <displayName>Create vSphere device on MSA</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
+      <processPath/>
+      <displayName>Initial Provisioning</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_wait_for_device_reachability.php">
+      <processPath/>
+      <displayName>Wait for Device Reachability</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/OrderCommand/Task_msa_synchronize_objects.php">
+      <processPath/>
+      <displayName>Synchronize Micro-services</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/vRO_Onboard/Process_Update_vRO_Params">
+    <visibility>5</visibility>
+    <displayName>Update vRO params</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_update_parameters.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/vRO_Onboard/Process_Update_vRO_Params/Tasks/</processPath>
+      <displayName>Update parameters</displayName>
+    </task>
+  <compensation/>
+  </process>
+  <process name="Process/VMWare/vRO_Onboard/Process_Delete_vRO">
+    <visibility>5</visibility>
+    <displayName>Delete vRO</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
+      <processPath/>
+      <displayName>Delete vSphere device</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/vRO_Onboard/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <compensation/>
+  </process>
+</ObjectDefinition>
