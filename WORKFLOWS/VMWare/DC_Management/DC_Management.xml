@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>VMWare|vRO</group>
+    <icon>/images/repository/CommandDefinition/icons/web browser.jpg</icon>
+    <name>DC Management</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>true</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Vcenter Device Id" displayOrder="0" maxLength="100" name="params.vcenter_device_id" startIncrement="0" type="Device">
+      <sdTypes>
+        <sdType manId="24" modId="17010303"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Criteria" displayOrder="1" maxLength="100" name="params.criteria" startIncrement="0" type="String"/>
+    <variable displayName="VM Count" displayOrder="1" maxLength="100" name="params.vm_count" startIncrement="0" type="Integer"/>
+    <variable displayName="VM Id" displayOrder="2" isUserLocked="true" maxLength="100" name="params.vm.0.id" startIncrement="0" type="String"/>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/VMWare/DC_Management/Process_Get_VMs_by_Name">
+    <visibility>5</visibility>
+    <displayName>Get VMs by Name</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/VMWare/Common/Tasks/Task_Fetch_vRO_Details.php">
+      <processPath/>
+      <displayName>Fetch vRO details</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Get_VMs_by_Name.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/DC_Management/Process_Get_VMs_by_Name/Tasks/</processPath>
+      <displayName>Get VMs by Name</displayName>
+    </task>
+  <compensation/>
+  </process>
+  <process name="Process/VMWare/DC_Management/Process_Refresh_VMs_by_Name">
+    <visibility>5</visibility>
+    <displayName>Refresh VMs by Name</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Get_VMs_by_Name.php">
+      <processPath/>
+      <displayName>Refresh VMs by Name</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/DC_Management/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <compensation/>
+  </process>
+</ObjectDefinition>

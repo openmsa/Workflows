@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>vm_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>VMWare|vRO</group>
+    <icon>/images/repository/CommandDefinition/icons/Service.png</icon>
+    <name>VM Lifecycle Management</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="vCenter Device Id" displayOrder="0" maxLength="100" name="params.vcenter_device_id" startIncrement="0" type="Device">
+      <sections>
+        <section>Fetch vRO details</section>
+      </sections>
+      <sdTypes>
+        <sdType manId="24" modId="17010303"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.vmName" startIncrement="0" type="String">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable displayName="Guest OS" displayOrder="2" editable="false" isMandatory="true" maxLength="100" name="params.vmGuestOs" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Ubuntu Guest">ubuntuGuest</value>
+        <value displayValue="Ubuntu64 Guest">ubuntu64Guest</value>
+        <value displayValue="Redhat Guest">redhatGuest</value>
+      </values>
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable displayName="Folder" displayOrder="3" editable="false" isMandatory="true" maxLength="100" name="params.vmFolder" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+      <classes>
+        <class>folder</class>
+      </classes>
+    </variable>
+    <variable displayName="Resourcepool" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.vmResourcePool" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+      <classes>
+        <class>resource_pool</class>
+      </classes>
+    </variable>
+    <variable displayName="Host" displayOrder="5" editable="false" maxLength="100" name="params.vmHost" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+      <classes>
+        <class>host</class>
+      </classes>
+    </variable>
+    <variable displayName="Disk Size (in GB)" displayOrder="6" isMandatory="true" maxLength="100" name="params.vmDiskSize" startIncrement="0" type="Integer">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable displayName="Memory Size (in MB)" displayOrder="7" isMandatory="true" maxLength="100" name="params.vmMemorySize" startIncrement="0" type="Integer">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable default="1" displayName="No. of CPUs" displayOrder="8" editable="false" maxLength="100" name="params.vmNbOfCpus" startIncrement="0" type="Integer">
+      <values>
+        <value displayValue="1">1</value>
+        <value displayValue="2">2</value>
+        <value displayValue="3">3</value>
+        <value displayValue="4">4</value>
+        <value displayValue="5">5</value>
+        <value displayValue="6">6</value>
+        <value displayValue="7">7</value>
+        <value displayValue="8">8</value>
+      </values>
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable displayName="Network" displayOrder="9" editable="false" isMandatory="true" maxLength="100" name="params.vmNetwork" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+      <classes>
+        <class>network</class>
+      </classes>
+    </variable>
+    <variable displayName="Datastore" displayOrder="10" editable="false" isMandatory="true" maxLength="100" name="params.vmDatastore" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+      <classes>
+        <class>datastore</class>
+      </classes>
+    </variable>
+    <variable default="false" displayName="Disk Thin Provisioned" displayOrder="11" maxLength="100" name="params.diskThinProvisioned" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Create Simple VM</section>
+      </sections>
+    </variable>
+    <variable displayName="vRO SDK Object Id" displayOrder="12" isUserLocked="true" maxLength="100" name="params.vm" startIncrement="0" type="String">
+      <sections>
+        <section>VM</section>
+      </sections>
+    </variable>
+    <variable displayName="Id" displayOrder="13" editable="false" isUserLocked="true" maxLength="100" name="params.vm_id" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>VM</section>
+      </sections>
+      <classes>
+        <class>vm</class>
+      </classes>
+    </variable>
+    <variable displayName="Datastore" displayOrder="14" editable="false" isMandatory="true" maxLength="100" name="params.datastore" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+      <classes>
+        <class>datastore</class>
+      </classes>
+    </variable>
+    <variable displayName="Disk Index" displayOrder="15" isMandatory="true" maxLength="100" name="params.diskIndex" startIncrement="0" type="Integer">
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+    </variable>
+    <variable displayName="Disk size (in GB)" displayOrder="16" isMandatory="true" maxLength="100" name="params.diskSize" startIncrement="0" type="Integer">
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+    </variable>
+    <variable displayName="Disk mode" displayOrder="17" displayType="alt" editable="false" isMandatory="true" maxLength="100" name="params.diskMode" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Non-persistent">nonpersistent</value>
+        <value displayValue="Undoable">undoable</value>
+        <value displayValue="Independent persistent">independent_persistent</value>
+        <value displayValue="Independent non-persistent">independent_nonpersistent</value>
+        <value displayValue="Persistent">persistent</value>
+        <value displayValue="Append">append</value>
+      </values>
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+    </variable>
+    <variable displayName="SCSI controller bus number" displayOrder="18" maxLength="100" name="params.scsiBusNumber" startIncrement="0" type="Integer">
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Thin Provisioned" displayOrder="19" maxLength="100" name="params.thinProvisioned" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Add Disk</section>
+      </sections>
+    </variable>
+    <variable default="Client Device" displayName="Device type" displayOrder="20" displayType="alt" editable="false" isMandatory="true" maxLength="100" name="params.deviceType" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Client Device">Client Device</value>
+        <value displayValue="Datastore ISO file">Datastore ISO file</value>
+        <value displayValue="Host Device">Host Device</value>
+      </values>
+      <sections>
+        <section>Add CD-ROM</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Connect At Power ON" displayOrder="21" maxLength="100" name="params.connectAtPowerOn" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Add CD-ROM</section>
+      </sections>
+    </variable>
+    <variable displayName="ISO file path" displayOrder="22" maxLength="100" name="params.filePath" startIncrement="0" type="String">
+      <sections>
+        <section>Add CD-ROM</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Set CPU" displayOrder="23" maxLength="100" name="params.setCPU" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Set RAM" displayOrder="24" maxLength="100" name="params.setRAM" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Set Disk" displayOrder="25" maxLength="100" name="params.setDisk" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+    </variable>
+    <variable displayName="CPU shares level" displayOrder="26" maxLength="100" name="params.cpuSharesLevel" selector="params.setCPU" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="CPU shares level" displayOrder="0" displayType="alt" editable="false" isMandatory="true" maxLength="100" name="params.cpuSharesLevel" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Low">low</value>
+            <value displayValue="Normal">normal</value>
+            <value displayValue="High">high</value>
+            <value displayValue="Custom">custom</value>
+          </values>
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="CPU shares (MHz)" displayOrder="27" maxLength="100" name="params.cpuShares" selector="params.setCPU" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="CPU shares (MHz)" displayOrder="0" maxLength="100" name="params.cpuShares" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="CPU reservation (MHz)" displayOrder="28" maxLength="100" name="params.cpuReservation" selector="params.setCPU" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="CPU reservation (MHz)" displayOrder="0" maxLength="100" name="params.cpuReservation" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="CPU limit (MHz)" displayOrder="29" maxLength="100" name="params.cpuLimit" selector="params.setCPU" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="CPU limit (MHz)" displayOrder="0" maxLength="100" name="params.cpuLimit" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="RAM shares level" displayOrder="30" maxLength="100" name="params.ramSharesLevel" selector="params.setRAM" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="RAM shares level" displayOrder="0" displayType="alt" editable="false" isMandatory="true" maxLength="100" name="params.ramSharesLevel" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Low">low</value>
+            <value displayValue="Normal">normal</value>
+            <value displayValue="High">high</value>
+            <value displayValue="Custom">custom</value>
+          </values>
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="RAM shares (MB)" displayOrder="31" maxLength="100" name="params.ramShares" selector="params.setRAM" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="RAM shares (MB)" displayOrder="0" maxLength="100" name="params.ramShares" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="RAM reservation (MB)" displayOrder="32" maxLength="100" name="params.ramReservation" selector="params.setRAM" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="RAM reservation (MB)" displayOrder="0" maxLength="100" name="params.ramReservation" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="RAM limit (MB)" displayOrder="33" maxLength="100" name="params.ramLimit" selector="params.setRAM" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="RAM limit (MB)" displayOrder="0" maxLength="100" name="params.ramLimit" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Disk shares level" displayOrder="34" maxLength="100" name="params.diskSharesLevel" selector="params.setDisk" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Disk shares level" displayOrder="0" displayType="alt" editable="false" isMandatory="true" maxLength="100" name="params.diskSharesLevel" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Low">low</value>
+            <value displayValue="Normal">normal</value>
+            <value displayValue="High">high</value>
+            <value displayValue="Custom">custom</value>
+          </values>
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Number of Disk shares" displayOrder="35" maxLength="100" name="params.diskShares" selector="params.setDisk" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Set VM Performance</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Number of Disk shares" displayOrder="0" maxLength="100" name="params.diskShares" selectorValue="true" startIncrement="0" type="Integer">
+          <sections>
+            <section>Set VM Performance</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Host" displayOrder="36" editable="false" maxLength="100" name="params.host" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Start VM</section>
+      </sections>
+      <classes>
+        <class>host</class>
+      </classes>
+    </variable>
+    <variable displayName="Memory size (in MB)" displayOrder="37" isMandatory="true" maxLength="100" name="params.memory" startIncrement="0" type="Integer">
+      <sections>
+        <section>Change RAM</section>
+      </sections>
+    </variable>
+    <variable displayName="Name" displayOrder="38" maxLength="100" name="params.snapshot_name" startIncrement="0" type="String">
+      <sections>
+        <section>Create Snapshot</section>
+      </sections>
+    </variable>
+    <variable displayName="Description" displayOrder="39" maxLength="100" name="params.description" startIncrement="0" type="String">
+      <sections>
+        <section>Create Snapshot</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Include VM memory dump" displayOrder="40" maxLength="100" name="params.snapshot_memory" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Create Snapshot</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Quiesce the file system in VM" displayOrder="41" maxLength="100" name="params.quiesce" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Create Snapshot</section>
+      </sections>
+    </variable>
+    <variable displayName="Snapshot" displayOrder="42" editable="false" isUserLocked="true" maxLength="100" name="params.snapshot" startIncrement="0" type="String">
+      <sections>
+        <section>Create Snapshot</section>
+      </sections>
+    </variable>
+    <variable displayName="Snapshot Revert Host" displayOrder="43" editable="false" maxLength="100" name="params.snapshot_revert_host" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Restore Snapshot</section>
+      </sections>
+      <classes>
+        <class>host</class>
+      </classes>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Create_Simple_VM">
+    <visibility>5</visibility>
+    <displayName>Create Simple VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/VMWare/Common/Tasks/Task_Fetch_vRO_Details.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/VM_Lifecycle_Management/Process_Fetch_vRO_Details/</processPath>
+      <displayName>Fetch vRO details</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Create_Simple_VM.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/VM_Lifecycle_Management/Process_Create_Simple_VM/</processPath>
+      <displayName>Create Simple VM</displayName>
+    </task>
+  <compensation/>
+  </process>
+  
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Add_Disk">
+    <visibility>5</visibility>
+    <displayName>Add Disk</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Add_Disk.php">
+      <processPath/>
+      <displayName>Add Disk</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Add_CD-ROM">
+    <visibility>5</visibility>
+    <displayName>Add CD-ROM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Add_CD_ROM.php">
+      <processPath/>
+      <displayName>Add CD-ROM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Mount_CD-ROM">
+    <visibility>5</visibility>
+    <displayName>Mount CD-ROM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Mount_CD_ROM.php">
+      <processPath/>
+      <displayName>Mount CD-ROM</displayName>
+    </task>
+  </process>
+  
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Set_VM_Performance">
+    <visibility>5</visibility>
+    <displayName>Set VM Performance</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Set_VM_Performance.php">
+      <processPath/>
+      <displayName>Set VM Performance</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Hibernate_VM">
+    <visibility>5</visibility>
+    <displayName>Hibernate VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Suspend_VM_And_Wait.php">
+      <processPath/>
+      <displayName>Hibernate VM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Restart_VM">
+    <visibility>5</visibility>
+    <displayName>Restart VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Reboot_VM.php">
+      <processPath/>
+      <displayName>Restart VM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Power_Off_VM">
+    <visibility>5</visibility>
+    <displayName>Power Off VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Power_Off_VM.php">
+      <processPath/>
+      <displayName>Power Off VM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Start_VM">
+    <visibility>5</visibility>
+    <displayName>Start VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Start_VM_And_Wait.php">
+      <processPath/>
+      <displayName>Start VM</displayName>
+    </task>
+  </process>
+  
+  
+  
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Change_RAM">
+    <visibility>5</visibility>
+    <displayName>Change RAM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Change_RAM.php">
+      <processPath/>
+      <displayName>Change RAM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Create_Snapshot">
+    <visibility>5</visibility>
+    <displayName>Create Snapshot</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Create_Snapshot.php">
+      <processPath/>
+      <displayName>Create Snapshot</displayName>
+    </task>
+  </process>
+  
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Restore_Snapshot">
+    <visibility>5</visibility>
+    <displayName>Restore Snapshot</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Revert_To_Snapshot_And_Wait.php">
+      <processPath/>
+      <displayName>Restore Snapshot</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Delete_Snapshot">
+    <visibility>5</visibility>
+    <displayName>Delete Snapshot</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Remove_All_Snapshots.php">
+      <processPath/>
+      <displayName>Delete Snapshot</displayName>
+    </task>
+  </process>
+  
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Delete_VM">
+    <visibility>5</visibility>
+    <displayName>Delete VM</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <compensation/>
+  <task name="/opt/fmc_repository/Process/Reference/VMWARE/vRO/Tasks/REST/vCenter/VM_Management/Task_vRO_Delete_VM.php">
+      <processPath/>
+      <displayName>Delete VM</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/VM_Lifecycle_Management/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <compensation/>
+  </process>
+</ObjectDefinition>
