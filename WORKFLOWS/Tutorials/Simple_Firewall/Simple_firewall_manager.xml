@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description>Simple firewall manager</description>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>DevDay|Security</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Simple firewall manager</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Devices" displayOrder="0" keepOnImport="true" maxLength="165" name="params.devices.0.id" startIncrement="0" type="Device"/>
+    <variable displayName="Rule ID" displayOrder="1" maxLength="100" name="params.id" startIncrement="100" type="Integer">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Ip" displayOrder="2" maxLength="100" name="params.src_ip" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Dst Port" displayOrder="3" maxLength="100" name="params.dst_port" startIncrement="0" type="Integer">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Delete" displayOrder="4" maxLength="100" name="params.rules.0.delete" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Rule ID" displayOrder="5" maxLength="100" name="params.rules.0.id" startIncrement="0" type="Integer">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Ip" displayOrder="6" maxLength="100" name="params.rules.0.src_ip" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Dst Port" displayOrder="7" maxLength="100" name="params.rules.0.dst_port" startIncrement="0" type="Integer">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/DevDay/Simple_Firewall/Process_Create_Firewall">
+    <visibility>5</visibility>
+    <displayName>Create Firewall Service</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_Select_Devices.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Create_Firewall/Tasks/</processPath>
+      <displayName>Select Devices</displayName>
+    </task>
+  </process>
+  <process name="Process/DevDay/Simple_Firewall/Process_Delete_Firewall_Service">
+    <visibility>5</visibility>
+    <displayName>Delete Firewall Service</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <task name="Task_Delete_Service.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Delete_Firewall_Service/Tasks/</processPath>
+      <displayName>Delete Service</displayName>
+    </task>
+  </process>
+<process name="Process/DevDay/Simple_Firewall/Process_Add_deny_rule">
+    <visibility>5</visibility>
+    <displayName>Add filter rule</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_add_rule.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Add_deny_rule/Tasks/</processPath>
+      <displayName>add rule</displayName>
+    </task>
+  </process>
+<process name="Process/DevDay/Simple_Firewall/Process_Remove_deny_rule">
+    <visibility>5</visibility>
+    <displayName>Remove filter rule</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_remove_rule.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Remove_deny_rule/Tasks/</processPath>
+      <displayName>remove rule</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
