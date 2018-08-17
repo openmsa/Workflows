@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
     <createTemplateObject/>
     <defaultDisplay>false</defaultDisplay>
-    <description>Manage linux users</description>
+    <description>Demo Microservice to Manage linux users</description>
     <displayField>object_id</displayField>
     <dynamic>false</dynamic>
     <group>System</group>
