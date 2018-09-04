@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Container</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.name" startIncrement="0" type="String"/>
+    <variable displayName="Id" displayOrder="1" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Image UUID" displayOrder="2" isMandatory="true" maxLength="100" name="params.image_uuid" startIncrement="0" type="String"/>
+    <variable displayName="Hostname" displayOrder="3" maxLength="100" name="params.hostname" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>host</class>
+      </classes>
+    </variable>
+    <variable displayName="Host" displayOrder="4" maxLength="100" name="params.ports.0.host" onlyDetailView="true" startIncrement="0" type="Integer">
+      <sections>
+        <section>Ports</section>
+      </sections>
+    </variable>
+    <variable displayName="Container" displayOrder="5" maxLength="100" name="params.ports.0.container" onlyDetailView="true" startIncrement="0" type="Integer">
+      <sections>
+        <section>Ports</section>
+      </sections>
+    </variable>
+    <variable displayName="Port" displayOrder="6" isUserLocked="true" maxLength="100" name="params.ports.0.port" startIncrement="0" type="String">
+      <sections>
+        <section>Ports</section>
+      </sections>
+    </variable>
+    <variable displayName="State" displayOrder="7" isUserLocked="true" maxLength="100" name="params.state" startIncrement="0" type="String"/>
+    <variable displayName="Primary IP Address" displayOrder="8" isUserLocked="true" maxLength="100" name="params.primary_ip_address" startIncrement="0" type="String"/>
+    <variable displayName="UUID" displayOrder="9" isUserLocked="true" maxLength="100" name="params.uuid" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>GET</operation>
+    <xpath>v2-beta/projects/{$PROJECT_ID}/containers</xpath>
+    <parser>
+      <section>
+        <xpath>//root/data/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>state</xpath>
+          <regexp>@&lt;state&gt;(?&lt;state&gt;.*)&lt;/state&gt;@</regexp>
+        </line>
+        
+        <line>
+          <xpath>uuid</xpath>
+          <regexp>@&lt;uuid&gt;(?&lt;uuid&gt;.*)&lt;/uuid&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>imageUuid</xpath>
+          <regexp>@&lt;imageUuid&gt;(?&lt;image_uuid&gt;.*)&lt;/imageUuid&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>hostname</xpath>
+          <regexp>@&lt;hostname&gt;(?&lt;hostname&gt;.*)&lt;/hostname&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>primaryIpAddress</xpath>
+          <regexp>@&lt;primaryIpAddress&gt;(?&lt;primary_ip_address&gt;.*)&lt;/primaryIpAddress&gt;@</regexp>
+        </line>
+        <line>
+          <array name="ports">
+            <xpath>ports</xpath>
+            <lines>
+              <line>
+                <xpath>//row</xpath>
+                <regexp>@&lt;row&gt;(?&lt;port&gt;.*)&lt;/row&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST
+</rest>
+    <xpath>v2-beta/projects/{$PROJECT_ID}/containers
+</xpath>
+    <operation>{literal}{{/literal}
+"name":"{$params.name}",
+"imageUuid":"{$params.image_uuid}"
+{if !empty($params.ports)}
+,"ports":[
+{foreach $params.ports as $port}
+{if $port@iteration &gt; 1},{/if}
+"{$port.host}:{$port.container}"
+{/foreach}
+]
+{/if}
+{if !empty($params.hostname)}
+,"hostname":"{$params.hostname}"
+{/if}
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <rest>PUT
+</rest>
+    <xpath>v2-beta/projects/{$PROJECT_ID}/containers/{$params.object_id|object_id}
+</xpath>
+    <operation>{literal}{{/literal}
+"name":"{$params.name}"
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>DELETE
+</rest>
+    <xpath>v2-beta/projects/{$PROJECT_ID}/containers/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>
