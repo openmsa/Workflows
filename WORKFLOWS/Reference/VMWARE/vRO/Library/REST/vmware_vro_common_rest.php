@@ -101,6 +101,7 @@ function vro_execute_workflow_and_wait_for_completion ($workflow_id, $parameters
 		exit;
 	}
 	$context['output_parameters'] = $response['wo_newparams'];
+	$context[$workflow_id][0][$execution_id][0]['output_parameters'] = $response['wo_newparams'];
 }
 
 ?>
