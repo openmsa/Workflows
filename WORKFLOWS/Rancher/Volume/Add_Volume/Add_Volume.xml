@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>Rancher|Volume</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Add Volume</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Rancher Reference" displayOrder="0" maxLength="100" name="params.rancher_reference" startIncrement="0" type="String">
+      <sections>
+        <section>Rancher details</section>
+      </sections>
+    </variable>
+    <variable displayName="Volume Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.volume_name" startIncrement="0" type="String">
+      <sections>
+        <section>Add Volume</section>
+      </sections>
+    </variable>
+    <variable displayName="Volume Size Mb" displayOrder="2" maxLength="100" name="params.volume_size_mb" startIncrement="0" type="Integer">
+      <sections>
+        <section>Add Volume</section>
+      </sections>
+    </variable>
+    <variable displayName="Volume Driver" displayOrder="3" maxLength="100" name="params.volume_driver" startIncrement="0" type="String">
+      <sections>
+        <section>Add Volume</section>
+      </sections>
+    </variable>
+    <variable displayName="Volume Host Id" displayOrder="4" maxLength="100" name="params.volume_host_id" startIncrement="0" type="String">
+      <sections>
+        <section>Add Volume</section>
+      </sections>
+    </variable>
+    <variable displayName="Volume Stack Id" displayOrder="5" maxLength="100" name="params.volume_stack_id" startIncrement="0" type="String">
+      <sections>
+        <section>Add Volume</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/Rancher/Volume/Add_Volume/Process_Add_Volume">
+    <visibility>5</visibility>
+    <displayName>Add Volume</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+  <task name="/opt/fmc_repository/Process/Rancher/Common/Tasks/Task_Fetch_Rancher_details.php">
+      <processPath/>
+      <displayName>Fetch Rancher details</displayName>
+    </task>
+    <task name="Task_Add_Volume.php">
+      <processPath>/opt/fmc_repository/Process/Rancher/Volume/Add_Volume/Process_Add_Volume/Tasks/</processPath>
+      <displayName>Add Volume</displayName>
+    </task>
+  </process>
+  <process name="Process/Rancher/Volume/Add_Volume/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

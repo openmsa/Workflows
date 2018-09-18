@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>VMWare|vRO|vSphere|VM|VM Operation</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>IP Duplicate confirmation</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="IP Address to check" displayOrder="0" maxLength="100" name="params.ipAddress" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Check IP duplication</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/VMWare/vCenter/IP_Duplicate_confirmation/Process_IP_Duplication_Confirmation">
+    <visibility>5</visibility>
+    <displayName>IP Duplication Confirmation</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+  <task name="Task_Check_IP_duplication.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/vCenter/IP_Duplicate_confirmation/Process_IP_Duplication_Confirmation/Tasks/</processPath>
+      <displayName>Check IP duplication</displayName>
+    </task>
+  </process>
+<process name="Process/VMWare/vCenter/IP_Duplicate_confirmation/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

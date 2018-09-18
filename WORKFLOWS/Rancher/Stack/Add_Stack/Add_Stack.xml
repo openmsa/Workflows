@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>Rancher|Stack</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Add Stack</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Rancher Reference" displayOrder="0" maxLength="100" name="params.rancher_reference" startIncrement="0" type="String">
+      <sections>
+        <section>Fetch Rancher details</section>
+      </sections>
+    </variable>
+    <variable displayName="Stack Name" displayOrder="2" isMandatory="true" maxLength="100" name="params.stack_name" startIncrement="0" type="String">
+      <sections>
+        <section>Add Stack</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/Rancher/Stack/Add_Stack/Process_Add_Stack">
+    <visibility>5</visibility>
+    <displayName>Add Stack</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+  
+    
+  <task name="/opt/fmc_repository/Process/Rancher/Common/Tasks/Task_Fetch_Rancher_details.php">
+      <processPath/>
+      <displayName>Fetch Rancher details</displayName>
+    </task>
+    <task name="Task_Add_Stack.php">
+      <processPath>/opt/fmc_repository/Process/Rancher/Stack/Add_Stack/Process_Add_Stack/Tasks/</processPath>
+      <displayName>Add Stack</displayName>
+    </task>
+  </process>
+  <process name="Process/Rancher/Stack/Add_Stack/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>VMWare|vRO|vSphere|VM|VM Operation</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>VM Power On</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Vcenter Device Id" displayOrder="0" maxLength="100" name="params.vcenter_device_id" startIncrement="0" type="Device">
+      <sections>
+        <section>Fetch vRO details</section>
+      </sections>
+      <sdTypes>
+        <sdType manId="24" modId="17010303"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="VM Name" displayOrder="2" maxLength="100" name="params.vm_name" startIncrement="0" type="String">
+      <sections>
+        <section>Get virtual machines by name</section>
+      </sections>
+    </variable>
+    <variable displayName="Host" displayOrder="4" editable="false" maxLength="100" name="params.host" refDeviceIdVar="params.vcenter_device_id" startIncrement="0" type="OBMFRef" visible="false">
+      <sections>
+        <section>Start virtual machine</section>
+      </sections>
+      <classes>
+        <class>host</class>
+      </classes>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/VMWare/vCenter/VM_Power_On/Process_VM_Power_On">
+    <visibility>5</visibility>
+    <displayName>VM Power On</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/VMWare/Common/Tasks/Task_Fetch_vRO_Details.php">
+      <processPath/>
+      <displayName>Fetch vRO details</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/VMWare/vCenter/Commons/Tasks/Task_vRO_Get_VMs_by_Name.php">
+      <processPath/>
+      <displayName>Get virtual machines by name</displayName>
+    </task>
+    <task name="Task_Start_virtual_machine.php">
+      <processPath>/opt/fmc_repository/Process/VMWare/vCenter/VM_Power_On/Process_VM_Power_On/Tasks/</processPath>
+      <displayName>Start virtual machine</displayName>
+    </task>
+  </process>
+  <process name="Process/VMWare/vCenter/VM_Power_On/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

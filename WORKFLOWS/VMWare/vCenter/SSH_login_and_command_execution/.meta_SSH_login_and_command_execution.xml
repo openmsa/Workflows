@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <map>
+        <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1536968893136</value>
+        </entry>
+        <entry>
+            <key>COMMENT</key>
+            <value></value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>CommandDefinition</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1536681121498</value>
+        </entry>
+        <entry>
+            <key>CONFIGURATION_FILTER</key>
+            <value></value>
+        </entry>
+        <entry>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>SSH_login_and_command_execution.xml</value>
+        </entry>
+    </map>
+</metadata>
