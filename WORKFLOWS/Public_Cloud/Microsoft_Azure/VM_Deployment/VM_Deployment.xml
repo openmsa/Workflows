@@ -35,17 +35,17 @@
         <section>Azure Subscription</section>
       </sections>
     </variable>
-    <variable default="add8fef0-851d-47c3-b190-e37dea4a1b12" displayName=" Client Id" displayOrder="3" isMandatory="true" maxLength="100" name="params.client_id" startIncrement="0" type="String">
+    <variable displayName=" Client Id" displayOrder="3" isMandatory="true" maxLength="100" name="params.client_id" startIncrement="0" type="String">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable default="dma" displayName=" Password" displayOrder="4" isMandatory="true" maxLength="100" name="params.client_secret" startIncrement="0" type="Password">
+    <variable displayName=" Password" displayOrder="4" isMandatory="true" maxLength="100" name="params.client_secret" startIncrement="0" type="Password">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable default="302c4541-94f4-42a4-930c-96cbb2ca8a5e" displayName="Tenant Id" displayOrder="5" isMandatory="true" maxLength="100" name="params.tenant_id" startIncrement="0" type="String">
+    <variable displayName="Tenant Id" displayOrder="5" isMandatory="true" maxLength="100" name="params.tenant_id" startIncrement="0" type="String">
       <sections>
         <section>Token</section>
       </sections>
