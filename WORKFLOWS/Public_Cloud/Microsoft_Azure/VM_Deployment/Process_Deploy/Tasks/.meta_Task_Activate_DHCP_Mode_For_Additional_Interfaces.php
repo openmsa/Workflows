@@ -7,31 +7,23 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1538503883242</value>
+            <value>1538503845634</value>
         </entry>
         <entry>
             <key>COMMENT</key>
             <value></value>
         </entry>
         <entry>
-            <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
-        </entry>
-        <entry>
             <key>DATE_CREATION</key>
-            <value>1536595859366</value>
+            <value>1538503845598</value>
         </entry>
         <entry>
-            <key>CONFIGURATION_FILTER</key>
+            <key>TAG</key>
             <value></value>
         </entry>
         <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
-        </entry>
-        <entry>
-            <key>TAG</key>
-            <value>VM_Deployment</value>
         </entry>
     </map>
 </metadata>

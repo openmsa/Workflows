@@ -352,6 +352,45 @@
     
     
     
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   <task name="Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
@@ -396,9 +435,21 @@
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>MSA Initial Device Provisioning</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Attach_Profile.php">
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_wait_for_device_reachability.php">
+      <processPath/>
+      <displayName>Wait for device reachability</displayName>
+    </task>
+    <task name="Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
+      <displayName>Activate DHCP Mode For Additional Interfaces</displayName>
+    </task>
+    <task name="Task_Attach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Attach Profile</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/OrderCommand/Task_msa_synchronize_objects.php">
+      <processPath/>
+      <displayName>Synchronize</displayName>
     </task>
   </process>
   
@@ -456,6 +507,31 @@
     <icon/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   <task name="Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
@@ -500,6 +576,22 @@
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>MSA Initial Device Provisioning</displayName>
     </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_wait_for_device_reachability.php">
+      <processPath/>
+      <displayName>Wait for device reachability</displayName>
+    </task>
+    <task name="Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
+      <displayName>Activate DHCP Mode For Additional Interfaces</displayName>
+    </task>
+    <task name="Task_Attach_Profile.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
+      <displayName>Attach Profile</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/OrderCommand/Task_msa_synchronize_objects.php">
+      <processPath/>
+      <displayName>Synchronize</displayName>
+    </task>
   </process>
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy">
     <visibility>5</visibility>
@@ -508,6 +600,15 @@
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>  
   
+    
+    
+    
+    
+    
+    
+    
+  
+    
     
     
     
@@ -552,7 +653,7 @@
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete VM Disk</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Detach_Profile.php">
+    <task name="Task_Detach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Detach Profile</displayName>
     </task>
