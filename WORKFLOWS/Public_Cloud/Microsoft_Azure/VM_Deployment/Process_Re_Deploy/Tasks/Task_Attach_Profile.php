@@ -41,4 +41,5 @@ $response = prepare_json_response(ENDED, "Profile $profile_ref attached to Devic
 echo $response;
 
 
+sleep(15);
 ?>

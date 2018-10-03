@@ -10,7 +10,7 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1538413024452</value>
+            <value>1538570271738</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -31,12 +31,12 @@
             <value></value>
         </entry>
         <entry>
-            <key>TYPE</key>
-            <value>UPLOAD</value>
-        </entry>
-        <entry>
             <key>TAG</key>
             <value></value>
+        </entry>
+        <entry>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
         </entry>
     </map>
 </metadata>
