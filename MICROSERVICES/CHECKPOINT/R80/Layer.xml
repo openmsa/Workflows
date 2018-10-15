@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Access Layer</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable default="true" displayName="Add default rule" displayOrder="0" maxLength="100" name="params.add_default_rule" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable displayName="Access Layer Name" displayOrder="0" isMandatory="true" maxLength="100" name="params.name" startIncrement="0" type="String"/>
+    <variable default="false" displayName="Applications and url filtering" displayOrder="1" maxLength="100" name="params.applications_and_url_filtering" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable default="false" displayName="Shared" displayOrder="1" maxLength="100" name="params.shared" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable displayName="Type" displayOrder="1" isUserLocked="true" maxLength="100" name="params.type" startIncrement="0" type="String"/>
+    <variable default="true" displayName="Firewall" displayOrder="2" maxLength="100" name="params.firewall" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable arrayCanAdd="false" displayName="UID" displayOrder="2" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="CREATE">
+    <rest>add-access-layer
+</rest>
+    <xpath>
+</xpath>
+    <operation>{literal}{{/literal}
+"name":"{$params.name}",
+"firewall":"{$params.firewall}",
+"applications-and-url-filtering":"{$params.applications_and_url_filtering}",
+"add-default-rule":"{$params.add_default_rule}",
+"shared":"{$params.shared}"
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>delete-access-layer
+</rest>
+    <xpath>
+</xpath>
+    <operation>{literal}{{/literal}
+"uid":"{$params.object_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="IMPORT">
+    <operation>show-access-layers</operation>
+    <xpath/>
+    <parser>
+      <section>
+        <xpath>//root/access-layers/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>type</xpath>
+          <regexp>@&lt;type&gt;(?&lt;type&gt;.*)&lt;/type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>uid</xpath>
+          <regexp>@&lt;uid&gt;(?&lt;object_id&gt;.*)&lt;/uid&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>set-access-layer
+</rest>
+    <xpath>
+</xpath>
+    <operation>{literal}{{/literal}
+"new-name":"{$params.name}",
+"uid":"{$params.object_id}",
+"firewall":"{$params.firewall}",
+"shared":"{$params.shared}"
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>
