@@ -9,16 +9,21 @@ require_once COMMON_DIR . 'curl_performer.php';
  */
 function _device_fields_get_serial_number ($device_id) {
 
-	$msa_rest_api = "deviceFields/{$device_id}/serialNumber";
-	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
-	$response = perform_curl_operation($curl_cmd, "GET DEVICE SERIAL NUMBER");
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		return $response;
-	}
-	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
-	return $response;
+    $msa_rest_api = "deviceFields/{$device_id}/serialNumber";
+    $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+    $response = perform_curl_operation($curl_cmd, "GET DEVICE SERIAL NUMBER");
+    $response = json_decode($response, true);
+    if ($response['wo_status'] !== ENDED) {
+        $response = json_encode($response);
+        return $response;
+    }
+    if (array_key_exists('response_body', $response['wo_newparams'])) {
+        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+    }
+    else {
+        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']);
+    }
+    return $response;
 }
 
 /**

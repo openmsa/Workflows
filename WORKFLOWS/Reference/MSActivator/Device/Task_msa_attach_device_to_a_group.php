@@ -4,7 +4,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 
 function list_args() {
 	create_var_def('device_id', 'Device');
-	create_var_def('device_group_id', 'integer');
+	create_var_def('device_group_id', 'Integer');
 }
 
 if(empty($context['device_id'])) {

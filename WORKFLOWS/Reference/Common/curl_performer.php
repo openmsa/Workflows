@@ -62,7 +62,12 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 	}
 	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -u {$USERNAME}:\$p --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
 	if ($json_body !== "") {
-		$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
+		if (is_json($json_body)) {
+			$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
+		}
+		else {
+			$curl_cmd .= " -d $'{$json_body}'";
+		}
 	}
 	logToFile("Curl Request : $curl_cmd\n");
 	$curl_cmd = "p=$(" . ENCP_SCRIPT .  " '{$NCROOT_PASSWORD}');{$curl_cmd}";
@@ -358,11 +363,17 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 				$result = rtrim($result);
 				$headers_and_response = explode("\n\n", $result);
 				$headers_and_response_count = count($headers_and_response);
-				$raw_headers = $headers_and_response[$headers_and_response_count - 2];
-				$response_body = $headers_and_response[$headers_and_response_count - 1];
-				if (is_json($response_body)) {
-					$response_body = pretty_print_json($response_body);
-				}
+				if ($headers_and_response_count > 1) {
+                                        $raw_headers = $headers_and_response[$headers_and_response_count - 2];
+                                        $response_body = $headers_and_response[$headers_and_response_count - 1];
+                                        if (is_json($response_body)) {
+                                                $response_body = pretty_print_json($response_body);
+                                        }
+                                }
+                                else {
+                                        $raw_headers = $headers_and_response[$headers_and_response_count - 1];
+                                        $response_body = "";
+                                }
 				logToFile("Curl Response :\n$raw_headers\n\n$response_body\n");
 				if (strpos($response_body, "<html>") !== false || strpos($line, 'HTTP_CODE=000') !== false) {
 					$http_status_code = intval(substr($line, strpos('HTTP_CODE=', $line) + strlen('HTTP_CODE=')));

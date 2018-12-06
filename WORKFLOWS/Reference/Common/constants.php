@@ -83,6 +83,7 @@ define('ENDED', 'ENDED');
 define('FAILED', 'FAIL');
 define('RUNNING', 'RUNNING');
 define('WARNING', 'WARNING');
+define('PAUSED', 'PAUSE');
 
 // MSA TAG for entities
 define('TAG_OPERATOR', 'O');
@@ -95,6 +96,5 @@ define('MICRO_SERVICES_HOME_DIR', '/opt/fmc_repository/CommandDefinition/');
 define('WORKFLOWS_HOME_DIR', '/opt/fmc_repository/Process/');
 
 $workflow_internal_params = array('EXECNUMBER', 'PROCESSINSTANCEID', 'SERVICEINSTANCEID', 'SERVICEINSTANCEREFERENCE', 'TASKID', 'UBIQUBEID', 'service_id');
-
 
 ?>

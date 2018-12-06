@@ -81,7 +81,7 @@ function _lookup_list_manager_ids () {
  * curl -u ncroot:ubiqube  -XGET http://localhost:10080/ubi-api-rest/lookup/manager/operators/id/{managerId}
  */
 function _lookup_list_operator_ids ($manager_id) {
-	$msa_rest_api = "lookup/manager/operators/id/{$managerId}";
+	$msa_rest_api = "lookup/manager/operators/id/{$manager_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "LIST OPERATOR IDs");
 	$response = json_decode($response, true);

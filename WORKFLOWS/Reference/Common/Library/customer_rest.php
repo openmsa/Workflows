@@ -139,7 +139,7 @@ function _customer_add_configuration_variable ($customer_reference, $name, $valu
 function _customer_list_configuration_variables ($customer_id) {
 
 	$msa_rest_api = "customer/id/{$customer_id}/variables";
-	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "LIST CUSTOMER CONFIGURATION VARIABLES");
 	$response = json_decode($response, true);
 	if ($response['wo_status'] !== ENDED) {
@@ -158,7 +158,7 @@ function _customer_list_configuration_variables ($customer_id) {
 function _customer_read_configuration_variable ($customer_id, $name) {
 
 	$msa_rest_api = "customer/id/{$customer_id}/variables/{$name}";
-	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ CUSTOMER CONFIGURATION VARIABLE");
 	$response = json_decode($response, true);
 	if ($response['wo_status'] !== ENDED) {

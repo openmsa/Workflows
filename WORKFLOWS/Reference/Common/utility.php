@@ -79,8 +79,9 @@ function obtain_file_lock ($lock_file, $mode, $process_params,
 		if ($length > 0) {
 			$content = fread($lf, $length);
 		}
-		if ($content === "unlocked") {
+		if (strpos($content, "unlock") === 0) {
 			// lock at application level
+			ftruncate($lf, 0);
 			fseek($lf, 0);
 			fwrite($lf, "locked");
 			$lock_ok = true;
@@ -91,6 +92,7 @@ function obtain_file_lock ($lock_file, $mode, $process_params,
 		}
 		// application locked
 		fclose($lf);
+		update_asynchronous_task_details($process_params, "{$check_lock_status_message}Waiting to obtain Lock");
 		sleep($sleep_time);
 		$total_sleeptime += $sleep_time;
 		if ($total_sleeptime > $timeout) {

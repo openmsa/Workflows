@@ -12,8 +12,10 @@ require_once LIBRARY_DIR . 'configuration_variable_rest.php';
 require_once LIBRARY_DIR . 'smarty.php';
 require_once LIBRARY_DIR . 'repository_rest.php';
 require_once LIBRARY_DIR . 'user_rest.php';
+require_once LIBRARY_DIR . 'email_rest.php';
 require_once LIBRARY_DIR . 'profile_rest.php';
 require_once LIBRARY_DIR . 'delegation_rest.php';
+require_once LIBRARY_DIR . 'topology_rest.php';
 require_once LIBRARY_DIR . 'openstack_function.php';
 require_once LIBRARY_DIR . 'customer_rest.php';
 require_once LIBRARY_DIR . 'operator_rest.php';
@@ -269,6 +271,7 @@ function get_object_id_from_name ($device_id, $object, $object_name_key, $object
 	$wo_newparams = array();
 	$wo_comment = "";
 	foreach ($objects as $id => $object_params) {
+	   if (array_key_exists($object_name_key, $object_params)) {
 		$name = $object_params[$object_name_key];
 		if ($name === $object_name_value) {
 			$object_id = $object_params['object_id'];
@@ -277,6 +280,7 @@ function get_object_id_from_name ($device_id, $object, $object_name_key, $object
 			$response = prepare_json_response(ENDED, $wo_comment, $wo_newparams, true);
 			return $response;
 		}
+	  }
 	}
 	$response = prepare_json_response(FAILED, "Not able to retrieve the object_id.", $wo_newparams, true);
 	return $response;
@@ -468,8 +472,16 @@ function wait_for_pushconfig_completion ($device_id, $process_params, $ignore_me
 		logToFile("PUSH CONFIG MESSAGE : $message");
 
 		$wo_comment = "Push Config Status : " . $status;
+		$wo_comment_print = $wo_comment;
 		$wo_comment .= "\nPush Config Message : $message\n";
-		update_asynchronous_task_details($process_params, $check_pushconfig_status_message . $wo_comment);
+		if (strlen($message) > 3800) {
+			$message = substr($message, 0, 3800);
+			$wo_comment_print .= "\nPush Config Message (truncated) : $message\n";
+		}
+		else {
+			$wo_comment_print = $wo_comment;
+		}
+		update_asynchronous_task_details($process_params, $check_pushconfig_status_message . $wo_comment_print);
 		if ($status === ENDED) {
 			break;
 		}
@@ -575,7 +587,7 @@ function wait_for_ssh_status ($ip_address, $port_no = SSH_DEFAULT_PORT_NO, $proc
 	$ssh_status = '';
 	$count = 0;
 	$wo_comment = "";
-	$params = "{$ip_address}%0D%0A{$port_no}";
+	$params = "{$ip_address}\r\n{$port_no}";
 	$check_ssh_status_message = "Checking IP Address $ip_address SSH connectivity (every " . SLEEP_BETWEEN_SSH_RETRY . " seconds";
 	$check_ssh_status_message .= ", maximum SSH retry requests = $max_ssh_counts) :\n";
 	while ($ssh_status !== $status_check) {
@@ -681,84 +693,83 @@ function execute_linux_command_and_wait_for_output ($cmd, $expected_output_strin
  */
 function wait_for_process_completion ($process_id, $process_params, $sleep_time = PROCESS_STATUS_CHECK_SLEEP) {
 
-	$wo_newparams = array();
-	$response = _orchestration_get_process_instance($process_id);
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		return $response;
-	}
-	$process_task_status = $response['wo_newparams']['status']['processTaskStatus'];
-	$process_task_count = count($process_task_status);
+  $wo_newparams = array();
+  $response = _orchestration_get_process_instance($process_id);
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+    $response = json_encode($response);
+    return $response;
+  }
+  $process_task_status = $response['wo_newparams']['status']['processTaskStatus'];
+  $process_task_count = count($process_task_status);
 
-	$service_id = $response['wo_newparams']['serviceId']['id'];
-	$service_name = $response['wo_newparams']['serviceId']['name'];
-	$process_id = $response['wo_newparams']['processId']['id'];
-	$process_name = $response['wo_newparams']['processId']['name'];
+  $service_id = $response['wo_newparams']['serviceId']['id'];
+  $service_name = $response['wo_newparams']['serviceId']['name'];
+  $process_id = $response['wo_newparams']['processId']['id'];
+  $process_name = $response['wo_newparams']['processId']['name'];
 
-	$update_async_task_details = "Checking Process $process_id Status (every $sleep_time seconds) :\n";
-	$update_async_task_details .= "Service Id : $service_id\nService Name : $service_name\n";
-	$update_async_task_details .= "Process Id : $process_id\nProcess Name : $process_name\n\n";
+  $update_async_task_details = array();
+  $update_async_task_details[0] = "Checking Process $process_id Status (every $sleep_time seconds) :\n";
+  $update_async_task_details[0] .= "Service Id : $service_id\nService Name : $service_name\n";
+  $update_async_task_details[0] .= "Process Id : $process_id\nProcess Name : $process_name\n\n";
 
-	$wo_comment = "";
-	$total_sleeptime = 0;
-	$process_task_running = 0;
-	while ($process_task_running < $process_task_count) {
+  $wo_comment = "";
+  $total_sleeptime = 0;
+  $tasks_already_displayed = array();
+  $process_status = $response['wo_newparams']['status']['status']; //get the status of the whole tasks
+  
+  //In processTaskStatus we don't see all available tasks before all tasks are finished, there are filled one after one when they are finished individually.
+  //We want write into logs the running task and each task already ended. 
+  
+  while ($process_status === RUNNING) { //status of the whole tasks, it will be ended when all tasks are ended.
+    $response = _orchestration_get_process_instance($process_id);
+    $response = json_decode($response, true);
+    if ($response['wo_status'] !== ENDED) {
+      $response = json_encode($response);
+      return $response;
+    }
 
-		$response = _orchestration_get_process_instance($process_id);
-		$response = json_decode($response, true);
-		if ($response['wo_status'] !== ENDED) {
-			$response = json_encode($response);
-			return $response;
-		}
+    $process_task_status = $response['wo_newparams']['status']['processTaskStatus'];
+    $process_status = $response['wo_newparams']['status']['status'];
+ 
 
-		$process_task_status = $response['wo_newparams']['status']['processTaskStatus'];
-
-		$order = $process_task_status[$process_task_running]['order'];
-		$script_name = $process_task_status[$process_task_running]['scriptName'];
-		$order_status = $process_task_status[$process_task_running]['status'];
-		$details = $process_task_status[$process_task_running]['details'];
-		logToFile("SCRIPT NAME : $script_name => STATUS : $order_status");
-
-		if ($order_status === ENDED || $order_status === WARNING) {
-
-			$update_async_task_details .= "$order] $script_name\n";
-			$update_async_task_details .= "Details : $details\n";
-			$update_async_task_details .= "Status : $order_status\n";
-			update_asynchronous_task_details($process_params, $update_async_task_details);
-			for ($index = $process_task_running + 1; $index < $process_task_count; $index++) {
-
-				$order = $process_task_status[$index]['order'];
-				$script_name = $process_task_status[$index]['scriptName'];
-				$order_status = $process_task_status[$index]['status'];
-				$details =  $process_task_status[$index]['details'];
-				logToFile("SCRIPT NAME : $script_name => STATUS : $order_status");
-
-				if ($order_status === RUNNING || $order_status === NONE) {
-					break;
-				}
-				else if ($order_status === FAILED) {
-					$response = prepare_json_response(FAILED, $details, $wo_newparams, true);
-					return $response;
-				}
-				$update_async_task_details .= "$order] $script_name\n";
-				$update_async_task_details .= "Details : $details\n";
-				$update_async_task_details .= "Status : $order_status\n";
-				update_asynchronous_task_details($process_params, $update_async_task_details);
-			}
-			$process_task_running = $index;
-			if ($process_task_running === $process_task_count && $order_status === ENDED) {
-				break;
-			}
-		}
-		else if ($order_status === FAILED) {
-			$response = prepare_json_response(FAILED, $details, $wo_newparams, true);
-			return $response;
-		}
-		sleep($sleep_time);
-	}
-	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $wo_newparams);
-	return $response;
+    if ($process_status === FAILED) {
+      $response = prepare_json_response(FAILED, $response['wo_newparams']['status']['details'], $wo_newparams, true);
+      return $response;
+    }
+  
+    //Log in 'live times' all tasks not already logged (we display each task only 1 time : status RUNNING (if the task is running) or  status ENDED when the task is ended)
+    foreach ($process_task_status as $process_1task_status) {
+      $order_status = $process_1task_status['status'];
+      $order        = $process_1task_status['order'];
+      if ($order_status === FAILED) {
+        $response = prepare_json_response(FAILED, $details, $wo_newparams, true);
+        return $response;
+      }elseif( ! isset($tasks_already_displayed[$order][$order_status])){
+        //to display        
+        $script_name = $process_1task_status['scriptName'];
+        $details     = $process_1task_status['details'];
+        logToFile("SCRIPT NAME : $script_name => STATUS : $order_status");
+        $update_async_task_details[$order] = "$order] $script_name\n";
+        $update_async_task_details[$order] .= "Details : $details\n";
+        $update_async_task_details[$order] .= "Status : $order_status\n";
+        $tasks_already_displayed[$order][$order_status]=1;
+      }  
+    } 
+    $update_async_task_details_string='';
+    foreach ($update_async_task_details as $detail){
+      $update_async_task_details_string .= $detail;
+    }       
+    update_asynchronous_task_details($process_params, $update_async_task_details_string);
+    
+    if ($process_status!== ENDED){
+      sleep($sleep_time);
+    }    
+  }
+    
+  //$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $wo_newparams);
+  $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']);
+  return $response;
 }
 
 /**
@@ -782,6 +793,126 @@ function add_service_variable_string_to_context ($name, $value) {
 		$pos = &$pos[$split];
 	}
 	$pos = $value;
+}
+
+function convert_to_msa_var () {
+
+	global $context;
+	global $workflow_internal_params;
+
+        $context_params = array();
+        foreach ($context as $key => $value) {
+		if (!in_array($key, $workflow_internal_params)) {
+	                build_msa_param($context_params, null, $key, $value);
+		}
+        }
+        return $context_params;
+}
+
+function build_msa_param (&$context_params, $current_key, $sub_key, $sub_value) {
+
+        $full_key = $current_key;
+        if (empty($full_key)) {
+                $full_key = $sub_key;
+        }
+        else {
+                $full_key .= ".{$sub_key}";
+        }
+        if (is_array($sub_value)) {
+                if (array_values($sub_value) === $sub_value) {
+                        for ($index = 0; $index < count($sub_value); $index++) {
+                                build_msa_param($context_params, $full_key, $index, $sub_value[$index]);
+                        }
+                }
+                else {
+                        foreach ($sub_value as $key => $value) {
+                                build_msa_param($context_params, $full_key, $key, $value);
+                        }
+                }
+        }
+        else {
+                $context_params[$full_key] = $sub_value;
+        }
+}
+
+/**
+ * Poll Device Update Config Status and wait for it's completion
+ *
+ * @param unknown $device_id
+ * @param unknown $process_params
+ * @return mixed|unknown
+ */
+function wait_for_update_config_completion ($device_id, $process_params, $timeout = UPDATE_CONFIG_TIMEOUT) {
+
+	$wo_newparams = array();
+	$status = '';
+	$wo_comment = "";
+	$total_sleeptime = 0;
+	$check_update_config_status_message = "Checking Device $device_id Update Config Status (every " . UPDATE_CONFIG_CHECK_SLEEP . " seconds";
+	$check_update_config_status_message .= ", timeout = $timeout seconds) :\n";
+	while ($status !== ENDED) {
+
+		$response = _device_get_update_config_status($device_id);
+		$response = json_decode($response, true);
+		if ($response['wo_status'] !== ENDED) {
+			$response = json_encode($response);
+			return $response;
+		}
+		$status = $response['wo_newparams']['status'];
+		$message = $response['wo_newparams']['message'];
+		logToFile("UPDATE CONFIG STATUS : $status");
+		logToFile("UPDATE CONFIG MESSAGE : $message");
+
+		$wo_comment = "Update Config Status : " . $status;
+		$wo_comment .= "\nUpdate Config Message : $message\n";
+		update_asynchronous_task_details($process_params, $check_update_config_status_message . $wo_comment);
+		if ($status === ENDED) {
+			break;
+		}
+		else if ($status === FAILED) {
+			$response = prepare_json_response(FAILED, $message, $wo_newparams, true);
+			return $response;
+		}
+		sleep(UPDATE_CONFIG_CHECK_SLEEP);
+		$total_sleeptime += UPDATE_CONFIG_CHECK_SLEEP;
+		if ($total_sleeptime > $timeout) {
+			$wo_comment .= "The Device $device_id Update Config could not be completed within $timeout seconds.\nHence, Ending the Process as Failure.";
+			$response = prepare_json_response(FAILED, $wo_comment, $wo_newparams, true);
+			return $response;
+		}
+	}
+	$response = prepare_json_response(ENDED, $wo_comment, $wo_newparams);
+	return $response;
+}
+
+function msa_execute_service_by_reference_and_wait_for_completion ($external_ref, $service_name, $process_name, $json_body = "{}", $store_service_vars_in_context = true, $service_reference = "") {
+
+        global $context;
+
+        $response = _orchestration_execute_service_by_reference($external_ref, $service_reference, $service_name, $process_name, $json_body);
+        $response = json_decode($response, true);
+        if ($response['wo_status'] !== ENDED) {
+		task_error($response['wo_comment']);
+        }
+
+        $process_id = $response['wo_newparams']['processId']['id'];
+        $service_id = $response['wo_newparams']['serviceId']['id'];
+	$response = wait_for_process_completion($process_id, $context);
+  	$response = json_decode($response, true);
+  	if ($response['wo_status'] !== ENDED) {
+		task_error($response['wo_comment']);
+  	}
+
+    	//Get the context from the WF
+	if ($store_service_vars_in_context) {
+	  	$response =  _orchestration_get_service_variables_by_service_id($service_id);
+	  	$response = json_decode($response, true);
+  		if ($response['wo_status'] !== ENDED) {
+			task_error($response['wo_comment']);
+  		}
+  		$context['executed_service_id'] = $service_id;
+  		$context[$service_name][$service_id]['context'] = $response['wo_newparams'];
+	}
 }
 
 ?>

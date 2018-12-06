@@ -136,7 +136,7 @@ function _orchestration_list_process_instance ($ubiqube_id, $service_name, $proc
  */
 function _orchestration_execute_service ($ubiqube_id, $service_name, $process_name, $json_body = "{}") {
 
-	$msa_rest_api = "orchestration/service/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}&serviceInstance=0";
+	$msa_rest_api = "orchestration/service/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}";
 	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
 	$response = perform_curl_operation($curl_cmd, "EXECUTE SERVICE");
 	$response = json_decode($response, true);

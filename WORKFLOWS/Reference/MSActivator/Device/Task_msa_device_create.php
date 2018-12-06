@@ -8,7 +8,7 @@ function list_args() {
 	create_var_def('device_external_reference', 'String');
 	create_var_def('manufacturer_id', 'Integer');
 	create_var_def('model_id', 'Integer');
-	create_var_def('device_ip_address', 'IP Address');
+	create_var_def('device_ip_address', 'IpAddress');
 	create_var_def('login', 'String');
 	create_var_def('password', 'Password');
 	create_var_def('password_admin', 'Password');

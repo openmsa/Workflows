@@ -140,4 +140,13 @@ function task_error($message) {
   exit;
 }
 
+function task_error_with_email ($from, $email_recipients, $email_subject, $email_content) {
+  global $context;
+  logTofile(debug_dump($email_content, "Error message :\n"));
+  _email_send($from, $email_recipients, $email_subject, $email_content);
+  $response = prepare_json_response(FAILED, $email_content, $context, true);
+  echo $response;
+  exit;
+}
+
 ?>
