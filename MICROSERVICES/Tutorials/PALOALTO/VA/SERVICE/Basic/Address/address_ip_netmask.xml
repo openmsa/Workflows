@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description>IP Netmask object</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Objects|Network|Addresses</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>IP Netmask</name>
+    <order>10</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="250" name="params.object_id" type="String"/>
+    <variable displayName="Address" displayOrder="1" groupDisplayName="Network" groupSeparator="/" isGrouped="true" isMandatory="true" maxLength="250" name="params.address" type="String"/>
+    <variable displayName="Mask length" displayOrder="2" groupDisplayName="Network" groupSeparator="/" isGrouped="true" isMandatory="true" maxLength="250" name="params.masklen" type="String"/>
+  </variables>  <example>
+    <content>&lt;result&gt;
+  &lt;address&gt;
+  &lt;entry name="Address_VLAN-20-IP"&gt;
+    &lt;ip-netmask&gt;10.101.101.254/24&lt;/ip-netmask&gt;
+  &lt;/entry&gt;
+  &lt;entry name="EES7"&gt;
+    &lt;ip-netmask&gt;7.7.70.7/16&lt;/ip-netmask&gt;
+  &lt;/entry&gt;
+  &lt;/address&gt;
+&lt;/result&gt;
+</content>
+  </example>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;ip-netmask&gt;{$params.address}/{$params.masklen}&lt;/ip-netmask&gt;
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address/entry[@name='{$params.object_id}']/ip-netmask
+</xpath>
+    <operation>&lt;ip-netmask&gt;{$params.address}/{$params.masklen}&lt;/ip-netmask&gt;
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address</xpath>
+    <parser>
+      <section>
+        <xpath>//address/entry</xpath>
+      </section>
+      <lines>
+        <line>
+            <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+            <xpath>//entry/@name</xpath>
+        </line>
+        <line>
+          <regexp>@&lt;ip-netmask&gt;(?&lt;address&gt;[^/]+)/(?&lt;masklen&gt;[^&lt;]+)&lt;/ip-netmask&gt;@</regexp>
+          <xpath>//entry/ip-netmask</xpath>
+        </line>
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+</ObjectDefinition>
