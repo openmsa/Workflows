@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>device_groups</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="object_id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="description" displayOrder="1" maxLength="100" name="params.description" startIncrement="0" type="String"/>
+    <variable displayName="scenario_type" displayOrder="2" editable="false" maxLength="100" name="params.scenario_type" startIncrement="0" type="String">
+      <values>
+        <value displayValue="pbr">pbr</value>
+        <value displayValue="filter">filter</value>
+        <value displayValue="qos_policymap">qos_policymap</value>
+        <value displayValue="qos_interface">qos_interface</value>
+        <value displayValue="qos_class">qos_class</value>
+        <value displayValue="vlan_ip">vlan_ip</value>
+      </values>
+    </variable>
+    <variable displayName="position" displayOrder="3" maxLength="100" name="params.position" selector="params.scenario_type" startIncrement="0" type="Composite">
+      <behaviors>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="filter" startIncrement="0" type="String">
+          <values>
+            <value displayValue="0">0</value>
+          </values>
+        </behavior>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="pbr" startIncrement="0" type="Integer">
+          <values>
+            <value displayValue="0">0</value>
+            <value displayValue="1">1</value>
+          </values>
+        </behavior>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="qos_class" startIncrement="0" type="String">
+          <values>
+            <value displayValue="0">0</value>
+          </values>
+        </behavior>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="qos_interface" startIncrement="0" type="String">
+          <values>
+            <value displayValue="0">0</value>
+          </values>
+        </behavior>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="qos_policymap" startIncrement="0" type="String">
+          <values>
+            <value displayValue="0">0</value>
+          </values>
+        </behavior>
+        <behavior default="0" displayName="position" displayOrder="0" editable="false" maxLength="100" name="params.position" selectorValue="vlan_ip" startIncrement="0" type="String">
+          <values>
+            <value displayValue="0">0</value>
+          </values>
+        </behavior>
+      </behaviors>
+    </variable>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>GET</operation>
+    <xpath>/sc/devicegroups</xpath>
+    <parser>
+      <section>
+        <xpath>/api/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//devicegroup_name</xpath>
+          <regexp>@&lt;devicegroup_name&gt;(?&lt;object_id&gt;.*)&lt;/devicegroup_name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//description</xpath>
+          <regexp>@&lt;description&gt;(?&lt;description&gt;.*)&lt;/description&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//scenario_type</xpath>
+          <regexp>@&lt;scenario_type&gt;(?&lt;scenario_type&gt;.*)&lt;/scenario_type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//position</xpath>
+          <regexp>@&lt;position&gt;(?&lt;position&gt;.*)&lt;/position&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST
+</rest>
+    <xpath>/sc/devicegroups
+</xpath>
+    <operation>{literal}{{/literal}
+    "devicegroup_name": "{$params.object_id}",
+    "description": "{$params.description}",
+    "scenario_type": "{$params.scenario_type}",
+    "position": {$params.position}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>DELETE
+</rest>
+    <xpath>/sc/devicegroups/{$device_groups.$object_id.object_id}?scenario_type={$device_groups.$object_id.scenario_type}&amp;position={$device_groups.$object_id.position}
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

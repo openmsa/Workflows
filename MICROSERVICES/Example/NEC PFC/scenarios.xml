@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>scenarios_pbr</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Entry ID" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Scenario Type" displayOrder="1" editable="false" isUserLocked="true" maxLength="100" name="params.scenario_type" startIncrement="0" type="String">
+      <values>
+        <value displayValue="pbr">pbr</value>
+        <value displayValue="filter">filter</value>
+        <value displayValue="qos_policymap">qos_policymap</value>
+        <value displayValue="qos_interface">qos_interface</value>
+        <value displayValue="qos_class">qos_class</value>
+        <value displayValue="vlan_ip">vlan_ip</value>
+      </values>
+    </variable>
+    <variable displayName="Enable" displayOrder="2" maxLength="100" name="params.enable" startIncrement="0" type="String">
+      <values>
+        <value>false</value>
+        <value>true</value>
+      </values>
+    </variable>
+    <variable displayName="position" displayOrder="3" isUserLocked="true" maxLength="100" name="params.position" startIncrement="0" type="String"/>
+    <variable displayName="description" displayOrder="4" isUserLocked="true" maxLength="100" name="params.description" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="5" isUserLocked="true" maxLength="100" name="params.devicegroups.0.devicegroup_name" startIncrement="0" type="String">
+      <sections>
+        <section>Device Group</section>
+      </sections>
+    </variable>
+    <variable displayName="Position" displayOrder="6" isUserLocked="true" maxLength="100" name="params.devicegroups.0.position" startIncrement="0" type="String">
+      <sections>
+        <section>Device Group</section>
+      </sections>
+    </variable>
+    <variable displayName="Name" displayOrder="7" isUserLocked="true" maxLength="100" name="params.parametergroups.0.parametergroup_name" startIncrement="0" type="String">
+      <sections>
+        <section>Parameter Group</section>
+      </sections>
+    </variable>
+    <variable displayName="Type" displayOrder="8" isUserLocked="true" maxLength="100" name="params.parametergroups.0.parametergroup_type" startIncrement="0" type="String">
+      <sections>
+        <section>Parameter Group</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>GET</operation>
+    <xpath>/sc/scenarios?scenario_type=pbr</xpath>
+    <parser>
+      <section>
+        <xpath>/api/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry_id</xpath>
+          <regexp>@&lt;entry_id&gt;(?&lt;object_id&gt;.*)&lt;/entry_id&gt;@</regexp>
+        </line>
+        
+        <line>
+          <xpath>//scenario_type</xpath>
+          <regexp>@&lt;scenario_type&gt;(?&lt;scenario_type&gt;.*)&lt;/scenario_type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//enable</xpath>
+          <regexp>@&lt;enable&gt;(?&lt;enable&gt;.*)&lt;/enable&gt;@</regexp>
+        </line>
+        <line>
+          <array name="parametergroups">
+            <xpath>//parametergroups/row</xpath>
+            <lines>
+              <line>
+                <xpath>//parametergroup_type</xpath>
+                <regexp>@&lt;parametergroup_type&gt;(?&lt;parametergroup_type&gt;.*)&lt;/parametergroup_type&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>//parametergroup_name</xpath>
+                <regexp>@&lt;parametergroup_name&gt;(?&lt;parametergroup_name&gt;.*)&lt;/parametergroup_name&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="devicegroups">
+            <xpath>//devicegroups/row</xpath>
+            <lines>
+              <line>
+                <xpath>//devicegroup_name</xpath>
+                <regexp>@&lt;devicegroup_name&gt;(?&lt;devicegroup_name&gt;.*)&lt;/devicegroup_name&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>//position</xpath>
+                <regexp>@&lt;position&gt;(?&lt;position&gt;.*)&lt;/position&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+
+
+<command name="UPDATE">
+    <rest>PUT
+</rest>
+    <xpath>/sc/scenarios/{$object_id}
+</xpath>
+    <operation>{literal}{{/literal}
+"enable":{$params.enable},
+"write_memory":true
+{literal}}{/literal}
+</operation>
+  </command>
+
+</ObjectDefinition>

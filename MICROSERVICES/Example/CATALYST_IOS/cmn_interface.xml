@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>cmn_interface</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Interface" displayOrder="0" maxLength="150" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Description" displayOrder="1" maxLength="100" name="params.cmn_int_description" startIncrement="0" type="String"/>
+    <variable displayName="Mode" displayOrder="2" editable="false" maxLength="50" name="params.cmn_int_mode" startIncrement="0" type="String">
+      <values>
+        <value displayValue="access">access</value>
+        <value displayValue="trunk">trunk</value>
+      </values>
+    </variable>
+    <variable displayName="Trunk vlan" displayOrder="3" maxLength="100" name="params.cmn_int_trunk_vlan" selector="params.cmn_int_mode" startIncrement="0" type="Composite">
+      <behaviors>
+        <behavior displayName="cmn_int_trunk_vlan" displayOrder="0" maxLength="100" name="params.cmn_int_trunk_vlan" selectorValue="" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="cmn_int_trunk_vlan" displayOrder="0" maxLength="100" name="params.cmn_int_trunk_vlan" selectorValue="access" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Trunk vlan" displayOrder="0" maxLength="100" name="params.cmn_int_trunk_vlan" selectorValue="trunk" startIncrement="0" type="String"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Trunk_vlan_add" displayOrder="4" maxLength="100" name="params.trunk_vlan_add.0.cmn_int_trunk_vlan_add" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Access vlan" displayOrder="5" isUserLocked="true" maxLength="80" name="params.cmn_int_access_vlan" selector="params.cmn_int_mode" startIncrement="0" type="Composite">
+      <behaviors>
+        <behavior displayName="cmn_int_access_vlan" displayOrder="0" maxLength="100" name="params.cmn_int_access_vlan" selectorValue="" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Access vlan" displayOrder="0" maxLength="100" name="params.cmn_int_access_vlan" selectorValue="access" startIncrement="0" type="String"/>
+        <behavior displayName="cmn_int_access_vlan" displayOrder="0" maxLength="100" name="params.cmn_int_access_vlan" selectorValue="trunk" startIncrement="0" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="IP" displayOrder="6" isUserLocked="true" maxLength="100" name="params.cmn_int_ip" startIncrement="0" type="String"/>
+    <variable displayName="Mask" displayOrder="7" isUserLocked="true" maxLength="100" name="params.cmn_int_mask" startIncrement="0" type="String"/>
+    <variable default="auto" displayName="Speed" displayOrder="8" editable="false" isMandatory="true" maxLength="100" name="params.cmn_int_speed" startIncrement="0" type="String">
+      <values>
+        <value displayValue="10">10</value>
+        <value displayValue="100">100</value>
+        <value displayValue="1000">1000</value>
+        <value displayValue="auto">auto</value>
+      </values>
+    </variable>
+    <variable default="auto" displayName="Duplex" displayOrder="9" editable="false" isMandatory="true" maxLength="100" name="params.cmn_int_duplex" startIncrement="0" type="String">
+      <values>
+        <value displayValue="half">half</value>
+        <value displayValue="full">full</value>
+        <value displayValue="auto">auto</value>
+      </values>
+    </variable>
+    <variable displayName="State" displayOrder="10" editable="false" maxLength="70" name="params.cmn_int_shut" startIncrement="0" type="String">
+      <values>
+        <value displayValue="no shutdown">no shutdown</value>
+        <value displayValue="shutdown">shutdown</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>show run</operation>
+    <parser>
+      <section>
+        
+        
+        <regexp>@^interface (?&lt;object_id&gt;\S+)$@</regexp>
+        
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@no ip address@
+</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@^\s@</regexp>
+        </ignore>
+        <line>
+          <regexp>@^\sswitchport trunk allowed vlan (?&lt;cmn_int_trunk_vlan&gt;\S+)$@</regexp>
+        </line>
+        <line>
+          <array name="trunk_vlan_add">
+            <regexp>@^\sswitchport trunk allowed vlan add (?&lt;cmn_int_trunk_vlan_add&gt;\S+)$@</regexp>
+          </array>
+        </line>
+        
+        <line>
+          <regexp>@^\sswitchport access vlan (?&lt;cmn_int_access_vlan&gt;\S+)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\sswitchport mode (?&lt;cmn_int_mode&gt;\S+)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\s(?&lt;cmn_int_shut&gt;no shutdown)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\s(?&lt;cmn_int_shut&gt;shutdown)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\sspeed (?&lt;cmn_int_speed&gt;\S+)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\sduplex (?&lt;cmn_int_duplex&gt;\S+)$@
+</regexp>
+        </line>
+        <line>
+          <regexp>@^\sdescription (?&lt;cmn_int_description&gt;[^$]+)$@</regexp>
+        </line>
+        <line>
+          <regexp>@^\sip address (?&lt;cmn_int_ip&gt;\S+) (?&lt;cmn_int_mask&gt;\S+)$@
+</regexp>
+        </line>
+        
+      </lines>
+    </parser>
+    <post_template>{if $params.cmn_int_shut == ""}
+  {assign_object_variable var="cmn_int_shut" value="no shutdown"}
+{/if}
+
+{assign var="trunk_list" value=$params.cmn_int_trunk_vlan}
+{foreach $params.trunk_vlan_add as $item}
+  {assign var="trunk_list" value=$trunk_list|cat:','|cat:$item.cmn_int_trunk_vlan_add}
+{/foreach}
+
+{assign_object_variable var="cmn_int_trunk_vlan" value=$trunk_list}
+
+{if $params.cmn_int_duplex == ""}
+   {assign_object_variable var="cmn_int_duplex" value="auto"}
+{/if}
+
+{if $params.cmn_int_speed == ""}
+   {assign_object_variable var="cmn_int_speed" value="auto"}
+{/if}</post_template>
+  </command>
+<command name="UPDATE">
+    <operation>interface {$params.object_id}
+	{if $params.cmn_int_description != ""}
+		description {$params.cmn_int_description}
+	{else}
+		no description
+	{/if}
+	{if $params.cmn_int_mode == "trunk"}
+		no switchport access vlan
+		switchport mode {$params.cmn_int_mode}
+		{if $params.cmn_int_trunk_vlan != ""}
+			{assign var="trunk_vlan_split" value=','|explode:$params.cmn_int_trunk_vlan}
+			{* prepare flag/counter and buffers *}
+			{assign var="buffer" value=''} {* vlan ids *}
+			{assign var="first" value="TRUE"} {* if TRUE, this is the first trunk vlan command, so exclude "add" *}
+			{assign var="count" value="0"} {* loop counter *}
+
+			{foreach $trunk_vlan_split as $vlan_id}
+			  {if $buffer == ""} {* 1st vlan id *}
+				{assign var="buffer" value="$vlan_id"}
+			  {else}  {* 2nd,... 10th with comma *}
+				{assign var="buffer" value=$buffer|cat:','|cat:$vlan_id}
+			  {/if}
+			  {assign var="count" value=$count+1}
+			  {if $count &gt;= 10} {* every 10 times *}
+				{if $first == "TRUE"}
+				  switchport trunk allowed vlan {$buffer}
+				  {assign var="first" value="FALSE"}
+				{else}
+				  switchport trunk allowed vlan add {$buffer}
+				{/if}
+				{assign var="count" value="0"}
+				{assign var="buffer" value=''}
+			  {/if}
+			{/foreach}
+			{if $buffer != ""} {* vlan items left in buffer, finally add *}
+			  {if $first == "TRUE"} {* if a few vlan input *}
+				switchport trunk allowed vlan {$buffer}
+			  {else}  {* otherwise *}
+				switchport trunk allowed vlan add {$buffer}
+			  {/if}
+			{/if}			
+		{else}
+			no switchport trunk allowed vlan
+		{/if}
+	{elseif $params.cmn_int_mode == "access"}
+		no switchport trunk allowed vlan
+		switchport mode {$params.cmn_int_mode}
+		{if $params.cmn_int_access_vlan != ""}
+			switchport access vlan {$params.cmn_int_access_vlan}
+		{else}
+			no switchport access vlan
+		{/if}
+	{else}
+		no switchport trunk allowed vlan
+		no switchport access vlan
+		no switchport mode
+	{/if}
+	{if $params.cmn_int_speed != ""}
+		speed {$params.cmn_int_speed}
+	{/if}
+	{if $params.cmn_int_duplex != ""}
+		duplex {$params.cmn_int_duplex}
+	{/if}
+	{$params.cmn_int_shut}
+</operation>
+  </command>
+<command name="READ">
+    <output>{literal}{"cmn_interface":{/literal}[
+    {$cmn_interface.$object_id|@json_encode}
+]{literal}}{/literal}
+</output>
+  </command>
+</ObjectDefinition>
