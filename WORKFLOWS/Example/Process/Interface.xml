@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Interface</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="device Id" displayOrder="0" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+    <variable displayCols="3" displayName="Interface" displayOrder="1" displayType="alt" maxLength="100" name="params.list.0.object_id" refDeviceIdVar="params.device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Interface</section>
+      </sections>
+      <classes>
+        <class>cmn_interface</class>
+      </classes>
+    </variable>
+    <variable default="hoge" displayName="Description" displayOrder="2" maxLength="100" name="params.list.0.description" startIncrement="0" type="String">
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+    <variable default="access" displayName="Mode" displayOrder="3" editable="false" maxLength="100" name="params.list.0.mode" startIncrement="0" type="String">
+      <values>
+        <value displayValue="access">access</value>
+        <value displayValue="trunk">trunk</value>
+      </values>
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+    <variable displayName="Trunk Vlan" displayOrder="4" maxLength="100" name="params.list.0.trunk_vlan" selector="params.list.0.mode" startIncrement="0" type="Composite">
+      <sections>
+        <section>Interface</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Trunk Vlan" displayOrder="0" maxLength="100" name="params.list.0.trunk_vlan" selectorValue="access" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>Interface</section>
+          </sections>
+        </behavior>
+        <behavior displayName="Trunk Vlan" displayOrder="0" maxLength="100" name="params.list.0.trunk_vlan" selectorValue="trunk" startIncrement="0" type="String">
+          <sections>
+            <section>Interface</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable default="2120" displayName="Access Vlan" displayOrder="5" maxLength="100" name="params.list.0.access_vlan" selector="params.list.0.mode" startIncrement="0" type="Composite">
+      <sections>
+        <section>Interface</section>
+      </sections>
+      <behaviors>
+        <behavior default="2120" displayName="Access Vlan" displayOrder="0" maxLength="100" name="params.list.0.access_vlan" selectorValue="access" startIncrement="0" type="String">
+          <sections>
+            <section>Interface</section>
+          </sections>
+        </behavior>
+        <behavior displayName="Access Vlan" displayOrder="0" maxLength="100" name="params.list.0.access_vlan" selectorValue="trunk" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>Interface</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable default="auto" displayName="Speed" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.list.0.speed" startIncrement="0" type="String">
+      <values>
+        <value displayValue="100">100</value>
+        <value displayValue="auto">auto</value>
+        <value displayValue="1000">1000</value>
+        <value displayValue="10">10</value>
+      </values>
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+    <variable default="auto" displayName="Duplex" displayOrder="7" editable="false" isMandatory="true" maxLength="100" name="params.list.0.duplex" startIncrement="0" type="String">
+      <values>
+        <value displayValue="half">half</value>
+        <value displayValue="auto">auto</value>
+        <value displayValue="full">full</value>
+      </values>
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+    <variable displayName="State" displayOrder="8" editable="false" isMandatory="true" maxLength="100" name="params.list.0.shut" startIncrement="0" type="String">
+      <values>
+        <value>shutdown</value>
+        <value>no shutdown</value>
+      </values>
+      <sections>
+        <section>Interface</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+
+
+<process name="Process/Process_Interface">
+    <visibility>5</visibility>
+    <displayName>Interface</displayName>
+    <icon/>
+    <allowSchedule>true</allowSchedule>
+    <type>SET</type>
+    <task name="Task_Interface.php">
+      <processPath>/opt/fmc_repository/Process/Process_Interface/Tasks/</processPath>
+      <displayName>Interface</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
