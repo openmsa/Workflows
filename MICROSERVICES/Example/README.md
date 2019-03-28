@@ -34,7 +34,7 @@
 ### Mircoservice : scenarios
 
 #### Summary
-* A Microservice for the PFC , Is is used to change scenarios saved in the PFC. 
+* A Microservice for the PFC , It is used to change scenarios saved in the PFC. 
 
 #### Microservice Details
 |Item | Description|
@@ -64,7 +64,7 @@
 ### Mircoservice : device_groups
 
 #### Summary
-*  A Microservice for the PFC, Is is used to change device_groups saved in the PFC. 
+*  A Microservice for the PFC, It is used to change device_groups saved in the PFC. 
 
 #### Microservice Details
 |Item | Description|
@@ -85,3 +85,4 @@
 |position||
 
 ---
+
