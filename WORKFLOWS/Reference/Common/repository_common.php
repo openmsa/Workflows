@@ -237,9 +237,9 @@ function convert_variables_array_to_xml_definition (&$object_definition, $variab
 		if (isset($variable_details[$index]['section'])) {
 			$section = $variable_details[$index]['section'];
 		}
-		$desctiption = "";
+		$description = "";
 		if (isset($variable_details[$index]['description'])) {
-			$desctiption = $variable_details[$index]['description'];
+			$description = $variable_details[$index]['description'];
 		}
 		$is_mandatory = "true";
 		if (isset($variable_details[$index]['isMandatory'])) {
