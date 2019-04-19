@@ -28,6 +28,8 @@
   </variables>  <example>
     <content>sho run |  inc clock timezone
 clock timezone MSA 4 0
+
+# NOTE: this micro-service MUST be named "system" for it to work.
 </content>
   </example>
   
@@ -35,5 +37,4 @@ clock timezone MSA 4 0
     <operation>!{$params.timezone}
 </operation>
   </command>
-<command name="DELETE"/>
 </ObjectDefinition>
