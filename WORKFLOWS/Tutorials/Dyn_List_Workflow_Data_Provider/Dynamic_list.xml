@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Tutorials</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Dynamic list</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>true</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="data providers instances" displayOrder="1" isMandatory="true" maxLength="100" name="params.list" numberOfRowMax="0" refServiceURI="Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Data_provider.xml" startIncrement="0" tableSizeFix="false" type="ServiceRef"/>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_create">
+    <visibility>5</visibility>
+    <displayName>create</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_create/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+  <process name="Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_update">
+    <visibility>5</visibility>
+    <displayName>update</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_update/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
