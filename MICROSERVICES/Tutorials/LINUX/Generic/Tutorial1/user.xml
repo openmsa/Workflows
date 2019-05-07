@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,14 +23,14 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="comment" displayOrder="0" maxLength="100" name="params.comment" startIncrement="0" type="String"/>
-    <variable displayName="group_id" displayOrder="1" maxLength="100" name="params.group_id" startIncrement="0" type="String"/>
-    <variable displayName="login" displayOrder="1" maxLength="100" name="params.login" startIncrement="0" type="String"/>
-    <variable displayName="home_dir" displayOrder="2" maxLength="100" name="params.home_dir" startIncrement="0" type="String"/>
-    <variable displayName="object_id" displayOrder="3" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="password" displayOrder="4" maxLength="100" name="params.password" startIncrement="0" type="String"/>
-    <variable displayName="shell" displayOrder="5" maxLength="100" name="params.shell" startIncrement="0" type="String"/>
-    <variable displayName="user_id" displayOrder="6" maxLength="100" name="params.user_id" startIncrement="0" type="String"/>
+    <variable displayName="object_id" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="user_id" displayOrder="1" maxLength="100" name="params.user_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="group_id" displayOrder="2" maxLength="100" name="params.group_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="login" displayOrder="3" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="home_dir" displayOrder="4" maxLength="100" name="params.home_dir" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="password" displayOrder="5" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="shell" displayOrder="6" maxLength="100" name="params.shell" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="comment" displayOrder="7" maxLength="100" name="params.comment" numberOfRowMax="0" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>[root@managed-linux ~]# cat /etc/passwd 
 root:x:0:0:root:/root:/bin/bash
