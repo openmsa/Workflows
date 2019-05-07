@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description>Illustrate the use for variable type Microservice reference</description>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Tutorials</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Microservice reference</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="user" displayOrder="0" editable="false" maxLength="100" name="params.user" numberOfRowMax="0" refDeviceIdVar="params.device" startIncrement="0" tableSizeFix="false" type="OBMFRef">
+      <classes>
+        <class>user</class>
+      </classes>
+    </variable>
+    <variable displayName="device" displayOrder="1" keepOnImport="true" maxLength="165" name="params.device" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device"/>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/Tutorials/Microservice_reference/Process_create">
+    <visibility>5</visibility>
+    <displayName>create</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Microservice_reference/Process_create/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Microservice_reference/Process_select_user">
+    <visibility>5</visibility>
+    <displayName>select user</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Microservice_reference/Process_select_user/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Microservice_reference/Process_delete">
+    <visibility>5</visibility>
+    <displayName>delete</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+<process name="Process/Tutorials/Microservice_reference/Process_refresh_user">
+    <visibility>5</visibility>
+    <displayName>refresh user</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Microservice_reference/Process_refresh_user/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
