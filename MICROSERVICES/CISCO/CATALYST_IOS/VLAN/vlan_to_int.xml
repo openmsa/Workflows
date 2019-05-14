@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+<information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>100</order>
+    <displayField>object_id</displayField>
+    <description>Interfaces</description>
+    <name>Interfaces</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VLAN</group>
+    <importrank>1</importrank>
+  </information>
+<example>
+    <content>interface FastEthernet0/24
+ switchport
+ switchport access vlan 1
+ switchport private-vlan trunk encapsulation dot1q
+ switchport private-vlan trunk native vlan tag
+ no switchport nonegotiate
+ no switchport protected
+ no switchport block multicast
+ no switchport block unicast
+ switchport port-security maximum 1
+ no switchport port-security
+ switchport port-security aging time 0
+ switchport port-security violation shutdown
+ switchport port-security aging type absolute
+ switchport port-security limit rate invalid-source-mac 10
+ no switchport port-security mac-address sticky
+ no switchport port-security aging static
+ load-interval 300
+ mls qos cos 0
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ snmp trap link-status
+ cdp tlv location
+ cdp tlv server-location 
+ cdp tlv app
+ arp arpa
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show running-config all</operation>
+    <parser>
+      <section name="vlan_to_int">
+        <regexp>@^interface\s+(?&lt;object_id&gt;\S+Ethernet0/[0-9]+)\s*$@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^\sswitchport\s+access\s+vlan\s+(?&lt;vlan&gt;[0-9]+)\s*$@</regexp>
+        </line>
+        <ignore>
+          <regexp>@^\s+\S+.*$@</regexp>
+          <regexp>@^\s*$@</regexp>
+          <regexp>@^!.*$@</regexp>
+        </ignore>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+  
+  
+  <command name="UPDATE">
+    <operation>int {$params.object_id}
+switchport mode access
+switchport access vlan {$params.vlan}
+</operation>
+  </command>
+  
+<variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Interface" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="VLAN ID" displayOrder="1" maxLength="200" name="params.vlan" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vlan</class>
+      </classes>
+    </variable>
+  </variables>
+</ObjectDefinition>
