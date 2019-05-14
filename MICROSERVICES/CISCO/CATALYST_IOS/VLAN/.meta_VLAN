@@ -6,16 +6,12 @@
             <value>CATALYST_IOS</value>
         </entry>
         <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
-        </entry>
-        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1557836993982</value>
+            <value>1430141749708</value>
         </entry>
         <entry>
             <key>COMMENT</key>
-            <value>Manage VLAN</value>
+            <value>VLAN</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -23,7 +19,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1429792307593</value>
+            <value>1430141749667</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
@@ -34,11 +30,11 @@
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>DIRECTORY</value>
         </entry>
         <entry>
             <key>TAG</key>
-            <value>vlan.xml</value>
+            <value></value>
         </entry>
     </map>
 </metadata>
