@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <map>
+        <entry>
+            <key>MODEL</key>
+            <value>CATALYST_IOS</value>
+        </entry>
+        <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1430141447337</value>
+        </entry>
+        <entry>
+            <key>COMMENT</key>
+            <value>Manage VLAN on interface</value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>CommandDefinition</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1429792311123</value>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
+        </entry>
+        <entry>
+            <key>CONFIGURATION_FILTER</key>
+            <value></value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>PRE_CONFIG</value>
+        </entry>
+        <entry>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
+        </entry>
+    </map>
+</metadata>

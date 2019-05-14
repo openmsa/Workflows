@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>
+<information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>VLAN</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VLAN</group>
+    <icon>/images/repository/CommandDefinition/icons/vault.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VLAN</name>
+    <order>100</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>
+<example>
+    <content>VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/1, Fa0/2, Fa0/3, Fa0/4, Fa0/5, Fa0/7, Fa0/8, Fa0/9, Fa0/10, Fa0/11, Fa0/12, Fa0/13, Fa0/14, Fa0/15, Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23, Fa0/24, Gi0/1, Gi0/2
+130  VLAN0130                         active    Fa0/6
+1002 fddi-default                     act/unsup 
+1003 token-ring-default               act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trnet-default                    act/unsup
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>terminal width 0 ##show vlan brief</operation>
+    <parser>
+      <section name="vlan">
+        <regexp>@^(?&lt;object_id&gt;[0-9]+)\s+(?&lt;name&gt;\S+)\s+(?&lt;status&gt;\S+)\s+(?&lt;ports&gt;.*)@</regexp>
+      </section>
+      <lines>
+
+
+
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+  <command name="CREATE">
+    <operation>vlan {$params.object_id}
+name {$params.name}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no vlan {$params.object_id}
+</operation>
+  </command>
+  
+  <command name="UPDATE">
+    <operation>vlan {$params.object_id}
+name {$params.name}
+</operation>
+  </command>
+<variables frozen="0">
+    <variable displayName="VLAN ID" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="3000" startIncrement="0" type="AutoIncrement"/>
+    <variable displayName="VLAN Name" displayOrder="1" maxLength="200" name="params.name" numberOfRowMax="3000" startIncrement="0" type="String"/>
+    <variable default="active" displayName="Status" displayOrder="2" editable="false" maxLength="100" name="params.status" numberOfRowMax="3000" startIncrement="0" type="String"/>
+    <variable displayName="Associated ports" displayOrder="3" maxLength="100" name="params.ports" numberOfRowMax="3000" startIncrement="0" type="String"/>
+  </variables>
+</ObjectDefinition>
