@@ -1,29 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
     <displayField>service_id</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
     <group/>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <name>TFTP</name>
     <order>10000</order>
+    <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
     <showDetailedServiceInstances>false</showDetailedServiceInstances>
     <showProcessExecConsole>false</showProcessExecConsole>
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Customer Id" displayOrder="0" maxLength="100" name="params.customer_id" startIncrement="0" type="Customer">
+    <variable displayName="Customer Id" displayOrder="0" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="Customer">
       <sections>
         <section>TFTP</section>
       </sections>
     </variable>
-    <variable displayName="Device Id" displayOrder="1" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+    <variable displayName="Device Id" displayOrder="1" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device">
       <sections>
         <section>TFTP</section>
       </sections>
     </variable>
-    <variable displayName="Date" displayOrder="2" maxLength="100" name="params.date" startIncrement="0" type="String">
+    <variable displayName="Date" displayOrder="2" maxLength="100" name="params.date" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>TFTP</section>
       </sections>
@@ -42,5 +45,6 @@
       <processPath>/opt/fmc_repository/Process/Process_TFTP/Tasks/</processPath>
       <displayName>TFTP</displayName>
     </task>
+  <compensation/>
   </process>
 </ObjectDefinition>

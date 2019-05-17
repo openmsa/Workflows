@@ -1,19 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
     <displayField>service_id</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
     <group/>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <name>PBR</name>
     <order>10000</order>
+    <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
     <showDetailedServiceInstances>false</showDetailedServiceInstances>
     <showProcessExecConsole>false</showProcessExecConsole>
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Event Source" displayOrder="0" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+    <variable displayName="Event Source" displayOrder="0" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device">
       <sections>
         <section>NFA_PBR</section>
       </sections>
@@ -21,32 +24,32 @@
         <sdType manId="70000" modId="17111602"/>
       </sdTypes>
     </variable>
-    <variable displayName="Target Device" displayOrder="1" keepOnImport="true" maxLength="165" name="params.target_device" startIncrement="0" type="Device">
+    <variable displayName="Target Device" displayOrder="1" keepOnImport="true" maxLength="165" name="params.target_device" numberOfRowMax="0" startIncrement="0" type="Device">
       <sections>
         <section>NFA_PBR</section>
       </sections>
     </variable>
-    <variable displayName="Event Occured Time" displayOrder="2" maxLength="100" name="params.date" startIncrement="0" type="String">
+    <variable displayName="Event Occured Time" displayOrder="2" maxLength="100" name="params.date" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>NFA_PBR</section>
       </sections>
     </variable>
-    <variable displayName="Rule" displayOrder="3" maxLength="100" name="params.rule" startIncrement="0" type="String">
+    <variable displayName="Rule" displayOrder="3" maxLength="100" name="params.rule" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>NFA_PBR</section>
       </sections>
     </variable>
-    <variable displayName="Event Name" displayOrder="4" maxLength="100" name="params.policy" startIncrement="0" type="String">
+    <variable displayName="Event Name" displayOrder="4" maxLength="100" name="params.policy" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>NFA_PBR</section>
       </sections>
     </variable>
-    <variable displayName="entry_id" displayOrder="7" maxLength="100" name="params.list.0.object_id" startIncrement="0" type="String">
+    <variable displayName="entry_id" displayOrder="7" maxLength="100" name="params.list.0.object_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>PBR</section>
       </sections>
     </variable>
-    <variable displayName="parameter enable" displayOrder="8" maxLength="100" name="params.list.0.enable" startIncrement="0" type="String">
+    <variable displayName="parameter enable" displayOrder="8" maxLength="100" name="params.list.0.enable" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>PBR</section>
       </sections>
@@ -66,5 +69,6 @@
       <processPath>/opt/fmc_repository/Process/Process_PBR/Tasks/</processPath>
       <displayName>PBR</displayName>
     </task>
+  <compensation/>
   </process>
 </ObjectDefinition>

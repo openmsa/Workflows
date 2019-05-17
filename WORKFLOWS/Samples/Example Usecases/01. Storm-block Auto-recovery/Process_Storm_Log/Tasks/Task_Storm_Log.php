@@ -5,7 +5,7 @@ require_once '/opt/fmc_repository/Process/function/same_port_lock.php';
 require_once '/opt/fmc_repository/Process/function/device_release.php';
 require_once '/opt/fmc_repository/Process/function/port_replace.php';
 require '/opt/fmc_repository/Process/function/config.php';
-
+ 
 function list_args()
 {
   create_var_def('device_id', 'Device');

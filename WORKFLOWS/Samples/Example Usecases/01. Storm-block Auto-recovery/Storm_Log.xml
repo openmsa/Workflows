@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
   <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
     <displayField>service_id</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
     <group/>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <name>Storm_Log</name>
     <order>10000</order>
+    <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
     <showDetailedServiceInstances>false</showDetailedServiceInstances>
     <showProcessExecConsole>false</showProcessExecConsole>
@@ -15,7 +18,7 @@
     <visibility>5</visibility>
   </information>
   <variables frozen="0">
-    <variable displayName="Device Id" displayOrder="0" isMandatory="true" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+    <variable displayName="Device Id" displayOrder="0" isMandatory="true" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device">
       <sections>
         <section>Read</section>
       </sections>
@@ -23,37 +26,37 @@
         <sdType manId="1" modId="104"/>
       </sdTypes>
     </variable>
-    <variable displayName="Date" displayOrder="1" maxLength="100" name="params.date" startIncrement="0" type="String">
+    <variable displayName="Date" displayOrder="1" maxLength="100" name="params.date" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Read</section>
       </sections>
     </variable>
-    <variable displayName="Interface" displayOrder="3" maxLength="100" name="params.list.0.before_object_id" startIncrement="0" type="String">
+    <variable displayName="Interface" displayOrder="3" maxLength="100" name="params.list.0.before_object_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Before</section>
       </sections>
     </variable>
-    <variable displayName="Description" displayOrder="4" maxLength="100" name="params.list.0.before_description" startIncrement="0" type="String">
+    <variable displayName="Description" displayOrder="4" maxLength="100" name="params.list.0.before_description" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Before</section>
       </sections>
     </variable>
-    <variable displayName="State" displayOrder="5" maxLength="100" name="params.list.0.before_state" startIncrement="0" type="String">
+    <variable displayName="State" displayOrder="5" maxLength="100" name="params.list.0.before_state" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Before</section>
       </sections>
     </variable>
-    <variable displayName="Interface" displayOrder="6" maxLength="100" name="params.list2.0.after_object_id" startIncrement="0" type="String">
+    <variable displayName="Interface" displayOrder="6" maxLength="100" name="params.list2.0.after_object_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>After</section>
       </sections>
     </variable>
-    <variable displayName="Description" displayOrder="7" maxLength="100" name="params.list2.0.after_description" startIncrement="0" type="String">
+    <variable displayName="Description" displayOrder="7" maxLength="100" name="params.list2.0.after_description" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>After</section>
       </sections>
     </variable>
-    <variable displayName="State" displayOrder="8" maxLength="100" name="params.list2.0.after_state" startIncrement="0" type="String">
+    <variable displayName="State" displayOrder="8" maxLength="100" name="params.list2.0.after_state" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>After</section>
       </sections>
@@ -79,5 +82,6 @@
       <processPath>/opt/fmc_repository/Process/Process_Storm_Log/Tasks/</processPath>
       <displayName>Storm_Log</displayName>
     </task>
+  <compensation/>
   </process>
 </ObjectDefinition>
