@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Upload_1</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0"/>  <example>    <content>
+      <?php?>
+    </content>  </example>
+  <process name="Process/github-openmsa/Samples/Example Usecases/test_path/Process_AA">
+    <visibility>5</visibility>
+    <displayName>AA</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/github-openmsa/Samples/Example Usecases/test_path/Process_AA/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
