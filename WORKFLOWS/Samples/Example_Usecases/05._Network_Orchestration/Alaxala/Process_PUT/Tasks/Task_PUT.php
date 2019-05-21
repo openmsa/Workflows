@@ -21,6 +21,7 @@ return $output_string;
 check_mandatory_param('interface');
 check_mandatory_param('subinterface');
 
+
 $ip = $context['device_ip_address'];
 
 /***   We do NOT use urlencode (see SUPFUJ-155)***/
@@ -60,7 +61,30 @@ $response = json_decode($response, true);
 
 if ($response['wo_status'] == ENDED) {
 	
-	task_success('Creation of the VLAN OK '.url_encode_ipop($interface));
+	task_success('Creation of the VLAN OK ');
+
+/* 
+   the call to MS API below is there to simulate a Microservice CREATE and will be useful 
+   to list the existing VLAN (see process to delete a VLAN 
+
+
+  $object_id = $interface.'_'.$subinterface;
+  $micro_service_vars_array = array();
+  $micro_service_vars_array['object_id'] = $object_id;
+  $micro_service_vars_array['interface'] = $interface;
+  $micro_service_vars_array['vlan'] = $subinterface;
+
+  $vlan = array('vlan' => array($object_id => $micro_service_vars_array));
+
+  $response = execute_command_and_verify_response($device_id, CMD_CREATE, $vlan, "CREATE vlan MICROSERVICE instance");
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+	$response = prepare_json_response($response['wo_status'], $response['wo_comment'], $context, true);
+	echo $response;
+	exit;
+  }
+*/
+
 }
 else{
 	task_error('Task FAILED');

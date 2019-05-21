@@ -5,7 +5,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/curl_performer.php';
 
 function list_args()
 {
-   create_var_def("interfaces.0.name", "String");
+ 
 }
 
 $ip = $context['device_ip_address'];
@@ -24,24 +24,23 @@ $response_raw_headers_array = json_decode($wo_newparams['response_raw_headers'],
 
 $interfaces = $response_raw_headers_array['ietf-interfaces:interfaces'];
 
-logToFile(debug_dump($interfaces, "*********** INTERFACES: \n"));
-
 $interface_array = $interfaces['interface'];
 
-unset($context['interfaces']['name']);
+unset($context['interfaces']);
 
 foreach ($interface_array as &$itf) {
-  logToFile($itf['name']);
-  $context['interfaces'][]['name']=$itf['name'];
-  
+  //logToFile($itf['name']);
+  $name = $itf['name'];
+  if (strpos($name, '.') !== false) {
+     $context['vlans'][]['name']=$itf['name'];
+  } else {
+     $context['interfaces'][]['name']=$itf['name'];
+  }
 }
 
 if ($response_array['wo_status'] == ENDED) {
-	logToFile("\n***** ENDED");
-       	//$json_response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, "");
-	//echo $json_response;
-	//logToFile("\n***** json_response:\n".$json_response);
 
+      
 	task_success('Discovery of interfaces OK');
 }
 else{

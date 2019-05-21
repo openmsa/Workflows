@@ -11,39 +11,40 @@
     <order>10000</order>
     <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
-    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
     <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>false</showVariables>
+    <showVariables>true</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Interfaces" displayOrder="0" maxLength="100" name="params.interfaces.0.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable default="hundredgigabitethernet 3/1" displayName="Interface" displayOrder="1" editable="false" maxLength="100" name="params.interface" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="VLAN Id" displayOrder="2" editable="false" maxLength="100" name="params.subinterface" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer">
+    <variable displayName="VLANs" displayOrder="0" maxLength="100" name="params.vlans.0.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Interfaces" displayOrder="1" isUserLocked="true" maxLength="100" name="params.interfaces.0.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="hundredgigabitethernet 3/1" displayName="Interface" displayOrder="2" editable="false" isMandatory="true" maxLength="150" name="params.interface" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="VLAN Id" displayOrder="3" maxLength="100" name="params.subinterface" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
       <values>
-        <value>1100</value>
+        <value displayValue="1100">1100</value>
       </values>
     </variable>
-    <variable displayName="Customer Id" displayOrder="3" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Customer">
+    <variable displayName="Customer Id" displayOrder="4" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Customer">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable default="RCP #1" displayName="Managed Device Name" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable default="RCP #1" displayName="Name" displayOrder="5" editable="false" isMandatory="true" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
         <value displayValue="RCP #4">RCP #4</value>
         <value displayValue="RCP #1">RCP #1</value>
       </values>
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable displayName="Host" displayOrder="5" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" selector="params.managed_device_name" startIncrement="0" tableSizeFix="false" type="Composite">
+    <variable displayName="Host IP" displayOrder="6" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" selector="params.managed_device_name" startIncrement="0" tableSizeFix="false" type="Composite">
       <values>
         <value displayValue="133.69.35.21">133.69.35.21</value>
         <value displayValue="133.69.35.22">133.69.35.22</value>
       </values>
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
       <behaviors>
         <behavior default="133.69.35.21" displayName="IP Address" displayOrder="0" editable="false" isMandatory="true" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" selectorValue="RCP #1" startIncrement="0" tableSizeFix="false" type="IpAddress">
@@ -58,40 +59,46 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable default="my_login" displayName="Login" displayOrder="6" editable="false" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
+    <variable default="my_login" displayName="Login" displayOrder="7" editable="false" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable default="my_password" displayName="Password" displayOrder="7" editable="false" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Password" visible="false">
+    <variable default="my_password" displayName="Password" displayOrder="8" editable="false" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Password" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable displayName="Password Admin" displayOrder="8" editable="false" maxLength="100" name="params.password_admin" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Password" visible="false">
+    <variable displayName="Password Admin" displayOrder="9" editable="false" maxLength="100" name="params.password_admin" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Password" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable displayName="Device Id" displayOrder="9" editable="false" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device" visible="false">
+    <variable displayName="Device Id" displayOrder="10" editable="false" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device" visible="false">
       <sections>
-        <section>Provision Device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable displayName="Device External Reference" displayOrder="10" editable="false" maxLength="100" name="params.device_external_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
+    <variable displayName="Device External Reference" displayOrder="11" editable="false" maxLength="100" name="params.device_external_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable default="14020601" displayName="Manufacturer Id" displayOrder="11" editable="false" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer" visible="false">
+    <variable default="14020601" displayName="Manufacturer Id" displayOrder="12" editable="false" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
     </variable>
-    <variable default="14020601" displayName="Model Id" displayOrder="12" editable="false" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer" visible="false">
+    <variable default="14020601" displayName="Model Id" displayOrder="13" editable="false" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer" visible="false">
       <sections>
-        <section>Add device</section>
+        <section>Managed Device</section>
       </sections>
+    </variable>
+    <variable default="1100" displayName="VLAN ID" displayOrder="14" maxLength="100" name="params.subinterfaced" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <values>
+        <value displayValue="1100">1100</value>
+        <value displayValue="1200">1200</value>
+      </values>
     </variable>
   </variables>  <example>    <content>
       <?php?>
@@ -104,6 +111,15 @@
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
+  
+    
+    
+    
+  
+    
+    
+    
+    
   <task name="Task_Enter_Parameters.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Samples/Example_Usecases/05._Network_Orchestration/Alaxala/Process_VLAN_management/Tasks/</processPath>
       <displayName>Enter Parameters</displayName>

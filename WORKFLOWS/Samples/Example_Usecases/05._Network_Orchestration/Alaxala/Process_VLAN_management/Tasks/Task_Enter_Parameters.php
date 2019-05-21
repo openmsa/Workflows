@@ -15,8 +15,14 @@ function list_args() {
 	create_var_def('login', 'String');
 	create_var_def('password', 'Password');
 	create_var_def('password_admin', 'Password');
+
 }
 
+$customer_id = substr($context['customer_id'], 4);
+
+logToFile("*** customer_id : ".$customer_id);
+
+$context['customer_id'] = $customer_id;
 
 /**
  * End of the task (choose one)

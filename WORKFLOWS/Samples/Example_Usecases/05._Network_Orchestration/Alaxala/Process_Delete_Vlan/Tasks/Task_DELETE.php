@@ -6,7 +6,8 @@ require_once '/opt/fmc_repository/Process/Reference/Common/curl_performer.php';
 function list_args()
 {
   create_var_def('interface', 'String');
-  create_var_def('subinterface', 'String');
+  create_var_def('subinterfaced', 'String');
+
 }
 
 function url_encode_ipop($input_string){
@@ -20,7 +21,7 @@ return $output_string;
 
 
 check_mandatory_param('interface');
-check_mandatory_param('subinterface');
+check_mandatory_param('subinterfaced');
 
 $ip = $context['device_ip_address'];
 
@@ -29,9 +30,9 @@ $ip = $context['device_ip_address'];
 $interface = $context['interface'];
 $interface_URL=url_encode_ipop($interface);
 
-$subinterface = $context['subinterface'];
+$subinterfaced = $context['subinterfaced'];
 
-$host = "/restconf/data/ietf-interfaces:interfaces/interface=$interface_URL.$subinterface";
+$host = "/restconf/data/ietf-interfaces:interfaces/interface=$interface_URL.$subinterfaced";
 
 $host = 'http://'.$ip.':8080'.$host;
 
@@ -44,9 +45,9 @@ $response = json_decode($original_response, true);
 
 if ($response['wo_status'] == ENDED) {
 
-	task_success('Deletion of the VLAN OK '.$original_response);
+	task_success('Deletion of the VLAN OK ');
 }
 else{
-	task_error('Task FAILED '.$original_response);
+	task_error('Task FAILED ');
 }
 ?>
