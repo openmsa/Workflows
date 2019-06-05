@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Manage_VNF_on_AWS</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>true</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName=" AWS Region" displayOrder="0" maxLength="100" name="params.AwsDeviceId" startIncrement="0" type="Device">
+      <sections>
+        <section>Synchonization to AWS cloud</section>
+      </sections>
+      <sdTypes>
+        <sdType manId="17010301" modId="17010301"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Deviceid" displayOrder="3" maxLength="100" name="params.deviceId" startIncrement="0" type="Device" visible="false">
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+    </variable>
+    <variable default="ami-c75abbbe" displayName="Image ID" displayOrder="4" maxLength="100" name="params.ImageId" startIncrement="0" type="String">
+      <values>
+        <value>ami-c75abbbe</value>
+      </values>
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+    </variable>
+    <variable default="1" displayName="Maxcount" displayOrder="5" maxLength="100" name="params.MaxCount" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+    </variable>
+    <variable default="1" displayName="Mincount" displayOrder="6" maxLength="100" name="params.MinCount" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+    </variable>
+    <variable default="m3.xlarge" displayName="Instance Type" displayOrder="7" maxLength="100" name="params.InstanceType" startIncrement="0" type="String">
+      <values>
+        <value>m3.medium</value>
+        <value>m3.2xlarge</value>
+        <value>m3.xlarge</value>
+        <value>m3.large</value>
+      </values>
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+    </variable>
+    <variable displayName="Subnet ID" displayOrder="8" maxLength="100" name="params.SubnetId" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Instantiate VNFC</section>
+      </sections>
+      <classes>
+        <class>Subnets</class>
+      </classes>
+    </variable>
+    <variable default="17" displayName="Manufacturer Id" displayOrder="12" maxLength="100" name="params.manufacturer_id" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable default="15102617" displayName="Model Id" displayOrder="13" maxLength="100" name="params.model_id" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable default="admin" displayName="Login" displayOrder="14" maxLength="100" name="params.login" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Password" displayOrder="15" maxLength="100" name="params.password" startIncrement="0" type="Password" visible="false">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Network interfaces ID" displayOrder="18" maxLength="100" name="params.NetworkInterfaces.0.Id" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Manage VNFCi network interfaces</section>
+      </sections>
+      <classes>
+        <class>Network_interfaces</class>
+      </classes>
+    </variable>
+    <variable displayName="Device Id" displayOrder="19" isUserLocked="true" maxLength="100" name="params.device_id" startIncrement="0" type="Device" visible="false">
+      <sections>
+        <section>Do MSA device initial provisioning</section>
+      </sections>
+    </variable>
+    <variable displayName="Abc" displayOrder="35" maxLength="100" name="params.abc" startIncrement="0" type="ServiceRef" visible="false">
+      <sections>
+        <section>Terminate VNFCi from AWS</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Force" displayOrder="50" maxLength="100" name="params.force" startIncrement="0" type="Boolean">
+      <sections>
+        <section>Stop VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Configuration and Monitoring Profiles" displayOrder="65" maxLength="100" name="params.conf_mon_profiles.0.reference" startIncrement="0" type="String">
+      <values>
+        <value>FortigateFWpack</value>
+        <value>FortigateUTMpack</value>
+      </values>
+      <sections>
+        <section>Attach profiles to device</section>
+      </sections>
+    </variable>
+    <variable displayName="Customer Id" displayOrder="69" maxLength="100" name="params.customer_id" startIncrement="0" type="Integer">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Managed Device Name" displayOrder="70" maxLength="100" name="params.managed_device_name" startIncrement="0" type="String">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Device External Reference" displayOrder="71" maxLength="100" name="params.device_external_reference" startIncrement="0" type="String">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Device Ip Address" displayOrder="74" maxLength="100" name="params.device_ip_address" startIncrement="0" type="String">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Password Admin" displayOrder="77" maxLength="100" name="params.password_admin" startIncrement="0" type="Password">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Snmp Community" displayOrder="78" maxLength="100" name="params.snmp_community" startIncrement="0" type="String">
+      <sections>
+        <section>Create MSA device corresponding to VNFCi</section>
+      </sections>
+    </variable>
+    <variable displayName="Var Name" displayOrder="81" maxLength="100" name="params.var_name" startIncrement="0" type="String">
+      <sections>
+        <section>Update VNFCi user password</section>
+      </sections>
+    </variable>
+    <variable displayName="Var Name2" displayOrder="82" maxLength="100" name="params.var_name2" startIncrement="0" type="Integer">
+      <sections>
+        <section>Update VNFCi user password</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  
+  
+  
+
+
+
+
+
+<process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_New_service">
+    <visibility>5</visibility>
+    <displayName>New service</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_New_service/Tasks/Task_Synchonization_to_AWS_cloud.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_New_service/Tasks/</processPath>
+      <displayName>Synchonization to AWS cloud</displayName>
+    </task>
+  </process>
+
+<process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE">
+    <visibility>5</visibility>
+    <displayName>Deploy VNF</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Create_VM.php">
+      <processPath/>
+      <displayName>Instantiate VNFC</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait VNFCi ping</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_msa_device_create.php">
+      <processPath/>
+      <displayName>Create MSA device corresponding to VNFCi</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/</processPath>
+      <displayName>Update VNFCi user password</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
+      <processPath/>
+      <displayName>Manage VNFCi network interfaces</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
+      <processPath/>
+      <displayName>Restart VNFCi</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait VNFCi ping</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
+      <processPath/>
+      <displayName>Do MSA device initial provisioning</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/FORTINET/Tasks/Task_fortigate_port_mode_update.php">
+      <processPath/>
+      <displayName>Set device ports configuration as DHCP mode</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
+      <processPath/>
+      <displayName>Attach profiles to device</displayName>
+    </task>
+  </process>
+
+<process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_Start_VNFC">
+    <visibility>5</visibility>
+    <displayName>Start VNFCi</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
+      <processPath/>
+      <displayName>Start VNFCi</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait VNFCi ping</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_Stop_VNFC">
+    <visibility>5</visibility>
+    <displayName>Stop VNFCi</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
+      <processPath/>
+      <displayName>Stop VNFCi</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_Restart_VNFC">
+    <visibility>5</visibility>
+    <displayName>Restart VNFCi</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
+      <processPath/>
+      <displayName>Restart VNFCi</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait VNFCi ping</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_Terminate_service">
+    <visibility>5</visibility>
+    <displayName>Terminate service</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+    
+    
+  <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
+      <processPath/>
+      <displayName>Terminate VNFCi from AWS</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/Public_Cloud/MSSP/Process_Terminate_VNFC/Tasks/Task_Wait.php">
+      <processPath/>
+      <displayName>Wait</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
+      <processPath/>
+      <displayName>Remove device from MSA</displayName>
+    </task>
+  </process>
+
+
+<process name="Process/Public_Cloud/Public_Cloud/MSSP/Process_Move_To_Trash">
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>
