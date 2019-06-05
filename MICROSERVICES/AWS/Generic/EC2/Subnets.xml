@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>xml</configType>
     <createTemplateId/>
@@ -23,12 +23,12 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Subnet Id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="VPC Id" displayOrder="1" isMandatory="true" maxLength="100" name="params.vpc_id" startIncrement="0" type="String"/>
-    <variable displayName="CIDR" displayOrder="2" isMandatory="true" maxLength="100" name="params.cidr_block" startIncrement="0" type="String"/>
-    <variable displayName="Availability Zone" displayOrder="3" maxLength="100" name="params.availability_zone" startIncrement="0" type="String"/>
-    <variable displayName="Available Address Count" displayOrder="4" isUserLocked="true" maxLength="100" name="params.available_address_count" startIncrement="0" type="String"/>
-    <variable displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.state" startIncrement="0" type="String"/>
+    <variable displayName="Subnet Id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="VPC Id" displayOrder="1" isMandatory="true" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="CIDR" displayOrder="2" isMandatory="true" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Availability Zone" displayOrder="3" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Available Address Count" displayOrder="4" isUserLocked="true" maxLength="100" name="params.available_address_count" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>
 </content>
@@ -67,7 +67,9 @@
         </line>
       </lines>
     </parser>
-    <post_template/>
+    <post_template>{if  $params.state == available }
+      {assign_object_variable var="_color" value=green}
+{/if}</post_template>
   </command>
   <command name="CREATE">
     <rest>Aws\Ec2\Ec2Client
