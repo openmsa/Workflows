@@ -64,7 +64,7 @@
         <section>Instantiate VNFC</section>
       </sections>
       <classes>
-        <class>Subnets</class>
+        <class>subnets</class>
       </classes>
     </variable>
     <variable displayName="Managed Device Name" displayOrder="7" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
@@ -163,11 +163,12 @@
   
   
   
-  <task name="Task_Synchonization_to_AWS_cloud.php">
+  
+  
+  <task name="Task_Synchronization_to_AWS_cloud.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Process_New_service/Tasks/</processPath>
-      <displayName>Synchonization to AWS cloud</displayName>
+      <displayName>Synchronization with AWS</displayName>
     </task>
-  <compensation/>
   </process>
 
 <process name="Process/Public_Cloud/AWS_WF/Process_CREATE">
@@ -299,6 +300,7 @@
       <processPath/>
       <displayName>Wait VNFCi ping</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/AWS_WF/Process_Stop_VNFC">
     <visibility>5</visibility>
@@ -313,6 +315,7 @@
       <processPath/>
       <displayName>Stop VNFCi</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/AWS_WF/Process_Restart_VNFC">
     <visibility>5</visibility>
@@ -333,6 +336,7 @@
       <processPath/>
       <displayName>Wait VNFCi ping</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/AWS_WF/Process_Terminate_service">
     <visibility>5</visibility>
@@ -359,6 +363,7 @@
       <processPath/>
       <displayName>Remove device from MSA</displayName>
     </task>
+  <compensation/>
   </process>
 
 
@@ -369,5 +374,18 @@
     <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
   <compensation/>
+  </process>
+<process name="Process/OpenMSA/Public_Cloud/AWS/Process_Sync_with_AWS">
+    <visibility>5</visibility>
+    <displayName>Sync with AWS</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Process_New_service/Tasks/Task_Synchronization_to_AWS_cloud.php">
+      <processPath/>
+      <displayName>Synchronization with AWS</displayName>
+    </task>
   </process>
 </ObjectDefinition>

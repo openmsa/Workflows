@@ -19,7 +19,6 @@ function list_args()
 
 check_mandatory_param("AwsDeviceId");
 
-// TODO - Call method to synchronize device (Micro Service)
 
 logToFile(debug_dump($context, "MSA CONTEXT:\n"));
 
