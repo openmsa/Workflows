@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>xml</configType>
     <createTemplateId/>
@@ -13,7 +13,7 @@
     <importonce>false</importonce>
     <importrank>1</importrank>
     <maxInstances>0</maxInstances>
-    <name>Network_interfaces</name>
+    <name>Network interfaces</name>
     <order>10000</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
@@ -23,13 +23,13 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Network_interfaces" displayOrder="0" maxLength="100" name="params.Network_interfaces" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Network Interface ID" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="_color" displayOrder="1" maxLength="100" name="params._color" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Availability Zone" displayOrder="1" maxLength="100" name="params.availability_zone" startIncrement="0" type="String"/>
-    <variable displayName="SubnetId" displayOrder="1" maxLength="100" name="params.subnetId" startIncrement="0" type="String"/>
-    <variable displayName="Vpc ID" displayOrder="2" maxLength="100" name="params.vpc_id" startIncrement="0" type="String"/>
-    <variable displayName="Status" displayOrder="4" maxLength="100" name="params.status" startIncrement="0" type="String"/>
+    <variable displayName="Network_interfaces" displayOrder="0" maxLength="100" name="params.Network_interfaces" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Network Interface ID" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="_color" displayOrder="1" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Availability Zone" displayOrder="1" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="SubnetId" displayOrder="1" maxLength="100" name="params.subnetId" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Vpc ID" displayOrder="2" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Status" displayOrder="4" maxLength="100" name="params.status" numberOfRowMax="0" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>&lt;?xml version="1.0"?&gt;
 &lt;root&gt;
@@ -556,9 +556,6 @@
 {/if}
 {if  $params.status == 'in-use' }
       {assign_object_variable var="_color" value=red}
-{/if}
-{if  $params.status == 'available' }
-
 {/if}</post_template>
     <xpath>DescribeNetworkInterfaces</xpath>
     <parser>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>xml</configType>
     <createTemplateId/>
     <createTemplateObject/>
     <defaultDisplay>false</defaultDisplay>
     <description/>
-    <displayField>object_id</displayField>
+    <displayField>security_group</displayField>
     <dynamic>false</dynamic>
     <group>EC2</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -23,24 +23,25 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="object_id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="from_port" displayOrder="2" maxLength="100" name="params.ip_permissions.0.from_port" startIncrement="0" type="String">
+    <variable displayName="ID" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.group_name" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="From port" displayOrder="2" maxLength="100" name="params.ip_permissions.0.from_port" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
-        <section>ip_permissions</section>
+        <section>Rule</section>
       </sections>
     </variable>
-    <variable displayName="ip_protocol" displayOrder="3" maxLength="100" name="params.ip_permissions.0.ip_protocol" startIncrement="0" type="String">
+    <variable displayName="IP protocol" displayOrder="3" maxLength="100" name="params.ip_permissions.0.ip_protocol" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
-        <section>ip_permissions</section>
+        <section>Rule</section>
       </sections>
     </variable>
-    <variable displayName="group_name" displayOrder="5" isMandatory="true" maxLength="100" name="params.group_name" startIncrement="0" type="String"/>
-    <variable displayName="description" displayOrder="6" isMandatory="true" maxLength="100" name="params.description" startIncrement="0" type="String"/>
-    <variable displayName="vpcid" displayOrder="7" maxLength="100" name="params.vpcid" startIncrement="0" type="ObjectRef">
+    <variable displayName="Description" displayOrder="4" isMandatory="true" maxLength="100" name="params.description" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="VPC" displayOrder="5" maxLength="100" name="params.vpcid" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
         <class>vpc</class>
       </classes>
     </variable>
+    <variable displayName="security_group" displayOrder="6" editable="false" maxLength="100" name="params.security_group" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
   </variables>  <example>
     <content>
 </content>
@@ -86,7 +87,7 @@
         </line>
       </lines>
     </parser>
-    <post_template/>
+    <post_template>{assign_object_variable var="security_group" value="{$params.object_id} - {$params.group_name}"}</post_template>
   </command>
 <command name="CREATE">
     <rest>Aws\Ec2\Ec2Client
