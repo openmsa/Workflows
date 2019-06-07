@@ -24,6 +24,7 @@ check_mandatory_param('new_password');
 
 // MSA device creation parameters
 $customer_id = $context['customer_id'];
+$customer_db_id = substr($customer_id,4);
 $managed_device_name = $context["InstanceId"];
 $manufacturer_id = $context['manufacturer_id'];
 $model_id = $context['model_id'];
@@ -36,7 +37,7 @@ if (array_key_exists('device_external_reference', $context)) {
 	$device_external_reference = $context['device_external_reference'];
 }
 
-$response = _device_create($customer_id, $managed_device_name, $manufacturer_id,
+$response = _device_create($customer_db_id, $managed_device_name, $manufacturer_id,
 							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "false",$snmp_communityi = "Default");
 
 $response = json_decode($response, true);

@@ -26,6 +26,8 @@ logToFile("ec2 client successful");
 
 logToFile(debug_dump($context, "DEBUG CONTEXT:\n"));
 
+
+if (isset($context["NetworkInterfaces"])) {
 $networkInterfaces = $context["NetworkInterfaces"];
 $netInterfaceCount = count($networkInterfaces);
 
@@ -54,7 +56,9 @@ for ($i = 0; $i < $netInterfaceCount; $i++) {
 	}
 }
 
-//task_exit(ENDED, " Network interfaces are successfully attached to corresponding instance id:" . $instanceId . "\n");
-task_exit(ENDED, " Network interfaces are successfully attached to corresponding instance. \n");
 
+task_exit(ENDED, " Network interfaces are successfully attached to corresponding instance. \n");
+} else {
+task_exit(ENDED, "No network interface where defined and attached to this instance. \n");
+}
 ?>

@@ -28,6 +28,23 @@ $response = synchronize_objects_and_verify_response($device_id);
 
 logToFile($response);
 
-task_exit(ENDED, "Synchronisation to AWS cloud is successfull.");
+
+$response = _device_read_by_id($device_id);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+
+$region = $response['wo_newparams']['externalReference'];
+$context["region"] = $region;
+$key = $response['wo_newparams']['login'];
+$context["key"] = $key;
+$secret = $response['wo_newparams']['password'];
+$context["secret"] = $secret;
+
+
+task_exit(ENDED, "Synchronisation to AWS cloud is successful.");
 
 ?>

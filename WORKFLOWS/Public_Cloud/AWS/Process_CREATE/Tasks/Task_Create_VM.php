@@ -19,6 +19,7 @@ function list_args()
   create_var_def('MaxCount', 'Integer');
   create_var_def('MinCount', 'Integer');
   create_var_def('InstanceType', 'String');
+  create_var_def('security_group', 'String');
   create_var_def('SubnetId', 'OBMFref');
 }
 
@@ -28,14 +29,30 @@ check_mandatory_param('MaxCount');
 check_mandatory_param('MinCount');
 check_mandatory_param('SubnetId');
 
-logToFile("check params successful");
-$key = "AKIAI67XKTXU32R5IEAQ";
-$secret= "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";
-$region = "eu-west-1";
 
-$context["key"] = $key;
-$context["secret"] = $secret;
-$context["region"] = $region;
+
+$PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];
+$EXECNUMBER = $context['EXECNUMBER'];
+$TASKID = $context['TASKID'];
+$process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
+						'EXECNUMBER' => $EXECNUMBER,
+						'TASKID' => $TASKID);
+	
+$AwsDeviceId = $context["AwsDeviceId"];
+$dev_seq_num = substr($AwsDeviceId,3);
+
+$response = _device_read_by_id($dev_seq_num);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+
+
+$region = $context["region"];
+$key=$context["key"];
+$secret = $context["secret"];
 
 $ec2Client = Ec2Client::factory(array(
     'key'    => $key,
@@ -76,6 +93,33 @@ try {
    task_exit(FAILED, "Error : $e");
 }
 
-task_exit(ENDED, "VM successfully created. Id : " . $context["InstanceId"]);
+
+$device_ip_address = $context["device_ip_address"];
+
+/*
+ * test Ping
+ */
+$response = wait_for_ping_status($device_ip_address, $process_params);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+$ping_status_message = $response['wo_comment'];
+
+/*
+ * test SSH
+ */
+$port_no = SSH_DEFAULT_PORT_NO;
+$response = wait_for_ssh_status($device_ip_address, $port_no, $process_params);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+
+task_exit(ENDED, "instance ". $context["InstanceId"] . " successfully created. IP = " . $context["device_ip_address"]);
 
 ?>

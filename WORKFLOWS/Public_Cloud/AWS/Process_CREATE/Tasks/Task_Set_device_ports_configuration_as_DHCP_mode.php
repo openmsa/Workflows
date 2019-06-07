@@ -13,6 +13,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
 	
+if (isset($context['NetworkInterfaces'])) {
 $device_id = substr($context['device_id'], 3);
 $netInterfaceCount =  count($context['NetworkInterfaces']);
 
@@ -60,5 +61,9 @@ $pushconfig_status_message = $response['wo_comment'];
 
 $response = prepare_json_response(ENDED, "DHCP config is updated successfully on Interface $interface on the Fortigate Device $device_id.\n$pushconfig_status_message", $context, true);
 echo $response;
+} else {
+$response = prepare_json_response(ENDED, "No interface found for this VNF", $context, true);
+echo $response;
+}
 
 ?>
