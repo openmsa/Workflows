@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,25 +23,28 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="AutoIncrement"/>
-    <variable default="0.0.0.0" displayName="Destination IP" displayOrder="1" isMandatory="true" maxLength="200" name="params.ip_dest" startIncrement="0" type="IpMask"/>
-    <variable default="0.0.0.0" displayName="Subnet Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
-    <variable default="0.0.0.0" displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gw" startIncrement="0" type="IpMask"/>
-    <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.interface" startIncrement="0" type="String">
+    <variable displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" numberOfRowMax="0" type="AutoIncrement"/>
+    <variable default="0.0.0.0" displayName="Destination IP" displayOrder="1" isMandatory="true" maxLength="200" name="params.ip_dest" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable default="0.0.0.0" displayName="Subnet Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable default="0.0.0.0" displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gw" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.interface" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <values>
-        <value>port1</value>
-        <value>port8</value>
-        <value>port9</value>
-        <value>port6</value>
-        <value>port7</value>
-        <value>port4</value>
-        <value>port5</value>
-        <value>port2</value>
-        <value>port3</value>
-        <value>port10</value>
+        <value displayValue="port1">port1</value>
+        <value displayValue="port8">port8</value>
+        <value displayValue="port9">port9</value>
+        <value displayValue="port6">port6</value>
+        <value displayValue="port7">port7</value>
+        <value displayValue="port4">port4</value>
+        <value displayValue="port5">port5</value>
+        <value displayValue="port2">port2</value>
+        <value displayValue="port3">port3</value>
+        <value displayValue="port10">port10</value>
       </values>
+      <classes>
+        <class>interface</class>
+      </classes>
     </variable>
-    <variable cols="165" displayName="Comment" displayOrder="5" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+    <variable cols="165" displayName="Comment" displayOrder="5" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>UBI-SITONECELL-MASTE~001 # show full-configuration route static 
 config router static

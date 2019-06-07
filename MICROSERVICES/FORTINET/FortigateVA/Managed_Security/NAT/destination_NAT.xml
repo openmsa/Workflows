@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,34 +23,34 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="External IP Address" displayOrder="1" maxLength="200" name="params.extIP" startIncrement="0" type="IpMask"/>
-    <variable displayName="Mapped IP Address" displayOrder="2" maxLength="200" name="params.mapIP" startIncrement="0" type="IpMask"/>
-    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" startIncrement="0" type="ObjectRef">
+    <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="External IP Address" displayOrder="1" maxLength="200" name="params.extIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="Mapped IP Address" displayOrder="2" maxLength="200" name="params.mapIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <values>
-        <value>1</value>
-        <value>2</value>
-        <value>3</value>
-        <value>4</value>
-        <value>5</value>
-        <value>6</value>
-        <value>7</value>
-        <value>8</value>
-        <value>9</value>
-        <value>10</value>
+        <value displayValue="1">1</value>
+        <value displayValue="2">2</value>
+        <value displayValue="3">3</value>
+        <value displayValue="4">4</value>
+        <value displayValue="5">5</value>
+        <value displayValue="6">6</value>
+        <value displayValue="7">7</value>
+        <value displayValue="8">8</value>
+        <value displayValue="9">9</value>
+        <value displayValue="10">10</value>
       </values>
       <classes>
-        <class>Interface</class>
+        <class>interface</class>
       </classes>
     </variable>
-    <variable default="false" displayName="Port Forward" displayOrder="4" maxLength="200" name="params.portFor" startIncrement="0" type="Boolean"/>
-    <variable displayName="Protocol" displayOrder="5" isMandatory="true" maxLength="200" name="params.proto" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+    <variable default="false" displayName="Port Forward" displayOrder="4" maxLength="200" name="params.portFor" numberOfRowMax="0" startIncrement="0" type="Boolean"/>
+    <variable displayName="Protocol" displayOrder="5" isMandatory="true" maxLength="200" name="params.proto" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
       <values>
         <value displayValue="tcp">tcp</value>
         <value displayValue="udp">udp</value>
       </values>
       <behaviors>
-        <behavior displayName="Protocol" displayOrder="0" maxLength="100" name="params.proto" selectorValue="true" startIncrement="0" type="String">
+        <behavior displayName="Protocol" displayOrder="0" maxLength="100" name="params.proto" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <values>
             <value displayValue="TCP">tcp</value>
             <value displayValue="UDP">udp</value>
@@ -58,18 +58,18 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="External Service Port" displayOrder="6" maxLength="200" name="params.extPortProto" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="External Service Port" displayOrder="6" maxLength="200" name="params.extPortProto" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
       <behaviors>
-        <behavior displayName="External Service Port" displayOrder="0" maxLength="200" name="params.extPortProto" selectorValue="true" startIncrement="0" type="String"/>
+        <behavior displayName="External Service Port" displayOrder="0" maxLength="200" name="params.extPortProto" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String"/>
       </behaviors>
     </variable>
-    <variable displayName="Mapped Port " displayOrder="7" maxLength="200" name="params.mapPort" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Mapped Port " displayOrder="7" maxLength="200" name="params.mapPort" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
       <behaviors>
-        <behavior displayName="Mapped Port" displayOrder="0" maxLength="200" name="params.mapPort" selectorValue="true" startIncrement="0" type="String"/>
+        <behavior displayName="Mapped Port" displayOrder="0" maxLength="200" name="params.mapPort" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String"/>
       </behaviors>
     </variable>
-    <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
-    <variable displayName="statusPortForward" displayOrder="9" maxLength="200" name="params.statusPortForward" startIncrement="0" type="String" visible="false"/>
+    <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="statusPortForward" displayOrder="9" maxLength="200" name="params.statusPortForward" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>UBI-SITONECELL-MASTE~001 # show full-configuration firewall vip
 config firewall vip

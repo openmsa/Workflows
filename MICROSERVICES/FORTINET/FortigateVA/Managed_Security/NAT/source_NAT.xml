@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,10 +23,10 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="Start IP Address" displayOrder="1" maxLength="200" name="params.startIp" startIncrement="0" type="IpMask"/>
-    <variable displayName="End IP Address" displayOrder="2" maxLength="200" name="params.EndIp" startIncrement="0" type="IpMask"/>
-    <variable cols="165" displayName="Comment" displayOrder="3" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Start IP Address" displayOrder="1" maxLength="200" name="params.startIp" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="End IP Address" displayOrder="2" maxLength="200" name="params.endIp" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable cols="165" displayName="Comment" displayOrder="3" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>UBI-SITONECELL-MASTE~001 # show full-configuration firewall ippool 
 config firewall ippool
@@ -45,7 +45,7 @@ end
     <operation>config firewall ippool
 edit "{$params.object_id}"
 set startip {$params.startIp}
-set endip {$params.EndIp}
+set endip {$params.endIp}
 set arp-reply enable
 set comments '{$params.comment}'
 next
@@ -63,7 +63,7 @@ end
           <regexp>@set startip (?&lt;startIp&gt;\S+)@</regexp>
         </line>
         <line>
-          <regexp>@set endip (?&lt;EndIp&gt;\S+)@</regexp>
+          <regexp>@set endip (?&lt;endIp&gt;\S+)@</regexp>
         </line>
         <line>
           <regexp>@set comment "(?&lt;comment&gt;[^"]+)"@</regexp>
@@ -85,18 +85,12 @@ end
     <operation>config firewall ippool
 edit "{$params.object_id}"
 set startip {$params.startIp}
-set endip {$params.EndIp}
+set endip {$params.endIp}
 set arp-reply enable
 set comments '{$params.comment}'
 next
 end
 </operation>
   </command>
-<command name="CONSTRAINT">
-    <operation>{if !empty($params.startIp) &amp;&amp; !empty($params.EndIp)}
-{if is_in_network($params.startIp, "100.64.0.0", "255.192.0.0") || is_in_network($params.EndIp, "100.64.0.0", "255.192.0.0") || is_overlapping($params.startIp, $params.EndIp, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
-{/if}
-{/if}
-</operation>
-  </command>
+
 </ObjectDefinition>

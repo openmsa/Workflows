@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,8 +23,8 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Group Name" displayOrder="1" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="Associated Interface" displayOrder="2" isMandatory="true" maxLength="200" name="params.port" onlyDetailView="true" startIncrement="0" type="String">
+    <variable displayName="Group Name" displayOrder="1" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Associated Interface" displayOrder="2" isMandatory="true" maxLength="200" name="params.port" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="ObjectRef">
       <values>
         <value displayValue="Port4">4</value>
         <value displayValue="Port5">5</value>
@@ -34,13 +34,16 @@
         <value displayValue="Port9">9</value>
         <value displayValue="Port10">10</value>
       </values>
-    </variable>
-    <variable displayName="Members" displayOrder="3" editable="false" isMandatory="true" isMandatoryArray="true" localVarNameMatch="port" maxLength="200" name="params.members.0.member" remoteVarNameMatch="port" startIncrement="0" type="ObjectRef">
       <classes>
-        <class>AddressObject</class>
+        <class>interface</class>
       </classes>
     </variable>
-    <variable cols="165" displayName="Comment " displayOrder="5" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="Members" displayOrder="3" editable="false" isMandatory="true" isMandatoryArray="true" localVarNameMatch="port" maxLength="200" name="params.members.0.member" numberOfRowMax="0" remoteVarNameMatch="port" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>address_object</class>
+      </classes>
+    </variable>
+    <variable cols="165" displayName="Comment " displayOrder="5" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>FGVM020000034713 # show full-configuration firewall addrgrp 
 config firewall addrgrp
@@ -58,7 +61,7 @@ end
     <operation>{if !empty($params.members)}
 config firewall addrgrp
 edit "{$params.object_id}"
-	set comment '{$params.comment}'
+  set comment '{$params.comment}'
   set member {foreach $params.members as $memberItem}{$memberItem.member} {/foreach}
 
 end

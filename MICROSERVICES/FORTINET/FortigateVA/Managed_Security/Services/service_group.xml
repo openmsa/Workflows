@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,14 +23,14 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Group Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="Members" displayOrder="1" editable="false" isMandatory="true" isMandatoryArray="true" maxLength="200" name="params.members.0.member" startIncrement="0" type="ObjectRef">
+    <variable displayName="Group Name" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Members" displayOrder="1" editable="false" isMandatory="true" isMandatoryArray="true" maxLength="200" name="params.members.0.member" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
-        <class>Service</class>
-        <class>Service_Predefined</class>
+        <class>service</class>
+        <class>service_predefined</class>
       </classes>
     </variable>
-    <variable displayName="Comment" displayOrder="2" maxLength="200" name="params.comment" startIncrement="0" type="String"/>
+    <variable displayName="Comment" displayOrder="2" maxLength="200" name="params.comment" numberOfRowMax="0" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>config firewall service group
     edit "Email Access"
@@ -121,6 +121,7 @@ end
 <command name="CONSTRAINT">
     <operation>{if {$params.object_id} === "Email Access" or {$params.object_id} === "Web Access" or {$params.object_id} === "Windows AD" or {$params.object_id} === "Exchange Server"}
 This service group name is reserved, please change the service group to another one.
-{/if}</operation>
+{/if}
+</operation>
   </command>
 </ObjectDefinition>

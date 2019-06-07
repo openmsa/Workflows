@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,38 +23,38 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Address Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable default="ipmask" displayName="Type" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.type" startIncrement="0" type="String">
+    <variable displayName="Address Name" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable default="ipmask" displayName="Type" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.type" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Subnet">ipmask</value>
         <value displayValue="IP Range">iprange</value>
       </values>
     </variable>
-    <variable displayName="Address" displayOrder="2" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.address" selector="params.type" startIncrement="0" type="Composite">
+    <variable displayName="Address" displayOrder="2" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.address" numberOfRowMax="0" selector="params.type" startIncrement="0" type="Composite">
       <behaviors>
-        <behavior displayName="IP Address" displayOrder="0" maxLength="200" name="params.address" selectorValue="ipmask" startIncrement="0" type="IpMask"/>
-        <behavior displayName="address" displayOrder="0" maxLength="200" name="params.address" selectorValue="iprange" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="IP Address" displayOrder="0" maxLength="200" name="params.address" numberOfRowMax="0" selectorValue="ipmask" startIncrement="0" type="IpMask"/>
+        <behavior displayName="address" displayOrder="0" maxLength="200" name="params.address" numberOfRowMax="0" selectorValue="iprange" startIncrement="0" type="String" visible="false"/>
       </behaviors>
     </variable>
-    <variable displayName="NetMask" displayOrder="4" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="200" name="params.netmask" selector="params.type" startIncrement="0" type="Composite">
+    <variable displayName="NetMask" displayOrder="4" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="200" name="params.netmask" numberOfRowMax="0" selector="params.type" startIncrement="0" type="Composite">
       <behaviors>
-        <behavior displayName="Subnet Mask" displayOrder="0" groupSeparator="/" maxLength="200" name="params.netmask" selectorValue="ipmask" startIncrement="0" type="IpMask"/>
-        <behavior displayName="netmask" displayOrder="0" maxLength="200" name="params.netmask" selectorValue="iprange" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Subnet Mask" displayOrder="0" groupSeparator="/" maxLength="200" name="params.netmask" numberOfRowMax="0" selectorValue="ipmask" startIncrement="0" type="IpMask"/>
+        <behavior displayName="netmask" displayOrder="0" maxLength="200" name="params.netmask" numberOfRowMax="0" selectorValue="iprange" startIncrement="0" type="String" visible="false"/>
       </behaviors>
     </variable>
-    <variable displayName="Start Address" displayOrder="5" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.startIp" selector="params.type" startIncrement="0" type="Composite">
+    <variable displayName="Start Address" displayOrder="5" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.startIp" numberOfRowMax="0" selector="params.type" startIncrement="0" type="Composite">
       <behaviors>
-        <behavior displayName="startIp" displayOrder="0" maxLength="200" name="params.startIp" selectorValue="ipmask" startIncrement="0" type="String" visible="false"/>
-        <behavior displayName="Start IP Address" displayOrder="0" maxLength="200" name="params.startIp" selectorValue="iprange" startIncrement="0" type="IpMask"/>
+        <behavior displayName="startIp" displayOrder="0" maxLength="200" name="params.startIp" numberOfRowMax="0" selectorValue="ipmask" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Start IP Address" displayOrder="0" maxLength="200" name="params.startIp" numberOfRowMax="0" selectorValue="iprange" startIncrement="0" type="IpMask"/>
       </behaviors>
     </variable>
-    <variable displayName="End Address" displayOrder="6" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="200" name="params.endIp" selector="params.type" startIncrement="0" type="Composite">
+    <variable displayName="End Address" displayOrder="6" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="200" name="params.endIp" numberOfRowMax="0" selector="params.type" startIncrement="0" type="Composite">
       <behaviors>
-        <behavior displayName="End IP Address" displayOrder="0" maxLength="200" name="params.endIp" selectorValue="ipmask" startIncrement="0" type="String" visible="false"/>
-        <behavior displayName="End IP Address" displayOrder="0" groupSeparator="-" maxLength="200" name="params.endIp" selectorValue="iprange" startIncrement="0" type="IpMask"/>
+        <behavior displayName="End IP Address" displayOrder="0" maxLength="200" name="params.endIp" numberOfRowMax="0" selectorValue="ipmask" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="End IP Address" displayOrder="0" groupSeparator="-" maxLength="200" name="params.endIp" numberOfRowMax="0" selectorValue="iprange" startIncrement="0" type="IpMask"/>
       </behaviors>
     </variable>
-    <variable displayName="Interface" displayOrder="7" editable="false" isMandatory="true" maxLength="100" name="params.port" startIncrement="0" type="ObjectRef">
+    <variable displayName="Interface" displayOrder="7" editable="false" isMandatory="true" maxLength="100" name="params.port" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <values>
         <value displayValue="Port4">4</value>
         <value displayValue="Port5">5</value>
@@ -65,10 +65,10 @@
         <value displayValue="Port10">10</value>
       </values>
       <classes>
-        <class>Interface</class>
+        <class>interface</class>
       </classes>
     </variable>
-    <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
+    <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>UFGVM020000034713 # show full-configuration firewall address 
 config firewall address
@@ -107,7 +107,7 @@ config firewall address
 edit "{$params.object_id}"
 set type {$params.type}
 set comment '{$params.comment}'
-set associated-interface "port{$params.port}"
+set associated-interface "{$params.port}"
 {if $params.type=="ipmask"}
 set subnet {$params.address} {$params.netmask}
 {else}
@@ -129,7 +129,7 @@ end
 edit "{$params.object_id}"
 set type {$params.type}
 set comment '{$params.comment}'
-set associated-interface "port{$params.port}"
+set associated-interface "{$params.port}"
 {if $params.type=="ipmask"}
 set subnet {$params.address} {$params.netmask}
 {else}

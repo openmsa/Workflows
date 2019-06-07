@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,7 +23,8 @@
     <sortvariable>params._order</sortvariable>
     <visibility>4</visibility>
   </information>  <variables frozen="0">
-    <variable default="25" displayName="Timezone" displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.device_timezone" type="String">
+    <variable displayName="Hostname" displayOrder="0" isUserLocked="true" maxLength="100" name="params.device_hostname" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="25" displayName="Timezone" displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.device_timezone" numberOfRowMax="0" type="String">
       <values>
         <value displayValue="(GMT-12:00)Eniwetok,Kwajalein">00</value>
         <value displayValue="(GMT-11:00)Midway Island, Samoa">01</value>
@@ -108,8 +109,8 @@
         <value displayValue="(GMT)Greenwich Mean Time">80</value>
       </values>
     </variable>
-    <variable default="0" displayName="Timezone" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="String" visible="false"/>
-    <variable displayName="timezone" displayOrder="1" editable="false" isUserLocked="true" maxLength="200" name="params.timezone" type="String" visible="false"/>
+    <variable default="0" displayName="Timezone" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" numberOfRowMax="0" type="String" visible="false"/>
+    <variable displayName="timezone" displayOrder="1" editable="false" isUserLocked="true" maxLength="200" name="params.timezone" numberOfRowMax="0" type="String" visible="false"/>
   </variables>  
   <example>
     <content>config system global
@@ -138,6 +139,9 @@ end
         </ignore>
         <line>
           <regexp>@^\s+set timezone (?&lt;device_timezone&gt;\d+)\s*$@</regexp>
+        </line>
+        <line>
+          <regexp>@^\s+set hostname (?&lt;device_hostname&gt;\S+)\s*$@</regexp>
         </line>
       </lines>
     </parser>
