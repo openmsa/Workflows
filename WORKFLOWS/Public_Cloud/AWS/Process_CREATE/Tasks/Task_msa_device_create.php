@@ -33,12 +33,14 @@ $password = $context["InstanceId"];
 $password_admin = $context['new_password'];
 $device_ip_address = $context['device_ip_address'];
 $device_external_reference = "";
+$snmp_community = $context['snmp_community'];
+
 if (array_key_exists('device_external_reference', $context)) {
 	$device_external_reference = $context['device_external_reference'];
 }
 
 $response = _device_create($customer_db_id, $managed_device_name, $manufacturer_id,
-							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "false",$snmp_communityi = "Default");
+							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "true", $snmp_community);
 
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {

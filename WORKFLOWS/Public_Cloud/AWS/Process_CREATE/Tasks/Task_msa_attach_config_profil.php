@@ -1,13 +1,12 @@
 <?php
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-//require_once '/opt/fmc_repository/Process/Reference/Common/Library/profile_rest.php';
 
 function list_args() {
-	create_var_def('conf_mon_profiles.0.reference', 'String');
+	create_var_def('conf_profile_reference', 'String');
+	create_var_def('mon_profile_reference', 'String');
 }
 
-check_mandatory_param('conf_mon_profiles');
 
 $PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];
 $EXECNUMBER = $context['EXECNUMBER'];
@@ -19,30 +18,27 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 $device_id = substr($context['device_id'], 3);
 $device_reference = $context['device_id'];
 
-if (isset($context['conf_mon_profiles'])) {
-	for ($i = 0; $i < count($context['conf_mon_profiles']); $i++) 
-	{
-		$profile_reference = $context['conf_mon_profiles'][$i]['reference'];
-
-		$response = _profile_attach_to_device_by_reference ($profile_reference, $device_reference );
-		$response = json_decode($response, true);
-		if ($response['wo_status'] !== ENDED) {
-			$response = json_encode($response);
-			echo $response;
-			exit;
-		}
-	}
-		
-	$response = wait_for_provisioning_completion($device_id, $process_params);
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		echo $response;
-		exit;
-	}
-	$wo_comment = $response['wo_comment'];
+if (isset($context['conf_profile_reference'])) {
+  $conf_profile_ref = $context['conf_profile_reference'];
+  $response = _profile_attach_to_device_by_reference ($conf_profile_ref, $device_reference );
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+    $response = json_encode($response);
+    echo $response;
+  }
 }
-$response = prepare_json_response(ENDED, "MSA Device $device_id Provisioned successfully.\n$wo_comment", $context, true);
+
+if (isset($context['mon_profile_reference'])) {
+  $mon_profile_reference = $context['mon_profile_reference'];
+  $response = _profile_attach_to_device_by_reference ($mon_profile_reference, $device_reference );
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+    $response = json_encode($response);
+    echo $response;
+  }
+
+}
+$response = prepare_json_response(ENDED, "Configuration and Monitoring profile attached.\n", $context, true);
 echo $response;
 
 ?>
