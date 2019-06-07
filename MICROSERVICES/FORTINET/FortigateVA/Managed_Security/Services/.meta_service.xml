@@ -11,7 +11,7 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1459951850588</value>
+            <value>1559910204262</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -23,7 +23,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1445863665831</value>
+            <value>1559910203937</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
@@ -33,12 +33,12 @@
             <value></value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>AddressGroup.xml</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>sService.xml</value>
         </entry>
     </map>
 </metadata>

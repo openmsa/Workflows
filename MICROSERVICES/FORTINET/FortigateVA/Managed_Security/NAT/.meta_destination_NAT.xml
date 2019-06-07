@@ -11,7 +11,7 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1460458444642</value>
+            <value>1559909705187</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -23,7 +23,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1453126542043</value>
+            <value>1559909704840</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
@@ -33,12 +33,12 @@
             <value></value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>Global_White_Black List.xml</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>Destination NAT.xml</value>
         </entry>
     </map>
 </metadata>

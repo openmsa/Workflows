@@ -2,12 +2,16 @@
 <metadata>
     <map>
         <entry>
+            <key>MODEL</key>
+            <value>Generic</value>
+        </entry>
+        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1459323065923</value>
+            <value>1559909801827</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -19,19 +23,22 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1445421105164</value>
+            <value>1559909801340</value>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>CONFIGURATION_FILTER</key>
             <value></value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>Service.xml</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>Antivirus.xml</value>
         </entry>
     </map>
 </metadata>
