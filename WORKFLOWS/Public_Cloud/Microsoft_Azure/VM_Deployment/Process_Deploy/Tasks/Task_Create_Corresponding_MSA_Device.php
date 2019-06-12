@@ -19,19 +19,20 @@ function list_args()
    *
    * Add as many variables as needed
    */ 
- 
+   create_var_def('customer', 'String');
    create_var_def('manufacturer_id', 'String');
    create_var_def('model_id', 'String');
    create_var_def('device_id', 'String');
    create_var_def('status in msa', 'String');
 }
-sleep(20);
+
+//sleep(20);
 
 check_mandatory_param('manufacturer_id');
 check_mandatory_param('model_id');
 
 // MSA device creation parameters
-$customer_id = substr($context['UBIQUBEID'], 4);
+$customer_id = substr($context['customer'], 4);
 $managed_device_name = $context['vm_name'];
 $manufacturer_id = $context['manufacturer_id'];
 $model_id = $context['model_id'];

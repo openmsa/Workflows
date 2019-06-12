@@ -22,9 +22,24 @@ function list_args()
  
    
 }
+
+if($context['vm_disk_name']=='') {
+	$response = prepare_json_response(ENDED, "No Device to detach profile", $context, true);
+	echo $response;
+	exit;
+}
+
+
 $device_ref=$context['device_id'];
 $profile_ref=$context['profile_ref'];
 sleep(10);
+
+if(empty($profile_ref)){
+$response = prepare_json_response(ENDED, "No Profile attached to Device $device_ref.\n", $context, true);
+echo $response;
+exit;
+}
+
 
 $response =_profile_detach_from_device_by_reference ($profile_ref, $device_ref);
 

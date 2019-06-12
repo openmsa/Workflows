@@ -26,6 +26,12 @@ $device_ref=$context['device_id'];
 $profile_ref=$context['profile_ref'];
 sleep(10);
 
+if(empty($profile_ref)){
+$response = prepare_json_response(ENDED, "No Profile attached to Device $device_ref.\n", $context, true);
+echo $response;
+exit;
+}
+
 $response =_profile_attach_to_device_by_reference ($profile_ref, $device_ref);
 
 $response = json_decode($response, true);
@@ -39,7 +45,6 @@ if ($response['wo_status'] !== ENDED) {
 $wo_comment = $response['wo_comment'];
 $response = prepare_json_response(ENDED, "Profile $profile_ref attached to Device $device_ref.\n$wo_comment", $context, true);
 echo $response;
-
 
 sleep(15);
 ?>
