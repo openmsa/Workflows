@@ -9,6 +9,12 @@ function list_args() {
 
 //$context['operation']='Delete '.$context['vm_name'].' from MSA';
 
+if($context['vm_disk_name']=='') {
+	$response = prepare_json_response(ENDED, "No device to delete", $context, true);
+	echo $response;
+	exit;
+}
+
 if($context['status in msa']=='Device Deleted') {
 
 	$response = prepare_json_response(ENDED, "No device to delete", $context, true);

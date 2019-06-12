@@ -14,9 +14,14 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'TASKID' => $TASKID);
 	
 $device_id = substr($context['device_id'], 3);
-$netInterfaceCount =  count($context['private']);
+
 
 // Generate configuration depending the count of interfaces
+
+if ($context['private_network']=='true') {
+
+$netInterfaceCount =  count($context['private']);
+
 for ($i = 0; $i < $netInterfaceCount; $i++) 
 {
 	// TODO - set this variable as the workflow variable to get flexibility.
@@ -60,5 +65,11 @@ $pushconfig_status_message = $response['wo_comment'];
 
 $response = prepare_json_response(ENDED, "DHCP config is updated successfully on Interface $interface on the Fortigate Device $device_id.\n$pushconfig_status_message", $context, true);
 echo $response;
+
+}
+
+else{
+task_exit(ENDED, "Private Network Interface disabled");
+}
 
 ?>

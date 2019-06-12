@@ -23,6 +23,12 @@ function list_args()
   
 }
 
+if($context['vm_disk_name']=='') {
+	$response = prepare_json_response(ENDED, "No Disk to delete", $context, true);
+	echo $response;
+	exit;
+}
+
 $authorization = 'Authorization: Bearer '.$context['token'].'';
 $context['URL']='https://management.azure.com/subscriptions/'.$context['subscription_id'].'/resourceGroups/'.$context['res_gr_name'].'/providers/Microsoft.Compute/disks/'.$context['vm_disk_name'].'?api-version=2017-03-30';
 

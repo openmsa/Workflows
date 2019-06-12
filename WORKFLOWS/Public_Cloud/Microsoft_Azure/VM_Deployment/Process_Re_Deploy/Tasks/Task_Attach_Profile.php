@@ -40,6 +40,5 @@ $wo_comment = $response['wo_comment'];
 $response = prepare_json_response(ENDED, "Profile $profile_ref attached to Device $device_ref.\n$wo_comment", $context, true);
 echo $response;
 
-
 sleep(15);
 ?>

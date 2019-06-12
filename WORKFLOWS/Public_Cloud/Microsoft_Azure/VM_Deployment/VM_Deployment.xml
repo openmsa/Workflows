@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
     <displayField>operation</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
-    <group/>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Public Cloud|MS Azure</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <name>Microsoft Azure VNF Orchestration</name>
     <order>10000</order>
+    <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
     <showDetailedServiceInstances>false</showDetailedServiceInstances>
     <showProcessExecConsole>false</showProcessExecConsole>
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Id" displayOrder="0" isMandatory="true" maxLength="100" name="params.subscription_id" startIncrement="0" type="String">
+    <variable default="2e49859a-2bdb-4230-8d53-1a267e71c3c6" displayName="Id" displayOrder="0" isMandatory="true" maxLength="100" name="params.subscription_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Azure Subscription</section>
       </sections>
     </variable>
-    <variable default="westeurope" displayName="Location" displayOrder="1" maxLength="100" name="params.location" startIncrement="0" type="String">
+    <variable default="westeurope" displayName="Location" displayOrder="1" maxLength="100" name="params.location" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>northeurope</value>
       </values>
@@ -27,7 +29,7 @@
         <section>Azure Subscription</section>
       </sections>
     </variable>
-    <variable default="dmaResourceGroup" displayName="Resource Group" displayOrder="2" isMandatory="true" maxLength="100" name="params.res_gr_name" startIncrement="0" type="String">
+    <variable default="dmaResourceGroup" displayName="Resource Group" displayOrder="2" isMandatory="true" maxLength="100" name="params.res_gr_name" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="RsDemo">RsDemo</value>
       </values>
@@ -35,32 +37,32 @@
         <section>Azure Subscription</section>
       </sections>
     </variable>
-    <variable displayName=" Client Id" displayOrder="3" isMandatory="true" maxLength="100" name="params.client_id" startIncrement="0" type="String">
+    <variable default="add8fef0-851d-47c3-b190-e37dea4a1b12" displayName=" Client Id" displayOrder="3" isMandatory="true" maxLength="100" name="params.client_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable displayName=" Password" displayOrder="4" isMandatory="true" maxLength="100" name="params.client_secret" startIncrement="0" type="Password">
+    <variable default="dma" displayName=" Password" displayOrder="4" isMandatory="true" maxLength="100" name="params.client_secret" numberOfRowMax="0" startIncrement="0" type="Password">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable displayName="Tenant Id" displayOrder="5" isMandatory="true" maxLength="100" name="params.tenant_id" startIncrement="0" type="String">
+    <variable default="302c4541-94f4-42a4-930c-96cbb2ca8a5e" displayName="Tenant Id" displayOrder="5" isMandatory="true" maxLength="100" name="params.tenant_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable displayName="Url" displayOrder="6" isUserLocked="true" maxLength="100" name="params.URL" startIncrement="0" type="String" visible="false">
+    <variable displayName="Url" displayOrder="6" isUserLocked="true" maxLength="100" name="params.URL" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable displayName="Token" displayOrder="7" isUserLocked="true" maxLength="100" name="params.token" startIncrement="0" type="String" visible="false">
+    <variable displayName="Token" displayOrder="7" isUserLocked="true" maxLength="100" name="params.token" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Token</section>
       </sections>
     </variable>
-    <variable default="dmaNetworkSectGr" displayName="Network Security Group" displayOrder="8" maxLength="100" name="params.network_sec_gr_name" startIncrement="0" type="String">
+    <variable default="dmaNetworkSectGr" displayName="Network Security Group" displayOrder="8" maxLength="100" name="params.network_sec_gr_name" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>SecGroup</value>
       </values>
@@ -68,12 +70,12 @@
         <section>Interface</section>
       </sections>
     </variable>
-    <variable displayName="Network Interface Card" displayOrder="9" isUserLocked="true" maxLength="100" name="params.nic" startIncrement="0" type="String" visible="false">
+    <variable displayName="Network Interface Card" displayOrder="9" isUserLocked="true" maxLength="100" name="params.nic" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Interface</section>
       </sections>
     </variable>
-    <variable default="virtunet1" displayName="Virtual Network" displayOrder="10" isMandatory="true" maxLength="100" name="params.virtu_net" startIncrement="0" type="String">
+    <variable default="virtunet1" displayName="Virtual Network" displayOrder="10" isMandatory="true" maxLength="100" name="params.virtu_net" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>virtu2</value>
       </values>
@@ -81,7 +83,7 @@
         <section>Interface</section>
       </sections>
     </variable>
-    <variable default="default" displayName="Subnet" displayOrder="11" isMandatory="true" maxLength="100" name="params.subnet_name" startIncrement="0" type="String">
+    <variable default="default" displayName="Subnet" displayOrder="11" isMandatory="true" maxLength="100" name="params.subnet_name" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>default2</value>
       </values>
@@ -89,54 +91,54 @@
         <section>Interface</section>
       </sections>
     </variable>
-    <variable displayName="Public Address Name" displayOrder="12" isUserLocked="true" maxLength="100" name="params.public_address" startIncrement="0" type="String" visible="false">
+    <variable displayName="Public Address Name" displayOrder="12" isUserLocked="true" maxLength="100" name="params.public_address" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Interface</section>
       </sections>
     </variable>
-    <variable displayName="IP Interface " displayOrder="13" isUserLocked="true" maxLength="100" name="params.interface_name" startIncrement="0" type="String" visible="false">
+    <variable displayName="IP Interface " displayOrder="13" isUserLocked="true" maxLength="100" name="params.interface_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Interface</section>
       </sections>
     </variable>
-    <variable displayName="Public IP Address" displayOrder="14" isUserLocked="true" maxLength="100" name="params.public_address_value" startIncrement="0" type="String">
+    <variable displayName="Public IP Address" displayOrder="14" isUserLocked="true" maxLength="100" name="params.public_address_value" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Interface</section>
       </sections>
     </variable>
-    <variable default="false" displayName="Additional Network Interfaces" displayOrder="15" maxLength="100" name="params.private_network" startIncrement="0" type="Boolean">
+    <variable default="false" displayName="Additional Network Interfaces" displayOrder="15" maxLength="100" name="params.private_network" numberOfRowMax="0" startIncrement="0" type="Boolean">
       <sections>
         <section>Interface</section>
       </sections>
     </variable>
-    <variable displayName="Network Interface Cards" displayOrder="16" maxLength="100" name="params.private.0.nics" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Network Interface Cards" displayOrder="16" maxLength="100" name="params.private.0.nics" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
       <behaviors>
-        <behavior displayName="nics" displayOrder="0" maxLength="100" name="params.private.0.nics" selectorValue="false" startIncrement="0" type="String" visible="false">
+        <behavior displayName="nics" displayOrder="0" maxLength="100" name="params.private.0.nics" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
-        <behavior displayName="nics" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.nics" selectorValue="true" startIncrement="0" type="String">
+        <behavior displayName="nics" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.nics" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Subnets" displayOrder="17" maxLength="100" name="params.private.0.subnet_names" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Subnets" displayOrder="17" maxLength="100" name="params.private.0.subnet_names" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
       <behaviors>
-        <behavior displayName="subnet_names" displayOrder="0" maxLength="100" name="params.private.0.subnet_names" selectorValue="false" startIncrement="0" type="String" visible="false">
+        <behavior displayName="subnet_names" displayOrder="0" maxLength="100" name="params.private.0.subnet_names" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
-        <behavior default="default" displayName="subnet_names" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.subnet_names" selectorValue="true" startIncrement="0" type="String">
+        <behavior default="default" displayName="subnet_names" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.subnet_names" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <values>
             <value displayValue="default">default</value>
           </values>
@@ -146,73 +148,73 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Interfaces Names" displayOrder="18" isUserLocked="true" maxLength="100" name="params.private.0.interface_names" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Interfaces Names" displayOrder="18" isUserLocked="true" maxLength="100" name="params.private.0.interface_names" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
       <behaviors>
-        <behavior displayName="interface_names" displayOrder="0" maxLength="100" name="params.private.0.interface_names" selectorValue="false" startIncrement="0" type="String" visible="false">
+        <behavior displayName="interface_names" displayOrder="0" maxLength="100" name="params.private.0.interface_names" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
-        <behavior displayName="interface_names" displayOrder="0" maxLength="100" name="params.private.0.interface_names" selectorValue="true" startIncrement="0" type="String">
+        <behavior displayName="interface_names" displayOrder="0" maxLength="100" name="params.private.0.interface_names" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Virtual Networks" displayOrder="20" maxLength="100" name="params.private.0.virtu_nets" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Virtual Networks" displayOrder="20" maxLength="100" name="params.private.0.virtu_nets" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
       <behaviors>
-        <behavior displayName="virtu_nets" displayOrder="0" maxLength="100" name="params.private.0.virtu_nets" selectorValue="false" startIncrement="0" type="String" visible="false">
+        <behavior displayName="virtu_nets" displayOrder="0" maxLength="100" name="params.private.0.virtu_nets" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
-        <behavior default="virtunet1" displayName="virtu_nets" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.virtu_nets" selectorValue="true" startIncrement="0" type="String">
+        <behavior default="virtunet1" displayName="virtu_nets" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.virtu_nets" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Network Security Groups" displayOrder="21" maxLength="100" name="params.private.0.network_sec_gr_names" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Network Security Groups" displayOrder="21" maxLength="100" name="params.private.0.network_sec_gr_names" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
       <behaviors>
-        <behavior displayName="network_sec_gr_names" displayOrder="0" maxLength="100" name="params.private.0.network_sec_gr_names" selectorValue="false" startIncrement="0" type="String" visible="false">
+        <behavior displayName="network_sec_gr_names" displayOrder="0" maxLength="100" name="params.private.0.network_sec_gr_names" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
-        <behavior default="dmaNetworkSectGr" displayName="network_sec_gr_names" displayOrder="0" maxLength="100" name="params.private.0.network_sec_gr_names" selectorValue="true" startIncrement="0" type="String">
+        <behavior default="dmaNetworkSectGr" displayName="network_sec_gr_names" displayOrder="0" isMandatory="true" maxLength="100" name="params.private.0.network_sec_gr_names" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
           <sections>
             <section>private</section>
           </sections>
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Operation" displayOrder="22" isUserLocked="true" maxLength="100" name="params.operation" startIncrement="0" type="String">
+    <variable displayName="Operation" displayOrder="22" isUserLocked="true" maxLength="100" name="params.operation" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Name" displayOrder="23" isMandatory="true" maxLength="100" name="params.vm_name" startIncrement="0" type="String">
+    <variable displayName="Name" displayOrder="23" isMandatory="true" maxLength="100" name="params.vm_name" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="Standard_D3_v2" displayName="Size" displayOrder="24" isMandatory="true" maxLength="100" name="params.vm_size" startIncrement="0" type="String">
+    <variable default="Standard_D3_v2" displayName="Size" displayOrder="24" isMandatory="true" maxLength="100" name="params.vm_size" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="UbuntuServer" displayName="Image Offer" displayOrder="25" isMandatory="true" maxLength="100" name="params.image_offer" startIncrement="0" type="String">
+    <variable default="fortinet_fortigate-vm_v5" displayName="Image Offer" displayOrder="25" isMandatory="true" maxLength="100" name="params.image_offer" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Debian">Debian</value>
         <value>fortinet_fortigate-vm_v5</value>
@@ -221,7 +223,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="Canonical" displayName="Image Publisher" displayOrder="26" isMandatory="true" maxLength="100" name="params.image_publisher" startIncrement="0" type="String">
+    <variable default="fortinet" displayName="Image Publisher" displayOrder="26" isMandatory="true" maxLength="100" name="params.image_publisher" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="credativ">credativ</value>
         <value>fortinet</value>
@@ -230,7 +232,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="16.04-LTS" displayName="Image Sku" displayOrder="27" isMandatory="true" maxLength="100" name="params.image_sku" startIncrement="0" type="String">
+    <variable default="fortinet_fg-vm_payg" displayName="Image Sku" displayOrder="27" isMandatory="true" maxLength="100" name="params.image_sku" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="8">8</value>
         <value>fortinet_fg-vm_payg</value>
@@ -239,7 +241,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="latest" displayName="Image Version" displayOrder="28" isMandatory="true" maxLength="100" name="params.image_version" startIncrement="0" type="String">
+    <variable default="latest" displayName="Image Version" displayOrder="28" isMandatory="true" maxLength="100" name="params.image_version" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>6.0.0</value>
         <value>5.6.6</value>
@@ -249,22 +251,22 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="dma" displayName="Admin Username" displayOrder="29" isMandatory="true" maxLength="100" name="params.admin_username" startIncrement="0" type="String">
+    <variable default="admin" displayName="Admin Username" displayOrder="29" isMandatory="true" maxLength="100" name="params.admin_username" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="DmaUbiqube38" displayName="Admin Password" displayOrder="30" isMandatory="true" maxLength="100" name="params.admin_password" startIncrement="0" type="Password">
+    <variable default="Fortinet2O18" displayName="Admin Password" displayOrder="30" isMandatory="true" maxLength="100" name="params.admin_password" numberOfRowMax="0" startIncrement="0" type="Password">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Disk" displayOrder="31" isUserLocked="true" maxLength="100" name="params.vm_disk_name" startIncrement="0" type="String">
+    <variable displayName="Disk" displayOrder="31" isUserLocked="true" maxLength="100" name="params.vm_disk_name" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="14020601" displayName="Manufacturer" displayOrder="32" isMandatory="true" maxLength="100" name="params.manufacturer_id" startIncrement="0" type="String">
+    <variable default="17" displayName="Manufacturer" displayOrder="32" isMandatory="true" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Linux">14020601</value>
         <value displayValue="Fortinet">17</value>
@@ -273,7 +275,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="14020601" displayName="Model" displayOrder="33" isMandatory="true" maxLength="100" name="params.model_id" startIncrement="0" type="String">
+    <variable default="130" displayName="Model" displayOrder="33" isMandatory="true" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Fortinet Generic">130</value>
         <value displayValue="Linux Generic">14020601</value>
@@ -282,44 +284,47 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Device" displayOrder="34" isUserLocked="true" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+    <variable displayName="Device" displayOrder="34" isUserLocked="true" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="VM Status" displayOrder="35" isUserLocked="true" maxLength="100" name="params.vm_status" startIncrement="0" type="String">
+    <variable displayName="VM Status" displayOrder="35" isUserLocked="true" maxLength="100" name="params.vm_status" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Status In Msa" displayOrder="36" isUserLocked="true" maxLength="100" name="params.status in msa" startIncrement="0" type="String">
+    <variable displayName="Status In Msa" displayOrder="36" isUserLocked="true" maxLength="100" name="params.status in msa" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Signature" displayOrder="37" maxLength="100" name="params.signature" startIncrement="0" type="String" visible="false">
+    <variable displayName="Signature" displayOrder="37" maxLength="100" name="params.signature" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Set License Plan</section>
       </sections>
     </variable>
-    <variable displayName="Licensetextlink" displayOrder="38" maxLength="100" name="params.licenseTextLink" startIncrement="0" type="String" visible="false">
+    <variable displayName="Licensetextlink" displayOrder="38" maxLength="100" name="params.licenseTextLink" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Set License Plan</section>
       </sections>
     </variable>
-    <variable displayName="Privacypolicylink" displayOrder="39" maxLength="100" name="params.privacyPolicyLink" startIncrement="0" type="String" visible="false">
+    <variable displayName="Privacypolicylink" displayOrder="39" maxLength="100" name="params.privacyPolicyLink" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Set License Plan</section>
       </sections>
     </variable>
-    <variable displayName="Retrievedatetime" displayOrder="40" maxLength="100" name="params.retrieveDatetime" startIncrement="0" type="String" visible="false">
+    <variable displayName="Retrievedatetime" displayOrder="40" maxLength="100" name="params.retrieveDatetime" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Set License Plan</section>
       </sections>
     </variable>
-    <variable displayName="Profile Reference" displayOrder="160" isMandatory="true" maxLength="100" name="params.profile_ref" startIncrement="0" type="String">
+    <variable default="LinuxG" displayName="Profile Reference" displayOrder="160" isMandatory="true" maxLength="100" name="params.profile_ref" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value displayValue="FortigateAzure">FortigateAzure</value>
+      </values>
       <sections>
-        <section>Attach Profile</section>
+        <section>Configurations</section>
       </sections>
     </variable>
   </variables>  <example>    <content/>  </example>
@@ -391,47 +396,62 @@
     
     
     
-  <task name="Task_Get_Token.php">
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Get_Public_Address.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Get_Public_Address.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get Public Address</displayName>
     </task>
-    <task name="Task_Create_Interface.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Create_Interface.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Create Interface</displayName>
     </task>
-    <task name="Task_Create_Private_Network_Interfaces.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Create_Private_Network_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Create Private Network Interfaces</displayName>
     </task>
-    <task name="Task_Set_License_Plan.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Set_License_Plan.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Set License Plan</displayName>
     </task>
-    <task name="Task_Deploy_VM.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Deploy_VM.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Deploy VM</displayName>
     </task>
-    <task name="Task_Get_VM_Disk_Name.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Get_VM_Disk_Name.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get VM Disk Name</displayName>
     </task>
-    <task name="Task_Get_VM_IP_Public_Address.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Get_VM_IP_Public_Address.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get VM IP Public Address</displayName>
     </task>
-    <task name="Task_Create_Corresponding_MSA_Device.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Create_Corresponding_MSA_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Create Corresponding MSA Device</displayName>
     </task>
-    <task name="Task_Ping_Device.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Ping_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Ping Device</displayName>
     </task>
-    <task name="Task_MSA_Initial_Device_Provisioning.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_MSA_Initial_Device_Provisioning.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>MSA Initial Device Provisioning</displayName>
     </task>
@@ -439,11 +459,11 @@
       <processPath/>
       <displayName>Wait for device reachability</displayName>
     </task>
-    <task name="Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Activate DHCP Mode For Additional Interfaces</displayName>
     </task>
-    <task name="Task_Attach_Profile.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Attach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Attach Profile</displayName>
     </task>
@@ -451,6 +471,7 @@
       <processPath/>
       <displayName>Synchronize</displayName>
     </task>
+  <compensation/>
   </process>
   
 
@@ -461,14 +482,15 @@
     <icon/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    <task name="Task_Get_Token.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Start_VM/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Start_VM/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Start.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Start_VM/Tasks/Task_Start.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Start_VM/Tasks/</processPath>
       <displayName>Start</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Stop_VM">
     <visibility>5</visibility>
@@ -476,14 +498,15 @@
     <icon/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    <task name="Task_Get_Token.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Stop_VM/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Stop_VM/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Stop.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Stop_VM/Tasks/Task_Stop.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Stop_VM/Tasks/</processPath>
       <displayName>Stop</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Restart_VM">
     <visibility>5</visibility>
@@ -491,14 +514,15 @@
     <icon/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    <task name="Task_Get_Token.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Restart_VM/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Restart_VM/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Restart.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Restart_VM/Tasks/Task_Restart.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Restart_VM/Tasks/</processPath>
       <displayName>Restart</displayName>
     </task>
+  <compensation/>
   </process>
 
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy">
@@ -532,47 +556,47 @@
     
     
     
-  <task name="Task_Get_Token.php">
+  <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Get_Public_Address.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Get_Public_Address.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get Public Address</displayName>
     </task>
-    <task name="Task_Create_Interface.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Create_Interface.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Create Interface</displayName>
     </task>
-    <task name="Task_Create_Private_Network_Interfaces.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Create_Private_Network_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Create Private Network Interfaces</displayName>
     </task>
-    <task name="Task_Set_License_Plan.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Set_License_Plan.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Set License Plan</displayName>
     </task>
-    <task name="Task_Deploy_VM.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Deploy_VM.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Deploy VM</displayName>
     </task>
-    <task name="Task_Get_VM_Disk_Name.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Get_VM_Disk_Name.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get VM Disk Name</displayName>
     </task>
-    <task name="Task_Get_VM_IP_Public_Address.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Get_VM_IP_Public_Address.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get VM IP Public Address</displayName>
     </task>
-    <task name="Task_Ping_Device.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Ping_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Ping Device</displayName>
     </task>
-    <task name="Task_Create_Corresponding_MSA_Device.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Create_Corresponding_MSA_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Create Corresponding MSA Device</displayName>
     </task>
-    <task name="Task_MSA_Initial_Device_Provisioning.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_MSA_Initial_Device_Provisioning.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>MSA Initial Device Provisioning</displayName>
     </task>
@@ -580,11 +604,11 @@
       <processPath/>
       <displayName>Wait for device reachability</displayName>
     </task>
-    <task name="Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Activate DHCP Mode For Additional Interfaces</displayName>
     </task>
-    <task name="Task_Attach_Profile.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Attach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Attach Profile</displayName>
     </task>
@@ -592,6 +616,7 @@
       <processPath/>
       <displayName>Synchronize</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy">
     <visibility>5</visibility>
@@ -625,42 +650,43 @@
     
     
     
-  <task name="Task_Get_Token.php">
+  <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Task_Stop_VM.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Stop_VM.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Stop VM</displayName>
     </task>
-    <task name="Task_Delete_VM.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_VM.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete VM</displayName>
     </task>
-    <task name="Task_Delete_Interface.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_Interface.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete Interface</displayName>
     </task>
-    <task name="Task_Delete_Public_Address.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_Public_Address.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete Public Address</displayName>
     </task>
-    <task name="Task_Delete_Private_Network_Interfaces.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_Private_Network_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete Private Network Interfaces</displayName>
     </task>
-    <task name="Task_Delete_VM_Disk.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_VM_Disk.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete VM Disk</displayName>
     </task>
-    <task name="Task_Detach_Profile.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Detach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Detach Profile</displayName>
     </task>
-    <task name="Task_Delete_MSA_Device.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/Task_Delete_MSA_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Undeploy/Tasks/</processPath>
       <displayName>Delete MSA Device</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Delete_Instance">
     <visibility>5</visibility>
@@ -668,5 +694,6 @@
     <icon/>
     <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
+  <compensation/>
   </process>
 </ObjectDefinition>
