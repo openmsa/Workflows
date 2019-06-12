@@ -2,7 +2,7 @@
 <ObjectDefinition>  <information>
     <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
-    <displayField>operation</displayField>
+    <displayField>service_id</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
     <executionMode>TRANSACTION</executionMode>
     <group>Public Cloud|MS Azure</group>
@@ -165,7 +165,7 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Virtual Networks" displayOrder="20" maxLength="100" name="params.private.0.virtu_nets" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Virtual Networks" displayOrder="19" maxLength="100" name="params.private.0.virtu_nets" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
@@ -182,7 +182,7 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Network Security Groups" displayOrder="21" maxLength="100" name="params.private.0.network_sec_gr_names" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Network Security Groups" displayOrder="20" maxLength="100" name="params.private.0.network_sec_gr_names" numberOfRowMax="0" selector="params.private_network" startIncrement="0" type="Composite" visible="false">
       <sections>
         <section>Additional Network Interfaces</section>
       </sections>
@@ -199,22 +199,22 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Operation" displayOrder="22" isUserLocked="true" maxLength="100" name="params.operation" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Operation" displayOrder="21" isUserLocked="true" maxLength="100" name="params.operation" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable displayName="Name" displayOrder="23" isMandatory="true" maxLength="100" name="params.vm_name" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Name" displayOrder="22" isMandatory="true" maxLength="100" name="params.vm_name" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="Standard_D3_v2" displayName="Size" displayOrder="24" isMandatory="true" maxLength="100" name="params.vm_size" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="Standard_D3_v2" displayName="Size" displayOrder="23" isMandatory="true" maxLength="100" name="params.vm_size" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="fortinet_fortigate-vm_v5" displayName="Image Offer" displayOrder="25" isMandatory="true" maxLength="100" name="params.image_offer" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="fortinet_fortigate-vm_v5" displayName="Image Offer" displayOrder="24" isMandatory="true" maxLength="100" name="params.image_offer" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Debian">Debian</value>
         <value>fortinet_fortigate-vm_v5</value>
@@ -223,7 +223,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="fortinet" displayName="Image Publisher" displayOrder="26" isMandatory="true" maxLength="100" name="params.image_publisher" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="fortinet" displayName="Image Publisher" displayOrder="25" isMandatory="true" maxLength="100" name="params.image_publisher" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="credativ">credativ</value>
         <value>fortinet</value>
@@ -232,7 +232,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="fortinet_fg-vm_payg" displayName="Image Sku" displayOrder="27" isMandatory="true" maxLength="100" name="params.image_sku" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="fortinet_fg-vm_payg" displayName="Image Sku" displayOrder="26" isMandatory="true" maxLength="100" name="params.image_sku" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="8">8</value>
         <value>fortinet_fg-vm_payg</value>
@@ -241,7 +241,7 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="latest" displayName="Image Version" displayOrder="28" isMandatory="true" maxLength="100" name="params.image_version" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="latest" displayName="Image Version" displayOrder="27" isMandatory="true" maxLength="100" name="params.image_version" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>6.0.0</value>
         <value>5.6.6</value>
@@ -251,12 +251,17 @@
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="admin" displayName="Admin Username" displayOrder="29" isMandatory="true" maxLength="100" name="params.admin_username" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Customer" displayOrder="28" maxLength="100" name="params.customer" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Customer">
       <sections>
         <section>VM</section>
       </sections>
     </variable>
-    <variable default="Fortinet2O18" displayName="Admin Password" displayOrder="30" isMandatory="true" maxLength="100" name="params.admin_password" numberOfRowMax="0" startIncrement="0" type="Password">
+    <variable default="UbiqubeGre" displayName="Admin Username" displayOrder="29" isMandatory="true" maxLength="100" name="params.admin_username" numberOfRowMax="0" startIncrement="0" type="String">
+      <sections>
+        <section>VM</section>
+      </sections>
+    </variable>
+    <variable default="P@ssw0rd2019" displayName="Admin Password" displayOrder="30" isMandatory="true" maxLength="100" name="params.admin_password" numberOfRowMax="0" startIncrement="0" type="Password">
       <sections>
         <section>VM</section>
       </sections>
@@ -319,10 +324,7 @@
         <section>Set License Plan</section>
       </sections>
     </variable>
-    <variable default="LinuxG" displayName="Profile Reference" displayOrder="160" isMandatory="true" maxLength="100" name="params.profile_ref" numberOfRowMax="0" startIncrement="0" type="String">
-      <values>
-        <value displayValue="FortigateAzure">FortigateAzure</value>
-      </values>
+    <variable displayName="Profile Reference" displayOrder="41" maxLength="100" name="params.profile_ref" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Configurations</section>
       </sections>
@@ -411,6 +413,38 @@
     
     
     
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
   <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
@@ -445,7 +479,7 @@
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Create_Corresponding_MSA_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
-      <displayName>Create Corresponding MSA Device</displayName>
+      <displayName>Create  MSA Device</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Ping_Device.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
@@ -453,7 +487,7 @@
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_MSA_Initial_Device_Provisioning.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
-      <displayName>MSA Initial Device Provisioning</displayName>
+      <displayName>Activate Device</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_wait_for_device_reachability.php">
       <processPath/>
@@ -461,15 +495,15 @@
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Activate_DHCP_Mode_For_Additional_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
-      <displayName>Activate DHCP Mode For Additional Interfaces</displayName>
+      <displayName>Activate DHCP for Additional Interfaces</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Attach_Profile.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/</processPath>
       <displayName>Attach Profile</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Reference/MSActivator/OrderCommand/Task_msa_synchronize_objects.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Synchronize_Microservices.php">
       <processPath/>
-      <displayName>Synchronize</displayName>
+      <displayName>Synchronize Microservices</displayName>
     </task>
   <compensation/>
   </process>
@@ -556,6 +590,22 @@
     
     
     
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
   <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/Task_Get_Token.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Get Token</displayName>
@@ -612,9 +662,9 @@
       <processPath>/opt/fmc_repository/Process/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Re_Deploy/Tasks/</processPath>
       <displayName>Attach Profile</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Reference/MSActivator/OrderCommand/Task_msa_synchronize_objects.php">
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/Microsoft_Azure/VM_Deployment/Process_Deploy/Tasks/Task_Synchronize_Microservices.php">
       <processPath/>
-      <displayName>Synchronize</displayName>
+      <displayName>Synchronize Microservices</displayName>
     </task>
   <compensation/>
   </process>
