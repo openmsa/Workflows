@@ -7,7 +7,7 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1559825115139</value>
+            <value>1559918479554</value>
         </entry>
         <entry>
             <key>COMMENT</key>
@@ -15,23 +15,22 @@
         </entry>
         <entry>
             <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1510761364911</value>
+            <value>1524752853346</value>
         </entry>
         <entry>
             <key>CONFIGURATION_FILTER</key>
             <value></value>
         </entry>
         <entry>
-            <key>TYPE</key>
-            <value>UPLOAD</value>
+            <key>TAG</key>
+            <value>Task_msa_attach_config_profil.php</value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>security_groups.xml</value>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
         </entry>
     </map>
 </metadata>

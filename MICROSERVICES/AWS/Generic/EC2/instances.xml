@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>instance_id</displayField>
+    <dynamic>false</dynamic>
+    <group>EC2</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Instances</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Private DNS Name" displayOrder="0" maxLength="100" name="params.dns_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Instance ID" displayOrder="0" maxLength="150" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.tag_value" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="availability_zone" displayOrder="1" maxLength="100" name="params.Placement.0.availability_zone" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Placement</section>
+      </sections>
+    </variable>
+    <variable displayName="group_name" displayOrder="1" maxLength="100" name="params.Placement.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Placement</section>
+      </sections>
+    </variable>
+    <variable displayName="tenancy" displayOrder="1" maxLength="100" name="params.Placement.0.tenancy" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Placement</section>
+      </sections>
+    </variable>
+    <variable displayName="tag_name" displayOrder="1" maxLength="100" name="params.Tags.0.tag_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable default="eu-west-1a" displayName="Availability Zone " displayOrder="2" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable default="ami-c75abbbe" displayName="Image ID" displayOrder="2" maxLength="100" name="params.image_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable default="m3.medium" displayName="Instance Type" displayOrder="2" maxLength="100" name="params.instance_type" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable default="1" displayName="Max Count" displayOrder="2" maxLength="100" name="params.max_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable default="1" displayName="Min Count" displayOrder="2" maxLength="100" name="params.min_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable displayName="Security Groups" displayOrder="3" maxLength="100" name="params.security_groups" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="State" displayOrder="3" isUserLocked="true" maxLength="100" name="params.state_name" numberOfRowMax="0" startIncrement="0" type="String">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="state_name" displayOrder="4" maxLength="100" name="params.State.0.state_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>State</section>
+      </sections>
+    </variable>
+    <variable displayName="_color" displayOrder="4" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable default="Name" displayName="Tag Key" displayOrder="4" maxLength="100" name="params.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Key" displayOrder="6" maxLength="100" name="params.Tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="6" maxLength="100" name="params.Tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="State Transition Reason" displayOrder="6" maxLength="100" name="params.state_transition_reason" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="group_id" displayOrder="7" maxLength="100" name="params.SecurityGroups.0.group_id" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>SecurityGroups</section>
+      </sections>
+    </variable>
+    <variable displayName="Group Name" displayOrder="8" maxLength="100" name="params.SecurityGroups.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>SecurityGroups</section>
+      </sections>
+    </variable>
+    <variable displayName="Key Name" displayOrder="12" maxLength="100" name="params.key_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Subnet ID" displayOrder="12" maxLength="100" name="params.subnet_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>Subnets</class>
+      </classes>
+    </variable>
+    <variable displayName="VPC ID" displayOrder="14" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+    <variable displayName="Launch Time" displayOrder="16" maxLength="100" name="params.launch_time" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Private IP Address" displayOrder="18" maxLength="100" name="params.private_ip_address" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Public DNS Name" displayOrder="21" maxLength="100" name="params.public_dns_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Virtualization Type" displayOrder="27" maxLength="100" name="params.virtualization_type" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>&lt;?xml version="1.0"?&gt;
+&lt;root&gt;
+	&lt;requestId&gt;290f81fa-88dc-43a8-8635-5863056ff198&lt;/requestId&gt;
+	&lt;Reservations&gt;
+		&lt;row&gt;
+			&lt;ReservationId&gt;r-0210c3ba32edccc99&lt;/ReservationId&gt;
+			&lt;OwnerId&gt;180813930377&lt;/OwnerId&gt;
+			&lt;Groups/&gt;
+			&lt;Instances&gt;
+				&lt;row&gt;
+					&lt;enaSupport&gt;true&lt;/enaSupport&gt;
+					&lt;InstanceId&gt;i-03a5755a0c96f00f5&lt;/InstanceId&gt;
+					&lt;ImageId&gt;ami-7ce67205&lt;/ImageId&gt;
+					&lt;State&gt;
+						&lt;Code&gt;80&lt;/Code&gt;
+						&lt;Name&gt;stopped&lt;/Name&gt;
+					&lt;/State&gt;
+					&lt;PrivateDnsName&gt;ip-172-31-46-106.eu-west-1.compute.internal&lt;/PrivateDnsName&gt;
+					&lt;PublicDnsName/&gt;
+					&lt;StateTransitionReason&gt;User initiated (2018-03-13 14:30:33 GMT)&lt;/StateTransitionReason&gt;
+					&lt;KeyName&gt;Fortigate&lt;/KeyName&gt;
+					&lt;AmiLaunchIndex&gt;0&lt;/AmiLaunchIndex&gt;
+					&lt;ProductCodes&gt;
+						&lt;row&gt;
+							&lt;ProductCodeId&gt;dlaioq277sglm5mw1y1dmeuqa&lt;/ProductCodeId&gt;
+							&lt;ProductCodeType&gt;marketplace&lt;/ProductCodeType&gt;
+						&lt;/row&gt;
+					&lt;/ProductCodes&gt;
+					&lt;InstanceType&gt;m4.2xlarge&lt;/InstanceType&gt;
+					&lt;LaunchTime&gt;2018-03-13T13:57:28.000Z&lt;/LaunchTime&gt;
+					&lt;Placement&gt;
+						&lt;AvailabilityZone&gt;eu-west-1b&lt;/AvailabilityZone&gt;
+						&lt;GroupName/&gt;
+						&lt;Tenancy&gt;default&lt;/Tenancy&gt;
+					&lt;/Placement&gt;
+					&lt;Monitoring&gt;
+						&lt;State&gt;disabled&lt;/State&gt;
+					&lt;/Monitoring&gt;
+					&lt;SubnetId&gt;subnet-f8d3cba0&lt;/SubnetId&gt;
+					&lt;VpcId&gt;vpc-5cc71e3b&lt;/VpcId&gt;
+					&lt;PrivateIpAddress&gt;172.31.46.106&lt;/PrivateIpAddress&gt;
+					&lt;StateReason&gt;
+						&lt;Code&gt;Client.UserInitiatedShutdown&lt;/Code&gt;
+						&lt;Message&gt;Client.UserInitiatedShutdown: User initiated shutdown&lt;/Message&gt;
+					&lt;/StateReason&gt;
+					&lt;Architecture&gt;x86_64&lt;/Architecture&gt;
+					&lt;RootDeviceType&gt;ebs&lt;/RootDeviceType&gt;
+					&lt;RootDeviceName&gt;/dev/sda1&lt;/RootDeviceName&gt;
+					&lt;BlockDeviceMappings&gt;
+						&lt;row&gt;
+							&lt;DeviceName&gt;/dev/sda1&lt;/DeviceName&gt;
+							&lt;Ebs&gt;
+								&lt;VolumeId&gt;vol-0eef7460300fb800d&lt;/VolumeId&gt;
+								&lt;Status&gt;attached&lt;/Status&gt;
+								&lt;AttachTime&gt;2018-03-13T13:57:28.000Z&lt;/AttachTime&gt;
+								&lt;DeleteOnTermination&gt;true&lt;/DeleteOnTermination&gt;
+							&lt;/Ebs&gt;
+						&lt;/row&gt;
+						&lt;row&gt;
+							&lt;DeviceName&gt;/dev/sdb&lt;/DeviceName&gt;
+							&lt;Ebs&gt;
+								&lt;VolumeId&gt;vol-0207bcd75d2158185&lt;/VolumeId&gt;
+								&lt;Status&gt;attached&lt;/Status&gt;
+								&lt;AttachTime&gt;2018-03-13T13:57:28.000Z&lt;/AttachTime&gt;
+								&lt;DeleteOnTermination&gt;true&lt;/DeleteOnTermination&gt;
+							&lt;/Ebs&gt;
+						&lt;/row&gt;
+					&lt;/BlockDeviceMappings&gt;
+					&lt;VirtualizationType&gt;hvm&lt;/VirtualizationType&gt;
+					&lt;ClientToken&gt;15209494455666649&lt;/ClientToken&gt;
+					&lt;Tags&gt;
+						&lt;row&gt;
+							&lt;Key&gt;Name&lt;/Key&gt;
+							&lt;Value&gt;Fortigate BYOL test&lt;/Value&gt;
+						&lt;/row&gt;
+					&lt;/Tags&gt;
+					&lt;SecurityGroups&gt;
+						&lt;row&gt;
+							&lt;GroupName&gt;launch-wizard-1&lt;/GroupName&gt;
+							&lt;GroupId&gt;sg-07f2147f&lt;/GroupId&gt;
+						&lt;/row&gt;
+					&lt;/SecurityGroups&gt;
+					&lt;SourceDestCheck&gt;true&lt;/SourceDestCheck&gt;
+					&lt;Hypervisor&gt;xen&lt;/Hypervisor&gt;
+					&lt;NetworkInterfaces&gt;
+						&lt;row&gt;
+							&lt;NetworkInterfaceId&gt;eni-01971804&lt;/NetworkInterfaceId&gt;
+							&lt;SubnetId&gt;subnet-f8d3cba0&lt;/SubnetId&gt;
+							&lt;VpcId&gt;vpc-5cc71e3b&lt;/VpcId&gt;
+							&lt;Description/&gt;
+							&lt;OwnerId&gt;180813930377&lt;/OwnerId&gt;
+							&lt;Status&gt;in-use&lt;/Status&gt;
+							&lt;MacAddress&gt;0a:ee:b1:bf:c7:3e&lt;/MacAddress&gt;
+							&lt;PrivateIpAddress&gt;172.31.46.106&lt;/PrivateIpAddress&gt;
+							&lt;PrivateDnsName&gt;ip-172-31-46-106.eu-west-1.compute.internal&lt;/PrivateDnsName&gt;
+							&lt;SourceDestCheck&gt;true&lt;/SourceDestCheck&gt;
+							&lt;Groups&gt;
+								&lt;row&gt;
+									&lt;GroupName&gt;launch-wizard-1&lt;/GroupName&gt;
+									&lt;GroupId&gt;sg-07f2147f&lt;/GroupId&gt;
+								&lt;/row&gt;
+							&lt;/Groups&gt;
+							&lt;Attachment&gt;
+								&lt;AttachmentId&gt;eni-attach-e3d62701&lt;/AttachmentId&gt;
+								&lt;DeviceIndex&gt;0&lt;/DeviceIndex&gt;
+								&lt;Status&gt;attached&lt;/Status&gt;
+								&lt;AttachTime&gt;2018-03-13T13:57:28.000Z&lt;/AttachTime&gt;
+								&lt;DeleteOnTermination&gt;true&lt;/DeleteOnTermination&gt;
+							&lt;/Attachment&gt;
+							&lt;PrivateIpAddresses&gt;
+								&lt;row&gt;
+									&lt;PrivateIpAddress&gt;172.31.46.106&lt;/PrivateIpAddress&gt;
+									&lt;PrivateDnsName&gt;ip-172-31-46-106.eu-west-1.compute.internal&lt;/PrivateDnsName&gt;
+									&lt;Primary&gt;true&lt;/Primary&gt;
+								&lt;/row&gt;
+							&lt;/PrivateIpAddresses&gt;
+						&lt;/row&gt;
+					&lt;/NetworkInterfaces&gt;
+					&lt;EbsOptimized&gt;true&lt;/EbsOptimized&gt;
+				&lt;/row&gt;
+			&lt;/Instances&gt;
+		&lt;/row&gt;
+	&lt;/Reservations&gt;
+&lt;/root&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeInstances</xpath>
+    <parser>
+      <section>
+        <xpath>//root/Reservations/row/Instances/row</xpath>
+      </section>
+      <lines>
+        
+        <line>
+          <xpath>InstanceId</xpath>
+          <regexp>@&lt;InstanceId&gt;(?&lt;object_id&gt;.*)&lt;/InstanceId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>ImageId</xpath>
+          <regexp>@&lt;ImageId&gt;(?&lt;image_id&gt;.*)&lt;/ImageId&gt;@</regexp>
+        </line>
+        <line>
+          <array name="State">
+            <xpath>State</xpath>
+            <lines>
+              
+              <line>
+                <xpath>Name</xpath>
+                <regexp>@&lt;Name&gt;(?&lt;state_name&gt;.*)&lt;/Name&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <xpath>PrivateDnsName</xpath>
+          <regexp>@&lt;PrivateDnsName&gt;(?&lt;dns_name&gt;.*)&lt;/PrivateDnsName&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>PublicDnsName</xpath>
+          <regexp>@&lt;PublicDnsName&gt;(?&lt;public_dns_name&gt;.*)&lt;/PublicDnsName&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>StateTransitionReason</xpath>
+          <regexp>@&lt;StateTransitionReason&gt;(?&lt;state_transition_reason&gt;.*)&lt;/StateTransitionReason&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>KeyName</xpath>
+          <regexp>@&lt;KeyName&gt;(?&lt;key_name&gt;.*)&lt;/KeyName&gt;@</regexp>
+        </line>
+        
+        
+        <line>
+          <xpath>InstanceType</xpath>
+          <regexp>@&lt;InstanceType&gt;(?&lt;instance_type&gt;.*)&lt;/InstanceType&gt;@</regexp>
+        </line>
+        
+        <line>
+          <array name="Placement">
+            <xpath>Placement</xpath>
+            <lines>
+              <line>
+                <xpath>AvailabilityZone</xpath>
+                <regexp>@&lt;AvailabilityZone&gt;(?&lt;availability_zone&gt;.*)&lt;/AvailabilityZone&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>GroupName</xpath>
+                <regexp>@&lt;GroupName&gt;(?&lt;group_name&gt;.*)&lt;/GroupName&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Tenancy</xpath>
+                <regexp>@&lt;Tenancy&gt;(?&lt;tenancy&gt;.*)&lt;/Tenancy&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+        
+        
+        
+        
+        <line>
+          <xpath>SubnetId</xpath>
+          <regexp>@&lt;SubnetId&gt;(?&lt;subnet_id&gt;.*)&lt;/SubnetId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>VpcId</xpath>
+          <regexp>@&lt;VpcId&gt;(?&lt;vpc_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>PrivateIpAddress</xpath>
+          <regexp>@&lt;PrivateIpAddress&gt;(?&lt;private_ip_address&gt;.*)&lt;/PrivateIpAddress&gt;@</regexp>
+        </line>
+        
+        
+        
+        
+        <line>
+          <xpath>VirtualizationType</xpath>
+          <regexp>@&lt;VirtualizationType&gt;(?&lt;virtualization_type&gt;.*)&lt;/VirtualizationType&gt;@</regexp>
+        </line>
+        
+        <line>
+          <array name="SecurityGroups">
+            <xpath>SecurityGroups/row</xpath>
+            <lines>
+              <line>
+                <xpath>GroupName</xpath>
+                <regexp>@&lt;GroupName&gt;(?&lt;group_name&gt;.*)&lt;/GroupName&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>GroupId</xpath>
+                <regexp>@&lt;GroupId&gt;(?&lt;group_id&gt;.*)&lt;/GroupId&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="Tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+        <line>
+          <xpath>Hypervisor</xpath>
+          <regexp>@&lt;Hypervisor&gt;(?&lt;hypervisor&gt;.*)&lt;/Hypervisor&gt;@</regexp>
+        </line>
+        
+        
+        
+        
+        
+        
+        
+      </lines>
+    </parser>
+    <post_template>{assign_object_variable var="availability_zone" value=$params.Placement.0.availability_zone}
+{assign_object_variable var="state_name" value=$params.State.0.state_name}
+{assign_object_variable var="security_groups" value=$params.SecurityGroups.0.group_id}
+{assign_object_variable var="tag_value" value=$params.Tags.0.tag_value}
+
+
+{if  $params.State.0.state_name == running }
+      {assign_object_variable var="_color" value=green}
+{/if}
+{if  $params.State.0.state_name == stopped }
+      {assign_object_variable var="_color" value=red}
+{/if}</post_template>
+  </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>RunInstances
+</xpath>
+    <operation>{literal}{{/literal}
+"ImageId":"{$params.image_id}",
+"InstanceType":"{$params.instance_type}",
+"MaxCount":"{$params.max_count}",
+"MinCount":"{$params.min_count}",
+"Placement.AvailabilityZone":"{$params.availability_zone}",
+"TagSpecifications":{literal}[[{{/literal}"Tags":{literal}[[{{/literal}"key":"{$params.tag_key}"{literal}}{/literal},{literal}{{/literal}"value":"{$params.tag_value}"{literal}}{/literal}
+{literal}]]}]]}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>TerminateInstances
+</xpath>
+    <operation>{literal}{{/literal}
+"InstanceIds":{literal}[{/literal}"{$params.object_id}"{literal}]{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+
+</ObjectDefinition>

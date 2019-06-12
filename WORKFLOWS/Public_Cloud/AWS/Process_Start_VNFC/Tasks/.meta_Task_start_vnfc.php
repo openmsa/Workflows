@@ -2,36 +2,41 @@
 <metadata>
     <map>
         <entry>
+            <key>MODEL</key>
+        </entry>
+        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1559825115139</value>
+            <value>1548349135378</value>
         </entry>
         <entry>
             <key>COMMENT</key>
-            <value></value>
+            <value>Start instance in AWS</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1510761364911</value>
+            <value>1523261074239</value>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>CONFIGURATION_FILTER</key>
             <value></value>
         </entry>
         <entry>
-            <key>TYPE</key>
-            <value>UPLOAD</value>
+            <key>TAG</key>
+            <value>Task_start_vnfc.php</value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>security_groups.xml</value>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
         </entry>
     </map>
 </metadata>

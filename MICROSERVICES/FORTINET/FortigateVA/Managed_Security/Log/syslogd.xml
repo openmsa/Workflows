@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,24 +23,24 @@
     <sortvariable>params._order</sortvariable>
     <visibility>4</visibility>
   </information>  <variables frozen="0">
-    <variable default="Syslog" displayName="syslogd" displayOrder="0" isUserLocked="true" keepOnImport="true" maxLength="150" name="params.object_id" type="String" visible="false"/>
-    <variable default="disable" displayName="Status" displayOrder="7" editable="false" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_status" type="String">
+    <variable default="Syslog" displayName="syslogd" displayOrder="0" isUserLocked="true" keepOnImport="true" maxLength="150" name="params.object_id" numberOfRowMax="0" type="String" visible="false"/>
+    <variable default="disable" displayName="Status" displayOrder="7" editable="false" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_status" numberOfRowMax="0" type="String">
       <values>
         <value displayValue="Enable">enable</value>
         <value displayValue="Disable">disable</value>
       </values>
     </variable>
-    <variable default="514" displayName="Port" displayOrder="8" groupDisplayName="Syslogd3" maxLength="200" name="params.syslogd3_port" selector="params.syslogd3_status" type="Composite">
+    <variable default="514" displayName="Port" displayOrder="8" groupDisplayName="Syslogd3" maxLength="200" name="params.syslogd3_port" numberOfRowMax="0" selector="params.syslogd3_status" type="Composite">
       <behaviors>
-        <behavior displayName="syslogd3_port" displayOrder="0" maxLength="200" name="params.syslogd3_port" selectorValue="disable" type="String" visible="false"/>
-        <behavior default="514" displayName="Port" displayOrder="0" isMandatory="true" maxLength="200" name="params.syslogd3_port" selectorValue="enable" type="Integer">
+        <behavior displayName="syslogd3_port" displayOrder="0" maxLength="200" name="params.syslogd3_port" numberOfRowMax="0" selectorValue="disable" type="String" visible="false"/>
+        <behavior default="514" displayName="Port" displayOrder="0" isMandatory="true" maxLength="200" name="params.syslogd3_port" numberOfRowMax="0" selectorValue="enable" type="Integer">
           <sections>
             <section>Syslog3</section>
           </sections>
         </behavior>
       </behaviors>
     </variable>
-    <variable default="local7" displayName="Facility " displayOrder="9" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_facility_name" selector="params.syslogd3_status" type="Composite">
+    <variable default="local7" displayName="Facility " displayOrder="9" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_facility_name" numberOfRowMax="0" selector="params.syslogd3_status" type="Composite">
       <values>
         <value displayValue="ntp">ntp</value>
         <value displayValue="local2">local2</value>
@@ -68,8 +68,8 @@
         <value displayValue="ftp">ftp</value>
       </values>
       <behaviors>
-        <behavior displayName="syslogd3_facility_name" displayOrder="0" maxLength="200" name="params.syslogd3_facility_name" selectorValue="disable" type="String" visible="false"/>
-        <behavior default="local7" displayName="Facility " displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.syslogd3_facility_name" selectorValue="enable" type="String">
+        <behavior displayName="syslogd3_facility_name" displayOrder="0" maxLength="200" name="params.syslogd3_facility_name" numberOfRowMax="0" selectorValue="disable" type="String" visible="false"/>
+        <behavior default="local7" displayName="Facility " displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.syslogd3_facility_name" numberOfRowMax="0" selectorValue="enable" type="String">
           <values>
             <value displayValue="alert">alert</value>
             <value displayValue="audit">audit</value>
@@ -99,16 +99,10 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable default="disable" displayName="Reliable" displayOrder="10" editable="false" groupDisplayName="Syslogd3" maxLength="200" name="params.syslogd3_reliable" type="String" visible="false">
-      <values>
-        <value displayValue="disable">disable</value>
-        <value displayValue="enable">enable</value>
-      </values>
-    </variable>
-    <variable displayName="Server IP Address" displayOrder="12" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_server_ip" selector="params.syslogd3_status" type="Composite">
+    <variable displayName="Server IP Address" displayOrder="12" groupDisplayName="Syslogd3" isMandatory="true" maxLength="200" name="params.syslogd3_server_ip" numberOfRowMax="0" selector="params.syslogd3_status" type="Composite">
       <behaviors>
-        <behavior displayName="syslogd3_server_ip" displayOrder="0" maxLength="200" name="params.syslogd3_server_ip" selectorValue="disable" type="String" visible="false"/>
-        <behavior displayName="Server IP Address" displayOrder="0" isMandatory="true" maxLength="200" name="params.syslogd3_server_ip" selectorValue="enable" type="IpMask"/>
+        <behavior displayName="syslogd3_server_ip" displayOrder="0" maxLength="200" name="params.syslogd3_server_ip" numberOfRowMax="0" selectorValue="disable" type="String" visible="false"/>
+        <behavior displayName="Server IP Address" displayOrder="0" isMandatory="true" maxLength="200" name="params.syslogd3_server_ip" numberOfRowMax="0" selectorValue="enable" type="IpMask"/>
       </behaviors>
     </variable>
   </variables>  <example>
@@ -140,9 +134,6 @@ set port {$params.syslogd3_port}
 set port 514
 {/if}
 
-{if !empty($params.syslogd3_reliable)}
-set reliable {$params.syslogd3_reliable}
-{/if}
 set server {$params.syslogd3_server_ip}
 end
 {/if}
@@ -160,9 +151,6 @@ set facility {$params.syslogd3_facility_name}
 set port {$params.syslogd3_port}
 {else}
 set port 514
-{/if}
-{if isset($params.syslogd3_reliable)}
-set reliable {$params.syslogd3_reliable}
 {/if}
 set server {$params.syslogd3_server_ip}
 {else}

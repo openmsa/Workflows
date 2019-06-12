@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>xml</configType>
     <createTemplateId/>
@@ -23,10 +23,10 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="VPC Id" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
-    <variable displayName="CIDR Block" displayOrder="1" maxLength="100" name="params.cidr_block" startIncrement="0" type="String"/>
-    <variable displayName="State" displayOrder="2" maxLength="100" name="params.state" startIncrement="0" type="String"/>
-    <variable displayName="vpc_ref" displayOrder="3" maxLength="100" name="params.vpc_ref" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="VPC Id" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="CIDR Block" displayOrder="1" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="State" displayOrder="2" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="vpc_ref" displayOrder="3" maxLength="100" name="params.vpc_ref" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>
 </content>
@@ -53,6 +53,10 @@
         </line>
       </lines>
     </parser>
-    <post_template>{assign_object_variable var="vpc_ref" value="{$params.object_id} - {$params.cidr_block}"}</post_template>
+    <post_template>{assign_object_variable var="vpc_ref" value="{$params.object_id} - {$params.cidr_block}"}
+
+{if  $params.state == available }
+      {assign_object_variable var="_color" value=green}
+{/if}</post_template>
   </command>
 </ObjectDefinition>

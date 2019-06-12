@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>NAT Object</group>
+    <icon>/images/repository/CommandDefinition/icons/objects_fortinet.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Destination NAT</name>
+    <order>1050</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="NAT Name" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="External IP Address" displayOrder="1" maxLength="200" name="params.extIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="Mapped IP Address" displayOrder="2" maxLength="200" name="params.mapIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="External Interface" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.port" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <values>
+        <value displayValue="1">1</value>
+        <value displayValue="2">2</value>
+        <value displayValue="3">3</value>
+        <value displayValue="4">4</value>
+        <value displayValue="5">5</value>
+        <value displayValue="6">6</value>
+        <value displayValue="7">7</value>
+        <value displayValue="8">8</value>
+        <value displayValue="9">9</value>
+        <value displayValue="10">10</value>
+      </values>
+      <classes>
+        <class>interface</class>
+      </classes>
+    </variable>
+    <variable default="false" displayName="Port Forward" displayOrder="4" maxLength="200" name="params.portFor" numberOfRowMax="0" startIncrement="0" type="Boolean"/>
+    <variable displayName="Protocol" displayOrder="5" isMandatory="true" maxLength="200" name="params.proto" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+      <values>
+        <value displayValue="tcp">tcp</value>
+        <value displayValue="udp">udp</value>
+      </values>
+      <behaviors>
+        <behavior displayName="Protocol" displayOrder="0" maxLength="100" name="params.proto" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String">
+          <values>
+            <value displayValue="TCP">tcp</value>
+            <value displayValue="UDP">udp</value>
+          </values>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="External Service Port" displayOrder="6" maxLength="200" name="params.extPortProto" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="External Service Port" displayOrder="0" maxLength="200" name="params.extPortProto" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Mapped Port " displayOrder="7" maxLength="200" name="params.mapPort" numberOfRowMax="0" selector="params.portFor" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="Mapped Port" displayOrder="0" maxLength="200" name="params.mapPort" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String"/>
+      </behaviors>
+    </variable>
+    <variable cols="165" displayName="Comment" displayOrder="8" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="statusPortForward" displayOrder="9" maxLength="200" name="params.statusPortForward" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>UBI-SITONECELL-MASTE~001 # show full-configuration firewall vip
+config firewall vip
+    edit "testNatDMA"
+        set id 0
+        set comment "coucou"
+        set type static-nat
+        set extip 10.0.0.1
+        set extintf "port3"
+        set arp-reply enable
+        set nat-source-vip disable
+        set portforward enable
+        set gratuitous-arp-interval 0
+        set color 0
+        set mappedip 10.0.0.2
+        set protocol tcp
+        set extport 8888
+        set mappedport 20
+        set portmapping-type 1-to-1
+    next
+end
+</content>
+  </example>
+<command name="CREATE">
+    <operation>config firewall vip
+edit "{$params.object_id}"
+set comment "{$params.comment}"
+set extip {$params.extIP}
+set extintf "{$params.port}"
+set arp-reply enable
+set mappedip "{$params.mapIP}"
+{if $params.portFor=="true"}
+set portforward enable
+set protocol {$params.proto}
+set extport {$params.extPortProto}
+set mappedport {$params.mapPort}
+{else}
+set portforward disable
+{/if}
+next 
+end
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>show full-configuration firewall vip</operation>
+    <parser>
+      <section>
+        <regexp>@edit "(?&lt;object_id&gt;[^"]+)"@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@set @</regexp>
+        </ignore>
+        <line>
+          <regexp>@set comment "(?&lt;comment&gt;[^"]+)"@</regexp>
+        </line>
+        <line>
+          <regexp>@set extip (?&lt;extIP&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set extintf "(?&lt;port&gt;[^"]+)"@</regexp>
+        </line>
+        <line>
+          <regexp>@set portforward (?&lt;statusPortForward&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set mappedip (!?")(?&lt;mapIP&gt;\S+)(!?")@</regexp>
+        </line>
+        <line>
+          <regexp>@set protocol (?&lt;proto&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set extport (?&lt;extPortProto&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@set mappedport (?&lt;mapPort&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{if ($params.statusPortForward=="disable") }
+{assign_object_variable var="portFor" value="false"}
+{else}
+{assign_object_variable var="portFor" value="true"}
+{/if}</post_template>
+  </command>
+<command name="DELETE">
+    <operation>config firewall vip
+delete "{$Destination_NAT.$object_id.object_id}"
+end
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>config firewall vip
+edit "{$params.object_id}"
+set comment "{$params.comment}"
+set extip {$params.extIP}
+set extintf "{$params.port}"
+set arp-reply enable
+set mappedip "{$params.mapIP}"
+{if $params.portFor=="true"}
+set portforward enable
+set protocol {$params.proto}
+set extport {$params.extPortProto}
+set mappedport {$params.mapPort}
+{else}
+set portforward disable
+{/if}
+next 
+end
+</operation>
+  </command>
+
+</ObjectDefinition>
