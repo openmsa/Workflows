@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>true</visible>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>20</order>
+    <description/>
+    <name>Net Imports</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Objects|Network</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Layer3" displayOrder="0" maxLength="150" name="params.object_id" type="ObjectRef">
+      <classes>
+        <class>layer3</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>&lt;zone&gt;
+            &lt;entry name="TEST2_R1_vFW"&gt;
+              &lt;network&gt;
+                &lt;layer3&gt;
+                  &lt;member&gt;ae1.1&lt;/member&gt;
+                &lt;/layer3&gt;
+              &lt;/network&gt;
+            &lt;/entry&gt;
+            &lt;entry name="TEST2_R1_VM"&gt;
+              &lt;network&gt;
+                &lt;layer3&gt;
+                  &lt;member&gt;ae2.1&lt;/member&gt;
+                &lt;/layer3&gt;
+              &lt;/network&gt;
+            &lt;/entry&gt;
+          &lt;/zone&gt;
+</content>
+  </example>
+  
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']
+</xpath>
+    <operation>&lt;import&gt;&lt;network&gt;&lt;interface&gt;&lt;/interface&gt;&lt;/network&gt;&lt;/import&gt;
+</operation>
+  </command>
+  
+</ObjectDefinition>

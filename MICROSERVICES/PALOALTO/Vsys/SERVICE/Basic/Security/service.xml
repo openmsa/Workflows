@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>true</visible>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>1</order>
+    <description/>
+    <name>Security Services</name>
+    <defaultDisplay>true</defaultDisplay>
+    <group>Security</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="From" displayOrder="0" isUserLocked="true" maxLength="150" name="params.zone_from" type="String">
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="To" displayOrder="1" isUserLocked="true" maxLength="150" name="params.zone_to" type="String">
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="URL filtering" displayOrder="2" maxLength="220" name="params.url_filtering_profile" type="ObjectRef">
+      <classes>
+        <class>urlf_shared_profile</class>
+        <class>urlf_user_profile</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Anti-Virus" displayOrder="3" maxLength="220" name="params.virus_profile" type="ObjectRef">
+      <classes>
+        <class>antivirus_shared_profile</class>
+        <class>antivirus_user_profile</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="IPS/IDS" displayOrder="5" maxLength="220" name="params.ips_profile" type="ObjectRef">
+      <classes>
+        <class>vulnerability_shared_profile</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Policy name" displayOrder="6" maxLength="150" name="params.object_id" type="String" visible="false"/>
+  </variables>  <example>
+    <content>&lt;rulebase&gt;
+            &lt;security&gt;
+              &lt;rules&gt;
+                &lt;entry name="FW_20140728_1"&gt;
+                  &lt;profile-setting&gt;
+                    &lt;profiles&gt;
+                      &lt;url-filtering&gt;
+                        &lt;member&gt;MSS_URL_Template_VM-vFW&lt;/member&gt;
+                      &lt;/url-filtering&gt;
+                      &lt;virus&gt;
+                        &lt;member&gt;MSS_Web_Mail_AntiVirus&lt;/member&gt;
+                      &lt;/virus&gt;
+                      &lt;spyware&gt;
+                        &lt;member&gt;MSS_SPY_Block&lt;/member&gt;
+                      &lt;/spyware&gt;
+                      &lt;vulnerability&gt;
+                        &lt;member&gt;MSS_IPS_Block&lt;/member&gt;
+                      &lt;/vulnerability&gt;
+                    &lt;/profiles&gt;
+                  &lt;/profile-setting&gt;
+                  &lt;option&gt;
+                    &lt;disable-server-response-inspection&gt;no&lt;/disable-server-response-inspection&gt;
+                  &lt;/option&gt;
+                  &lt;from&gt;
+                    &lt;member&gt;TEST2_R1_VM&lt;/member&gt;
+                  &lt;/from&gt;
+                  &lt;to&gt;
+                    &lt;member&gt;TEST2_R1_vFW&lt;/member&gt;
+                  &lt;/to&gt;
+                  &lt;source&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/source&gt;
+                  &lt;destination&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/destination&gt;
+                  &lt;source-user&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/source-user&gt;
+                  &lt;category&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/category&gt;
+                  &lt;application&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/application&gt;
+                  &lt;service&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/service&gt;
+                  &lt;hip-profiles&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/hip-profiles&gt;
+                  &lt;log-start&gt;no&lt;/log-start&gt;
+                  &lt;log-end&gt;yes&lt;/log-end&gt;
+                  &lt;log-setting&gt;SOC_Default_Logging&lt;/log-setting&gt;
+                  &lt;negate-source&gt;no&lt;/negate-source&gt;
+                  &lt;negate-destination&gt;no&lt;/negate-destination&gt;
+                  &lt;action&gt;allow&lt;/action&gt;
+                &lt;/entry&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/rulebase/security/rules</xpath>
+    <parser>
+      <section>
+        <xpath>//rules/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        
+        <line>
+          <xpath>//entry/profile-setting/profiles/url-filtering/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;url_filtering_profile&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/profile-setting/profiles/virus/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;virus_profile&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        
+        <line>
+          <xpath>//entry/profile-setting/profiles/vulnerability/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;ips_profile&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        
+        <line>
+          <xpath>//entry/from/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;zone_from&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/to/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;zone_to&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/rulebase/security/rules/entry[@name='{$params.object_id}']/profile-setting/profiles
+</xpath>
+    <operation>&lt;profiles&gt;
+{if !empty($params.url_filtering_profile)}
+&lt;url-filtering&gt;
+  &lt;member&gt;{$params.url_filtering_profile}&lt;/member&gt;
+&lt;/url-filtering&gt;
+{/if}
+{if !empty($params.virus_profile)}
+&lt;virus&gt;
+  &lt;member&gt;{$params.virus_profile}&lt;/member&gt;
+&lt;/virus&gt;
+{/if}
+{if !empty($params.ips_profile)}
+&lt;vulnerability&gt;
+  &lt;member&gt;{$params.ips_profile}&lt;/member&gt;
+&lt;/vulnerability&gt;
+{/if}
+&lt;/profiles&gt;
+</operation>
+  </command>
+</ObjectDefinition>

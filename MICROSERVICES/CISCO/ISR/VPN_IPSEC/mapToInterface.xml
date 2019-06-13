@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/repository/CommandDefinition/icons/vpn gateway.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Map interface</name>
+    <order>600</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Interface" displayOrder="0" maxLength="100" name="params.interface" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>interface</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Crypto Map" displayOrder="1" maxLength="100" name="params.object_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>crypto_map</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>Interface GigabitEthernet0/0.24
+ crypto map TEST-S2S-VPN
+</content>
+  </example>
+  <command name="CREATE">
+    <operation>interface {$params.interface}
+ crypto map {$params.object_id}
+exit
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>interface {$mapToInterface.$object_id.interface}
+no crypto map {$mapToInterface.$object_id.object_id}
+exit
+</operation>
+  </command>
+</ObjectDefinition>

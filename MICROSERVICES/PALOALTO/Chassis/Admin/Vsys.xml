@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Admin|Vsys</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Vsys</name>
+    <order>1</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Vsys Name" displayOrder="0" maxLength="150" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Display Name" displayOrder="1" maxLength="150" name="params.display_name" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Device" displayOrder="2" keepOnImport="true" maxLength="165" name="params.device" type="Device">
+      <sdTypes>
+        <sdType manId="28" modId="136"/>
+      </sdTypes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys</xpath>
+    <parser>
+      <section>
+        <xpath>//vsys/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/display-name</xpath>
+          <regexp>@&lt;display-name&gt;(?&lt;display_name&gt;.*)&lt;/display-name&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>
+</rest>
+    <xpath>
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;display-name&gt;{$params.display_name}&lt;/display-name&gt;
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>type=config&amp;action=delete</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$params.object_id}']</xpath>
+    <operation/>
+  </command>
+</ObjectDefinition>

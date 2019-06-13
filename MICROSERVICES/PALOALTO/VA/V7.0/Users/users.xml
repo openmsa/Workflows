@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Users management</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Device|Local User Database</group>
+    <icon>/images/repository/CommandDefinition/icons/androgenous person.jpg</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Users</name>
+    <order>100</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" maxLength="250" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Password Hash" displayOrder="0" maxLength="200" name="params.password" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>&lt;mgt-config&gt;
+    &lt;users&gt;
+      &lt;entry name="admin"&gt;
+        &lt;phash&gt;fnRL/G5lXVMug&lt;/phash&gt;
+        &lt;permissions&gt;
+          &lt;role-based&gt;
+            &lt;superuser&gt;yes&lt;/superuser&gt;
+          &lt;/role-based&gt;
+        &lt;/permissions&gt;
+      &lt;/entry&gt;
+    &lt;/users&gt;
+&lt;/mgt-config&gt;
+</content>
+  </example>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/shared/local-user-database/user/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;phash&gt;{$params.password}&lt;/phash&gt;
+</operation>
+  </command>
+
+  <command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/shared/local-user-database/user/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/shared/local-user-database/user</xpath>
+    <parser>
+      <section>
+        <xpath>//user/entry</xpath>
+      </section>
+      <lines>
+        <line>
+            <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+            <xpath>//entry/@name</xpath>
+        </line>
+        <line>
+          <xpath>//entry/phash</xpath>
+          <regexp>@&lt;phash&gt;(?&lt;password&gt;.*)&lt;/phash&gt;@</regexp>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+</ObjectDefinition>

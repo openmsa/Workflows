@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>true</visible>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>10000</order>
+    <description/>
+    <name>Address Groups</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Objects|Network</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Group Name" displayOrder="0" maxLength="150" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Address Name" displayOrder="1" maxLength="150" name="params.static.0.address" type="ObjectRef">
+      <classes>
+        <class>address_ip_netmask</class>
+        <class>address_ip_range</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/address-group</xpath>
+    <parser>
+      <section>
+        <xpath>//address-group/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <array name="static">
+            <xpath>//entry/static/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;address&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

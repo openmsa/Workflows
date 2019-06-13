@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>System</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Jobs</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="ID" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Tenq" displayOrder="1" maxLength="200" name="params.tenq" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="User" displayOrder="2" maxLength="200" name="params.user" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Type" displayOrder="3" maxLength="200" name="params.type" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Status" displayOrder="4" maxLength="200" name="params.status" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="stoppable" displayOrder="5" maxLength="200" name="params.stoppable" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Result" displayOrder="6" maxLength="200" name="params.result" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Tfin" displayOrder="7" maxLength="200" name="params.tfin" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Progress" displayOrder="8" maxLength="200" name="params.progress" startIncrement="0" type="Integer"/>
+    <variable numberOfRowMax="3000" displayName="Warning" displayOrder="9" maxLength="200" name="params.warning" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Line" displayOrder="10" maxLength="200" name="params.details.0.line" startIncrement="0" type="String">
+      <sections>
+        <section>Details</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=op&amp;cmd=&lt;show&gt;&lt;jobs&gt;&lt;all&gt;&lt;/all&gt;&lt;/jobs&gt;&lt;/show&gt;</operation>
+    <xpath/>
+    <parser>
+      <section>
+        <xpath>//job</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//tenq</xpath>
+          <regexp>@&lt;tenq&gt;(?&lt;tenq&gt;.*)&lt;/tenq&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//user</xpath>
+          <regexp>@&lt;user&gt;(?&lt;user&gt;.*)&lt;/user&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//type</xpath>
+          <regexp>@&lt;type&gt;(?&lt;type&gt;.*)&lt;/type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//status</xpath>
+          <regexp>@&lt;status&gt;(?&lt;status&gt;.*)&lt;/status&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//stoppable</xpath>
+          <regexp>@&lt;stoppable&gt;(?&lt;stoppable&gt;.*)&lt;/stoppable&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//result</xpath>
+          <regexp>@&lt;result&gt;(?&lt;result&gt;.*)&lt;/result&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//tfin</xpath>
+          <regexp>@&lt;tfin&gt;(?&lt;tfin&gt;.*)&lt;/tfin&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//progress</xpath>
+          <regexp>@&lt;progress&gt;(?&lt;progress&gt;.*)&lt;/progress&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//warning</xpath>
+          <regexp>@&lt;warning&gt;(?&lt;warning&gt;.*)&lt;/warning&gt;@</regexp>
+        </line>
+        <line>
+          <array name="details">
+            <xpath>//details</xpath>
+            <lines>
+              <line>
+                <xpath>//line</xpath>
+                <regexp>@&lt;line&gt;(?&lt;line&gt;.*)&lt;/line&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+</ObjectDefinition>

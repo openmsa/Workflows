@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <defaultDisplay>true</defaultDisplay>
+    <description>Advanced FW policies</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security</group>
+    <icon>/images/repository/CommandDefinition/icons/cisco asa 5500.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Policies</name>
+    <order>5</order>
+    <relatedObjects/>
+    <reorderinstances>true</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="1">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" maxLength="150" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Zone" displayOrder="2" isMandatory="true" maxLength="100" name="params.zone_from" type="ObjectRef">
+      <sections>
+        <section>Source</section>
+      </sections>
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" default="any" displayName="Address" displayOrder="3" isMandatory="true" maxLength="200" name="params.src_address" type="ObjectRef">
+      <sections>
+        <section>Source</section>
+      </sections>
+      <classes>
+        <class>address_ip_netmask</class>
+        <class>address_ip_range</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="User" displayOrder="4" maxLength="200" name="params.users.0.user" startIncrement="0" type="ObjectRef">
+      <sections>
+        <section>Source</section>
+      </sections>
+      <classes>
+        <class>user_group</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Zone" displayOrder="5" isMandatory="true" maxLength="100" name="params.zone_to" type="ObjectRef">
+      <sections>
+        <section>Destination</section>
+      </sections>
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" default="any" displayName="Address" displayOrder="6" isMandatory="true" maxLength="200" name="params.dst_address" type="ObjectRef">
+      <sections>
+        <section>Destination</section>
+      </sections>
+      <classes>
+        <class>address_ip_netmask</class>
+        <class>address_ip_range</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" default="any" displayName="Application" displayOrder="7" maxLength="200" name="params.application.0.application" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>application</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" default="any" displayName="Service" displayOrder="8" isMandatory="true" isMandatoryArray="true" maxLength="170" name="params.services.0.service" type="String">
+      <values>
+        <value displayValue="service-http">service-http</value>
+        <value displayValue="service-https">service-https</value>
+        <value displayValue="any">any</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" default="allow" displayName="Action" displayOrder="9" editable="false" isMandatory="true" maxLength="150" name="params.action" type="String">
+      <values>
+        <value displayValue="allow">allow</value>
+        <value displayValue="deny">deny</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Profile" displayOrder="11" maxLength="200" name="params.profile_grp" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>profile_group</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Schedule" displayOrder="12" maxLength="150" name="params.schedule" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>schedule</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="_next" displayOrder="13" maxLength="200" name="params._next" startIncrement="0" type="String" visible="false"/>
+    <variable numberOfRowMax="3000" displayName="_prev" displayOrder="14" maxLength="200" name="params._prev" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>&lt;rulebase&gt;
+            &lt;security&gt;
+              &lt;rules&gt;
+                &lt;entry name="Fw-Pascal"&gt;
+                  &lt;from&gt;
+                    &lt;member&gt;Trust&lt;/member&gt;
+                  &lt;/from&gt;
+                  &lt;to&gt;
+                    &lt;member&gt;untrust&lt;/member&gt;
+                  &lt;/to&gt;
+                  &lt;source&gt;
+                    &lt;member&gt;Ip_Lan_192.168.45.0&lt;/member&gt;
+                  &lt;/source&gt;
+                  &lt;destination&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/destination&gt;
+                  &lt;source-user&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/source-user&gt;
+                  &lt;category&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/category&gt;
+                  &lt;application&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/application&gt;
+                  &lt;service&gt;
+                    &lt;member&gt;service-http&lt;/member&gt;
+                    &lt;member&gt;service-https&lt;/member&gt;
+                  &lt;/service&gt;
+                  &lt;hip-profiles&gt;
+                    &lt;member&gt;any&lt;/member&gt;
+                  &lt;/hip-profiles&gt;
+                  &lt;action&gt;allow&lt;/action&gt;
+                  &lt;tag&gt;
+                    &lt;member&gt;Trust&lt;/member&gt;
+                  &lt;/tag&gt;
+                  &lt;schedule&gt;EES2&lt;/schedule&gt;
+                  &lt;profile-setting&gt;
+                    &lt;group&gt;
+                      &lt;member&gt;EESProfGrp&lt;/member&gt;
+                    &lt;/group&gt;
+                  &lt;/profile-setting&gt;
+                &lt;/entry&gt;
+              &lt;/rules&gt;
+            &lt;/security&gt;
+&lt;/rulebase&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules</xpath>
+    <parser>
+      <section>
+        <xpath>//rules/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/profile-setting/group/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;profile_grp&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <array name="application&#10;">
+            <xpath>//entry/application/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;application&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/from/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;zone_from&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/to/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;zone_to&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/source/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;src_address&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/destination/member</xpath>
+          <regexp>@&lt;member&gt;(?&lt;dst_address&gt;.*)&lt;/member&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/action</xpath>
+          <regexp>@&lt;action&gt;(?&lt;action&gt;.*)&lt;/action&gt;@</regexp>
+        </line>
+        <line>
+          <array name="users">
+            <xpath>//entry/source-user</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;user&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <xpath>//entry/schedule</xpath>
+          <regexp>@&lt;schedule&gt;(?&lt;schedule&gt;.*)&lt;/schedule&gt;@</regexp>
+        </line>
+        <line>
+          <array name="services">
+            <xpath>//entry/service/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;service&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+        
+        
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>{if !empty($params._prev)}
+type=config&amp;action=move&amp;where=after&amp;dst={urlencode url=$params._prev}
+{elseif !empty($params._next)}
+type=config&amp;action=move&amp;where=before&amp;dst={urlencode url=$params._next}
+{else}
+type=config&amp;action=edit
+{/if}
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>{if empty($params._prev) &amp;&amp; empty($params._next)}
+&lt;entry name="{$params.object_id}"&gt;
+&lt;from&gt;
+&lt;member&gt;{$params.zone_from}&lt;/member&gt;
+&lt;/from&gt;
+&lt;to&gt;
+&lt;member&gt;{$params.zone_to}&lt;/member&gt;
+&lt;/to&gt;
+&lt;source&gt;
+&lt;member&gt;{$params.src_address}&lt;/member&gt;
+&lt;/source&gt;
+&lt;destination&gt;
+&lt;member&gt;{$params.dst_address}&lt;/member&gt;
+&lt;/destination&gt;
+&lt;source-user&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/source-user&gt;
+&lt;category&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/category&gt;
+&lt;application&gt;
+{foreach $params.application as $app}
+&lt;member&gt;{$app.application}&lt;/member&gt;
+{/foreach}
+&lt;/application&gt;
+&lt;service&gt;
+{foreach $params.services as $srv}
+&lt;member&gt;{$srv.service}&lt;/member&gt;
+{/foreach}
+&lt;/service&gt;
+&lt;hip-profiles&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/hip-profiles&gt;
+&lt;action&gt;{$params.action}&lt;/action&gt;
+{if !empty($params.profile_grp)}
+&lt;profile-setting&gt;
+&lt;group&gt;
+&lt;member&gt;{$params.profile_grp}&lt;/member&gt;
+&lt;/group&gt;
+&lt;/profile-setting&gt;
+{/if}
+{if !empty($params.schedule)}
+&lt;schedule&gt;{$params.schedule}&lt;/schedule&gt;
+{/if}
+&lt;/entry&gt;
+{/if}
+</operation>
+  </command>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;from&gt;
+&lt;member&gt;{$params.zone_from}&lt;/member&gt;
+&lt;/from&gt;
+&lt;to&gt;
+&lt;member&gt;{$params.zone_to}&lt;/member&gt;
+&lt;/to&gt;
+&lt;source&gt;
+&lt;member&gt;{$params.src_address}&lt;/member&gt;
+&lt;/source&gt;
+&lt;destination&gt;
+&lt;member&gt;{$params.dst_address}&lt;/member&gt;
+&lt;/destination&gt;
+&lt;source-user&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/source-user&gt;
+&lt;category&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/category&gt;
+&lt;application&gt;
+{foreach $params.application as $app}
+&lt;member&gt;{$app.application}&lt;/member&gt;
+{/foreach}
+&lt;/application&gt;
+&lt;service&gt;
+{foreach $params.services as $srv}
+&lt;member&gt;{$srv.service}&lt;/member&gt;
+{/foreach}
+&lt;/service&gt;
+&lt;hip-profiles&gt;
+&lt;member&gt;any&lt;/member&gt;
+&lt;/hip-profiles&gt;
+&lt;action&gt;{$params.action}&lt;/action&gt;
+{if !empty($params.profile_grp)}
+&lt;profile-setting&gt;
+&lt;group&gt;
+&lt;member&gt;{$params.profile_grp}&lt;/member&gt;
+&lt;/group&gt;
+&lt;/profile-setting&gt;
+{/if}
+{if !empty($params.schedule)}
+&lt;schedule&gt;{$params.schedule}&lt;/schedule&gt;
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

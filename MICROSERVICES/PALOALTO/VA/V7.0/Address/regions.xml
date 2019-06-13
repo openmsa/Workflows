@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Predifined Regions</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security Options</group>
+    <icon>/images/repository/CommandDefinition/icons/longreach cpe.jpg</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Regions</name>
+    <order>10</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Region Name" displayOrder="0" isMandatory="true" maxLength="250" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Help String" displayOrder="1" maxLength="200" name="params.help_string" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content/>
+  </example>
+
+
+  
+<command name="IMPORT">
+    <operation>type=config&amp;action=get</operation>
+    <xpath>/config/predefined/region</xpath>
+    <parser>
+      <section>
+        <xpath>//region/entry</xpath>
+      </section>
+      <lines>
+        <line>
+            <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+            <xpath>//entry/@name</xpath>
+        </line>
+        <line>
+          <xpath>//entry/@help-string</xpath>
+          <regexp>@help-string="(?&lt;help_string&gt;.*)"@</regexp>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+</ObjectDefinition>

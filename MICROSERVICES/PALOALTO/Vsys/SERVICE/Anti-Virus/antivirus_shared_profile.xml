@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>false</visible>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>1</order>
+    <description/>
+    <name>Default Anti-virus Profiles</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Objects|Anti-virus</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Profile name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/shared/profiles/virus</xpath>
+    <parser>
+      <section>
+        <xpath>//virus/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>true</visible>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>50</order>
+    <description>IP Range object</description>
+    <name>IP Range</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Objects|Network|Addresses</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" maxLength="250" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Start address" displayOrder="1" groupDisplayName="Range" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="250" name="params.startaddress" type="IpAddress"/>
+    <variable numberOfRowMax="3000" displayName="End address" displayOrder="2" groupDisplayName="Range" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="250" name="params.endaddress" type="IpAddress"/>
+  </variables>  <example>
+    <content>&lt;result&gt;
+  &lt;address&gt;
+  &lt;entry name="Address_VLAN-20-IP"&gt;
+    &lt;ip-netmask&gt;10.101.101.254/24&lt;/ip-netmask&gt;
+  &lt;/entry&gt;
+  &lt;entry name="EES7"&gt;
+    &lt;ip-netmask&gt;7.7.70.7/16&lt;/ip-netmask&gt;
+  &lt;/entry&gt;
+  &lt;/address&gt;
+&lt;/result&gt;
+</content>
+  </example>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/address/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;ip-range&gt;{$params.startaddress}-{$params.endaddress}&lt;/ip-range&gt;
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/address/entry[@name='{$params.object_id}']/ip-range
+</xpath>
+    <operation>&lt;ip-range&gt;{$params.startaddress}-{$params.endaddress}&lt;/ip-range&gt;
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/address/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='{$SD-&gt;SD_HOSTNAME}']/address</xpath>
+    <parser>
+      <section>
+        <xpath>//address/entry</xpath>
+      </section>
+      <lines>
+        <line>
+            <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+            <xpath>//entry/@name</xpath>
+        </line>
+        
+        
+        <line>
+          <xpath>//entry/ip-range</xpath>
+          <regexp>@&lt;ip-range&gt;(?&lt;startaddress&gt;[^-]+)-(?&lt;endaddress&gt;[^&lt;]+)&lt;/ip-range&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

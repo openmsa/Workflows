@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Firewall</group>
+    <icon>/images/repository/CommandDefinition/icons/web cluster.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Zones</name>
+    <order>2300</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Interfaces" displayOrder="1" isMandatory="true" maxLength="200" name="params.interface.0.int_name" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>interface</class>
+      </classes>
+    </variable>
+    <variable displayName="_int_name" displayOrder="2" maxLength="200" name="params._interface.0.int_name" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>sho zone security | ex Member|Description|self</operation>
+    <parser>
+      <section>
+        <regexp>@^zone (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@^\s+Member Interfaces:\s*$@</regexp>
+        </ignore>
+        <line>
+          <array name="interface">
+            <regexp>@\s+(?&lt;int_name&gt;\S+)@</regexp>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>zone security {$params.object_id}
+{foreach $params.interface as $int}
+ interface {$int.int_name}
+   zone-member security {$params.object_id}
+   exit
+{/foreach}
+
+{foreach $zone as $zone_object}
+
+{if $zone_object.object_id != $params.object_id}
+
+ ip access-list extended {$params.object_id}-to-{$zone_object.object_id}
+
+ class-map type inspect match-all {$params.object_id}-to-{$zone_object.object_id}-class
+  match access-group name {$params.object_id}-to-{$zone_object.object_id}
+
+ policy-map type inspect {$params.object_id}-to-{$zone_object.object_id}-policy
+  class type inspect {$params.object_id}-to-{$zone_object.object_id}-class
+  inspect
+  class class-default
+  drop log
+
+  zone-pair security {$params.object_id}-to-{$zone_object.object_id} source {$params.object_id} destination {$zone_object.object_id}
+  service-policy type inspect {$params.object_id}-to-{$zone_object.object_id}-policy
+
+
+ ip access-list extended {$zone_object.object_id}-to-{$params.object_id}
+
+ class-map type inspect match-all {$zone_object.object_id}-to-{$params.object_id}-class
+  match access-group name {$zone_object.object_id}-to-{$params.object_id}
+
+ policy-map type inspect {$zone_object.object_id}-to-{$params.object_id}-policy
+  class type inspect {$zone_object.object_id}-to-{$params.object_id}-class
+  inspect
+  class class-default
+  drop log
+
+ zone-pair security {$zone_object.object_id}-to-{$params.object_id} source {$zone_object.object_id} destination {$params.object_id}
+  service-policy type inspect {$zone_object.object_id}-to-{$params.object_id}-policy
+
+{/if}
+
+{/foreach}
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>{foreach $zone.$object_id.interface as $prev_int}
+{assign var="found" value=false}
+{foreach $params.interface as $int}
+{if $int.int_name == $prev_int.int_name}
+{assign var="found" value=true}
+{break}
+{/if}
+{/foreach}
+{if !$found}
+interface {$int.int_name}
+  no zone-member security {$params.object_id}
+  exit
+{/if}
+{/foreach}
+{foreach $params.interface as $int}
+interface {$int.int_name}
+  zone-member security {$params.object_id}
+  exit
+{/foreach}
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>{foreach $zone as $zone_object}
+{if $zone_object.object_id != $params.object_id}
+ no zone-pair security {$params.object_id}-to-{$zone_object.object_id} source {$params.object_id} destination {$zone_object.object_id}
+ no zone-pair security {$zone_object.object_id}-to-{$params.object_id} source {$zone_object.object_id} destination {$params.object_id}
+{/if}
+{/foreach}
+
+{foreach $zone as $zone_object}
+
+{if $zone_object.object_id != $params.object_id}
+
+ no zone-pair security {$params.object_id}-to-{$zone_object.object_id} source {$params.object_id} destination {$zone_object.object_id}
+ no policy-map type inspect {$params.object_id}-to-{$zone_object.object_id}-policy
+ no class-map type inspect match-all {$params.object_id}-to-{$zone_object.object_id}-class
+ no ip access-list extended {$params.object_id}-to-{$zone_object.object_id}
+
+ no zone-pair security {$zone_object.object_id}-to-{$params.object_id} source {$zone_object.object_id} destination {$params.object_id}
+ no policy-map type inspect {$zone_object.object_id}-to-{$params.object_id}-policy
+ no class-map type inspect match-all {$zone_object.object_id}-to-{$params.object_id}-class
+ no ip access-list extended {$zone_object.object_id}-to-{$params.object_id}
+
+{/if}
+
+{/foreach}
+
+no zone security {$params.object_id}
+</operation>
+  </command>
+</ObjectDefinition>
