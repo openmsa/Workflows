@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Glance</group>
+    <icon>/images/repository/CommandDefinition/icons/file server.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Images</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" type="String"/>
+    <variable displayName="Status" displayOrder="2" isUserLocked="true" maxLength="200" name="params.status" type="String"/>
+    <variable displayName="Disk Format" displayOrder="3" maxLength="200" name="params.disk_format" type="String">
+      <values>
+        <value>vdi</value>
+        <value>raw</value>
+        <value>aki</value>
+        <value>ari</value>
+        <value>qcow2</value>
+        <value>ami</value>
+        <value>iso</value>
+        <value>vmdk</value>
+        <value>vhd</value>
+      </values>
+    </variable>
+    <variable displayName="Container Format" displayOrder="4" maxLength="200" name="params.container_format" type="String">
+      <values>
+        <value>bare</value>
+        <value>aki</value>
+        <value>ari</value>
+        <value>ovf</value>
+        <value>ami</value>
+      </values>
+    </variable>
+    <variable displayName="Size" displayOrder="5" isUserLocked="true" maxLength="200" name="params.size" type="Integer"/>
+    <variable displayName="Minimum RAM" displayOrder="6" maxLength="200" name="params.min_ram" type="Integer"/>
+    <variable displayName="Minimum Disk" displayOrder="7" maxLength="200" name="params.min_disk" type="Integer"/>
+    <variable default="false" displayName="Protected" displayOrder="8" maxLength="200" name="params.protected" type="Boolean"/>
+    <variable default="public" displayName="Visibility" displayOrder="9" maxLength="200" name="params.visibility" type="String">
+      <values>
+        <value displayValue="public">public</value>
+        <value displayValue="private">private</value>
+      </values>
+    </variable>
+    <variable displayName="File Path" displayOrder="10" maxLength="200" name="params.file_path" onlyDetailView="true" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>glance</operation>
+    <xpath>/v2/images</xpath>
+    <parser>
+      <section>
+        <xpath>//root/images/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>status</xpath>
+          <regexp>@&lt;status&gt;(?&lt;status&gt;.*)&lt;/status&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>container_format</xpath>
+          <regexp>@&lt;container_format&gt;(?&lt;container_format&gt;.*)&lt;/container_format&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>disk_format</xpath>
+          <regexp>@&lt;disk_format&gt;(?&lt;disk_format&gt;.*)&lt;/disk_format&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>min_disk</xpath>
+          <regexp>@&lt;min_disk&gt;(?&lt;min_disk&gt;.*)&lt;/min_disk&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>min_ram</xpath>
+          <regexp>@&lt;min_ram&gt;(?&lt;min_ram&gt;.*)&lt;/min_ram&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>protected</xpath>
+          <regexp>@&lt;protected&gt;(?&lt;protected&gt;.*)&lt;/protected&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>visibility</xpath>
+          <regexp>@&lt;visibility&gt;(?&lt;visibility&gt;.*)&lt;/visibility&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>size</xpath>
+          <regexp>@&lt;size&gt;(?&lt;size&gt;.*)&lt;/size&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#glance
+</rest>
+    <xpath>/v2/images
+</xpath>
+    <operation>{literal}{{/literal}
+"name": "{$params.name}",
+"visibility": "{$params.visibility}",
+"container_format": "{$params.container_format}",
+"disk_format": "{$params.disk_format}",
+{if !empty({$params.min_disk})}
+"min_disk": {$params.min_disk},
+{/if}
+{if !empty({$params.min_ram})}
+"min_ram": {$params.min_ram},
+{/if}
+"protected": {$params.protected}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>glance
+</rest>
+    <xpath>​/v2/images/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>PUT#glance
+</rest>
+    <xpath>​/v2/images/{$params.object_id|object_id}/file
+</xpath>
+    <operation>@{$params.file_path}
+</operation>
+  </command>
+</ObjectDefinition>

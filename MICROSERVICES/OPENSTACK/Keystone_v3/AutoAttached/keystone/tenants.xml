@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Keystone</group>
+    <icon>/images/repository/CommandDefinition/icons/androgenous person.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>0</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Tenants</name>
+    <order>1</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" type="String"/>
+    <variable default="true" displayName="Enabled" displayOrder="2" maxLength="200" name="params.enabled" type="Boolean"/>
+    <variable displayName="Description" displayOrder="3" maxLength="200" name="params.description" type="String"/>
+    <variable displayName="Role" displayOrder="4" maxLength="200" name="params.role" onlyDetailView="true" type="ObjectRef">
+      <classes>
+        <class>roles</class>
+      </classes>
+    </variable>
+    <variable displayName="User" displayOrder="5" maxLength="200" name="params.user" onlyDetailView="true" type="ObjectRef">
+      <classes>
+        <class>users</class>
+      </classes>
+    </variable>
+    <variable displayName="Domain Id" displayOrder="6" maxLength="100" name="params.domain_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>domains</class>
+      </classes>
+    </variable>
+    <variable default="false" displayName="Is Domain" displayOrder="7" maxLength="100" name="params.is_domain" startIncrement="0" type="Boolean"/>
+    <variable displayName="Parent Id" displayOrder="8" maxLength="100" name="params.parent_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+<command name="CREATE">
+    <rest>POST#keystone
+</rest>
+    <xpath>/projects
+</xpath>
+    <operation>{literal}{{/literal}
+"project": {literal}{{/literal}
+"name": "{$params.name}"
+{if !empty($params.description)}
+,"description": "{$params.description}"
+{/if}
+{if !empty($params.enabled)}
+,"enabled": {$params.enabled}
+{/if}
+{if !empty($params.domain_id)}
+,"domain_id": "{$params.domain_id}"
+{/if}
+{if !empty($params.is_domain)}
+,"is_domain": {$params.is_domain}
+{/if}
+{if !empty($params.parent_id)}
+,"parent_id": "{$params.parent_id}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="IMPORT">
+    <operation>keystone</operation>
+    <xpath>/projects</xpath>
+    <parser>
+      <section>
+        <xpath>//root/projects/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>domain_id</xpath>
+          <regexp>@&lt;domain_id&gt;(?&lt;domain_id&gt;.*)&lt;/domain_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>is_domain</xpath>
+          <regexp>@&lt;is_domain&gt;(?&lt;is_domain&gt;.*)&lt;/is_domain&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>parent_id</xpath>
+          <regexp>@&lt;parent_id&gt;(?&lt;parent_id&gt;.*)&lt;/parent_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>description</xpath>
+          <regexp>@&lt;description&gt;(?&lt;description&gt;.*)&lt;/description&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>enabled</xpath>
+          <regexp>@&lt;enabled&gt;(?&lt;enabled&gt;.*)&lt;/enabled&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>PATCH#keystone
+</rest>
+    <xpath>​/projects/{$params.object_id|object_id}
+</xpath>
+    <operation>{literal}{{/literal}
+"project": {literal}{{/literal}
+"name": "{$params.name}"
+{if !empty($params.description)}
+,"description": "{$params.description}"
+{/if}
+{if !empty($params.enabled)}
+,"enabled": {$params.enabled}
+{/if}
+{if !empty($params.domain_id)}
+,"domain_id": "{$params.domain_id}"
+{/if}
+{if !empty($params.parent_id)}
+,"parent_id": "{$params.parent_id}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>keystone
+</rest>
+    <xpath>​/projects/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

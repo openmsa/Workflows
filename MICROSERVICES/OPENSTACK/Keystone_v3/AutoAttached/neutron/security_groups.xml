@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Neutron|Security Groups</group>
+    <icon>/images/repository/CommandDefinition/icons/firewall.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Security Groups</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" displayType="" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" displayType="" maxLength="200" name="params.name" type="String"/>
+    <variable displayName="Description" displayOrder="2" displayType="" maxLength="200" name="params.description" type="String"/>
+    <variable displayName="Direction" displayOrder="3" displayType="" isUserLocked="true" maxLength="200" name="params.security_group_rules.0.direction" type="String">
+      <sections>
+        <section>Security Group Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Ethernet Type" displayOrder="4" displayType="" isUserLocked="true" maxLength="200" name="params.security_group_rules.0.ethertype" type="String">
+      <sections>
+        <section>Security Group Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Port Range Min" displayOrder="5" displayType="" isUserLocked="true" maxLength="200" name="params.security_group_rules.0.port_range_min" type="Integer">
+      <sections>
+        <section>Security Group Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Port Range Max" displayOrder="6" displayType="" isUserLocked="true" maxLength="200" name="params.security_group_rules.0.port_range_max" type="Integer">
+      <sections>
+        <section>Security Group Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Protocol" displayOrder="7" displayType="" isUserLocked="true" maxLength="200" name="params.security_group_rules.0.protocol" type="String">
+      <sections>
+        <section>Security Group Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Tenant" displayOrder="8" displayType="" maxLength="200" name="params.tenant_id" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>neutron</operation>
+    <xpath>/v2.0/security-groups</xpath>
+    <parser>
+      <section>
+        <xpath>//root/security_groups/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>description</xpath>
+          <regexp>@&lt;description&gt;(?&lt;description&gt;.*)&lt;/description&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>tenant_id</xpath>
+          <regexp>@&lt;tenant_id&gt;(?&lt;tenant_id&gt;.*)&lt;/tenant_id&gt;@</regexp>
+        </line>
+        <line>
+          <array name="security_group_rules">
+            <xpath>security_group_rules/row</xpath>
+            <lines>
+              <line>
+                <xpath>direction</xpath>
+                <regexp>@&lt;direction&gt;(?&lt;direction&gt;.*)&lt;/direction&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>ethertype</xpath>
+                <regexp>@&lt;ethertype&gt;(?&lt;ethertype&gt;.*)&lt;/ethertype&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>port_range_min</xpath>
+                <regexp>@&lt;port_range_min&gt;(?&lt;port_range_min&gt;.*)&lt;/port_range_min&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>port_range_max</xpath>
+                <regexp>@&lt;port_range_max&gt;(?&lt;port_range_max&gt;.*)&lt;/port_range_max&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>protocol</xpath>
+                <regexp>@&lt;protocol&gt;(?&lt;protocol&gt;.*)&lt;/protocol&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#neutron
+</rest>
+    <xpath>/v2.0/security-groups
+</xpath>
+    <operation>{literal}{{/literal}
+"security_group": {literal}{{/literal}
+"name": "{$params.name}",
+"description": "{$params.description}"
+{if !empty($params.tenant_id)}
+,"tenant_id": "{$params.tenant_id}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>neutron
+</rest>
+    <xpath>/v2.0/security-groups/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>PUT#neutron
+</rest>
+    <xpath>/v2.0/security-groups/{$params.object_id|object_id}
+</xpath>
+    <operation>{literal}{{/literal}
+"security_group": {literal}{{/literal}
+"description": "{$params.description}"
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

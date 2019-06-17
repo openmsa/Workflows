@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Orchestration</group>
+    <icon>/images/repository/CommandDefinition/icons/CUBE.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Stacks</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Stack Name" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Template URL" displayOrder="1" maxLength="100" name="params.template_url" startIncrement="0" type="Link"/>
+    <variable displayName="Name" displayOrder="2" maxLength="100" name="params.parameters.0.paramname" startIncrement="0" type="String">
+      <sections>
+        <section>Parameters</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="3" maxLength="100" name="params.parameters.0.paramvalue" startIncrement="0" type="String">
+      <sections>
+        <section>Parameters</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="CREATE">
+    <rest>POST#heat
+</rest>
+    <xpath>{$TENANT_ID}/stacks
+</xpath>
+    <operation>{literal}{{/literal}
+"stack_name": "{$params.object_id}",
+"template_url": "{$params.template_url}",
+"parameters": {literal}{{/literal}
+  {foreach $params.parameters as $p}
+    {if $p@iteration &gt; 1},{/if}
+    "{$p.paramname}": "{$p.paramvalue}"
+  {/foreach}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

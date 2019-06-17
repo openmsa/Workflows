@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>true</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Nova</group>
+    <icon>/images/repository/CommandDefinition/icons/www server.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>4</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Servers</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" type="String"/>
+    <variable displayName="Status" displayOrder="2" isUserLocked="true" maxLength="120" name="params.status" type="String"/>
+    <variable displayName="Task State" displayOrder="3" isUserLocked="true" maxLength="100" name="params.task_state" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Power State" displayOrder="4" editable="false" isUserLocked="true" maxLength="100" name="params.power_state" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="No State">0</value>
+        <value displayValue="Running">1</value>
+        <value displayValue="Paused">3</value>
+        <value displayValue="Shutdown">4</value>
+        <value displayValue="Crashed">6</value>
+        <value displayValue="Suspended">7</value>
+        <value displayValue="Building">9</value>
+      </values>
+    </variable>
+    <variable displayName="Address" displayOrder="5" isUserLocked="true" maxLength="200" name="params.addresses.0.addr" type="IpAddress">
+      <sections>
+        <section>Addresses</section>
+      </sections>
+    </variable>
+    <variable default="4" displayName="Version" displayOrder="6" isUserLocked="true" maxLength="150" name="params.addresses.0.version" type="String">
+      <values>
+        <value displayValue="6">6</value>
+        <value displayValue="4">4</value>
+      </values>
+      <sections>
+        <section>Addresses</section>
+      </sections>
+    </variable>
+    <variable displayName="MAC Address" displayOrder="7" isUserLocked="true" maxLength="200" name="params.addresses.0.mac_addr" type="String">
+      <sections>
+        <section>Addresses</section>
+      </sections>
+    </variable>
+    <variable displayName="Type" displayOrder="8" isUserLocked="true" maxLength="150" name="params.addresses.0.type" type="String">
+      <sections>
+        <section>Addresses</section>
+      </sections>
+    </variable>
+    <variable displayName="Network" displayOrder="9" maxLength="200" name="params.networks.0.network" onlyDetailView="true" startIncrement="0" type="ObjectRef">
+      <sections>
+        <section>Networks</section>
+      </sections>
+      <classes>
+        <class>networks</class>
+      </classes>
+    </variable>
+    <variable displayName="Port" displayOrder="10" keepOnImport="true" maxLength="200" name="params.networks.0.port" onlyDetailView="true" startIncrement="0" type="ObjectRef">
+      <sections>
+        <section>Networks</section>
+      </sections>
+      <classes>
+        <class>ports</class>
+      </classes>
+    </variable>
+    <variable displayName="Fixed IP" displayOrder="11" keepOnImport="true" maxLength="200" name="params.networks.0.fixed_ip" onlyDetailView="true" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Networks</section>
+      </sections>
+    </variable>
+    <variable displayName="Security Group" displayOrder="12" maxLength="200" name="params.security_groups.0.security_group" type="ObjectRef">
+      <sections>
+        <section>Security Groups</section>
+      </sections>
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="Access IPv4" displayOrder="13" maxLength="100" name="params.accessIPv4" type="IpAddress" visible="false"/>
+    <variable displayName="metadata.0" displayOrder="13" maxLength="100" name="params.metadata.0" startIncrement="0" type="String"/>
+    <variable displayName="Access IPv6" displayOrder="14" maxLength="100" name="params.accessIPv6" type="String" visible="false"/>
+    <variable displayName="Host" displayOrder="15" isUserLocked="true" maxLength="200" name="params.host" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Hypervisor Hostname" displayOrder="16" isUserLocked="true" maxLength="200" name="params.hypervisor_hostname" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Image" displayOrder="17" isMandatory="true" maxLength="200" name="params.image_id" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>images</class>
+      </classes>
+    </variable>
+    <variable displayName="Flavor" displayOrder="18" isMandatory="true" maxLength="200" name="params.flavor_id" type="ObjectRef">
+      <classes>
+        <class>flavors</class>
+      </classes>
+    </variable>
+    <variable displayName="Key Name" displayOrder="19" maxLength="200" name="params.key_name" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>keypairs</class>
+      </classes>
+    </variable>
+    <variable displayName="Tenant" displayOrder="20" isUserLocked="true" maxLength="200" name="params.tenant_id" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+    <variable displayName="Availability Zone" displayOrder="21" maxLength="200" name="params.availability_zone" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>availability_zones</class>
+      </classes>
+    </variable>
+    <variable displayName="Minimum Count" displayOrder="22" keepOnImport="true" maxLength="200" name="params.min_count" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable displayName="Maximum Count" displayOrder="23" keepOnImport="true" maxLength="200" name="params.max_count" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable displayName="Admin Password" displayOrder="24" keepOnImport="true" maxLength="200" name="params.admin_pass" onlyDetailView="true" startIncrement="0" type="Password"/>
+    <variable cols="100" displayName="User Data" displayOrder="25" keepOnImport="true" maxLength="200" name="params.user_data" onlyDetailView="true" startIncrement="0" type="String"/>
+    <variable displayName="Path" displayOrder="26" keepOnImport="true" maxLength="200" name="params.personality.0.path" startIncrement="0" type="String">
+      <sections>
+        <section>Personality</section>
+      </sections>
+    </variable>
+    <variable displayName="Contents" displayOrder="27" keepOnImport="true" maxLength="200" name="params.personality.0.contents" startIncrement="0" type="String">
+      <sections>
+        <section>Personality</section>
+      </sections>
+    </variable>
+    <variable displayName="Key" displayOrder="28" keepOnImport="true" maxLength="200" name="params.metadata.0.metadata_key" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Metadata</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="29" keepOnImport="true" maxLength="200" name="params.metadata.0.metadata_value" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Metadata</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Config Drive" displayOrder="30" maxLength="200" name="params.config_drive" startIncrement="0" type="Boolean" visible="false">
+      <values>
+        <value displayValue="false">false</value>
+        <value displayValue="true">true</value>
+      </values>
+    </variable>
+    <variable displayName="Device Name" displayOrder="31" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.device_name" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable displayName="Source Type" displayOrder="32" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.source_type" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="snapshot">snapshot</value>
+        <value displayValue="blank">blank</value>
+        <value displayValue="image">image</value>
+        <value displayValue="volume">volume</value>
+      </values>
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable displayName="Destination Type" displayOrder="33" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.destination_type" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="local">local</value>
+        <value displayValue="volume">volume</value>
+      </values>
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Delete on Termination" displayOrder="34" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.delete_on_termination" startIncrement="0" type="Boolean" visible="false">
+      <values>
+        <value displayValue="true">true</value>
+        <value displayValue="false">false</value>
+      </values>
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable displayName="Guest Format" displayOrder="35" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.guest_format" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="ephemeral">ephemeral</value>
+        <value displayValue="swap">swap</value>
+      </values>
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable displayName="Boot Index" displayOrder="36" keepOnImport="true" maxLength="200" name="params.block_device_mapping_v2.0.boot_index" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="0">0</value>
+        <value displayValue="-1">-1</value>
+      </values>
+      <sections>
+        <section>Block Device Mapping V2</section>
+      </sections>
+    </variable>
+    <variable displayName="rel" displayOrder="37" isUserLocked="true" maxLength="200" name="params.links.0.rel" type="String" visible="false">
+      <sections>
+        <section>Links</section>
+      </sections>
+    </variable>
+    <variable displayName="href" displayOrder="38" isUserLocked="true" maxLength="300" name="params.links.0.href" type="Link" visible="false">
+      <sections>
+        <section>Links</section>
+      </sections>
+    </variable>
+    <variable displayName="MSA Device" displayOrder="39" keepOnImport="true" maxLength="450" name="params.msadevice" type="Device" visible="false">
+      <sdTypes>
+        <sdType manId="17" modId="130"/>
+        <sdType manId="14020601" modId="14020601"/>
+      </sdTypes>
+    </variable>
+    <variable default=" " displayName="Action" displayOrder="40" maxLength="200" name="params.action" onlyDetailView="true" type="String">
+      <values>
+        <value displayValue="Server Action">Server Action</value>
+        <value displayValue="Server Update">Server Update</value>
+        <value displayValue=" "> </value>
+      </values>
+    </variable>
+    <variable default=" " displayName="Server Action" displayOrder="41" maxLength="200" name="params.server_action" onlyDetailView="true" selector="params.action" type="Composite" visible="false">
+      <values>
+        <value displayValue="Start">Start</value>
+        <value displayValue="Stop">Stop</value>
+        <value displayValue="Evacuate Server">Evacuate Server</value>
+        <value displayValue="Restore">Restore</value>
+        <value displayValue="Migrate">Migrate</value>
+        <value displayValue="Resume">Resume</value>
+        <value displayValue="Lock">Lock</value>
+        <value displayValue="Confirm Resize">Confirm Resize</value>
+        <value displayValue="Reboot">Reboot</value>
+        <value displayValue="Inject Network Info">Inject Network Info</value>
+        <value displayValue="Add Fixed IP Address">Add Fixed IP Address</value>
+        <value displayValue="Remove Fixed IP Address">Remove Fixed IP Address</value>
+        <value displayValue="Suspend">Suspend</value>
+        <value displayValue="Resize">Resize</value>
+        <value displayValue="Pause">Pause</value>
+        <value displayValue="Add Floating IP Address">Add Floating IP Address</value>
+        <value displayValue="Add Security Group">Add Security Group</value>
+        <value displayValue="Remove Security Group">Remove Security Group</value>
+        <value displayValue="Reset Server State">Reset Server State</value>
+        <value displayValue="Live Migrate">Live Migrate</value>
+        <value displayValue="Unpause">Unpause</value>
+        <value displayValue="Unlock">Unlock</value>
+        <value displayValue="Reset Network">Reset Network</value>
+        <value displayValue="Remove Floating IP Address">Remove Floating IP Address</value>
+        <value displayValue="Force Delete">Force Delete</value>
+        <value displayValue="Create Backup">Create Backup</value>
+        <value displayValue="Revert Resize">Revert Resize</value>
+      </values>
+      <behaviors>
+        <behavior displayName="Server Action" displayOrder="0" maxLength="200" name="params.server_action" selectorValue="Server Action" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Add Floating IP Address">Add Floating IP Address</value>
+            <value displayValue="Remove Floating IP Address">Remove Floating IP Address</value>
+            <value displayValue="Add Fixed IP Address">Add Fixed IP Address</value>
+            <value displayValue="Remove Fixed IP Address">Remove Fixed IP Address</value>
+            <value displayValue="Add Security Group">Add Security Group</value>
+            <value displayValue="Remove Security Group">Remove Security Group</value>
+            <value displayValue="Resize">Resize</value>
+            <value displayValue="Confirm Resize">Confirm Resize</value>
+            <value displayValue="Revert Resize">Revert Resize</value>
+            <value displayValue="Pause">Pause</value>
+            <value displayValue="Unpause">Unpause</value>
+            <value displayValue="Suspend">Suspend</value>
+            <value displayValue="Resume">Resume</value>
+            <value displayValue="Migrate">Migrate</value>
+            <value displayValue="Reset Network">Reset Network</value>
+            <value displayValue="Inject Network Info">Inject Network Info</value>
+            <value displayValue="Lock">Lock</value>
+            <value displayValue="Unlock">Unlock</value>
+            <value displayValue="Force Delete">Force Delete</value>
+            <value displayValue="Restore">Restore</value>
+            <value displayValue="Start">Start</value>
+            <value displayValue="Stop">Stop</value>
+            <value displayValue="Create Backup">Create Backup</value>
+            <value displayValue="Live Migrate">Live Migrate</value>
+            <value displayValue="Reset Server State">Reset Server State</value>
+            <value displayValue="Evacuate Server">Evacuate Server</value>
+            <value displayValue="Reboot">Reboot</value>
+          </values>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Action Argument1" displayOrder="42" maxLength="200" name="params.action_arg1" onlyDetailView="true" selector="params.server_action" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="Fixed IP Network" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Add Fixed IP Address" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>networks</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Floating IP Address" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Add Floating IP Address" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>floatingips</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Security Group" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Add Security Group" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>security_groups</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Backup Name" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Create Backup" startIncrement="0" type="String"/>
+        <behavior default="false" displayName="On Shared Storage" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Evacuate Server" startIncrement="0" type="Boolean"/>
+        <behavior displayName="Host" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Live Migrate" startIncrement="0" type="String"/>
+        <behavior displayName="Reboot Type" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Reboot" startIncrement="0" type="String">
+          <values>
+            <value displayValue="SOFT">SOFT</value>
+            <value displayValue="HARD">HARD</value>
+          </values>
+        </behavior>
+        <behavior displayName="Fixed IP Address" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Remove Fixed IP Address" startIncrement="0" type="IpAddress"/>
+        <behavior displayName="Floating IP Address" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Remove Floating IP Address" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>floatingips</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Security Group" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Remove Security Group" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>security_groups</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Reset Server State" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Reset Server State" startIncrement="0" type="String"/>
+        <behavior displayName="Flavor" displayOrder="0" maxLength="200" name="params.action_arg1" selectorValue="Resize" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>flavors</class>
+          </classes>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Action Argument2" displayOrder="43" maxLength="200" name="params.action_arg2" onlyDetailView="true" selector="params.server_action" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="Fixed IP Address" displayOrder="0" maxLength="200" name="params.action_arg2" selectorValue="Add Floating IP Address" startIncrement="0" type="IpAddress"/>
+        <behavior displayName="Backup Type" displayOrder="0" maxLength="200" name="params.action_arg2" selectorValue="Create Backup" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Daily">daily</value>
+            <value displayValue="Weekly">weekly</value>
+          </values>
+        </behavior>
+        <behavior displayName="Host" displayOrder="0" maxLength="200" name="params.action_arg2" selectorValue="Evacuate Server" startIncrement="0" type="String"/>
+        <behavior default="false" displayName="Block Migration" displayOrder="0" maxLength="200" name="params.action_arg2" selectorValue="Live Migrate" startIncrement="0" type="Boolean"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Action Argument3" displayOrder="44" maxLength="200" name="params.action_arg3" onlyDetailView="true" selector="params.server_action" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="Rotation" displayOrder="0" maxLength="200" name="params.action_arg3" selectorValue="Create Backup" startIncrement="0" type="Integer"/>
+        <behavior displayName="Admin Password" displayOrder="0" maxLength="200" name="params.action_arg3" selectorValue="Evacuate Server" startIncrement="0" type="Password"/>
+        <behavior default="false" displayName="Disk Over Limit" displayOrder="0" maxLength="200" name="params.action_arg3" selectorValue="Live Migrate" startIncrement="0" type="Boolean"/>
+      </behaviors>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>nova</operation>
+    <xpath>/{$TENANT_ID}/servers/detail</xpath>
+    <parser>
+      <section>
+        <xpath>//root/servers/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <array name="links">
+            <xpath>links/row</xpath>
+            <lines>
+              <line>
+                <xpath>rel</xpath>
+                <regexp>@&lt;rel&gt;(?&lt;rel&gt;.*)&lt;/rel&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>href</xpath>
+                <regexp>@&lt;href&gt;(?&lt;href&gt;.*)&lt;/href&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line> 
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>flavor/id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;flavor_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>image/id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;image_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>tenant_id</xpath>
+          <regexp>@&lt;tenant_id&gt;(?&lt;tenant_id&gt;.*)&lt;/tenant_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>availability_zone</xpath>
+          <regexp>@&lt;availability_zone&gt;(?&lt;availability_zone&gt;.*)&lt;/availability_zone&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>hypervisor_hostname</xpath>
+          <regexp>@&lt;hypervisor_hostname&gt;(?&lt;hypervisor_hostname&gt;.*)&lt;/hypervisor_hostname&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>host</xpath>
+          <regexp>@&lt;host&gt;(?&lt;host&gt;.*)&lt;/host&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>status</xpath>
+          <regexp>@&lt;status&gt;(?&lt;status&gt;.*)&lt;/status&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>task_state</xpath>
+          <regexp>@&lt;task_state&gt;(?&lt;task_state&gt;.*)&lt;/task_state&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>power_state</xpath>
+          <regexp>@&lt;power_state&gt;(?&lt;power_state&gt;.*)&lt;/power_state&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>key_name</xpath>
+          <regexp>@&lt;key_name&gt;(?&lt;key_name&gt;.*)&lt;/key_name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>accessIPv4</xpath>
+          <regexp>@&lt;accessIPv4&gt;(?&lt;accessIPv4&gt;.*)&lt;/accessIPv4&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>accessIPv6</xpath>
+          <regexp>@&lt;accessIPv6&gt;(?&lt;accessIPv6&gt;.*)&lt;/accessIPv6&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>config_drive</xpath>
+          <regexp>@&lt;config_drive&gt;(?&lt;config_drive&gt;.*)&lt;/config_drive&gt;@</regexp>
+        </line>
+        <line>
+          <array name="networks">
+            <xpath>addresses/*</xpath>
+            <lines>
+              <line>
+                <xpath>/*</xpath>
+                <regexp>@&lt;(?&lt;network&gt;.*?)&gt;&lt;row&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="addresses">
+            <xpath>addresses/*/row</xpath>
+            <lines>
+              <line>
+                <xpath>addr</xpath>
+                <regexp>@&lt;addr&gt;(?&lt;addr&gt;.*)&lt;/addr&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>version</xpath>
+                <regexp>@&lt;version&gt;(?&lt;version&gt;.*)&lt;/version&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>mac_addr</xpath>
+                <regexp>@&lt;mac_addr&gt;(?&lt;mac_addr&gt;.*)&lt;/mac_addr&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>type</xpath>
+                <regexp>@&lt;type&gt;(?&lt;type&gt;.*)&lt;/type&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="security_groups">
+            <xpath>security_groups/row</xpath>
+            <lines>
+              <line>
+                <xpath>name</xpath>
+                <regexp>@&lt;name&gt;(?&lt;security_group&gt;.*)&lt;/name&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#nova
+</rest>
+    <xpath>/{$TENANT_ID}/servers
+</xpath>
+    <operation>{literal}{{/literal}
+"server": {literal}{{/literal}
+"name": "{$params.name}",
+"imageRef": "{$params.image_id}",
+"flavorRef": "{$params.flavor_id}",
+{if !empty($params.availability_zone)}
+"availability_zone": "{$params.availability_zone}",
+{/if}
+{if !empty($params.key_name)}
+"key_name": "{$params.key_name}",
+{/if}
+{if !empty($params.min_count)}
+"min_count": {$params.min_count},
+{/if}
+{if !empty($params.max_count)}
+"max_count": {$params.max_count},
+{/if}
+{if !empty($params.admin_pass)}
+"adminPass": "{$params.admin_pass}",
+{/if}
+{if !empty($params.user_data)}
+"user_data": "{$params.user_data}",
+{/if}
+"networks": [
+{foreach $params.networks as $net}
+{if $net@iteration &gt; 1},{/if}
+{literal}{{/literal}
+{if !empty($net.network)}
+"uuid": "{$net.network}"
+{/if}
+{if !empty($net.port)}
+,"port": "{$net.port}"
+{/if}
+{if !empty($net.fixed_ip)}
+,"fixed_ip": "{$net.fixed_ip}"
+{/if}
+{literal}}{/literal}
+{/foreach}
+]
+{if !empty($params.security_groups)}
+,"security_groups":[
+{foreach $params.security_groups as $secgrp}
+{if $secgrp@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"name": "{$secgrp.security_group}"
+{literal}}{/literal}
+{/foreach}
+]
+{/if}
+{if !empty($params.personality)}
+,"personality":[
+{foreach $params.personality as $pers}
+{if $pers@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"path": "{$pers.path}",
+"contents": "{$pers.contents}"
+{literal}}{/literal}
+{/foreach}
+]
+{/if}
+{if !empty($params.metadata)}
+,"metadata": {literal}{{/literal}
+{foreach $params.metadata as $meta}
+{if $meta@iteration &gt; 1},{/if}
+"{$meta.metadata_key}": "{$meta.metadata_value}"
+{/foreach}
+{literal}}{/literal}
+{/if}
+{if !empty($params.config_drive)}
+,"config_drive": "{$params.config_drive}"
+{/if}
+{if !empty($params.block_device_mapping_v2)}
+,"block_device_mapping_v2":[
+{foreach $params.block_device_mapping_v2 as $block_device_mapping}
+{if $block_device_mapping@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"device_name": "{$block_device_mapping.device_name}",
+"source_type": "{$block_device_mapping.source_type}",
+"delete_on_termination": "{$block_device_mapping.delete_on_termination}",
+"guest_format": "{$block_device_mapping.guest_format}",
+"boot_index": "{$block_device_mapping.boot_index}"
+{if !empty($block_device_mapping.destination_type)}
+,"destination_type": "{$block_device_mapping.destination_type}"
+{/if}
+{literal}}{/literal}
+{/foreach}
+]
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>nova
+</rest>
+    <xpath>/{$TENANT_ID}/servers/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>{if $params.action == "Server Update"}
+PUT#nova
+{elseif $params.action == "Server Action"}
+POST#nova
+{/if}
+</rest>
+    <xpath>{if $params.action == "Server Update"}
+/{$TENANT_ID}/servers/{$params.object_id|object_id}
+{elseif $params.action == "Server Action"}
+/{$TENANT_ID}/servers/{$params.object_id|object_id}/action
+{/if}
+</xpath>
+    <operation>{if $params.action == "Server Update"}
+{literal}{{/literal}
+"server": {literal}{{/literal}
+{if !empty($params.accessIPv4)}
+"accessIPv4": "{$params.accessIPv4}"
+{/if}
+{if !empty($params.accessIPv6)}
+{if !empty($params.accessIPv4)},{/if}
+"accessIPv6": "{$params.accessIPv6}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.action == "Server Action"}
+{if $params.server_action == "Add Floating IP Address"}
+{literal}{{/literal}
+"addFloatingIp": {literal}{{/literal}
+{if !empty($params.action_arg2)}
+"fixed_address": "{$params.action_arg2}",
+{/if}
+"address": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Remove Floating IP Address"}
+{literal}{{/literal}
+"removeFloatingIp": {literal}{{/literal}
+"address": "{$floatingips[$params.action_arg1|object_id].floating_ip_address}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Add Security Group"}
+{literal}{{/literal}
+"addSecurityGroup": {literal}{{/literal}
+"name": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Remove Security Group"}
+{literal}{{/literal}
+"removeSecurityGroup": {literal}{{/literal}
+"name": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Add Fixed IP Address"}
+{literal}{{/literal}
+"addFixedIp": {literal}{{/literal}
+"networkId": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Remove Fixed IP Address"}
+{literal}{{/literal}
+"removeFixedIp": {literal}{{/literal}
+"address": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Resize"}
+{literal}{{/literal}
+"resize": {literal}{{/literal}
+"flavorRef": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Reboot"}
+{literal}{{/literal}
+"reboot": {literal}{{/literal}
+"type": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Confirm Resize"}
+{literal}{{/literal}
+"confirmResize": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Revert Resize"}
+{literal}{{/literal}
+"revertResize": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Pause"}
+{literal}{{/literal}
+"pause": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Unpause"}
+{literal}{{/literal}
+"unpause": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Suspend"}
+{literal}{{/literal}
+"suspend": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Resume"}
+{literal}{{/literal}
+"resume": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Migrate"}
+{literal}{{/literal}
+"migrate": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Reset Network"}
+{literal}{{/literal}
+"resetNetwork": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Inject Network Info"}
+{literal}{{/literal}
+"injectNetworkInfo": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Lock"}
+{literal}{{/literal}
+"lock": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Unlock"}
+{literal}{{/literal}
+"unlock": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Force Delete"}
+{literal}{{/literal}
+"forceDelete": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Restore"}
+{literal}{{/literal}
+"restore": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Start"}
+{literal}{{/literal}
+"os-start": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Stop"}
+{literal}{{/literal}
+"os-stop": null
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Create Backup"}
+{literal}{{/literal}
+"createBackup": {literal}{{/literal}
+"name": "{$params.action_arg1}",
+"backup_type": "{$params.action_arg2}",
+"rotation": "{$params.action_arg3}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Live Migrate"}
+{literal}{{/literal}
+"os-migrateLive": {literal}{{/literal}
+"host": "{$params.action_arg1}",
+"block_migration": "{$params.action_arg2}",
+"disk_over_commit": "{$params.action_arg3}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Reset Server State"}
+{literal}{{/literal}
+"os-resetState": {literal}{{/literal}
+"state": "{$params.action_arg1}"
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.server_action == "Evacuate Server"}
+{literal}{{/literal}
+"evacuate": {literal}{{/literal}
+"onSharedStorage": "{$params.action_arg1}"
+{if !empty($params.action_arg2)}
+,"host": "{$params.action_arg2}"
+{/if}
+{if !empty($params.action_arg3)}
+,"adminPass": "{$params.action_arg3}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+{/if}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Neutron|Security Groups</group>
+    <icon>/images/repository/CommandDefinition/icons/firewall.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <name>Security Group Rules</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" displayType="" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Security Group" displayOrder="1" displayType="" isMandatory="true" maxLength="200" name="params.security_group_id" type="ObjectRef">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="Direction" displayOrder="3" displayType="" maxLength="200" name="params.direction" type="String">
+      <values>
+        <value>ingress</value>
+        <value>egress</value>
+      </values>
+    </variable>
+    <variable displayName="Protocol" displayOrder="4" displayType="" maxLength="200" name="params.protocol" type="String">
+      <values>
+        <value>udp</value>
+        <value>null</value>
+        <value>icmp</value>
+        <value>tcp</value>
+      </values>
+    </variable>
+    <variable default="IPv4" displayName="Ethernet Type" displayOrder="5" displayType="" maxLength="200" name="params.ethertype" type="String">
+      <values>
+        <value>IPv6</value>
+        <value>IPv4</value>
+      </values>
+    </variable>
+    <variable displayName="Port Range Minimum" displayOrder="6" displayType="" maxLength="200" name="params.port_range_min" type="Integer"/>
+    <variable displayName="Port Range Maximum" displayOrder="7" displayType="" maxLength="200" name="params.port_range_max" type="Integer"/>
+    <variable displayName="Remote Group" displayOrder="8" displayType="" maxLength="200" name="params.remote_group_id" type="ObjectRef">
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="Remote IP Prefix" displayOrder="10" displayType="" maxLength="200" name="params.remote_ip_prefix" type="String"/>
+    <variable displayName="Tenant" displayOrder="11" displayType="" maxLength="200" name="params.tenant_id" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>neutron</operation>
+    <xpath>/v2.0/security-group-rules</xpath>
+    <parser>
+      <section>
+        <xpath>//root/security_group_rules/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>security_group_id</xpath>
+          <regexp>@&lt;security_group_id&gt;(?&lt;security_group_id&gt;.*)&lt;/security_group_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>direction</xpath>
+          <regexp>@&lt;direction&gt;(?&lt;direction&gt;.*)&lt;/direction&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>ethertype</xpath>
+          <regexp>@&lt;ethertype&gt;(?&lt;ethertype&gt;.*)&lt;/ethertype&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>port_range_min</xpath>
+          <regexp>@&lt;port_range_min&gt;(?&lt;port_range_min&gt;.*)&lt;/port_range_min&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>port_range_max</xpath>
+          <regexp>@&lt;port_range_max&gt;(?&lt;port_range_max&gt;.*)&lt;/port_range_max&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>protocol</xpath>
+          <regexp>@&lt;protocol&gt;(?&lt;protocol&gt;.*)&lt;/protocol&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>remote_ip_prefix</xpath>
+          <regexp>@&lt;remote_ip_prefix&gt;(?&lt;remote_ip_prefix&gt;.*)&lt;/remote_ip_prefix&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>remote_group_id</xpath>
+          <regexp>@&lt;remote_group_id&gt;(?&lt;remote_group_id&gt;.*)&lt;/remote_group_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>tenant_id</xpath>
+          <regexp>@&lt;tenant_id&gt;(?&lt;tenant_id&gt;.*)&lt;/tenant_id&gt;@</regexp>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="CREATE">
+    <rest>POST#neutron
+</rest>
+    <xpath>/v2.0/security-group-rules
+</xpath>
+    <operation>{literal}{{/literal}
+"security_group_rule": {literal}{{/literal}
+"direction": "{$params.direction}",
+"security_group_id": "{$params.security_group_id}",
+"ethertype" : "{$params.ethertype}"
+{if !empty($params.port_range_min)}
+,"port_range_min": {$params.port_range_min}
+{/if}
+{if !empty($params.port_range_max)}
+,"port_range_max": {$params.port_range_max}
+{/if}
+{if !empty($params.protocol)}
+,"protocol": "{$params.protocol}"
+{/if}
+{if !empty($params.remote_group_id)}
+,"remote_group_id": "{$params.remote_group_id}"
+{/if}
+{if !empty($params.remote_ip_prefix)}
+,"remote_ip_prefix": "{$params.remote_ip_prefix}"
+{/if}
+{if !empty($params.tenant_id)}
+,"tenant_id": "{$params.tenant_id}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>neutron
+</rest>
+    <xpath>/​v2.0/security-group-rules/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

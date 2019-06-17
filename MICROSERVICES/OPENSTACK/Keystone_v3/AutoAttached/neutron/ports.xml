@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>name</group>
+    <icon>/images/repository/CommandDefinition/icons/pc.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>4</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Ports</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" type="String"/>
+    <variable displayName="Network" displayOrder="2" maxLength="200" name="params.network_id" type="ObjectRef">
+      <classes>
+        <class>networks</class>
+      </classes>
+    </variable>
+    <variable displayName="Subnet" displayOrder="4" maxLength="200" name="params.fixed_ips.0.subnet_id" type="ObjectRef">
+      <sections>
+        <section>Fixed IPs</section>
+      </sections>
+      <classes>
+        <class>subnets</class>
+      </classes>
+    </variable>
+    <variable displayName="IP Address" displayOrder="5" maxLength="200" name="params.fixed_ips.0.ip_address" type="IpAddress">
+      <sections>
+        <section>Fixed IPs</section>
+      </sections>
+    </variable>
+    <variable displayName="MAC Address" displayOrder="7" maxLength="200" name="params.mac_address" type="String"/>
+    <variable displayName="security_groups.0" displayOrder="7" maxLength="100" name="params.security_groups.0" startIncrement="0" type="String"/>
+    <variable default="true" displayName="Admin State Up" displayOrder="8" maxLength="200" name="params.admin_state_up" type="Boolean"/>
+    <variable displayName="Status" displayOrder="10" isUserLocked="true" maxLength="200" name="params.status" type="String"/>
+    <variable displayName="Device Owner" displayOrder="12" isUserLocked="true" maxLength="200" name="params.device_owner" type="String"/>
+    <variable displayName="Device ID" displayOrder="13" maxLength="200" name="params.device_id" startIncrement="0" type="String"/>
+    <variable default="true" displayName="Port Security Enabled" displayOrder="14" maxLength="200" name="params.port_security_enabled" startIncrement="0" type="Boolean"/>
+    <variable displayName="Security Group" displayOrder="15" maxLength="200" name="params.security_groups.0.security_group_id" type="ObjectRef">
+      <sections>
+        <section>Security Groups</section>
+      </sections>
+      <classes>
+        <class>security_groups</class>
+      </classes>
+    </variable>
+    <variable displayName="Tenant" displayOrder="16" maxLength="200" name="params.tenant_id" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>neutron</operation>
+    <xpath>/v2.0/ports</xpath>
+    <parser>
+      <section>
+        <xpath>//root/ports/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        
+        <line>
+          <xpath>status</xpath>
+          <regexp>@&lt;status&gt;(?&lt;status&gt;.*)&lt;/status&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>admin_state_up</xpath>
+          <regexp>@&lt;admin_state_up&gt;(?&lt;admin_state_up&gt;.*)&lt;/admin_state_up&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>network_id</xpath>
+          <regexp>@&lt;network_id&gt;(?&lt;network_id&gt;.*)&lt;/network_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>tenant_id</xpath>
+          <regexp>@&lt;tenant_id&gt;(?&lt;tenant_id&gt;.*)&lt;/tenant_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>mac_address</xpath>
+          <regexp>@&lt;mac_address&gt;(?&lt;mac_address&gt;.*)&lt;/mac_address&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>device_owner</xpath>
+          <regexp>@&lt;device_owner&gt;(?&lt;device_owner&gt;.*)&lt;/device_owner&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>device_id</xpath>
+          <regexp>@&lt;device_id&gt;(?&lt;device_id&gt;.*)&lt;/device_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>port_security_enabled</xpath>
+          <regexp>@&lt;port_security_enabled&gt;(?&lt;port_security_enabled&gt;.*)&lt;/port_security_enabled&gt;@</regexp>
+        </line>
+        <line>
+          <array name="security_groups">
+            <xpath>security_groups/row</xpath>
+            <lines>
+              <line>
+                <xpath>//row</xpath>
+                <regexp>@&lt;row&gt;(?&lt;security_group_id&gt;.*)&lt;/row&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="fixed_ips">
+            <xpath>fixed_ips/row</xpath>
+            <lines>
+              <line>
+                <xpath>subnet_id</xpath>
+                <regexp>@&lt;subnet_id&gt;(?&lt;subnet_id&gt;.*)&lt;/subnet_id&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>ip_address</xpath>
+                <regexp>@&lt;ip_address&gt;(?&lt;ip_address&gt;.*)&lt;/ip_address&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#neutron
+</rest>
+    <xpath>/v2.0/ports
+</xpath>
+    <operation>{literal}{{/literal}
+"port": {literal}{{/literal}
+"name": "{$params.name}",
+"tenant_id": "{$params.tenant_id}",
+"network_id": "{$params.network_id}",
+"admin_state_up": "{$params.admin_state_up}"
+{if !empty($params.mac_address)}
+,"mac_address": "{$params.mac_address}"
+{/if}
+{if !empty($params.security_groups)}
+,"security_groups":[
+{foreach $params.security_groups as $security_group}
+{if $security_group@iteration &gt; 1},{/if}
+"{$security_group.security_group_id}"
+{/foreach}
+]
+{/if}
+{if !empty($params.fixed_ips)}
+,"fixed_ips":[
+{foreach $params.fixed_ips as $fixed_ip}
+{if $fixed_ip@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"subnet_id": "{$fixed_ip.subnet_id}",
+"ip_address": "{$fixed_ip.ip_address}"
+{literal}}{/literal}
+{/foreach}
+]
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>neutron
+</rest>
+    <xpath>​/v2.0/ports/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>PUT#neutron
+</rest>
+    <xpath>​/v2.0/ports/{$params.object_id|object_id}
+</xpath>
+    <operation>{literal}{{/literal}
+"port": {literal}{{/literal}
+"name": "{$params.name}",
+{if !empty($params.admin_state_up)}
+"admin_state_up": "{$params.admin_state_up}",
+{/if}
+{if !empty($params.port_security_enabled)}
+"port_security_enabled": "{$params.port_security_enabled}"
+{/if}
+{if !empty($params.security_groups)}
+,"security_groups":[
+{foreach $params.security_groups as $security_group}
+{if $security_group@iteration &gt; 1},{/if}
+{if empty($security_group.security_group_id)}{break}{/if}
+"{$security_group.security_group_id}"
+{/foreach}
+]
+{else}
+,"security_groups":[]
+{/if}
+{if !empty($params.fixed_ips)}
+,"fixed_ips":[
+{foreach $params.fixed_ips as $fixed_ip}
+{if $fixed_ip@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"subnet_id": "{$fixed_ip.subnet_id}",
+"ip_address": "{$fixed_ip.ip_address}"
+{literal}}{/literal}
+{/foreach}
+]
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

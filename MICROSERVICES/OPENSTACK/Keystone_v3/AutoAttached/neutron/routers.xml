@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Neutron</group>
+    <icon>/images/repository/CommandDefinition/icons/router.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Routers</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" type="String"/>
+    <variable default="true" displayName="Admin State Up" displayOrder="2" maxLength="200" name="params.admin_state_up" type="Boolean"/>
+    <variable displayName="Status" displayOrder="3" isUserLocked="true" maxLength="200" name="params.status" type="String"/>
+    <variable displayName="Network" displayOrder="4" maxLength="200" name="params.network_id" type="ObjectRef">
+      <sections>
+        <section>External Gateway Info</section>
+      </sections>
+      <classes>
+        <class>networks</class>
+      </classes>
+    </variable>
+    <variable default="true" displayName="Enable SNAT" displayOrder="7" maxLength="200" name="params.enable_snat" type="Boolean">
+      <sections>
+        <section>External Gateway Info</section>
+      </sections>
+    </variable>
+    <variable displayName="routes.0" displayOrder="7" maxLength="100" name="params.routes.0" startIncrement="0" type="String"/>
+    <variable displayName="Subnet" displayOrder="8" isUserLocked="true" maxLength="200" name="params.external_gateway_info.0.subnet_id" type="ObjectRef">
+      <sections>
+        <section>External Gateway Info</section>
+      </sections>
+      <classes>
+        <class>subnets</class>
+      </classes>
+    </variable>
+    <variable displayName="IP Address" displayOrder="10" isUserLocked="true" maxLength="200" name="params.external_gateway_info.0.ip_address" type="String">
+      <sections>
+        <section>External Gateway Info</section>
+      </sections>
+    </variable>
+    <variable displayName="Nexthop" displayOrder="11" maxLength="200" name="params.routes.0.nexthop" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Routes</section>
+      </sections>
+    </variable>
+    <variable displayName="Destination" displayOrder="12" maxLength="200" name="params.routes.0.destination" startIncrement="0" type="String">
+      <sections>
+        <section>Routes</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Distributed" displayOrder="13" maxLength="200" name="params.distributed" startIncrement="0" type="Boolean"/>
+    <variable default="false" displayName="HA" displayOrder="14" maxLength="200" name="params.ha" startIncrement="0" type="Boolean"/>
+    <variable displayName="Tenant" displayOrder="15" maxLength="200" name="params.tenant_id" type="ObjectRef">
+      <classes>
+        <class>tenants</class>
+      </classes>
+    </variable>
+    <variable default=" " displayName="Router Action" displayOrder="17" maxLength="200" name="params.router_action" onlyDetailView="true" type="String">
+      <values>
+        <value displayValue=" "> </value>
+        <value displayValue="Router Action">Router Action</value>
+        <value displayValue="Router Update">Router Update</value>
+      </values>
+    </variable>
+    <variable displayName="Interface Action" displayOrder="18" maxLength="200" name="params.router_interface_action" onlyDetailView="true" selector="params.router_action" type="Composite" visible="false">
+      <values>
+        <value displayValue=" "> </value>
+        <value displayValue="Remove Router Interface">Remove Router Interface</value>
+        <value displayValue="Add Router Interface">Add Router Interface</value>
+      </values>
+      <behaviors>
+        <behavior displayName="Router Interface Action" displayOrder="0" maxLength="200" name="params.router_interface_action" selectorValue="Router Action" startIncrement="0" type="String">
+          <values>
+            <value displayValue="Add Router Interface">Add Router Interface</value>
+            <value displayValue="Remove Router Interface">Remove Router Interface</value>
+          </values>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Subnet" displayOrder="19" maxLength="200" name="params.subnet" onlyDetailView="true" selector="params.router_interface_action" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="Subnet" displayOrder="0" maxLength="200" name="params.subnet" selectorValue="Add Router Interface" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>subnets</class>
+          </classes>
+        </behavior>
+        <behavior displayName="Subnet" displayOrder="0" maxLength="200" name="params.subnet" selectorValue="Remove Router Interface" startIncrement="0" type="ObjectRef">
+          <classes>
+            <class>subnets</class>
+          </classes>
+        </behavior>
+      </behaviors>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>neutron</operation>
+    <xpath>/v2.0/routers</xpath>
+    <parser>
+      <section>
+        <xpath>//root/routers/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>admin_state_up</xpath>
+          <regexp>@&lt;admin_state_up&gt;(?&lt;admin_state_up&gt;.*)&lt;/admin_state_up&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>status</xpath>
+          <regexp>@&lt;status&gt;(?&lt;status&gt;.*)&lt;/status&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>external_gateway_info/network_id</xpath>
+          <regexp>@&lt;network_id&gt;(?&lt;network_id&gt;.*)&lt;/network_id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>external_gateway_info/enable_snat</xpath>
+          <regexp>@&lt;enable_snat&gt;(?&lt;enable_snat&gt;.*)&lt;/enable_snat&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>distributed</xpath>
+          <regexp>@&lt;distributed&gt;(?&lt;distributed&gt;.*)&lt;/distributed&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>ha</xpath>
+          <regexp>@&lt;ha&gt;(?&lt;ha&gt;.*)&lt;/ha&gt;@</regexp>
+        </line>
+        <line>
+          <array name="external_gateway_info">
+            <xpath>external_gateway_info/external_fixed_ips/row</xpath>
+            <lines>
+              <line>
+                <xpath>subnet_id</xpath>
+                <regexp>@&lt;subnet_id&gt;(?&lt;subnet_id&gt;.*)&lt;/subnet_id&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>ip_address</xpath>
+                <regexp>@&lt;ip_address&gt;(?&lt;ip_address&gt;.*)&lt;/ip_address&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+        <line>
+          <xpath>tenant_id</xpath>
+          <regexp>@&lt;tenant_id&gt;(?&lt;tenant_id&gt;.*)&lt;/tenant_id&gt;@</regexp>
+        </line>
+        <line>
+          <array name="routes">
+            <xpath>routes/row</xpath>
+            <lines>
+              <line>
+                <xpath>nexthop</xpath>
+                <regexp>@&lt;nexthop&gt;(?&lt;nexthop&gt;.*)&lt;/nexthop&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>destination</xpath>
+                <regexp>@&lt;destination&gt;(?&lt;destination&gt;.*)&lt;/destination&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#neutron
+</rest>
+    <xpath>/v2.0/routers
+</xpath>
+    <operation>{literal}{{/literal}
+"router": {literal}{{/literal}
+"name": "{$params.name}",
+"admin_state_up": "{$params.admin_state_up}",
+{if !empty($params.tenant_id)}
+"tenant_id" : "{$params.tenant_id}",
+{/if}
+"external_gateway_info": {literal}{{/literal}
+{if !empty($params.network_id)}
+"network_id": "{$params.network_id}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>neutron
+</rest>
+    <xpath>​/v2.0/routers/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+  <command name="UPDATE">
+    <rest>PUT#neutron
+</rest>
+    <xpath>{if $params.router_action == "Router Update"}
+/v2.0/routers/{$params.object_id|object_id}
+{elseif $params.router_action == "Router Action"}
+{if $params.router_interface_action == "Add Router Interface"}
+/v2.0/routers/{$params.object_id|object_id}/add_router_interface
+{elseif $params.router_interface_action == "Remove Router Interface"}
+/v2.0/routers/{$params.object_id|object_id}/remove_router_interface
+{/if}
+{/if}
+</xpath>
+    <operation>{if $params.router_action == "Router Update"}
+{literal}{{/literal}
+"router": {literal}{{/literal}
+"name": "{$params.name}",
+"admin_state_up": "{$params.admin_state_up}",
+"distributed": "{$params.distributed}",
+"external_gateway_info": {literal}{{/literal}
+{if !empty($params.network_id)}
+"network_id": "{$params.network_id}",
+"enable_snat": "{$params.enable_snat}"
+{/if}
+{literal}}{/literal}
+{if !empty($params.routes)}
+,"routes": [
+{foreach $params.routes as $route}
+{if $route@iteration &gt; 1},{/if}
+{literal}{{/literal}
+"nexthop": "{$route.nexthop}",
+"destination": "{$route.destination}"
+{literal}}{/literal}
+{/foreach}
+]
+{else}
+,"routes":[]
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+##
+{elseif $params.router_action == "Router Action"}
+{if $params.router_interface_action == "Add Router Interface"}
+{literal}{{/literal}
+"subnet_id": "{$params.subnet}"
+{literal}}{/literal}
+##
+{elseif $params.router_interface_action == "Remove Router Interface"}
+{literal}{{/literal}
+"subnet_id": "{$params.subnet}"
+{literal}}{/literal}
+{/if}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>

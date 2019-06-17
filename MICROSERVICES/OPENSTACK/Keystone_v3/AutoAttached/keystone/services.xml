@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>name</displayField>
+    <dynamic>false</dynamic>
+    <group>Keystone</group>
+    <icon>/images/repository/CommandDefinition/icons/Services.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Services</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="UUID" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="200" name="params.name" startIncrement="0" type="String"/>
+    <variable displayName="Type" displayOrder="2" maxLength="200" name="params.type" type="String"/>
+    <variable default="true" displayName="Enabled" displayOrder="3" maxLength="200" name="params.enabled" type="Boolean"/>
+    <variable displayName="Description" displayOrder="4" maxLength="200" name="params.description" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>keystone</operation>
+    <xpath>/services</xpath>
+    <parser>
+      <section>
+        <xpath>//root/services/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>id</xpath>
+          <regexp>@&lt;id&gt;(?&lt;object_id&gt;.*)&lt;/id&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>type</xpath>
+          <regexp>@&lt;type&gt;(?&lt;type&gt;.*)&lt;/type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>enabled</xpath>
+          <regexp>@&lt;enabled&gt;(?&lt;enabled&gt;.*)&lt;/enabled&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>name</xpath>
+          <regexp>@&lt;name&gt;(?&lt;name&gt;.*)&lt;/name&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>description</xpath>
+          <regexp>@&lt;description&gt;(?&lt;description&gt;.*)&lt;/description&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <rest>POST#keystone
+</rest>
+    <xpath>/services
+</xpath>
+    <operation>{literal}{{/literal}
+"service": {literal}{{/literal}
+"name": "{$params.name}"
+{if !empty($params.type)}
+,"type": "{$params.type}"
+{/if}
+{if !empty($params.enabled)}
+,"enabled": {$params.enabled}
+{/if}
+{if !empty($params.description)}
+,"description": "{$params.description}"
+{/if}
+{literal}}{/literal}
+{literal}}{/literal}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>keystone
+</rest>
+    <xpath>/services/{$params.object_id|object_id}
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>
