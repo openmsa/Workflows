@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/repository/CommandDefinition/icons/vpn gateway.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Extended access-list </name>
+    <order>400</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="ACL Name" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName=" Subnet" displayOrder="1" maxLength="100" name="params.subneta" startIncrement="0" type="String">
+      <sections>
+        <section>Protected Subnet Source </section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName=" Mask" displayOrder="2" maxLength="100" name="params.maska" startIncrement="0" type="String">
+      <sections>
+        <section>Protected Subnet Source </section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName=" Subnet" displayOrder="3" maxLength="100" name="params.subnetb" startIncrement="0" type="String">
+      <sections>
+        <section>Protected Subnet Destination </section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName=" Mask" displayOrder="4" maxLength="100" name="params.maskb" startIncrement="0" type="String">
+      <sections>
+        <section>Protected Subnet Destination </section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>ip access-list extended TEST-SITE-A-B-VPN-ACL
+ permit ip 172.16.30.0 0.0.0.255 172.16.31.0 0.0.0.255
+</content>
+  </example>
+<command name="CREATE">
+    <operation>ip access-list extended {$params.object_id}
+ permit ip {$params.subneta} {$params.maska} {$params.subnetb} {$params.maskb}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no ip access-list extended {$acl.$object_id.object_id}
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>xml</configType>
+    <visible>true</visible>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>10</order>
+    <description/>
+    <name>Anti-virus Profile</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Security Options</group>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Profile name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="name" displayOrder="1" editable="false" isMandatory="true" maxLength="150" name="params.decoder.0.decoder_id" type="String">
+      <values>
+        <value>ftp</value>
+        <value>http</value>
+        <value>imap</value>
+        <value>pop3</value>
+        <value>smb</value>
+        <value>smtp</value>
+      </values>
+      <sections>
+        <section>decoder</section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="action" displayOrder="2" editable="false" isMandatory="true" maxLength="150" name="params.decoder.0.decoder_action" type="String">
+      <values>
+        <value>alert</value>
+        <value>allow</value>
+        <value>block</value>
+        <value>default</value>
+      </values>
+      <sections>
+        <section>decoder</section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="wildfire action" displayOrder="3" editable="false" isMandatory="true" maxLength="150" name="params.decoder.0.decoder_wildfire_action" type="String">
+      <values>
+        <value>alert</value>
+        <value>allow</value>
+        <value>block</value>
+        <value>default</value>
+      </values>
+      <sections>
+        <section>decoder</section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" default="no" displayName="packet capture" displayOrder="3" editable="false" isMandatory="true" maxLength="150" name="params.packet_capture" type="String">
+      <values>
+        <value>yes</value>
+        <value>no</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="description" displayOrder="4" maxLength="150" name="params.description" type="String"/>
+  </variables>  <example>
+    <content>&lt;virus&gt;
+  &lt;entry name="USER_AV_Config"&gt;
+    &lt;decoder&gt;
+      &lt;entry name="ftp"&gt;
+        &lt;action&gt;block&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+      &lt;entry name="http"&gt;
+        &lt;action&gt;alert&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+      &lt;entry name="imap"&gt;
+        &lt;action&gt;allow&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+      &lt;entry name="pop3"&gt;
+        &lt;action&gt;allow&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+      &lt;entry name="smb"&gt;
+        &lt;action&gt;allow&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+      &lt;entry name="smtp"&gt;
+        &lt;action&gt;alert&lt;/action&gt;
+        &lt;wildfire-action&gt;default&lt;/wildfire-action&gt;
+      &lt;/entry&gt;
+    &lt;/decoder&gt;
+    &lt;packet-capture&gt;yes&lt;/packet-capture&gt;
+  &lt;/entry&gt;
+&lt;/virus&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus</xpath>
+    <parser>
+      <section>
+        <xpath>//virus/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <array name="decoder">
+            <xpath>//entry/decoder/entry</xpath>
+            <lines>
+              <line>
+                <xpath>//entry/@name</xpath>
+                <regexp>@name="(?&lt;decoder_id&gt;.*)"@</regexp>
+              </line>
+              <line>
+                <xpath>//entry/action</xpath>
+                <regexp>@&lt;action&gt;(?&lt;decoder_action&gt;[^&lt;]+)&lt;/action&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>//entry/wildfire-action</xpath>
+                <regexp>@&lt;wildfire-action&gt;(?&lt;decoder_wildfire_action&gt;[^&lt;]+)&lt;/wildfire-action&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <xpath>//entry/packet-capture</xpath>
+          <regexp>@&lt;packet-capture&gt;(?&lt;packet_capture&gt;[^&lt;]+)&lt;/packet-capture&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/description</xpath>
+          <regexp>@&lt;description&gt;(?&lt;description&gt;[^&lt;]+)&lt;/description&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+  </command>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus
+</xpath>
+    <operation>&lt;entry name='{$params.object_id}'&gt;
+&lt;decoder&gt;
+{foreach $params.decoder as $decoder}
+&lt;entry name="{$decoder.decoder_id}"&gt;
+&lt;action&gt;{$decoder.decoder_action}&lt;/action&gt;
+&lt;wildfire-action&gt;{$decoder.decoder_wildfire_action}&lt;/wildfire-action&gt;
+&lt;/entry&gt;
+{/foreach}
+&lt;/decoder&gt;
+&lt;packet-capture&gt;{$params.packet_capture}&lt;/packet-capture&gt;
+{if !empty($params.description) }
+&lt;description&gt;{$params.description}&lt;/description&gt;
+{/if}
+&lt;/entry&gt;
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;entry name='{$params.object_id}'&gt;
+&lt;decoder&gt;
+{foreach $params.decoder as $decoder}
+&lt;entry name="{$decoder.decoder_id}"&gt;
+&lt;action&gt;{$decoder.decoder_action}&lt;/action&gt;
+&lt;wildfire-action&gt;{$decoder.decoder_wildfire_action}&lt;/wildfire-action&gt;
+&lt;/entry&gt;
+{/foreach}
+&lt;/decoder&gt;
+&lt;packet-capture&gt;{$params.packet_capture}&lt;/packet-capture&gt;
+{if !empty($params.description) }
+&lt;description&gt;{$params.description}&lt;/description&gt;
+{/if}
+&lt;/entry&gt;
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/profiles/virus/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

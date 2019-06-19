@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/repository/CommandDefinition/icons/vpn gateway.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Crypto map</name>
+    <order>500</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Crypto Map Name" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="transformset" displayOrder="1" maxLength="100" name="params.transformset" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="WAN IP" displayOrder="1" maxLength="100" name="params.wanIP" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" displayName="isakmpprofile" displayOrder="2" maxLength="100" name="params.isakmpprofile" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" default="acl_todo" displayName="acl" displayOrder="4" maxLength="100" name="params.acl" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>crypto map TEST-S2S-VPN 10 ipsec-isakmp 
+ set peer 37.216.238.226
+ set transform-set TEST-SITE-A-B-VPN-SET
+ set isakmp-profile TEST-SITE-A-B-VPN-PROFILE
+ match address TEST-SITE-A-B-VPN-ACL
+!
+exit
+</content>
+  </example>
+<command name="CREATE">
+    <operation>crypto map {$params.object_id} 10 ipsec-isakmp 
+set peer {$params.wanIP}
+set transform-set {$params.transformset}
+set isakmp-profile {$params.isakmpprofile}
+match address {$params.acl}
+!
+exit
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no crypto map {$params.object_id}
+</operation>
+  </command>
+  <command name="IMPORT">
+    <operation>sh run</operation>
+    <parser>
+      <section>
+        <regexp>@crypto map (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@ ! Incomplete@
+</regexp>
+        </ignore>
+        <line>
+          <regexp>@ set peer (?&lt;wanIP&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@ set transform-set IPSEC1</regexp>
+        </line>
+        <line>
+          <regexp>@ match address (?&lt;acl&gt;\S+)@</regexp>
+        </line>
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+</ObjectDefinition>

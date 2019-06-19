@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network|Interface</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Ethernet</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Interface" displayOrder="0" editable="false" isMandatory="true" maxLength="200" name="params.object_id" startIncrement="0" type="String">
+      <values>
+        <value displayValue="ethernet1/20">ethernet1/20</value>
+        <value displayValue="ethernet1/17">ethernet1/17</value>
+        <value displayValue="ethernet1/6">ethernet1/6</value>
+        <value displayValue="ethernet1/7">ethernet1/7</value>
+        <value displayValue="ethernet1/1">ethernet1/1</value>
+        <value displayValue="ethernet1/21">ethernet1/21</value>
+        <value displayValue="ethernet1/23">ethernet1/23</value>
+        <value displayValue="ethernet1/14">ethernet1/14</value>
+        <value displayValue="ethernet1/4">ethernet1/4</value>
+        <value displayValue="ethernet1/24">ethernet1/24</value>
+        <value displayValue="ethernet1/9">ethernet1/9</value>
+        <value displayValue="ethernet1/16">ethernet1/16</value>
+        <value displayValue="ethernet1/10">ethernet1/10</value>
+        <value displayValue="ethernet1/22">ethernet1/22</value>
+        <value displayValue="ethernet1/18">ethernet1/18</value>
+        <value displayValue="ethernet1/12">ethernet1/12</value>
+        <value displayValue="ethernet1/3">ethernet1/3</value>
+        <value displayValue="ethernet1/5">ethernet1/5</value>
+        <value displayValue="ethernet1/19">ethernet1/19</value>
+        <value displayValue="ethernet1/11">ethernet1/11</value>
+        <value displayValue="ethernet1/2">ethernet1/2</value>
+        <value displayValue="ethernet1/13">ethernet1/13</value>
+        <value displayValue="ethernet1/15">ethernet1/15</value>
+        <value displayValue="ethernet1/8">ethernet1/8</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" default="tap" displayName="Interface Type" displayOrder="1" editable="false" isMandatory="true" maxLength="200" name="params.interface_type" startIncrement="0" type="String">
+      <values>
+        <value displayValue="HA">ha</value>
+        <value displayValue="Layer2">layer2</value>
+        <value displayValue="Tap">tap</value>
+        <value displayValue="Virtual Wire">virtual-wire</value>
+        <value displayValue="Layer3">layer3</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Comment" displayOrder="2" maxLength="200" name="params.comment" startIncrement="0" type="String"/>
+    <variable numberOfRowMax="3000" default="auto" displayName="Link State" displayOrder="3" editable="false" maxLength="200" name="params.link_state" startIncrement="0" type="String">
+      <values>
+        <value displayValue="down">down</value>
+        <value displayValue="auto">auto</value>
+        <value displayValue="up">up</value>
+      </values>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Enable" displayOrder="3" maxLength="200" name="params.lldp_enable" selector="params.interface_type" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>LLDP</section>
+      </sections>
+      <behaviors>
+        <behavior default="no" displayName="Enable" displayOrder="0" maxLength="200" name="params.lldp_enable" selectorValue="layer2" startIncrement="0" type="String">
+          <values>
+            <value displayValue="yes">yes</value>
+            <value displayValue="no">no</value>
+          </values>
+          <sections>
+            <section>LLDP</section>
+          </sections>
+        </behavior>
+        <behavior default="no" displayName="Enable" displayOrder="0" maxLength="200" name="params.lldp_enable" selectorValue="layer3" startIncrement="0" type="String">
+          <values>
+            <value displayValue="yes">yes</value>
+            <value displayValue="no">no</value>
+          </values>
+          <sections>
+            <section>LLDP</section>
+          </sections>
+        </behavior>
+        <behavior default="no" displayName="Enable" displayOrder="0" maxLength="200" name="params.lldp_enable" selectorValue="virtual-wire" startIncrement="0" type="String">
+          <values>
+            <value displayValue="yes">yes</value>
+            <value displayValue="no">no</value>
+          </values>
+          <sections>
+            <section>LLDP</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Profile" displayOrder="4" maxLength="200" name="params.lldp_profile" selector="params.lldp_enable" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>LLDP</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Profile" displayOrder="0" maxLength="200" name="params.lldp_profile" selectorValue="yes" startIncrement="0" type="String">
+          <sections>
+            <section>LLDP</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet</xpath>
+    <parser>
+      <section>
+        <xpath>//ethernet/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/*</xpath>
+          <regexp>@&lt;(?&lt;interface_type&gt;[^\s\&gt;\/]+).*&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/*/lldp/enable</xpath>
+          <regexp>@&lt;enable&gt;(?&lt;lldp_enable&gt;.*)&lt;/enable&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/*/lldp/profile</xpath>
+          <regexp>@&lt;profile&gt;(?&lt;lldp_profile&gt;.*)&lt;/profile&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/comment</xpath>
+          <regexp>@&lt;comment&gt;(?&lt;comment&gt;.*)&lt;/comment&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/link-state</xpath>
+          <regexp>@&lt;link-state&gt;(?&lt;link_state&gt;.*)&lt;/link-state&gt;@</regexp>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+
+  
+  
+
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;{$params.interface_type}&gt;
+{if $params.interface_type === "virtual-wire" || $params.interface_type === "layer2" || $params.interface_type === "layer3"}
+&lt;lldp&gt;
+&lt;enable&gt;{$params.lldp_enable}&lt;/enable&gt;
+{if !empty($params.lldp_profile)}
+&lt;profile&gt;{$params.lldp_profile}&lt;/profile&gt;
+{/if}
+&lt;/lldp&gt;
+{/if}
+&lt;/{$params.interface_type}&gt;
+&lt;comment&gt;{$params.comment}&lt;/comment&gt;
+&lt;link-state&gt;{$params.link_state}&lt;/link-state&gt;
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;entry name='{$params.object_id}'&gt;
+&lt;{$params.interface_type}&gt;
+{if $params.interface_type === "virtual-wire" || $params.interface_type === "layer2" || $params.interface_type === "layer3"}
+&lt;lldp&gt;
+&lt;enable&gt;{$params.lldp_enable}&lt;/enable&gt;
+{if !empty($params.lldp_profile)}
+&lt;profile&gt;{$params.lldp_profile}&lt;/profile&gt;
+{/if}
+&lt;/lldp&gt;
+{/if}
+&lt;/{$params.interface_type}&gt;
+&lt;comment&gt;{$params.comment}&lt;/comment&gt;
+&lt;link-state&gt;{$params.link_state}&lt;/link-state&gt;
+&lt;/entry&gt;
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>

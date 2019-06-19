@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/repository/CommandDefinition/icons/Service.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Services</name>
+    <order>2200</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Protocol" displayOrder="1" maxLength="200" name="params.protocol" startIncrement="0" type="String"/>
+    <variable displayName="Port" displayOrder="2" maxLength="200" name="params.port" startIncrement="0" type="String"/>
+    <variable displayName="Port end" displayOrder="3" maxLength="200" name="params.port_end" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>CREATE
+
+object service mySer1
+ service tcp source eq ssh destination eq ssh
+
+IMPORT
+
+show running-config all object service in-line
+
+!predefined
+object service ah pre-defined service ah  description This is a pre-defined object
+object service eigrp pre-defined service eigrp  description This is a pre-defined object
+object service esp pre-defined service esp  description This is a pre-defined object
+object service gre pre-defined service gre  description This is a pre-defined object
+object service icmp pre-defined service icmp  description This is a pre-defined object
+
+
+! user defined
+object service sms service tcp destination eq 28169
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>sho run | sec object-group service</operation>
+    <parser>
+      <section>
+        <regexp>@object-group service (?&lt;object_id&gt;\S+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+        <line>
+          <regexp>@\s(?&lt;protocol&gt;\S+) eq (?&lt;port&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s(?&lt;protocol&gt;\S+) range (?&lt;port&gt;\S+) (?&lt;port_end&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@^\s(?&lt;protocol&gt;\S+)$@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>object-group service {$params.object_id}
+ {$params.protocol}{if !empty($params.port) and  !empty($params.port_end)} range {$params.port} {$params.port_end}{elseif !empty($params.port)} eq {$params.port}{/if}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>no object-group service {$service.$object_id.object_id}
+object-group service {$params.object_id}
+ {$params.protocol}{if !empty($params.port) and  !empty($params.port_end)} range {$params.port} {$params.port_end}{elseif !empty($params.port)} eq {$params.port}{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no object-group service {$service.$object_id.object_id}
+</operation>
+  </command>
+</ObjectDefinition>

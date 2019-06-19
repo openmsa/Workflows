@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Eth-Tag</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network|Interface</group>
+    <icon>/images/repository/CommandDefinition/icons/web cluster.jpg</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <name>Ethernet Interface Tag</name>
+    <order>50</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Interface Name" displayOrder="0" isMandatory="true" maxLength="250" name="params.object_id" type="ObjectRef">
+      <classes>
+        <class>ethernet</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Subinterface" displayOrder="2" isUserLocked="true" maxLength="200" name="params.vwireinterface.0.subinterface" startIncrement="0" type="ObjectRef" visible="false">
+      <sections>
+        <section>VWire Interface</section>
+      </sections>
+      <classes>
+        <class>ethernet</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Subinterface Id" displayOrder="3" maxLength="200" name="params.vwireinterface.0.subinterface_id" startIncrement="0" type="String">
+      <sections>
+        <section>VWire Interface</section>
+      </sections>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Tag" displayOrder="4" isMandatory="true" maxLength="200" name="params.vwireinterface.0.tag" startIncrement="0" type="Integer">
+      <sections>
+        <section>VWire Interface</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>&lt;ethernet&gt;
+  &lt;entry name="ethernet1/1"&gt;
+    &lt;virtual-wire&gt;
+      &lt;units&gt;
+        &lt;entry name="ethernet1/1.100"&gt;
+          &lt;tag&gt;100&lt;/tag&gt;
+        &lt;/entry&gt;
+        &lt;entry name="ethernet1/1.200"&gt;
+          &lt;tag&gt;200&lt;/tag&gt;
+        &lt;/entry&gt;
+      &lt;/units&gt;
+    &lt;/virtual-wire&gt;
+  &lt;/entry&gt;
+  &lt;entry name="ethernet1/2"&gt;
+    &lt;virtual-wire&gt;
+      &lt;units&gt;
+        &lt;entry name="ethernet1/2.100"&gt;
+          &lt;tag&gt;100&lt;/tag&gt;
+        &lt;/entry&gt;
+        &lt;entry name="ethernet1/2.200"&gt;
+          &lt;tag&gt;200&lt;/tag&gt;
+        &lt;/entry&gt;
+      &lt;/units&gt;
+    &lt;/virtual-wire&gt;
+  &lt;/entry&gt;
+&lt;/ethernet&gt;
+</content>
+  </example>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet/entry[@name='{$params.object_id}']/virtual-wire/units
+</xpath>
+    <operation>{foreach $params.vwireinterface as $interface}
+        &lt;entry name="{$params.object_id}.{$interface.subinterface_id}"&gt;
+          &lt;tag&gt;{$interface.tag}&lt;/tag&gt;
+        &lt;/entry&gt;
+{/foreach}
+</operation>
+  </command>
+
+  
+<command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet</xpath>
+    <parser>
+      <section>
+        <xpath>//ethernet/entry</xpath>
+      </section>
+      <lines>
+        <line>
+            <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+            <xpath>//entry/@name</xpath>
+        </line>
+        
+        
+        <line>
+          <array name="vwireinterface">
+            <xpath>//entry/virtual-wire/units/entry</xpath>
+            <lines>
+              <line>
+                <xpath>//entry</xpath>
+                <regexp>@&lt;entry name="(?&lt;subinterface&gt;[^.]+).(?&lt;subinterface_id&gt;[^"]+)"&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>//entry/tag</xpath>
+                <regexp>@&lt;tag&gt;(?&lt;tag&gt;.*)&lt;/tag&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="UPDATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/interface/ethernet/entry[@name='{$params.object_id}']/virtual-wire/units
+</xpath>
+    <operation>{foreach $params.vwireinterface as $interface}
+{if !empty($interface.subinterface_id)}
+    &lt;entry name="{$params.object_id}.{$interface.subinterface_id}"&gt;
+        &lt;tag&gt;{$interface.tag}&lt;/tag&gt;
+    &lt;/entry&gt;
+{/if}
+{/foreach}
+</operation>
+  </command>
+
+</ObjectDefinition>

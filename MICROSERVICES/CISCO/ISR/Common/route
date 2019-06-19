@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>subnet</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/repository/CommandDefinition/icons/Network.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Routes</name>
+    <order>2100</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="id" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="AutoIncrement"/>
+    <variable displayName="Subnet" displayOrder="1" isMandatory="true" maxLength="200" name="params.subnet" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
+    <variable displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gateway" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Interface" displayOrder="4" keepOnImport="true" maxLength="165" name="params.interface" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>interface</class>
+      </classes>
+    </variable>
+    <variable default="1" displayName="Metric" displayOrder="5" maxLength="200" name="params.metric" startIncrement="0" type="Integer"/>
+  </variables>  <example>
+    <content>ip route 0.0.0.0 0.0.0.0 10.30.19.254
+ip route 3.3.3.0 255.255.255.0 GigabitEthernet1 5.5.5.5 2
+ip route 3.3.3.0 255.255.255.0 3.3.3.3 5
+</content>
+  </example>
+  
+  
+
+<command name="IMPORT">
+    <operation>sho run | inc ip route</operation>
+    <parser>
+      <section>
+        <regexp>@^ip route (?&lt;object_id&gt;(?&lt;subnet&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;gateway&gt;([0-9]{1,3}\.){3}[0-9]{1,3}))\s*$@</regexp>
+        
+        <regexp>@^ip route (?&lt;object_id&gt;(?&lt;subnet&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;gateway&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;metric&gt;\d+))\s*$@</regexp>
+        <regexp>@^ip route (?&lt;object_id&gt;(?&lt;subnet&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;interface&gt;[a-zA-Z]\S*) (?&lt;gateway&gt;([0-9]{1,3}\.){3}[0-9]{1,3}))\s*$@</regexp>
+        
+        <regexp>@^ip route (?&lt;object_id&gt;(?&lt;subnet&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;interface&gt;[a-zA-Z]\S*) (?&lt;gateway&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;metric&gt;\d+))\s*$@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="CREATE">
+    <operation>ip route {$params.subnet} {$params.mask} {$params.interface}  {$params.gateway} {$params.metric}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no ip route {$route.$object_id.subnet} {$route.$object_id.mask} {$route.$object_id.interface}  {$route.$object_id.gateway} {$route.$object_id.metric}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>no ip route {$route.$object_id.subnet} {$route.$object_id.mask} {$route.$object_id.interface}  {$route.$object_id.gateway} {$route.$object_id.metric}
+
+ip route {$params.subnet} {$params.mask} {$params.interface} {$params.gateway} {$params.metric}
+</operation>
+  </command>
+</ObjectDefinition>

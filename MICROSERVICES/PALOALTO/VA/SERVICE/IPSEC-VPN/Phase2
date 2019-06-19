@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Phase 2</name>
+    <order>10001</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable default="esp" displayName="ESP/AH" displayOrder="2" isMandatory="true" maxLength="200" name="params.protocol" startIncrement="0" type="String">
+      <values>
+        <value displayValue="AH">ah</value>
+        <value displayValue="ESP">esp</value>
+      </values>
+    </variable>
+    <variable displayName="Encryption" displayOrder="3" editable="false" maxLength="200" name="params.encryption.0.member" selector="params.protocol" startIncrement="0" type="Composite">
+      <behaviors>
+        <behavior displayName="member" displayOrder="0" maxLength="200" name="params.encryption.0.member" selectorValue="ah" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>encryption</section>
+          </sections>
+        </behavior>
+        <behavior displayName="member" displayOrder="0" isMandatory="true" isMandatoryArray="true" maxLength="200" name="params.encryption.0.member" selectorValue="esp" startIncrement="0" type="Index">
+          <values>
+            <value>md5</value>
+            <value>sha1</value>
+            <value>sha256</value>
+            <value>sh384</value>
+            <value>sha512</value>
+          </values>
+          <sections>
+            <section>encryption</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Authentication" displayOrder="4" editable="false" isMandatory="true" isMandatoryArray="true" maxLength="200" name="params.authentication.0.member" startIncrement="0" type="Index">
+      <values>
+        <value displayValue="md5">md5</value>
+        <value displayValue="sha1">sha1</value>
+        <value displayValue="sha256">sha256</value>
+        <value displayValue="sha384">sha384</value>
+        <value displayValue="sha512">sha512</value>
+      </values>
+    </variable>
+    <variable default="group14" displayName="DH-group" displayOrder="5" editable="false" maxLength="200" name="params.dhgroup" startIncrement="0" type="String">
+      <values>
+        <value displayValue="group1">group1</value>
+        <value>group14</value>
+        <value>group2</value>
+        <value>group5</value>
+        <value>no-pfs</value>
+      </values>
+    </variable>
+    <variable default="3600" displayName="Lifetime (in seconds)" displayOrder="6" groupDisplayName="Lifetime" isMandatory="true" maxLength="200" name="params.lifetime" startIncrement="0" type="Integer"/>
+    <variable displayName="Lifetime unit" displayOrder="7" groupDisplayName="Lifetime" maxLength="200" name="params.lifetime_unit" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="ah_auth" displayOrder="8" maxLength="200" name="params.ah_auth" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="member" displayOrder="9" maxLength="200" name="params.ah_auth.0.member" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>ah_auth</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>&lt;ipsec-crypto-profiles&gt;
+&lt;entry name=”default”&gt;
+&lt;encryption&gt;
+&lt;member&gt;aes192&lt;/member&gt;
+&lt;member&gt;aes256&lt;/member&gt;
+&lt;member&gt;aes128&lt;/member&gt;
+&lt;member&gt;3des&lt;/member&gt;
+&lt;/encryption&gt;
+&lt;hash&gt;
+&lt;member&gt;sha1&lt;/member&gt;
+&lt;member&gt;md5&lt;/member&gt;
+&lt;/hash&gt;
+&lt;dh-group&gt;
+&lt;member&gt;group2&lt;/member&gt;
+&lt;member&gt;group1&lt;/member&gt;
+&lt;/dh-group&gt;
+&lt;lifetime&gt;
+&lt;hours&gt;24&lt;/hours&gt;
+&lt;/lifetime&gt;
+&lt;/entry&gt;
+&lt;/ipsec-crypto-profiles&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>type=config&amp;action=show</operation>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/ike/crypto-profiles/ipsec-crypto-profiles</xpath>
+    <parser>
+      <section>
+        <xpath>//ipsec-crypto-profiles/entry</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>//entry/@name</xpath>
+          <regexp>@name="(?&lt;object_id&gt;.*)"@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/lifetime/days</xpath>
+          <regexp>@&lt;(?&lt;lifetime_unit&gt;[^&gt;]*)&gt;(?&lt;lifetime&gt;.*)&lt;/days&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/lifetime/hours</xpath>
+          <regexp>@&lt;(?&lt;lifetime_unit&gt;[^&gt;]*)&gt;(?&lt;lifetime&gt;.*)&lt;/hours&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/lifetime/minutes</xpath>
+          <regexp>@&lt;(?&lt;lifetime_unit&gt;[^&gt;]*)&gt;(?&lt;lifetime&gt;.*)&lt;/minutes&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/lifetime/seconds</xpath>
+          <regexp>@&lt;(?&lt;lifetime_unit&gt;[^&gt;]*)&gt;(?&lt;lifetime&gt;.*)&lt;/seconds&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/dh-group</xpath>
+          <regexp>@&lt;dh-group&gt;(?&lt;dhgroup&gt;.*)&lt;/dh-group&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/ah</xpath>
+          <regexp>@&lt;(?&lt;protocol&gt;[^&gt;]+)&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>//entry/esp</xpath>
+          <regexp>@&lt;(?&lt;protocol&gt;[^&gt;]+)&gt;@</regexp>
+        </line>
+        <line>
+          <array name="encryption">
+            <xpath>//entry/esp/encryption/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;member&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="authentication">
+            <xpath>//entry/esp/authentication/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;member&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="ah_auth">
+            <xpath>//entry/ah/authentication/member</xpath>
+            <lines>
+              <line>
+                <xpath>//member</xpath>
+                <regexp>@&lt;member&gt;(?&lt;member&gt;.*)&lt;/member&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+      </lines>
+    </parser>
+    <post_template>{if $params.lifetime_unit=="days"}
+{assign_object_variable var="lifetime" value=$params.lifetime*86400}
+{elseif $params.lifetime_unit=="hours"}
+{assign_object_variable var="lifetime" value=$params.lifetime*3600}
+{elseif $params.lifetime_unit=="minutes"}
+{assign_object_variable var="lifetime" value=$params.lifetime*60}
+{/if}
+{if !empty($params.ah_auth)}
+{foreach $params.ah_auth as $index =&gt; $member}
+{assign_object_variable var="authentication.$index.member" value=$member.member}
+{/foreach}
+{/if}</post_template>
+  </command>
+<command name="CREATE">
+    <rest>type=config&amp;action=set
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/ike/crypto-profiles/ipsec-crypto-profiles/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>{if $params.protocol=="esp"}
+&lt;esp&gt;
+&lt;encryption&gt;
+{foreach $params.encryption as $encryption}
+&lt;member&gt;{$encryption.member}&lt;/member&gt;
+{/foreach}
+&lt;/encryption&gt;
+&lt;authentication&gt;
+{foreach $params.authentication as $authentication}
+&lt;member&gt;{$authentication.member}&lt;/member&gt;
+{/foreach}
+&lt;/authentication&gt;
+&lt;/esp&gt;
+{else}
+&lt;ah&gt;
+&lt;authentication&gt;
+{foreach $params.authentication as $authentication}
+&lt;member&gt;{$authentication.member}&lt;/member&gt;
+{/foreach}
+&lt;/authentication&gt;
+&lt;/ah&gt;
+{/if}
+&lt;dh-group&gt;{$params.dhgroup}&lt;/dh-group&gt;
+&lt;lifetime&gt;
+&lt;seconds&gt;{$params.lifetime}&lt;/seconds&gt;
+&lt;/lifetime&gt;
+</operation>
+  </command>
+  <command name="UPDATE">
+    <rest>type=config&amp;action=edit
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/ike/crypto-profiles/ipsec-crypto-profiles/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>&lt;entry name="{$params.object_id}"&gt;
+{if $params.protocol=="esp"}
+&lt;esp&gt;
+&lt;encryption&gt;
+{foreach $params.encryption as $encryption}
+&lt;member&gt;{$encryption.member}&lt;/member&gt;
+{/foreach}
+&lt;/encryption&gt;
+&lt;authentication&gt;
+{foreach $params.authentication as $authentication}
+&lt;member&gt;{$authentication.member}&lt;/member&gt;
+{/foreach}
+&lt;/authentication&gt;
+&lt;/esp&gt;
+{else}
+&lt;ah&gt;
+&lt;authentication&gt;
+{foreach $params.authentication as $authentication}
+&lt;member&gt;{$authentication.member}&lt;/member&gt;
+{/foreach}
+&lt;/authentication&gt;
+&lt;/ah&gt;
+{/if}
+&lt;dh-group&gt;{$params.dhgroup}&lt;/dh-group&gt;
+&lt;lifetime&gt;
+&lt;seconds&gt;{$params.lifetime}&lt;/seconds&gt;
+&lt;/lifetime&gt;
+&lt;/entry&gt;
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>type=config&amp;action=delete
+</rest>
+    <xpath>/config/devices/entry[@name='localhost.localdomain']/network/ike/crypto-profiles/ipsec-crypto-profiles/entry[@name='{$params.object_id}']
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>
