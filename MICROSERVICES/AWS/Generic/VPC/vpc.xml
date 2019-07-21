@@ -14,7 +14,7 @@
     <importrank>1</importrank>
     <maxInstances>0</maxInstances>
     <name>VPC</name>
-    <order>10000</order>
+    <order>95</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
     <sortascending>true</sortascending>

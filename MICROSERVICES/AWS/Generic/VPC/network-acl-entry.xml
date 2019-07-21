@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Security</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Network ACL Entry</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="rule-number" displayOrder="0" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="Index"/>
+    <variable displayName="cidr-block" displayOrder="1" isMandatory="true" maxLength="100" name="params.cidr-block" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="Inbound Rules" displayName="direction" displayOrder="2" isMandatory="true" maxLength="100" name="params.direction" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <values>
+        <value displayValue="Outbound Rules">Outbound Rules</value>
+        <value displayValue="Inbound Rules">Inbound Rules</value>
+      </values>
+    </variable>
+    <variable displayName="from" displayOrder="3" groupDisplayName="Port Range" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="50" name="params.port-range-from" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
+    <variable displayName="to" displayOrder="4" groupDisplayName="Port Range" groupSeparator="-" isGrouped="true" isMandatory="true" maxLength="50" name="params.port-range-to" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
+    <variable default="1" displayName="protocol" displayOrder="5" editable="false" isMandatory="true" maxLength="100" name="params.protocol" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <values>
+        <value displayValue="TCP">1</value>
+        <value displayValue="UDP">6</value>
+        <value displayValue="ICMP">17</value>
+      </values>
+    </variable>
+    <variable default="deny" displayName="rule-action" displayOrder="6" isMandatory="true" maxLength="100" name="params.rule-action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <values>
+        <value displayValue="allow">allow</value>
+        <value displayValue="deny">deny</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>create-network-acl-entry
+[--cidr-block &lt;value&gt;]
+[--dry-run | --no-dry-run]
+--egress | --ingress
+[--icmp-type-code &lt;value&gt;]
+[--ipv6-cidr-block &lt;value&gt;]
+--network-acl-id &lt;value&gt;
+[--port-range &lt;value&gt;]
+--protocol &lt;value&gt;
+--rule-action &lt;value&gt;
+--rule-number &lt;value&gt;
+[--cli-input-json &lt;value&gt;]
+[--generate-cli-skeleton &lt;value&gt;]
+</content>
+  </example>
+  
+<command name="CREATE">
+    <rest>
+</rest>
+    <xpath>
+</xpath>
+    <operation>
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>
+</rest>
+    <xpath>
+</xpath>
+    <operation>
+</operation>
+  </command>
+</ObjectDefinition>
