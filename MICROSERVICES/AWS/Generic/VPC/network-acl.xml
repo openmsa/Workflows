@@ -67,7 +67,7 @@
         <section>Entries</section>
       </sections>
     </variable>
-    <variable displayName="Action" displayOrder="9" isMandatory="true" isUserLocked="true" maxLength="80" name="params.entries.0.action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable default="deny" displayName="Action" displayOrder="9" isMandatory="true" isUserLocked="true" maxLength="80" name="params.entries.0.action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
         <value displayValue="allow">allow</value>
         <value displayValue="deny">deny</value>

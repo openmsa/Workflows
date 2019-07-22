@@ -23,28 +23,36 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="ID" displayOrder="0" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="Network ACL" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.network_acl_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable displayName="ID" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="AutoIncrement"/>
+    <variable displayName="Rule Number" displayOrder="1" maxLength="100" name="params.rule_number" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
+    <variable displayName="Network ACL" displayOrder="2" editable="false" isMandatory="true" maxLength="100" name="params.network_acl_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <classes>
         <class>network-acl</class>
       </classes>
     </variable>
-    <variable displayName="Rule Number" displayOrder="2" maxLength="100" name="params.rule_number" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
     <variable default="false" displayName="Egress" displayOrder="3" maxLength="100" name="params.egress" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
-    <variable default="1" displayName="Protocol" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.protocol" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable default="6" displayName="Protocol" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.protocol" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
-        <value displayValue="TCP">1</value>
-        <value displayValue="UDP">6</value>
-        <value displayValue="ICMP">17</value>
+        <value displayValue="TCP">6</value>
+        <value displayValue="UDP">17</value>
+        <value displayValue="ICMP">1</value>
       </values>
     </variable>
-    <variable displayName="From" displayOrder="5" isMandatory="true" maxLength="100" name="params.portrange_from" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
-    <variable displayName="To" displayOrder="6" isMandatory="true" maxLength="100" name="params.portrange_to" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer"/>
-    <variable displayName="CIDR" displayOrder="7" isMandatory="true" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable default="deny" displayName="Action" displayOrder="8" isMandatory="true" maxLength="100" name="params.rule_action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="From" displayOrder="5" isMandatory="true" maxLength="100" name="params.portrange_from" numberOfRowMax="0" selector="params.protocol" startIncrement="0" tableSizeFix="false" type="Composite">
+      <behaviors>
+        <behavior displayName="From" displayOrder="0" editable="false" maxLength="100" name="params.portrange_from" numberOfRowMax="0" selectorValue="1" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="To" displayOrder="6" isMandatory="true" maxLength="100" name="params.portrange_to" numberOfRowMax="0" selector="params.protocol" startIncrement="0" tableSizeFix="false" type="Composite">
+      <behaviors>
+        <behavior displayName="To" displayOrder="0" editable="false" maxLength="100" name="params.portrange_to" numberOfRowMax="0" selectorValue="1" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable default="0.0.0.0/0" displayName="CIDR" displayOrder="7" isMandatory="true" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="deny" displayName="Action" displayOrder="8" editable="false" isMandatory="true" maxLength="100" name="params.rule_action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
+        <value displayValue="allow">allow</value>
         <value displayValue="deny">deny</value>
-        <value displayValue="permit">permit</value>
       </values>
     </variable>
   </variables>  <example>
@@ -70,23 +78,64 @@
     <xpath>createNetworkAclEntry
 </xpath>
     <operation>{literal}{{/literal}
-"NetworkAclId"="{$params.network_acl_id}"
-"RuleNumber"="{$params.rule_number}"
-"Protocol"="{$params.protocol}"
-"RuleAction"="{$params.rule_action}"
-"Egress"="{$params.egress}"
-"CidrBlock"="{$params.cidr_block}"
-"PortRange.From"="{$params.portrange_from}"
-"PortRange.To"="{$params.portrange_to}"
+"NetworkAclId":"{$params.network_acl_id}",
+"RuleNumber":{$params.rule_number},
+"Protocol":"{$params.protocol}",
+"RuleAction":"{$params.rule_action}",
+"Egress":{$params.egress},
+"CidrBlock":"{$params.cidr_block}",
+{if $params.protocol !=1}
+"PortRange":
+  {literal}{{/literal}
+  "From":"{$params.portrange_from}",
+  "To":"{$params.portrange_to}"
+  {literal}}{/literal},
+{/if}
+"IcmpTypeCode" : 
+  {literal}{{/literal}
+  "Code":"1",
+  "Type":"1"
+  {literal}}{/literal}
 {literal}}{/literal}
 </operation>
   </command>
 <command name="DELETE">
-    <rest>
+    <rest>Aws\Ec2\Ec2Client
 </rest>
-    <xpath>
+    <xpath>deleteNetworkAclEntry
 </xpath>
-    <operation>
+    <operation>{literal}{{/literal}
+"NetworkAclId":"{$params.network_acl_id}",
+"RuleNumber":{$params.rule_number},
+"Egress":{$params.egress}
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="UPDATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createNetworkAclEntry
+</xpath>
+    <operation>{literal}{{/literal}
+"NetworkAclId":"{$params.network_acl_id}",
+"RuleNumber":{$params.rule_number},
+"Protocol":"{$params.protocol}",
+"RuleAction":"{$params.rule_action}",
+"Egress":{$params.egress},
+"CidrBlock":"{$params.cidr_block}",
+{if $params.protocol !=1}
+"PortRange":
+  {literal}{{/literal}
+  "From":"{$params.portrange_from}",
+  "To":"{$params.portrange_to}"
+  {literal}}{/literal},
+{/if}
+"IcmpTypeCode" : 
+  {literal}{{/literal}
+  "Code":"1",
+  "Type":"1"
+  {literal}}{/literal}
+{literal}}{/literal}
 </operation>
   </command>
 </ObjectDefinition>
