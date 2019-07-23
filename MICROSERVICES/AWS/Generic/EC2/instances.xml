@@ -382,6 +382,12 @@
 {/if}
 {if  $params.State.0.state_name == stopped }
       {assign_object_variable var="_color" value=red}
+{/if}
+{if  $params.State.0.state_name == terminated }
+      {assign_object_variable var="_color" value=red}
+{/if}
+{if  $params.State.0.state_name == shutting-down }
+      {assign_object_variable var="_color" value=orange}
 {/if}</post_template>
   </command>
 <command name="CREATE">
