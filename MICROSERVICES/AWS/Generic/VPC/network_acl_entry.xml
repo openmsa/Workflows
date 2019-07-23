@@ -105,9 +105,9 @@
     <xpath>deleteNetworkAclEntry
 </xpath>
     <operation>{literal}{{/literal}
-"NetworkAclId":"{$params.network_acl_id}",
-"RuleNumber":{$params.rule_number},
-"Egress":{$params.egress}
+"NetworkAclId" : "{$network_acl_entry.$object_id.network_acl_id}",
+"RuleNumber" : {$network_acl_entry.$object_id.rule_number},
+"Egress" : {$network_acl_entry.$object_id.egress}
 {literal}}{/literal}
 </operation>
   </command>
