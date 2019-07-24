@@ -92,7 +92,7 @@
     <variable displayName="Key Name" displayOrder="12" maxLength="100" name="params.key_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
     <variable displayName="Subnet ID" displayOrder="12" maxLength="100" name="params.subnet_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
-        <class>Subnets</class>
+        <class>subnets</class>
       </classes>
     </variable>
     <variable displayName="VPC ID" displayOrder="14" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">

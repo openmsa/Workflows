@@ -5,7 +5,7 @@
     <createTemplateObject/>
     <defaultDisplay>false</defaultDisplay>
     <description/>
-    <displayField>object_id</displayField>
+    <displayField>subnet_ref</displayField>
     <dynamic>false</dynamic>
     <group>EC2</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -23,12 +23,22 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Subnet Id" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Subnet Id" displayOrder="0" isUserLocked="true" maxLength="120" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
     <variable displayName="CIDR" displayOrder="1" isMandatory="true" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="VPC Id" displayOrder="2" isMandatory="true" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Availability Zone" displayOrder="3" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="VPC Id" displayOrder="2" editable="false" isMandatory="true" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+    <variable displayName="Availability Zone" displayOrder="3" editable="false" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <classes>
+        <class>availability_zones</class>
+      </classes>
+    </variable>
     <variable displayName="Available Address Count" displayOrder="4" isUserLocked="true" maxLength="100" name="params.available_address_count" numberOfRowMax="0" startIncrement="0" type="String"/>
     <variable displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="subnet_ref" displayOrder="6" editable="false" maxLength="100" name="params.subnet_ref" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable default="none" displayName="_color" displayOrder="7" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
   </variables>  <example>
     <content>
 </content>
@@ -67,7 +77,9 @@
         </line>
       </lines>
     </parser>
-    <post_template>{if  $params.state == available }
+    <post_template>{assign_object_variable var="subnet_ref" value="{$params.object_id} - {$params.cidr_block}"}
+
+{if  $params.state == "available" }
       {assign_object_variable var="_color" value=green}
 {/if}</post_template>
   </command>

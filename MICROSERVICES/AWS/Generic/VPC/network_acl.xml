@@ -23,60 +23,14 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="ID" displayOrder="0" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
+    <variable displayName="Network ACL ID" displayOrder="0" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
     <variable default="false" displayName="Default" displayOrder="1" isUserLocked="true" maxLength="50" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
-    <variable displayName="VPC" displayOrder="2" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable displayName="VPC" displayOrder="2" maxLength="150" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <classes>
         <class>vpc</class>
       </classes>
     </variable>
-    <variable displayName="Rule Number" displayOrder="3" maxLength="100" name="params.entries.0.rule_number" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Entries</section>
-      </sections>
-    </variable>
-    <variable displayName="Protocol" displayOrder="4" editable="false" isMandatory="true" maxLength="80" name="params.entries.0.protocol" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <values>
-        <value displayValue="ICMP">-1</value>
-        <value displayValue="TCP">6</value>
-        <value displayValue="UDP">17</value>
-      </values>
-      <sections>
-        <section>Entries</section>
-      </sections>
-    </variable>
-    <variable default="false" displayName="Egress" displayOrder="5" isUserLocked="true" maxLength="60" name="params.entries.0.egress" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean">
-      <sections>
-        <section>Entries</section>
-      </sections>
-    </variable>
-    <variable displayName="From" displayOrder="6" maxLength="100" name="params.entries.0.port_range_from" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Entries</section>
-        <section>Port Range</section>
-      </sections>
-    </variable>
-    <variable displayName="To" displayOrder="7" maxLength="100" name="params.entries.0.port_range_to" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Entries</section>
-        <section>Port Range</section>
-      </sections>
-    </variable>
-    <variable displayName="CIDR" displayOrder="8" isMandatory="true" isUserLocked="true" maxLength="100" name="params.entries.0.cidr_block" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Entries</section>
-      </sections>
-    </variable>
-    <variable default="deny" displayName="Action" displayOrder="9" isMandatory="true" isUserLocked="true" maxLength="80" name="params.entries.0.action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <values>
-        <value displayValue="allow">allow</value>
-        <value displayValue="deny">deny</value>
-      </values>
-      <sections>
-        <section>Entries</section>
-      </sections>
-    </variable>
-    <variable displayName="Subnet" displayOrder="10" maxLength="100" name="params.associations.0.subnet_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable displayName="Subnet" displayOrder="10" maxLength="150" name="params.associations.0.subnet_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <sections>
         <section>Associations</section>
       </sections>
@@ -84,12 +38,12 @@
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="Key" displayOrder="10" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Key" displayOrder="10" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="Value" displayOrder="12" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Value" displayOrder="12" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <sections>
         <section>Tags</section>
       </sections>
@@ -156,41 +110,7 @@
             </lines>
           </array>
         </line>
-        <line>
-          <array name="entries">
-            <xpath>Entries/row</xpath>
-            <lines>
-              <line>
-                <xpath>RuleNumber</xpath>
-                <regexp>@&lt;RuleNumber&gt;(?&lt;rule_number&gt;.*)&lt;/RuleNumber&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>Protocol</xpath>
-                <regexp>@&lt;Protocol&gt;(?&lt;protocol&gt;.*)&lt;/Protocol&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>PortRange/From</xpath>
-                <regexp>@&lt;From&gt;(?&lt;port_range_from&gt;.*)&lt;/From&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>PortRange/To</xpath>
-                <regexp>@&lt;To&gt;(?&lt;port_range_to&gt;.*)&lt;/To&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>RuleAction</xpath>
-                <regexp>@&lt;RuleAction&gt;(?&lt;action&gt;.*)&lt;/RuleAction&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>Egress</xpath>
-                <regexp>@&lt;Egress&gt;(?&lt;egress&gt;.*)&lt;/Egress&gt;@</regexp>
-              </line>
-              <line>
-                <xpath>CidrBlock</xpath>
-                <regexp>@&lt;CidrBlock&gt;(?&lt;cidr_block&gt;.*)&lt;/CidrBlock&gt;@</regexp>
-              </line>
-            </lines>
-          </array>
-        </line>
+        
       </lines>
     </parser>
     <post_template/>
@@ -202,16 +122,9 @@
     <xpath>deleteNetworkAcl
 </xpath>
     <operation>{literal}{{/literal}
-"NetworkAclId":"{$network-acl.$object_id.object_id}"
+"NetworkAclId":"{$network_acl.$object_id.object_id}"
 {literal}}{/literal}
 </operation>
   </command>
-<command name="UPDATE">
-    <rest>Aws\Ec2\Ec2Client
-</rest>
-    <xpath>
-</xpath>
-    <operation>
-</operation>
-  </command>
+
 </ObjectDefinition>
