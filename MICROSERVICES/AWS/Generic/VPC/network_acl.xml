@@ -11,7 +11,7 @@
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <importonce>false</importonce>
-    <importrank>1</importrank>
+    <importrank>40</importrank>
     <maxInstances>0</maxInstances>
     <name>Network ACL</name>
     <order>100</order>
@@ -23,14 +23,15 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Network ACL ID" displayOrder="0" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
-    <variable default="false" displayName="Default" displayOrder="1" isUserLocked="true" maxLength="50" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
-    <variable displayName="VPC" displayOrder="2" maxLength="150" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable arrayCanAdd="false" arrayCanEdit="false" arrayCanMove="false" arrayCanRemove="false" displayName="Name" displayOrder="0" isUserLocked="true" maxLength="80" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Network ACL ID" displayOrder="1" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
+    <variable default="false" displayName="Default" displayOrder="2" isUserLocked="true" maxLength="50" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
+    <variable displayName="VPC" displayOrder="3" maxLength="150" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <classes>
         <class>vpc</class>
       </classes>
     </variable>
-    <variable displayName="Subnet" displayOrder="10" maxLength="150" name="params.associations.0.subnet_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable displayName="Subnet" displayOrder="4" maxLength="150" name="params.associations.0.subnet_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <sections>
         <section>Associations</section>
       </sections>
@@ -38,12 +39,12 @@
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="Key" displayOrder="10" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Key" displayOrder="5" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="Value" displayOrder="12" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Value" displayOrder="6" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
       <sections>
         <section>Tags</section>
       </sections>
@@ -113,7 +114,11 @@
         
       </lines>
     </parser>
-    <post_template/>
+    <post_template>{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}</post_template>
   </command>
 
 <command name="DELETE">

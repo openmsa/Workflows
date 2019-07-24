@@ -7,14 +7,14 @@
     <description/>
     <displayField>instance_id</displayField>
     <dynamic>false</dynamic>
-    <group>EC2</group>
+    <group>EC2|Instances</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <importonce>false</importonce>
-    <importrank>1</importrank>
+    <importrank>100</importrank>
     <maxInstances>0</maxInstances>
     <name>Instances</name>
-    <order>10000</order>
+    <order>1</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
     <sortascending>true</sortascending>
@@ -23,87 +23,100 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Private DNS Name" displayOrder="0" maxLength="100" name="params.dns_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Instance ID" displayOrder="0" maxLength="150" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.tag_value" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="availability_zone" displayOrder="1" maxLength="100" name="params.Placement.0.availability_zone" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="ID" displayOrder="0" editable="false" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="AutoIncrement" visible="false"/>
+    <variable displayName="Name" displayOrder="1" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Instance ID" displayOrder="2" isUserLocked="true" maxLength="150" name="params.instance_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="availability_zone" displayOrder="3" maxLength="100" name="params.Placement.0.availability_zone" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="group_name" displayOrder="1" maxLength="100" name="params.Placement.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+    <variable displayName="group_name" displayOrder="4" maxLength="100" name="params.Placement.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="tenancy" displayOrder="1" maxLength="100" name="params.Placement.0.tenancy" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+    <variable displayName="tenancy" displayOrder="5" maxLength="100" name="params.Placement.0.tenancy" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Placement</section>
       </sections>
     </variable>
-    <variable displayName="tag_name" displayOrder="1" maxLength="100" name="params.Tags.0.tag_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="tag_name" displayOrder="6" maxLength="100" name="params.Tags.0.tag_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable default="eu-west-1a" displayName="Availability Zone " displayOrder="2" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="ami-c75abbbe" displayName="Image ID" displayOrder="2" maxLength="100" name="params.image_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="m3.medium" displayName="Instance Type" displayOrder="2" maxLength="100" name="params.instance_type" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="1" displayName="Max Count" displayOrder="2" maxLength="100" name="params.max_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
-    <variable default="1" displayName="Min Count" displayOrder="2" maxLength="100" name="params.min_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
-    <variable displayName="Security Groups" displayOrder="3" maxLength="100" name="params.security_groups" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+    <variable default="eu-west-1a" displayName="Availability Zone " displayOrder="7" maxLength="100" name="params.availability_zone" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>availability_zones</class>
+      </classes>
+    </variable>
+    <variable default="ami-0938efb76b45ff5b8" displayName="Image ID" displayOrder="8" maxLength="100" name="params.image_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable default="t2.medium" displayName="Instance Type" displayOrder="9" maxLength="100" name="params.instance_type" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value>t2.small</value>
+        <value>t2.xlarge</value>
+        <value>t2.micro</value>
+        <value>t2.large</value>
+        <value>t2.medium</value>
+      </values>
+    </variable>
+    <variable default="1" displayName="Max Count" displayOrder="10" maxLength="100" name="params.max_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable default="1" displayName="Min Count" displayOrder="11" maxLength="100" name="params.min_count" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Integer"/>
+    <variable displayName="Security Groups" displayOrder="12" maxLength="100" name="params.security_groups" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
         <class>security_groups</class>
       </classes>
     </variable>
-    <variable displayName="State" displayOrder="3" isUserLocked="true" maxLength="100" name="params.state_name" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="State" displayOrder="13" isUserLocked="true" maxLength="100" name="params.state_name" numberOfRowMax="0" startIncrement="0" type="String">
       <classes>
         <class>security_groups</class>
       </classes>
     </variable>
-    <variable displayName="state_name" displayOrder="4" maxLength="100" name="params.State.0.state_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="Private DNS Name" displayOrder="14" maxLength="100" name="params.dns_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="state_name" displayOrder="15" maxLength="100" name="params.State.0.state_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>State</section>
       </sections>
     </variable>
-    <variable displayName="_color" displayOrder="4" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
-    <variable default="Name" displayName="Tag Key" displayOrder="4" maxLength="100" name="params.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Key" displayOrder="6" maxLength="100" name="params.Tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+    <variable displayName="Key" displayOrder="17" maxLength="100" name="params.Tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="Value" displayOrder="6" maxLength="100" name="params.Tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+    <variable displayName="Value" displayOrder="18" maxLength="100" name="params.Tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="State Transition Reason" displayOrder="6" maxLength="100" name="params.state_transition_reason" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="group_id" displayOrder="7" maxLength="100" name="params.SecurityGroups.0.group_id" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="State Transition Reason" displayOrder="19" maxLength="100" name="params.state_transition_reason" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="group_id" displayOrder="20" maxLength="100" name="params.SecurityGroups.0.group_id" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
       <sections>
         <section>SecurityGroups</section>
       </sections>
     </variable>
-    <variable displayName="Group Name" displayOrder="8" maxLength="100" name="params.SecurityGroups.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
+    <variable displayName="Group Name" displayOrder="21" maxLength="100" name="params.SecurityGroups.0.group_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false">
       <sections>
         <section>SecurityGroups</section>
       </sections>
     </variable>
-    <variable displayName="Key Name" displayOrder="12" maxLength="100" name="params.key_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Subnet ID" displayOrder="12" maxLength="100" name="params.subnet_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+    <variable displayName="Hypervisor" displayOrder="22" isUserLocked="true" maxLength="100" name="params.hypervisor" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Key Name" displayOrder="23" maxLength="100" name="params.key_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Subnet ID" displayOrder="24" maxLength="100" name="params.subnet_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="VPC ID" displayOrder="14" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+    <variable displayName="VPC ID" displayOrder="25" maxLength="100" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <classes>
         <class>vpc</class>
       </classes>
     </variable>
-    <variable displayName="Launch Time" displayOrder="16" maxLength="100" name="params.launch_time" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Private IP Address" displayOrder="18" maxLength="100" name="params.private_ip_address" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Public DNS Name" displayOrder="21" maxLength="100" name="params.public_dns_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Virtualization Type" displayOrder="27" maxLength="100" name="params.virtualization_type" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Launch Time" displayOrder="26" maxLength="100" name="params.launch_time" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Private IP Address" displayOrder="27" maxLength="100" name="params.private_ip_address" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Public DNS Name" displayOrder="28" maxLength="100" name="params.public_dns_name" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Virtualization Type" displayOrder="29" maxLength="100" name="params.virtualization_type" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="String" visible="false"/>
+    <variable default="none" displayName="_color" displayOrder="30" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>&lt;?xml version="1.0"?&gt;
 &lt;root&gt;
@@ -242,7 +255,7 @@
         
         <line>
           <xpath>InstanceId</xpath>
-          <regexp>@&lt;InstanceId&gt;(?&lt;object_id&gt;.*)&lt;/InstanceId&gt;@</regexp>
+          <regexp>@&lt;InstanceId&gt;(?&lt;instance_id&gt;.*)&lt;/InstanceId&gt;@</regexp>
         </line>
         <line>
           <xpath>ImageId</xpath>
@@ -348,6 +361,10 @@
             <xpath>Tags/row</xpath>
             <lines>
               <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_key&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+              <line>
                 <xpath>Value</xpath>
                 <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
               </line>
@@ -371,22 +388,18 @@
     <post_template>{assign_object_variable var="availability_zone" value=$params.Placement.0.availability_zone}
 {assign_object_variable var="state_name" value=$params.State.0.state_name}
 {assign_object_variable var="security_groups" value=$params.SecurityGroups.0.group_id}
-{assign_object_variable var="tag_value" value=$params.Tags.0.tag_value}
+{assign_object_variable var="name" value=$params.Tags.0.tag_value}
 
 
-{if  $params.State.0.state_name == running }
+{if  $params.State.0.state_name == "running" }
       {assign_object_variable var="_color" value=green}
-{/if}
-{if  $params.State.0.state_name == pending }
+{else if  $params.State.0.state_name == "pending" }
       {assign_object_variable var="_color" value=blue}
-{/if}
-{if  $params.State.0.state_name == stopped }
+{else if  $params.State.0.state_name == "stopped" }
       {assign_object_variable var="_color" value=red}
-{/if}
-{if  $params.State.0.state_name == terminated }
+{else if  $params.State.0.state_name == terminated }
       {assign_object_variable var="_color" value=red}
-{/if}
-{if  $params.State.0.state_name == shutting-down }
+{else if  $params.State.0.state_name == shutting-down }
       {assign_object_variable var="_color" value=orange}
 {/if}</post_template>
   </command>
@@ -401,7 +414,12 @@
 "MaxCount":"{$params.max_count}",
 "MinCount":"{$params.min_count}",
 "Placement.AvailabilityZone":"{$params.availability_zone}",
-"TagSpecifications":{literal}[[{{/literal}"Tags":{literal}[[{{/literal}"key":"{$params.tag_key}"{literal}}{/literal},{literal}{{/literal}"value":"{$params.tag_value}"{literal}}{/literal}
+"TagSpecifications":
+{literal}[[{{/literal}
+"ResourceType":"instance",
+"Tags":
+  {literal}[[{{/literal}"key":"Name"{literal}}{/literal},
+  {literal}{{/literal}"value":"{$params.name}"{literal}}{/literal}
 {literal}]]}]]}{/literal}
 </operation>
   </command>
@@ -411,7 +429,7 @@
     <xpath>TerminateInstances
 </xpath>
     <operation>{literal}{{/literal}
-"InstanceIds":{literal}[{/literal}"{$params.object_id}"{literal}]{/literal}
+"InstanceIds":{literal}[{/literal}"{$instances.$object_id.instance_id}"{literal}]{/literal}
 {literal}}{/literal}
 </operation>
   </command>

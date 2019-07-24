@@ -7,7 +7,7 @@
     <description/>
     <displayField>vpc_ref</displayField>
     <dynamic>false</dynamic>
-    <group>VPC</group>
+    <group>VPC|Virtual Private Cloud</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <importonce>false</importonce>
@@ -71,10 +71,13 @@
 </operation>
   </command>
 <command name="DELETE">
-    <rest>Aws\Ec2\Ec2Client</rest>
-    <xpath>deleteVpc</xpath>
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteVpc
+</xpath>
     <operation>{literal}{{/literal}
 "VpcId":"{$vpc.$object_id.object_id}"
-{literal}}{/literal}</operation>
+{literal}}{/literal}
+</operation>
   </command>
 </ObjectDefinition>

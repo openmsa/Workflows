@@ -7,7 +7,7 @@
     <description/>
     <displayField>security_group</displayField>
     <dynamic>false</dynamic>
-    <group>EC2</group>
+    <group>EC2|Network &amp; Security</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <importonce>false</importonce>
