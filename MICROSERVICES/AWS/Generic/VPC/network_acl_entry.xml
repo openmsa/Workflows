@@ -167,11 +167,20 @@
 </operation>
   </command>
 <command name="UPDATE">
-    <rest>{foreach $params.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}Aws\Ec2\Ec2Client##{/if}{/foreach}
+    <rest>{foreach $network_acl_entry.$object_id.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}Aws\Ec2\Ec2Client##{/if}{/foreach}{foreach $params.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}Aws\Ec2\Ec2Client##{/if}{/foreach}
 </rest>
-    <xpath>{foreach $params.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}createNetworkAclEntry##{/if}{/foreach}
+    <xpath>{foreach $network_acl_entry.$object_id.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}deleteNetworkAclEntry##{/if}{/foreach}{foreach $params.entries as $entry}{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}createNetworkAclEntry##{/if}{/foreach}
 </xpath>
-    <operation>{foreach $params.entries as $entry}
+    <operation>{foreach $network_acl_entry.$object_id.entries as $entry}
+{if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}
+{literal}{{/literal}
+"NetworkAclId" : "{$network_acl_entry.$object_id.network_acl_id}",
+"RuleNumber" : {$entry.rule_number},
+"Egress" : {$entry.egress}
+{literal}}{/literal}
+##
+{/if}
+{/foreach}{foreach $params.entries as $entry}
 {if $entry.rule_number&gt;0 &amp;&amp; $entry.rule_number&lt;32767}
 {literal}{{/literal}
 "NetworkAclId":"{$params.network_acl_id}",
