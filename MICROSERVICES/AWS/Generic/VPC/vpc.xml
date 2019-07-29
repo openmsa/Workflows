@@ -23,11 +23,22 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable default="none" displayName="VPC Id" displayOrder="0" editable="false" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="CIDR Block" displayOrder="1" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="State" displayOrder="2" isUserLocked="true" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="none" displayName="VPC Id" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="CIDR Block" displayOrder="2" maxLength="100" name="params.cidr_block" numberOfRowMax="0" startIncrement="0" type="String"/>
     <variable displayName="vpc_ref" displayOrder="3" maxLength="100" name="params.vpc_ref" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
     <variable default="none" displayName="_color" displayOrder="4" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable displayName="State" displayOrder="5" editable="false" isUserLocked="true" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable default="Name" displayName="Key" displayOrder="6" editable="false" isUserLocked="true" maxLength="80" name="params.tags.0.tag_key" numberOfRowMax="1" startIncrement="0" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" displayName="Value" displayOrder="7" maxLength="80" name="params.tags.0.tag_value" numberOfRowMax="1" startIncrement="0" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
   </variables>  <example>
     <content>
 </content>
@@ -52,12 +63,36 @@
           <xpath>State</xpath>
           <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
         </line>
+        <line>
+          <array name="tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Key&gt;(?&lt;tag_key&gt;.*)&lt;/Key&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
       </lines>
     </parser>
     <post_template>{assign_object_variable var="vpc_ref" value="{$params.object_id} - {$params.cidr_block}"}
 
-{if  $params.state == available }
+{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}
+
+{if  $params.state == "available" }
       {assign_object_variable var="_color" value=green}
+{else if $params.state == "deleted" }
+      {assign_object_variable var="_color" value=gray}
+      {assign_object_variable var="name" value=DELETED}
 {/if}</post_template>
   </command>
 <command name="CREATE">
