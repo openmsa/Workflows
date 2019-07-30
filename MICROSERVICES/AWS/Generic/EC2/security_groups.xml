@@ -23,14 +23,14 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="ID" displayOrder="0" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Name" displayOrder="1" isMandatory="true" maxLength="100" name="params.group_name" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="From port" displayOrder="2" maxLength="100" name="params.ip_permissions.0.from_port" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="80" name="params.group_name" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="ID" displayOrder="1" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="From Port" displayOrder="2" maxLength="80" name="params.ip_permissions.0.from_port" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Rule</section>
       </sections>
     </variable>
-    <variable displayName="IP protocol" displayOrder="3" maxLength="100" name="params.ip_permissions.0.ip_protocol" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Protocol" displayOrder="3" maxLength="80" name="params.ip_permissions.0.ip_protocol" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Rule</section>
       </sections>
