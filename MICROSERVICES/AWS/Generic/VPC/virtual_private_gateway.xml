@@ -23,21 +23,11 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="ID" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="Name" displayOrder="1" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="Type" displayOrder="2" maxLength="100" name="params.type" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
-    <variable displayName="Key" displayOrder="3" isUserLocked="true" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Tags</section>
-      </sections>
-    </variable>
-    <variable displayName="Value" displayOrder="4" isUserLocked="true" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Tags</section>
-      </sections>
-    </variable>
-    <variable displayName="_color" displayOrder="5" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
-    <variable displayName="VPC ID" displayOrder="6" maxLength="100" name="params.vpc_attachements.0.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+    <variable displayName="Name" displayOrder="0" isUserLocked="true" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="ID" displayOrder="1" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Amazon ASN" displayOrder="2" isUserLocked="true" maxLength="100" name="params.bgp_asn" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="Integer"/>
+    <variable default="ipsec.1" displayName="Type" displayOrder="3" isUserLocked="true" maxLength="100" name="params.type" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="VPC ID" displayOrder="4" maxLength="100" name="params.vpc_attachements.0.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
       <sections>
         <section>VPC</section>
       </sections>
@@ -45,12 +35,23 @@
         <class>vpc</class>
       </classes>
     </variable>
-    <variable displayName="State" displayOrder="7" maxLength="100" name="params.vpc_attachements.0.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable arrayCanEdit="false" displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.vpc_attachements.0.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <sections>
         <section>VPC</section>
       </sections>
     </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" default="Name" displayName="Key" displayOrder="6" editable="false" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" displayName="Value" displayOrder="7" editable="false" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
     <variable displayName="State" displayOrder="8" editable="false" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable default="none" displayName="_color" displayOrder="9" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
   </variables>  <example>
     <content>&lt;root&gt;&lt;requestId&gt;436c509d-5650-4d49-9ebd-ff7d5d9b6427&lt;/requestId&gt;&lt;VpnGateways&gt;&lt;row&gt;&lt;VpnGatewayId&gt;vgw-09a166843815b07a3&lt;/VpnGatewayId&gt;&lt;State&gt;available&lt;/State&gt;&lt;Type&gt;ipsec.1&lt;/Type&gt;&lt;VpcAttachments/&gt;&lt;Tags/&gt;&lt;/row&gt;&lt;/VpnGateways&gt;&lt;/root&gt;
 </content>
@@ -106,14 +107,38 @@
         </line>
       </lines>
     </parser>
-    <post_template>{if  $params.state == "available" }
-      {assign_object_variable var="_color" value=green}
-{/if}
-{foreach $params.tags as $tag}
+    <post_template>{foreach $params.tags as $tag}
 {if $tag.tag_key == "Name"}
 {assign_object_variable var="name" value=$tag.tag_value}
 {/if}
-{/foreach}</post_template>
+{/foreach}
+
+{if  $params.state == "available" }
+      {assign_object_variable var="_color" value=green}
+{else if $params.state == "deleted" }
+      {assign_object_variable var="_color" value=gray}
+      {assign_object_variable var="name" value=DELETED}
+{/if}</post_template>
   <xpath>describeVpnGateways</xpath>
+  </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createVpnGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"Type":"{$params.type}"
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteVpnGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"VpnGatewayId":"{$params.object_id}"
+{literal}}{/literal}
+</operation>
   </command>
 </ObjectDefinition>
