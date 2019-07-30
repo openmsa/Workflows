@@ -5,7 +5,7 @@
     <createTemplateObject/>
     <defaultDisplay>false</defaultDisplay>
     <description>Network ACL</description>
-    <displayField>object_id</displayField>
+    <displayField>acl_ref</displayField>
     <dynamic>false</dynamic>
     <group>VPC|Security</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -23,6 +23,7 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
+    <variable displayName="acl_ref" displayOrder="0" editable="false" maxLength="100" name="params.acl_ref" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
     <variable arrayCanAdd="false" arrayCanEdit="false" arrayCanMove="false" arrayCanRemove="false" displayName="Name" displayOrder="0" isUserLocked="true" maxLength="80" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
     <variable displayName="Network ACL ID" displayOrder="1" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
     <variable default="false" displayName="Default" displayOrder="2" isUserLocked="true" maxLength="50" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
@@ -39,12 +40,12 @@
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="Key" displayOrder="5" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+    <variable arrayCanEdit="false" arrayCanMove="false" default="Name" displayName="Key" displayOrder="5" isUserLocked="true" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="1" startIncrement="0" type="String">
       <sections>
         <section>Tags</section>
       </sections>
     </variable>
-    <variable displayName="Value" displayOrder="6" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+    <variable arrayCanEdit="false" arrayCanMove="false" displayName="Value" displayOrder="6" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="1" startIncrement="0" type="String">
       <sections>
         <section>Tags</section>
       </sections>
@@ -118,7 +119,9 @@
 {if $tag.tag_key == "Name"}
 {assign_object_variable var="name" value=$tag.tag_value}
 {/if}
-{/foreach}</post_template>
+{/foreach}
+
+{assign_object_variable var="acl_ref" value="{$params.object_id} - {$params.vpc_id}"}</post_template>
   </command>
 
 <command name="DELETE">
@@ -131,5 +134,6 @@
 {literal}}{/literal}
 </operation>
   </command>
+
 
 </ObjectDefinition>
