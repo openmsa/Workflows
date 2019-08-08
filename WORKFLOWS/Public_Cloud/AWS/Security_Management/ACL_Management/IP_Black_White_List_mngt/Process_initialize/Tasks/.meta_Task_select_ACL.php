@@ -2,42 +2,28 @@
 <metadata>
     <map>
         <entry>
-            <key>MODEL</key>
-        </entry>
-        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1559919597966</value>
+            <value>1565016227381</value>
         </entry>
         <entry>
             <key>COMMENT</key>
             <value></value>
         </entry>
         <entry>
-            <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
-        </entry>
-        <entry>
             <key>DATE_CREATION</key>
-            <value>1548925346050</value>
+            <value>1564994895135</value>
         </entry>
         <entry>
-            <key>MANUFACTURER</key>
-        </entry>
-        <entry>
-            <key>CONFIGURATION_FILTER</key>
+            <key>TAG</key>
             <value></value>
         </entry>
         <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
-        </entry>
-        <entry>
-            <key>TAG</key>
-            <value>Manage_VNF_on_AW</value>
         </entry>
     </map>
 </metadata>

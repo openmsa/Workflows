@@ -6,18 +6,18 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1548925417185</value>
+            <value>1564497403487</value>
         </entry>
         <entry>
             <key>COMMENT</key>
+            <value></value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
-            <value>CommandDefinition</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1548925417111</value>
+            <value>1564497245806</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
@@ -32,6 +32,7 @@
         </entry>
         <entry>
             <key>TAG</key>
+            <value>Instance Mngt</value>
         </entry>
     </map>
 </metadata>
