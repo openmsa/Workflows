@@ -64,9 +64,14 @@ function wait_for_server_status ($openstack_device_id, $server_id, $status_check
 			$response = json_encode($response);
 			return $response;
 		}
+		if (isset($response['wo_newparams'][$instances_objname][$server_id])) {
 		$response = $response['wo_newparams'][$instances_objname][$server_id];
 		$server_status = $response['status'];
-		$server_power_state = $response['power_state'];
+                if (isset($response['power_state'])) {
+			$server_power_state = $response['power_state'];
+                } else {
+                  	$server_power_state = 0;
+                }
 		switch ($server_power_state) {
 			case '0':
 				$server_power_state = "NOSTATE";
@@ -89,6 +94,7 @@ function wait_for_server_status ($openstack_device_id, $server_id, $status_check
 			case '9':
 				$server_power_state = "Building";
 				break;
+		}
 		}
 		$server_task_state = "-";
 		if (array_key_exists('task_state', $response)) {
@@ -443,4 +449,25 @@ function allocate_floatingip_address ($openstack_device_id, $network, $tenant) {
 	return $response;
 }
 
+function _nova_server_action ($device_id, $server, $action, $arg1 = "", $arg2 = "", $arg3 = "") {
+
+    $array = array();
+    $array['action'] = 'Server Action';
+    $array['server_action'] = $action;
+    if ($arg1 !== "") {
+        $array['action_arg1'] = $arg1;
+    }
+    if ($arg2 !== "") {
+        $array['action_arg2'] = $arg2;
+    }
+    if ($arg3 !== "") {
+        $array['action_arg3'] = $arg3;
+    }
+
+    $array = array('servers' => array($server => $array));
+    $response = execute_command_and_verify_response($device_id, CMD_UPDATE, $array, "SERVER ACTION : $action");
+    return $response;
+}
+
 ?>
+

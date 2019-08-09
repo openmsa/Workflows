@@ -799,4 +799,29 @@ function remove_all_router_interfaces ($auth_token, $neutron_endpoint, $router) 
 	return $response;
 }
 
+function _list_stacks_resources ($stacks_endpoint, $auth_token, $stack_name, $stack_id) {
+
+        $openstack_rest_api = "{$stacks_endpoint}/stacks/{$stack_name}/{$stack_id}/resources";
+        $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+        $response = perform_curl_operation($curl_cmd, "IMPORT STACK RESOURCES");
+        $response = json_decode($response, true);
+        if ($response['wo_status'] !== ENDED) {
+                $response = json_encode($response);
+                return $response;
+        }
+        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+        return $response;
+}
+
+#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/${server_id} -X GET -H "X-Auth-Token:
+#${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json"
+function _nova_get_server_details ($nova_endpoint, $auth_token, $server_id) {
+
+        $openstack_rest_api = "{$nova_endpoint}/servers/{$server_id}";
+        $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+
+        $response = perform_curl_operation($curl_cmd, "SERVER GET DETAILS");
+        return $response;
+}
+
 ?>

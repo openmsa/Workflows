@@ -428,4 +428,30 @@ function _neutron_subnet_update_allocation_pools ($neutron_endpoint, $auth_token
 	return $response;
 }
 
+function _neutron_get_port_info($neutron_endpoint, $auth_token, $port_id) {
+	$openstack_rest_api = "{$neutron_endpoint}/v2.0/ports/".$port_id;
+	$curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token, "");
+	$response = perform_curl_operation($curl_cmd, "PORT LIST");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
+
+function _neutron_get_pubkic_networks($neutron_endpoint, $auth_token) {
+	$openstack_rest_api = "{$neutron_endpoint}/v2.0/networks?router:external=true";
+        $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token, "");
+	$response = perform_curl_operation($curl_cmd, "PUBLIC NETWORK LIST");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
 ?>

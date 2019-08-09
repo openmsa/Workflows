@@ -11,11 +11,13 @@ function _keystone_project_scoped_token_get ($keystone_endpoint, $userdomain, $u
 									$scopedomain, $projectname) {
 	
 	$array = array();
-	$array['domain'] = array('id' => $userdomain);
+	//$array['domain'] = array('id' => $userdomain);
+	$array['domain'] = array('name' => $userdomain);
 	$array['user'] = array('domain' => $array['domain'], 'name' => $username, 'password' => $password);
 	$array['password'] = array('user' => $array['user']);
 
-	$array['domain'] = array('id' => $scopedomain);
+	//$array['domain'] = array('id' => $scopedomain);
+	$array['domain'] = array('name' => $scopedomain);
 	$array['project'] = array('domain' => $array['domain'], 'id' => $projectname);
 	$array['scope'] = array('project' => $array['project']);
 	
