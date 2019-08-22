@@ -442,7 +442,7 @@ function _neutron_get_port_info($neutron_endpoint, $auth_token, $port_id) {
 }
 
 
-function _neutron_get_pubkic_networks($neutron_endpoint, $auth_token) {
+function _neutron_get_public_networks($neutron_endpoint, $auth_token) {
 	$openstack_rest_api = "{$neutron_endpoint}/v2.0/networks?router:external=true";
         $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token, "");
 	$response = perform_curl_operation($curl_cmd, "PUBLIC NETWORK LIST");
