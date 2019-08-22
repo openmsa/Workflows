@@ -6,7 +6,7 @@ require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/constants.
 function _nova_server_create ($device_id, $server_name, $networks,
 							$availability_zone = "", $flavor, $image,
 							$security_groups = array(), $key = "",
-							$user_data = "", $personality = array()) {
+							$user_data = "", $personality = array(), $config_drive="false") {
 
 	$server_array = array();
 	$server_array['name'] = $server_name;
@@ -14,6 +14,7 @@ function _nova_server_create ($device_id, $server_name, $networks,
 	$server_array['flavor_id'] = $flavor;
 	$server_array['image_id'] = $image;
 	$server_array['key'] = $key;
+	$server_array['config_drive'] = $config_drive;
 	$server_array['user_data'] = $user_data;
 	if ($availability_zone !== "") {
 		$array['availability_zone'] = $availability_zone;

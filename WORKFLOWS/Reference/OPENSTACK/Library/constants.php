@@ -34,6 +34,8 @@ define('SHUTOFF', 'SHUTOFF');
 define('RESIZE', 'RESIZE');
 define('VERIFY_RESIZE', 'VERIFY_RESIZE');
 define('DOWN', 'DOWN');
+define('SUSPENDED', 'SUSPENDED');
+define('RESUMED', 'RESUMED');
 
 // Openstack Volume Status
 define('VOLUME_CREATING', 'creating');
