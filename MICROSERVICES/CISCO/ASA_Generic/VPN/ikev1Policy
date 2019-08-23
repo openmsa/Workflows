@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>true</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>IKEv1 policies</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VPN IPSec|Phase 1</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Policy number" displayOrder="0" maxLength="100" name="params.object_id" type="Integer"/>
+    <variable default="pre-share" displayName="Authentication" displayOrder="1" editable="false" maxLength="200" name="params.authentication" type="String">
+      <values>
+        <value>pre-share</value>
+        <value>rsa-sig</value>
+        <value>crack</value>
+      </values>
+    </variable>
+    <variable default="3des" displayName="Encryption" displayOrder="2" editable="false" maxLength="200" name="params.encryption" type="String">
+      <values>
+        <value>des</value>
+        <value>aes</value>
+        <value>aes-192</value>
+        <value>aes-256</value>
+        <value>3des</value>
+      </values>
+    </variable>
+    <variable default="md5" displayName="Hash" displayOrder="3" maxLength="200" name="params.hash" type="String">
+      <values>
+        <value>md5</value>
+        <value displayValue="sha1">sha</value>
+      </values>
+    </variable>
+    <variable default="2" displayName="Diffie-Hellman group" displayOrder="4" editable="false" maxLength="200" name="params.group" type="Integer">
+      <values>
+        <value>7</value>
+        <value>2</value>
+        <value>1</value>
+        <value>5</value>
+      </values>
+    </variable>
+    <variable default="86400" displayName="Lifetime (seconde)" displayOrder="5" maxLength="200" name="params.lifetime" type="String"/>
+  </variables>  <example>
+    <content>crypto ikev1 policy 1
+ authentication pre-share
+ encryption 3des
+ hash sha
+ group 2
+ lifetime 86400
+crypto ikev1 policy 5
+ authentication rsa-sig
+ encryption des
+ hash md5
+ group 1
+ lifetime 36000
+crypto ikev1 policy 10
+ authentication rsa-sig
+ encryption des
+ hash sha
+ group 1
+ lifetime 36000
+crypto ikev1 policy 65535
+ authentication pre-share
+ encryption 3des
+ hash sha
+ group 2
+ lifetime 86400
+</content>
+  </example>
+  <command name="CREATE">
+    <operation>crypto ikev1 policy {$params.object_id}
+ authentication {$params.authentication}
+ encryption {$params.encryption}
+ hash {$params.hash}
+ group {$params.group}
+ lifetime {$params.lifetime}
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>crypto ikev1 policy {$params.object_id}
+ authentication {$params.authentication}
+ encryption {$params.encryption}
+ hash {$params.hash}
+ group {$params.group}
+ lifetime {$params.lifetime}</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sho run crypto ikev1</operation>
+    <parser>
+      <section>
+        <regexp>@crypto ikev1 policy (?&lt;object_id&gt;\d+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@\sencryption (?&lt;encryption&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\shash (?&lt;hash&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sgroup (?&lt;group&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sauthentication (?&lt;authentication&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sgroup (?&lt;group&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\slifetime (?&lt;lifetime&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="DELETE">
+    <operation>no crypto ikev1 policy {$object_id}
+</operation>
+  </command>
+</ObjectDefinition>

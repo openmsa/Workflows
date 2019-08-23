@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>IKEv1 Transform-set</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VPN IPSec|Phase 2</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable default="esp" displayName="Protocol" displayOrder="1" isUserLocked="true" maxLength="200" name="params.protocol" type="String"/>
+    <variable default="aes" displayName="Encryption" displayOrder="2" editable="false" maxLength="200" name="params.encryption" type="String">
+      <values>
+        <value displayValue="3des">3des</value>
+        <value displayValue="aes">aes</value>
+        <value displayValue="aes-192">aes-192</value>
+        <value displayValue="aes-256">aes-256</value>
+        <value displayValue="des">des</value>
+        <value displayValue="null">null</value>
+      </values>
+    </variable>
+    <variable default="md5-hmac" displayName="Authentication" displayOrder="3" editable="false" maxLength="200" name="params.authentication" type="String">
+      <values>
+        <value displayValue="md5">md5-hmac</value>
+        <value displayValue="sha-1">sha-hmac</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>crypto ipsec ikev2 ipsec-proposal DES
+ protocol esp encryption des
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal 3DES
+ protocol esp encryption 3des
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES
+ protocol esp encryption aes
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES192
+ protocol esp encryption aes-192
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES256
+ protocol esp encryption aes-256
+ protocol esp integrity sha-1 md5
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>sho run cry ipsec</operation>
+    <parser>
+      <section>
+        <regexp>@crypto ipsec ikev1 transform-set (?&lt;object_id&gt;\S+) (?&lt;protocol&gt;\S+)-(?&lt;encryption&gt;\S+) [^-]+-(?&lt;authentication&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>crypto ipsec ikev1 transform-set {$params.object_id} {$params.protocol}-{$params.encryption} {$params.protocol}-{$params.authentication}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>crypto ipsec ikev1 transform-set {$params.object_id} {$params.protocol}-{$params.encryption} {$params.protocol}-{$params.authentication}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>{assign var="params" value=$ikev1TransformSet.$object_id}
+
+no crypto ipsec ikev1 transform-set {$object_id} {$params.protocol}-{$params.encryption} {$params.protocol}-{$params.authentication}
+</operation>
+  </command>
+</ObjectDefinition>

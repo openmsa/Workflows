@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/voice commserver.jpg</icon>
+    <sortauto>true</sortauto>
+    <order>100000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>Services</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Objects</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="1">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable displayName="Protocol" displayOrder="1" isMandatory="true" name="params.protocol" type="String">
+      <values>
+        <value>tcp</value>
+        <value>udp</value>
+        <value>tcp-udp</value>
+        <value>ip</value>
+      </values>
+    </variable>
+    <variable displayName="port" displayOrder="2" isMandatory="true" name="params.port" type="String"/>
+  </variables>  <example>
+    <content>CREATE
+
+object service mySer1
+ service tcp source eq ssh destination eq ssh
+
+IMPORT
+
+show running-config object service in-line
+     
+object service sms service tcp destination eq 28169
+</content>
+  </example>
+<command name="CREATE">
+    <operation>object service {$params.object_id}
+service {$params.protocol} destination eq {$params.port}
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>no object service {$object_id}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>object service {$params.object_id}
+service {$params.protocol} destination eq {$params.port}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>show running-config object service in-line</operation>
+    <parser>
+      <section>
+        <regexp>@^object service (?&lt;object_id&gt;\S+) service (?&lt;protocol&gt;\S+) destination eq (?&lt;port&gt;\S+)\s*$@</regexp>
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

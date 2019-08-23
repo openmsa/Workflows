@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>true</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>RemoteAccessVPN</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VPN</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable default="false" displayName="Tunnel group list" displayOrder="0" maxLength="200" name="params.tunnelGroupList" type="Boolean"/>
+    <variable displayName="Interfaces" displayOrder="1" maxLength="200" name="params.interfaceToAplly.0.interfaceName" type="ObjectRef">
+      <classes>
+        <class>interfaceNameObject</class>
+      </classes>
+    </variable>
+    <variable displayName="Anyconnect Images" displayOrder="2" maxLength="200" name="params.anyConnectImages.0.imageName" type="ObjectRef">
+      <classes>
+        <class>anyconnectImage</class>
+      </classes>
+    </variable>
+    <variable default="LOCAL" displayName="Method" displayOrder="3" editable="false" isMandatory="true" maxLength="200" name="params.authMethod" type="String">
+      <values>
+        <value displayValue="LDAP">LDAP</value>
+        <value displayValue="LOCAL">LOCAL</value>
+      </values>
+      <sections>
+        <section>Authentication</section>
+      </sections>
+    </variable>
+    <variable displayName="LDAP server" displayOrder="4" maxLength="200" name="params.ldapServer" selector="params.authMethod" type="Composite">
+      <sections>
+        <section>Authentication</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="ldapserver" displayOrder="0" isMandatory="true" maxLength="200" name="params.ldapserver" selectorValue="LDAP" type="ObjectRef">
+          <classes>
+            <class>ldapServer</class>
+          </classes>
+        </behavior>
+        <behavior displayName="ldapserver" displayOrder="0" maxLength="200" name="params.ldapserver" selectorValue="LOCAL" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Start address" displayOrder="5" maxLength="200" name="params.poolBeginAddr" type="IpAddress">
+      <sections>
+        <section>IP pool</section>
+      </sections>
+    </variable>
+    <variable displayName="End address" displayOrder="6" maxLength="200" name="params.poolEndAddr" type="IpAddress">
+      <sections>
+        <section>IP pool</section>
+      </sections>
+    </variable>
+    <variable displayName="Mask" displayOrder="7" maxLength="200" name="params.poolMask" type="IpMask">
+      <sections>
+        <section>IP pool</section>
+      </sections>
+    </variable>
+    <variable displayName="Domain name" displayOrder="8" maxLength="200" name="params.domainName" type="String"/>
+    <variable displayName="DNS Servers (separated by blank)" displayOrder="9" maxLength="200" name="params.dnsServers" type="String"/>
+    <variable displayName="WINS Servers (separated by blank)" displayOrder="10" maxLength="200" name="params.winsServers" type="String"/>
+    <variable displayName="Network IP" displayOrder="11" maxLength="200" name="params.sharedNetworks.0.networkIP" type="String">
+      <sections>
+        <section>Shared networks</section>
+      </sections>
+    </variable>
+    <variable displayName="Network mask" displayOrder="12" maxLength="200" name="params.sharedNetworks.0.networkMask" type="String">
+      <sections>
+        <section>Shared networks</section>
+      </sections>
+    </variable>
+    <variable displayName="webvpn" displayOrder="13" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="String" visible="false"/>
+  </variables>  <example>
+    <content>webvpn
+ enable outside
+
+!--- Enable WebVPN on the outside interface
+
+ svc image disk0:/anyconnect-win-2.0.0343-k9.pkg 1
+
+!--- Assign an order to the AnyConnect SSL VPN Client image
+ 
+svc enable
+
+!--- Enable the security appliance to download SVC images to remote computers
+ 
+tunnel-group-list enable
+</content>
+  </example>
+<command name="CREATE">
+    <operation>!create the VPN pool
+ip local pool HSS-webvpn {$params.poolBeginAddr}-{$params.poolEndAddr}  mask {$params.poolMask}
+
+
+
+{foreach $params.sharedNetworks as $network}
+access-list HSS-webvpn-split-acl standard permit {$network.networkIP} {$network.networkMask}
+{/foreach}
+
+webvpn
+{foreach $params.interfaceToAplly as $interface}
+  enable {$interface.interfaceName}
+{/foreach}
+{assign var="index" value="1"}
+{foreach $params.anyConnectImages as $image}
+ anyconnect image disk0:{$image.imageName} {$index}
+ {assign var="index" value=$index+1}
+{/foreach}
+
+{if $params.tunnelGroupList=="true"}
+ tunnel-group-list enable
+{else}
+ no tunnel-group-list enable
+{/if}
+
+ anyconnect enable
+
+group-policy HSS-webvpn attributes
+{if !empty($params.domainName)}
+ default-domain value {$params.domainName}
+{/if}
+{if !empty($params.winsServers)}
+ wins-server value {$params.winsServers}
+{/if}
+{if !empty($params.dnsServers)}
+ dns-server value {$params.dnsServers}
+{/if}
+ split-tunnel-policy tunnelspecified
+ split-tunnel-network-list value HSS-webvpn-split-acl
+
+
+tunnel-group HSS-webvpn general-attributes
+ address-pool HSS-webvpn
+ default-group-policy HSS-webvpn
+{if !empty($params.ldapServer)}
+ authentication-server-group {$params.ldapServer}
+{else}
+ authentication-server-group LOCAL
+{/if}
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>!modify the VPN pool
+ip local pool HSS-webvpn {$params.poolBeginAddr}-{$params.poolEndAddr}  mask {$params.poolMask}
+
+{foreach $params.sharedNetworks as $network}
+access-list HSS-webvpn-split-acl standard permit {$network.networkIP} {$network.networkMask}
+{/foreach}
+
+webvpn
+{foreach $params.interfaceToAplly as $interface}
+  enable {$interface.interfaceName}
+{/foreach}
+{assign var="index" value="1"}
+{foreach $params.anyConnectImages as $image}
+ anyconnect image disk0:{$image.imageName} {$index}
+ {assign var="index" value=$index+1}
+{/foreach}
+
+{if $params.tunnelGroupList=="true"}
+ tunnel-group-list enable
+{else}
+ no tunnel-group-list enable
+{/if}
+
+ anyconnect enable
+
+group-policy HSS-webvpn attributes
+{if !empty($params.domainName)}
+ default-domain value {$params.domainName}
+{/if}
+{if !empty($params.winsServers)}
+ wins-server value {$params.winsServers}
+{/if}
+{if !empty($params.dnsServers)}
+ dns-server value {$params.dnsServers}
+{/if}
+ split-tunnel-policy tunnelspecified
+ split-tunnel-network-list value HSS-webvpn-split-acl
+
+tunnel-group HSS-webvpn general-attributes
+ address-pool HSS-webvpn
+ default-group-policy HSS-webvpn
+{if !empty($params.ldapServer)}
+ authentication-server-group {$params.ldapServer}
+{else}
+ authentication-server-group LOCAL
+{/if}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sho run webvpn##sho run ip local pool##sho run group-policy##sho run tunnel-group##sho run access-list HSS-webvpn-split-acl</operation>
+    <parser>
+      <section>
+        
+        <regexp>@group-policy HSS-(?&lt;object_id&gt;webvpn) attributes@</regexp>
+        <regexp>@ip local pool HSS-(?&lt;object_id&gt;webvpn) (?&lt;poolBeginAddr&gt;\S+)-(?&lt;poolEndAddr&gt;\S+) mask (?&lt;poolMask&gt;\S+)@</regexp>
+        <regexp>@(?&lt;object_id&gt;webvpn)@</regexp>
+        
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@\s+split-tunnel-policy@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\s+vpn-tunnel-protocol@</regexp>
+        </ignore>
+        
+        <line>
+          <array name="sharedNetworks">
+            <regexp>@access-list HSS-webvpn-split-acl standard permit (?&lt;networkIP&gt;\S+) (?&lt;networkMask&gt;\S+)@</regexp>
+          </array>
+        </line>
+        <line>
+          <regexp>@authentication-server-group (?&lt;ldapServer&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+default-domain value (?&lt;domainName&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+wins-server value (?&lt;winsServers&gt;.*)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+dns-server value (?&lt;dnsServers&gt;.*)@</regexp>
+        </line>
+        <ignore>
+          <regexp>@\s+anyconnect enable@</regexp>
+        </ignore>
+        <line>
+          <regexp>@\s+tunnel-group-list (?&lt;tunnelGroupList&gt;enable)@</regexp>
+        </line>
+        <line>
+          <array name="anyConnectImages">
+            <regexp>@\sanyconnect image disk0:/(?&lt;imageName&gt;\S+)@</regexp>
+          </array>
+        </line>
+        <line>
+          <array name="interfaceToAplly">
+            <regexp>@\s+enable (?&lt;interfaceName&gt;\S+)@</regexp>
+          </array>
+        </line>
+        
+        
+      </lines>
+    </parser>
+    <post_template>{if !empty($params.tunnelGroupList)}
+ {assign_object_variable var="tunnelGroupList" value="true"}
+{else}
+ {assign_object_variable var="tunnelGroupList" value="false"}
+{/if}
+
+{if !empty($params.ldapServer)}
+ {assign_object_variable var="authMethod" value="LDAP"}
+{else}
+ {assign_object_variable var="authMethod" value="LOCAL"}
+{/if}</post_template>
+  </command>
+
+</ObjectDefinition>

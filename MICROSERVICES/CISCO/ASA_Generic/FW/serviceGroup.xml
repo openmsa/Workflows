@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/dot-dot.jpg</icon>
+    <sortauto>true</sortauto>
+    <order>1000000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>Services groups</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Objects</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="0">
+    <variable displayName="Group name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable displayName="Description" displayOrder="1" isMandatory="true" name="params.description" type="String"/>
+    <variable displayName="Services" displayOrder="2" isMandatory="true" name="params.ObjectList.0.serviceObject" type="ObjectRef">
+      <values>
+        <value>serviceObject</value>
+        <value>PredefinedServiceObject</value>
+      </values>
+      <classes>
+        <class>serviceObject</class>
+        <class>PredefinedServiceObject</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>sho run object-group
+
+object-group service MyServersGroup
+ network-object object obj-10_101_65_0-255_255_255_0
+ network-object object WebServer01
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>sho object-group</operation>
+    <parser>
+      <section>
+        <regexp>@^object-group service (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^\sdescription: (?&lt;description&gt;.*)@</regexp>
+        </line>
+        <line>
+          <array name="ObjectList">
+            <regexp>@^\sservice-object object (?&lt;serviceObject&gt;\S+)\s*$@</regexp>
+          </array>
+        </line>
+      </lines>
+    </parser>
+  </command>
+<command name="CREATE">
+    <operation>object-group service {$object_id}
+ description {$params.description}
+{foreach $params.ObjectList as $Object}
+ service-object object {$Object.serviceObject}
+{/foreach}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no object-group service {$objectGroup.$object_id.object_id}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>object-group service {$object_id}
+ description {$params.description}
+{foreach $serviceGroup.$object_id.ObjectList as $oldObject}
+ no service-object object {$oldObject.serviceObject}
+{/foreach}
+{foreach $params.ObjectList as $Object}
+ service-object object {$Object.serviceObject}
+{/foreach}
+</operation>
+  </command>
+</ObjectDefinition>

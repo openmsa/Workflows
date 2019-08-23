@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>AAA</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>LDAP Servers</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="150" name="params.object_id" type="String"/>
+    <variable displayName="Interface" displayOrder="1" maxLength="200" name="params.interface" type="ObjectRef">
+      <classes>
+        <class>interfaces</class>
+      </classes>
+    </variable>
+    <variable displayName="IP Address" displayOrder="3" maxLength="200" name="params.ipAddress" type="IpAddress"/>
+    <variable displayName="Port" displayOrder="4" maxLength="100" name="params.serverPort" type="Integer"/>
+    <variable default="auto-detect" displayName="Type" displayOrder="5" editable="false" maxLength="200" name="params.serverType" type="String">
+      <values>
+        <value displayValue="auto-detect">auto-detect</value>
+        <value displayValue="microsoft">microsoft</value>
+        <value displayValue="novell">novell</value>
+        <value displayValue="openldap">openldap</value>
+        <value displayValue="sun">sun</value>
+      </values>
+    </variable>
+    <variable displayName="Base Dn" displayOrder="6" maxLength="200" name="params.ldapBaseDn" type="String">
+      <sections>
+        <section>LDAP parameters</section>
+      </sections>
+    </variable>
+    <variable displayName="Login Dn" displayOrder="7" maxLength="200" name="params.loginDn" type="String">
+      <sections>
+        <section>LDAP parameters</section>
+      </sections>
+    </variable>
+    <variable displayName="Password" displayOrder="8" maxLength="200" name="params.loginPassword" type="String">
+      <sections>
+        <section>LDAP parameters</section>
+      </sections>
+    </variable>
+    <variable displayName="Naming Attribute" displayOrder="9" maxLength="200" name="params.namingAttribute" type="String">
+      <sections>
+        <section>LDAP parameters</section>
+      </sections>
+    </variable>
+    <variable displayName="Scope" displayOrder="10" editable="false" maxLength="200" name="params.ldapScope" type="String">
+      <values>
+        <value displayValue="onelevel">onelevel</value>
+        <value displayValue="subtree">subtree</value>
+      </values>
+      <sections>
+        <section>LDAP parameters</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>Sho run aaa-server
+aaa-server LDAP_SRV protocol ldap
+aaa-server LDAP_SRV (inside) host 4.5.3.5
+ ldap-base-dn dc=ftwsecurity, dc=cisco, dc=com
+ ldap-scope subtree
+ ldap-naming-attribute sAMAccountName
+ ldap-login-password *****
+ ldap-login-dn cn=admin, cn=users, dc=ftwsecurity, dc=cisco, dc=com
+ server-type microsoft
+
+
+ldap-scope
+ onelevel  Search only one level beneath the Base DN
+  subtree   Search all levels beneath the Base DN
+
+server-type: 
+  auto-detect  Specify the vendor of the LDAP server is auto-detected
+  microsoft    Specify the vendor of the LDAP server is Microsoft
+  novell       Specify the vendor of the LDAP server is Novell
+  openldap     Specify the vendor of the LDAP server is OpenLDAP
+  sun          Specify the vendor of the LDAP server is Sun
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>sho run aaa-server</operation>
+    <parser>
+      <section>
+        <regexp>@aaa-server (?&lt;object_id&gt;\S+) protocol (?&lt;type&gt;ldap)@</regexp>
+        <regexp>@aaa-server (?&lt;object_id&gt;\S+) \((?&lt;interface&gt;\S+)\) host (?&lt;ipAddress&gt;\S+)@</regexp>
+        
+      </section>
+      <lines>
+        <line>
+          <regexp>@\s+ldap-login-password (?&lt;loginPassword&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+ldap-login-dn (?&lt;loginDn&gt;.+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+ldap-scope (?&lt;ldapScope&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+ldap-base-dn (?&lt;ldapBaseDn&gt;.+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+ldap-naming-attribute (?&lt;namingAttribute&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\s+server-type (?&lt;serverType&gt;\S+)@</regexp>
+        </line>
+        
+        <line>
+          <regexp>@\s+server-port (?&lt;serverPort&gt;\d+) @</regexp>
+        </line>
+        
+        
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>aaa-server {$params.object_id} protocol ldap
+aaa-server {$params.object_id} ({$params.interface}) host {$params.ipAddress}
+ ldap-base-dn {$params.ldapBaseDn}
+ ldap-scope {$params.ldapScope}
+ ldap-naming-attribute {$params.namingAttribute}
+ ldap-login-password {$params.loginPassword}
+ ldap-login-dn {$params.loginDn}
+ server-type {$params.serverType}
+ server-port {$params.serverPort}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>aaa-server {$params.object_id} protocol ldap
+aaa-server {$params.object_id} ({$params.interface}) host {$params.ipAddress}
+ ldap-base-dn {$params.ldapBaseDn}
+ ldap-scope {$params.ldapScope}
+ ldap-naming-attribute {$params.namingAttribute}
+ ldap-login-password {$params.loginPassword}
+ ldap-login-dn {$params.loginDn}
+ server-type {$params.serverType}
+ server-port {$params.serverPort}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no aaa-server {$ldapServer.$object_id.object_id} protocol ldap
+</operation>
+  </command>
+</ObjectDefinition>

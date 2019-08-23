@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/network.png</icon>
+    <sortauto>true</sortauto>
+    <order>100000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>Network</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Objects</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="1">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable displayName="Network IP" displayOrder="1" isMandatory="true" name="params.networkIp" type="IpAddress"/>
+    <variable displayName="Network Mask" displayOrder="2" isMandatory="true" name="params.networkMask" type="IpMask"/>
+    <variable displayName="Description" displayOrder="3" name="params.description" type="String"/>
+  </variables>  <example>
+    <content>CREATE:
+object network myNet1
+ subnet 1.1.1.0 255.255.255.0
+ description Net1DEscription
+
+IMPORT:
+show running-config object network in-line | include subnet
+
+object network obj-10.101.119.0-255.255.255.0 subnet 10.101.119.0 255.255.255.0
+object network obj-10.101.200.96-255.255.255.240 subnet 10.101.200.96 255.255.255.240
+object network obj-10.101.45.0-255.255.255.0 subnet 10.101.45.0 255.255.255.0
+object network obj-1.1.1.0-255.255.255.0 subnet 1.1.1.0 255.255.255.0
+object network obj-10.101.65.0-255.255.255.0 subnet 10.101.65.0 255.255.255.0
+</content>
+  </example>
+<command name="UPDATE">
+    <operation>object network {$object_id}
+ {if $params.description neq ''} 
+description {$params.description}
+{/if}
+ subnet {$params.networkIp} {$params.networkMask}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no object network {$object_id}
+</operation>
+  </command>
+  <command name="CREATE">
+    <operation>object network {$object_id}
+ {if $params.description neq ''} 
+description {$params.description}
+{/if}
+ subnet {$params.networkIp} {$params.networkMask}
+</operation>
+  </command>
+  <command name="IMPORT">
+    <operation>show running-config object network in-line | include subnet</operation>
+    <parser>
+      <section>
+        <regexp>@^object network (?&lt;object_id&gt;\S+) subnet (?&lt;networkIp&gt;\S+) (?&lt;networkMask&gt;\S+)\s*$@</regexp>
+        <regexp>@^object network (?&lt;object_id&gt;\S+) subnet (?&lt;networkIp&gt;\S+) (?&lt;networkMask&gt;\S+) description (?&lt;description&gt;.*)$@</regexp>
+        
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

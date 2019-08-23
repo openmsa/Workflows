@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>Certificate</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>PKI</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Trustpoint name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Password protecting the PKCS#12" displayOrder="1" maxLength="200" name="params.password" type="Password"/>
+    <variable displayName="PKCS#12 Base64 encoded" displayOrder="2" maxLength="200" name="params.p12Base64" type="String"/>
+  </variables>  <example>
+    <content>sho run | inc crypto ca trustpoint
+crypto ca trustpoint NETCELO-CA
+crypto ca trustpoint myTrustPoint
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation> sho run | inc crypto ca trustpoint</operation>
+    <parser>
+      <section>
+        <regexp>@crypto ca trustpoint (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines/>
+    </parser>
+    <post_template/>
+  </command>
+
+<command name="CREATE">
+    <operation>crypto ca import {$params.object_id} pkcs12 {$params.password} no
+
+{assign var="P12" value=$params.p12Base64}
+{$P12|regex_replace:"/ /":"\n"}
+quit
+</operation>
+  </command>
+</ObjectDefinition>

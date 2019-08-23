@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>Local users</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>AAA</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Username" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Password" displayOrder="1" maxLength="200" name="params.password" type="Password"/>
+  </variables>  <example>
+    <content>sho run username
+username username password A5XOy94YKDPXCo7U encrypted
+username cisco password 3USUcOPFUiMCO4Jk encrypted
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>sho run username | exclude {$SD-&gt;SD_LOGIN_ENTRY}</operation>
+    <parser>
+      <section>
+        <regexp>@username (?&lt;object_id&gt;\S+) password (?&lt;password&gt;\S+)@</regexp>
+      </section>
+      <lines/>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>username {$params.object_id} password {$params.password}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>username {$params.object_id} password {$params.password}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no username {$object_id}
+</operation>
+  </command>
+</ObjectDefinition>

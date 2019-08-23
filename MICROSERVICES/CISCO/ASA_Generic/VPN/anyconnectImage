@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>0</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>anyconnectImage</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Default</group>
+    <importrank>0</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Image Name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+  </variables>  <example>
+    <content>dir flash:anyconnect*
+
+Directory of disk0:/anyconnect*
+
+130    -rwx  6487517      07:34:40 May 27 2013  anyconnect-macosx-i386-2.5.2014-k9.pkg
+131    -rwx  6689498      07:34:42 May 27 2013  anyconnect-linux-2.5.2014-k9.pkg
+132    -rwx  4678691      07:34:42 May 27 2013  anyconnect-win-2.5.2014-k9.pkg
+135    -rwx  12088166     15:06:58 Jul 08 2015  anyconnect-linux-3.1.08009-k9.pkg
+136    -rwx  12681425     15:09:20 Jul 08 2015  anyconnect-macosx-i386-3.1.08009-k9.pkg
+137    -rwx  38360451     15:16:28 Jul 08 2015  anyconnect-win-3.1.08009-k9.pkg
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>dir flash:</operation>
+    <parser>
+      <section>
+        <regexp>@.*\s(?&lt;object_id&gt;anyconnect-.*)@</regexp>
+      </section>
+      <lines/>
+    </parser>
+    <post_template/>
+  </command>
+</ObjectDefinition>

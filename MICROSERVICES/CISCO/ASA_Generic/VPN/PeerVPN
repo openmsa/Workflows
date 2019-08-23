@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>true</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>true</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VPN Peer</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>1</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Number" displayOrder="1" maxLength="200" name="params.object_id" type="Integer"/>
+    <variable displayName="Peer IP address" displayOrder="1" isMandatory="true" maxLength="200" name="params.peerIP" type="IpAddress"/>
+    <variable displayName="Ike Version" displayOrder="2" editable="false" isMandatory="true" maxLength="200" name="params.ikeVersion" type="String">
+      <values>
+        <value displayValue="ikev2">ikev2</value>
+        <value displayValue="ikev1">ikev1</value>
+      </values>
+    </variable>
+    <variable displayName="Proposal/Transform set" displayOrder="3" maxLength="200" name="params.tunnelProposalTransformSet" selector="params.ikeVersion" type="Composite">
+      <behaviors>
+        <behavior displayName="tunnelProposalTransformSet" displayOrder="0" maxLength="200" name="params.tunnelProposalTransformSet" selectorValue="ikev1" type="ObjectRef">
+          <classes>
+            <class>ikev1TransformSet</class>
+          </classes>
+        </behavior>
+        <behavior displayName="tunnelProposalTransformSet" displayOrder="0" maxLength="200" name="params.tunnelProposalTransformSet" selectorValue="ikev2" type="ObjectRef">
+          <classes>
+            <class>ikev2Proposal</class>
+          </classes>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Authentication method" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.authenticationMethod" type="String">
+      <values>
+        <value displayValue="preshared key">pre-shared-key</value>
+        <value displayValue="Ceriticate">certificate</value>
+      </values>
+    </variable>
+    <variable displayName="Certificate" displayOrder="5" maxLength="200" name="params.trustPoint" selector="params.authenticationMethod" type="Composite">
+      <behaviors>
+        <behavior displayName="Certificate" displayOrder="0" isMandatory="true" maxLength="200" name="params.trustPoint" selectorValue="certificate" type="ObjectRef">
+          <classes>
+            <class>trustPoint</class>
+          </classes>
+        </behavior>
+        <behavior displayName="trustPoint" displayOrder="0" maxLength="200" name="params.trustPoint" selectorValue="pre-shared-key" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Preshared Key" displayOrder="6" keepOnImport="true" maxLength="200" name="params.presharedKey" selector="params.authenticationMethod" type="Composite">
+      <behaviors>
+        <behavior displayName="presharedKey" displayOrder="0" maxLength="200" name="params.presharedKey" selectorValue="certificate" type="String" visible="false"/>
+        <behavior displayName="presharedKey" displayOrder="0" isMandatory="true" keepOnImport="true" maxLength="200" name="params.presharedKey" selectorValue="pre-shared-key" type="Password"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Local network address" displayOrder="7" maxLength="200" name="params.networks.0.localNetAdd" type="IpAddress">
+      <sections>
+        <section>Networks</section>
+      </sections>
+    </variable>
+    <variable displayName="Local network mask" displayOrder="8" maxLength="200" name="params.networks.0.localNetMask" type="IpMask">
+      <sections>
+        <section>Networks</section>
+      </sections>
+    </variable>
+    <variable displayName="Peer network address" displayOrder="9" maxLength="200" name="params.networks.0.peerNetAdd" type="IpAddress">
+      <sections>
+        <section>Networks</section>
+      </sections>
+    </variable>
+    <variable displayName="Peer network mask" displayOrder="10" maxLength="200" name="params.networks.0.peerNetMask" type="IpMask">
+      <sections>
+        <section>Networks</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>crypto map l2l 1 match address l2l_10.10.4.108
+crypto map l2l 1 set peer 10.10.4.108
+crypto map l2l 1 set ikev2 ipsec-proposal myProposal
+crypto map l2l 1 set trustpoint myTrustPoint
+
+crypto map l2l 2 match address l2l_10.10.4.109
+crypto map l2l 2 set peer 10.10.4.109
+crypto map l2l 2 set ikev1 transform-set myTransformSet
+</content>
+  </example>
+<command name="CREATE">
+    <operation>{foreach $params.networks as $network}
+ access-list l2l_{$params.peerIP} extended permit ip {$network.localNetAdd} {$network.localNetMask} {$network.peerNetAdd} {$network.peerNetMask}
+{/foreach}
+
+
+{if $params.authenticationMethod=="pre-shared-key"}
+ {if $params.ikeVersion=="ikev1"}
+
+crypto map l2l {$params.object_id} set ikev1 transform-set {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+  ikev1 pre-shared-key {$params.presharedKey}
+
+
+ {else}
+crypto map l2l {$params.object_id} set ikev2 ipsec-proposal {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+  ikev2 local-authentication pre-shared-key {$params.presharedKey}
+
+ {/if}
+{else}
+crypto map l2l {$params.object_id} set trustpoint {$params.trustPoint}
+
+ {if $params.ikeVersion=="ikev1"}
+crypto map l2l {$params.object_id} set ikev1 transform-set {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+    ikev1 trust-point {$params.trustPoint}
+ {else}
+crypto map l2l {$params.object_id} set ikev2 ipsec-proposal {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+     ikev2 local-authentication certificate {$params.trustPoint}
+ {/if}
+{/if}
+
+crypto map l2l {$params.object_id} match address l2l_{$params.peerIP}
+crypto map l2l {$params.object_id} set peer {$params.peerIP}
+
+crypto map l2l interface outside
+crypto ikev1 enable outside
+crypto ikev2 enable outside
+</operation>
+  </command>
+<command name="DELETE">
+    <operation>clear configure tunnel-group {$PeerVPN.$object_id.object_id}
+
+clear configure access-list l2l_{$PeerVPN.$object_id.object_id}
+
+clear configure crypto map l2l {$PeerVPN.$object_id.object_id}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sho run crypto map  | inc l2l</operation>
+    <parser>
+      <section>
+        <regexp>@crypto map l2l (?&lt;object_id&gt;\d+) match address l2l_(?&lt;peerIP&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+        <regexp>@crypto map l2l (?&lt;object_id&gt;\d+) set (?&lt;ikeVersion&gt;ikev1) transform-set (?&lt;tunnelProposalTransformSet&gt;\S+)@</regexp>
+        <regexp>@crypto map l2l (?&lt;object_id&gt;\d+) set (?&lt;ikeVersion&gt;ikev2) ipsec-proposal (?&lt;tunnelProposalTransformSet&gt;\S+)@</regexp>
+        <regexp>@crypto map l2l (?&lt;object_id&gt;\d+) set trustpoint (?&lt;trustPoint&gt;\S+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+        
+        
+        
+        
+      </lines>
+    </parser>
+    <post_template>{assign var="networksIndex" value=0}
+
+{foreach $access_list as $index =&gt; $acl}
+	
+	{if $access_list.$index.object_id==$params.peerIP}
+		
+           {foreach $access_list.$index.acl_rules as $rule}
+             {assign_object_variable var="networks.{$networksIndex}.localNetAdd" value=$rule.local_network_address}
+             {assign_object_variable var="networks.$networksIndex.localNetMask" value=$rule.local_network_mask}
+             {assign_object_variable var="networks.$networksIndex.peerNetAdd" value=$rule.peer_network_address}
+             {assign_object_variable var="networks.$networksIndex.peerNetMask" value=$rule.peer_network_mask}
+             {assign var="networksIndex" value=$networksIndex+1}
+           {/foreach} 
+	{/if}
+{/foreach}
+
+{if $params.trustPoint!=""}
+  {assign_object_variable var="authenticationMethod" value="certificate"}
+{else}
+  {assign_object_variable var="authenticationMethod" value="pre-shared-key"}
+{/if}</post_template>
+  </command>
+<command name="UPDATE">
+    <operation>clear configure tunnel-group {$params.peerIP}
+
+clear configure access-list l2l_{$params.peerIP}
+
+clear configure crypto map l2l {$params.object_id}
+
+
+{foreach $params.networks as $network}
+ access-list l2l_{$params.peerIP} extended permit ip {$network.localNetAdd} {$network.localNetMask} {$network.peerNetAdd} {$network.peerNetMask}
+{/foreach}
+
+
+{if $params.authenticationMethod=="pre-shared-key"}
+ {if $params.ikeVersion=="ikev1"}
+
+crypto map l2l {$params.object_id} set ikev1 transform-set {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+  ikev1 pre-shared-key {$params.presharedKey}
+
+
+ {else}
+crypto map l2l {$params.object_id} set ikev2 ipsec-proposal {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+  ikev2 local-authentication pre-shared-key {$params.presharedKey}
+
+ {/if}
+{else}
+crypto map l2l {$params.object_id} set trustpoint {$params.trustPoint}
+
+ {if $params.ikeVersion=="ikev1"}
+crypto map l2l {$params.object_id} set ikev1 transform-set {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+    ikev1 trust-point {$params.trustPoint}
+ {else}
+crypto map l2l {$params.object_id} set ikev2 ipsec-proposal {$params.tunnelProposalTransformSet}
+tunnel-group {$params.peerIP} type ipsec-l2l
+tunnel-group {$params.peerIP} ipsec-attributes
+     ikev2 local-authentication certificate {$params.trustPoint}
+ {/if}
+{/if}
+
+crypto map l2l {$params.object_id} match address l2l_{$params.peerIP}
+crypto map l2l {$params.object_id} set peer {$params.peerIP}
+
+crypto map l2l interface outside
+crypto ikev1 enable outside
+crypto ikev2 enable outside
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>true</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>20000</order>
+    <description/>
+    <name>IKEv2 policies</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VPN IPSec|Phase 1</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Policy number" displayOrder="0" maxLength="100" name="params.object_id" type="Integer"/>
+    <variable default="3des" displayName="Encryption" displayOrder="1" editable="false" maxLength="200" name="params.encryption" type="String">
+      <values>
+        <value displayValue="aes-gcm">aes-gcm</value>
+        <value displayValue="aes-gcm-256">aes-gcm-256</value>
+        <value displayValue="aes-gcm-192">aes-gcm-192</value>
+        <value displayValue="aes-254">aes-254</value>
+        <value displayValue="aes-192">aes-192</value>
+        <value displayValue="des">des</value>
+        <value displayValue="3des">3des</value>
+        <value displayValue="null">null</value>
+        <value displayValue="aes">aes</value>
+      </values>
+    </variable>
+    <variable default="2" displayName="Diffie-Hellman group" displayOrder="2" editable="false" maxLength="200" name="params.group" type="Integer">
+      <values>
+        <value displayValue="2">2</value>
+        <value displayValue="1">1</value>
+        <value displayValue="19">19</value>
+        <value displayValue="14">14</value>
+        <value displayValue="24">24</value>
+        <value displayValue="5">5</value>
+        <value displayValue="20">20</value>
+        <value displayValue="21">21</value>
+      </values>
+    </variable>
+    <variable default="86400" displayName="Lifetime (seconde)" displayOrder="3" maxLength="200" name="params.lifetime" type="String"/>
+    <variable default="sha" displayName="Integrity" displayOrder="4" editable="false" maxLength="200" name="params.integrity" type="String">
+      <values>
+        <value displayValue="sha1">sha</value>
+        <value displayValue="sha256">sha256</value>
+        <value displayValue="sha512">sha512</value>
+        <value displayValue="md5">md5</value>
+        <value displayValue="null">null</value>
+        <value displayValue="sha384">sha384</value>
+      </values>
+    </variable>
+    <variable default="sha" displayName="Pseudo-random function" displayOrder="5" editable="false" maxLength="200" name="params.prf" type="String">
+      <values>
+        <value displayValue="md5">md5</value>
+        <value displayValue="sha256">sha256</value>
+        <value displayValue="sha512">sha512</value>
+        <value displayValue="sha384">sha384</value>
+        <value displayValue="sha1">sha</value>
+        <value displayValue="null">null</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>cry ikev2 policy 1
+encryption
+  3des         3des encryption
+  aes          aes encryption
+  aes-192      aes-192 encryption
+  aes-256      aes-256 encryption
+  aes-gcm      aes-gcm encryption
+  aes-gcm-192  aes-gcm-192 encryption
+  aes-gcm-256  aes-gcm-256 encryption
+  des          des encryption
+  null         null encryption
+
+  
+group  
+    1   Diffie-Hellman group 1
+  14  Diffie-Hellman group 14
+  19  Diffie-Hellman group 19
+  2   Diffie-Hellman group 2
+  20  Diffie-Hellman group 20
+  21  Diffie-Hellman group 21
+  24  Diffie-Hellman group 24
+  5   Diffie-Hellman group 5
+
+ lifetime
+  (seconds)
+  
+ integrity
+   md5     set hash md5
+  sha     set hash sha1
+  sha256  set hash sha256
+  sha384  set hash sha384
+  sha512  set hash sha512
+  
+  
+  prf (pseudo-random function)
+   md5     set hash md5
+  sha     set hash sha1
+  sha256  set hash sha256
+  sha384  set hash sha384
+  sha512  set hash sha512
+</content>
+  </example>
+  <command name="CREATE">
+    <operation>crypto ikev2 policy {$params.object_id}
+ encryption {$params.encryption}
+ integrity {$params.integrity}
+ group {$params.group}
+ prf {$params.prf}
+ lifetime seconds {$params.lifetime}
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>crypto ikev2 policy {$params.object_id}
+ encryption {$params.encryption}
+ integrity {$params.integrity}
+ group {$params.group}
+ prf {$params.prf}
+ lifetime seconds {$params.lifetime}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sho run crypto ikev2</operation>
+    <parser>
+      <section>
+        <regexp>@crypto ikev2 policy (?&lt;object_id&gt;\d+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@\sencryption (?&lt;encryption&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sintegrity (?&lt;integrity&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sgroup (?&lt;group&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sprf (?&lt;prf&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sgroup (?&lt;group&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\slifetime seconds (?&lt;lifetime&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="DELETE">
+    <operation>no crypto ikev2 policy {$object_id}
+</operation>
+  </command>
+</ObjectDefinition>

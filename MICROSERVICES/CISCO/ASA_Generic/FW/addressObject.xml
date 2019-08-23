@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/repository/CommandDefinition/icons/6700 series.jpg</icon>
+    <configType>cli</configType>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <order>100000</order>
+    <description/>
+    <name>Address</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>Objects</group>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="IP Address" displayOrder="1" isMandatory="true" maxLength="200" name="params.ipAddress" type="IpAddress"/>
+  </variables>  <example>
+    <content>CREATE:
+object network Address1
+ host 1.1.1.1
+    
+IMPORT:
+show running-config object network in-line | include host
+
+object network MSA-1.2.3.4 host 1.2.3.4
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show running-config object network in-line | include host</operation>
+    <parser>
+      <section>
+        <regexp>@^object network (?&lt;object_id&gt;\S+) host (?&lt;ipAddress&gt;\S+)\s*$@</regexp>
+      </section>
+      <lines/>
+    </parser>
+  <post_template/>
+  </command>
+  <command name="CREATE">
+    <operation>object network {$params.object_id}
+host {$params.ipAddress}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>object network {$object_id}
+host {$params.ipAddress}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no object network {$addressObject.$object_id.object_id}
+</operation>
+  </command>
+</ObjectDefinition>

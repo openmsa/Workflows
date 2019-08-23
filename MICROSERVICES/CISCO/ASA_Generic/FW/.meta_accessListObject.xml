@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <map>
+        <entry>
+            <key>MODEL</key>
+            <value>16 1</value>
+        </entry>
+        <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1488833708666</value>
+        </entry>
+        <entry>
+            <key>COMMENT</key>
+            <value></value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>CommandDefinition</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1488833708506</value>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
+            <value>1</value>
+        </entry>
+        <entry>
+            <key>CONFIGURATION_FILTER</key>
+            <value></value>
+        </entry>
+        <entry>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>ASA access-list Object</value>
+        </entry>
+    </map>
+</metadata>

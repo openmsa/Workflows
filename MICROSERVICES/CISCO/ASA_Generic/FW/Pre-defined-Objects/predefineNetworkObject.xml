@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Predefined-Objects</group>
+    <icon>/images/repository/CommandDefinition/icons/network.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Predefined network</name>
+    <order>200000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="1">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="100" name="params.object_id" type="String"/>
+    <variable displayName="Network IP" displayOrder="1" isMandatory="true" maxLength="100" name="params.networkIp" type="IpAddress"/>
+    <variable displayName="Network Mask" displayOrder="2" isMandatory="true" maxLength="100" name="params.networkMask" type="IpMask"/>
+    <variable displayName="Description" displayOrder="3" maxLength="100" name="params.description" type="String"/>
+  </variables>  <example>
+    <content>For creating ANY-network
+
+more ANY-network_0.0.0.0_0.0.0.0
+
+%Error opening disk0:/ANY-network_0.0.0.0_0.0.0.0 (No such file or directory)
+
+
+==========================
+  sho route | inc  directly connected
+C    10.30.16.0 255.255.248.0 is directly connected, outside
+C    10.101.119.0 255.255.255.0 is directly connected, inside
+</content>
+  </example>
+
+  
+  
+  <command name="IMPORT">
+    <operation>sho route | inc directly connected</operation>
+    <parser>
+      <section>
+        <regexp>@^\s*C\s+(?&lt;networkIp&gt;\S+) (?&lt;networkMask&gt;\S+) is (?&lt;object_id&gt;.*)@</regexp>
+        <regexp>@^%Error opening disk0:/(?&lt;object_id&gt;\S+)_(?&lt;networkIp&gt;\S+)_(?&lt;networkMask&gt;\S+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+</ObjectDefinition>

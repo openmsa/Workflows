@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <dynamic>false</dynamic>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <configType>cli</configType>
+    <reorderinstances>false</reorderinstances>
+    <visibility>5</visibility>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <singleton>false</singleton>
+    <sortvariable>params._order</sortvariable>
+    <sortascending>true</sortascending>
+    <sortnumerical>true</sortnumerical>
+    <sortauto>true</sortauto>
+    <relatedObjects/>
+    <order>10000</order>
+    <description/>
+    <name>Ikev2 Proposal</name>
+    <defaultDisplay>false</defaultDisplay>
+    <group>VPN IPSec|Phase 2</group>
+    <importrank>1</importrank>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable default="esp" displayName="Protocol" displayOrder="1" isUserLocked="true" maxLength="200" name="params.protocol" type="String"/>
+    <variable default="aes" displayName="Encryption" displayOrder="2" editable="false" maxLength="200" name="params.encryption" type="String">
+      <values>
+        <value displayValue="3des">3des</value>
+        <value displayValue="aes">aes</value>
+        <value displayValue="aes-192">aes-192</value>
+        <value displayValue="aes-256">aes-256</value>
+        <value displayValue="aes-gcm">aes-gcm</value>
+        <value displayValue="aes-gcm-192">aes-gcm-192</value>
+        <value displayValue="aes-gcm-256">aes-gcm-256</value>
+        <value displayValue="aes-gmac">aes-gmac</value>
+        <value displayValue="aes-gmac-192">aes-gmac-192</value>
+        <value displayValue="aes-gmac-256">aes-gmac-256</value>
+        <value displayValue="des">des</value>
+        <value displayValue="null">null</value>
+      </values>
+    </variable>
+    <variable displayName="Integrity" displayOrder="3" editable="false" maxLength="200" name="params.integrity" type="String">
+      <values>
+        <value>md5</value>
+        <value>null</value>
+        <value>sha-1</value>
+        <value>sha-256</value>
+        <value>sha-384</value>
+        <value>sha-512</value>
+      </values>
+    </variable>
+  </variables>  <example>
+    <content>crypto ipsec ikev2 ipsec-proposal DES
+ protocol esp encryption des
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal 3DES
+ protocol esp encryption 3des
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES
+ protocol esp encryption aes
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES192
+ protocol esp encryption aes-192
+ protocol esp integrity sha-1 md5
+
+crypto ipsec ikev2 ipsec-proposal AES256
+ protocol esp encryption aes-256
+ protocol esp integrity sha-1 md5
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>sho run cry ipsec</operation>
+    <parser>
+      <section>
+        <regexp>@crypto ipsec ikev2 ipsec-proposal (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@\sprotocol (?&lt;protocol&gt;\S+) encryption (?&lt;encryption&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@\sprotocol (?&lt;protocol&gt;\S+) integrity (?&lt;integrity&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>crypto ipsec ikev2 ipsec-proposal {$params.object_id}
+ protocol {$params.protocol} encryption {$params.encryption}
+ protocol {$params.protocol} integrity {$params.integrity}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>crypto ipsec ikev2 ipsec-proposal {$params.object_id}
+ protocol {$params.protocol} encryption {$params.encryption}
+ protocol {$params.protocol} integrity {$params.integrity}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no crypto ipsec ikev2 ipsec-proposal {$object_id}
+</operation>
+  </command>
+</ObjectDefinition>

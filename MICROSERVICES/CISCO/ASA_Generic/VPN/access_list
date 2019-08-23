@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>access_list</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>0</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="object_id" displayOrder="0" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="local_network_address" displayOrder="1" maxLength="200" name="params.acl_rules.0.local_network_address" type="String">
+      <sections>
+        <section>acl_rules</section>
+      </sections>
+    </variable>
+    <variable displayName="local_network_mask" displayOrder="1" maxLength="200" name="params.acl_rules.0.local_network_mask" type="String">
+      <sections>
+        <section>acl_rules</section>
+      </sections>
+    </variable>
+    <variable displayName="peer_network_address" displayOrder="4" maxLength="200" name="params.acl_rules.0.peer_network_address" type="String">
+      <sections>
+        <section>acl_rules</section>
+      </sections>
+    </variable>
+    <variable displayName="peer_network_mask" displayOrder="5" maxLength="200" name="params.acl_rules.0.peer_network_mask" type="String">
+      <sections>
+        <section>acl_rules</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>access-list l2l_10.10.4.108 extended permit ip 192.168.0.0 255.255.0.0 150.150.0.0 255.255.0.0
+access-list l2l_10.10.4.108 extended permit ip 192.168.1.0 255.255.255.0 150.150.0.0 255.255.0.0
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation> sho access-list</operation>
+    <parser>
+      <section>
+        <regexp>@access-list l2l_(?&lt;object_id&gt;([0-9]{1,3}\.){3}[0-9]{1,3});@</regexp>
+      </section>
+      <lines>
+        <line>
+          <array name="acl_rules">
+            <regexp>@access-list l2l_(([0-9]{1,3}\.){3}[0-9]{1,3}) line \d+ extended permit ip (?&lt;local_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;local_network_mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;peer_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;peer_network_mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+            <regexp>@access-list l2l_(([0-9]{1,3}\.){3}[0-9]{1,3}) line \d+ extended permit ip host (?&lt;local_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;peer_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;peer_network_mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+            <regexp>@access-list l2l_(([0-9]{1,3}\.){3}[0-9]{1,3}) line \d+ extended permit ip host (?&lt;local_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) host (?&lt;peer_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+            <regexp>@access-list l2l_(([0-9]{1,3}\.){3}[0-9]{1,3}) line \d+ extended permit ip (?&lt;local_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) (?&lt;local_network_mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) host (?&lt;peer_network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{foreach $params.acl_rules as $index =&gt; $rule}
+
+{if empty($rule.local_network_mask)}
+{assign_object_variable var="acl_rules.{$index}.local_network_mask" value="255.255.255.255"}
+{/if}
+
+{if  empty($rule.peer_network_mask)}
+{assign_object_variable var="acl_rules.{$index}.peer_network_mask" value="255.255.255.255"}
+{/if}
+
+{/foreach}</post_template>
+  </command>
+</ObjectDefinition>
