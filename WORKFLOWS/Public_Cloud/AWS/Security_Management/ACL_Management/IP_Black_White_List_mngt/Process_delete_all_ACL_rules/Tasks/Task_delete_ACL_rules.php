@@ -1,18 +1,12 @@
 <?php
 
-/**
- * This file is necessary to include to use all the in-built libraries of /opt/fmc_repository/Reference/Common
- */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
+require_once __DIR__.'../../Common/common.php';
 
-/**
- * List all the parameters required by the task
- */
 function list_args()
-{
- 
-}
+{ }
 
 task_success('Task OK');
+
 
 ?>

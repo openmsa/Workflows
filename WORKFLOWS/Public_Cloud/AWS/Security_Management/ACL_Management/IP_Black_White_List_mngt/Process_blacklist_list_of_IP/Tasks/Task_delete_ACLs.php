@@ -2,6 +2,7 @@
 
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
+require_once __DIR__.'/../../Common/common.php';
 
 function list_args()
 {
@@ -12,19 +13,27 @@ $vpc_id = $context['vpc_id'];
 
 if (isset($context['acls'])) {
 
-  $acl_array = $context['acls'];
-  foreach ($acl_array as $acl_id) {
-    delete_network_acl($device_id, $acl_id);
+  $response = synchronize_objects_and_verify_response($device_id);
+  $response = _device_read_by_id($device_id);
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+    $response = json_encode($response);
+    echo $response;
+    exit;
   }
+
+  $acl_list_string = $context['acls'];
+  $acl_list = explode("\n", $acl_list_string);
+
+  foreach ($acl_list as $acl_id) {
+    delete_acl($device_id, $acl_id, $context);
+  }
+
+
 } else {
   logToFile("no Network ACL to delete in VPC ".$vpc_id);
 }
 
 task_success('Task OK');
-
-
-function delete_network_acl($device_id, $acl_id) {
-  logToFile("delete Network ACL: ".$acl_id);
-}
 
 ?>
