@@ -23,20 +23,20 @@ $acl_index=0;
 for ($ip_index = 0; $ip_index < $ip_count; $ip_index++) { 
 
   $ip=$ip_list_array[$ip_index];
-  $rule_index = $ip_index % 18;
+  $rule_index = ($ip_index % 18)+1;
 
   logToFile("current IP: " . $ip .  " at index: " . $ip_index);
   logToFile("acl_index: " . $acl_index);
   logToFile("rule_index: " . $rule_index);
 
-  create_acl_entry ( $device_id, $acl_list_array[$acl_index], $rule_index, $value );
+  create_acl_entry ( $device_id, $acl_list_array[$acl_index], $rule_index, $ip );
 
-  if ($ip_index > 0 && $ip_index % 18 ==0) {
+  if ($ip_index > 0 && $rule_index % 18 ==0) {
     $acl_index++;
   }
 }
 
-task_success ( 'Task OK' );
+task_success ( $ip_index . ' rules created in ' . ($acl_index+1) . ' Network ACL' );
 exit;
 
 ?>

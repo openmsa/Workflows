@@ -33,6 +33,6 @@ $context['acls'] = $acl_list_string;
 
 
 
-task_success('Task OK: '.$acl_count.' Network ACL created in VPC '.$vpc_id );
+task_success($acl_count.' Network ACL created in VPC '.$vpc_id );
 
 ?>

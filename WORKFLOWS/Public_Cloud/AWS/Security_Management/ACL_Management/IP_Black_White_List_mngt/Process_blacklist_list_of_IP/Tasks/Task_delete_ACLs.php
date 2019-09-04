@@ -23,17 +23,18 @@ if (isset($context['acls'])) {
   }
 
   $acl_list_string = $context['acls'];
-  $acl_list = explode("\n", $acl_list_string);
-
+  $acl_list = explode(" ", $acl_list_string);
+  $acl_list_size = count($acl_list);
   foreach ($acl_list as $acl_id) {
     delete_acl($device_id, $acl_id, $context);
   }
-
+  task_success($acl_list_size . ' Network ACL deleted from VPC '.$vpc_id);
 
 } else {
-  logToFile("no Network ACL to delete in VPC ".$vpc_id);
+  //logToFile("no Network ACL to delete in VPC ".$vpc_id);
+  task_success("no Network ACL to delete in VPC ".$vpc_id);
 }
 
-task_success('Task OK');
+
 
 ?>

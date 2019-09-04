@@ -63,7 +63,7 @@
 
 <process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP">
     <visibility>5</visibility>
-    <displayName>blacklist_list_of_IP</displayName>
+    <displayName>blacklist list of IP</displayName>
     <icon/>
     <poolId>0</poolId>
     <compensation/>
@@ -81,36 +81,42 @@
     
     
   
+    
+    
+  
+    
     
     
   <task name="Task_get_IP_from_URL.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
-      <displayName>get_IP_from_URL</displayName>
+      <displayName>get IP from Database</displayName>
     </task>
     <task name="Task_delete_ACLs.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
-      <displayName>delete_ACLs</displayName>
+      <displayName>clean up ALC</displayName>
     </task>
     <task name="Task_create_ACLs.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
-      <displayName>create_ACLs</displayName>
+      <displayName>create ACL</displayName>
     </task>
     <task name="Task_create_ACL_rules.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
-      <displayName>create_ACL_rules</displayName>
+      <displayName>blacklist IP</displayName>
     </task>
   </process>
 <process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules">
     <visibility>5</visibility>
-    <displayName>delete_all_ACL_rules</displayName>
+    <displayName>cleanup ACL</displayName>
     <icon/>
     <poolId>0</poolId>
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    <task name="Task_delete_ACL_rules.php">
+    
+  
+  <task name="Task_delete_ACL_rules.php">
       <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules/Tasks/</processPath>
-      <displayName>delete_ACL_rules</displayName>
+      <displayName>cleanup ACL</displayName>
     </task>
   </process>
 </ObjectDefinition>
