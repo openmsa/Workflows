@@ -23,7 +23,7 @@
     <sortvariable>params._order</sortvariable>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="id" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="AutoIncrement"/>
+    <variable displayName="id" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="Index"/>
     <variable displayName="Subnet" displayOrder="1" isMandatory="true" maxLength="200" name="params.subnet" startIncrement="0" type="IpAddress"/>
     <variable displayName="Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
     <variable displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gateway" startIncrement="0" type="IpAddress"/>
