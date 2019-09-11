@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+<information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Objects</group>
+    <icon>/images/repository/CommandDefinition/icons/network management.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Addresses</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>
+<variables frozen="1">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="150" name="params.object_id" type="String"/>
+    <variable displayName="Book name" displayOrder="1" isMandatory="true" maxLength="150" name="params.addressBookName" type="ObjectRef">
+      <classes>
+        <class>addressBook</class>
+      </classes>
+    </variable>
+    <variable displayName="Network address" displayOrder="2" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="250" name="params.addressNetworkIP" type="IpAddress"/>
+    <variable displayName="Network Prefix" displayOrder="3" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="250" name="params.addressNetworkPrefix" type="Integer">
+      <values>
+        <value>32</value>
+        <value>31</value>
+        <value>30</value>
+        <value>29</value>
+        <value>28</value>
+        <value>27</value>
+        <value>26</value>
+        <value>25</value>
+        <value>24</value>
+        <value>23</value>
+        <value>22</value>
+        <value>21</value>
+        <value>20</value>
+        <value>19</value>
+        <value>18</value>
+        <value>17</value>
+        <value>16</value>
+        <value>15</value>
+        <value>14</value>
+        <value>13</value>
+        <value>12</value>
+        <value>11</value>
+        <value>10</value>
+        <value>9</value>
+        <value>8</value>
+        <value>7</value>
+        <value>6</value>
+        <value>5</value>
+        <value>4</value>
+        <value>3</value>
+        <value>2</value>
+        <value>1</value>
+      </values>
+    </variable>
+    <variable displayName="Network mask" displayOrder="4" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="250" name="params.addressNetworkMask" type="IpAddress"/>
+    <variable displayName="Range First IP" displayOrder="5" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="250" name="params.addressRangeFirstIP" type="IpAddress"/>
+    <variable displayName="Range Last IP" displayOrder="6" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="250" name="params.addressRangeLastIP" type="IpAddress"/>
+    <variable displayName="FQDN" displayOrder="7" groupDisplayName="Address" isGrouped="true" maxLength="250" name="params.addressDnsName" type="String"/>
+    <variable displayName="IPv4 only" displayOrder="8" maxLength="150" name="params.addressIPv4onlyOption" type="String">
+      <values>
+        <value>ipv4-only</value>
+      </values>
+    </variable>
+    <variable displayName="IPv6 only" displayOrder="9" maxLength="150" name="params.addressIPv6onlyOption" type="String">
+      <values>
+        <value>ipv6-only</value>
+      </values>
+    </variable>
+    <variable displayName="IPv6 only" displayOrder="10" maxLength="150" name="params.ipv6-only" type="String" visible="false">
+      <values>
+        <value>ipv6-only</value>
+      </values>
+    </variable>
+    <variable displayName="IPv4 only" displayOrder="11" maxLength="150" name="params.ipv4-only" type="String" visible="false">
+      <values>
+        <value>ipv4-only</value>
+      </values>
+    </variable>
+    <variable displayName="Description" displayOrder="12" keepOnImport="true" maxLength="150" name="params.addressDescription" type="String"/>
+  </variables>
+<example>
+    <content>root&gt; show configuration security zones | display set 
+set security zones security-zone trust host-inbound-traffic system-services all
+set security zones security-zone trust host-inbound-traffic protocols all
+set security zones security-zone trust interfaces vlan.0
+set security zones security-zone untrust screen untrust-screen
+set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services dhcp
+set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services tftp
+set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services ssh
+set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services ping
+set security zones security-zone untrust interfaces ge-0/0/0.0 host-inbound-traffic system-services snmp
+set security zones security-zone dmz host-inbound-traffic system-services all
+set security zones security-zone dmz host-inbound-traffic protocols all
+set security zones security-zone testAntoine host-inbound-traffic system-services lsping
+set security zones security-zone testAntoine host-inbound-traffic protocols sap
+set security zones security-zone testDemo host-inbound-traffic system-services netconf
+set security zones security-zone testDemo host-inbound-traffic protocols ospf
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show configuration security address-book | display set</operation>
+    <parser>
+      <section name="address_object">
+        <regexp>@^set security address-book \S+ address (?&lt;object_id&gt;\S*)@</regexp>
+      </section>
+      <lines>
+        <line>
+            <regexp>@^set security address-book (?&lt;addressBookName&gt;\S*) address (?&lt;object_id&gt;\S*) description "?(?&lt;addressDescription&gt;[^"]+)"?@</regexp>
+            <regexp>@^set security address-book (?&lt;addressBookName&gt;\S*) address (?&lt;object_id&gt;\S*) dns-name (?&lt;addressDnsName&gt;\S*)\s*(?&lt;addressIPv4onlyOption&gt;ipv4-only)?\s*(?&lt;addressIPv6onlyOption&gt;ipv6-only)?@</regexp>
+            <regexp>@^set security address-book (?&lt;addressBookName&gt;\S*) address (?&lt;object_id&gt;\S*) range-address (?&lt;addressRangeFirstIP&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) to (?&lt;addressRangeLastIP&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+            <regexp>@^set security address-book (?&lt;addressBookName&gt;\S*) address (?&lt;object_id&gt;\S*) wildcard-address (?&lt;addressNetworkIP&gt;([0-9]{1,3}\.){3}[0-9]{1,3})/(?&lt;addressNetworkMask&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+            <regexp>@^set security address-book (?&lt;addressBookName&gt;\S*) address (?&lt;object_id&gt;\S*) (?&lt;addressNetworkIP&gt;([0-9]{1,3}\.){3}[0-9]{1,3})/(?&lt;addressNetworkPrefix&gt;(\d){1,2})@</regexp>
+            <regexp>@^set security address-book {$addressBookName} address {$object_id} dns-name (?&lt;addressDnsName&gt;\S*)\s*(?&lt;addressIPv4onlyOption&gt;ipv4-only)?\s*(?&lt;addressIPv6onlyOption&gt;ipv6-only)?@</regexp>
+        </line>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>{if !empty($params.addressNetworkPrefix)}
+set security address-book {$params.addressBookName} address {$object_id} {$params.addressNetworkIP}/{$params.addressNetworkPrefix}
+{/if}  
+{if !empty($params.addressNetworkMask)}
+set security address-book {$params.addressBookName} address {$object_id} wildcard-address {$params.addressNetworkIP}/{$params.addressNetworkMask}
+{/if}
+{if !empty($params.addressRangeFirstIP) and !empty($params.addressRangeLastIP)}
+set security address-book {$params.addressBookName} address {$object_id} range-address {$params.addressRangeFirstIP} to {$params.addressRangeLastIP}
+{/if}
+{if !empty($params.addressDnsName) and !empty($params.addressIPv4onlyOption)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName} {$params.addressIPv4onlyOption}
+{elseif !empty($params.addressDnsName) and !empty($params.addressIPv6onlyOption)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName} {$params.addressIPv6onlyOption}
+{elseif !empty($params.addressDnsName)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName}
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>delete security address-book {$address_object.$object_id.addressBookName} address {$object_id}
+</operation>
+  </command>
+
+<command name="UPDATE">
+    <operation>{if !empty($params.addressNetworkPrefix)}
+set security address-book {$params.addressBookName} address {$object_id} {$params.addressNetworkIP}/{$params.addressNetworkPrefix}
+{/if}  
+{if !empty($params.addressNetworkMask)}
+set security address-book {$params.addressBookName} address {$object_id} wildcard-address {$params.addressNetworkIP}/{$params.addressNetworkMask}
+{/if}
+{if !empty($params.addressRangeFirstIP) and !empty($params.addressRangeLastIP)}
+set security address-book {$params.addressBookName} address {$object_id} range-address {$params.addressRangeFirstIP} to {$params.addressRangeLastIP}
+{/if}
+{if !empty($params.addressDnsName) and !empty($params.addressIPv4onlyOption)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName} {$params.addressIPv4onlyOption}
+{elseif !empty($params.addressDnsName) and !empty($params.addressIPv6onlyOption)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName} {$params.addressIPv6onlyOption}
+{elseif !empty($params.addressDnsName)}
+set security address-book {$params.addressBookName} address {$object_id} dns-name {$params.addressDnsName}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>subnet</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Routes</name>
+    <order>2100</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="id" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="200" name="params.object_id" type="AutoIncrement" visible="false"/>
+    <variable displayName="Subnet" displayOrder="1" maxLength="200" name="params.subnet" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Mask" displayOrder="2" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
+    <variable displayName="Gateway" displayOrder="3" maxLength="200" name="params.gateway" startIncrement="0" type="IpAddress"/>
+    <variable displayName="Interface" displayOrder="4" isUserLocked="true" maxLength="100" name="params.interface" startIncrement="0" type="ObjectRef" visible="false">
+      <classes>
+        <class>interface</class>
+      </classes>
+    </variable>
+    <variable displayName="Metric" displayOrder="5" maxLength="100" name="params.metric" startIncrement="0" type="Integer"/>
+    <variable displayName="_masklen" displayOrder="6" maxLength="200" name="params._masklen" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+  
+  
+
+<command name="IMPORT">
+    <operation>show configuration routing-options | display set</operation>
+    <parser>
+      <section>
+        <regexp>@^set\s+routing-options\s+static\s+route\s+(?&lt;object_id&gt;\S+ next-hop \S+)@</regexp>
+        <regexp>@^set\s+routing-options\s+static\s+route\s+(?&lt;object_id&gt;\S+ qualified-next-hop \S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^set\s+routing-options\s+static\s+route\s+(?&lt;subnet&gt;[^/]+)/(?&lt;_masklen&gt;\d+)\s+next-hop\s+(?&lt;gateway&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@^set\s+routing-options\s+static\s+route\s+(?&lt;subnet&gt;[^/]+)/(?&lt;_masklen&gt;\d+)\s+qualified-next-hop\s+(?&lt;gateway&gt;\S+)\s+preference\s+(?&lt;metric&gt;\d+)@</regexp>
+        </line>
+        <line>
+          <regexp>@^set\s+routing-options\s+static\s+route\s+(?&lt;subnet&gt;[^/]+)/(?&lt;_masklen&gt;\d+)\s+qualified-next-hop\s+(?&lt;gateway&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{if isset($params._masklen)}
+{get_mask_from_len var="m" len=$params._masklen}
+{assign_object_variable var="mask" value=$m}
+{else}
+{assign_object_variable var="mask" value="0.0.0.0"}
+{/if}</post_template>
+  </command>
+  <command name="CREATE">
+    <operation>{if isset($params.metric)}
+set routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} qualified-next-hop {$params.gateway} preference {$params.metric}
+{else}
+set routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} next-hop {$params.gateway}
+{/if}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>{if isset($route.$object_id.metric)}
+delete routing-options static route {$route.$object_id.subnet}/{get_mask_len mask=$route.$object_id.mask} qualified-next-hop {$route.$object_id.gateway}
+{else}
+delete routing-options static route {$route.$object_id.subnet}/{get_mask_len mask=$route.$object_id.mask} next-hop {$route.$object_id.gateway}
+{/if}
+{if isset($params.metric)}
+set routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} qualified-next-hop {$params.gateway} preference {$params.metric}
+{else}
+set routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} next-hop {$params.gateway}
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>{assign var="params" value=$route.$object_id}
+{if isset($params.metric)}
+delete routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} qualified-next-hop {$params.gateway}
+{else}
+delete routing-options static route {$params.subnet}/{get_mask_len mask=$params.mask} next-hop {$params.gateway}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>
