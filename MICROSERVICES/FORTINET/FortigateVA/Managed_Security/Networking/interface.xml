@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <configType>cli</configType>
     <createTemplateId/>
@@ -23,8 +23,8 @@
     <sortvariable>params._order</sortvariable>
     <visibility>3</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Name" displayOrder="1" isUserLocked="true" maxLength="100" name="params.alias" startIncrement="0" type="String"/>
-    <variable displayName="Port" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.object_id" startIncrement="0" type="String">
+    <variable displayName="Name" displayOrder="1" isUserLocked="true" maxLength="100" name="params.alias" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Port" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value>port1</value>
         <value>port8</value>
@@ -38,17 +38,17 @@
         <value>port10</value>
       </values>
     </variable>
-    <variable displayName="IP" displayOrder="2" groupDisplayName="IP / Netmask" isGrouped="true" maxLength="200" name="params.addressIP" startIncrement="0" type="IpMask"/>
-    <variable displayName="Netmask" displayOrder="3" groupDisplayName="IP / Netmask" groupSeparator="/" isGrouped="true" maxLength="200" name="params.mask" startIncrement="0" type="IpMask"/>
-    <variable default="false" displayName="Ping" displayOrder="4" maxLength="50" name="params.ping" startIncrement="0" type="Boolean"/>
-    <variable default="Up" displayName="Status" displayOrder="5" maxLength="50" name="params.status" startIncrement="0" type="String">
+    <variable displayName="IP" displayOrder="2" groupDisplayName="IP / Netmask" isGrouped="true" maxLength="200" name="params.addressIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable displayName="Netmask" displayOrder="3" groupDisplayName="IP / Netmask" groupSeparator="/" isGrouped="true" maxLength="200" name="params.mask" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
+    <variable default="false" displayName="Ping" displayOrder="4" maxLength="50" name="params.ping" numberOfRowMax="0" startIncrement="0" type="Boolean"/>
+    <variable default="Up" displayName="Status" displayOrder="5" maxLength="50" name="params.status" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Down">down</value>
         <value displayValue="Up">up</value>
       </values>
     </variable>
-    <variable cols="165" displayName="Comment" displayOrder="7" maxLength="200" name="params.comment" rows="1" startIncrement="0" type="String"/>
-    <variable displayName="verifPing" displayOrder="8" maxLength="200" name="params.verifPing" startIncrement="0" type="String" visible="false"/>
+    <variable cols="165" displayName="Comment" displayOrder="7" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
+    <variable displayName="verifPing" displayOrder="8" maxLength="200" name="params.verifPing" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>edit "port8"
         set vdom "root"
@@ -126,19 +126,19 @@
       </section>
       <lines>
         <ignore>
-          <regexp>@ set @</regexp>
+          <regexp>@set @</regexp>
         </ignore>
         <ignore>
-          <regexp>@ config @</regexp>
+          <regexp>@config @</regexp>
         </ignore>
         <ignore>
-          <regexp>@ unset @</regexp>
+          <regexp>@unset @</regexp>
         </ignore>
         <ignore>
-          <regexp>@ next@</regexp>
+          <regexp>@next@</regexp>
         </ignore>
         <ignore>
-          <regexp>@ end@</regexp>
+          <regexp>@end@</regexp>
         </ignore>
         <line>
           <regexp>@set ip (?&lt;addressIP&gt;\S+) (?&lt;mask&gt;\S+)@</regexp>
