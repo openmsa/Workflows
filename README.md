@@ -6,7 +6,8 @@ Alternatively, see below "Installing this repo on a live MSA".
 
 
 # Getting started
-The [wiki](https://github.com/ubiqube/Workflows-Microservices/wiki)provides a set of tutorials to help getting started with Workflow and Microservices
+The [wiki](https://github.com/ubiqube/Workflows-Microservices/wiki)
+provides a set of tutorials to help getting started with Workflow and Microservices.
 
 
 Installing this repo on a live MSA
