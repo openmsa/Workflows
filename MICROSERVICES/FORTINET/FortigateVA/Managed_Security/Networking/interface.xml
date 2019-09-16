@@ -40,7 +40,6 @@
     </variable>
     <variable displayName="IP" displayOrder="2" groupDisplayName="IP / Netmask" isGrouped="true" maxLength="200" name="params.addressIP" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
     <variable displayName="Netmask" displayOrder="3" groupDisplayName="IP / Netmask" groupSeparator="/" isGrouped="true" maxLength="200" name="params.mask" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
-    <variable default="false" displayName="Ping" displayOrder="4" maxLength="50" name="params.ping" numberOfRowMax="0" startIncrement="0" type="Boolean"/>
     <variable default="Up" displayName="Status" displayOrder="5" maxLength="50" name="params.status" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Down">down</value>
@@ -48,7 +47,6 @@
       </values>
     </variable>
     <variable cols="165" displayName="Comment" displayOrder="7" maxLength="200" name="params.comment" numberOfRowMax="0" rows="1" startIncrement="0" type="String"/>
-    <variable displayName="verifPing" displayOrder="8" maxLength="200" name="params.verifPing" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
   </variables>  <example>
     <content>edit "port8"
         set vdom "root"
@@ -143,9 +141,7 @@
         <line>
           <regexp>@set ip (?&lt;addressIP&gt;\S+) (?&lt;mask&gt;\S+)@</regexp>
         </line>
-        <line>
-          <regexp>@set allowaccess (?&lt;verifPing&gt;ping)@</regexp>
-        </line>
+        
         
         <line>
           <regexp>@set status (?&lt;status&gt;\S+)@</regexp>
@@ -158,13 +154,7 @@
         </line>
       </lines>
     </parser>
-    <post_template>{if empty($params.verifPing)}
-{assign_object_variable var="ping" value="false"}
-{else}
-{assign_object_variable var="ping" value="true"}
-{/if}
-
-{if empty($params.alias)}
+    <post_template>{if empty($params.alias)}
 {assign_object_variable var="alias" value=$params.object_id}
 {/if}</post_template>
   </command>
@@ -178,13 +168,6 @@ unset ip
 set ip {$params.addressIP} {$params.mask}
 {/if}
 set mtu-override enable
-{if isset($params.ping)}
-  {if $params.ping=="true" }
-    set allowaccess ping
-  {else}
-    unset allowaccess
-  {/if}
-{/if}
 set ident-accept enable
 set status {$params.status}
 {if empty($params.comment)}
