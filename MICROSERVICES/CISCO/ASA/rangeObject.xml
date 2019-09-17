@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/lan to lan.jpg</icon>
+    <sortauto>true</sortauto>
+    <order>100000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>IP Range</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Objects</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="1">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="First Address" displayOrder="1" isMandatory="true" name="params.firstIp" type="IpAddress"/>
+    <variable numberOfRowMax="3000" displayName="Last Address" displayOrder="2" isMandatory="true" name="params.lastIp" type="IpAddress"/>
+  </variables>  <example>
+    <content>CREATE:
+object network MyRange1
+ range 1.1.1.1 1.1.2.2
+
+IMPORT:
+show running-config object network in-line | include range
+
+object network EESRange range 10.10.0.0 10.10.0.255
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show running-config object network in-line | include range</operation>
+    <parser>
+      <section>
+        <regexp>@^object network (?&lt;object_id&gt;\S+) range (?&lt;firstIp&gt;\S+) (?&lt;lastIp&gt;\S+)\s*$@</regexp>
+      </section>
+      <lines/>
+    </parser>
+  </command>
+  <command name="CREATE">
+    <operation>object network {$object_id}
+range {$params.firstIp} {$params.lastIp}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>no object network {$object_id}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>object network {$object_id}
+range {$params.firstIp} {$params.lastIp}
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPN IPSec</group>
+    <icon>/images/repository/CommandDefinition/icons/vpn gateway.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Crypto isakmp</name>
+    <order>200</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Profile name" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String">
+      <classes>
+        <class>crypto_keyring</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Keyring" displayOrder="1" maxLength="100" name="params.keyring" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>crypto_keyring</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="WAN IP" displayOrder="2" maxLength="100" name="params.wanIP" startIncrement="0" type="IpAddress"/>
+  </variables>  <example>
+    <content>crypto isakmp policy 10
+ encr 3des
+ hash sha
+ authentication pre-share
+ group 2
+ lifetime 86400
+!
+exit
+!
+crypto isakmp profile TEST-SITE-A-B-VPN-PROFILE
+   keyring TEST-SITE-A-B-VPN-KEY
+   match identity address 37.216.238.226 255.255.255.255
+   keepalive 10 retry 5
+!
+exit
+</content>
+  </example>
+<command name="CREATE">
+    <operation>crypto isakmp policy 10
+ encr 3des
+ hash sha
+ authentication pre-share
+ group 2
+ lifetime 86400
+exit
+!
+crypto isakmp profile {$params.object_id}
+   keyring {$params.keyring}
+   match identity address {$params.wanIP} 255.255.255.255
+   keepalive 10 retry 5
+!
+exit
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sh run</operation>
+    <parser>
+      <section>
+        <regexp>@crypto isakmp profile (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@match identity address (?&lt;wanIP&gt;\S+) 255.255.255.255@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="DELETE">
+    <operation>no crypto isakmp profile {$params.object_id}
+</operation>
+  </command>
+</ObjectDefinition>

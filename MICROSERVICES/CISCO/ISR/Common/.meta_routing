@@ -3,11 +3,19 @@
     <map>
         <entry>
             <key>MODEL</key>
-            <value>CATALYST_IOS</value>
+            <value>ISR</value>
+        </entry>
+        <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1429791507039</value>
+            <value>1507542288408</value>
+        </entry>
+        <entry>
+            <key>COMMENT</key>
+            <value></value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +23,10 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1429791507019</value>
+            <value>1502547594782</value>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>CONFIGURATION_FILTER</key>
@@ -23,7 +34,11 @@
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>MODEL</value>
+            <value>UPLOAD</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+            <value>router</value>
         </entry>
     </map>
 </metadata>
