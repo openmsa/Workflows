@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/network.png</icon>
+    <sortauto>true</sortauto>
+    <order>200000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>Predefined network</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Predefined-Objects</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="1">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Network IP" displayOrder="1" isMandatory="true" name="params.networkIp" type="IpAddress"/>
+    <variable numberOfRowMax="3000" displayName="Network Mask" displayOrder="2" isMandatory="true" name="params.networkMask" type="IpMask"/>
+    <variable numberOfRowMax="3000" displayName="Description" displayOrder="3" name="params.description" type="String"/>
+  </variables>  <example>
+    <content>For creating ANY-network
+
+more ANY-network_0.0.0.0_0.0.0.0
+
+%Error opening disk0:/ANY-network_0.0.0.0_0.0.0.0 (No such file or directory)
+
+
+==========================
+  sho route | inc  directly connected
+C    10.30.16.0 255.255.248.0 is directly connected, outside
+C    10.101.119.0 255.255.255.0 is directly connected, inside
+</content>
+  </example>
+
+  
+  
+  <command name="IMPORT">
+    <operation>more ANY-network_0.0.0.0_0.0.0.0 ## sho route | inc directly connected</operation>
+    <parser>
+      <section>
+        <regexp>@^\s*C\s+(?&lt;networkIp&gt;\S+) (?&lt;networkMask&gt;\S+) is (?&lt;object_id&gt;.*)@</regexp>
+        <regexp>@^%Error opening disk0:/(?&lt;object_id&gt;\S+)_(?&lt;networkIp&gt;\S+)_(?&lt;networkMask&gt;\S+)@</regexp>
+        
+        
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

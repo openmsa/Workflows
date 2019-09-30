@@ -27,7 +27,7 @@
     <variable default="0.0.0.0" displayName="Destination IP" displayOrder="1" isMandatory="true" maxLength="200" name="params.ip_dest" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
     <variable default="0.0.0.0" displayName="Subnet Mask" displayOrder="2" isMandatory="true" maxLength="200" name="params.mask" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
     <variable default="0.0.0.0" displayName="Gateway" displayOrder="3" isMandatory="true" maxLength="200" name="params.gw" numberOfRowMax="0" startIncrement="0" type="IpMask"/>
-    <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="200" name="params.interface" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
+    <variable displayName="Interface" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.interface" numberOfRowMax="0" startIncrement="0" type="ObjectRef">
       <values>
         <value displayValue="port1">port1</value>
         <value displayValue="port8">port8</value>
@@ -62,8 +62,7 @@ config router static
 </content>
   </example>
 <command name="CREATE">
-    <operation>{if $params.object_id &lt;1000}
-config router static
+    <operation>config router static
 edit {$params.object_id}
 set dst {$params.ip_dest} {$params.mask}
 set gateway {$params.gw}
@@ -75,7 +74,6 @@ set comment "{$params.comment}"
 {/if}
 next
 end
-{/if}
 </operation>
   </command>
 <command name="IMPORT">
@@ -127,10 +125,7 @@ end
   </command>
 
 <command name="CONSTRAINT">
-    <operation>{if !empty($params.ip_dest) &amp;&amp; !empty($params.gw)}
-{if is_in_network($params.ip_dest, "100.64.0.0", "255.192.0.0") || is_in_network($params.gw, "100.64.0.0", "255.192.0.0")} Input restriction. Network 100.64.0.0/10 not allowed.
-{/if}
-{/if}
+    <operation>
 </operation>
   </command>
 </ObjectDefinition>

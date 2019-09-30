@@ -244,7 +244,7 @@ end
     <operation>config firewall policy##show full-configuration##end</operation>
     <parser>
       <section>
-        <regexp>@edit (?&lt;object_id&gt;[1-4]?\d{1,3})\s*$@</regexp>
+        <regexp>@edit (?&lt;object_id&gt;\d+)@</regexp>
       </section>
       <lines>
         <ignore>

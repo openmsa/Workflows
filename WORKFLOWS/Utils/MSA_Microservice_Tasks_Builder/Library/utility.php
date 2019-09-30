@@ -1,40 +1,8 @@
 <?php 
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require_once '/opt/fmc_repository/Process/MSA/MSA_Template_Management/Library/constants.php';
+require_once __DIR__.'/constants.php';
 
-function get_variables_string_from_template ($template_uri) {
-
-	$output_array = array();
-	exec("cat " . TEMPLATES_HOME_DIR . $template_uri, $output_array);
-	$variables_string = "";
-	if ($output_array[0] === "{*") {
-		for ($output_array_index = 1; $output_array[$output_array_index] !== "*}"; $output_array_index++) {
-			$variables_string .= $output_array[$output_array_index] . "\n";
-		}
-	}
-	return $variables_string;
-}
-
-function create_msa_workflow_information (&$object_definition, $name, $display_field, $execute_details_visibility = 5, 
-											$read_variable_visbility = 5, $show_detailed_workflow_instances = "false", 
-											$show_process_exec_console = "false", $show_variables = "false", $visibility = 5, 
-											$order = 10000, $group = "", $icon = "", $description = "") {
-	
-	$information = $object_definition->addChild('information');
-	$information->addChild('description', $description);
-	$information->addChild('displayField', $display_field);
-	$information->addChild('executionDetailsVisibility', $execute_details_visibility);
-	$information->addChild('group', $group);
-	$information->addChild('icon', $icon);
-	$information->addChild('name', $name);
-	$information->addChild('order', $order);
-	$information->addChild('readVariableVisibility', $read_variable_visbility);
-	$information->addChild('showDetailedServiceInstances', $show_detailed_workflow_instances);
-	$information->addChild('showProcessExecConsole', $show_process_exec_console);
-	$information->addChild('showVariables', $show_variables);
-	$information->addChild('visibility', $visibility);
-}
 
 function create_msa_workflow_variable (&$variables, $name, $display_order, $type = "String",  $display_name = "", $default = "", 
 										$section = "", $description = "", $max_length = 100, $start_increment = 0, $is_mandatory = "true",
@@ -105,74 +73,6 @@ function create_msa_workflow_variable (&$variables, $name, $display_order, $type
 		}
 	}
 }
-
-function create_msa_workflow_process (&$object_definition, $name, $icon, $visibility, $display_name, $type, $tasks = array()) {
-	
-	$process = $object_definition->addChild('process');
-	$process->addAttribute('name', $name);
-	$process->addChild('icon', $icon);
-	$process->addChild('visibility', $visibility);
-	$process->addChild('displayName', $display_name);
-	$process->addChild('type', $type);
-	foreach ($tasks as $task_params) {
-		$task = $process->addChild('task');
-		$task->addAttribute('name', $task_params['name']);
-		$task->addChild('processPath', $task_params['process_path']);
-		$task->addChild('displayName', $task_params['display_name']);
-	}
-}
-
-function msa_template_variables_to_workflow_variables ($variables_string) {
-	
-	$p = xml_parser_create();
-	xml_parse_into_struct($p, $variables_string, $vals);
-	xml_parser_free($p);
-
-	$variable_index = 0;
-	$variable_details = array();
-	for ($index = 0; $index < count($vals); $index++) {
-	
-		if (array_key_exists('attributes', $vals[$index])) {
-	
-			$attributes = $vals[$index]['attributes'];
-			$name = $attributes['NAME'];
-			$type = $attributes['TYPE'];
-			$max_length = $attributes['MAXLENGTH'];
-			$is_userlocked = "false";
-			$is_mandatory = "true";
-			if (array_key_exists('ISUSERLOCKED', $attributes)) {
-				$is_userlocked = $attributes['ISUSERLOCKED'];
-				$is_mandatory = "false";
-			}
-			$default = "";
-			if (array_key_exists('DEFAULT', $attributes)) {
-				$default = $attributes['DEFAULT'];
-			}
-			$valid_values = array();
-			if ($vals[$index+1]['tag'] === "VALUES" && $vals[$index+1]['type'] === "open") {
-				$index += 2;
-				while($vals[$index]['tag'] !== "VALUES" || $vals[$index]['type'] !== "close") {
-					if ($vals[$index]['tag'] === "VALUE" && $vals[$index]['type'] === "complete") {
-						$valid_values[] = $vals[$index]['value'];
-					}
-					$index += 2;
-				}
-			}
-			$variable_details[$variable_index]['name'] = $name;
-			$variable_details[$variable_index]['display_order'] = $variable_index;
-			$variable_details[$variable_index]['type'] = $type;
-			$variable_details[$variable_index]['display_name'] = $name;
-			$variable_details[$variable_index]['default'] = $default;
-			$variable_details[$variable_index]['max_length'] = $max_length;
-			$variable_details[$variable_index]['is_mandatory'] = $is_mandatory;
-			$variable_details[$variable_index]['is_userlocked'] = $is_userlocked;
-			$variable_details[$variable_index]['valid_values'] = $valid_values;
-			$variable_index++;
-		}
-	}
-	return $variable_details;
-}
-
 
 /**
  * Create MSA Workflow from MSA Templates
@@ -345,108 +245,6 @@ XML;
 	$metadata->asXML($workflow_meta_file);
 	
 	shell_exec("chmod 755 {$workflow_meta_file}");
-}
-
-function create_json_string_from_array ($array) {
-	return str_replace("\"", "\\\"", json_encode($array));
-}
-
-/**
- * Create MSA Task
- * 
- * @param unknown $template_details
- */
-function create_msa_workflow_task ($task_dir, $task_name, $additional_import_files_array = array(), $parameters = array(), $additional_task_string = "", $task_success_message = "Task completed successfully.") {
-	
-	$task = "<?php";
-	$task .= "\nrequire_once '/opt/fmc_repository/Process/Reference/Common/common.php';";
-	if (!empty($additional_import_files_array)) {
-		foreach ($additional_import_files_array as $import_file) {
-			$task .= "\nrequire_once '$import_file';";
-		}
-	}
-	
-	$task .= "\n\nfunction list_args()";
-	$task .= "\n{";
-	
-	$check_mandatory_params = "";
-	$user_inputs = "";
-	if (!empty($parameters)) {
-
-		logtoFile(debug_dump($parameters, "MSA Workflow User-input Parameters for the Task $task_name\n"));
-		$parameters_index = 0;
-		for ($index = 0; $index < count($parameters); $index++) {
-
-			$name = $parameters[$index]['name'];
-			$type = "String";
-			if (isset($parameters[$index]['type'])) {
-				$type = $parameters[$index]['type'];
-			}
-			$mandatory = "false";
-			if (isset($parameters[$index]['is_mandatory'])) {
-				$mandatory = $parameters[$index]['is_mandatory'];
-			}
-
-			$task .= "\ncreate_var_def('$name', '$type');";
-			if (strpos($name, ".0.") !== false) {
-				$name_array = explode(".0.", $name);
-				$params_name = $name_array[0];
-				if ($mandatory === "true") {
-					if (strpos($check_mandatory_params, "\ncheck_mandatory_param('$params_name');") === false) {
-						$check_mandatory_params .= "\ncheck_mandatory_param('$params_name');";						
-					}
-				}
-				if (strpos($user_inputs, "\$context['$task_name'][$parameters_index]['name'] = '$params_name';\n") === false) {
-					$user_inputs .= "\$context['$task_name'][$parameters_index]['name'] = '$params_name';\n";
-					$user_inputs .= "\$context['$task_name'][$parameters_index]['type'] = 'Array';\n";
-					$array_var_index = 0;
-				}
-				else {
-					$parameters_index--;
-				}
-				$user_inputs .= "\$context['$task_name'][$parameters_index]['arrayVars'][$array_var_index]['name'] = '$name';\n";
-				$user_inputs .= "\$context['$task_name'][$parameters_index]['arrayVars'][$array_var_index]['type'] = '$type';\n";
-				$parameters_index++;
-				$array_var_index++;
-			}
-			else {
-				if ($mandatory === "true") {
-					$check_mandatory_params .= "\ncheck_mandatory_param('$name');";
-				}
-				$user_inputs .= "\$context['$task_name'][$parameters_index]['name'] = '$name';\n";
-				$user_inputs .= "\$context['$task_name'][$parameters_index]['type'] = '$type';\n";
-				$parameters_index++;
-			}
-		}
-	}
-	
-	$task .= "\n}";
-	if ($check_mandatory_params !== "") {
-		$task .= "\n\n{$check_mandatory_params}";
-	}
-	if ($user_inputs) {
-		$task .= "\n\n{$user_inputs}";
-	}
-	if ($additional_task_string !== "") {
-		$task .= "\n\n{$additional_task_string}";
-	}
-	
-	$task .= "\n\n\$response = prepare_json_response(ENDED, \"$task_success_message\", \$context, true);";
-	$task .= "\necho \$response;";
-	$task .= "\n?>\n";
-
-	if (!is_dir(WORKFLOWS_HOME_DIR . "{$task_dir}")) {
-		mkdir(WORKFLOWS_HOME_DIR . "{$task_dir}", 0755, true);
-	}
-	$task_file = WORKFLOWS_HOME_DIR . "{$task_dir}/{$task_name}.php";
-	if (file_exists($task_file)) {
-		shell_exec("rm -f $task_file");
-	}
-	$fp = fopen($task_file, 'c+');
-	fwrite($fp, $task);
-	fclose($fp);
-	
-	shell_exec("chmod 755 $task_file");	
 }
 
 ?>

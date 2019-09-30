@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/service control.jpg</icon>
+    <configType>cli</configType>
+    <sortauto>true</sortauto>
+    <order>100000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>NAT rules</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Firewall</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Description" displayOrder="0" isMandatory="true" name="params.description" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Input Interface" displayOrder="1" isMandatory="true" name="params.InputInterface" type="ObjectRef">
+      <classes>
+        <class>interfaceNameObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Ouput Interface" displayOrder="2" isMandatory="true" name="params.OutputInterface" type="ObjectRef">
+      <classes>
+        <class>interfaceNameObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="source" displayOrder="3" name="params.originalSource" type="ObjectRef">
+      <sections>
+        <section>Original</section>
+      </sections>
+      <classes>
+        <class>addressObject</class>
+        <class>networkObject</class>
+        <class>rangeObject</class>
+        <class>ojectGroup</class>
+        <class>predefineNetworkObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Destination" displayOrder="4" name="params.originalDestination" type="ObjectRef">
+      <sections>
+        <section>Original</section>
+      </sections>
+      <classes>
+        <class>addressObject</class>
+        <class>networkObject</class>
+        <class>rangeObject</class>
+        <class>ojectGroup</class>
+        <class>predefineNetworkObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Service" displayOrder="5" name="params.originalService" type="ObjectRef">
+      <sections>
+        <section>Original</section>
+      </sections>
+      <classes>
+        <class>serviceObject</class>
+        <class>PredefinedServiceObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Source" displayOrder="6" name="params.translatedSource" type="ObjectRef">
+      <sections>
+        <section>Translated</section>
+      </sections>
+      <classes>
+        <class>addressObject</class>
+        <class>networkObject</class>
+        <class>rangeObject</class>
+        <class>ojectGroup</class>
+        <class>predefineNetworkObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Destination" displayOrder="7" name="params.translatedDestination" type="ObjectRef">
+      <sections>
+        <section>Translated</section>
+      </sections>
+      <classes>
+        <class>addressObject</class>
+        <class>networkObject</class>
+        <class>rangeObject</class>
+        <class>ojectGroup</class>
+        <class>predefineNetworkObject</class>
+      </classes>
+    </variable>
+    <variable numberOfRowMax="3000" displayName="Service" displayOrder="8" name="params.translatedService" type="ObjectRef">
+      <sections>
+        <section>Translated</section>
+      </sections>
+      <classes>
+        <class>serviceObject</class>
+        <class>PredefinedServiceObject</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>sh run nat
+
+nat (inside,any) source static obj-10.101.119.0-255.255.255.0 obj-10.101.119.0-255.255.255.0 destination static obj-10.101.200.96-255.255.255.240 obj-10.101.200.96-255.255.255.240
+
+object network obj-10.101.119.0-255.255.255.0
+ nat (inside,outside) dynamic interface
+
+object network MSA-1.2.3.4
+ nat (inside,outside) static interface service tcp www www
+</content>
+  </example>
+  <command name="CREATE">
+    <operation>nat ({$params.InputInterface},{$params.OutputInterface}) source static {$params.originalSource} {$params.translatedSource}{if $params.originalDestination!="" &amp;&amp; $params.translatedDestination!=""}  destination static {$params.originalDestination} {$params.translatedDestination}{/if}{if $params.translatedService!="" &amp;&amp; $params.originalService!=""} service {$params.originalService} {$params.translatedService}{/if}{if $params.description!=""} description {$params.description}{/if}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>sho run nat</operation>
+    <parser>
+      <section>
+        <regexp>@^nat \((?&lt;InputInterface&gt;\S+),(?&lt;OutputInterface&gt;\S+)\) source static (?&lt;originalSource&gt;\S+) (?&lt;translatedSource&gt;\S+)(?: destination static (?&lt;originalDestination&gt;\S+) (?&lt;translatedDestination&gt;\S+))?(?: service (?&lt;originalService&gt;\S+) (?&lt;translatedService&gt;\S+))? description (?&lt;description&gt;\S+)@</regexp>
+        <regexp>@^nat \((?&lt;InputInterface&gt;\S+),(?&lt;OutputInterface&gt;\S+)\) source static (?&lt;originalSource&gt;\S+) (?&lt;translatedSource&gt;\S+)(?: destination static (?&lt;originalDestination&gt;\S+) (?&lt;translatedDestination&gt;\S+))?(?: service (?&lt;originalService&gt;\S+) (?&lt;translatedService&gt;\S+))?@</regexp>
+        
+        
+        
+        
+      </section>
+      <lines>
+        
+      </lines>
+    </parser>
+  </command>
+  <command name="DELETE">
+    <operation>no nat ({$natRulesObject.$object_id.InputInterface},{$natRulesObject.$object_id.OutputInterface}) source static {$natRulesObject.$object_id.originalSource} {$natRulesObject.$object_id.translatedSource}{if $natRulesObject.$object_id.originalDestination!="" &amp;&amp; $natRulesObject.$object_id.translatedDestination!=""}  destination static {$natRulesObject.$object_id.originalDestination} {$natRulesObject.$object_id.translatedDestination}{/if}{if $natRulesObject.$object_id.translatedService!="" &amp;&amp; $natRulesObject.$object_id.originalService!=""} service {$natRulesObject.$object_id.originalService} {$natRulesObject.$object_id.translatedService}{/if}{if $params.description!=""} description {$natRulesObject.$object_id.description}{/if}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>no nat ({$natRulesObject.$object_id.InputInterface},{$natRulesObject.$object_id.OutputInterface}) source static {$natRulesObject.$object_id.originalSource} {$natRulesObject.$object_id.translatedSource}{if $natRulesObject.$object_id.originalDestination!="" &amp;&amp; $natRulesObject.$object_id.translatedDestination!=""}  destination static {$natRulesObject.$object_id.originalDestination} {$natRulesObject.$object_id.translatedDestination}{/if}{if $natRulesObject.$object_id.translatedService!="" &amp;&amp; $natRulesObject.$object_id.originalService!=""} service {$natRulesObject.$object_id.originalService} {$natRulesObject.$object_id.translatedService}{/if}{if $params.description!=""} description {$natRulesObject.$object_id.description}{/if}
+
+nat ({$params.InputInterface},{$params.OutputInterface}) source static {$params.originalSource} {$params.translatedSource}{if $params.originalDestination!="" &amp;&amp; $params.translatedDestination!=""}  destination static {$params.originalDestination} {$params.translatedDestination}{/if}{if $params.translatedService!="" &amp;&amp; $params.originalService!=""} service {$params.originalService} {$params.translatedService}{/if}{/if}{if $params.description!=""} description {$params.description}{/if}
+</operation>
+  </command>
+</ObjectDefinition>

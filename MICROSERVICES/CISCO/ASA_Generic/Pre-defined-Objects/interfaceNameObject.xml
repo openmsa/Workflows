@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <sortnumerical>true</sortnumerical>
+    <icon>/images/repository/CommandDefinition/icons/interface.jpg</icon>
+    <sortauto>true</sortauto>
+    <order>300000</order>
+    <description/>
+    <defaultDisplay>false</defaultDisplay>
+    <name>Interfaces</name>
+    <sortvariable>params._order</sortvariable>
+    <group>Network</group>
+    <sortascending>true</sortascending>
+  </information>  <variables frozen="0">
+    <variable numberOfRowMax="3000" displayName="Name" displayOrder="0" isMandatory="true" name="params.object_id" type="String"/>
+    <variable numberOfRowMax="3000" displayName="IP address" displayOrder="1" name="params.interfaceIPaddress" type="String" visible="false"/>
+    <variable numberOfRowMax="3000" displayName="Real name" displayOrder="1" name="params.interfaceRealName" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Admin status" displayOrder="2" name="params.interfaceAdminStatus" type="String"/>
+    <variable numberOfRowMax="3000" displayName="Line status" displayOrder="3" name="params.interfaceLineStatus" type="String"/>
+  </variables>  <example>
+    <content>#  sho interface  | inc Interface
+
+Interface Ethernet0/0 "", is up, line protocol is up
+Interface Ethernet0/1 "", is up, line protocol is up
+Interface Ethernet0/2 "", is administratively down, line protocol is down
+Interface Ethernet0/3 "", is administratively down, line protocol is down
+Interface Ethernet0/4 "", is administratively down, line protocol is down
+Interface Ethernet0/5 "", is administratively down, line protocol is down
+Interface Ethernet0/6 "", is administratively down, line protocol is down
+Interface Ethernet0/7 "", is administratively down, line protocol is up
+Interface Vlan1 "inside", is up, line protocol is up
+Interface Vlan2 "outside", is up, line protocol is up
+Interface Vlan1024 "dummy", is down, line protocol is down
+Interface Vlan2000 "DMZ2", is down, line protocol is down
+Interface Vlan2048 "DMZ1", is down, line protocol is down
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>sho interface</operation>
+    <parser>
+      <section>
+        <regexp>@^Interface (?&lt;interfaceRealName&gt;\S+) "(?&lt;object_id&gt;\S+)", is (?&lt;interfaceAdminStatus&gt;\S+), line protocol is (?&lt;interfaceLineStatus&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^\s+IP address (?&lt;interfaceIPaddress&gt;[0-9.]+),@</regexp>
+        </line>
+      </lines>
+    </parser>
+  </command>
+</ObjectDefinition>

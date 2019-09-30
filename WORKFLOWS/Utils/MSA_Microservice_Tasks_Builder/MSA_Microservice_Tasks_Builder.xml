@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
     <description/>
     <displayField>SERVICEINSTANCEREFERENCE</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
     <group>MSA Operator</group>
     <icon>/images/repository/CommandDefinition/icons/web cluster.jpg</icon>
     <name>MSA Micro service Tasks Builder</name>
     <order>10000</order>
+    <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
     <showDetailedServiceInstances>true</showDetailedServiceInstances>
     <showProcessExecConsole>true</showProcessExecConsole>
     <showVariables>false</showVariables>
     <visibility>3</visibility>
   </information>  <variables frozen="0">
-    <variable cols="100" default="&lt;PATH TO THE MICROSERVICE&gt;" displayName="Micro Service Path" displayOrder="0" isMandatory="true" maxLength="100" name="params.msa_micro_service_path" startIncrement="0" type="String">
+    <variable cols="100" default="&lt;PATH TO THE MICROSERVICE&gt;" displayName="Micro Service Path" displayOrder="0" isMandatory="true" maxLength="100" name="params.msa_micro_service_path" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>MSA Micro Service</section>
       </sections>
@@ -30,6 +32,7 @@
       <processPath/>
       <displayName>Create MSA Micro service Tasks</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/MSA_Micro_Service_Tasks_Builder/Process_Refresh_Micro_Service_Tasks/">
     <icon/>
@@ -41,11 +44,13 @@
       <processPath/>
       <displayName>Refresh MSA Micro service Tasks</displayName>
     </task>
+  <compensation/>
   </process>
   <process name="Process/MSA_Micro_Service_Tasks_Builder/Process_Delete_Workflow_Instance">
     <icon/>
     <visibility>5</visibility>
     <displayName>Move To Trash</displayName>
     <type>DELETE</type>
+  <compensation/>
   </process>
 </ObjectDefinition>
