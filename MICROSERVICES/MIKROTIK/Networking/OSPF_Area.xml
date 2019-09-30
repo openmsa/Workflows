@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Routing</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>OSPF Area</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Area Name" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Area ID" displayOrder="1" maxLength="100" name="params.area_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+  </variables>  <example>
+    <content>Flags: X - disabled, I - invalid, * - default
+ #    NAME                                                                                                                                              AREA-ID         TYPE    DEFAULT-COST
+ 0  * backbone                                                                                                                                          0.0.0.0         default
+ 1    area10                                                                                                                                            0.0.0.10        default
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>routing ospf area print</operation>
+    <parser>
+      <section>
+        <regexp>@(\s\d\s+[*]\s+|\s\d\s+)(?&lt;object_id&gt;\S+)\s+(?&lt;area_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <ignore>
+          <regexp>@Flags@</regexp>
+        </ignore>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>routing ospf area add name={$params.object_id} area-id={$params.area_id}
+</operation>
+  </command>
+</ObjectDefinition>
