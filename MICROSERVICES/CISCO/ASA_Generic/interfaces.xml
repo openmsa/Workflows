@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+
+	<information>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>description Interfaces</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Default</group>
+    <icon>/images/repository/CommandDefinition/icons/itp.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Interfaces</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>
+<command name="IMPORT">
+	<operation>show run</operation>
+	<parser>
+                <section name="interfaces">
+                        <regexp><![CDATA[@^\interface\s+(?<object_id>\S+)\s*$@]]></regexp>
+                </section>
+                <lines>
+        
+        <line>
+          <regexp>@^\ssecurity-level\s+(?&lt;securitylevel&gt;\S+)\s*$@</regexp>
+        </line>
+        <line>
+          <regexp>@^\snameif\s+(?&lt;nameif&gt;\S+)\s*$@</regexp>
+        </line>
+                        <line>
+          <regexp>@^\sdescription\s+(?&lt;description&gt;\S+)\s*$@</regexp>
+        </line>
+<ignore>
+                                        <regexp><![CDATA[@^\s+\S+.*$@]]></regexp>
+                                </ignore>
+                                <ignore>
+                                        <!-- ignore empty lines -->
+                                        <regexp><![CDATA[@^\s*$@]]>
+                                        </regexp>
+                                </ignore>
+                                <ignore>
+                                        <!-- ignore comments -->
+                                        <regexp><![CDATA[@^!.*$@]]>
+                                        </regexp>
+                                </ignore>
+                </lines>
+        </parser>
+<post_template/>
+  </command>
+<command name="CREATE">
+    <operation>{*
+&lt;variables&gt;
+  &lt;variable name="params.description" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.securitylevel" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.nameif" type="String"&gt;  &lt;/variable&gt;
+&lt;/variables&gt;
+*}
+interface {$object_id}
+{if isset($params.description) &amp;&amp; $params.description != ''}
+description {$params.description}
+{/if}
+{if isset($params.nameif) &amp;&amp; $params.nameif != ''}
+nameif{$params.nameif}
+{/if}
+{if isset($params.securitylevel) &amp;&amp; $params.securitylevel != ''}
+security-level{$params.securitylevel}
+{/if}
+</operation>
+  </command>
+	<command name="LIST">
+    <output>
+</output>
+  </command>
+	<command name="READ">
+    <output>{*
+&lt;variables&gt;
+  &lt;variable name="object_id" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="interfaces.0.description" type="String"&gt;  &lt;/variable&gt;
+&lt;/variables&gt;
+*}
+interface {$object_id}
+description {$interfaces.$object_id.description}
+</output>
+  </command>
+	<command name="UPDATE">
+    <operation>{*
+&lt;variables&gt;
+  &lt;variable name="params.description" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.securitylevel" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.nameif" type="String"&gt;  &lt;/variable&gt;
+&lt;/variables&gt;
+*}
+interface {$object_id}
+{if isset($params.description) &amp;&amp; $params.description != ''}
+description {$params.description}
+{/if}
+{if isset($params.nameif) &amp;&amp; $params.nameif != ''}
+nameif {$params.nameif}
+{/if}
+{if isset($params.securitylevel) &amp;&amp; $params.securitylevel != ''}
+security-level{$params.securitylevel}
+{/if}
+</operation>
+  </command>
+	<command name="DELETE">
+    <operation>{*
+&lt;variables&gt;
+  &lt;variable name="params.description" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.securitylevel" type="String"&gt;  &lt;/variable&gt;
+  &lt;variable name="params.nameif" type="String"&gt;  &lt;/variable&gt;
+&lt;/variables&gt;
+*}
+
+interface {$object_id}
+{if isset($params.description) &amp;&amp; $params.description != ''}
+no description {$params.description}
+{/if}
+{if isset($params.nameif) &amp;&amp; $params.nameif != ''}
+no nameif{$params.nameif}
+{/if}
+{if isset($params.securitylevel) &amp;&amp; $params.securitylevel != ''}
+no security-level{$params.securitylevel}
+{/if}
+</operation>
+  </command>
+<example>
+    <content>interface FastEthernet0/0
+ description ubi-external
+ ip address 10.30.18.245 255.255.254.0
+ ip access-group NETCELO_FROM_INTERNET in
+ no ip proxy-arp
+ ip nat outside
+ ip inspect NETCELO_FW in
+ ip virtual-reassembly
+ no ip route-cache cef
+ no ip mroute-cache
+ duplex auto
+ speed auto
+</content>
+  </example>
+<variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="description" displayOrder="1" maxLength="100" name="params.description" startIncrement="0" type="String"/>
+    <variable displayName="nameif" displayOrder="2" maxLength="100" name="params.nameif" startIncrement="0" type="String"/>
+    <variable displayName="securitylevel" displayOrder="3" maxLength="100" name="params.securitylevel" startIncrement="0" type="String"/>
+  </variables>
+</ObjectDefinition>

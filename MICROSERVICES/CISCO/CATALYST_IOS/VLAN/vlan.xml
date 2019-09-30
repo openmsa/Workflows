@@ -15,7 +15,7 @@
     <importrank>1</importrank>
     <maxInstances>0</maxInstances>
     <name>VLAN</name>
-    <order>100</order>
+    <order>820</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
     <sortascending>true</sortascending>

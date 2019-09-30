@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>A virtual private gateway is the router on the Amazon side of the VPN tunnel.</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Virtual Private Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Virtual Private Gateway</name>
+    <order>30</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isUserLocked="true" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="ID" displayOrder="1" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Amazon ASN" displayOrder="2" isUserLocked="true" maxLength="100" name="params.bgp_asn" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="Integer"/>
+    <variable default="ipsec.1" displayName="Type" displayOrder="3" isUserLocked="true" maxLength="100" name="params.type" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="VPC ID" displayOrder="4" maxLength="100" name="params.vpc_attachements.0.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <sections>
+        <section>VPC</section>
+      </sections>
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+    <variable arrayCanEdit="false" displayName="State" displayOrder="5" isUserLocked="true" maxLength="100" name="params.vpc_attachements.0.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>VPC</section>
+      </sections>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" default="Name" displayName="Key" displayOrder="6" editable="false" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" displayName="Value" displayOrder="7" editable="false" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="State" displayOrder="8" editable="false" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable default="none" displayName="_color" displayOrder="9" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+  </variables>  <example>
+    <content>&lt;root&gt;&lt;requestId&gt;436c509d-5650-4d49-9ebd-ff7d5d9b6427&lt;/requestId&gt;&lt;VpnGateways&gt;&lt;row&gt;&lt;VpnGatewayId&gt;vgw-09a166843815b07a3&lt;/VpnGatewayId&gt;&lt;State&gt;available&lt;/State&gt;&lt;Type&gt;ipsec.1&lt;/Type&gt;&lt;VpcAttachments/&gt;&lt;Tags/&gt;&lt;/row&gt;&lt;/VpnGateways&gt;&lt;/root&gt;
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <parser>
+            <section>
+        <xpath>//root/VpnGateways/row</xpath>
+      </section>
+<lines>
+        <line>
+          <xpath>VpnGatewayId</xpath>
+          <regexp>@&lt;VpnGatewayId&gt;(?&lt;object_id&gt;.*)&lt;/VpnGatewayId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>Type</xpath>
+          <regexp>@&lt;Type&gt;(?&lt;type&gt;.*)&lt;/Type&gt;@</regexp>
+        </line>
+        <line>
+          <array name="vpc_attachements">
+            <xpath>VpcAttachments/row</xpath>
+            <lines>
+              <line>
+                <xpath>VpcId</xpath>
+                <regexp>@&lt;VpcId&gt;(?&lt;vpc_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>State</xpath>
+                <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Key&gt;(?&lt;tag_key&gt;.*)&lt;/Key&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}
+
+{if  $params.state == "available" }
+      {assign_object_variable var="_color" value=green}
+{else if $params.state == "deleted" }
+      {assign_object_variable var="_color" value=gray}
+      {assign_object_variable var="name" value=DELETED}
+{/if}</post_template>
+  <xpath>describeVpnGateways</xpath>
+  </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createVpnGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"Type":"{$params.type}"
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteVpnGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"VpnGatewayId":"{$params.object_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

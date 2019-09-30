@@ -1,7 +1,7 @@
 <?php
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require_once '/opt/fmc_repository/Process/MSA_Template_Management/Library/utility.php';
+require_once __DIR__.'/../../../Library/utility.php';
 
 function list_args()
 {

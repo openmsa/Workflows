@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Network ACL</description>
+    <displayField>acl_ref</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Security</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>40</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Network ACL</name>
+    <order>100</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="acl_ref" displayOrder="0" editable="false" maxLength="100" name="params.acl_ref" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable arrayCanAdd="false" arrayCanEdit="false" arrayCanMove="false" arrayCanRemove="false" displayName="Name" displayOrder="0" isUserLocked="true" maxLength="80" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Network ACL ID" displayOrder="1" editable="false" isMandatory="true" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableUniqueValue="true" type="String"/>
+    <variable default="false" displayName="Default" displayOrder="2" isUserLocked="true" maxLength="50" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
+    <variable displayName="VPC" displayOrder="3" maxLength="150" name="params.vpc_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+    <variable displayName="Subnet" displayOrder="4" maxLength="150" name="params.associations.0.subnet_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <sections>
+        <section>Associations</section>
+      </sections>
+      <classes>
+        <class>subnets</class>
+      </classes>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" default="Name" displayName="Key" displayOrder="5" isUserLocked="true" maxLength="70" name="params.tags.0.tag_key" numberOfRowMax="1" startIncrement="0" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable arrayCanEdit="false" arrayCanMove="false" displayName="Value" displayOrder="6" maxLength="70" name="params.tags.0.tag_value" numberOfRowMax="1" startIncrement="0" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createNetworkAcl
+</xpath>
+    <operation>{literal}{{/literal}
+"VpcId":"{$params.vpc_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+
+<command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeNetworkAcls</xpath>
+    <parser>
+      <section>
+        <xpath>//root/NetworkAcls/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <array name="associations">
+            <xpath>Associations/row</xpath>
+            <lines>
+              <line>
+                <xpath>SubnetId</xpath>
+                <regexp>@&lt;SubnetId&gt;(?&lt;subnet_id&gt;.*)&lt;/SubnetId&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <xpath>VpcId</xpath>
+          <regexp>@&lt;VpcId&gt;(?&lt;vpc_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>NetworkAclId</xpath>
+          <regexp>@&lt;NetworkAclId&gt;(?&lt;object_id&gt;.*)&lt;/NetworkAclId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>IsDefault
+</xpath>
+          <regexp>@&lt;IsDefault&gt;(?&lt;default&gt;.*)&lt;/IsDefault&gt;@</regexp>
+        </line>
+        <line>
+          <array name="tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Key&gt;(?&lt;tag_key&gt;.*)&lt;/Key&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        
+      </lines>
+    </parser>
+    <post_template>{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}
+
+{assign_object_variable var="acl_ref" value="{$params.object_id} - {$params.vpc_id}"}</post_template>
+  </command>
+
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteNetworkAcl
+</xpath>
+    <operation>{literal}{{/literal}
+"NetworkAclId":"{$network_acl.$object_id.object_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+
+
+</ObjectDefinition>
