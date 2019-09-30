@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+<information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/repository/CommandDefinition/icons/h.323.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Interfaces</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>
+<example>
+    <content>set interfaces ge-0/0/0 unit 0 family inet sampling input
+set interfaces ge-0/0/0 unit 0 family inet sampling output
+set interfaces ge-0/0/0 unit 0 family inet address 10.21.1.130/24
+set interfaces sp-0/0/0 unit 0 family inet address 1.1.1.1/23
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show configuration interfaces | display set</operation>
+    <parser>
+      <section name="interface_object">
+        <regexp>@^set\s+interfaces\s+(?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^set\s+interfaces\s+(?&lt;object_id&gt;\S+)\s+description\s+(?&lt;interfaceDescription&gt;\S+)@</regexp>
+        </line>
+        
+        <line>
+          <array name="Interface_IPs_List">
+            <regexp>@^set\s+interfaces\s+(?&lt;object_id&gt;\S+)\s+unit\s+0\s+family\s+inet\s+address\s+(?&lt;interfaceIp&gt;\S+)@</regexp>
+            <regexp>@^set\s+interfaces\s+(?&lt;object_id&gt;\S+)\s+unit\s+0\s+family\s+inet6\s+address\s+(?&lt;interfaceIpv6&gt;\S+)@</regexp>
+          </array>
+        </line>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+
+
+<variables frozen="0">
+    <variable displayName="Interface Name" displayOrder="0" maxLength="150" name="params.object_id" type="String"/>
+    <variable displayName="IPv4" displayOrder="1" groupDisplayName="Address" maxLength="200" name="params.Interface_IPs_List.0.interfaceIp" type="String">
+      <sections>
+        <section>Address</section>
+      </sections>
+    </variable>
+    <variable displayName="IPv6" displayOrder="2" groupDisplayName="Address" maxLength="200" name="params.Interface_IPs_List.0.interfaceIpv6" type="String">
+      <sections>
+        <section>Address</section>
+      </sections>
+    </variable>
+    <variable displayName="interfaceDescription" displayOrder="7" maxLength="150" name="params.interfaceDescription" type="String"/>
+  </variables>
+<command name="CREATE">
+    <operation>create VRF
+{$VRFID}
+</operation>
+  </command>
+</ObjectDefinition>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Addresses</name>
+    <order>2400</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Type" displayOrder="1" maxLength="200" name="params.type" startIncrement="0" type="String">
+      <values>
+        <value displayValue="IP range">iprange</value>
+        <value displayValue="IP address">ipaddress</value>
+        <value displayValue="Network">network</value>
+        <value displayValue="FQDN">fqdn</value>
+      </values>
+    </variable>
+    <variable displayName="IP address" displayOrder="2" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.address" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="address" displayOrder="0" maxLength="200" name="params.address" selectorValue="ipaddress" startIncrement="0" type="IpAddress"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Network address" displayOrder="3" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.network_address" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="network_address" displayOrder="0" maxLength="200" name="params.network_address" selectorValue="network" startIncrement="0" type="IpAddress"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Network Mask" displayOrder="4" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="200" name="params.network_mask" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="network_mask" displayOrder="0" groupDisplayName="Address" groupSeparator="/" isGrouped="true" maxLength="200" name="params.network_mask" selectorValue="network" startIncrement="0" type="IpMask"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Start IP address" displayOrder="5" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.start_address" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="start_address" displayOrder="0" maxLength="200" name="params.start_address" selectorValue="iprange" startIncrement="0" type="IpAddress"/>
+      </behaviors>
+    </variable>
+    <variable displayName="End IP address" displayOrder="6" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="200" name="params.end_address" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="end_address" displayOrder="0" groupDisplayName="Address" groupSeparator="-" isGrouped="true" maxLength="200" name="params.end_address" selectorValue="iprange" startIncrement="0" type="IpAddress"/>
+      </behaviors>
+    </variable>
+    <variable displayName="FQDN" displayOrder="7" groupDisplayName="Address" isGrouped="true" maxLength="200" name="params.fqdn" selector="params.type" startIncrement="0" type="Composite" visible="false">
+      <behaviors>
+        <behavior displayName="fqdn" displayOrder="0" maxLength="200" name="params.fqdn" selectorValue="fqdn" startIncrement="0" type="String"/>
+      </behaviors>
+    </variable>
+    <variable displayName="_mask_len" displayOrder="8" maxLength="200" name="params._mask_len" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="_addressBookName" displayOrder="9" maxLength="200" name="params._addressBookName" startIncrement="0" type="String" visible="false"/>
+  </variables>  <example>
+    <content>set security address-book MyAddr_book address MyAddr 1.1.1.1/32
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show configuration security address-book | display set</operation>
+    <parser>
+      <section>
+        <regexp>@^set security address-book global address (?&lt;object_id&gt;\S*)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^set security address-book global address (?&lt;object_id&gt;\S*) dns-name (?&lt;fqdn&gt;\S+)\s*@</regexp>
+        </line>
+        <line>
+          <regexp>@^set security address-book global address (?&lt;object_id&gt;\S*) range-address (?&lt;start_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3}) to (?&lt;end_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+        </line>
+        <line>
+          <regexp>@^set security address-book global address (?&lt;object_id&gt;\S*) wildcard-address (?&lt;network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3})/(?&lt;network_mask&gt;([0-9]{1,3}\.){3}[0-9]{1,3})@</regexp>
+        </line>
+        <line>
+          <regexp>@^set security address-book global address (?&lt;object_id&gt;\S*) (?&lt;network_address&gt;([0-9]{1,3}\.){3}[0-9]{1,3})/(?&lt;_mask_len&gt;(\d){1,2})@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{if !empty($params.fqdn)}
+{assign_object_variable var="type" value="fqdn"}
+{/if}
+{if !empty($params.start_address)}
+{assign_object_variable var="type" value="iprange"}
+{/if}
+{if !empty($params.network_address)}
+{if !empty($params.network_mask)}
+{if $params.network_mask == "255.255.255.255"}
+{assign_object_variable var="type" value="ipaddress"}
+{assign_object_variable var="address" value=$params.network_address}
+{else}
+{assign_object_variable var="type" value="network"}
+{/if}
+{/if}
+{if !empty($params._mask_len)}
+{if $params._mask_len == "32"}
+{assign_object_variable var="type" value="ipaddress"}
+{assign_object_variable var="address" value=$params.network_address}
+{else}
+{assign_object_variable var="type" value="network"}
+{get_mask_from_len var="mask" len=$params._mask_len}
+{assign_object_variable var="network_mask" value=$mask}
+{/if}
+{/if}
+{/if}</post_template>
+  </command>
+<command name="CREATE">
+    <operation>{if $params.type == "ipaddress"}
+set security address-book global address {$params.object_id} {$params.address}/32
+{/if}
+{if $params.type == "iprange"}
+set security address-book global address {$params.object_id} range-address {$params.start_address} to {$params.end_address}
+{/if}
+{if $params.type == "network"}
+set security address-book global address {$params.object_id} wildcard-address {$params.network_address}/{$params.network_mask}
+{/if}
+{if $params.type == "fqdn"}
+set security address-book global address {$params.object_id} dns-name {$params.fqdn}
+{/if}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>{if $params.type == "ipaddress"}
+set security address-book global address {$params.object_id} {$params.address}/32
+{/if}
+{if $params.type == "iprange"}
+set security address-book global address {$params.object_id} range-address {$params.start_address} to {$params.end_address}
+{/if}
+{if $params.type == "network"}
+set security address-book global address {$params.object_id} wildcard-address {$params.network_address}/{$params.network_mask}
+{/if}
+{if $params.type == "fqdn"}
+set security address-book global address {$params.object_id} dns-name {$params.fqdn}
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>{assign var="params" value=$address.$object_id}
+delete security address-book global address {$params.object_id}
+</operation>
+  </command>
+</ObjectDefinition>

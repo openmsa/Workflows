@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Services</name>
+    <order>2200</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Protocol" displayOrder="1" maxLength="200" name="params.protocol" startIncrement="0" type="String"/>
+    <variable displayName="Port" displayOrder="2" maxLength="200" name="params.port" startIncrement="0" type="String"/>
+    <variable displayName="Port end" displayOrder="3" isUserLocked="true" maxLength="100" name="params.port_end" startIncrement="0" type="String"/>
+  </variables>  <example>
+    <content>Click here and paste your configuration example that represent the object OR a complete existant Object definition file.
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show configuration applications | display set</operation>
+    <parser>
+      <section>
+        <regexp>@^set applications application\s+(?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^set applications application\s+\S+\s+protocol\s+(?&lt;protocol&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <regexp>@^set applications application\s+\S+\s+destination-port\s+(?&lt;port&gt;\S+)@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+  <command name="CREATE">
+    <operation>{if !empty($params.protocol)}
+set applications application {$object_id} protocol {$params.protocol}
+{/if}   
+{if !empty($params.port)}
+set applications application {$object_id} destination-port {$params.port}
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>delete applications application {$object_id}
+</operation>
+  </command>
+  <command name="UPDATE">
+    <operation>{if !empty($params.protocol)}
+set applications application {$object_id} protocol {$params.protocol}
+{/if}   
+{if !empty($params.port)}
+set applications application {$object_id} destination-port {$params.port}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>

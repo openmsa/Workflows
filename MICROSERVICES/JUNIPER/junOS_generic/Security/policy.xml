@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>
+<information defaultDisplay="true">
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>true</defaultDisplay>
+    <definitionOrder>20</definitionOrder>
+    <description>Security policies</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Security</group>
+    <icon>/images/repository/CommandDefinition/icons/firewall.jpg</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Policies</name>
+    <order>100000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>
+<variables frozen="1">
+    <variable displayName="Policy Name" displayOrder="0" isMandatory="true" maxLength="200" name="params.object_id" numberOfRowMax="0" type="String"/>
+    <variable default="trust" displayName="From" displayOrder="1" isMandatory="true" maxLength="150" name="params.fromZone" numberOfRowMax="0" type="ObjectRef">
+      <classes>
+        <class>zone_object</class>
+      </classes>
+    </variable>
+    <variable default="untrust" displayName="To" displayOrder="2" isMandatory="true" maxLength="150" name="params.toZone" numberOfRowMax="0" type="ObjectRef">
+      <classes>
+        <class>zone_object</class>
+      </classes>
+    </variable>
+    <variable default="any" displayName="Source Address" displayOrder="3" isMandatory="true" maxLength="180" name="params.srcAddress.0.addr" numberOfRowMax="0" type="ObjectRef">
+      <classes>
+        <class>address_object</class>
+      </classes>
+    </variable>
+    <variable default="any" displayName="Destination Address" displayOrder="4" isMandatory="true" maxLength="180" name="params.dstAddress.0.addr" numberOfRowMax="0" type="ObjectRef">
+      <classes>
+        <class>address_object</class>
+      </classes>
+    </variable>
+    <variable default="any" displayName="Application" displayOrder="5" isMandatory="true" maxLength="150" name="params.application.0.application" numberOfRowMax="0" type="ObjectRef">
+      <classes>
+        <class>application</class>
+      </classes>
+    </variable>
+    <variable default="deny" displayName="Action" displayOrder="6" isMandatory="true" maxLength="100" name="params.action" numberOfRowMax="0" type="String">
+      <values>
+        <value>deny</value>
+        <value>permit</value>
+      </values>
+    </variable>
+    <variable displayName="Description" displayOrder="7" keepOnImport="true" maxLength="300" name="params.description" numberOfRowMax="0" type="String"/>
+  </variables>
+<example>
+    <content>set security policies from-zone trust to-zone trust policy default-permit match source-address any
+set security policies from-zone trust to-zone trust policy default-permit match destination-address any
+set security policies from-zone trust to-zone trust policy default-permit match application any
+set security policies from-zone trust to-zone trust policy default-permit then permit
+set security policies from-zone trust to-zone untrust policy default-permit match source-address any
+set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
+set security policies from-zone trust to-zone untrust policy default-permit match application any
+set security policies from-zone trust to-zone untrust policy default-permit then permit
+set security policies from-zone trust to-zone untrust policy 99 match source-address any
+set security policies from-zone trust to-zone untrust policy 99 match destination-address any
+set security policies from-zone trust to-zone untrust policy 99 match application any
+set security policies from-zone trust to-zone untrust policy 99 then deny
+set security policies from-zone trust to-zone untrust policy policy-test match source-address any
+set security policies from-zone trust to-zone untrust policy policy-test match destination-address any
+set security policies from-zone trust to-zone untrust policy policy-test match application any
+set security policies from-zone trust to-zone untrust policy policy-test then deny
+set security policies from-zone trust to-zone untrust policy permit-all match source-address any
+set security policies from-zone trust to-zone untrust policy permit-all match destination-address any
+set security policies from-zone trust to-zone untrust policy permit-all match application any
+set security policies from-zone trust to-zone untrust policy permit-all then permit
+set security policies from-zone untrust to-zone trust policy default-deny match source-address any
+set security policies from-zone untrust to-zone trust policy default-deny match destination-address any
+set security policies from-zone untrust to-zone trust policy default-deny match application any
+set security policies from-zone untrust to-zone trust policy default-deny then deny
+</content>
+  </example>
+<command name="CREATE">
+    <operation>set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} then {$params.action}
+{foreach $params.srcAddress as $addr}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match source-address {$addr.addr}
+{/foreach}
+{foreach $params.dstAddress as $addr}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match destination-address {$addr.addr}
+{/foreach}
+{foreach $params.application as $application}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match application {$application.application}
+{/foreach}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>show configuration security policies | display set</operation>
+    <parser>
+      <section name="policy">
+          <regexp>@^set security policies from-zone (?&lt;fromZone&gt;\S+) to-zone (?&lt;toZone&gt;\S+) policy (?&lt;object_id&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp>@^set security policies from-zone \S+ to-zone \S+ policy \S+ description "?(?&lt;description&gt;[^"]*)"?@</regexp>
+        </line>
+        <line>
+          <regexp>@^set security policies from-zone \S+ to-zone \S+ policy \S+ then (?&lt;action&gt;\S+)@</regexp>
+        </line>
+        <line>
+          <array name="dstAddress">
+            <regexp>@^set security policies from-zone \S+ to-zone \S+ policy \S+ match destination-address (?&lt;addr&gt;\S+)@</regexp>
+          </array>
+        </line>
+        <line>
+          <array name="srcAddress">
+            <regexp>@^set security policies from-zone \S+ to-zone \S+ policy \S+ match source-address (?&lt;addr&gt;\S+)@</regexp>
+          </array>
+        </line>
+        <line>
+          <array name="application">
+            <regexp>@^set security policies from-zone \S+ to-zone \S+ policy \S+ match application (?&lt;application&gt;\S+)@</regexp>
+          </array>
+        </line>
+        
+        
+        
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+  
+<command name="DELETE">
+    <operation>delete security policies from-zone {$policy.$object_id.fromZone} to-zone {$policy.$object_id.toZone} policy {$policy.$object_id.object_id}
+</operation>
+  </command>
+<command name="UPDATE">
+    <operation>set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} then {$params.action}
+{if !empty($policy.$object_id.srcAddress)}
+{foreach $policy.$object_id.srcAddress as $addr}
+{assign var="found" value="false"}
+{foreach $params.srcAddress as $addrp}
+{if $addr.addr === $addrp.addr}
+{assign var="found" value="true"}
+{/if}
+{/foreach}
+{if $found === "false"}
+delete security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match source-address {$addr.addr}
+{/if}
+{/foreach}
+{/if}
+{foreach $params.srcAddress as $addr}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match source-address {$addr.addr}
+{/foreach}
+{if !empty($policy.$object_id.dstAddress)}
+{foreach $policy.$object_id.dstAddress as $addr}
+{assign var="found" value="false"}
+{foreach $params.dstAddress as $addrp}
+{if $addr.addr === $addrp.addr}
+{assign var="found" value="true"}
+{/if}
+{/foreach}
+{if $found === "false"}
+delete security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match destination-address {$addr.addr}
+{/if}
+{/foreach}
+{/if}
+{foreach $params.dstAddress as $addr}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match destination-address {$addr.addr}
+{/foreach}
+{if !empty($policy.$object_id.application)}
+{foreach $policy.$object_id.application as $application}
+{assign var="found" value="false"}
+{foreach $params.application as $applicationp}
+{if $application.application === $applicationp.application}
+{assign var="found" value="true"}
+{/if}
+{/foreach}
+{if $found === "false"}
+delete security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match application {$application.application}
+{/if}
+{/foreach}
+{/if}
+{foreach $params.application as $application}
+set security policies from-zone {$params.fromZone} to-zone {$params.toZone} policy {$object_id} match application {$application.application}
+{/foreach}
+</operation>
+  </command>
+</ObjectDefinition>

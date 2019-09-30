@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+<information>
+    <configType>cli</configType>
+    <defaultDisplay>false</defaultDisplay>
+    <definitionOrder>30</definitionOrder>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Objects</group>
+    <icon>/images/repository/CommandDefinition/icons/paging_24x24.png</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importrank>1</importrank>
+    <name>Address Groups</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <singleton>false</singleton>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+    <visible>true</visible>
+  </information>
+<variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isMandatory="true" maxLength="200" name="params.object_id" type="String"/>
+    <variable displayName="Book name" displayOrder="2" maxLength="200" name="params.addressSetBookName" type="ObjectRef">
+      <classes>
+        <class>addressBook</class>
+      </classes>
+    </variable>
+    <variable displayName="Address" displayOrder="3" maxLength="200" name="params.address_list.0.addressName" type="ObjectRef">
+      <classes>
+        <class>address_object</class>
+      </classes>
+    </variable>
+    <variable displayName="Sub-address group" displayOrder="4" maxLength="150" name="params.subAddressSet_list.0.subAddressSetName" type="ObjectRef">
+      <classes>
+        <class>addressGroup</class>
+      </classes>
+    </variable>
+    <variable displayName="Description" displayOrder="20" keepOnImport="true" maxLength="300" name="params.addressSetDescription" type="String"/>
+  </variables>
+<example>
+    <content>show security address-book | display set | match addressSet
+
+set security address-book book1 address-set addressSet1 address VMR3
+set security address-book book1 address-set addressSet1 address-set addressSet2
+set security address-book book1 address-set addressSet2 description "address group 2"
+set security address-book book1 address-set addressSet2 address VMR3
+set security address-book book1 address-set addressSet2 address ADD22
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>show configuration | display set | match address-set</operation>
+    <parser>
+      <section name="addressGroup">
+        <regexp>@^set security address-book (?&lt;addressSetBookName&gt;\S+) address-set (?&lt;object_id&gt;\S*)@</regexp>
+      </section>
+      <lines>
+        
+        
+        <line>
+        <regexp>@^set security address-book \S+ address-set \S+ description "?(?&lt;addressSetDescription&gt;[^"]+)"?@</regexp>
+        </line>
+        <line>
+          <array name="address_list">
+            <regexp>@^set security address-book \S+ address-set \S+ address (?&lt;addressName&gt;\S*)@</regexp>
+          </array>
+        </line>
+        <line>
+          <array name="subAddressSet_list">
+            <regexp>@^set security address-book \S+ address-set \S+ address-set (?&lt;subAddressSetName&gt;\S+)@</regexp>
+          </array>
+        </line>
+      </lines>
+    </parser>
+  <post_template/>
+  </command>
+<command name="CREATE">
+    <operation>{if !empty($params.address_list)}
+{foreach $params.address_list as $address}
+set security address-book {$params.addressSetBookName} address-set {$object_id} address {$address.addressName}
+{/foreach}
+{/if}
+{if !empty($params.subAddressSet_list)}
+{foreach $params.subAddressSet_list as $addressSet}
+set security address-book {$params.addressSetBookName} address-set {$object_id} address-set {$addressSet.subAddressSetName}
+{/foreach}
+{/if}
+</operation>
+  </command>
+  <command name="DELETE">
+    <operation>delete security address-book {$addressGroup.$object_id.addressSetBookName} address-set {$object_id}
+</operation>
+  </command>
+  
+<command name="UPDATE">
+    <operation>{if !empty($addressGroup.$object_id.address_list)}
+{foreach $addressGroup.$object_id.address_list as $address}
+{if !empty($params.address_list)}
+{assign var="found" value="false"}
+{foreach $params.address_list as $addressp}
+{if $address.addressName === $addressp.addressName}
+{assign var="found" value="true"}
+{/if}
+{/foreach}
+{if $found === "false"}
+delete security address-book {$params.addressSetBookName} address-set {$object_id} address {$address.addressName}
+{/if}
+{else}
+delete security address-book {$params.addressSetBookName} address-set {$object_id} address {$address.addressName}
+{/if}
+{/foreach}
+{/if}
+{if !empty($params.address_list)}
+{foreach $params.address_list as $address}
+{if !empty($address.addressName)}
+set security address-book {$params.addressSetBookName} address-set {$object_id} address {$address.addressName}
+{/if}
+{/foreach}
+{/if}
+{if !empty($addressGroup.$object_id.subAddressSet_list)}
+{foreach $addressGroup.$object_id.subAddressSet_list as $address}
+{if !empty($params.subAddressSet_list)}
+{assign var="found" value="false"}
+{foreach $params.subAddressSet_list as $addressp}
+{if $address.subAddressSetName === $addressp.subAddressSetName}
+{assign var="found" value="true"}
+{/if}
+{/foreach}
+{if $found === "false"}
+delete security address-book {$params.addressSetBookName} address-set {$object_id} address-set {$address.subAddressSetName}
+{/if}
+{else}
+delete security address-book {$params.addressSetBookName} address-set {$object_id} addressset {$address.subAddressSetName}
+{/if}
+{/foreach}
+{/if}
+{if !empty($params.address_list)}
+{foreach $params.subAddressSet_list as $address}
+{if !empty($address.subAddressSetName)}
+set security address-book {$params.addressSetBookName} address-set {$object_id} address-set {$address.subAddressSetName}
+{/if}
+{/foreach}
+{/if}
+</operation>
+  </command>
+</ObjectDefinition>
