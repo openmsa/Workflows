@@ -14,7 +14,7 @@
     <importrank>1</importrank>
     <maxInstances>0</maxInstances>
     <name>Interfaces</name>
-    <order>10000</order>
+    <order>800</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
     <sortascending>true</sortascending>
@@ -51,8 +51,10 @@
         <value displayValue="FastEthernet 0/24">FastEthernet 0/24</value>
       </values>
     </variable>
-    <variable default="false" displayName="VLAN" displayOrder="1" maxLength="100" name="params.vlan" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Boolean"/>
-    <variable displayName="VLAN ID" displayOrder="2" maxLength="100" name="params.vlanNumber" numberOfRowMax="0" selector="params.vlan" startIncrement="0" type="Composite" visible="false">
+    <variable displayName="Address" displayOrder="1" maxLength="100" name="params.ip" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Mask" displayOrder="2" maxLength="100" name="params.mask" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="false" displayName="VLAN" displayOrder="3" maxLength="100" name="params.vlan" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" type="Boolean"/>
+    <variable displayName="VLAN ID" displayOrder="4" maxLength="100" name="params.vlanNumber" numberOfRowMax="0" selector="params.vlan" startIncrement="0" type="Composite" visible="false">
       <behaviors>
         <behavior displayName="vlanNumber" displayOrder="0" maxLength="100" name="params.vlanNumber" numberOfRowMax="0" selectorValue="false" startIncrement="0" type="String" visible="false"/>
         <behavior displayName="vlanNumber" displayOrder="0" editable="false" maxLength="100" name="params.vlanNumber" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="ObjectRef">
@@ -62,7 +64,7 @@
         </behavior>
       </behaviors>
     </variable>
-    <variable displayName="Description" displayOrder="3" maxLength="100" name="params.description" numberOfRowMax="0" startIncrement="0" type="String"/>
+    <variable displayName="Description" displayOrder="5" maxLength="100" name="params.description" numberOfRowMax="0" startIncrement="0" type="String"/>
   </variables>  <example>
     <content>MSA311#sh run | section interface 
 interface FastEthernet0/1
@@ -147,6 +149,9 @@ no switchport access vlan
         
         <line>
           <regexp>@ switchport access vlan (?&lt;vlanNumber&gt;[0-9]+)@</regexp>
+        </line>
+        <line>
+          <regexp>@ip address (?&lt;ip&gt;\S+) (?&lt;mask&gt;\S+)@</regexp>
         </line>
         <ignore>
           <regexp>@^\s+\S+.*$@</regexp>

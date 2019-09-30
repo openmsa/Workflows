@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Specify the Internet-routable IP address for your gateway's external interface; the address must be static and may be behind a device performing network address translation (NAT). For dynamic routing, also specify your gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN); this can be either a public or private ASN (such as those in the 64512-65534 range).</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Virtual Private Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Customer Gateways</name>
+    <order>30</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" isUserLocked="true" maxLength="80" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="ID" displayOrder="1" isUserLocked="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="IP Address" displayOrder="2" maxLength="100" name="params.ip_address" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <description>Specify the Internet-routable IP address for your gateway's external interface; the address must be static and may be behind a device performing network address translation (NAT).</description>
+    </variable>
+    <variable default="65000" displayName="BGP ASN" displayOrder="3" maxLength="100" name="params.bgp_asn" numberOfRowMax="0" selector="params.routing" startIncrement="0" tableSizeFix="false" type="Composite">
+      <behaviors>
+        <behavior default="65000" displayName="BGP ASN" displayOrder="0" isMandatory="true" maxLength="100" name="params.bgp_asn" numberOfRowMax="0" selectorValue="Dynamic" startIncrement="0" tableSizeFix="false" type="Integer"/>
+        <behavior displayName="bgp_asn" displayOrder="0" editable="false" maxLength="100" name="params.bgp_asn" numberOfRowMax="0" selectorValue="Static" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable default="ipsec.1" displayName="Type" displayOrder="4" editable="false" isMandatory="true" maxLength="100" name="params.type" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <values>
+        <value displayValue="ipsec.1">ipsec.1</value>
+      </values>
+    </variable>
+    <variable displayName="Key" displayOrder="5" editable="false" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="6" editable="false" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="State" displayOrder="7" editable="false" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable default="none" displayName="_color" displayOrder="8" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeCustomerGateways</xpath>
+    <parser>
+      <section>
+        <xpath>//root/CustomerGateways/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>CustomerGatewayId</xpath>
+          <regexp>@&lt;CustomerGatewayId&gt;(?&lt;object_id&gt;.*)&lt;/CustomerGatewayId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>Type</xpath>
+          <regexp>@&lt;Type&gt;(?&lt;type&gt;.*)&lt;/Type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>IpAddress</xpath>
+          <regexp>@&lt;IpAddress&gt;(?&lt;ip_address&gt;.*)&lt;/IpAddress&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>BgpAsn</xpath>
+          <regexp>@&lt;BgpAsn&gt;(?&lt;bgp_asn&gt;.*)&lt;/BgpAsn&gt;@</regexp>
+        </line>
+        <line>
+          <array name="tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Key&gt;(?&lt;tag_key&gt;.*)&lt;/Key&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}
+
+{if  $params.state == "available" }
+      {assign_object_variable var="_color" value=green}
+{else if $params.state == "deleted" }
+      {assign_object_variable var="_color" value=gray}
+      {assign_object_variable var="name" value=DELETED}
+{/if}
+</post_template>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteCustomerGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"CustomerGatewayId":"{$customer_gateway.$object_id.object_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>createCustomerGateway
+</xpath>
+    <operation>{literal}{{/literal}
+"BgpAsn":"{$params.bgp_asn}",
+"PublicIp":"{$params.ip_address}",
+"Type":"{$params.type}"
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

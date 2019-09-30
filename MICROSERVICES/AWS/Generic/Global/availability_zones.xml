@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description/>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>Global</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>Availability Zones</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Zone Name" displayOrder="0" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="State" displayOrder="1" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Region Name" displayOrder="2" maxLength="100" name="params.region_name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeAvailabilityZones</xpath>
+    <parser>
+      <section>
+        <xpath>//root/AvailabilityZones/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>ZoneName</xpath>
+          <regexp>@&lt;ZoneName&gt;(?&lt;object_id&gt;.*)&lt;/ZoneName&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>RegionName</xpath>
+          <regexp>@&lt;RegionName&gt;(?&lt;region_name&gt;.*)&lt;/RegionName&gt;@</regexp>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{if  $params.state == "available" }
+      {assign_object_variable var="_color" value=green}
+{else}
+       {assign_object_variable var="_color" value=orange}
+{/if}</post_template>
+  </command>
+</ObjectDefinition>

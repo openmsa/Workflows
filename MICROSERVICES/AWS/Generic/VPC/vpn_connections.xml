@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Select the virtual private gateway and customer gateway that you would like to connect via a VPN connection. You must have entered the virtual private gateway and your customer gateway information already.</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Virtual Private Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>5</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VPN Connections</name>
+    <order>30</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="ID" displayOrder="1" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Virtual Private GW" displayOrder="2" maxLength="100" name="params.vpn_gw_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <classes>
+        <class>virtual_private_gateway</class>
+      </classes>
+    </variable>
+    <variable displayName="Customer GW" displayOrder="3" maxLength="100" name="params.customer_gw_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <classes>
+        <class>customer_gateway</class>
+      </classes>
+    </variable>
+    <variable displayName="type" displayOrder="4" isUserLocked="true" maxLength="100" name="params.type" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable displayName="Outside IP" displayOrder="5" maxLength="100" name="params.tunnel_details.0.outside_ip" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tunnel Details</section>
+      </sections>
+    </variable>
+    <variable displayName="Status" displayOrder="6" maxLength="60" name="params.tunnel_details.0.status" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tunnel Details</section>
+      </sections>
+    </variable>
+    <variable displayName="Status Last Changed" displayOrder="7" maxLength="100" name="params.tunnel_details.0.last_status_change" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tunnel Details</section>
+      </sections>
+    </variable>
+    <variable displayName="Details" displayOrder="8" maxLength="100" name="params.tunnel_details.0.status_message" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tunnel Details</section>
+      </sections>
+    </variable>
+    <variable displayName="IP Prefixes" displayOrder="9" maxLength="100" name="params.routes.0.dst_cidr" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Routes</section>
+      </sections>
+    </variable>
+    <variable displayName="State" displayOrder="10" maxLength="100" name="params.routes.0.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Routes</section>
+      </sections>
+    </variable>
+    <variable default="none" displayName="_color" displayOrder="11" editable="false" maxLength="100" name="params._color" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable displayName="state" displayOrder="12" editable="false" maxLength="100" name="params.state" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+    <variable displayName="Key" displayOrder="13" isUserLocked="true" maxLength="100" name="params.tags.0.tag_key" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+    <variable displayName="Value" displayOrder="14" isUserLocked="true" maxLength="100" name="params.tags.0.tag_value" numberOfRowMax="0" onlyDetailView="true" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Tags</section>
+      </sections>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeVpnConnections</xpath>
+    <parser>
+      <section>
+        <xpath>//root/VpnConnections/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>VpnConnectionId</xpath>
+          <regexp>@&lt;VpnConnectionId&gt;(?&lt;object_id&gt;.*)&lt;/VpnConnectionId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>State</xpath>
+          <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>Type</xpath>
+          <regexp>@&lt;Type&gt;(?&lt;type&gt;.*)&lt;/Type&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>CustomerGatewayId</xpath>
+          <regexp>@&lt;CustomerGatewayId&gt;(?&lt;customer_gw_id&gt;.*)&lt;/CustomerGatewayId&gt;@</regexp>
+        </line>
+        <line>
+          <xpath>VpnGatewayId</xpath>
+          <regexp>@&lt;VpnGatewayId&gt;(?&lt;vpn_gw_id&gt;.*)&lt;/VpnGatewayId&gt;@</regexp>
+        </line>
+        <line>
+          <array name="routes">
+            <xpath>Routes/row</xpath>
+            <lines>
+              <line>
+                <xpath>DestinationCidrBlock</xpath>
+                <regexp>@&lt;DestinationCidrBlock&gt;(?&lt;dst_cidr&gt;.*)&lt;/DestinationCidrBlock&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>State</xpath>
+                <regexp>@&lt;State&gt;(?&lt;state&gt;.*)&lt;/State&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="tunnel_details">
+            <xpath>VgwTelemetry/row</xpath>
+            <lines>
+              <line>
+                <xpath>OutsideIpAddress</xpath>
+                <regexp>@&lt;OutsideIpAddress&gt;(?&lt;outside_ip&gt;.*)&lt;/OutsideIpAddress&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Status</xpath>
+                <regexp>@&lt;Status&gt;(?&lt;status&gt;.*)&lt;/Status&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>LastStatusChange</xpath>
+                <regexp>@&lt;LastStatusChange&gt;(?&lt;last_status_change&gt;.*)&lt;/LastStatusChange&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>StatusMessage</xpath>
+                <regexp>@&lt;StatusMessage&gt;(?&lt;status_message&gt;.*)&lt;/StatusMessage&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+        <line>
+          <array name="tags">
+            <xpath>Tags/row</xpath>
+            <lines>
+              <line>
+                <xpath>Key</xpath>
+                <regexp>@&lt;Key&gt;(?&lt;tag_key&gt;.*)&lt;/Key&gt;@</regexp>
+              </line>
+              <line>
+                <xpath>Value</xpath>
+                <regexp>@&lt;Value&gt;(?&lt;tag_value&gt;.*)&lt;/Value&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template>{foreach $params.tags as $tag}
+{if $tag.tag_key == "Name"}
+{assign_object_variable var="name" value=$tag.tag_value}
+{/if}
+{/foreach}
+
+{if  $params.state == "available" }
+      {assign_object_variable var="_color" value=green}
+{else if $params.state == "pending" }
+      {assign_object_variable var="_color" value=blue}
+{else if $params.state == "deleting" }
+      {assign_object_variable var="_color" value=orange}
+{else if $params.state == "deleted" }
+      {assign_object_variable var="_color" value=gray}
+      {assign_object_variable var="name" value="DELETED"}
+{/if}</post_template>
+  </command>
+<command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>deleteVpnConnection
+</xpath>
+    <operation>{literal}{{/literal}
+"VpnConnectionId":"{$vpn_connections.$object_id.object_id}"
+{literal}}{/literal}
+</operation>
+  </command>
+</ObjectDefinition>

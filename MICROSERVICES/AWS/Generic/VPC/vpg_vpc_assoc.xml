@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <configType>xml</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <description>Select the VPC to attach to the Virtual Private Gateway.</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
+    <group>VPC|Virtual Private Network</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
+    <importrank>10</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VPG / VPC associations</name>
+    <order>10000</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="VPN Gateway ID" displayOrder="0" isMandatory="true" maxLength="100" name="params.object_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="ObjectRef">
+      <classes>
+        <class>virtual_private_gateway</class>
+      </classes>
+    </variable>
+    <variable displayName="VPC ID" displayOrder="0" maxLength="100" name="params.vpc_assoc.0.vpc_id" numberOfRowMax="1" startIncrement="0" type="ObjectRef">
+      <classes>
+        <class>vpc</class>
+      </classes>
+    </variable>
+  </variables>  <example>
+    <content>
+</content>
+  </example>
+<command name="CREATE">
+    <rest>Aws\Ec2\Ec2Client</rest>
+    <xpath>attachVpnGateway</xpath>
+    <operation>{foreach $params.vpc_assoc as $vpc_association}
+{literal}{{/literal}
+"VpcId":"{$vpc_association.vpc_id}",
+"VpnGatewayId":"{$params.object_id}"
+{literal}}{/literal}
+{/foreach}
+</operation>
+  </command>
+  <command name="DELETE">
+    <rest>Aws\Ec2\Ec2Client
+</rest>
+    <xpath>detachVpnGateway
+</xpath>
+    <operation>{foreach $params.vpc_assoc as $vpc_association}
+{literal}{{/literal}
+"VpcId":"{$vpc_association.vpc_id}",
+"VpnGatewayId":"{$params.object_id}"
+{literal}}{/literal}
+{/foreach}
+</operation>
+  </command>
+<command name="IMPORT">
+    <operation>Aws\Ec2\Ec2Client</operation>
+    <xpath>describeVpnGateways</xpath>
+    <parser>
+      <section>
+        <xpath>//root/VpnGateways/row</xpath>
+      </section>
+      <lines>
+        <line>
+          <xpath>VpnGatewayId</xpath>
+          <regexp>@&lt;VpnGatewayId&gt;(?&lt;object_id&gt;.*)&lt;/VpnGatewayId&gt;@</regexp>
+        </line>
+        <line>
+          <array name="vpc_assoc">
+            <xpath>VpcAttachments/row</xpath>
+            <lines>
+              <line>
+                <xpath>VpcId</xpath>
+                <regexp>@&lt;VpcId&gt;(?&lt;vpc_id&gt;.*)&lt;/VpcId&gt;@</regexp>
+              </line>
+            </lines>
+          </array>
+        </line>
+      </lines>
+    </parser>
+    <post_template/>
+  </command>
+</ObjectDefinition>
