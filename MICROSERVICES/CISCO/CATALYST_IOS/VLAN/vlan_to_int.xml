@@ -1,25 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
 <information>
-    <dynamic>false</dynamic>
-    <icon>/images/eclipseIcons/page_obj.gif</icon>
     <configType>cli</configType>
-    <reorderinstances>false</reorderinstances>
-    <visibility>5</visibility>
-    <importIfMandatoryPresent>false</importIfMandatoryPresent>
-    <singleton>false</singleton>
-    <sortvariable>params._order</sortvariable>
-    <sortascending>true</sortascending>
-    <sortnumerical>true</sortnumerical>
-    <sortauto>true</sortauto>
-    <relatedObjects/>
-    <order>100</order>
-    <displayField>object_id</displayField>
-    <description>Interfaces</description>
-    <name>Interfaces</name>
+    <createTemplateId/>
+    <createTemplateObject/>
     <defaultDisplay>false</defaultDisplay>
+    <description>Mapping VLAN/Interface</description>
+    <displayField>object_id</displayField>
+    <dynamic>false</dynamic>
     <group>VLAN</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <importonce>false</importonce>
     <importrank>1</importrank>
+    <maxInstances>0</maxInstances>
+    <name>VLAN-Interfaces</name>
+    <order>840</order>
+    <relatedObjects/>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>true</sortascending>
+    <sortauto>true</sortauto>
+    <sortnumerical>true</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <visibility>5</visibility>
   </information>
 <example>
     <content>interface FastEthernet0/24
@@ -79,8 +82,8 @@ switchport access vlan {$params.vlan}
   </command>
   
 <variables frozen="0">
-    <variable numberOfRowMax="3000" displayName="Interface" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" startIncrement="0" type="String"/>
-    <variable numberOfRowMax="3000" displayName="VLAN ID" displayOrder="1" maxLength="200" name="params.vlan" startIncrement="0" type="ObjectRef">
+    <variable displayName="Interface" displayOrder="0" isUserLocked="true" maxLength="200" name="params.object_id" numberOfRowMax="3000" startIncrement="0" type="String"/>
+    <variable displayName="VLAN ID" displayOrder="1" maxLength="200" name="params.vlan" numberOfRowMax="3000" startIncrement="0" type="ObjectRef">
       <classes>
         <class>vlan</class>
       </classes>

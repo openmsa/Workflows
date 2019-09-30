@@ -15,7 +15,7 @@
     <importrank>1</importrank>
     <maxInstances>0</maxInstances>
     <name>VLAN</name>
-    <order>100</order>
+    <order>820</order>
     <relatedObjects/>
     <reorderinstances>false</reorderinstances>
     <sortascending>true</sortascending>
@@ -68,7 +68,5 @@ name {$params.name}
 <variables frozen="0">
     <variable displayName="VLAN ID" displayOrder="0" maxLength="200" name="params.object_id" numberOfRowMax="3000" startIncrement="0" type="AutoIncrement"/>
     <variable displayName="VLAN Name" displayOrder="1" maxLength="200" name="params.name" numberOfRowMax="3000" startIncrement="0" type="String"/>
-    <variable default="active" displayName="Status" displayOrder="2" editable="false" maxLength="100" name="params.status" numberOfRowMax="3000" startIncrement="0" type="String"/>
-    <variable displayName="Associated ports" displayOrder="3" maxLength="100" name="params.ports" numberOfRowMax="3000" startIncrement="0" type="String"/>
   </variables>
 </ObjectDefinition>
