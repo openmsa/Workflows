@@ -1,12 +1,12 @@
-# Workflows-Microservices
-This repository provides some Workflows and Microservices examples.
+# Workflows
+This repository provides some Workflows examples.
 Download them and then load them into the corresponding MSActivator repositories. 
 
 Alternatively, see below "Installing this repo on a live MSA".
 
 
 # Getting started
-The [wiki](https://github.com/ubiqube/Workflows-Microservices/wiki)
+The [wiki](https://github.com/ubiqube/Workflows/wiki)
 provides a set of tutorials to help getting started with Workflow and Microservices.
 
 
