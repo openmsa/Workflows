@@ -36,13 +36,21 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-
-$region = $response['wo_newparams']['externalReference'];
-$context["region"] = $region;
 $key = $response['wo_newparams']['login'];
 $context["key"] = $key;
 $secret = $response['wo_newparams']['password'];
 $context["secret"] = $secret;
+
+
+$response = _device_get_hostname_by_id($device_id);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+$region = $response['wo_newparams']['hostName'];
+$context["region"] = $region;
 
 
 task_exit(ENDED, "Synchronisation to AWS cloud is successful.");
