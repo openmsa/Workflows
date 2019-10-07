@@ -31,10 +31,10 @@
         <section>Instantiate VNFC</section>
       </sections>
     </variable>
-    <variable cols="150" displayName="Image ID" displayOrder="2" isMandatory="true" maxLength="150" name="params.ImageId" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable cols="150" displayName="Image ID" displayOrder="2" isMandatory="true" maxLength="150" name="params.ImageId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
-        <value displayValue="ami-0a97f4194a0515b21 [Fortigate eu-west-3]">ami-0a97f4194a0515b21</value>
-        <value displayValue="ami-0d333d8821f37aa36 [Fortigate eu-west-2]">ami-0d333d8821f37aa36</value>
+        <value displayValue="FortiGate-VM64 6.2.1 [eu-west-2] ">ami-08cce3d57081f5137</value>
+        <value displayValue="FortiGate-VM64 6.0.6 [eu-west-2] ">ami-0b1bed84cc40437e7</value>
       </values>
       <sections>
         <section>Instantiate VNFC</section>
@@ -186,48 +186,49 @@
 		<displayName>Deploy VNF</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
-			<processPath/>
-			<displayName>Instantiate VNFC</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_device_create.php">
-			<processPath/>
-			<displayName>Create MSA device</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
-			<processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Instance_Management/Process_CREATE/Tasks/
-			</processPath>
-			<displayName>Update VNFCi user password</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
-			<processPath/>
-			<displayName>Manage VNFCi network interfaces</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
-			<processPath/>
-			<displayName>Restart VNFCi</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
-			<processPath/>
-			<displayName>Wait VNFCi ping</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
-			<processPath/>
-			<displayName>Do MSA device initial provisioning</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Set_device_ports_configuration_as_DHCP_mode.php">
-			<processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Process_CREATE/Tasks/
-			</processPath>
-			<displayName>Set device ports configuration as DHCP mode
-			</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
-			<processPath/>
-			<displayName>Attach profiles to device</displayName>
-		</task>
-		<compensation/>
-	</process>
+		<type>UPDATE</type>		
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
+      <processPath/>
+      <displayName>Instantiate VNFC</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_wait_for_instance.php">
+      <processPath/>
+      <displayName>Wait for Instance</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_device_create.php">
+      <processPath/>
+      <displayName>Create MSA device</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Instance_Management/Process_CREATE/Tasks/</processPath>
+      <displayName>Update VNFCi user password</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
+      <processPath/>
+      <displayName>Manage VNFCi network interfaces</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
+      <processPath/>
+      <displayName>Restart VNFCi</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait VNFCi ping</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
+      <processPath/>
+      <displayName>Do MSA device initial provisioning</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Set_device_ports_configuration_as_DHCP_mode.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Process_CREATE/Tasks/</processPath>
+      <displayName>Set device ports configuration as DHCP mode</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
+      <processPath/>
+      <displayName>Attach profiles to device</displayName>
+    </task>
+    <compensation/>
+  </process>
 
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC">
 		<visibility>5</visibility>
