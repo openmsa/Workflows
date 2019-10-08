@@ -33,8 +33,8 @@
     </variable>
     <variable cols="150" displayName="Image ID" displayOrder="2" isMandatory="true" maxLength="150" name="params.ImageId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
-        <value displayValue="FortiGate-VM64 6.2.1 [eu-west-2] ">ami-08cce3d57081f5137</value>
         <value displayValue="FortiGate-VM64 6.0.6 [eu-west-2] ">ami-0b1bed84cc40437e7</value>
+        <value displayValue="FortiGate-VM64 6.2.1 [eu-west-2] ">ami-08cce3d57081f5137</value>
       </values>
       <sections>
         <section>Instantiate VNFC</section>
