@@ -96,6 +96,6 @@ try {
 
 $device_ip_address = $context["device_ip_address"];
 
-task_exit(ENDED, "instance ". $context["InstanceId"] . " successfully created. IP = " . $context["device_ip_address"]);
+task_exit(ENDED, "instance ". $context["InstanceId"] . " / ".$device_ip_address." created");
 
 ?>

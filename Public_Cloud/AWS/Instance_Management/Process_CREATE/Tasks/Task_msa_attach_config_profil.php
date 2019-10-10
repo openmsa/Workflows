@@ -38,6 +38,14 @@ if (isset($context['mon_profile_reference'])) {
   }
 
 }
+
+$response = _device_do_update_config ($device_id);
+  $response = json_decode($response, true);
+  if ($response['wo_status'] !== ENDED) {
+    $response = json_encode($response);
+    echo $response;
+  }
+
 $response = prepare_json_response(ENDED, "Configuration and Monitoring profile attached.\n", $context, true);
 echo $response;
 
