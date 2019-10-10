@@ -23,7 +23,9 @@ check_mandatory_param("AwsDeviceId");
 logToFile(debug_dump($context, "MSA CONTEXT:\n"));
 
 $device_id = substr($context['AwsDeviceId'], 3);
-
+/**
+* call to Microservice IMPORT to synchronize the MSA database with the managed AWS VIM
+*/
 $response = synchronize_objects_and_verify_response($device_id);
 
 logToFile($response);
