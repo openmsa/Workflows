@@ -53,7 +53,35 @@ $wo_comment = "Device External Reference : $device_id";
 logToFile($wo_comment);
 	
 $context['device_id'] = $device_id;
-//$context['device_external_ref'] = $device_external_ref;
+
+$device_id_long = substr($context['device_id'], 3);
+
+/**
+* generate a hostname based on the public IP
+* this is necessary for sysloct collection
+*/
+$device_hostname = str_replace(".", "-", $device_ip_address);
+$context['hostname'] = "host-".$device_hostname;
+$device_hostname = $context['hostname'];
+$response = _device_set_hostname_by_id ($device_id_long, $device_hostname);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+
+/**
+* mark the device as provisioned so that it's getting monitored as soon as it's IP is accessible
+*/ 
+$response = _device_mark_as_provisioned($device_id_long);
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit;
+}
+
 $response = prepare_json_response(ENDED, "MSA Device created successfully.\n$wo_comment", $context, true);
 echo $response;
 

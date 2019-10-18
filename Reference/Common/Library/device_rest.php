@@ -153,6 +153,23 @@ function _device_read_by_reference ($device_reference) {
 }
 
 /**
+ * reads, from the database, the hostname set for a device
+ * @param  $device_id
+ */
+function _device_get_hostname_by_id ($device_id) { 
+	$msa_rest_api = "device/v1/hostname/{$device_id}";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "READ DEVICE HOSTNAME BY ID");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
+/**
  * REST endpoint available in MSA NB
  * ex:
  * curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/device/maintenance/657?enable=true
