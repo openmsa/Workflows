@@ -18,7 +18,7 @@
     <visibility>5</visibility>
   </information>
 	<variables frozen="0">
-    <variable displayName=" AWS Region" displayOrder="0" maxLength="100" name="params.AwsDeviceId" numberOfRowMax="0" startIncrement="0" type="Device">
+    <variable displayName=" AWS Region" displayOrder="0" editable="false" isMandatory="true" keepOnImport="true" maxLength="165" name="params.AwsDeviceId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
       <sections>
         <section>Sync AWS cloud</section>
       </sections>
@@ -33,8 +33,9 @@
     </variable>
     <variable cols="150" displayName="Image ID" displayOrder="2" isMandatory="true" maxLength="150" name="params.ImageId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
       <values>
-        <value displayValue="FortiGate-VM64 6.0.6 [eu-west-2] ">ami-0b1bed84cc40437e7</value>
-        <value displayValue="FortiGate-VM64 6.2.1 [eu-west-2] ">ami-08cce3d57081f5137</value>
+        <value displayValue="FortiGate-VM64 6.0.6 [London] ">ami-0b1bed84cc40437e7</value>
+        <value displayValue="FortiGate-VM64 6.2.1 [London] ">ami-08cce3d57081f5137</value>
+        <value displayValue="FortiGate-VM64 6.2.1 [Seoul] ">ami-0a796272ef341a29d</value>
       </values>
       <sections>
         <section>Instantiate VNFC</section>
@@ -120,7 +121,7 @@
         <section>Create matching MSA device</section>
       </sections>
     </variable>
-    <variable displayName="Customer Id" displayOrder="16" isMandatory="true" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="Customer">
+    <variable displayName="Customer Id" displayOrder="16" editable="false" isMandatory="true" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Customer">
       <sections>
         <section>Create matching MSA device</section>
       </sections>
