@@ -63,10 +63,7 @@
         <section>Instantiate VNFC</section>
       </sections>
     </variable>
-    <variable default="default" displayName="Security Group" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.security_group" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" tableSizeFix="false" type="OBMFRef">
-      <values>
-        <value displayValue="security_groups">security_groups</value>
-      </values>
+    <variable displayName="Security Group" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.security_group" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" tableSizeFix="false" type="OBMFRef">
       <sections>
         <section>Instantiate VNFC</section>
       </sections>

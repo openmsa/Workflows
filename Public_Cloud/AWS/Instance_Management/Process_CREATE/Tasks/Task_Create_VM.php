@@ -63,7 +63,7 @@ $ec2Client = Ec2Client::factory(array(
 logToFile("ec2 client successful");
 
 $array = array("ImageId" => $context["ImageId"], "MinCount" => $context["MinCount"], "MaxCount" => $context["MaxCount"],
-"InstanceType" => $context['InstanceType'], "Placement.AvailabilityZone" => $context["region"], 'SubnetId' => $context["SubnetId"],);
+"InstanceType" => $context['InstanceType'], "Placement.AvailabilityZone" => $context["region"], 'SubnetId' => $context["SubnetId"], 'SecurityGroupId.1' => $context["security_group"],);
 logToFile(debug_dump($array, "AWS request array\n"));
 $result = $ec2Client->runInstances($array);
 
