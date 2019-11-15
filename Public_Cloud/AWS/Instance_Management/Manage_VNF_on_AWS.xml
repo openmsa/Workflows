@@ -124,7 +124,7 @@
         <section>Create matching MSA device</section>
       </sections>
     </variable>
-    <variable displayName="Snmp Community" displayOrder="17" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="myCommunity" displayName="Snmp Community" displayOrder="17" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Create matching MSA device</section>
       </sections>
