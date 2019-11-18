@@ -36,6 +36,7 @@
         <value displayValue="FortiGate-VM64 6.0.6 [London] ">ami-0b1bed84cc40437e7</value>
         <value displayValue="FortiGate-VM64 6.2.1 [London] ">ami-08cce3d57081f5137</value>
         <value displayValue="FortiGate-VM64 6.2.1 [Seoul] ">ami-0a796272ef341a29d</value>
+        <value displayValue="FortiGate-VM64 6.2.2 [Oregon] ">ami-038bd389458ba36d8</value>
       </values>
       <sections>
         <section>Instantiate VNFC</section>
@@ -62,10 +63,7 @@
         <section>Instantiate VNFC</section>
       </sections>
     </variable>
-    <variable default="default" displayName="Security Group" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.security_group" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" tableSizeFix="false" type="OBMFRef">
-      <values>
-        <value displayValue="security_groups">security_groups</value>
-      </values>
+    <variable displayName="Security Group" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.security_group" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" tableSizeFix="false" type="OBMFRef">
       <sections>
         <section>Instantiate VNFC</section>
       </sections>
@@ -126,7 +124,7 @@
         <section>Create matching MSA device</section>
       </sections>
     </variable>
-    <variable displayName="Snmp Community" displayOrder="17" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable default="myCommunity" displayName="Snmp Community" displayOrder="17" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Create matching MSA device</section>
       </sections>
