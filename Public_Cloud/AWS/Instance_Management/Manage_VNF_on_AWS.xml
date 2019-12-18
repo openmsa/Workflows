@@ -8,7 +8,7 @@
     <executionMode>TRANSACTION</executionMode>
     <group>Public Cloud|AWS</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>Manage VNF on AWS</name>
+    <name>Instance Management on AWS</name>
     <order>10000</order>
     <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
@@ -168,7 +168,7 @@
 	</example>
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Process_New_service">
 		<visibility>5</visibility>
-		<displayName>New service</displayName>
+		<displayName>New Service</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
 		<type>CREATE</type>
@@ -182,13 +182,24 @@
 
 	<process name="Process/OpenMSA/Public_Cloud/AWS_WF/Process_CREATE">
 		<visibility>5</visibility>
-		<displayName>Deploy VNF</displayName>
+		<displayName>Launch Instance</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
 		<type>UPDATE</type>		
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
       <processPath/>
-      <displayName>Instantiate VNFC</displayName>
+      <displayName>Launch Instance</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_wait_for_instance.php">
       <processPath/>
@@ -196,74 +207,79 @@
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_device_create.php">
       <processPath/>
-      <displayName>Create MSA device</displayName>
+      <displayName>Create Device</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Instance_Management/Process_CREATE/Tasks/</processPath>
-      <displayName>Update VNFCi user password</displayName>
+      <displayName>Update Instance Credentials</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
       <processPath/>
-      <displayName>Manage VNFCi network interfaces</displayName>
+      <displayName>Update Instance Interfaces</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
       <processPath/>
-      <displayName>Restart VNFCi</displayName>
+      <displayName>Restart Instance</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
       <processPath/>
-      <displayName>Wait VNFCi ping</displayName>
+      <displayName>Wait for Connectivity</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
       <processPath/>
-      <displayName>Do MSA device initial provisioning</displayName>
+      <displayName>Initial Provisioning</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Set_device_ports_configuration_as_DHCP_mode.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Process_CREATE/Tasks/</processPath>
-      <displayName>Set device ports configuration as DHCP mode</displayName>
+      <displayName>Set Ports Configuration to DHCP mode</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
       <processPath/>
-      <displayName>Attach profiles to device</displayName>
+      <displayName>Attach Configuration Settings</displayName>
     </task>
-    <compensation/>
+  <compensation/>
   </process>
 
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC">
 		<visibility>5</visibility>
-		<displayName>Start VNFCi</displayName>
+		<displayName>Start Instance</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
 		<type>UPDATE</type>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
-			<processPath/>
-			<displayName>Start VNFCi</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
-			<processPath/>
-			<displayName>Wait VNFCi ping</displayName>
-		</task>
-		<compensation/>
-	</process>
+		
+		
+		
+	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
+      <processPath/>
+      <displayName>Start Instance</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait for Connectivity</displayName>
+    </task>
+  <compensation/>
+  </process>
 
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC">
 		<visibility>5</visibility>
-		<displayName>Stop VNFCi</displayName>
+		<displayName>Stop Instance</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
 		<type>UPDATE</type>
 
 
 
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
-			<processPath/>
-			<displayName>Stop VNFCi</displayName>
-		</task>
-		<compensation/>
-	</process>
+		
+		
+	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
+      <processPath/>
+      <displayName>Stop Instance</displayName>
+    </task>
+  <compensation/>
+  </process>
 	<process name="Process/Public_Cloud/AWS_WF/Process_Restart_VNFC">
 		<visibility>5</visibility>
-		<displayName>Restart VNFCi</displayName>
+		<displayName>Restart Instance</displayName>
 		<icon/>
 		<allowSchedule>false</allowSchedule>
 		<type>UPDATE</type>
@@ -272,16 +288,19 @@
 
 
 
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
-			<processPath/>
-			<displayName>Restart VNFCi</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
-			<processPath/>
-			<displayName>Wait VNFCi ping</displayName>
-		</task>
-		<compensation/>
-	</process>
+		
+		
+		
+	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
+      <processPath/>
+      <displayName>Restart Instance</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+      <processPath/>
+      <displayName>Wait for Connectivity</displayName>
+    </task>
+  <compensation/>
+  </process>
 	<process name="Process/Public_Cloud/AWS_WF/Process_Terminate_service">
 		<visibility>5</visibility>
 		<displayName>Terminate service</displayName>
@@ -295,20 +314,24 @@
 
 
 
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
-			<processPath/>
-			<displayName>Terminate VNFCi from AWS</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Wait.php">
-			<processPath/>
-			<displayName>Wait</displayName>
-		</task>
-		<task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
-			<processPath/>
-			<displayName>Remove device from MSA</displayName>
-		</task>
-		<compensation/>
-	</process>
+		
+		
+		
+		
+	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
+      <processPath/>
+      <displayName>Terminate Instance</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Wait.php">
+      <processPath/>
+      <displayName>Wait</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
+      <processPath/>
+      <displayName>Delete Device</displayName>
+    </task>
+  <compensation/>
+  </process>
 
 
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Move_To_Trash">
@@ -321,7 +344,7 @@
 	</process>
 	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Sync_with_AWS">
 		<visibility>5</visibility>
-		<displayName>Sync with AWS</displayName>
+		<displayName>Synchronize with AWS</displayName>
 		<icon/>
 		<poolId>0</poolId>
 		<compensation/>
