@@ -15,6 +15,8 @@ function list_args()
 {
 }
 
+if (isset($context["NetworkInterfaces"])) {
+
 $ec2Client = Ec2Client::factory(array(
     'key'    => $context["key"],
     'secret' => $context["secret"],
@@ -36,6 +38,9 @@ catch (Exception $e) {
    task_exit(FAILED, "Error : $e");
 }
 
-task_exit(ENDED, "VM successfully rebooted. Id : " . $context["InstanceId"]);
+task_exit(ENDED, "Instance successfully rebooted. Id : " . $context["InstanceId"]);
+} else {
+task_exit(ENDED, "No interface added, skipping reboot of instance: " . $context["InstanceId"]);
+}
 
 ?>
