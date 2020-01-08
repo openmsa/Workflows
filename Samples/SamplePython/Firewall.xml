@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
 	<information>
     <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
@@ -17,15 +17,16 @@
     <showProcessExecConsole>true</showProcessExecConsole>
     <showVariables>true</showVariables>
     <visibility>5</visibility>
+<serviceTaskType>python</serviceTaskType>
   </information>
 	<variables frozen="0">
-    <variable displayName="Firewall name" displayOrder="0" isMandatory="true" maxLength="100" name="params.fw_name" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="1" displayName="Wait (s)" displayOrder="1" maxLength="100" name="params.sleep" numberOfRowMax="0" startIncrement="0" type="Integer"/>
+    <variable displayName="Firewall name" displayOrder="0" isMandatory="true" maxLength="100" name="params.fw_name" startIncrement="0" type="String"/>
+    <variable default="1" displayName="Wait (s)" displayOrder="1" maxLength="100" name="params.sleep" startIncrement="0" type="Integer"/>
   </variables>
 	<example>
 		<content/>
 	</example>
-	<process name="Process/Reference/SamplePy/Process_createfirewall">
+	<process name="Process/OpenMSA/SamplePython/Process_createfirewall">
 		<icon/>
 		<visibility>5</visibility>
 		<allowSchedule>true</allowSchedule>
@@ -36,11 +37,11 @@
                 
 		
 	<task name="Task_CreateFW1.py">
-      <processPath>/opt/fmc_repository/Process/Reference/SamplePy/Process_createfirewall/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/OpenMSA/SamplePython/Process_createfirewall/Tasks</processPath>
       <displayName>CreateFW1</displayName>
     </task>
     <task name="Task_CreateFW2.py">
-      <processPath>/opt/fmc_repository/Process/Reference/SamplePy/Process_createfirewall/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/OpenMSA/SamplePython/Process_createfirewall/Tasks</processPath>
       <displayName>CreateFW2</displayName>
     </task>
   <compensation/>
@@ -50,7 +51,7 @@
 	
 	
 
-<process name="Process/Reference/SamplePy/Process_Delete">
+<process name="Process/OpenMSA/SamplePython/Process_Delete">
     <visibility>5</visibility>
     <displayName>Delete</displayName>
     <icon/>
@@ -59,7 +60,7 @@
     <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
    <task name="Task_Delete.py">
-      <processPath>/opt/fmc_repository/Process/Reference/SamplePy/Process_Delete/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/OpenMSA/SamplePython/Process_Delete/Tasks</processPath>
       <displayName>Delete</displayName>
     </task>
   </process>
