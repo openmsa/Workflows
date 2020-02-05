@@ -84,6 +84,20 @@ $context ['rules'] [$index] ['dst_mask'] = $context ['dst_mask'];
 $context ['rules'] [$index] ['service'] = $context ['service'];
 $context ['rules'] [$index] ['action'] = $context ['action'];	
 
+
+$context ['backend_rules'] [$index] ['delete'] = false;
+$context ['backend_rules'] [$index] ['id'] = $context ['id'];
+
+$context ['backend_rules'] [$index] ['src_ip'] = $context ['src_ip'];
+$context ['backend_rules'] [$index] ['src_mask'] = $context ['src_mask'];
+
+$context ['backend_rules'] [$index] ['dst_ip'] = $context ['dst_ip'];
+$context ['backend_rules'] [$index] ['dst_mask'] = $context ['dst_mask'];
+
+$context ['backend_rules'] [$index] ['service'] = $context ['service'];
+$context ['backend_rules'] [$index] ['action'] = $context ['action'];	
+
+
 $response = prepare_json_response ( $response ['wo_status'], $response ['wo_comment'], $context, true );
 echo $response;
 

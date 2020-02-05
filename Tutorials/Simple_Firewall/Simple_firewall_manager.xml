@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>  <information>
     <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description>Simple firewall manager</description>
+    <description>Multi-firewall Manager</description>
     <displayField>service_id</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
     <executionMode>TRANSACTION</executionMode>
-    <group>DevDay|Security</group>
+    <group>Security</group>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>Simple firewall manager</name>
+    <name>Multi-firewall Manager</name>
     <order>10000</order>
     <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>

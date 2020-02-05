@@ -22,22 +22,20 @@ function list_args() {
 /**
  * loop through each rule stored in the array "rules" and call the microservice DELETE when the flag "delete" is set to true
  */
-logToFile ( "* * * * " );
-logToFile($context['rules']);
-logToFile(debug_dump($context ['rules']), "RULES");
+$response;
 $index = 0;
 foreach ( $context ['rules'] as $rulesRow ) {
 	logToFile(debug_dump($rulesRow), "RULE ROW");
 	$delete = $rulesRow ['delete'];
-	$rule_id = $rulesRow ['id'];
-	$rule_src_ip = $rulesRow ['src_ip'];
-	$rule_dst_ip = $rulesRow ['dst_ip'];
-	$rule_service = $rulesRow ['service'];
-	logToFile ( "************************************************" );
-	logToFile ( "$index ) delete:$delete : $rule_id - $rule_src_ip -> $rule_dst_ip:$rule_service" );
 	
 	if ($delete === "true") {
-		
+		$rule_id = $context ['backend_rules'][$index]['id'];
+		$rule_src_ip = $context ['backend_rules'][$index]['src_ip'];
+		$rule_dst_ip = $context ['backend_rules'][$index]['dst_ip'];
+		$rule_service = $context ['backend_rules'][$index]['service'];
+		logToFile ( "************************************************" );
+		logToFile ( "$index ) delete:$delete : $rule_id - $rule_src_ip -> $rule_dst_ip:$rule_service" );
+	
 		$object_id = $rule_id;
 		$simple_firewall = array (
 				'simple_firewall' => $object_id 
@@ -56,16 +54,16 @@ foreach ( $context ['rules'] as $rulesRow ) {
 			$response = json_decode ( $response, true );
 			if ($response ['wo_status'] === ENDED) {
 				$response = prepare_json_response ( $response ['wo_status'], $response ['wo_comment'], $context, true );
-				echo $response;
 			} else {
 				logToFile("WARNING: call to DELETE failed for $device_id");
  			}
 		}
 		unset ( $context ['rules'] [$index] );
+		unset ( $context ['backend_rules'] [$index] );
 	}
 	$index ++;
 }
-
+echo $response;
 /**
  * End of the task do not modify after this point
  */
