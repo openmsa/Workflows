@@ -70,42 +70,43 @@
         <section>Rule</section>
       </sections>
     </variable>
-    <variable default="false" displayName="Delete" displayOrder="8" maxLength="100" name="params.rules.0.delete" startIncrement="0" type="Boolean">
+    <variable displayName="Delete rule ID" displayOrder="8" isMandatory="true" maxLength="100" name="params.rule_delete" startIncrement="0" type="String"/>
+    <variable default="false" displayName="Delete" displayOrder="9" maxLength="100" name="params.rules.0.delete" startIncrement="0" type="Boolean">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="ID" displayOrder="9" maxLength="100" name="params.rules.0.id" startIncrement="0" type="Integer">
+    <variable displayName="ID" displayOrder="10" maxLength="100" name="params.rules.0.id" startIncrement="0" type="Integer">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Src Ip" displayOrder="10" maxLength="100" name="params.rules.0.src_ip" startIncrement="0" type="IpAddress">
+    <variable displayName="Src Ip" displayOrder="11" maxLength="100" name="params.rules.0.src_ip" startIncrement="0" type="IpAddress">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Src Mask" displayOrder="11" maxLength="100" name="params.rules.0.src_mask" startIncrement="0" type="String">
+    <variable displayName="Src Mask" displayOrder="12" maxLength="100" name="params.rules.0.src_mask" startIncrement="0" type="String">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Dest Ip" displayOrder="12" maxLength="100" name="params.rules.0.dst_ip" startIncrement="0" type="String">
+    <variable displayName="Dest Ip" displayOrder="13" maxLength="100" name="params.rules.0.dst_ip" startIncrement="0" type="String">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Dest Mask" displayOrder="13" maxLength="100" name="params.rules.0.dst_mask" startIncrement="0" type="String">
+    <variable displayName="Dest Mask" displayOrder="14" maxLength="100" name="params.rules.0.dst_mask" startIncrement="0" type="String">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Service" displayOrder="14" maxLength="100" name="params.rules.0.service" startIncrement="0" type="String">
+    <variable displayName="Service" displayOrder="15" maxLength="100" name="params.rules.0.service" startIncrement="0" type="String">
       <sections>
         <section>Rules</section>
       </sections>
     </variable>
-    <variable displayName="Action" displayOrder="15" maxLength="100" name="params.rules.0.action" startIncrement="0" type="String">
+    <variable displayName="Action" displayOrder="16" maxLength="100" name="params.rules.0.action" startIncrement="0" type="String">
       <sections>
         <section>Rules</section>
       </sections>

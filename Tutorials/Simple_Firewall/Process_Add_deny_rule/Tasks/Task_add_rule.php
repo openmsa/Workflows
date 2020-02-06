@@ -60,15 +60,22 @@ foreach ( $context ['devices'] as $deviceidRow ) {
 	$response = execute_command_and_verify_response ( $devicelongid, CMD_CREATE, $simple_firewall, "CREATE simple_firewall" );
 	$response = json_decode ( $response, true );
 	if ($response ['wo_status'] != ENDED) {
-		task_exit ( FAILED, "Task FAILED" );
+		task_exit ( FAILED, "Task FAILED: call to CREATE failes" );
 	}
 	
+	$response = synchronize_objects_and_verify_response($devicelongid);
+	$response = json_decode ( $response, true );
+	if ($response ['wo_status'] != ENDED) {
+		task_exit ( FAILED, "Task FAILED: IMPORT failed" );
+	}
+
 }
 if (isset ( $context ['rules'] )) {
 	$index = count ( $context ['rules'] );
 } else {
 	$index = 0;
 }
+logToFile("index: $index");
 /**
  * add the firewall policy rule to the array of rules applied on the devices
  */
