@@ -9,7 +9,9 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
  * List all the parameters required by the task
  */
 function list_args() {
+
 	create_var_def ( 'rule_delete', 'String' );
+	/*
 	create_var_def ( 'rules.0.delete', 'String' );
 	create_var_def ( 'rules.0.id', 'String' );
 	create_var_def ( 'rules.0.src_ip', 'String' );
@@ -18,6 +20,7 @@ function list_args() {
 	create_var_def ( 'rules.0.dst_mask', 'String' );
 	create_var_def ( 'rules.0.service', 'String' );
 	create_var_def ( 'rules.0.action', 'String' );
+	*/
 }
 
 
