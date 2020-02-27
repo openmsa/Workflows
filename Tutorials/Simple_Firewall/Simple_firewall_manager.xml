@@ -111,6 +111,11 @@
         <section>Rules</section>
       </sections>
     </variable>
+    <variable default="/opt/fmc_repository/Datafiles/POLICIES/FIREWALL/FWPOLICIES.diff" displayName="File" displayOrder="42" maxLength="1000" name="params.file" startIncrement="0" type="String">
+      <sections>
+        <section>FW Rule Import</section>
+      </sections>
+    </variable>
   </variables>  <example>    <content/>  </example>
 <process name="Process/DevDay/Simple_Firewall/Process_Create_Firewall">
     <visibility>5</visibility>
@@ -159,5 +164,23 @@
       <displayName>remove rule</displayName>
     </task>
   <compensation/>
+  </process>
+<process name="Process/DevDay/Simple_Firewall/Process_Add_Filter_Rule_From_File">
+    <visibility>5</visibility>
+    <displayName>Add Filter Rule From File</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+  <task name="Task_FW_Rule_Import.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Add_Filter_Rule_From_File/Tasks/</processPath>
+      <displayName>FW Rule Import</displayName>
+    </task>
+    <task name="Task_FW_Rule_Update.php">
+      <processPath>/opt/fmc_repository/Process/DevDay/Simple_Firewall/Process_Add_Filter_Rule_From_File/Tasks/</processPath>
+      <displayName>FW Rule Update</displayName>
+    </task>
   </process>
 </ObjectDefinition>
