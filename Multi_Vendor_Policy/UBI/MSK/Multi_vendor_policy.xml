@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Multi Vendor Policy</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <serviceTaskType>php</serviceTaskType>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Subnet" displayOrder="0" maxLength="100" name="params.service_subnet_ip" numberOfRowMax="0" startIncrement="0" type="String">
+      <sections>
+        <section>Service</section>
+      </sections>
+    </variable>
+    <variable displayName="Subnet Mask Length" displayOrder="1" maxLength="100" name="params.service_subnet_masklen" numberOfRowMax="0" startIncrement="0" type="Integer">
+      <sections>
+        <section>Service</section>
+      </sections>
+    </variable>
+    <variable displayName="Service Name" displayOrder="2" maxLength="100" name="params.services.0.service_name" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Service</section>
+      </sections>
+      <classes>
+        <class>services</class>
+      </classes>
+    </variable>
+    <variable displayName="Port" displayOrder="3" maxLength="100" name="params.services.0.service_port" numberOfRowMax="0" startIncrement="0" type="Integer">
+      <sections>
+        <section>Service</section>
+      </sections>
+    </variable>
+    <variable default="TCP" displayName="Protocol" displayOrder="4" maxLength="100" name="params.services.0.protocol" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value>TCP</value>
+        <value>UDP</value>
+      </values>
+      <sections>
+        <section>Service</section>
+      </sections>
+    </variable>
+    <variable displayName="Device" displayOrder="5" maxLength="100" name="params.sw_device" numberOfRowMax="0" startIncrement="0" type="Device">
+      <sections>
+        <section>Switch</section>
+      </sections>
+      <sdTypes>
+        <sdType manId="18" modId="16010203"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Lan Port" displayOrder="6" maxLength="100" name="params.lan_port" numberOfRowMax="0" refDeviceIdVar="params.sw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Switch</section>
+      </sections>
+      <classes>
+        <class>interface_object</class>
+      </classes>
+    </variable>
+    <variable default="false" displayName="Mode" displayOrder="7" editable="false" maxLength="100" name="params.mode" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <values>
+        <value displayValue="Trunk">true</value>
+        <value displayValue="Access">false</value>
+      </values>
+      <sections>
+        <section>Switch</section>
+      </sections>
+    </variable>
+    <variable displayName="Sw Vlan" displayOrder="8" maxLength="100" name="params.sw_vlan" numberOfRowMax="0" selector="params.mode" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Switch</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="sw_vlan" displayOrder="0" maxLength="100" name="params.sw_vlan" numberOfRowMax="0" selectorValue="true" startIncrement="0" type="String"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Vlan Name" displayOrder="9" maxLength="100" name="params.sw_vlan_name" numberOfRowMax="0" startIncrement="0" type="String">
+      <sections>
+        <section>Switch</section>
+      </sections>
+    </variable>
+    <variable displayName="Device" displayOrder="10" maxLength="100" name="params.fw_device" numberOfRowMax="0" startIncrement="0" type="Device">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <sdTypes>
+        <sdType manId="28" modId="134"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="WAN Interface" displayOrder="11" maxLength="100" name="params.fw_wan_int" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef" visible="false">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <classes>
+        <class>ethernet</class>
+      </classes>
+    </variable>
+    <variable default="external" displayName="Source Zone" displayOrder="12" maxLength="100" name="params.source_zone" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable default="internal" displayName="Destination Zone" displayOrder="13" maxLength="100" name="params.destination_zone" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <classes>
+        <class>zone</class>
+      </classes>
+    </variable>
+    <variable displayName="Source Address" displayOrder="14" maxLength="100" name="params.source_address" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <classes>
+        <class>address_ip_netmask</class>
+      </classes>
+    </variable>
+    <variable displayName="Static Route IP" displayOrder="15" maxLength="100" name="params.rtr_fw_int_ip" numberOfRowMax="0" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+    </variable>
+    <variable displayName="Static Route Interface" displayOrder="16" maxLength="100" name="params.fw_rtr_int" numberOfRowMax="0" refDeviceIdVar="params.fw_device" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>Firewall</section>
+      </sections>
+      <classes>
+        <class>ethernet</class>
+      </classes>
+    </variable>
+    <variable displayName="Device" displayOrder="17" maxLength="100" name="params.rtr_device" numberOfRowMax="0" startIncrement="0" type="String">
+      <sections>
+        <section>Router</section>
+      </sections>
+    </variable>
+    <variable displayName="Sub Interface" displayOrder="18" maxLength="100" name="params.rtr_sw_int" numberOfRowMax="0" refDeviceIdVar="params.rtr_device" startIncrement="0" type="String">
+      <sections>
+        <section>Router</section>
+      </sections>
+      <classes>
+        <class>RoutingSubinterface</class>
+      </classes>
+    </variable>
+    <variable default="Ubiqube" displayName="Vlan Description" displayOrder="38" maxLength="100" name="params.sw_vlan_description" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Switch</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content>
+      <?php?>
+    </content>  </example>
+
+  <process name="Process/UBI/MSK/Process_Update_Devices">
+    <visibility>5</visibility>
+    <displayName>Update Devices</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  
+  
+  <task name="/opt/fmc_repository/Process/UBI/MSK/Process_New_Service/Tasks/Task_Switch.php">
+      <processPath/>
+      <displayName>a</displayName>
+    </task>
+  </process>
+  <process name="Process/UBI/MSK/Process_Delete_Instance">
+    <visibility>5</visibility>
+    <displayName>Delete Instance</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+<process name="Process/UBI/MSK/Process_New_Service">
+    <visibility>5</visibility>
+    <displayName>New Service</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+    
+  
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  <task name="Task_Accept_Parameters.php">
+      <processPath>/opt/fmc_repository/Process/UBI/MSK/Process_New_Service/Tasks/</processPath>
+      <displayName>Accept Parameters</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/UBI/MSK/Process_Service_Initiate/Tasks/Task_Firewall_Route.php">
+      <processPath/>
+      <displayName>Add Static route in FIrewall</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/UBI/MSK/Process_Service_Initiate/Tasks/Task_Firewall_Update.php">
+      <processPath/>
+      <displayName>Add Firewall Policy</displayName>
+    </task>
+    <task name="Task_Check_VLAN.php">
+      <processPath>/opt/fmc_repository/Process/UBI/MSK/Process_New_Service/Tasks/</processPath>
+      <displayName>Check VLAN</displayName>
+    </task>
+    <task name="Task_Router.php">
+      <processPath>/opt/fmc_repository/Process/UBI/MSK/Process_New_Service/Tasks/</processPath>
+      <displayName>Update Router</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/UBI/MSK/Process_New_Service/Tasks/Task_Switch.php">
+      <processPath/>
+      <displayName>Update Switch</displayName>
+    </task>
+  </process>
+</ObjectDefinition>
