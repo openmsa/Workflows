@@ -9,14 +9,15 @@ function list_args()
 }
 
 check_mandatory_param('openstack_device_id');
-check_mandatory_param('floating_ip_id');
+check_mandatory_param('floating_ip_address');
 check_mandatory_param('server_id');
 
-$openstack_device_id = substr($context['openstack_device_id'], 3);
-$floating_ip_id = $context['floating_ip_id'];
+$openstack_device_id = $context['openstack_device_id'];
+$openstack_device_id = preg_replace('/\D/', '', $openstack_device_id);
+$floating_ip_address = $context['floating_ip_address'];
 $server_id = $context['server_id'];
 
-$response = _nova_floating_ip_associate($openstack_device_id, $server_id, $floating_ip_id);
+$response = _nova_floating_ip_associate($openstack_device_id, $server_id, $floating_ip_address);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {
 	$response = json_encode($response);
