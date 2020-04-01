@@ -43,8 +43,12 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-$device_id = $response['wo_newparams']['entity']['externalReference'];
-$wo_comment = "Device External Reference : $device_id";
+//Original lines are commented
+//$device_id = $response['wo_newparams']['entity']['externalReference'];
+//$wo_comment = "Device External Reference : $device_id";
+
+$device_id = $response['wo_newparams']['entity']['id'];
+$wo_comment = "Device ID : $device_id";
 logToFile($wo_comment);
 	
 $context['device_id'] = $device_id;
