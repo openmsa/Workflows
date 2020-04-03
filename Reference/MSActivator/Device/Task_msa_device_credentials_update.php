@@ -10,7 +10,8 @@ check_mandatory_param('device_id');
 check_mandatory_param('device_login');
 check_mandatory_param('device_password');
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id = preg_replace('/[A-Z]+/', '', $device_id);
 $login = $context['device_login'];
 $password = $context['device_password'];
 

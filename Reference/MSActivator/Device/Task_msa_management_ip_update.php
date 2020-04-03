@@ -10,7 +10,8 @@ check_mandatory_param('device_id');
 check_mandatory_param('device_ip_address');
 
 $ip_address = $context['device_ip_address'];
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id = preg_replace('/[A-Z]+/', '', $device_id);
 	
 $response = _device_update_management_ip_address($device_id, $ip_address);
 $response = json_decode($response, true);

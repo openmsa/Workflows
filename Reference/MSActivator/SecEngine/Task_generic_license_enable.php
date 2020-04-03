@@ -9,7 +9,8 @@ function list_args()
 
 check_mandatory_param('device_id');
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id = preg_replace('/[A-Z]+/', '', $device_id);
 
 $command = "license_enable_generic";
 $response = _secengine_perform_command_on_device($device_id, $command, "", 600, 600);

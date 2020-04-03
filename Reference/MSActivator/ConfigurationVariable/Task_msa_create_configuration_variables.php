@@ -11,7 +11,8 @@ function list_args()
 check_mandatory_param('device_id');
 check_mandatory_param('variable');
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id = preg_replace('/[A-Z]+/', '', $device_id);
 
 foreach ($context['variable'] as $var) {
 	logToFile("Add variable ".$var['name']." value ".$var['value']." to ".$context['device_id']);
