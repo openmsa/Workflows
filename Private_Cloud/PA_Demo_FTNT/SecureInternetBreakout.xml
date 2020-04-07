@@ -5,9 +5,9 @@
     <displayField>server_name</displayField>
     <executionDetailsVisibility>5</executionDetailsVisibility>
     <executionMode>TRANSACTION</executionMode>
-    <group>FTNT Demo</group>
+    <group>Private Cloud|Openstack</group>
     <icon>/images/repository/CommandDefinition/icons/carrier routing system.jpg</icon>
-    <name>Private Cloud WAN Services</name>
+    <name>Private Cloud VNF Management</name>
     <order>10000</order>
     <poolId>0</poolId>
     <readVariableVisibility>5</readVariableVisibility>
@@ -17,12 +17,12 @@
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" startIncrement="0" type="String">
+    <variable displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Openstack Train">UBI174</value>
       </values>
     </variable>
-    <variable default="13b551ae-6c66-4075-b32e-5132e17a989f" displayName="Floating Ip Network" displayOrder="1" editable="false" maxLength="100" name="params.floating_ip_network" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="13b551ae-6c66-4075-b32e-5132e17a989f" displayName="Floating Ip Network" displayOrder="1" editable="false" maxLength="100" name="params.floating_ip_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>Floating IP Address </section>
       </sections>
@@ -30,7 +30,7 @@
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="29c460835a2146f892f2776759cd3cac" displayName="Tenant" displayOrder="2" editable="false" maxLength="100" name="params.tenant" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="29c460835a2146f892f2776759cd3cac" displayName="Tenant" displayOrder="2" editable="false" maxLength="100" name="params.tenant" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>Floating IP Address </section>
       </sections>
@@ -38,12 +38,12 @@
         <class>tenants</class>
       </classes>
     </variable>
-    <variable default="FGT_VNF" displayName="Server Name" displayOrder="3" maxLength="100" name="params.server_name" startIncrement="0" type="String">
+    <variable default="FGT_VNF" displayName="Server Name" displayOrder="3" maxLength="100" name="params.server_name" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>VNF</section>
       </sections>
     </variable>
-    <variable default="nova" displayName="Availability Zone" displayOrder="4" editable="false" maxLength="100" name="params.availability_zone" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="nova" displayName="Availability Zone" displayOrder="4" editable="false" maxLength="100" name="params.availability_zone" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -51,7 +51,7 @@
         <class>availability_zones</class>
       </classes>
     </variable>
-    <variable default="7e74b682-d19a-49d5-9c97-d4d50eedf1fc" displayName="Flavor" displayOrder="5" editable="false" maxLength="100" name="params.flavor" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="7e74b682-d19a-49d5-9c97-d4d50eedf1fc" displayName="Flavor" displayOrder="5" editable="false" maxLength="100" name="params.flavor" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -59,7 +59,7 @@
         <class>flavors</class>
       </classes>
     </variable>
-    <variable default="5f19dd49-e553-4dda-a6c7-747305bf8a72" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="5f19dd49-e553-4dda-a6c7-747305bf8a72" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -67,7 +67,7 @@
         <class>images</class>
       </classes>
     </variable>
-    <variable default="65a613ad-ad7e-4263-b491-234e792f35af" displayName="Management Network" displayOrder="7" editable="false" maxLength="100" name="params.onm_network" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="65a613ad-ad7e-4263-b491-234e792f35af" displayName="Management Network" displayOrder="7" editable="false" maxLength="100" name="params.onm_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -75,20 +75,12 @@
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="192.168.2.5" displayName="Management Ip" displayOrder="8" maxLength="100" name="params.onm_network_ip" startIncrement="0" type="IpAddress">
+    <variable default="192.168.2.5" displayName="Management Ip" displayOrder="8" maxLength="100" name="params.onm_network_ip" numberOfRowMax="0" startIncrement="0" type="IpAddress">
       <sections>
         <section>VNF</section>
       </sections>
     </variable>
-    <variable default="fdf30193-6408-491c-8437-675e64176422" displayName="WAN Network" displayOrder="9" editable="false" maxLength="100" name="params.external_network" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
-      <sections>
-        <section>VNF</section>
-      </sections>
-      <classes>
-        <class>networks</class>
-      </classes>
-    </variable>
-    <variable default="31e873aa-4a91-4ee1-9163-9685264a9f17" displayName="LAN Network" displayOrder="10" editable="false" maxLength="100" name="params.private_network" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="fdf30193-6408-491c-8437-675e64176422" displayName="WAN Network" displayOrder="9" editable="false" maxLength="100" name="params.external_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -96,77 +88,85 @@
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="172.16.0.1" displayName="LAN Port IP" displayOrder="11" maxLength="100" name="params.private_network_ip" startIncrement="0" type="IpAddress">
+    <variable default="31e873aa-4a91-4ee1-9163-9685264a9f17" displayName="LAN Network" displayOrder="10" editable="false" maxLength="100" name="params.private_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+      <sections>
+        <section>VNF</section>
+      </sections>
+      <classes>
+        <class>networks</class>
+      </classes>
+    </variable>
+    <variable default="172.16.0.1" displayName="LAN Port IP" displayOrder="11" maxLength="100" name="params.private_network_ip" numberOfRowMax="0" startIncrement="0" type="IpAddress">
       <sections>
         <section>VNF</section>
       </sections>
     </variable>
-    <variable default="20" displayName="Customer Id" displayOrder="12" maxLength="100" name="params.customer_id" startIncrement="0" type="Integer">
+    <variable default="20" displayName="Customer Id" displayOrder="12" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="Integer">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="FGT_VNF" displayName="Managed Device Name" displayOrder="13" maxLength="100" name="params.managed_device_name" startIncrement="0" type="String">
+    <variable default="FGT_VNF" displayName="Managed Device Name" displayOrder="13" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="FGT_VNF" displayName="Device External Reference" displayOrder="14" maxLength="100" name="params.device_external_reference" startIncrement="0" type="String">
+    <variable default="FGT_VNF" displayName="Device External Reference" displayOrder="14" maxLength="100" name="params.device_external_reference" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="17" displayName="Manufacturer Id" displayOrder="15" maxLength="100" name="params.manufacturer_id" startIncrement="0" type="Integer">
+    <variable default="17" displayName="Manufacturer Id" displayOrder="15" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" type="Integer">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="15102617" displayName="Model Id" displayOrder="16" maxLength="100" name="params.model_id" startIncrement="0" type="Integer">
+    <variable default="15102617" displayName="Model Id" displayOrder="16" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" type="Integer">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable displayName="Device Ip Address" displayOrder="17" maxLength="100" name="params.device_ip_address" startIncrement="0" type="IpAddress">
+    <variable displayName="Device Ip Address" displayOrder="17" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" startIncrement="0" type="IpAddress">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="admin" displayName="Login" displayOrder="18" maxLength="100" name="params.login" startIncrement="0" type="String">
+    <variable default="admin" displayName="Login" displayOrder="18" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="Ubiqube38" displayName="Password" displayOrder="19" maxLength="100" name="params.password" startIncrement="0" type="Password">
+    <variable default="Ubiqube38" displayName="Password" displayOrder="19" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" type="Password">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable default="Ubiqube38" displayName="Password Admin" displayOrder="20" maxLength="100" name="params.password_admin" startIncrement="0" type="Password">
+    <variable default="Ubiqube38" displayName="Password Admin" displayOrder="20" maxLength="100" name="params.password_admin" numberOfRowMax="0" startIncrement="0" type="Password">
       <sections>
         <section>MSA</section>
       </sections>
     </variable>
-    <variable displayName="Device Id" displayOrder="21" maxLength="100" name="params.device_id" startIncrement="0" type="String">
+    <variable displayName="Device Id" displayOrder="21" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Initial Provisioning</section>
       </sections>
     </variable>
-    <variable default="PRE_CONFIG" displayName="Templates Position" displayOrder="22" maxLength="100" name="params.position" startIncrement="0" type="String">
+    <variable default="PRE_CONFIG" displayName="Templates Position" displayOrder="22" maxLength="100" name="params.position" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Initial Provisioning</section>
       </sections>
     </variable>
-    <variable default="Configuration/FORTINET/FortigateVA/PA_initial_config" displayName="Templates" displayOrder="23" maxLength="100" name="params.uris.0.uri" startIncrement="0" type="String">
+    <variable default="Configuration/FORTINET/FortigateVA/PA_initial_config" displayName="Templates" displayOrder="23" maxLength="100" name="params.uris.0.uri" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Initial Provisioning</section>
       </sections>
     </variable>
-    <variable displayName="Server Id" displayOrder="40" maxLength="100" name="params.server_id" startIncrement="0" type="String">
+    <variable displayName="Server Id" displayOrder="40" maxLength="100" name="params.server_id" numberOfRowMax="0" startIncrement="0" type="String">
       <sections>
         <section>Delete Instance</section>
       </sections>
     </variable>
-    <variable default="Social Networking" displayName="Url Category" displayOrder="72" maxLength="100" name="params.url_category" startIncrement="0" type="String">
+    <variable default="Social Networking" displayName="Url Category" displayOrder="72" maxLength="100" name="params.url_category" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Social Networking">Social Networking</value>
         <value displayValue="Sports">Sports</value>
@@ -175,7 +175,7 @@
         <section>Create Address Objects</section>
       </sections>
     </variable>
-    <variable displayName="Policy Id" displayOrder="91" maxLength="100" name="params.policy_id" startIncrement="103" type="AutoIncrement">
+    <variable displayName="Policy Id" displayOrder="91" maxLength="100" name="params.policy_id" numberOfRowMax="0" startIncrement="103" type="AutoIncrement">
       <sections>
         <section>Create Firewall Policy</section>
       </sections>
