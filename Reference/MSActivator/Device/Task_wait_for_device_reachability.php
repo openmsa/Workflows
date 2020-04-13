@@ -16,7 +16,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'TASKID' => $TASKID);
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $response = wait_for_device_reachability($device_id, $process_params);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {

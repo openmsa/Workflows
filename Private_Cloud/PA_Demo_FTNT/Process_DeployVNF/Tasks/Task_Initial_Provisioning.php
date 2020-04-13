@@ -15,7 +15,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 
 $server_interface_details = $context['server_interface_details'];
 $onm_ip = $server_interface_details[0]['ip_address'];

@@ -14,7 +14,7 @@ if(empty($context['device_id'])) {
 }
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $response = _device_delete($device_id);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {

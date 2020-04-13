@@ -11,7 +11,7 @@ check_mandatory_param('device_id');
 check_mandatory_param('serial_number');
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $serial_number = $context['serial_number'];
 $response = _device_fields_set_serial_number($device_id, $serial_number);
 $response = json_decode($response, true);

@@ -11,7 +11,7 @@ check_mandatory_param('device_id');
 check_mandatory_param('uris');
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $uris = $context['uris'];
 $uris_array = array();
 $index = 0;

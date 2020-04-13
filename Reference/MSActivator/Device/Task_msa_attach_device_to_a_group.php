@@ -14,7 +14,7 @@ if(empty($context['device_id'])) {
 }
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 if(empty($context['device_id'])) {
 	$response = prepare_json_response(ENDED, "No group specified.", $context, true);
 }else{

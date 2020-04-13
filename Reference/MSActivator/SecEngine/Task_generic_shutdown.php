@@ -15,7 +15,7 @@ if(empty($context['device_id'])) {
 }
 	
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $command = "shutdown";
 $response = _secengine_perform_command_on_device($device_id, $command, "", 600, 600);
 $response = json_decode($response, true);

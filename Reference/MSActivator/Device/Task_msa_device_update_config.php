@@ -16,7 +16,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'TASKID' => $TASKID);
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $response = _device_do_update_config($device_id);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {

@@ -15,7 +15,7 @@ function list_args()
 check_mandatory_param('device_id');
 
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $response = _device_mark_as_provisioned($device_id);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {
