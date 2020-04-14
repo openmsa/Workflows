@@ -12,7 +12,8 @@ check_mandatory_param('device_id');
 check_mandatory_param('uris');
 check_mandatory_param('position');
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id=getIdFromUbiId ($device_id);
 $uris = $context['uris'];
 $uris_array = array();
 $index = 0;

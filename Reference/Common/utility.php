@@ -31,7 +31,7 @@ function logToFile($msg, $filename = PROCESS_LOGS_FILE) {
 	if ($filename === PROCESS_LOGS_FILE) {
 		global $context;
 		if (isset($context['SERVICEINSTANCEID'])) {
-			$filename .= "-" . $context['SERVICEINSTANCEID'];
+			$filename = PROCESS_LOGS_DIRECTORY . "process-" . $context['SERVICEINSTANCEID'] . ".log";
 		}
 	}
 	
@@ -106,7 +106,7 @@ function obtain_file_lock ($lock_file, $mode, $process_params,
 }
 /**
  * Release obtained file-lock
- * 
+ *
  * @param unknown $lock_file
  * @param unknown $mode
  * @param unknown $process_params
@@ -144,21 +144,30 @@ function release_file_lock ($lock_file, $mode, $process_params,
 
 /**
  * Get a variable value from vars.ctx file
- *
+ * Read only one time the full file and fill all values in one global variable $context['vars_ctx_values']
  * @param unknown $variable
  * @return unknown|boolean
  */
 function get_vars_value($variable) {
-	$VARS_CTX = VARS_CTX_FILE;
-	$vars_content = file_get_contents($VARS_CTX);
-	if ($vars_content) {
-		$regex = "@$variable=+(.*)@";
-		$is_result = preg_match($regex, $vars_content, $result);
-		if ($is_result) {
-			return $result[1];
-		}
-	}
-	return false;
+  global $context; 
+  if (isset($context['vars_ctx_values'][$variable])){
+    return $context['vars_ctx_values'][$variable];
+  }else{
+    //Read only one time the full file per different needed variables and fill all values in one global variable $context['vars_ctx_values'], we don't want to put the full VARS_CTX_FILE (500 lines) into the $context variable
+    $vars_content = file_get_contents(VARS_CTX_FILE);
+    if ($vars_content) {
+      $regex = "@$variable=+(.*)@";
+      $is_result = preg_match($regex, $vars_content, $result);
+      if ($is_result) {
+        if (! isset($context['vars_ctx_values'])){
+          $context['vars_ctx_values'] = array();
+        } 
+        $context['vars_ctx_values'][$variable] = $result[1];
+        return $result[1];
+      }
+    }
+    return false;
+  }
 }
 
 /**
@@ -236,6 +245,229 @@ function modify_generated_configuration ($config) {
 
 	return $config;
 }
+
+/**
+ * Generate a list of all IP addresses between $start and $end (inclusive).
+ * For Ex. [1.1.1.1, 1.1.1.5] => 1.1.1.1, 1.1.1.2, 1.1.1.3, 1.1.1.4, 1.1.1.5
+ * 
+ * @param unknown $start
+ * @param unknown $end
+ */
+function get_ip_range ($start, $end) {
+
+	$start = ip2long($start);
+	$end = ip2long($end);
+	return array_map('long2ip', range($start, $end));
+}
+
+/**
+ * Get the Start and End Address of the IP range from CIDR
+ * For Ex. [10.0.0.0/24] => 10.0.0.0 - 10.0.0.255
+ * 
+ * @param unknown $cidr
+ * @return Array:Start and End IP Address
+ */
+function cidr_to_range($cidr) {
+
+	$range = array();
+	$cidr = explode('/', $cidr);
+	$range[0] = long2ip((ip2long($cidr[0])) & ((-1 << (32 - (int)$cidr[1]))));
+	$range[1] = long2ip((ip2long($cidr[0])) + pow(2, (32 - (int)$cidr[1])) - 1);
+	return $range;
+}
+
+/**
+ * Check if 2 CIDRs are over-lapping
+ * For Ex. : $cidr1 = 100.64.0.0/10 and $cidr2 = 100.0.0.0/9 => true
+ *         : $cidr1 = 100.64.0.0/10 and $cidr2 = 100.128.0.0/9 => false
+ * 
+ * @param unknown $cidr1
+ * @param unknown $cidr2
+ * @return boolean
+ */
+function is_overlapping_cidr($cidr1, $cidr2) {
+
+	$range1 = cidr_to_range($cidr1);
+	$startIpNum = ip2long($range1[0]);
+	$endIpNum = ip2long($range1[1]);
+
+	$range2 = cidr_to_subnet_and_subnetmask_address($cidr2);
+	$netnum  = ip2long($range2['subnet_ip']);
+	$masknum = ip2long($range2['subnet_mask']);
+	for ($i = $startIpNum; $i < $endIpNum; $i++) {
+		if (($i & $masknum) === ($netnum & $masknum)) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+/**
+ * Match IP address in a CIDR
+ *
+ * @param unknown $ip
+ * @param unknown $cidr
+ * @return boolean
+ */
+function cidr_match ($ip, $cidr) {
+
+	list ($subnet, $mask) = explode ('/', $cidr);
+	if ((ip2long($ip) & ~((1 << (32 - $mask)) - 1) ) == ip2long($subnet)) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Check of the given IP in contains in one list of CIDR
+ *
+ * @param unknown $ip
+ * @param  $cidrs_string is a string with all CIDRs  separated with a coma , like '100.65.0.0/16,100.66.0.0/15,100.68.0.0/14'
+ * @return false if the IP is OK, else return the list of conflict CIDRs
+ */
+function cidr_match_list($ip, $cidrs_string) {
+  $errors=array();
+
+  if ($cidrs_string){
+    $cidrs_string=preg_replace("/\s+/",'',$cidrs_string); //remove blanc space
+    if ($cidrs_string){
+      $cidrs=explode(",",$cidrs_string);
+      foreach($cidrs as $cidr){
+        if (cidr_match($ip, $cidr)){
+          //The IP $ip is in the CIDR
+          $errors[] = $cidr;
+        }
+      }
+    }
+  }
+  if ($errors){
+    //Error, the IP is in one or more specific CIDR
+    return implode(", ",$errors);
+  }else{
+    // The IP is OK
+	  return false;
+  }
+}
+
+
+/**
+ * Convert Netmask to CIDR prefix
+ * For ex. 255.255.255.0 -> 24
+ *
+ * @param unknown $netmask
+ * @return number
+ */
+function netmask_to_cidr ($netmask) {
+	$cidr = 0;
+	foreach (explode('.', $netmask) as $number) {
+		for (;$number > 0; $number = ($number << 1) % 256) {
+			$cidr++;
+		}
+	}
+	return $cidr;
+}
+
+/**
+ * Check if the String is in CIDR format
+ * For ex. 101.0.0.100/24
+ *
+ * @param unknown $string
+ */
+function is_cidr ($string) {
+
+	$regex = '/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$/';
+	return (preg_match($regex, $string) > 0);
+}
+
+/**
+ * Convert CIDR to Subnet and Mask address
+ * For ex. if CIDR is 10.0.0.0/24 => 10.0.0.0 255.255.255.0
+ *
+ * @param unknown $cidr
+ * @return multitype:string multitype:
+ */
+function cidr_to_subnet_and_subnetmask_address ($cidr) {
+
+	list ($subnet_ip, $prefix) = explode ('/', $cidr);
+	// Take all 1s upto the prefix and rest of the 32-bits as 0s
+	$binary_mask = "";
+	for ($i = 0; $i < $prefix; $i++) {
+		$binary_mask = $binary_mask . "1";
+	}
+	for ($i = $prefix; $i < 32; $i++) {
+		$binary_mask = $binary_mask . "0";
+	}
+
+	// Out of 32-bits,convert each 8-bits in integer form
+	// Add a "." after first 3 integers
+	$binary_octect = "";
+	$subnet_mask = "";
+	for ($i = 0; $i < 32; $i = $i + 8) {
+		$binary_octect = substr($binary_mask, $i, 8);
+		$subnet_mask = $subnet_mask . intval($binary_octect, 2);
+		if ($i != 24) {
+			$subnet_mask = $subnet_mask . ".";
+		}
+		$binary_octect = "";
+	}
+	$response = array('subnet_ip' => $subnet_ip, 'subnet_mask' => $subnet_mask);
+	return $response;
+}
+
+/** check if address is in network
+ @note	IPV4 Only
+ @param	addr		address to check
+ @param	net         network
+ @param	mask		network mask
+ @return	true if addr is in network
+ */
+function address_is_in_network($addr, $net, $mask = '255.255.255.255')
+{
+	// case where IP is with /32 CIDR
+	if (strpos($addr, '/')) {
+		$tmp = explode('/', $addr);
+		$addr = $tmp[0];
+	}
+
+	$addrnum = ip2long($addr);
+	$netnum  = ip2long($net);
+	$masknum = ip2long($mask);
+
+	return (($addrnum & $masknum) === ($netnum & $masknum));
+}
+
+
+/**
+ * Function calcul the subnet IP of the given IP and mask ('255.255.255.255')
+ *
+ * @param  addr    is an IP like '10.12.25.12'
+ * @param  netmask  is the mask like '255.255.255.0'
+ * @return the subnet IP (the first IP of the subnet) like '10.12.25.0'
+ */
+function get_subnet_from_IP_and_netmask($addr, $netmask )
+{
+  $ip_int = ip2long($addr);
+  $netmask_int = ip2long($netmask);
+  // Network is a logical AND between the address and netmask
+  $network_int = $ip_int & $netmask_int;
+  $network = long2ip($network_int);
+  return $network;
+}
+
+/**
+* Function to convert a cidr mask (ex: 24) to  netmask (ex: 255.255.255.0)   :
+ * @param   cidr_mask  is the mask in CIDR (integer like 24)
+ * @return  netmask    is the mask like '255.255.255.0'
+*/
+function cidrmask_to_netmask($cidr_mask){
+  $netmask = str_split (str_pad (str_pad ('', $cidr_mask, '1'), 32, '0'), 8);
+  foreach ($netmask as &$element){
+    $element = bindec ($element);
+  }
+  return join ('.', $netmask);
+}
+
+
 
 /**
  * Function to find 2 multi-dimentional Arrays' difference
@@ -379,4 +611,8 @@ function pretty_print_json ($json) {
 	return $result;
 }
 
+function getIdFromUbiId ($ubi_id){
+	$num_id = preg_replace('/[A-Z]+/', '', $ubi_id);
+	return $num_id;
+}
 ?>

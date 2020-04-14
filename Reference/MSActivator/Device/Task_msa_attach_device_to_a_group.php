@@ -13,7 +13,8 @@ if(empty($context['device_id'])) {
 	exit;
 }
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id=getIdFromUbiId ($device_id);
 if(empty($context['device_id'])) {
 	$response = prepare_json_response(ENDED, "No group specified.", $context, true);
 }else{
