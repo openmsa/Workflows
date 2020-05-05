@@ -25,7 +25,7 @@
   <process name="Process/Tutorials/python/Simple_Firewall/Create_Firewall_Service">
     <displayName>Create Firewall Service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Create_Firewall_Service_Select_Devices.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>Select Devices</displayName>
@@ -34,7 +34,7 @@
   <process name="Process/Tutorials/python/Simple_Firewall/Add_filter_Rule">
     <displayName>Add Filter Rule</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Add_filter_Rule_add_rule.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>add rule</displayName>
@@ -43,7 +43,7 @@
   <process name="Process/Tutorials/python/Simple_Firewall/Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Delete_Service_delete_service.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>delete service</displayName>
@@ -55,7 +55,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Simple Firewall (Python)</name>
     <group/>
   </information>
