@@ -1,1 +1,22 @@
 = how to install the Simple Firewall workflow
+connect to the container 'api'
+----
+$ docker-compose exec api bash
+----
+
+----
+# cd /opt/fmc_repository/
+----
+
+clone the Workflows repository from github.com/openmsa
+----
+[root@msa fmc_repository]# git clone https://github.com/openmsa/Workflows.git
+Cloning into 'Workflows'...
+remote: Enumerating objects: 344, done.
+remote: Counting objects: 100% (344/344), done.
+remote: Compressing objects: 100% (210/210), done.
+remote: Total 3546 (delta 184), reused 243 (delta 127), pack-reused 3202
+Receiving objects: 100% (3546/3546), 962.39 KiB | 1.35 MiB/s, done.
+Resolving deltas: 100% (2192/2192), done.
+Checking connectivity... done.
+----
