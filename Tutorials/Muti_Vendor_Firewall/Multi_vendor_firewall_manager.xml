@@ -1,0 +1,163 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Devices" name="params.devices_0_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="true" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Rule ID" name="params.id" startIncrement="100" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Ip" name="params.src_ip" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Mask" name="params.src_mask" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="255.255.255.255" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <value>255.255.255.0</value>
+        <value>255.255.255.255</value>
+      </values>
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Dest IP" name="params.dst_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Dest Mask" name="params.dst_mask" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="255.255.255.255" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <value>255.255.255.0</value>
+        <value>255.255.255.255</value>
+      </values>
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Service" name="params.service" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="ftp" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <value>ftp</value>
+        <value>http</value>
+        <value>https</value>
+      </values>
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Action" name="params.action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="deny" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <value>allow</value>
+        <value>deny</value>
+      </values>
+      <sections>
+        <section>Rule</section>
+      </sections>
+    </variable>
+    <variable displayName="Delete rule ID" name="params.rule_delete" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Delete" name="params.rules_0_delete" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="ID" name="params.rules_0_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Ip" name="params.rules_0_src_ip" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Src Mask" name="params.rules_0_src_mask" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Dest Ip" name="params.rules_0_dst_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Dest Mask" name="params.rules_0_dst_mask" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Service" name="params.rules_0_service" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="Action" name="params.rules_0_action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>Rules</section>
+      </sections>
+    </variable>
+    <variable displayName="File" name="params.file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="42" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="/opt/fmc_repository/Datafiles/POLICIES/FIREWALL/FWPOLICIES.diff" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <section>FW Rule Import</section>
+      </sections>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/Tutorials/Muti_Vendor_Firewall/Process_Create_Firewall">
+    <displayName>Create Firewall Service</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="Task_Select_Devices.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Create_Firewall/Tasks/</processPath>
+      <displayName>Select Devices</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Muti_Vendor_Firewall/Process_Delete_Firewall_Service">
+    <displayName>Delete Firewall Service</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="Task_Delete_Service.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Delete_Firewall_Service/Tasks/</processPath>
+      <displayName>Delete Service</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Muti_Vendor_Firewall/Process_Add_deny_rule">
+    <displayName>Add filter rule</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Task_add_rule.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Add_deny_rule/Tasks/</processPath>
+      <displayName>add rule</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Muti_Vendor_Firewall/Process_Remove_deny_rule">
+    <displayName>Remove filter rule</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Task_remove_rule.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Remove_deny_rule/Tasks/</processPath>
+      <displayName>remove rule</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Muti_Vendor_Firewall/Process_Add_Filter_Rule_From_File">
+    <displayName>Add Filter Rule From File</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Task_FW_Rule_Import.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Add_Filter_Rule_From_File/Tasks/</processPath>
+      <displayName>FW Rule Import</displayName>
+    </task>
+    <task name="Task_FW_Rule_Update.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Muti_Vendor_Firewall/Process_Add_Filter_Rule_From_File/Tasks/</processPath>
+      <displayName>FW Rule Update</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>Multi-firewall Manager</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Multi-firewall Manager</name>
+    <group>Security</group>
+  </information>
+</ObjectDefinition>
