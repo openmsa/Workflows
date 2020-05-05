@@ -1,5 +1,7 @@
 = how to install the Simple Firewall workflow
+
 connect to the container 'api'
+
 ----
 $ docker-compose exec api bash
 ----
@@ -9,6 +11,7 @@ $ docker-compose exec api bash
 ----
 
 clone the Workflows repository from github.com/openmsa
+
 ----
 [root@msa fmc_repository]# git clone https://github.com/openmsa/Workflows.git
 Cloning into 'Workflows'...
