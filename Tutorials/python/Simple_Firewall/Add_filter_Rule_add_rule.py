@@ -29,7 +29,7 @@ simple_firewall = {'simple_firewall': {object_id: micro_service_vars_array}}
 order = Order(devicelongid)
 
 # command_execute(self, command, params, timeout=60) 
-order.command_execute('CREATE', simple_firewall)
+order.command_execute('CREATE', json.dumps(simple_firewall))
 response = json.loads(order.content)
 if 'wo_status' not in response.keys():
   ret = MSA_API.process_content('FAILED', f'Policy update failed - {response}', context, True)
