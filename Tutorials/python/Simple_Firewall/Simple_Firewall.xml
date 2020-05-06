@@ -22,30 +22,30 @@
     </variable>
   </variables>
   <example/>
-  <process name="Process/Tutorials/php/Simple_Firewall/Create_Firewall_Service">
+  <process name="Process/Tutorials/python/Simple_Firewall/Create_Firewall_Service">
     <displayName>Create Firewall Service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
-    <task name="Create_Firewall_Service_Select_Devices.php">
-      <processPath>/opt/fmc_repository/Process/Tutorials/php/Simple_Firewall</processPath>
+    <visibility>5</visibility>
+    <task name="Create_Firewall_Service_Select_Devices.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>Select Devices</displayName>
     </task>
   </process>
-  <process name="Process/Tutorials/php/Simple_Firewall/Add_filter_Rule">
+  <process name="Process/Tutorials/python/Simple_Firewall/Add_filter_Rule">
     <displayName>Add Filter Rule</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
-    <task name="Add_filter_Rule_add_rule.php">
-      <processPath>/opt/fmc_repository/Process/Tutorials/php/Simple_Firewall</processPath>
+    <visibility>5</visibility>
+    <task name="Add_filter_Rule_add_rule.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>add rule</displayName>
     </task>
   </process>
-  <process name="Process/Tutorials/php/Simple_Firewall/Delete_Service">
+  <process name="Process/Tutorials/python/Simple_Firewall/Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
-    <task name="Delete_Service_delete_service.php">
-      <processPath>/opt/fmc_repository/Process/Tutorials/php/Simple_Firewall</processPath>
+    <visibility>5</visibility>
+    <task name="Delete_Service_delete_service.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>delete service</displayName>
     </task>
   </process>
@@ -53,10 +53,10 @@
     <icon/>
     <description>block IP and port on a security VNF</description>
     <displayField>service_id</displayField>
-    <serviceTaskType>php</serviceTaskType>
+    <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
-    <name>Simple Firewall (PHP)</name>
+    <visibility>5</visibility>
+    <name>Simple Firewall (Python)</name>
     <group/>
   </information>
 </ObjectDefinition>
