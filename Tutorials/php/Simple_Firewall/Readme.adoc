@@ -1,4 +1,5 @@
 = how to install the Simple Firewall workflow
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 
 connect to the container 'api'
 
