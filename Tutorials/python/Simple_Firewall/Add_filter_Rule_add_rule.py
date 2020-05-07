@@ -15,8 +15,6 @@ device_id = context['device']
 # extract the database ID
 devicelongid = device_id[-3:]
 
-# logToFile("update device $devicelongid");
-
 # build the Microservice JSON params for the CREATE
 micro_service_vars_array = {"object_id": context['id'],
                             "src_ip": context['src_ip'],
@@ -29,13 +27,13 @@ simple_firewall = {"simple_firewall": {object_id: micro_service_vars_array}}
 
 # call the CREATE for simple_firewall MS for each device
 order = Order(devicelongid)
-# command_execute(self, command, params, timeout=60)
 order.command_execute('CREATE', json.dumps(simple_firewall))
 
 # convert dict object into json
 content = json.loads(order.content)
 
-if order.response.status_code == 200:
+# check if the response is OK
+if order.response.ok:
 
     if 'rules' in context.keys():
         num = len(context['rules'])
