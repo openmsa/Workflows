@@ -27,7 +27,7 @@ simple_firewall = {"simple_firewall": {object_id: micro_service_vars_array}}
 
 # call the CREATE for simple_firewall MS for each device
 order = Order(devicelongid)
-order.command_execute('CREATE', json.dumps(simple_firewall))
+order.command_execute('CREATE', simple_firewall)
 
 # convert dict object into json
 content = json.loads(order.content)
