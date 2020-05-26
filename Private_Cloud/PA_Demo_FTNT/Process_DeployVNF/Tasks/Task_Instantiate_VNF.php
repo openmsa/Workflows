@@ -44,9 +44,8 @@ $networks[1]['fixed_ip'] = $context['private_network_ip'];
 $networks[2]['network'] = $context['external_network'];
 
 
-//$openstack_device_id = substr($context['openstack_device_id'], 3);
 $openstack_device_id = $context['openstack_device_id'];
-$openstack_device_id = preg_replace('/\D/', '', $openstack_device_id);
+$openstack_device_id = getIdFromUbiId ($openstack_device_id);
 $response = _nova_server_create($openstack_device_id, $server_name, $networks,
 									$availability_zone, $flavor, $image);
 $response = json_decode($response, true);
