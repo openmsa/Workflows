@@ -196,11 +196,31 @@
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
   <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Neutron/Task_openstack_get_available_floating_ip.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Get an available Floating IP Address</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/Task_Instantiate_VNF.php">
+    <task name="Task_Instantiate_VNF.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Instantiate VNF</displayName>
     </task>
@@ -208,7 +228,7 @@
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Associate Floating IP to the VNF</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/Task_Disable_Port_Security_on_Traffic_Interfaces.php">
+    <task name="Task_Disable_Port_Security_on_Traffic_Interfaces.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Disable Port Security on Traffic Interfaces</displayName>
     </task>
@@ -224,15 +244,15 @@
       <processPath/>
       <displayName>Wait for Ping</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/Task_Initial_Provisioning.php">
-      <processPath/>
+    <task name="Task_Initial_Provisioning.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Initial Provsioning</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_mark_device_as_provisioned.php">
       <processPath/>
       <displayName>Activate Entity</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/Task_Create_Jira_Task.php">
+    <task name="Task_Create_Jira_Task.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Create Jira Task</displayName>
     </task>
@@ -246,11 +266,13 @@
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-  <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/Task_Create_Address_Objects.php">
+  
+    
+  <task name="Task_Create_Address_Objects.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
       <displayName>Create Address Objects</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/Task_Create_Firewall_Policy.php">
+    <task name="Task_Create_Firewall_Policy.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
       <displayName>Create Firewall Policy</displayName>
     </task>
@@ -264,6 +286,9 @@
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
+  
+    
+    
   <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Nova/Task_openstack_server_delete.php">
       <processPath/>
       <displayName>Delete VNF Instance</displayName>
@@ -272,7 +297,7 @@
       <processPath/>
       <displayName>Delete in MSA</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_Decommission_VNF/Tasks/Task_Move_Jira_to_Done.php">
+    <task name="Task_Move_Jira_to_Done.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_Decommission_VNF/Tasks/</processPath>
       <displayName>Move Jira to Done</displayName>
     </task>
