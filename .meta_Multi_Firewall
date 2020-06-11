@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>CONFIGURATION_FILTER</key>
+            <value></value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1590771974390</value>
+            <value>1590760294726</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,18 +15,20 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1590771221278</value>
+            <value>1590760294721</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
+            <key>MODEL</key>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>DIRECTORY</value>
         </entry>
         <entry>
             <key>COMMENT</key>
