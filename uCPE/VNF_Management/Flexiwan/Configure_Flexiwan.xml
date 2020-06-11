@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/repository/CommandDefinition/icons/3174 (desktop).jpg</icon>
+    <name>Configure Flexiwan SDWAN</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <serviceTaskType>php</serviceTaskType>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable default="UBI633" displayName="Device Id" displayOrder="0" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
+      <sections>
+        <section>Synchronise with Fleximanager</section>
+      </sections>
+    </variable>
+    <variable default="flexiwanVNF" displayName="Name" displayOrder="1" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Approve VNF</section>
+      </sections>
+    </variable>
+    <variable default="192.168.0.10" displayName="Default Route" displayOrder="2" maxLength="100" name="params.defaultRoute" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="IpAddress">
+      <sections>
+        <section>Approve VNF</section>
+      </sections>
+    </variable>
+    <variable default="true" displayName="Approved" displayOrder="3" maxLength="100" name="params.isApproved" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean">
+      <sections>
+        <section>Approve VNF</section>
+      </sections>
+    </variable>
+    <variable default="48.0.0.3/16" displayName="Destination Network" displayOrder="7" maxLength="100" name="params.destination_network" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Create Static Route</section>
+      </sections>
+    </variable>
+    <variable default="192.168.0.10" displayName="Gateway Ip" displayOrder="8" maxLength="100" name="params.gateway_ip" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+      <sections>
+        <section>Create Static Route</section>
+      </sections>
+    </variable>
+    <variable default="1" displayName="Exec Delay" displayOrder="15" maxLength="100" name="params.exec_delay" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer">
+      <sections>
+        <section>Synchronise with Fleximanager</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan">
+    <visibility>5</visibility>
+    <displayName>Setup Flexiwan</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+    
+    
+    
+  
+    
+    
+    
+  
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+  <task name="Task_Synchronise_with_Fleximanager.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Synchronise with Fleximanager</displayName>
+    </task>
+    <task name="Task_Approve_VNF.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Approve VNF</displayName>
+    </task>
+    <task name="Task_Wait_for_Device_Ready.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Wait for Device Ready</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Tunnel.php">
+      <processPath/>
+      <displayName>Create Tunnel</displayName>
+    </task>
+    <task name="Task_Start_Flexiwan_Edge.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Start Flexiwan Edge</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Static_Route.php">
+      <processPath/>
+      <displayName>Create Static Route</displayName>
+    </task>
+  </process>
+  <process name="Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup">
+    <visibility>5</visibility>
+    <displayName>Delete Setup</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+    
+    
+  
+    
+  
+    
+    
+  <task name="Task_Delete_Tunnel.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup/Tasks/</processPath>
+      <displayName>Delete Tunnel</displayName>
+    </task>
+    <task name="Task_Delete_Static_route.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup/Tasks/</processPath>
+      <displayName>Delete Static route</displayName>
+    </task>
+    <task name="Task_Stop_Flexi-Edge.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup/Tasks/</processPath>
+      <displayName>Stop Flexi-Edge</displayName>
+    </task>
+  </process>
+<process name="Process/ENEA/VNF_Management/Flexiwan/Process_Move_to_Trash">
+    <visibility>5</visibility>
+    <displayName>Move to Trash</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>
