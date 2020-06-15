@@ -17,12 +17,7 @@
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable default="UBI174" displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="Device">
-
-      <values>
-        <value displayValue="Openstack Train">UBI174</value>
-      </values>
-    </variable>
+    <variable default="UBI174" displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="Device"/>
     <variable default="13b551ae-6c66-4075-b32e-5132e17a989f" displayName="Floating Ip Network" displayOrder="1" editable="false" maxLength="100" name="params.floating_ip_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>Floating IP Address </section>
@@ -60,7 +55,7 @@
         <class>flavors</class>
       </classes>
     </variable>
-    <variable default="f3661fab-5282-41c7-8b74-c5bc1d57a221" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="f9abcc9b-a140-4a8b-aa72-40b1a7bf2209" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -170,7 +165,6 @@
     <variable default="Social Networking" displayName="Url Category" displayOrder="72" maxLength="100" name="params.url_category" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
         <value displayValue="Social Networking">Social Networking</value>
-        <value displayValue="Sports">Sports</value>
       </values>
       <sections>
         <section>Create Address Objects</section>
@@ -218,7 +212,7 @@
     
     
   <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Neutron/Task_openstack_get_available_floating_ip.php">
-      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Get an available Floating IP Address</displayName>
     </task>
     <task name="Task_Instantiate_VNF.php">
@@ -226,7 +220,7 @@
       <displayName>Instantiate VNF</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Nova/Task_openstack_associate_floatingip_to_server.php">
-      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Associate Floating IP to the VNF</displayName>
     </task>
     <task name="Task_Disable_Port_Security_on_Traffic_Interfaces.php">
@@ -234,11 +228,11 @@
       <displayName>Disable Port Security on Traffic Interfaces</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_create.php">
-      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Create Managed Entity in MSA</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/DeviceConfiguration/Task_msa_attach_files_to_device.php">
-      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Attach Day0 Template</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_ping_check.php">
