@@ -163,9 +163,6 @@
       </sections>
     </variable>
     <variable default="Social Networking" displayName="Url Category" displayOrder="72" maxLength="100" name="params.url_category" numberOfRowMax="0" startIncrement="0" type="String">
-      <values>
-        <value displayValue="Social Networking">Social Networking</value>
-      </values>
       <sections>
         <section>Create Address Objects</section>
       </sections>
