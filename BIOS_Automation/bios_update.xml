@@ -2,23 +2,23 @@
   <variables frozen="0">
     <variable displayName="Server Ip Address" name="params.server_ip_address" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="10.10.195.192" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Define variables</section>
+        <sections>Define variables</sections>
       </sections>
     </variable>
     <variable displayName="Server Mac Address" name="params.server_mac_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="a4:bf:01:69:60:ac" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Define variables</section>
+        <sections>Define variables</sections>
       </sections>
     </variable>
     <variable displayName="Server BIOS Profile" name="params.server_bios_profile" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Performance" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <values>
-        <value>Performance</value>
-        <value>Low-Latency</value>
-        <value>Energy-effency</value>
-      </values>
       <sections>
-        <section>Define variables</section>
+        <sections>Define variables</sections>
       </sections>
+      <values>
+        <values>Performance</values>
+        <values>Low-Latency</values>
+        <values>Energy-effency</values>
+      </values>
     </variable>
   </variables>
   <example>
@@ -27,7 +27,7 @@
   <process name="Process/BIOS_Automation/Process_BIOS_parameters_fixing">
     <displayName>BIOS parameters fixing</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Define_variables.php">
       <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Define variables</displayName>
@@ -68,7 +68,7 @@
   <process name="Process/BIOS_Automation/Process_Rolllback_BIOS_parameters">
     <displayName>Rolllback BIOS parameters</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Rollback_BIOS_parameters.php">
       <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_Rolllback_BIOS_parameters/Tasks/</processPath>
       <displayName>Rollback BIOS parameters</displayName>
@@ -85,7 +85,7 @@
   <process name="Process/BIOS_Automation/Process_Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -93,7 +93,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>BIOS parameters automation</name>
     <group/>
   </information>
