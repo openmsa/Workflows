@@ -4,7 +4,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
 
 
-//Retrive variables from $context and define the new ones
+//Retreive variables from $context and define the new ones
 $PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];
 $EXECNUMBER = $context['EXECNUMBER'];
 $TASKID = $context['TASKID'];

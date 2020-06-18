@@ -4,12 +4,12 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
 
 
-//Retrive variables from $context() and define the new ones
+//Retreive variables from $context() and define the new ones
 $server_name = $context['server_name'] = $context['server_vendor']."[".$context['server_ip_address']."]";
 $server_ip_address = $context['server_ip_address'];
 $device_external_reference = $context['device_external_reference'] = hash('crc32', md5($context['server_vendor'].$context['server_ip_address'].$context['server_mac_address']));
 
-//model and manufacture IDs should be changed properlly
+//model and manufacture IDs should be changed properly
 $manufacture_id = $context['manufacture_id'] = '191200';
 $model_id = $context['model_id'] = '191200';
 

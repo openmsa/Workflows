@@ -6,7 +6,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.ph
 
 
 /*
-The process recieves server IP and MAC address as parameters
+The process receives server IP and MAC address as parameters
 */
 function list_args()
 {
@@ -31,7 +31,7 @@ if (isset($context['server_bios_profile']) === False) {
 
 
 /*
-Initilize additional variables
+Initialize additional variables
 
 oui_file contains lines like:
 <MAC address OUI>:<Vendor name>:<Default username>:<Default password>:<List of required BIOS parameters>

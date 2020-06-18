@@ -3,7 +3,7 @@
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
 
-//Retrive variables from $context and define the new ones
+//Retreive variables from $context and define the new ones
 $microservices_array = $context['microservices_array'];
 $ms_server_inventory = $microservices_array['Server inventory'];
 $ms_server_power = $microservices_array['Server power managment'];
@@ -44,7 +44,7 @@ if ($server_power_state !== 'Off') {
         exit;
 	}
 
-	//Retrive server power status again
+	//Retreive server power status again
 	$response = json_decode(import_objects($device_id, array($ms_server_inventory)), True);
 	$object_ids_array = $response['wo_newparams'][$ms_server_inventory];
 	$object_params = current($object_ids_array);
