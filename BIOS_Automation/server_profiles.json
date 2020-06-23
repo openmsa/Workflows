@@ -1,0 +1,206 @@
+{
+	"Cisco": {
+		"OUI": ["FACE38", "FACE39"],
+		"Default Credentials": {
+			"Username": "ubiqube",
+			"Password": "4XDptRyt3nIo*"
+		},
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"Intel": {
+		"OUI": ["FACE40", "A4BF01"],
+		"Default Credentials": {
+			"Username": "ubiqube",
+			"Password": "4XDptRyt3nIo*"
+		},
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 1,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"AMD": {
+		"OUI": ["00001A", "FACE41"],
+		"Default Credentials": {
+			"Username": "ubiqube",
+			"Password": "4XDptRyt3nIo*"
+		},
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"HPE": {
+		"OUI": ["9440C9", "FACE42"],
+		"Default Credentials": {
+			"Username": "ubiqube",
+			"Password": "4XDptRyt3nIo*"
+		},
+		"BIOS profiles": {
+			"Performance": {
+				"ProcVirtualization": "Enabled",
+				"IntelProcVtd": "Enabled",
+				"Sriov": "Enabled",
+				"ProcTurbo": "Enabled",
+				"EnergyEfficientTurbo": "Disabled",
+				"ProcHyperthreading": "Disabled",
+				"DynamicPowerCapping": "Disabled",
+				"PowerRegulator": "StaticHighPerf",
+				"EnergyPerfBias": "MaxPerf",
+				"WorkloadProfile": "Custom",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePower": "NoCStates",
+				"ThermalConfig": "MaxCooling",
+				"ThermalShutdown": "Enabled",
+				"FanFailPolicy": "Shutdown",
+				"ProcAes": "Enabled",
+				"AdminEmail": "test@ubiqube.com"
+			},
+			"Low-Latency": {
+				"ProcVirtualization": "Disable",
+				"IntelProcVtd": "Enabled",
+				"Sriov": "Enabled",
+				"ProcTurbo": "Enabled",
+				"EnergyEfficientTurbo": "Disabled",
+				"ProcHyperthreading": "Disabled",
+				"DynamicPowerCapping": "Disabled",
+				"PowerRegulator": "StaticHighPerf",
+				"EnergyPerfBias": "MaxPerf",
+				"WorkloadProfile": "Custom",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePower": "NoCStates",
+				"ThermalConfig": "MaxCooling",
+				"ThermalShutdown": "Enabled",
+				"FanFailPolicy": "Shutdown",
+				"ProcAes": "Enabled",
+				"AdminEmail": "test@ubiqube.com"
+			},
+			"Energy-effency": {
+				"ProcVirtualization": "Enabled",
+				"IntelProcVtd": "Enabled",
+				"Sriov": "Enabled",
+				"ProcTurbo": "Enabled",
+				"EnergyEfficientTurbo": "Enable",
+				"ProcHyperthreading": "Disabled",
+				"DynamicPowerCapping": "Disabled",
+				"PowerRegulator": "StaticHighPerf",
+				"EnergyPerfBias": "MaxPerf",
+				"WorkloadProfile": "Custom",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePkgState": "NoState",
+				"MinProcIdlePower": "NoCStates",
+				"ThermalConfig": "MaxCooling",
+				"ThermalShutdown": "Enabled",
+				"FanFailPolicy": "Shutdown",
+				"ProcAes": "Enabled",
+				"AdminEmail": "test@ubiqube.com"
+			}
+		}
+	}
+}
