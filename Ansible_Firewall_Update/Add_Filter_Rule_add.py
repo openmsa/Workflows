@@ -24,9 +24,11 @@ playbook = {"AnsiblePlaybook": {"":micro_service_vars_array}}
 order = Order(devicelongid)
 order.command_execute('CREATE', playbook)
 
+
+
 # convert dict object into json
 content = json.loads(order.content)
-
+order.command_synchronize(10)
 # check if the response is OK
 print(order.process_content('ENDED',
                                   f'STATUS: {content["status"]}, \
