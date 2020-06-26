@@ -25,25 +25,20 @@
   <process name="Process/AnsUpdateFW/Create_FW_service">
     <displayName>Create FW service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Create_FW_service_create.py">
       <processPath>/opt/fmc_repository/Process/AnsUpdateFW</processPath>
       <displayName>create</displayName>
     </task>
-  </process>
-  <process name="Process/AnsUpdateFW/Add_Filter_Rule">
-    <displayName>Add Filter Rule</displayName>
-    <type>UPDATE</type>
-    <visibility>5</visibility>
-    <task name="Add_Filter_Rule_add.py">
+    <task name="Create_FW_service_add_firewall_rule.py">
       <processPath>/opt/fmc_repository/Process/AnsUpdateFW</processPath>
-      <displayName>add</displayName>
+      <displayName>add firewall rule</displayName>
     </task>
   </process>
   <process name="Process/AnsUpdateFW/Delete_service">
     <displayName>Delete service</displayName>
     <type>DELETE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Delete_service_delete.py">
       <processPath>/opt/fmc_repository/Process/AnsUpdateFW</processPath>
       <displayName>delete</displayName>
@@ -55,7 +50,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>AnsUpdateFW</name>
     <group/>
   </information>
