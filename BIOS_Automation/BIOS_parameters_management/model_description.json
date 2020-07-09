@@ -1,0 +1,31 @@
+{
+    "hpe": {
+        "models": {
+            "dl380": "/opt/fmc_repository/Datafiles/F5N/HPE/dl380/"
+        },
+        "names": [
+            "Hewlett Packard Enterprise",
+            "HPE"
+        ]
+    },
+    "intel": {
+        "models": {
+            "s2600bpr": "/opt/fmc_repository/Datafiles/F5N/INTEL/S2600BP/",
+            "s2600wfq": "/opt/fmc_repository/Datafiles/F5N/INTEL/S2600WF/"
+        },
+        "names": [
+            "Intel Corporation",
+            "Intel Corp.",
+            "Intel"
+        ]
+    },
+    "dell": {
+        "models": {
+            "r610": "/opt/fmc_repository/Datafiles/F5N/DELL/r610/"
+        },
+        "names": [
+            "Dell EMC",
+            "Dell Inc."
+        ]
+    }    
+}

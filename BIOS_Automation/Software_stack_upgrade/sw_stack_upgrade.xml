@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Device" displayOrder="0" keepOnImport="true" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device">
+      <sdTypes>
+        <sdType manId="191200" modId="191200"/>
+      </sdTypes>
+    </variable>
+    <variable default="true" displayName="Emulation?" displayOrder="1" maxLength="100" name="params.is_emulation" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean"/>
+  </variables>
+  <example>
+    <content/>
+  </example>
+  <process name="Process/F5N/Process_Upgrade_software_stack">
+    <displayName>Upgrade software stack</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Task_Define_Variables.php">
+      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <displayName>Define Variables</displayName>
+    </task>
+    <task name="Task_Upgrade_software.php">
+      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <displayName>Prepare upgrade</displayName>
+    </task>
+    <task name="Task_Execute_multi-stage_upgrade.php">
+      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <displayName>Execute multi-stage upgrade</displayName>
+    </task>
+    <task name="Task_Upgrade_verification.php">
+      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <displayName>Upgrade verification</displayName>
+    </task>
+  </process>
+  <process name="Process/F5N/Process_Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Upgrade software stack</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <serviceTaskType>php</serviceTaskType>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>
+</ObjectDefinition>
