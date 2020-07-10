@@ -25,7 +25,7 @@
   <process name="Process/AnsUpdateFW/Create_FW_service">
     <displayName>Create FW service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Create_FW_service_create.py">
       <processPath>/opt/fmc_repository/Process/Ansible/Firewall_Management</processPath>
       <displayName>create</displayName>
@@ -34,7 +34,7 @@
   <process name="Process/AnsUpdateFW/Delete_service">
     <displayName>Delete service</displayName>
     <type>DELETE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Delete_service_delete.py">
       <processPath>/opt/fmc_repository/Process/Ansible/Firewall_Management</processPath>
       <displayName>delete</displayName>
@@ -43,7 +43,7 @@
   <process name="Process/AnsUpdateFW/Add_Firewall_rule">
     <displayName>Add Firewall rule</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Add_Firewall_rule_Add_Rule.py">
       <processPath>/opt/fmc_repository/Process/Ansible/Firewall_Management</processPath>
       <displayName>Add Rule</displayName>
@@ -55,8 +55,8 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
-    <name>AnsUpdateFW</name>
-    <group/>
+    <visibility>5</visibility>
+    <name>Ansible Firewall Management</name>
+    <group>IT|AUTOMATION</group>
   </information>
 </ObjectDefinition>
