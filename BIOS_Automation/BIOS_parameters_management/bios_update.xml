@@ -29,39 +29,39 @@
     <type>CREATE</type>
     <visibility>0</visibility>
     <task name="Task_Define_variables.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Define variables</displayName>
     </task>
     <task name="Task_Create_managed_entity.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Create managed entity</displayName>
     </task>
     <task name="Task_Provision_and_activate_managed_entity.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Provision and activate managed entity</displayName>
     </task>
     <task name="Task_Retrive_current_power_state_and_shutdown.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Shutdown server if it is turned on</displayName>
     </task>
     <task name="Task_Prepare_BIOS_parameters_to_change.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Prepare BIOS parameters to change</displayName>
     </task>
     <task name="Task_Change_BIOS_parameters.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Modify BIOS parameters</displayName>
     </task>
     <task name="Task_Turn_on_server.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Turn on server</displayName>
     </task>
     <task name="Task_Change_default_BMC_password.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Change default BMC password</displayName>
     </task>
     <task name="Task_Verify_and_finish_the_process.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_BIOS_parameters_fixing/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Verify and finish the process</displayName>
     </task>
   </process>
@@ -70,15 +70,15 @@
     <type>UPDATE</type>
     <visibility>0</visibility>
     <task name="Task_Rollback_BIOS_parameters.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_Rollback_BIOS_parameters/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_Rollback_BIOS_parameters/Tasks/</processPath>
       <displayName>Rollback BIOS parameters</displayName>
     </task>
     <task name="Task_Reboot_server_to_apply_BIOS_changes.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_Rollback_BIOS_parameters/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_Rollback_BIOS_parameters/Tasks/</processPath>
       <displayName>Reboot server to apply BIOS changes</displayName>
     </task>
     <task name="Task_Verify_BIOS_parameters_and_finish.php">
-      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Process_Rollback_BIOS_parameters/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_Rollback_BIOS_parameters/Tasks/</processPath>
       <displayName>Verify BIOS parameters and finish</displayName>
     </task>
   </process>

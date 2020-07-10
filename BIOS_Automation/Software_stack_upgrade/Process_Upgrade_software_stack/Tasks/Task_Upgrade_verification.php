@@ -2,7 +2,7 @@
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
-require_once '/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/common.php';
+require_once '/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/Process_Upgrade_software_stack/common.php';
 
 /*
 The task performs upgrade validation comparing latest software version and cthe current ones one-by-one

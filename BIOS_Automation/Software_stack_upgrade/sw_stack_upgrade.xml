@@ -15,19 +15,19 @@
     <type>CREATE</type>
     <visibility>5</visibility>
     <task name="Task_Define_Variables.php">
-      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/Process_Upgrade_software_stack/Tasks/</processPath>
       <displayName>Define Variables</displayName>
     </task>
     <task name="Task_Upgrade_software.php">
-      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/Process_Upgrade_software_stack/Tasks/</processPath>
       <displayName>Prepare upgrade</displayName>
     </task>
     <task name="Task_Execute_multi-stage_upgrade.php">
-      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/Process_Upgrade_software_stack/Tasks/</processPath>
       <displayName>Execute multi-stage upgrade</displayName>
     </task>
     <task name="Task_Upgrade_verification.php">
-      <processPath>/opt/fmc_repository/Process/F5N/Process_Upgrade_software_stack/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/Process_Upgrade_software_stack/Tasks/</processPath>
       <displayName>Upgrade verification</displayName>
     </task>
   </process>
