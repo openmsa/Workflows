@@ -38,7 +38,7 @@ oui_file contains lines like:
 */
 
 $server_bios_profile = $context['server_bios_profile'];
-$server_profiles_file_path = '/opt/fmc_repository/Process/F5N/BIOS_automation/BIOS_parameters_management/server_profiles.json';
+$server_profiles_file_path = '/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/server_profiles.json';
 $normalizated_mac = preg_replace('/:|-/', '', $context['server_mac_address']);
 $mac_oui = strtoupper(substr($normalizated_mac, 0, 6));
 $context['server_vendor'] = $context['username'] = $context['password'] = 'UNKNOWN';
