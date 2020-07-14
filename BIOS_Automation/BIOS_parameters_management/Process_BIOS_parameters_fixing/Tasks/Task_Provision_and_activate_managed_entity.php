@@ -50,22 +50,6 @@ if ($response['wo_status'] !== ENDED) {
   echo $response;
 }
 
-
-//Update managed entity config 
-$response = json_decode(_device_do_update_config ($device_id), True);
-  if ($response['wo_status'] !== ENDED) {
-    $response = json_encode($response);
-    echo $response;
-}
-
-//Mark managed entity as provisioned
-$response = json_decode(_device_mark_as_provisioned($device_id), True);
-if ($response['wo_status'] !== ENDED) {
-  $response = json_encode($response);
-  echo $response;
-  exit;
-}
-
 //Waiting until the managed device will be finally avaliable
 $response = json_decode(wait_for_device_reachability ($device_id, $process_params, $timeout = DEVICE_STATUS_CHANGE_TIMEOUT), True);
 if ($response['wo_status'] !== ENDED) {
@@ -73,6 +57,16 @@ if ($response['wo_status'] !== ENDED) {
   echo $response;
   exit;
 }
+
+//Sync up the ME MSs
+$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+if ($response['wo_status'] !== ENDED) {
+  $response = json_encode($response);
+  echo $response;
+  exit;
+}
+
+
   
 task_success("MSA Device $device_id is provisioned and reachable successfully.");
 
