@@ -67,7 +67,7 @@ $device_id_long = substr($context['vnf_device_id'], 3);
 /**
 * generate a hostname based on the public IP
 * this is necessary for sysloct collection
-*/
+
 $device_hostname = str_replace(".", "-", $device_ip_address);
 $context['hostname'] = "host-".$device_hostname;
 $device_hostname = $context['hostname'];
@@ -78,7 +78,7 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-
+*/
 /**
 * mark the device as provisioned so that it's getting monitored as soon as it's IP is accessible
 */ 

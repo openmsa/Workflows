@@ -1,431 +1,318 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
   <variables frozen="0">
-    <variable default="UBI261" displayName="Device" displayOrder="0" isMandatory="true" keepOnImport="true" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device"/>
-    <variable default="1" displayName="exec_delay" displayOrder="0" maxLength="100" name="params.exec_delay" numberOfRowMax="0" startIncrement="0" type="Integer">
+    <variable displayName="Device" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="true" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI261" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="exec_delay" name="params.exec_delay" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="1" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
-        <behavior displayName="" displayOrder="1586858446936" maxLength="0" name="" numberOfRowMax="0" selectorValue="" startIncrement="0" type="String"/>
+        <behaviour displayName="" displayOrder="1586858446936" maxLength="0" name="" selectorValue="" startIncrement="0" type="String"/>
       </behaviors>
     </variable>
-    <variable displayName="vnfi" displayOrder="1" editable="false" maxLength="100" name="params.vnfi" numberOfRowMax="0" refDeviceIdVar="params.device_id" startIncrement="0" type="String" visible="false"/>
-    <variable displayName="Customer Id" displayOrder="2" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="14020601" displayName="Manufacturer Id" displayOrder="3" editable="false" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="vnfi" name="params.vnfi" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Customer Id" name="params.customer_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="14020601" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
-        <value displayValue="Linux">14020601</value>
-        <value displayValue="Pfsense">200425</value>
+        <values displayValue="Linux">14020601</values>
+        <values displayValue="Pfsense">200425</values>
       </values>
     </variable>
-    <variable default="14020601" displayName="Model Id" displayOrder="4" editable="false" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="14020601" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
-        <value displayValue="Linux">14020601</value>
-        <value displayValue="Pfsense">200425</value>
+        <values displayValue="Linux">14020601</values>
+        <values displayValue="Pfsense">200425</values>
       </values>
     </variable>
-    <variable default="10.31.1.213" displayName="Device Ip Address" displayOrder="5" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="root" displayName="Login" displayOrder="6" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="$ubiqube" displayName="Password" displayOrder="7" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" type="Password"/>
-    <variable displayName="New Password" displayOrder="8" maxLength="100" name="params.new_password" numberOfRowMax="0" startIncrement="0" type="Password"/>
-    <variable default="myCommunity" displayName="Snmp Community" displayOrder="9" editable="false" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Conf Profile Reference" displayOrder="10" editable="false" maxLength="100" name="params.conf_profile_reference" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Mon Profile Reference" displayOrder="11" editable="false" maxLength="100" name="params.mon_profile_reference" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="VNF Descriptor" displayOrder="12" editable="false" maxLength="100" name="params.vnf_descriptor" numberOfRowMax="0" refDeviceIdVar="params.device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Device Ip Address" name="params.device_ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="10.31.1.213" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Login" name="params.login" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="root" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="$ubiqube" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="New Password" name="params.new_password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Snmp Community" name="params.snmp_community" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="myCommunity" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Conf Profile Reference" name="params.conf_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Mon Profile Reference" name="params.mon_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VNF Descriptor" name="params.vnf_descriptor" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>VNF_descriptors</class>
       </classes>
     </variable>
-    <variable default="1010" displayName="Ucpe Devices" displayOrder="13" maxLength="100" name="params.ucpe_devices" numberOfRowMax="0" refDeviceIdVar="params.device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Ucpe Devices" name="params.ucpe_devices" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="1010" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>devices</class>
       </classes>
     </variable>
-    <variable displayName="Vnf Name" displayOrder="14" maxLength="100" name="params.vnf_name" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Vnf Device Id" displayOrder="17" maxLength="100" name="params.vnf_device_id" numberOfRowMax="0" startIncrement="0" type="Device"/>
-    <variable displayName="Name" displayOrder="18" maxLength="100" name="params.bridge_name" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Interface" displayOrder="19" maxLength="100" name="params.interface_name" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="communication" displayName="Subtype" displayOrder="20" editable="false" maxLength="100" name="params.bridge_subType" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="ID" displayOrder="21" isMandatory="true" maxLength="100" name="params.nics.0.id" numberOfRowMax="0" refDeviceIdVar="params.device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Vnf Name" name="params.vnf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Vnf Device Id" name="params.vnf_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Name" name="params.bridge_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="18" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Interface" name="params.interface_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Subtype" name="params.bridge_subType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="communication" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ID" name="params.nics.0.id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>Connection_values</class>
       </classes>
     </variable>
-    <variable default="Dpdk" displayName="Type" displayOrder="22" isMandatory="true" maxLength="100" name="params.nics.0.type" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Interface Name" displayOrder="23" isMandatory="true" maxLength="100" name="params.nics.0.interfacename" numberOfRowMax="0" refDeviceIdVar="params.device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Type" name="params.nics.0.type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Dpdk" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Interface Name" name="params.nics.0.interfacename" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="23" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>Bridge_Values</class>
       </classes>
     </variable>
-    <variable displayName="NIC Model" displayOrder="25" maxLength="100" name="params.nics.0.nicmodel" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="LAN" displayName="Nics 1 Id" displayOrder="54" maxLength="100" name="params.nics_1_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="Dpdk" displayName="Nics 1 Type" displayOrder="55" maxLength="100" name="params.nics_1_type" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="lan_br" displayName="Nics 1 Interfacename" displayOrder="56" maxLength="100" name="params.nics_1_interfacename" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="WAN" displayName="Nics 2 Id" displayOrder="57" maxLength="100" name="params.nics_2_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="Dpdk" displayName="Nics 2 Type" displayOrder="58" maxLength="100" name="params.nics_2_type" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable default="svc_br" displayName="Nics 2 Interfacename" displayOrder="59" maxLength="100" name="params.nics_2_interfacename" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Nics 3 Id" displayOrder="60" maxLength="100" name="params.nics_3_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Nics 3 Type" displayOrder="61" maxLength="100" name="params.nics_3_type" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Nics 3 Interfacename" displayOrder="62" maxLength="100" name="params.nics_3_interfacename" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Cloud Init" displayOrder="90" maxLength="100" name="params.cloud_init" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="File">
-      <repositories>
-        <repository>Datafiles</repository>
-      </repositories>
-    </variable>
+    <variable displayName="NIC Model" name="params.nics.0.nicmodel" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 1 Id" name="params.nics_1_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="54" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="LAN" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 1 Type" name="params.nics_1_type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="55" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Dpdk" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 1 Interfacename" name="params.nics_1_interfacename" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="56" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="lan_br" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 2 Id" name="params.nics_2_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="57" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="WAN" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 2 Type" name="params.nics_2_type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="58" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Dpdk" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 2 Interfacename" name="params.nics_2_interfacename" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="59" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="svc_br" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 3 Id" name="params.nics_3_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="60" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 3 Type" name="params.nics_3_type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="61" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Nics 3 Interfacename" name="params.nics_3_interfacename" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="62" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Cloud Init" name="params.cloud_init" startIncrement="0" type="File" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="90" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/ENEA/VNF_Management/Process_New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
-    
-    
-    
-    
-    
-    
-    
-  <task name="Task_Syncronise_with_ucpeManager.php">
-      <processPath>uCPE/VNF_Management/Process_New_Service/Tasks/</processPath>
-      <displayName>Syncronise with ucpeManager</displayName>
+    <task name="Task_Syncronise_with_ucpeManager.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_New_Service/Tasks/</processPath>
+      <displayName>Syncronise with uCPE</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Syncronise_Token.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Syncronise_Token.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Get Device Info</displayName>
+      <displayName>Get ME Info</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Bridge Info</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Push_Bridge_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Push_Bridge_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Push Bridge Info</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Get_Connection_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Get_Connection_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Connections</displayName>
     </task>
-    <task name="uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Push_Connection_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Push_Connection_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Push Connections</displayName>
     </task>
   </process>
-  <process name="uCPE/VNF_Management/Process_Start_VNF">
+  <process name="Process/ENEA/VNF_Management/Process_Start_VNF">
     <displayName>Start VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <task name="Task_Start_VNF.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Start_VNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Start_VNF/Tasks/</processPath>
       <displayName>Start VNF</displayName>
     </task>
     <task name="Task_Sync.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Start_VNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Start_VNF/Tasks/</processPath>
       <displayName>Sychronise with uCPEManager</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Stop_VNF">
+  <process name="Process/ENEA/VNF_Management/Process_Stop_VNF">
     <displayName>Stop VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    
-    
-  <task name="Task_Stop_VNF.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Stop_VNF/Tasks/</processPath>
+    <task name="Task_Stop_VNF.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Stop_VNF/Tasks/</processPath>
       <displayName>Stop VNF</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Start_VNF/Tasks/Task_Sync.php">
+    <task name="Process/ENEA/VNF_Management/Process_Start_VNF/Tasks/Task_Sync.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Sychronise with uCPEManager</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Terminate_VNF">
+  <process name="Process/ENEA/VNF_Management/Process_Terminate_VNF">
     <displayName>Terminate VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <task name="Task_Delete_VNF.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Terminate_VNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Terminate_VNF/Tasks/</processPath>
       <displayName>Delete VNF</displayName>
     </task>
     <task name="Task_Delete_Device.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Terminate_VNF/Tasks/</processPath>
-      <displayName>Delete Device</displayName>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Terminate_VNF/Tasks/</processPath>
+      <displayName>Delete Managed Entity</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Move_to_Trash">
+  <process name="Process/ENEA/VNF_Management/Process_Move_to_Trash">
     <displayName>Move to Trash</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Synchronise_with_uCPE_Manager">
+  <process name="Process/ENEA/VNF_Management/Process_Synchronise_with_uCPE_Manager">
     <displayName>Synchronise with uCPE Manager</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    
-  <task name="Process/uCPE/VNF_Management/Process_New_Service/Tasks/Task_Syncronise_with_ucpeManager.php">
+    <task name="Process/ENEA/VNF_Management/Process_New_Service/Tasks/Task_Syncronise_with_ucpeManager.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Sychronise with uCPEManager</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_test">
+  <process name="Process/ENEA/VNF_Management/Process_test">
     <displayName>Deploy new VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-  <task name="Task_Get_session_token.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/</processPath>
+    <task name="Task_Get_session_token.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/</processPath>
       <displayName>Get session token</displayName>
     </task>
     <task name="Task_Get_VNFD_Info.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/</processPath>
       <displayName>Get VNFD Info</displayName>
     </task>
     <task name="Task_Get_Device_Info.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/</processPath>
-      <displayName>Get Device Info</displayName>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/</processPath>
+      <displayName>Get ME Info</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Instantiate_VNF.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Instantiate_VNF.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Insantiate VNF</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Create_MSA_Device.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Create_MSA_Device.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Create MSA Device</displayName>
+      <displayName>Create MSA Managed Entity</displayName>
     </task>
     <task name="Task_Wait_for_ping.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/</processPath>
       <displayName>Wait for ping</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_MSA_Device_Provisioning.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_MSA_Device_Provisioning.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>MSA Device Provisioning</displayName>
+      <displayName>MSA Managed Entity Provisioning</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Attach_Profiles_to_device.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Attach_Profiles_to_device.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Attach Profiles to device</displayName>
+      <displayName>Attach Profiles to Managed Entity</displayName>
     </task>
     <task name="Task_Syncronise_with_uCPE_manager.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/</processPath>
       <displayName>Syncronise with uCPE manager</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Create_Bridge">
+  <process name="Process/ENEA/VNF_Management/Process_Create_Bridge">
     <displayName>Create Bridge</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    
-    
-  <task name="Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_session_token.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_session_token.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>get session token</displayName>
     </task>
     <task name="Task_Create_Bridge.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Create_Bridge/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Create_Bridge/Tasks/</processPath>
       <displayName>Create Bridge</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Get_Bridges">
+  <process name="Process/ENEA/VNF_Management/Process_Get_Bridges">
     <displayName>Get Bridges</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    
-    
-    
-    
-    
-    
-  <task name="Task_Syncronise_Token.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
+    <task name="Task_Syncronise_Token.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
       <displayName>Syncronise Token</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Device info</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Bridge info</displayName>
     </task>
     <task name="Task_Push_Bridge_Info.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
       <displayName>Push Bridge Info</displayName>
     </task>
     <task name="Task_Get_Connection_Info.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
       <displayName>Get Connection Info</displayName>
     </task>
     <task name="Task_Push_Connection_Info.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/</processPath>
       <displayName>Push Connection Info</displayName>
     </task>
   </process>
-  <process name="Process/uCPE/VNF_Management/Process_Create_new_VNF">
+  <process name="Process/ENEA/VNF_Management/Process_Create_new_VNF">
     <displayName>Create new VNF</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  <task name="Process/uCPE/VNF_Management/Process_New_Service/Tasks/Task_Syncronise_with_ucpeManager.php">
+    <task name="Process/ENEA/VNF_Management/Process_New_Service/Tasks/Task_Syncronise_with_ucpeManager.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Synchronise with ucpeManager</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Syncronise_Token.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Syncronise_Token.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Get Device Info</displayName>
+      <displayName>Get Managed Entity Info</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_New_Service/Tasks/Task_Get_Bridge_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Bridge Info</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Get_Bridges/Tasks/Task_Get_Connection_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_Get_Bridges/Tasks/Task_Get_Connection_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get Connections</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_session_token.php">
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_session_token.php">
       <processPath/>
       <displayName>Get Token</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_Device_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Get Device Info</displayName>
+      <displayName>Get ME Info</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_test/Tasks/Task_Get_VNFD_Info.php">
+    <task name="Process/ENEA/VNF_Management/Process_test/Tasks/Task_Get_VNFD_Info.php">
       <processPath>/opt/fmc_repository/</processPath>
       <displayName>Get VNFD</displayName>
     </task>
     <task name="Task_Instantiate_VNF_uCPE.php">
-      <processPath>/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Create_new_VNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Create_new_VNF/Tasks/</processPath>
       <displayName>Instantiate VNF uCPE</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Create_MSA_Device.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Create_MSA_Device.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>Create MSA Device</displayName>
+      <displayName>Create MSA Managed Entity</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/Task_Wait_for_ping.php">
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Process_test/Tasks/Task_Wait_for_ping.php">
       <processPath/>
       <displayName>Wait for ping</displayName>
     </task>
-    <task name="Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_MSA_Device_Provisioning.php">
+    <task name="Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_MSA_Device_Provisioning.php">
       <processPath>/opt/fmc_repository/</processPath>
-      <displayName>MSA Device Provisioning</displayName>
+      <displayName>MSA Managed Entity Provisioning</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/uCPE/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Attach_Profiles_to_device.php">
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Process_Deploy_new_VNF/Tasks/Task_Attach_Profiles_to_device.php">
       <processPath/>
-      <displayName>Attach Profiles to Device</displayName>
+      <displayName>Attach Profiles to Managed Entity</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/uCPE/VNF_Management/Process_test/Tasks/Task_Syncronise_with_uCPE_manager.php">
-      <processPath/>
-      <displayName>Syncronise with uCPE manager</displayName>
-    </task>
-    <task name="/opt/fmc_repository/Process/uCPE/VNF_Management/Process_T/Tasks/Task_up.php">
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Process_T/Tasks/Task_up.php">
       <processPath/>
       <displayName>set external ref</displayName>
     </task>
   </process>
-  <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description>VNF management on ENEA uCPE</description>
-    <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group>uCPE|ENEA</group>
-    <icon>/images/repository/CommandDefinition/icons/www server.jpg</icon>
-    <name>uCPE VNF Management</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <serviceTaskType>php</serviceTaskType>
-    <showDetailedServiceInstances>false</showDetailedServiceInstances>
-    <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>false</showVariables>
+  <process name="Process/uCPE_VNF_Management/Clear_Instances">
+    <displayName>Clear Instances</displayName>
+    <type>UPDATE</type>
     <visibility>5</visibility>
+    <task name="Clear_Instances_Remove_Archived.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management</processPath>
+      <displayName>Remove Archived</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/repository/CommandDefinition/icons/www server.jpg</icon>
+    <description>VNF management on ENEA uCPE</description>
+    <displayField>SERVICEINSTANCEREFERENCE</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>uCPE VNF Management</name>
+    <group>uCPE|ENEA</group>
   </information>
-
-
-
 </ObjectDefinition>

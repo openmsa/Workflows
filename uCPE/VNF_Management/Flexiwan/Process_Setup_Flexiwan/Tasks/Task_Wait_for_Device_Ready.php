@@ -16,7 +16,7 @@ $arr= array("Devices");
 $x = 0;
 while($device_ready != true)
 {
-   if($x == 20)
+   if($x == 10)
    {
 	task_error('Flexi-edge device still not in ready state please check in Fleximanager');
 	exit;
