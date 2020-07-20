@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>CONFIGURATION_FILTER</key>
+            <value></value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1579215928443</value>
+            <value>1590493756127</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,10 +15,16 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1579215928438</value>
+            <value>1590493756119</value>
         </entry>
         <entry>
             <key>TAG</key>
+        </entry>
+        <entry>
+            <key>MODEL</key>
+        </entry>
+        <entry>
+            <key>MANUFACTURER</key>
         </entry>
         <entry>
             <key>TYPE</key>
