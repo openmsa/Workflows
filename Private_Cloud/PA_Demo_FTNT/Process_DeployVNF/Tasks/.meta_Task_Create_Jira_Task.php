@@ -3,7 +3,7 @@
     <map>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1592232817290</value>
+            <value>1592302824815</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
