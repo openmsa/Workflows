@@ -51,7 +51,7 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-$region = $response['wo_newparams']['hostName'];
+$region = $response['wo_newparams']['hostname'];
 $context["region"] = $region;
 
 
