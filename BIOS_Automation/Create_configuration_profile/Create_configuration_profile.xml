@@ -21,18 +21,23 @@
     </variable>
   </variables>
   <example/>
-  <process name="Process/Create_configuration_profile/Create_profile">
+  <process name="Process/BIOS_Automation/Create_configuration_profile/Create_profile">
     <displayName>Create profile</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Create_profile_Create_Profile.php">
-      <processPath>/opt/fmc_repository/Process/Create_configuration_profile</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Create_configuration_profile</processPath>
       <displayName>Create Profile</displayName>
     </task>
     <task name="Create_profile_Assign_microservices.php">
-      <processPath>/opt/fmc_repository/Process/Create_configuration_profile</processPath>
+      <processPath>/opt/fmc_repository/Process/BIOS_Automation/Create_configuration_profile</processPath>
       <displayName>Assign microservices</displayName>
     </task>
+  </process>
+  <process name="Process/Create_configuration_profile/Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
@@ -40,7 +45,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Create configuration profile</name>
     <group/>
   </information>
