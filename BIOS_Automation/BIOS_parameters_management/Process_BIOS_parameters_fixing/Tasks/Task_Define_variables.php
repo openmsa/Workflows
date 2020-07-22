@@ -29,7 +29,6 @@ if (isset($context['server_bios_profile']) === False) {
   $context['server_bios_profile'] = 'Performance';
 }
 
-
 /*
 Initilize additional variables
 
@@ -47,7 +46,7 @@ $context['server_vendor'] = $context['username'] = $context['password'] = 'UNKNO
 $context['bios_parameters_array'] = array();
 
 //microservice_array contains microservice's description and name
-$context['microservices_array'] = array('BIOS parameters manipulation'=> 'redfish_bios_settings',
+$context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfish_bios_settings',
                                         'BIOS upgrade process'        =>  'redfish_bios_version',
                                         'Redfish account manipulation'=>  'redfish_server_accounts',
                                         'Server power managment'      =>  'redfish_server_actions',
@@ -56,6 +55,8 @@ $context['microservices_array'] = array('BIOS parameters manipulation'=> 'redfis
 
 
 //Determine server vendor based on MAC address and fill in bios_parameters_array
+$response = update_asynchronous_task_details($context, "Checking variables and identifying server vendor... ");
+
 $vendor_array = json_decode(file_get_contents($server_profiles_file_path), True);
 while ((list($vendor, $properties) = each($vendor_array)) and ($context['server_vendor'] == 'UNKNOWN')) {
   logToFile(debug_dump($properties, "DEBUG: PROPERTIES"));
@@ -75,8 +76,8 @@ while ((list($vendor, $properties) = each($vendor_array)) and ($context['server_
 //If server vendor has been identify correctly then finish the task
 if ($context['username'] !== 'UNKNOWN' and $context['password'] !== 'UNKNOWN') {
   $wo_comment = "Server vendor and default credentials were identified correctly";
-  task_success('All variables have been defined correctly. Server vendor is '.$context['server_vendor']);
+  task_success('Checking variables and identifying server vendor... Server vendor is '.$context['server_vendor']);
 } else {
-  task_error("The server hasn't been identivied correctly. The task is failed.");
+  task_error("Checking variables and identifying server vendor... the server hasn't been identivied correctly. The task is failed.");
 }
 ?>

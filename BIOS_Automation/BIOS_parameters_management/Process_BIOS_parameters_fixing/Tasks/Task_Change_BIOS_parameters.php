@@ -11,8 +11,10 @@ $microservices_array = $context['microservices_array'];
 $ms_bios_params = $microservices_array['BIOS parameters manipulation'];
 
 //Change BIOS parameters for each parameter what has was_it_changed is True
+$response = update_asynchronous_task_details($context, "Modyfing BIOS parameters... ");
 foreach ($bios_parameters as $parameter_name => $parameter_values) {
 	if ($parameter_values['was_it_changed'] === "true") {
+		$response = update_asynchronous_task_details($context, "Modyfing BIOS parameters... ".$parameter_name."... ");
 		$micro_service_vars_array = array ();
 		$micro_service_vars_array ['object_id'] = $parameter_name;
 		$micro_service_vars_array ['value'] = $parameter_values['Required Value'];
@@ -24,6 +26,7 @@ foreach ($bios_parameters as $parameter_name => $parameter_values) {
     	    echo $response;
     	    exit;
     	}
+      $response = update_asynchronous_task_details($context, "Modyfing BIOS parameters... ".$parameter_name."... OK");
 	}
 	sleep($delay);
 }

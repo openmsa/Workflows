@@ -11,9 +11,10 @@ $microservices_array = $context['microservices_array'];
 $ms_bios_params = $microservices_array['BIOS parameters manipulation'];
 
 //Rollback to original value each parameter what has was_it_changed true
+$response = update_asynchronous_task_details($context, "Rolling back to original BIOS parameters value... ");
 foreach ($bios_parameters as $parameter_name => $parameter_values) {
 	if ($parameter_values['was_it_changed'] === "true") {
-
+		$response = update_asynchronous_task_details($context, "Rolling back to original BIOS parameters value... ".$parameter_name." to value ".$parameter_values['Original Value']);
 		$micro_service_vars_array = array ();
 		$micro_service_vars_array ['object_id'] = $parameter_name;
 		$micro_service_vars_array ['value'] = $parameter_values['Original Value'];

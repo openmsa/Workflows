@@ -16,6 +16,8 @@ $model_id = $context['model_id'] = '191200';
 $username = $context['username'];
 $password = $password_admin = $context['password'];
 
+$response = update_asynchronous_task_details($context, "Creating managed entity ".$server_name."... ");
+
 //Extract numeric customer ID
 if (preg_match('/.{3}\D*?(\d+?)/', $context['UBIQUBEID'], $matches) === 1) {
 	$customer_db_id = $context['customer_db_id'] = $matches[1];
@@ -49,7 +51,7 @@ $device_id = $context['device_id'] = $response['wo_newparams']['entity']['id'];
 
 if ($device_id) {
 	$wo_comment = "Device ID : $device_id";
-	$response = prepare_json_response(ENDED, "MSA Device created successfully.\n$wo_comment", $context, true);
+	$response = prepare_json_response(ENDED, "Creating managed entity ".$server_name."... \nMSA Device created successfully.\n".$wo_comment, $context, true);
 	echo $response;
 } else {
 	task_error("Device has not been created successfully.");
