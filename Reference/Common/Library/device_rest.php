@@ -48,7 +48,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
   }  
   
 	$json = json_encode($array);
-	$msa_rest_api = "device/{$customer_id}";
+	$msa_rest_api = "device/v2/{$customer_id}";
 	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api, $json);
 	$response = perform_curl_operation($curl_cmd, "CREATE TEMPLATE MANAGED DEVICE");
 	$response = json_decode($response, true);
