@@ -7,6 +7,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.ph
 //Retrive variables from $context() and define the new ones
 $server_name = $context['server_name'] = $context['server_vendor']."[".$context['server_ip_address']."]";
 $server_ip_address = $context['server_ip_address'];
+$server_port = $context['server_port'];
 $device_external_reference = $context['device_external_reference'] = hash('crc32', md5($context['server_vendor'].$context['server_ip_address'].$context['server_mac_address']));
 
 //model and manufacture IDs should be changed properlly
@@ -27,16 +28,23 @@ if (preg_match('/.{3}\D*?(\d+?)/', $context['UBIQUBEID'], $matches) === 1) {
 
 //Create new managed entity
 $response = json_decode(_device_create($customer_db_id,
-						   			   $server_name,
-						   			   $manufacture_id,
-						   			   $model_id,
-						   			   $username,
-						   			   $password,
-						   			   $password_admin,
-						   			   $server_ip_address,
-						   			   $device_external_reference
-						   			  ), True);
-
+	   			      			             	   $server_name,
+	   			      			             	   $manufacture_id,
+	   			      			             	   $model_id,
+	   			      			             	   $username,
+	   			      			             	   $password,
+	   			      			             	   $password_admin,
+	   			      			             	   $server_ip_address,
+	   			      			             	   $device_external_reference,
+                                   		 "true",
+                                   		 "true",
+                                   		 "true",
+                                   		 "false",
+                                   		 "public",
+                                   		 "",
+                                   		 $server_port
+	 			  					                  ), 
+                           True);
 
 
 if ($response['wo_status'] !== ENDED) {

@@ -13,6 +13,7 @@ function list_args()
   create_var_def('server_ip_address', 'IpAddress');
   create_var_def('server_mac_address', 'String');
   create_var_def('server_bios_profile', 'String');
+  create_var_def('server_port', 'Integer');
 }
 
 if(isset($parameters) ){
@@ -25,6 +26,7 @@ if(isset($parameters) ){
 
 check_mandatory_param('server_ip_address');
 check_mandatory_param('server_mac_address');
+check_mandatory_param('server_port');
 if (isset($context['server_bios_profile']) === False) {
   $context['server_bios_profile'] = 'Performance';
 }
