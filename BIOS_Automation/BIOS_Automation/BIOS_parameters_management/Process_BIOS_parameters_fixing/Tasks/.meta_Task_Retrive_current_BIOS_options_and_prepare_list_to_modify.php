@@ -3,7 +3,7 @@
     <map>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1595596419450</value>
+            <value>1588763724808</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,11 +11,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1595596419444</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1588763587385</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -25,12 +21,8 @@
             <value>text</value>
         </entry>
         <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
