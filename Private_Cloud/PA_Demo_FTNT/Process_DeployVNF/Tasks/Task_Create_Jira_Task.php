@@ -31,7 +31,7 @@ $project = 10902;
 $priority = "1";
 $issuetype = 10003;
 $summary = "Private Cloud Demo created FGT";
-$description = "Successfully instnatiate Fortigate VNF on openstack 
+$description = "Successfully instanciated Fortigate VNF on Openstack 
 \nServer Name: {$server_name}
 \nFlavour:     {$flavor}
 \nImage:       {$image}

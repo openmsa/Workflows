@@ -22,7 +22,7 @@ if ($response['wo_status'] !== ENDED) {
 	exit;
 }
 	
-$response = prepare_json_response(ENDED, "MSA Device $device_id deleted successfully.", $context, true);
+$response = prepare_json_response(ENDED, "MSA ME $device_id deleted successfully.", $context, true);
 echo $response;
 
 ?>

@@ -19,6 +19,8 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 	$HTTP_PORT = get_vars_value(WEB_NODE_HTTP_PORT);
 	$USERNAME = "ncroot";
 	$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
+	$password = shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
+	$auth_token = get_auth_token($USERNAME, rtrim($password), $HTTP_HOST, $HTTP_PORT, $connection_timeout, $max_time);
 
 	if (strpos($msa_rest_api, "?") !== false) {
 		list($uri, $data) = explode("?", $msa_rest_api);
@@ -32,27 +34,11 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 				$encoded_data .= "&";
 			}
 		}
-		$ait = new ArrayIterator(explode("/", $uri));
-		$cit = new CachingIterator($ait);
-		$uri_encoded = "";
-		foreach ($cit as $uri_path) {
-			$uri_encoded .= rawurlencode($uri_path);
-			if ($cit->hasNext()) {
-				$uri_encoded .= "/";
-			}
-		}
+		$uri_encoded = encode_uri($uri);
 		$url = "'http://{$HTTP_HOST}:{$HTTP_PORT}/ubi-api-rest/{$uri_encoded}?{$encoded_data}'";
 	}
 	else {
-		$ait = new ArrayIterator(explode("/", $msa_rest_api));
-		$cit = new CachingIterator($ait);
-		$uri_encoded = "";
-		foreach ($cit as $uri_path) {
-			$uri_encoded .= rawurlencode($uri_path);
-			if ($cit->hasNext()) {
-				$uri_encoded .= "/";
-			}
-		}
+		$uri_encoded = encode_uri($msa_rest_api);
 		$url = "'http://{$HTTP_HOST}:{$HTTP_PORT}/ubi-api-rest/{$uri_encoded}'";
 	}
 
@@ -60,17 +46,11 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 	if (strpos($json_body, "@") === 0) {
 		$content_type = "*/*";
 	}
-	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -u {$USERNAME}:\$p --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
+	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -H \"Authorization: Bearer $auth_token\" --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
 	if ($json_body !== "") {
-		if (is_json($json_body)) {
-			$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
-		}
-		else {
-			$curl_cmd .= " -d $'{$json_body}'";
-		}
+		$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
 	}
 	logToFile("Curl Request : $curl_cmd\n");
-	$curl_cmd = "p=$(" . ENCP_SCRIPT .  " '{$NCROOT_PASSWORD}');{$curl_cmd}";
 	return $curl_cmd;
 }
 
@@ -346,7 +326,34 @@ function get_http_status_message ($code) {
 function perform_curl_operation ($curl_cmd, $operation = "") {
 
 	$output_array = array();
-	exec($curl_cmd, $output_array);
+	$verbose_details = '';
+
+	if (preg_match("/\s+-v\s+/", $curl_cmd)) {
+    		//used -v (verbose mode), we separate the error return (stderr) into the  $verbose_details
+
+    		$descriptorspec = array(
+      			0 => array("pipe", "r"),  // stdin  read input
+      			1 => array("pipe", "w"),  // stdout write output
+      			2 => array("pipe", "w")   // stderr error output
+    		);
+
+    		$process = proc_open($curl_cmd, $descriptorspec, $pipes);
+
+    		if (is_resource($process)) {
+			fclose($pipes[0]);
+      			$out = stream_get_contents($pipes[1]);
+      			fclose($pipes[1]);
+      			$out = preg_replace("/\r/",'',$out); //remove carriage
+      			$output_array = explode("\n",$out);  //reput result into one table
+      			$verbose_details = stream_get_contents($pipes[2]);
+      			fclose($pipes[2]);
+			proc_close($process);
+      		}
+    	}
+	else {
+  		exec($curl_cmd, $output_array);
+	}
+
 	$result = '';
 	$headers_and_response = array();
 	$headers_and_response_count = 1;
@@ -356,7 +363,7 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 			$result .= "{$line}\n";
 		}
 		else {
-			if (strpos($line, 'HTTP_CODE=20') !== 0 && strpos($line, 'HTTP_CODE=300') !== 0) {
+			if (strpos($line, 'HTTP_CODE=20') !== 0 && strpos($line, 'HTTP_CODE=300') !== 0 && strpos($line, 'HTTP_CODE=100') !== 0) {
 				if ($operation !== "") {
 					logToFile("$operation FAILED");
 				}
@@ -364,17 +371,22 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 				$headers_and_response = explode("\n\n", $result);
 				$headers_and_response_count = count($headers_and_response);
 				if ($headers_and_response_count > 1) {
-                                        $raw_headers = $headers_and_response[$headers_and_response_count - 2];
-                                        $response_body = $headers_and_response[$headers_and_response_count - 1];
-                                        if (is_json($response_body)) {
-                                                $response_body = pretty_print_json($response_body);
-                                        }
-                                }
-                                else {
-                                        $raw_headers = $headers_and_response[$headers_and_response_count - 1];
-                                        $response_body = "";
-                                }
-				logToFile("Curl Response :\n$raw_headers\n\n$response_body\n");
+					$raw_headers = $headers_and_response[$headers_and_response_count - 2];
+					$response_body = $headers_and_response[$headers_and_response_count - 1];
+					if (is_json($response_body)) {
+						$response_body = pretty_print_json($response_body);
+					}
+				}
+				else {
+					$raw_headers = $headers_and_response[$headers_and_response_count - 1];
+					$response_body = "";
+				}
+				if ($verbose_details !== "") {
+					logToFile("Curl Response :\n$verbose_details\n$raw_headers\n\n$response_body\n");
+				}
+				else {
+					logToFile("Curl Response :\n$raw_headers\n\n$response_body\n");
+				}
 				if (strpos($response_body, "<html>") !== false || strpos($line, 'HTTP_CODE=000') !== false) {
 					$http_status_code = intval(substr($line, strpos('HTTP_CODE=', $line) + strlen('HTTP_CODE=')));
 					$response_body = get_http_status_message($http_status_code);
@@ -389,7 +401,7 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 	$result = rtrim($result);
 	$headers_and_response = explode("\n\n", $result);
 	$headers_and_response_count = count($headers_and_response);
-	if ($headers_and_response_count > 1 && strpos('HTTP/1.1 100', $headers_and_response[0]) === false) {
+	if ($headers_and_response_count > 1) {
 		$raw_headers = $headers_and_response[$headers_and_response_count - 2];
 		$response_body = $headers_and_response[$headers_and_response_count - 1];
 		#$response_headers = http_parse_headers($raw_headers);
@@ -404,9 +416,57 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 		$wo_newparams['response_raw_headers'] = $result;
 		logToFile("Curl Response :\n$result\n");
 	}
-	
+
 	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $wo_newparams);
 	return $response;
+}
+
+function get_auth_token($username, $password, $host, $port, $connection_timeout, $max_time) {
+
+    $curl = create_token_auth_request($username, $password, $host, $port, $connection_timeout, $max_time);
+
+    $output_array = array();
+    exec($curl, $output_array);
+    $result = process_rest_reponse($output_array);
+    if ($result !== 'no_token') {
+        $index = strrpos($result, ':');
+        $result = substr($result, $index + 1);
+        $result = rtrim($result);
+        return $result;
+    }
+
+    return '';
+
+}
+
+function process_rest_reponse($output_array) {
+    foreach ($output_array as $line) {
+        logToFile('line .......:-----' . $line);
+    	if (strpos($line, 'Authorization:') !== false) {
+    		return $line;
+    	}
+    }
+    return 'no_token';
+}
+
+function create_token_auth_request($username, $password, $host, $port, $connection_timeout, $max_time) {
+	$curl = "curl -isw '\nHTTP_CODE=%{http_code}' --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: application/json\" -X POST http://$host:$port/ubi-api-rest/auth/token";
+    $curl .= " -d '" . pretty_print_json("{\"username\":\"$username\", \"password\":\"$password\"}") . "'";
+    logToFile("Curl Request : $curl\n");
+    return $curl;
+}
+
+function encode_uri($uri) {
+    $ait = new ArrayIterator(explode("/", $uri));
+	$cit = new CachingIterator($ait);
+	$encoded_uri = "";
+	foreach ($cit as $uri_path) {
+		$encoded_uri .= rawurlencode($uri_path);
+		if ($cit->hasNext()) {
+			$encoded_uri .= "/";
+		}
+	}
+	return $encoded_uri;
 }
 
 ?>

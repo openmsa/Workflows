@@ -28,23 +28,23 @@ if (preg_match('/.{3}\D*?(\d+?)/', $context['UBIQUBEID'], $matches) === 1) {
 
 //Create new managed entity
 $response = json_decode(_device_create($customer_db_id,
-	   			      				  $server_name,
-	   			      				  $manufacture_id,
-	   			      				  $model_id,
-	   			      				  $username,
-	   			      				  $password,
-	   			      				  $password_admin,
-	   			      				  $server_ip_address,
-	   			      				  $device_external_reference,
-                      				  "true",
-                      				  "true",
-                      				  "true",
-                      				  "false",
-                      				  "public",
-                      				  "",
-                      				  $server_port
-	 			  					  ), 
-                       	  True);
+	   			      			             	   $server_name,
+	   			      			             	   $manufacture_id,
+	   			      			             	   $model_id,
+	   			      			             	   $username,
+	   			      			             	   $password,
+	   			      			             	   $password_admin,
+	   			      			             	   $server_ip_address,
+	   			      			             	   $device_external_reference,
+                                   		 "true",
+                                   		 "true",
+                                   		 "true",
+                                   		 "false",
+                                   		 "public",
+                                   		 "",
+                                   		 $server_port
+	 			  					                  ), 
+                           True);
 
 
 if ($response['wo_status'] !== ENDED) {

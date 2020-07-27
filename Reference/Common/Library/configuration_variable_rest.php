@@ -29,7 +29,7 @@ function _configuration_variable_delete ($device_id, $name) {
  */
 function _configuration_variable_list ($device_id) {
 
-	$msa_rest_api = "variables/{$device_id}";
+	$msa_rest_api = "v1/configuration-variable/{$device_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "LIST CONFIGURATION VARIABLES");
 	$response = json_decode($response, true);
