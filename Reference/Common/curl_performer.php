@@ -431,13 +431,6 @@ function process_rest_reponse($output_array) {
     return 'no_token';
 }
 
-function create_token_auth_request($username, $password, $host, $port, $connection_timeout, $max_time) {
-	$curl = "curl -isw '\nHTTP_CODE=%{http_code}' --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: application/json\" -X POST http://$host:$port/ubi-api-rest/auth/token";
-    $curl .= " -d '" . pretty_print_json("{\"username\":\"$username\", \"password\":\"$password\"}") . "'";
-    logToFile("Curl Request : $curl\n");
-    return $curl;
-}
-
 function encode_uri($uri) {
     $ait = new ArrayIterator(explode("/", $uri));
 	$cit = new CachingIterator($ait);
