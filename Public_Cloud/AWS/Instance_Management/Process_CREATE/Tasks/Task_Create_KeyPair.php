@@ -24,9 +24,9 @@ $ec2Client = Ec2Client::factory(array(
     'region' => 'eu-west-1' // (e.g., us-east-1)
 ));
 
-$context["Key"] = 'AKIAIVVB6I6URUCAGREQ';
-$context["secret"] = 'oMdIyzsAsWk9VyYNHRt6myUqO380InZegnsYtg3D';
-$context["region"] = 'eu-west-1';
+$context["Key"] = 'SET YOU OWN';
+$context["secret"] = 'SET YOU OWN';
+$context["region"] = 'SET YOU OWN';
 
 $KeyName = $context["KeyName"];
 $array = array("KeyName" => $KeyName);
