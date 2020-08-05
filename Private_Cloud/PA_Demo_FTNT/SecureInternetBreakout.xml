@@ -59,7 +59,7 @@
         <class>flavors</class>
       </classes>
     </variable>
-    <variable default="f9abcc9b-a140-4a8b-aa72-40b1a7bf2209" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="402da829-9f07-40bb-8b22-6d4810c11a75" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
