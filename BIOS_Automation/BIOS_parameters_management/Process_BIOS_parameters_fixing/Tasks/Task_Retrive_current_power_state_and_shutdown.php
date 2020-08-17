@@ -13,14 +13,17 @@ $delay = 15;
 
 
 //Import current server power state
+$response = update_asynchronous_task_details($context, "Import current power state... ");
 $response = json_decode(import_objects($device_id, array($ms_server_inventory)), True);
 $object_ids_array = $response['wo_newparams'][$ms_server_inventory];
 $object_params = current($object_ids_array);
 $server_object_id = $object_params['object_id'];
 $server_power_state = $object_params['power_state'];
+$response = update_asynchronous_task_details($context, "Import current power state... ".$server_power_state);
 
 //Shutdown server if it is turned on now
 if ($server_power_state !== 'Off') {
+	$response = update_asynchronous_task_details($context, "Import current power state... ".$server_power_state." Shutting down...");
 	$action = 'ForceOff';
 	$micro_service_vars_array = array ();
 	$micro_service_vars_array ['object_id'] = $action;
@@ -33,10 +36,21 @@ if ($server_power_state !== 'Off') {
         echo $response;
         exit;
     }
+	$response = update_asynchronous_task_details($context, "Import current power state... ".$server_power_state." Shutting down... OK");
+  
+	$response = update_asynchronous_task_details($context, "Waiting ".$delay." seconds to be sure that server has been shutted down properlly");
     //Sleep $delay seconds to be sure that server has been gone down
 	sleep($delay);
 
 	//Sync microservices
+	$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+	if ($response['wo_status'] !== ENDED) {
+        $response = json_encode($response);
+        echo $response;
+        exit;
+	}
+  
+  	//Sync refernced MSs
 	$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
 	if ($response['wo_status'] !== ENDED) {
         $response = json_encode($response);

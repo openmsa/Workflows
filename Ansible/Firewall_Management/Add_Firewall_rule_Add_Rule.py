@@ -15,7 +15,7 @@ devicelongid = device_id[-3:]
 
 # build the Microservice JSON params for the CREATE
 micro_service_vars_array = {
-                            "playbook_path": "/opt/playbooks/createFW.yml",
+                            "playbook_path": "/opt/playbooks/linux_firewall_creation.yml",
                             "extra_vars": "\"dport="+context['dst_port']+" ip="+context['src_ip']+"\""}
 
 playbook = {"AnsiblePlaybook": {"":micro_service_vars_array}}
@@ -29,6 +29,6 @@ content = json.loads(order.content)
 order.command_synchronize(10)
 # check if the response is OK
 print(order.process_content('ENDED',
-                                  f'STATUS: {content["status"]}, \
+                                  'STATUS: {content["status"]}, \
                                     MESSAGE: {content["message"]}',
                                   context, True))

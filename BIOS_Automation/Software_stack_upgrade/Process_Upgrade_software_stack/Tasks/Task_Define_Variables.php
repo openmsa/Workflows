@@ -12,18 +12,48 @@ The workflow requires the following variables as input:
 function list_args()
 {
   create_var_def('device_id', 'Device');
+  create_var_def('device_ip', 'String');
   create_var_def('is_emulation', 'Boolean');
+  create_var_def('is_part_of_BPM', 'Boolean');
 }
 
-
-check_mandatory_param('device_id');
 check_mandatory_param('is_emulation');
+check_mandatory_param('is_part_of_BPM');
+if ($context['is_part_of_BPM']) {
+  check_mandatory_param('device_ip');
+  $response = json_decode(_lookup_list_device_ids(), True);
+  if ($response['wo_status'] !== ENDED) {
+    echo $response;
+    exit;
+  }
+  foreach ($response['wo_newparams'] as $device => $properties) {
+    if (strpos($properties['name'], $context['device_ip']) !== False) {
+    	$context['device_id'] = $properties['id'];
+        $context['device_name'] = $properties['name'];
+    }
+  }
+  if (empty($context['device_id'])) {
+    echo 'No device id has been found. Exit.';
+    exit;
+  }
+} else {
+  check_mandatory_param('device_id');
+  preg_match("/\S*?(?<device_id>\d{3})$/", $context['device_id'], $matches);
+  $context['device_id'] = $matches['device_id'];
+  $response = json_decode(_lookup_list_device_ids(), True);
+  if ($response['wo_status'] !== ENDED) {
+    echo $response;
+    exit;
+  }
+  foreach ($response['wo_newparams'] as $device => $properties) {
+    if ($properties['id'] == $context['device_id']) {
+    	$context['device_name'] = $properties['name'];
+    }
+  }
+}
 
-/*
-Grab correct device_id
-*/
-preg_match("/\S*?(?<device_id>\d{3})$/", $context['device_id'], $matches);
-$context['device_id'] = $matches['device_id'];
+$response = update_asynchronous_task_details($context, "The device is ".$context['device_name']." id is ".$context['device_id']);
+sleep(5);
 
 //Define microservice list
 $context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfish_bios_settings',
@@ -40,7 +70,7 @@ $microservices_array = $context['microservices_array'];
 $device_id = $context['device_id'];
 
 //The file describes software stacks directories based on server vendor and model
-$model_description_file_path = '/opt/fmc_repository/Process/F5N/Bios_automation/model_description.json';
+$model_description_file_path = '/opt/fmc_repository/Process/BIOS_Automation/Software_stack_upgrade/model_description.json';
 
 //Identify server's vendor and model
 $ms_server_inventory = $microservices_array['Server inventory'];

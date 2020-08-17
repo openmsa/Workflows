@@ -15,11 +15,11 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 
 	global $CURL_CMD;
 	
-	$HTTP_HOST = get_vars_value(WEB_NODE_PRIV_IP);
-	$HTTP_PORT = get_vars_value(WEB_NODE_HTTP_PORT);
+	$HTTP_HOST = "msa_api"; // get_vars_value(WEB_NODE_PRIV_IP)"";
+	$HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
 	$USERNAME = "ncroot";
-	$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
-	$password = shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
+	//$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
+	$password = "ubiqube"; //shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
 	$auth_token = get_auth_token($USERNAME, rtrim($password), $HTTP_HOST, $HTTP_PORT, $connection_timeout, $max_time);
 
 	if (strpos($msa_rest_api, "?") !== false) {

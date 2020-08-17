@@ -13,7 +13,7 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-   create_var_def("abc", "ServiceRef");
+
 }
 
 $ec2Client = Ec2Client::factory(array(

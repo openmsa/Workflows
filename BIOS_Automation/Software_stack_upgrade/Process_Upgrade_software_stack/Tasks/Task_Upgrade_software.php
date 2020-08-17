@@ -17,6 +17,22 @@ $ms_software_inventory = $microservices_array['Software inventory'];
 $device_id             = $context['device_id'];
 $model_dir_file_path   = $context['model_dir_file_path'];
 
+$response = update_asynchronous_task_details($context, "Synchronize device data ");
+
+//Sync up the ME MSs
+$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+if ($response['wo_status'] !== ENDED) {
+  echo $response;
+  exit;
+}
+
+//Sync up the referenced MSs
+$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+if ($response['wo_status'] !== ENDED) {
+  echo $response;
+  exit;
+}
+
 //Getting current software stack
 $response = update_asynchronous_task_details($context, "Getting current software stack... ");
 $context['current_sw_stack'] = $current_sw_stack = get_current_sw_stack($device_id, $ms_software_inventory);
