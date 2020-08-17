@@ -23,10 +23,10 @@ if (!defined('LIBRARY_DIR')) {
   define('LIBRARY_DIR', dirname(__FILE__) . DS . 'Library' . DS);
 }
 
-require_once COMMON_DIR . 'networking_common.php';
 require_once COMMON_DIR . 'workflows_common.php';
 require_once COMMON_DIR . 'micro_services_common.php';
 require_once LIBRARY_DIR . 'msa_common.php';
+require_once COMMON_DIR . 'utility.php';
 
 // Common header for all tasks
 $var_defs = array();
@@ -140,11 +140,11 @@ function task_error($message) {
   exit;
 }
 
-function task_error_with_email ($from, $email_recipients, $email_subject, $email_content) {
+// when a sub-call success with warning and you want to end the task
+function task_warning($message) {
   global $context;
-  logTofile(debug_dump($email_content, "Error message :\n"));
-  _email_send($from, $email_recipients, $email_subject, $email_content);
-  $response = prepare_json_response(FAILED, $email_content, $context, true);
+  logTofile(debug_dump($message, "Message"));
+  $response = prepare_json_response(WARNING, $message, $context, true);
   echo $response;
   exit;
 }

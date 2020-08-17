@@ -612,7 +612,8 @@ function pretty_print_json ($json) {
 }
 
 function getIdFromUbiId ($ubi_id){
-	$num_id = preg_replace('/[A-Z]+/', '', $ubi_id);
-	return $num_id;
+        $num_id = preg_replace('/[A-Z]+/', '', $ubi_id);
+        return $num_id;
 }
+
 ?>

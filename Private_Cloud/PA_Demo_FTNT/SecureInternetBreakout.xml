@@ -17,7 +17,11 @@
     <showVariables>false</showVariables>
     <visibility>5</visibility>
   </information>  <variables frozen="0">
-    <variable default="UBI174" displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="Device"/>
+    <variable default="UBI174" displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="Device">
+      <sdTypes>
+        <sdType manId="14020603" modId="16051904"/>
+      </sdTypes>
+    </variable>
     <variable default="13b551ae-6c66-4075-b32e-5132e17a989f" displayName="Floating Ip Network" displayOrder="1" editable="false" maxLength="100" name="params.floating_ip_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>Floating IP Address </section>
@@ -55,7 +59,7 @@
         <class>flavors</class>
       </classes>
     </variable>
-    <variable default="f9abcc9b-a140-4a8b-aa72-40b1a7bf2209" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable default="402da829-9f07-40bb-8b22-6d4810c11a75" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
       <sections>
         <section>VNF</section>
       </sections>
@@ -177,6 +181,8 @@
         <section>Create Jira Task</section>
       </sections>
     </variable>
+    <variable default="UBIPR165" displayName="VNF Deployment Settings Reference" displayOrder="129" maxLength="100" name="params.conf_profile_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
+    <variable default="FGT_VNF" displayName="VNF External Reference" displayOrder="130" maxLength="100" name="params.dev_ext_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String"/>
   </variables>  <example>    <content>
       <?php?>
     </content>  </example>
@@ -188,6 +194,16 @@
     <compensation/>
     <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
   
     
     
@@ -247,6 +263,10 @@
     <task name="Task_Create_Jira_Task.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Create Jira Task</displayName>
+    </task>
+    <task name="Task_Associate_DS_to_the_ME.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <displayName>Associate DS to the ME</displayName>
     </task>
   </process>
 

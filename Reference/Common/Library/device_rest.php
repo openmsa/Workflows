@@ -25,7 +25,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 						$management_address, $device_external_reference = "",
 						$log_enabled = "true", $log_more_enabled = "true", 
 						$mail_alerting = "true", $reporting = "false", $snmp_community = SNMP_COMMUNITY_DEFAULT, 
-						$managementInterface = "", $managementPort = 22) {
+						$managementInterface = "", $hostname = "" , $management_port = 22) {
 
 	$array = array('name' => $device_name,
 			'manufacturerId' => $manufacturer_id,
@@ -40,7 +40,9 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 			'managementAddress' => $management_address,
 			'managementPort' => $managementPort,
 			'externalReference' => $device_external_reference,
-			'snmpCommunity' => $snmp_community
+			'snmpCommunity' => $snmp_community,
+			'hostname' => $hostname,
+			'managementPort' => $management_port
 	);
   if (isset($managementInterface) && $managementInterface){
     $array['managementInterface'] = $managementInterface;
@@ -165,6 +167,7 @@ function _device_read_by_reference ($device_reference) {
  */
 function _device_get_hostname_by_id ($device_id) {
 	$msa_rest_api = "device/v1/hostname/{$device_id}";
+  
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE HOSTNAME BY ID");
 	$response = json_decode($response, true);

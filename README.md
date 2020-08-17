@@ -10,7 +10,7 @@ Alternatively, see below "Installing this repo on a live MSA".
 Getting started
 ---------------
 
-The [wiki](https://github.com/ubiqube/Workflows/wiki)
+The [wiki](https://github.com/openmsa/Workflows/wiki)
 provides a set of tutorials to help getting started with Workflow.
 
 
