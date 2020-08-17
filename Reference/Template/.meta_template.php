@@ -7,23 +7,15 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1548427645732</value>
-        </entry>
-        <entry>
-            <key>COMMENT</key>
-            <value></value>
+            <value>1453304773541</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1523356873657</value>
-        </entry>
-        <entry>
-            <key>TAG</key>
-            <value></value>
+            <value>1453299819146</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>FILE</value>
         </entry>
     </map>
 </metadata>

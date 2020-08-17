@@ -33,7 +33,10 @@ if ($response['wo_status'] !== ENDED) {
 	exit;
 }
 $ping_status_message = $response['wo_comment'];
-
+/*
+sleep(120);
+task_exit(ENDED, "the AWS instance ". $context["InstanceId"] . " is now available (SSH and ICMP). IP = " . $context["device_ip_address"]);
+*/
 /* test SSH */
 $port_no = SSH_DEFAULT_PORT_NO;
 $response = wait_for_ssh_status($device_ip_address, $port_no, $process_params);

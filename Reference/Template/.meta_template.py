@@ -3,25 +3,19 @@
     <map>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1590063762882</value>
-        </entry>
-        <entry>
-            <key>REPOSITORY</key>
-            <value>Process</value>
+            <value>1587725257969</value>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1590063762875</value>
+            <value>1587725257963</value>
         </entry>
         <entry>
-            <key>TAG</key>
+            <key>FILE_TYPE</key>
+            <value>text</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>DIRECTORY</value>
-        </entry>
-        <entry>
-            <key>COMMENT</key>
+            <value>FILE</value>
         </entry>
     </map>
 </metadata>
