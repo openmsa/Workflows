@@ -23,7 +23,7 @@
     <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
     
-  <task name="/opt/fmc_repository/Process/OpenMSA/Tutorials/Helloworld/Process_create_instance/Tasks/Task_init.php">
+  <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_create_instance/Tasks/Task_init.php">
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_create_instance</processPath>
       <displayName>init</displayName>
     </task>
@@ -35,7 +35,7 @@
     <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
     
-  <task name="/opt/fmc_repository/Process/OpenMSA/Tutorials/Helloworld/Process_delete_instance/Tasks/Task_delete.php">
+  <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_delete_instance/Tasks/Task_delete.php">
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_delete_instance/Tasks/</processPath>
       <displayName>delete</displayName>
     </task>
@@ -48,7 +48,7 @@
     <type>UPDATE</type>
     
   
-  <task name="/opt/fmc_repository/Process/OpenMSA/Tutorials/Helloworld/Process_print_message/Tasks/Task_print.php">
+  <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_print_message/Tasks/Task_print.php">
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_print_message/Tasks/</processPath>
       <displayName>print</displayName>
     </task>
