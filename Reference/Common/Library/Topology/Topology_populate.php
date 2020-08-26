@@ -21,8 +21,8 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 			"device_nature" => $device_nature,
 			"name" => $name,
 			"object_id" => $nodeId,
-			"x" => 0,
-			"y" => 0,
+			"x" => "",
+			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
 			"image" => $image,
@@ -46,18 +46,17 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 	return $place;
 }
 
-function createTopology($nodeId, $name, $subtype, $image) {
+function createTopologyNetwork($nodeId, $name, $subtype, $image) {
 	global $context;
 
 	$place = _topology_exist_object_this_instance($nodeId);
 	if ($place == -1) {
 		$context['Nodes'][] = array(
 			"primary_key" => $nodeId,
-			"device_nature" => $device_nature,
 			"name" => $name,
 			"object_id" => $nodeId,
-			"x" => 0,
-			"y" => 0,
+			"x" => "",
+			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
 			"image" => $image,

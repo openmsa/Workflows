@@ -125,9 +125,9 @@ function startVLANForDevice($deviceId, $ubiId, $name, $device_nature, &$nodePlac
 		}
 		
 		if ($vlan->object_id == 1) {
-			createTopology($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
+			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
 		} else {
-			createTopology($vlan->object_id, $vlan->name, "vlan", "");
+			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
 		}
 		$GLOBALS ["Nodes"] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
 	}
