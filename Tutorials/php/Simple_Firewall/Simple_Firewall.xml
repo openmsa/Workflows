@@ -57,6 +57,6 @@
     <order>10000</order>
     <visibility>0</visibility>
     <name>Simple Firewall (PHP)</name>
-    <group/>
+    <group>Tutorial</group>
   </information>
 </ObjectDefinition>
