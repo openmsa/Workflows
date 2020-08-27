@@ -37,27 +37,27 @@
     <type>CREATE</type>
     <visibility>0</visibility>
     <task name="CREATE_task_01_retrieve_data.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_01_retrieve_data</displayName>
     </task>
     <task name="CREATE_task_02_create_configuration.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_02_create_configuration</displayName>
     </task>
     <task name="CREATE_task_03_create_loopbacks.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_03_create_loopbacks</displayName>
     </task>
     <task name="CREATE_task_04_create_secrets.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_04_create_secrets</displayName>
     </task>
     <task name="CREATE_task_05_create_policy.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_05_create_policy</displayName>
     </task>
     <task name="CREATE_task_06_create_cryptomap.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_06_create_cryptomap</displayName>
     </task>
   </process>
@@ -66,7 +66,7 @@
     <type>DELETE</type>
     <visibility>0</visibility>
     <task name="DELETE_task_01.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_connect_branch</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
       <displayName>task_01</displayName>
     </task>
   </process>
@@ -78,6 +78,6 @@
     <order>10000</order>
     <visibility>0</visibility>
     <name>sdwan_connect_branch</name>
-    <group/>
+    <group>minilab|SDWAN</group>
   </information>
 </ObjectDefinition>
