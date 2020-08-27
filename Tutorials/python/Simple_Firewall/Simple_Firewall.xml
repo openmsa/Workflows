@@ -57,6 +57,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Simple Firewall (Python)</name>
-    <group/>
+    <group>minilab|Firewall</group>
   </information>
 </ObjectDefinition>
