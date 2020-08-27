@@ -47,6 +47,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Create configuration profile</name>
-    <group/>
+    <group>BIOS</group>
   </information>
 </ObjectDefinition>

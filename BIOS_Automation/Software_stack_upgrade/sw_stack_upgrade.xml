@@ -44,6 +44,6 @@
     <order>10000</order>
     <visibility>0</visibility>
     <name>Upgrade software stack</name>
-    <group/>
+    <group>BIOS</group>
   </information>
 </ObjectDefinition>

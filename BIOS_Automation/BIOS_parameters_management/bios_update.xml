@@ -96,6 +96,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>BIOS parameters automation</name>
-    <group/>
+    <group>BIOS</group>
   </information>
 </ObjectDefinition>
