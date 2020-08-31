@@ -1,0 +1,19 @@
+{
+  "IPAM IPv4 addresses": "Netbox___IP_address",
+  "IPAM IPv4 prefixes": "Netbox___Prefix",
+  "IPAM Sites": "Netbox___Sites",
+  "IPAM Tenants": "NetBox___Tenant",
+  "IPAM VLANs": "Netbox___VLAN",
+  "IPAM VRFs": "Netbox___VRF",
+  "IPAM Devices": "Netbox___Devices",
+  "IPAM Interfaces": "Netbox___Interfaces",
+  "IPAM Interface Connections": "Netbox___Interface_connections",
+  "IPAM Available Prefixes": "Netbox___Avaliable_Prefix",
+  "Router interfaces": "interfaces",
+  "Router BGP neighbours": "bgp_neighbour",
+  "Router BGP speaker": "bgp_speaker",
+  "Router VRF": "vrf",
+  "Router Prefix Filter": "prefix_filter",
+  "Router Import Connected to BGP": "import_connected_to_bgp",
+  "Router Import advertised routes by BGP": "import_advertised_routes_bgp"
+}
