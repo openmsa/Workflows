@@ -38,6 +38,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 			'mailAlerting' => $mail_alerting,
 			'reporting' => $reporting,
 			'managementAddress' => $management_address,
+			'managementPort' => $managementPort,
 			'externalReference' => $device_external_reference,
 			'snmpCommunity' => $snmp_community,
 			'hostname' => $hostname,
@@ -165,9 +166,8 @@ function _device_read_by_reference ($device_reference) {
  * @param  $device_id
  */
 function _device_get_hostname_by_id ($device_id) {
-	//$msa_rest_api = "device/v1/hostname/{$device_id}";
-	$msa_rest_api = "device/v2/{$device_id}";
-
+	$msa_rest_api = "device/v1/hostname/{$device_id}";
+  
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE HOSTNAME BY ID");
 	$response = json_decode($response, true);
@@ -188,7 +188,6 @@ function _device_get_hostname_by_id ($device_id) {
  */
 function _device_set_hostname_by_id ($device_id, $hostname) {
 	$msa_rest_api = "device/v1/{$device_id}/hostname/{$hostname}";
-
 	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "SET DEVICE HOSTNAME BY ID");
 	return $response;
