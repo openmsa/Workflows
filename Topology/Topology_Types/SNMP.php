@@ -12,6 +12,13 @@ function topology_create_view() {
 	$customer_db_id = substr($context ["UBIQUBEID"],4);
 	$response = _customer_read_by_id($customer_db_id);
 	logTofile(debug_dump($response, "***** _customer_read_by_id"));
+
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		echo $response;
+		exit;
+	  }
+	  
 	$customer_ref = $response['wo_newparams']['entity']['externalReference'];
 
 
