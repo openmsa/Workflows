@@ -19,7 +19,7 @@
   <process name="Process/Topology/Process_Create_View">
     <displayName>Create</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Create.php">
       <processPath>/opt/fmc_repository/Process/Topology/Process_Create_View/Tasks</processPath>
       <displayName>Create</displayName>
@@ -32,7 +32,7 @@
   <process name="Process/Topology/Process_Update_View">
     <displayName>Update</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Update.php">
       <processPath>/opt/fmc_repository/Process/Topology/Process_Update_View/Tasks</processPath>
       <displayName>Update</displayName>
@@ -45,12 +45,12 @@
   <process name="Process/Topology/Process_Delete_View">
     <displayName>Delete</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <process name="Process/Topology/Process_Call_For_Device">
     <displayName>Device Polling</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Task_Call_For_Device.php">
       <processPath>/opt/fmc_repository/Process/Topology/Process_Call_For_Device/Tasks</processPath>
       <displayName>Call Service</displayName>
@@ -59,7 +59,7 @@
   <process name="Process/Topology/Process_Save_View">
     <displayName>Save</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Task_Save.php">
       <processPath>/opt/fmc_repository/Process/Topology/Process_Save_View/Tasks</processPath>
       <displayName>Save</displayName>
@@ -67,12 +67,12 @@
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <description/>
+    <description>Topology</description>
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Topology</name>
-    <group/>
+    <group>Topology</group>
   </information>
 </ObjectDefinition>
