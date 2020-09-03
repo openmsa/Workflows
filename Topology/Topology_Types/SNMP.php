@@ -8,7 +8,13 @@ function topology_create_view() {
 	$context ['Nodes'] = array ();
 	$context ['Nodes_MAJ'] = array ();
 	
-	$list = json_decode(_lookup_list_devices_by_customer_reference($context ["UBIQUBEID"]), false);
+	// read the customer and get the external reference
+	$customer_db_id = substr($context ["UBIQUBEID"],4);
+	$response = _customer_read_by_id($customer_db_id);
+	$customer_ref = $response['wo_newparams']['entity']['externalReference'];
+
+
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
 
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
