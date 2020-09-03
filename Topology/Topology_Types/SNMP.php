@@ -1,5 +1,23 @@
 <?php
-require_once '/opt/fmc_repository/Process/Reference/Common/Library/Topology/Topology_populate.php';
+require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php';
+
+
+function get_customer_ref() {
+	global $context;
+
+	// read the customer and get the external reference
+	$customer_db_id = substr($context ["UBIQUBEID"],4);
+	$response = _customer_read_by_id($customer_db_id);
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		echo $response;
+		exit;
+	 }
+		  
+	$customer_ref = $response['wo_newparams']['externalReference'];
+	return $customer_ref;
+}
 
 // **********SERVICE LAUNCHERS********** //
 function topology_create_view() {
@@ -7,8 +25,9 @@ function topology_create_view() {
 	
 	$context ['Nodes'] = array ();
 	$context ['Nodes_MAJ'] = array ();
-	
-	$list = json_decode(_lookup_list_devices_by_customer_reference($context ["UBIQUBEID"]), false);
+		  
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
 
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
@@ -36,7 +55,10 @@ function topology_update_view() {
 	if (!isset($context ["Nodes_MAJ"])) {
 		$context ['Nodes_MAJ'] = array ();
 	}
-	$list = json_decode(_lookup_list_devices_by_customer_reference($context ['UBIQUBEID']), false);
+
+
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
 	
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
@@ -66,7 +88,7 @@ function readInformationsFromDevice($device_id, &$community, &$address) {
 		return $info ["wo_comment"];
 	}
 	
-	logTofile(debug_dump($info, "***TOPOLOGY READINFO INFODEVICE***"));
+	logTofile(debug_dump($info, "***TOPOLOGY READINFO INFODEVICE***\n"));
 	
 	$address = $info ["wo_newparams"] ["managementAddress"];
 	$community = $info ["wo_newparams"] ["snmpCommunity"];
@@ -174,7 +196,7 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 		try {
 			checkSNMPResponds($community, $address);
 			$cmd = "snmpwalk -v2c -c $community $address IP-MIB::ipAdEntNetMask 2>&1";
-			logTofile(debug_dump($cmd, "***TOPOLOGY SNMP COMMAND***"));
+			logTofile(debug_dump($cmd, "***TOPOLOGY SNMP COMMAND***\n"));
 			exec($cmd, $value, $error);
 			if (!$error) {
 				$rep = array ();
@@ -192,13 +214,13 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 					}
 				}
 			} else {
-				logTofile(debug_dump($value, "***TOPOLOGY START ERROR_1***"));
+				logTofile(debug_dump($value, "***TOPOLOGY START ERROR_1***\n"));
 			}
 		} catch (Exception $e) {
-			logTofile(debug_dump($e->getMessage(), "***TOPOLOGY START ERROR_2***"));
+			logTofile(debug_dump($e->getMessage(), "***TOPOLOGY START ERROR_2***\n"));
 		}
 	} else {
-		logTofile(debug_dump($error, "***TOPOLOGY START ERROR_3***"));
+		logTofile(debug_dump($error, "***TOPOLOGY START ERROR_3***\n"));
 	}
 }
 
@@ -207,7 +229,7 @@ function getStatus($device_id) {
 	$status = $info ["wo_newparams"];
 	
 	if (empty($status) || $status == "") {
-		return "Site with id " . $device_id . " was not found";
+		return "Managed Entity with id " . $device_id . " was not found";
 	} else {
 		return $status;
 	}
@@ -215,7 +237,10 @@ function getStatus($device_id) {
 
 function checkSNMPResponds($community, $address) {
 	$cmd_SNMP_RESPOND = "timeout 1 snmpwalk -v2c -c $community $address SNMPv2-MIB::sysName 2>&1";
-	exec($cmd_SNMP_RESPOND, $value, $error);
+	logToFile("checkSNMPResponds with command: " . $cmd_SNMP_RESPOND  . "\n");
+	$res = exec($cmd_SNMP_RESPOND, $value, $error);
+	logToFile("checkSNMPResponds result: " . $res  . "\n");
+
 	if ($error) {
 		throw new Exception("SNMP NOT AVAILABLE ON " . $address);
 	}
