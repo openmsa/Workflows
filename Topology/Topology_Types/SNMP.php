@@ -3,19 +3,20 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/Topology/Topo
 
 
 function get_customer_ref() {
-		// read the customer and get the external reference
-		$customer_db_id = substr($context ["UBIQUBEID"],4);
-		$response = _customer_read_by_id($customer_db_id);
-		$response = json_decode($response, true);
-	
-		if ($response['wo_status'] !== ENDED) {
-			$response = json_encode($response);
-			echo $response;
-			exit;
-		  }
+	global $context;
+
+	// read the customer and get the external reference
+	$customer_db_id = substr($context ["UBIQUBEID"],4);
+	$response = _customer_read_by_id($customer_db_id);
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		echo $response;
+		exit;
+	 }
 		  
-		$customer_ref = $response['wo_newparams']['externalReference'];
-		return $customer_ref;
+	$customer_ref = $response['wo_newparams']['externalReference'];
+	return $customer_ref;
 }
 
 // **********SERVICE LAUNCHERS********** //
