@@ -237,7 +237,10 @@ function getStatus($device_id) {
 
 function checkSNMPResponds($community, $address) {
 	$cmd_SNMP_RESPOND = "timeout 1 snmpwalk -v2c -c $community $address SNMPv2-MIB::sysName 2>&1";
-	exec($cmd_SNMP_RESPOND, $value, $error);
+	logToFile("checkSNMPResponds with command: " . $cmd_SNMP_RESPOND  . "\n");
+	$res = exec($cmd_SNMP_RESPOND, $value, $error);
+	logToFile("checkSNMPResponds result: " . $res  . "\n");
+
 	if ($error) {
 		throw new Exception("SNMP NOT AVAILABLE ON " . $address);
 	}
