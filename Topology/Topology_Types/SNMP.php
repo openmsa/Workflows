@@ -11,6 +11,7 @@ function topology_create_view() {
 	// read the customer and get the external reference
 	$customer_db_id = substr($context ["UBIQUBEID"],4);
 	$response = _customer_read_by_id($customer_db_id);
+	logTofile(debug_dump($response, "***** _customer_read_by_id"));
 	$customer_ref = $response['wo_newparams']['entity']['externalReference'];
 
 
