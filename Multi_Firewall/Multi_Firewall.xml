@@ -85,6 +85,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Multi-Firewall (PHP)</name>
-    <group/>
+    <group>Security|multi-vendor</group>
   </information>
 </ObjectDefinition>
