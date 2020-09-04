@@ -2,7 +2,7 @@
   <variables frozen="0">
     <variable displayName="Paloalto Device" name="params.device_id_pa" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI172" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <sections>Syncronise with Devices</sections>
+        <sections>Synchronize with Devices</sections>
       </sections>
       <sdTypes>
         <sdTypes manId="28" modId="134"/>
@@ -10,7 +10,7 @@
     </variable>
     <variable displayName="Checkpoint Device" name="params.device_id_cp" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI881" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <sections>Synronise with Checkpoint</sections>
+        <sections>Synchronize with Checkpoint</sections>
       </sections>
     </variable>
     <variable displayName="Network Name" name="params.net_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -34,17 +34,17 @@
     <displayName>Setup Network</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
-    <task name="Task_Syncronise_with_Devices.php">
+    <task name="Task_Synchronize_with_Devices.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
-      <displayName>Syncronise with Palo Alto</displayName>
+      <displayName>Synchronize with Palo Alto</displayName>
     </task>
     <task name="Task_Add_IP_Netmask.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
       <displayName>Add IP Netmask</displayName>
     </task>
-    <task name="Task_Synronise_with_Checkpoint.php">
+    <task name="Task_Synchronize_with_Checkpoint.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
-      <displayName>Synronise with Checkpoint</displayName>
+      <displayName>Synchronize with Checkpoint</displayName>
     </task>
     <task name="Task_Add_CP_Network.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
@@ -68,13 +68,13 @@
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
       <displayName>Delete Paloalto Network</displayName>
     </task>
-    <task name="Task_Synchronise_with_Palo_alto.php">
+    <task name="Task_Synchronize_with_Palo_alto.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
-      <displayName>Synchronise with Palo alto</displayName>
+      <displayName>Synchronize with Palo alto</displayName>
     </task>
-    <task name="Task_Synchronise_with_Checkpoint.php">
+    <task name="Task_Synchronize_with_Checkpoint.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
-      <displayName>Synchronise with Checkpoint</displayName>
+      <displayName>Synchronize with Checkpoint</displayName>
     </task>
   </process>
   <information>
