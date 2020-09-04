@@ -1,104 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ObjectDefinition>  <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description/>
-    <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group/>
-    <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>Multi-Firewall</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <serviceTaskType>php</serviceTaskType>
-    <showDetailedServiceInstances>false</showDetailedServiceInstances>
-    <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>false</showVariables>
-    <visibility>5</visibility>
-  </information>  <variables frozen="0">
-    <variable default="UBI172" displayName="Paloalto Device" displayOrder="0" maxLength="100" name="params.device_id_pa" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Paloalto Device" name="params.device_id_pa" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI172" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Syncronise with Devices</section>
+        <sections>Syncronise with Devices</sections>
       </sections>
       <sdTypes>
-        <sdType manId="28" modId="134"/>
+        <sdTypes manId="28" modId="134"/>
       </sdTypes>
     </variable>
-    <variable default="UBI881" displayName="Checkpoint Device" displayOrder="2" maxLength="100" name="params.device_id_cp" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
+    <variable displayName="Checkpoint Device" name="params.device_id_cp" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI881" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Synronise with Checkpoint</section>
+        <sections>Synronise with Checkpoint</sections>
       </sections>
     </variable>
-    <variable displayName="Network Name" displayOrder="4" maxLength="100" name="params.net_name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Network Name" name="params.net_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Add IP Netmask</section>
+        <sections>Add IP Netmask</sections>
       </sections>
     </variable>
-    <variable displayName="IP Address" displayOrder="5" maxLength="100" name="params.address" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="IP Address" name="params.address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Add IP Netmask</section>
+        <sections>Add IP Netmask</sections>
       </sections>
     </variable>
-    <variable displayName="Mask length" displayOrder="6" maxLength="100" name="params.masklength" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Mask length" name="params.masklength" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Add IP Netmask</section>
+        <sections>Add IP Netmask</sections>
       </sections>
     </variable>
-  </variables>  <example>    <content/>  </example>
-<process name="Process/Multi_Firewall/Process_Setup_Network">
-    <visibility>5</visibility>
+  </variables>
+  <example/>
+  <process name="Process/Multi_Firewall/Process_Setup_Network">
     <displayName>Setup Network</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-  <task name="Task_Syncronise_with_Devices.php">
+    <visibility>5</visibility>
+    <task name="Task_Syncronise_with_Devices.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
       <displayName>Syncronise with Palo Alto</displayName>
     </task>
@@ -116,25 +52,15 @@
     </task>
   </process>
   <process name="Process/Multi_Firewall/Process_Move_To_Trash">
-    <visibility>5</visibility>
     <displayName>Move To Trash</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
-  </process>
-<process name="Process/Multi_Firewall/Process_Delete_Networks">
     <visibility>5</visibility>
+  </process>
+  <process name="Process/Multi_Firewall/Process_Delete_Networks">
     <displayName>Delete Networks</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    
-    
-  
-    
-  <task name="Task_Delete_Checkpoint_Network.php">
+    <visibility>5</visibility>
+    <task name="Task_Delete_Checkpoint_Network.php">
       <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
       <displayName>Delete Checkpoint Network</displayName>
     </task>
@@ -151,4 +77,14 @@
       <displayName>Synchronise with Checkpoint</displayName>
     </task>
   </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>Multi-Firewall</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Multi-Firewall (PHP)</name>
+    <group/>
+  </information>
 </ObjectDefinition>
