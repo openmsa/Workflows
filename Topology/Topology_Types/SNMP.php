@@ -41,7 +41,6 @@ function topology_update_view() {
 		$context ['Nodes_MAJ'] = array ();
 	}
 
-
 	$customer_ref = get_customer_ref();
 	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
 	
@@ -57,7 +56,7 @@ function topology_update_view() {
 		}
 	}
 	
-	return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
+	return prepare_json_response(ENDED, "Topology  fully loaded", $context, false);
 }
 
 // **********SERVICE FUNCTIONS********** //
@@ -82,28 +81,10 @@ function singleSNMP($device_id, $name, $device_nature) {
 	}
 }
 
-function launchParallelSNMP($deviceId, $name, $view_type) {
-	global $context;
-	
-	$ubiqube_id = $context ['UBIQUBEID'];
-	$service_instance = $context ['SERVICEINSTANCEID'];
-	
-	$service_name = "Process/Topology/Topology";
-	$process_name = "Process/Topology/Process_Call_For_Device";
-	
-	$add_service_array = $context;
-	$add_service_array ['device_id'] = $deviceId;
-	$add_service_array ['name'] = $name;
-	$json_body = json_encode($add_service_array);
-	
-	_orchestration_launch_sub_process($ubiqube_id, $service_instance, $service_name, $process_name, $json_body);
-	
-	logTofile("***TOPOLOGY LAUNCH SNMP $deviceId * $name***");
-}
+
 
 function startSNMPForDevice($deviceId, $name, $device_nature) {
 	global $context;
-	global $DO_NOT_DELETE;
 	
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	$error = readInformationsFromDevice($deviceId, $community, $address);
@@ -176,5 +157,27 @@ function readInformationsFromDevice($device_id, &$community, &$address) {
 		return "";
 	}
 }
+
+
+/*
+function launchParallelSNMP($deviceId, $name, $view_type) {
+	global $context;
+	
+	$ubiqube_id = $context ['UBIQUBEID'];
+	$service_instance = $context ['SERVICEINSTANCEID'];
+	
+	$service_name = "Process/Topology/Topology";
+	$process_name = "Process/Topology/Process_Call_For_Device";
+	
+	$add_service_array = $context;
+	$add_service_array ['device_id'] = $deviceId;
+	$add_service_array ['name'] = $name;
+	$json_body = json_encode($add_service_array);
+	
+	_orchestration_launch_sub_process($ubiqube_id, $service_instance, $service_name, $process_name, $json_body);
+	
+	logTofile("***TOPOLOGY LAUNCH SNMP $deviceId * $name***");
+}
+*/
 
 ?>
