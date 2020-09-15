@@ -1,0 +1,48 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <process name="Process/IPOP2020_showcase__Optical_E2E_automation_/AON_system_turn_up">
+    <displayName>AON system turn up</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="AON_system_turn_up_SDN_domain_turn_up.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>SDM domain</displayName>
+    </task>
+    <task name="AON_system_turn_up_WDM1_domain.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>WDM1 domain</displayName>
+    </task>
+    <task name="AON_system_turn_up_WDM2_domain.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>WDM2 domain</displayName>
+    </task>
+  </process>
+  <process name="Process/IPOP2020_showcase__Optical_E2E_automation_/AON_system_turn_down">
+    <displayName>AON system turn down</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="AON_system_turn_down_SDN_domain.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>SDM domain</displayName>
+    </task>
+    <task name="AON_system_turn_down_WDM1_domain.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>WDM1 domain</displayName>
+    </task>
+    <task name="AON_system_turn_down_WDM2_domain.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase__Optical_E2E_automation_</processPath>
+      <displayName>WDM2 domain</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>IPOP2020 showcase (Optical E2E automation) controlling KDDI's AON controllers</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>IPOP2020 showcase AON System</name>
+    <group/>
+  </information>
+</ObjectDefinition>
