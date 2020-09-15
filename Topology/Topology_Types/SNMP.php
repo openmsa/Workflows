@@ -17,8 +17,10 @@ function topology_create_view() {
 		$deviceId = $value->id;
 		$name = $value->name;
         $device_info = json_decode(_device_read_by_id ($deviceId));
-        $device_nature = $device_info->wo_newparams->sdNature;
-		$error = singleSNMP($deviceId, $name, $device_nature, $context ["view_type"]);
+		$device_nature = $device_info->wo_newparams->sdNature;
+		$status = getStatus($deviceId);
+
+		$error = singleSNMP($deviceId, $name, $device_nature);
 		
 		if ($error != "") {
 			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
@@ -48,7 +50,6 @@ function topology_update_view() {
 		$name = $value->name;
         $device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-		//$error = launchParallelSNMP($deviceId, $name, $context ["view_type"]);
 		$error = singleSNMP($deviceId, $name, $device_nature, $context ["view_type"]);
 		
 		if ($error != "") {
@@ -60,34 +61,6 @@ function topology_update_view() {
 }
 
 // **********SERVICE FUNCTIONS********** //
-function searchAdress($search, &$matches) {
-	return preg_match_all('#([0-9]{1,3})(\.[0-9]{1,3}){3}#', $search, $matches);
-}
-
-function readInformationsFromDevice($device_id, &$community, &$address) {
-	$info = json_decode(_device_read_by_id($device_id), true);
-	
-	if ($info ["wo_status"] == "FAIL") {
-		return $info ["wo_comment"];
-	}
-	
-	logTofile(debug_dump($info, "***TOPOLOGY READINFO INFODEVICE***\n"));
-	
-	$address = $info ["wo_newparams"] ["managementAddress"];
-	$community = $info ["wo_newparams"] ["snmpCommunity"];
-	
-	if ((empty($community) || $community == "") && (empty($address) || $address == "")) {
-		return "Site with id " . $device_id . " was not found";
-	} else if (empty($community) || $community == "") {
-		return "Community of site with id " . $device_id . " was not found";
-	} else if (empty($address) || $address == "") {
-		return "Address of site with id " . $device_id . " was not found";
-	} else {
-		return "";
-	}
-}
-
-
 function singleSNMP($device_id, $name, $device_nature) {
 	try {
 		$status = getStatus($device_id);
@@ -142,7 +115,6 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 			logTofile(debug_dump($cmd, "***TOPOLOGY SNMP COMMAND***\n"));
 			exec($cmd, $value, $error);
 			if (!$error) {
-				$rep = array ();
 				foreach ($value as $search) {
 					if (searchAdress($search, $matches) != false) {
 						if ($matches [1] [0] != 127) {
@@ -177,4 +149,32 @@ function checkSNMPResponds($community, $address) {
 		throw new Exception("SNMP NOT AVAILABLE ON " . $address);
 	}
 }
+
+function searchAdress($search, &$matches) {
+	return preg_match_all('#([0-9]{1,3})(\.[0-9]{1,3}){3}#', $search, $matches);
+}
+
+function readInformationsFromDevice($device_id, &$community, &$address) {
+	$info = json_decode(_device_read_by_id($device_id), true);
+	
+	if ($info ["wo_status"] == "FAIL") {
+		return $info ["wo_comment"];
+	}
+	
+	logTofile(debug_dump($info, "***TOPOLOGY READINFO INFODEVICE***\n"));
+	
+	$address = $info ["wo_newparams"] ["managementAddress"];
+	$community = $info ["wo_newparams"] ["snmpCommunity"];
+	
+	if ((empty($community) || $community == "") && (empty($address) || $address == "")) {
+		return "Site with id " . $device_id . " was not found";
+	} else if (empty($community) || $community == "") {
+		return "Community of site with id " . $device_id . " was not found";
+	} else if (empty($address) || $address == "") {
+		return "Address of site with id " . $device_id . " was not found";
+	} else {
+		return "";
+	}
+}
+
 ?>

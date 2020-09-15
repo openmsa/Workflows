@@ -7,9 +7,8 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest
 function topology_create_view() {
 	global $context;
 
-	logTofile(debug_dump($context, "***TOPOLOGY VLAN CONTEXT***"));
-	$GLOBALS ["Nodes"] = array ();
-	$GLOBALS ["DO_NOT_DESTROY"] = array ();
+	$context ['Nodes'] = array ();
+	$context ['Nodes_MAJ'] = array ();
 	
 	$customer_ref = get_customer_ref();
 	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref));
@@ -17,11 +16,8 @@ function topology_create_view() {
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
 		$name = $value->name;
-		logTofile(debug_dump($deviceId, "***TOPOLOGY VLAN DEVICEID***"));
-
 		$device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-
 		$status = getStatus($deviceId);
 		logTofile(debug_dump($status, "***TOPOLOGY VLAN STATUS***"));
 		$nodePlace = -1;
