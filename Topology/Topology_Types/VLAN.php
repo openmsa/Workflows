@@ -1,5 +1,6 @@
 <?php
 require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php';
+require_once '/opt/fmc_repository/Process/Topology/Common/Topology_common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest.php';
 
 // **********SERVICE LAUNCHERS********** //
@@ -10,7 +11,8 @@ function topology_create_view() {
 	$GLOBALS ["Nodes"] = array ();
 	$GLOBALS ["DO_NOT_DESTROY"] = array ();
 	
-	$list = json_decode(_lookup_list_devices_by_customer_reference($context ["UBIQUBEID"]));
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref));
 	
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
@@ -140,16 +142,4 @@ function startVLANForDevice($deviceId, $name, $device_nature, &$nodePlace) {
 	logTofile(debug_dump($GLOBALS ["Nodes"], "***TOPOLOGY GLOBALS***"));
 	return false;
 }
-
-function getStatus($device_id) {
-	$info = json_decode(_device_get_status($device_id), true);
-	$status = $info ["wo_newparams"];
-	
-	if (empty($status) || $status == "") {
-		return "Site with id " . $device_id . " was not found";
-	} else {
-		return $status;
-	}
-}
-
 ?>

@@ -1,23 +1,7 @@
 <?php
 require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php';
-
-
-function get_customer_ref() {
-	global $context;
-
-	// read the customer and get the external reference
-	$customer_db_id = substr($context ["UBIQUBEID"],4);
-	$response = _customer_read_by_id($customer_db_id);
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		echo $response;
-		exit;
-	 }
-		  
-	$customer_ref = $response['wo_newparams']['externalReference'];
-	return $customer_ref;
-}
+require_once '/opt/fmc_repository/Process/Topology/Common/Topology_common.php';
+require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest.php';
 
 // **********SERVICE LAUNCHERS********** //
 function topology_create_view() {
@@ -167,7 +151,6 @@ function singleSNMP($device_id, $name, $device_nature) {
 
 function launchParallelSNMP($deviceId, $name, $view_type) {
 	global $context;
-	global $process_id;
 	
 	$ubiqube_id = $context ['UBIQUBEID'];
 	$service_instance = $context ['SERVICEINSTANCEID'];
@@ -221,17 +204,6 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 		}
 	} else {
 		logTofile(debug_dump($error, "***TOPOLOGY START ERROR_3***\n"));
-	}
-}
-
-function getStatus($device_id) {
-	$info = json_decode(_device_get_status($device_id), true);
-	$status = $info ["wo_newparams"];
-	
-	if (empty($status) || $status == "") {
-		return "Managed Entity with id " . $device_id . " was not found";
-	} else {
-		return $status;
 	}
 }
 
