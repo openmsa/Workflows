@@ -43,8 +43,10 @@ function topology_create_view() {
 	$ret = prepare_json_response(ENDED, "The topology has fully loaded", $context, true);
 	return $ret;
 }
+
 function topology_update_view() {
 	global $context;
+
 	logTofile(debug_dump($context, "***TOPOLOGY VLAN CONTEXT***"));
 	if (isset($context ["Nodes"])) {
 		$GLOBALS ["Nodes"] = $context ["Nodes"];
@@ -74,6 +76,7 @@ function topology_update_view() {
 		logTofile(debug_dump($status, "***TOPOLOGY VLAN STATUS***"));
 		if ($status == "UP") {
 			$error = startVLANForDevice($deviceId, $name, $device_nature, $nodePlace);
+
 			if ($error != "") {
 				logTofile(debug_dump($error, "***TOPOLOGY VLAN ERROR***"));
 			}
@@ -113,6 +116,7 @@ function topology_update_view() {
 // **********SERVICE FUNCTIONS********** //
 // Don't delete $nodeplace : it's use in Update
 function startVLANForDevice($deviceId, $name, $device_nature, &$nodePlace) {
+
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	
 	$instances_objname = "vlan";
