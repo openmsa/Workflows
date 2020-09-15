@@ -18,7 +18,6 @@ function topology_create_view() {
 		$name = $value->name;
         $device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-		//$error = launchParallelSNMP($deviceId, $name, $context ["view_type"]);
 		$error = singleSNMP($deviceId, $name, $device_nature, $context ["view_type"]);
 		
 		if ($error != "") {
@@ -88,45 +87,6 @@ function readInformationsFromDevice($device_id, &$community, &$address) {
 	}
 }
 
-function calcMask($maskAdr) {
-	$maskPart = explode(".", $maskAdr);
-	$mask = "";
-	foreach ($maskPart as $val) {
-		$mask .= decbin(intval($val));
-	}
-	$pos = strpos($mask, "0");
-	if ($pos !== false) {
-		return $pos;
-	} else {
-		return 32;
-	}
-}
-
-function getNetworkByAddressAndMask($address, $mask) {
-	$addressParts = explode(".", $address);
-	$networkAddressBinary = "";
-	foreach ($addressParts as $val) {
-		$morceauBinaire = decbin(intval($val));
-		while (strlen($morceauBinaire) < 8) {
-			$morceauBinaire = "0" . $morceauBinaire;
-		}
-		$networkAddressBinary .= $morceauBinaire;
-	}
-	
-	$networkAddressBinary = substr($networkAddressBinary, 0, $mask);
-	while (strlen($networkAddressBinary) < 32) {
-		$networkAddressBinary .= "0";
-	}
-	
-	$addressMasked = "";
-	for($i = 0; $i < 32; $i = $i + 8) {
-		$part = intval(substr($networkAddressBinary, $i, 8), 2);
-		$addressMasked .= $part . ".";
-	}
-	
-	$addressMasked = substr($addressMasked, 0, strlen($addressMasked) - 1);
-	return $addressMasked;
-}
 
 function singleSNMP($device_id, $name, $device_nature) {
 	try {

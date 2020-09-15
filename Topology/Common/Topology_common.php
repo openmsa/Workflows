@@ -28,4 +28,49 @@ function get_customer_ref() {
 	return $customer_ref;
 }
 
+
+function calcMask($maskAdr) {
+	$maskPart = explode(".", $maskAdr);
+	$mask = "";
+	foreach ($maskPart as $val) {
+		$mask .= decbin(intval($val));
+	}
+	$result=0;
+	$pos = strpos($mask, "0");
+	if ($pos !== false) {
+		$result = $pos;
+	} else {
+		$result = 32;
+	}
+	logTofile("calcMask ".$maskAdr." -> ".$result);
+	return $result;
+}
+
+function getNetworkByAddressAndMask($address, $mask) {
+	$addressParts = explode(".", $address);
+	$networkAddressBinary = "";
+	foreach ($addressParts as $val) {
+		$morceauBinaire = decbin(intval($val));
+		while (strlen($morceauBinaire) < 8) {
+			$morceauBinaire = "0" . $morceauBinaire;
+		}
+		$networkAddressBinary .= $morceauBinaire;
+	}
+	
+	$networkAddressBinary = substr($networkAddressBinary, 0, $mask);
+	while (strlen($networkAddressBinary) < 32) {
+		$networkAddressBinary .= "0";
+	}
+	
+	$addressMasked = "";
+	for($i = 0; $i < 32; $i = $i + 8) {
+		$part = intval(substr($networkAddressBinary, $i, 8), 2);
+		$addressMasked .= $part . ".";
+	}
+	
+	$addressMasked = substr($addressMasked, 0, strlen($addressMasked) - 1);
+	logTofile("getNetworkByAddressAndMask: ".$address." ".$mask." -> ".$addressMasked."\n");
+	return $addressMasked;
+}
+
 ?>
