@@ -17,7 +17,7 @@
     <type>CREATE</type>
     <visibility>5</visibility>
     <task name="CREATE_ipsec_task_01_create_process.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_ipsec_control</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_ipsec_control</processPath>
       <displayName>task_01_create_process</displayName>
     </task>
   </process>
@@ -26,7 +26,7 @@
     <type>DELETE</type>
     <visibility>5</visibility>
     <task name="DELETE_task_01.py">
-      <processPath>/opt/fmc_repository/Process/sdwan_ipsec_control</processPath>
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_ipsec_control</processPath>
       <displayName>task_01</displayName>
     </task>
   </process>
@@ -36,8 +36,8 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>5</visibility>
-    <name>SD-WAN IPsec Control</name>
-    <group/>
+    <visibility>0</visibility>
+    <name>sdwan_ipsec_control</name>
+    <group>minilab|SDWAN</group>
   </information>
 </ObjectDefinition>
