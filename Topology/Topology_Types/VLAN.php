@@ -110,7 +110,7 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 		logTofile(debug_dump($context ["Nodes"], "*** TOPOLOGY Nodes ***"));
 		return false;
 	} else {
-		logTofile("WARNING: managed entity ".$device_id." has no vlan microservice attached");
+		logTofile("WARNING: managed entity ".$deviceId." has no vlan microservice attached");
 	}
 }
 ?>
