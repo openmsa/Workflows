@@ -102,8 +102,8 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 		}
 		$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
 	}
-	
-	logTofile(debug_dump($GLOBALS ["Nodes"], "***TOPOLOGY GLOBALS***"));
+
+	logTofile(debug_dump($context ["Nodes"], "***TOPOLOGY GLOBALS***"));
 	return false;
 }
 ?>
