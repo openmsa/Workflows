@@ -89,21 +89,28 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 	$array = array (
 			$instances_objname
 	);
-	$vlans = json_decode(import_objects($deviceId, $array))->wo_newparams->vlan;
-	foreach ($vlans as $vlan) {
-	//	if (!in_array($vlan->object_id, $GLOBALS ["DO_NOT_DESTROY"])) {
-	//		array_push($GLOBALS ["DO_NOT_DESTROY"], $vlan->object_id);
-	//	}
-		
-		if ($vlan->object_id == 1) {
-			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
-		} else {
-			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
-		}
-		$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
-	}
 
-	logTofile(debug_dump($context ["Nodes"], "***TOPOLOGY GLOBALS***"));
-	return false;
+	$import_result = json_decode(import_objects($deviceId, $array));
+	if (isset($import_result->wo_newparams->vlan)) {
+		$vlans = $import_result->wo_newparams->vlan;
+		foreach ($vlans as $vlan) {
+
+			if (!isset($vlan->name)) {
+				$vlan->name = "unknown VLAN name. The Microservice VLAN requires a variable \'name\'";
+			}
+			
+			if ($vlan->object_id == 1) {
+				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
+			} else {
+				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
+			}
+			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
+		}
+		
+		logTofile(debug_dump($context ["Nodes"], "*** TOPOLOGY Nodes ***"));
+		return false;
+	} else {
+		logTofile("WARNING: managed entity ".$device_id." has no vlan microservice attached");
+	}
 }
 ?>
