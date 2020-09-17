@@ -1,117 +1,88 @@
 <?php
 require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php';
+require_once '/opt/fmc_repository/Process/Topology/Common/Topology_common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest.php';
 
 // **********SERVICE LAUNCHERS********** //
-function topology_create_view($context) {
-	logTofile(debug_dump($context, "***TOPOLOGY VLAN CONTEXT***"));
-	$GLOBALS ["Nodes"] = array ();
-	$GLOBALS ["DO_NOT_DESTROY"] = array ();
+function topology_create_view() {
+	global $context;
 	
-	$list = json_decode(_lookup_list_devices_by_customer_reference($context ["UBIQUBEID"]));
-	
+	$context ['Nodes'] = array ();
+	$context ['Nodes_MAJ'] = array ();
+		  
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
+
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
-		$ubiId = $value->ubiId;
 		$name = $value->name;
-		logTofile(debug_dump($deviceId, "***TOPOLOGY VLAN DEVICEID***"));
-
-		$device_info = json_decode(_device_read_by_id ($deviceId));
-        $device_nature = $device_info->wo_newparams->sdNature;
-
+        $device_info = json_decode(_device_read_by_id ($deviceId));
+		$device_nature = $device_info->wo_newparams->sdNature;
 		$status = getStatus($deviceId);
-		logTofile(debug_dump($status, "***TOPOLOGY VLAN STATUS***"));
-		$nodePlace = -1;
-		if ($status == "UP") {
-			$error = startVLANForDevice($deviceId, $ubiId, $name, $device_nature, $nodePlace);
-			if ($error) {
-				logTofile(debug_dump($error, "***TOPOLOGY VLAN ERROR***"));
-			}
-		} else {
-			if ($status == "UNREACHABLE") {
-				createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
-			} else if ($status == "NEVERREACHED") {
-				createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
-			} else if ($status == "CRITICAL") {
-				createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
-			}
+
+		$error = singleVLAN($deviceId, $name, $device_nature);
+		
+		if ($error != "") {
+			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
 		}
 	}
 	
-	$context ["Nodes"] = $GLOBALS ["Nodes"];
-	$ret = prepare_json_response(ENDED, "The topology has fully loaded", $context, true);
-	return $ret;
+	return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
 }
-function topology_update_view($context) {
-	logTofile(debug_dump($context, "***TOPOLOGY VLAN CONTEXT***"));
-	if (isset($context ["Nodes"])) {
-		$GLOBALS ["Nodes"] = $context ["Nodes"];
-		unset($context ["Nodes"]);
-	} else {
-		$GLOBALS ["Nodes"] = array ();
+
+function topology_update_view() {
+	global $context;
+	
+	if (!isset($context ["Nodes"])) {
+		$context ['Nodes'] = array ();
 	}
-	$GLOBALS ["DO_NOT_DESTROY"] = array ();
 	
-	$ubiqube_id = $context ['UBIQUBEID'];
-	
-	$list = json_decode(_lookup_list_devices_by_customer_reference($ubiqube_id));
+	if (!isset($context ["Nodes_MAJ"])) {
+		$context ['Nodes_MAJ'] = array ();
+	}
+
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
 	
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
-		$ubiId = $value->ubiId;
 		$name = $value->name;
-		
-		array_push($GLOBALS ["DO_NOT_DESTROY"], $deviceId);
-
-		logTofile(debug_dump($deviceId, "***TOPOLOGY VLAN DEVICEID***"));
-
-		$device_info = json_decode(_device_read_by_id ($deviceId));
+        $device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-
-		$nodePlace = -1;
-		$status = getStatus($deviceId);
-		logTofile(debug_dump($status, "***TOPOLOGY VLAN STATUS***"));
-		if ($status == "UP") {
-			$error = startVLANForDevice($deviceId, $ubiId, $name, $device_nature, $nodePlace);
-			if ($error != "") {
-				logTofile(debug_dump($error, "***TOPOLOGY VLAN ERROR***"));
-			}
-		} else {
-			if ($status == "UNREACHABLE") {
-				$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
-			} else if ($status == "NEVERREACHED") {
-				$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
-			} else if ($status == "CRITICAL") {
-				$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
-			}
-		}
+		$error = singleVLAN($deviceId, $name, $device_nature, $context ["view_type"]);
 		
-		$cluster_id = $GLOBALS ["Nodes"] [$nodePlace] ["cluster_id"];
-		if (!in_array($cluster_id, $GLOBALS ["DO_NOT_DESTROY"])) {
-			array_push($GLOBALS ["DO_NOT_DESTROY"], $cluster_id);
+		if ($error != "") {
+			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
 		}
 	}
 	
-	foreach ($GLOBALS ["Nodes"] as $key => $value_verif) {
-		$destroy = true;
-		foreach ($GLOBALS ["DO_NOT_DESTROY"] as $value_not_destroy) {
-			if ($value_verif ["object_id"] == $value_not_destroy) {
-				$destroy = false;
-			}
-		}
-		if ($destroy) {
-			unset($GLOBALS ["Nodes"] [$key]);
-		}
-	}
-	
-	$context ["Nodes"] = $GLOBALS ["Nodes"];
-	logTofile(debug_dump($context, "***TOPOLOGY VLAN CONTEXT***"));
-	return prepare_json_response(ENDED, "The topology has fully loaded", $context, true);
+	return prepare_json_response(ENDED, "Topology  fully loaded", $context, false);
 }
 
 // **********SERVICE FUNCTIONS********** //
-// Don't delete $nodeplace : it's use in Update
-function startVLANForDevice($deviceId, $ubiId, $name, $device_nature, &$nodePlace) {
+function singleVLAN($device_id, $name, $device_nature) {
+	try {
+		$status = getStatus($device_id);
+		if($status == "UP") {
+			startVLANForDevice($device_id, $name, $device_nature);
+		} else {
+			if($status == "UNREACHABLE") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
+			} else if($status == "NEVERREACHED") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
+			} else if($status == "CRITICAL") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
+			}
+		}
+	} catch (Exception $e) {
+		logTofile(debug_dump($e, "**************TOPOLOGY ERROR **************"));
+		echo prepare_json_response(FAILED, "FAILED", $context, true);
+		exit;
+	}
+}
+
+function startVLANForDevice($deviceId, $name, $device_nature) {
+
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	
 	$instances_objname = "vlan";
@@ -120,33 +91,19 @@ function startVLANForDevice($deviceId, $ubiId, $name, $device_nature, &$nodePlac
 	);
 	$vlans = json_decode(import_objects($deviceId, $array))->wo_newparams->vlan;
 	foreach ($vlans as $vlan) {
-		if (!in_array($vlan->object_id, $GLOBALS ["DO_NOT_DESTROY"])) {
-			array_push($GLOBALS ["DO_NOT_DESTROY"], $vlan->object_id);
-		}
+	//	if (!in_array($vlan->object_id, $GLOBALS ["DO_NOT_DESTROY"])) {
+	//		array_push($GLOBALS ["DO_NOT_DESTROY"], $vlan->object_id);
+	//	}
 		
 		if ($vlan->object_id == 1) {
 			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
 		} else {
 			createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
 		}
-		$GLOBALS ["Nodes"] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
+		$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
 	}
-	
-	logTofile(debug_dump($GLOBALS ["Nodes"], "***TOPOLOGY GLOBALS***"));
-	return false;
-}
 
-function getStatus($device_id) {
-	$cmd = "/opt/ubi-jentreprise/bin/api/device/getDeviceStatus.sh " . $device_id;
-	$res = shell_exec($cmd);
-	
-	preg_match('#<return>[A-Za-z]*</return>#', $res, $matches);
-	$status = substr($matches [0], 8, -9);
-	
-	if (empty($status) || $status == "") {
-		return "Site with id " . $device_id . " was not found";
-	} else {
-		return $status;
-	}
+	logTofile(debug_dump($context ["Nodes"], "***TOPOLOGY GLOBALS***"));
+	return false;
 }
 ?>
