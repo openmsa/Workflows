@@ -35,16 +35,7 @@ if ($server_power_state !== 'Off') {
         exit;
     	} 
     } else {
-    	//Import avaliable power actions
-		$response = json_decode(import_objects($device_id, array($ms_server_power)), True);
-		$object_ids_array = $response['wo_newparams'][$ms_server_power];
-		$action = 'UNKNOWN';
-		$possible_action = array('ForceOn', 'On');
-		while ((list($object_id, $object_details) = each($object_ids_array)) and ($action === 'UNKNOWN')) {
-			if (in_array($object_details['object_id'], $possible_action)) {
-				$action = $object_details['object_id'];
-			}
-		}
+    	$action = 'ForceOn';
 		$response = update_asynchronous_task_details($context, "Checking server power state... ".$server_power_state." Lets use ".$action);
 		$micro_service_vars_array = array ();
 		$micro_service_vars_array ['object_id'] = $action;

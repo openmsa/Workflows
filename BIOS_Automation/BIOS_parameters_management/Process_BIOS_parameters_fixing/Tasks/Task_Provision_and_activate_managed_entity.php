@@ -30,18 +30,6 @@ _configuration_variable_create ($device_id, 'TOKEN_XPATH', '//root/sessionToken'
 _configuration_variable_create ($device_id, '_SYSTEM', "/redfish/v1/Systems", $type ="String", $comment = "");
 
 */
-
-$response = update_asynchronous_task_details($context, "Attaching configuration profile... ");
-
-//Attach configuration profile to managed device
-$response = json_decode(_profile_attach_to_device_by_reference ($profile_name, $device_external_reference), True);
-if ($response['wo_status'] !== ENDED) {
-  echo $response;
-}
-
-$response = update_asynchronous_task_details($context, "Attaching configuration profile... OK");
-sleep(3);
-
 $response = update_asynchronous_task_details($context, "Activating device... ");
 
 //Make initial provisioning
@@ -61,14 +49,23 @@ if ($response['wo_status'] !== ENDED) {
 $response = update_asynchronous_task_details($context, "Activating device... OK");
 sleep(3);
 
+$response = update_asynchronous_task_details($context, "Attaching configuration profile... ");
+
+//Attach configuration profile to managed device
+$response = json_decode(_profile_attach_to_device_by_reference ($profile_name, $device_external_reference), True);
+if ($response['wo_status'] !== ENDED) {
+  echo $response;
+}
+
+$response = update_asynchronous_task_details($context, "Attaching configuration profile... OK");
+sleep(3);
+
 //Waiting until the managed device will be finally avaliable
 $response = json_decode(wait_for_device_reachability ($device_id, $process_params, $timeout = DEVICE_STATUS_CHANGE_TIMEOUT), True);
 if ($response['wo_status'] !== ENDED) {
   echo $response;
   exit;
 }
-
-sleep (30);
 
 $response = update_asynchronous_task_details($context, "Device syncing... ");
 
