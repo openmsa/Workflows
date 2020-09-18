@@ -6,19 +6,64 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.ph
 
 //Retrive variables from $context and define the new ones
 $modifying_failed = '';
+$delay = 30;
 $device_id = $context['device_id'];
 $bios_parameters = $context['bios_parameters_array'];
 $microservices_array = $context['microservices_array'];
 $ms_server_inventory = $microservices_array['Server inventory'];
 $ms_server_power = $microservices_array['Server power managment'];
 $ms_bios_params = $microservices_array['BIOS parameters manipulation'];
+$ms_job_manager = $microservices_array['Job manager'];
+if (array_key_exists('misc_server_params', $context)) {
+  $misc_server_params = $context['misc_server_params'];
+}
 
-$response = update_asynchronous_task_details($context, "Device syncing... ");
+if (array_key_exists('JobManager', $misc_server_params)) {
+  if ($misc_server_params['JobManager']) {
+    $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... ");
+    //Syncing microservices
+    $are_all_job_completed = False;
+    while ($are_all_job_completed === False) {
+      $are_all_job_completed = True;
+      $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+      if ($response['wo_status'] !== ENDED) {
+        $response = json_encode($response);
+        echo $response;
+        exit;
+      }
+      
+      //Sync up the referenced MSs
+      $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+      if ($response['wo_status'] !== ENDED) {
+        $response = json_encode($response);
+        echo $response;
+        exit;
+  
+      }
+  
+      $response = json_decode(import_objects($device_id, array($ms_job_manager)), True);
+      $current_job = $response['wo_newparams'][$ms_job_manager];
+  
+      foreach ($current_job as $job_name => $job_params) {
+        if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
+          $are_all_job_completed = False;
+        }
+      sleep(10);
+      }
+    }
+    $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... OK");
+    sleep(3);
+  }
+} else {
+  $response = update_asynchronous_task_details($context, "Device syncing... ");
+
+  //Waiting until new parameters have been applied
+  sleep($delay);
+}
 
 //Sync up the ME MSs
 $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
 if ($response['wo_status'] !== ENDED) {
-  $response = json_encode($response);
   echo $response;
   exit;
 }

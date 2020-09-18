@@ -14,7 +14,7 @@ $server_mac_address = $context['server_mac_address'];
 //Create new password
 $response = update_asynchronous_task_details($context, "Creating new password... ");
 //$new_password = trim(base64_encode(substr(md5($username.$server_ip_address.$server_mac_address), 0, 10)), '=');
-$new_password = '4XDptRyt3nIo*';
+$new_password = $context['password'];
 $context['password'] = $new_password;
 $response = update_asynchronous_task_details($context, "Creating new password... OK. The new password is ".$new_password);
 sleep(3);
