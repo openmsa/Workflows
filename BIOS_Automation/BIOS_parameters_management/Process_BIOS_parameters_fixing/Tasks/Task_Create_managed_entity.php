@@ -20,7 +20,7 @@ $password = $password_admin = $context['password'];
 $response = update_asynchronous_task_details($context, "Creating managed entity ".$server_name."... ");
 
 //Extract numeric customer ID
-if (preg_match('/.{3}\D*?(\d+?)/', $context['UBIQUBEID'], $matches) === 1) {
+if (preg_match('/.{3}\D*?(\d+)/', $context['UBIQUBEID'], $matches) === 1) {
 	$customer_db_id = $context['customer_db_id'] = $matches[1];
 } else {
 	$customer_db_id = $context['customer_db_id'] = -1;
