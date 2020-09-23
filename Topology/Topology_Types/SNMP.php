@@ -95,11 +95,12 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 		try {
 			checkSNMPResponds($community, $address);
 			$cmd = "snmpwalk -v2c -c $community $address IP-MIB::ipAdEntNetMask 2>&1";
-			logTofile(debug_dump($cmd, "*** startSNMPForDevice SNMP COMMAND ***\n"));
+			logTofile("*** startSNMPForDevice SNMP COMMAND: ".$cmd."\n");
 			exec($cmd, $value, $error);
 			if (!$error) {
 				foreach ($value as $search) {
 					if (searchAdress($search, $matches) != false) {
+						logTofile(debug_dump($matches, "checkSNMPResponds searchAdress matches:\n"));
 						if ($matches [1] [0] != 127) {
 							$address_link = $matches [0] [0];
 							$maskAdr = $matches [0] [1];
