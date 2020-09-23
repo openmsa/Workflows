@@ -46,8 +46,8 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
 	);
-	logTofile("***  createTopology nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place."\n");
-	logTofile(debug_dump($context, "*** createTopology context ***"));
+	logTofile("*** createTopology 3 nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place."\n");
+	logTofile(debug_dump($context, "*** createTopology context \n"));
 
 	return $place;
 }
