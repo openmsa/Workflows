@@ -95,7 +95,7 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 		try {
 			checkSNMPResponds($community, $address);
 			$cmd = "snmpwalk -v2c -c $community $address IP-MIB::ipAdEntNetMask 2>&1";
-			logTofile(debug_dump($cmd, "***TOPOLOGY SNMP COMMAND***\n"));
+			logTofile(debug_dump($cmd, "*** startSNMPForDevice SNMP COMMAND ***\n"));
 			exec($cmd, $value, $error);
 			if (!$error) {
 				foreach ($value as $search) {
@@ -129,7 +129,7 @@ function checkSNMPResponds($community, $address) {
 	logToFile("checkSNMPResponds result: " . $res  . "\n");
 
 	if ($error) {
-		throw new Exception("SNMP NOT AVAILABLE ON " . $address);
+		throw new Exception("checkSNMPResponds SNMP NOT AVAILABLE ON " . $address);
 	}
 }
 
