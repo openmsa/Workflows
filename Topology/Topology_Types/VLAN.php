@@ -105,9 +105,9 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 			logTofile("*** startVLANForDevice  vlan_id: ".$vlan_id."\n");
 
 			if ($vlan_id == 1) {
-				createTopologyNetwork($vlan_id, $vlan->name, "network", "");
+				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
 			} else {
-				createTopologyNetwork($vlan_id, $vlan->name, "network", "");
+				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
 			}
 			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan_id;
 		}
