@@ -15,6 +15,9 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 	global $context;
 	
 	$place = _topology_exist_object_this_instance($nodeId);
+
+	logTofile("*** createTopology 1  nodeId $nodeId,  name $name place: $place");
+
 	if ($place == -1) {
 		$context['Nodes'][] = array(
 			"primary_key" => $nodeId,
@@ -37,8 +40,8 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 		$context['Nodes'][$place]["name"] = $name;
 		$context['Nodes'][$place]["image"] = $image;
 	}
+	logTofile("*** createTopology  2 nodeId $nodeId,  name $name place: $place");
 
-	logTofile(debug_dump($place, "*** createTopology $nodeId * $name ***"));
 	$context['Nodes_MAJ'][] = array(
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
