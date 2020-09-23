@@ -43,6 +43,9 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
 	);
+	logTofile("***  createTopology nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place."\n");
+	logTofile(debug_dump($context, "*** createTopology context ***"));
+
 	return $place;
 }
 
@@ -72,11 +75,13 @@ function createTopologyNetwork($nodeId, $name, $subtype, $image) {
 		$context['Nodes'][$place]["image"] = $image;
 	}
 
-	logTofile(debug_dump($place, "***  createTopologyNetwork $nodeId * $name ***"));
 	$context['Nodes_MAJ'][] = array(
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
 	);
+	logTofile("***  createTopologyNetwork nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place."\n");
+	logTofile(debug_dump($context, "*** createTopologyNetwork context ***"));
+
 	return $place;
 }
 
