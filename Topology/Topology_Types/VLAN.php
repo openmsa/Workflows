@@ -83,6 +83,7 @@ function singleVLAN($device_id, $name, $device_nature, $status) {
 }
 
 function startVLANForDevice($deviceId, $name, $device_nature) {
+	logTofile("*** startVLANForDevice  deviceId: ".$deviceId." name: ".$name);
 
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	
