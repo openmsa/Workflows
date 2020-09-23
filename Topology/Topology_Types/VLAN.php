@@ -20,10 +20,10 @@ function topology_create_view() {
 		$device_nature = $device_info->wo_newparams->sdNature;
 		$status = getStatus($deviceId);
 
-		$error = singleVLAN($deviceId, $name, $device_nature);
+		$error = singleVLAN($deviceId, $name, $device_nature, $status);
 		
 		if ($error != "") {
-			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
+			logTofile(debug_dump($error, "*** topology_create_view ERROR***"));
 		}
 	}
 	
@@ -49,10 +49,11 @@ function topology_update_view() {
 		$name = $value->name;
         $device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-		$error = singleVLAN($deviceId, $name, $device_nature, $context ["view_type"]);
+		$status = getStatus($deviceId);
+		$error = singleVLAN($deviceId, $name, $device_nature, $status);
 		
 		if ($error != "") {
-			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
+			logTofile(debug_dump($error, "*** topology_update_view  ERROR ***"));
 		}
 	}
 	
@@ -60,9 +61,9 @@ function topology_update_view() {
 }
 
 // **********SERVICE FUNCTIONS********** //
-function singleVLAN($device_id, $name, $device_nature) {
+function singleVLAN($device_id, $name, $device_nature, $status) {
 	try {
-		$status = getStatus($device_id);
+		//$status = getStatus($device_id);
 		if($status == "UP") {
 			startVLANForDevice($device_id, $name, $device_nature);
 		} else {
@@ -75,13 +76,15 @@ function singleVLAN($device_id, $name, $device_nature) {
 			}
 		}
 	} catch (Exception $e) {
-		logTofile(debug_dump($e, "**************TOPOLOGY ERROR **************"));
+		logTofile(debug_dump($e, "************** singleVLAN ERROR **************"));
 		echo prepare_json_response(FAILED, "FAILED", $context, true);
 		exit;
 	}
 }
 
 function startVLANForDevice($deviceId, $name, $device_nature) {
+	global $context;
+	logTofile("*** startVLANForDevice  deviceId: ".$deviceId." name: ".$name."\n");
 
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	
@@ -98,19 +101,21 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 			if (!isset($vlan->name)) {
 				$vlan->name = "unknown VLAN name. The Microservice VLAN requires a variable \'name\'";
 			}
-			
-			if ($vlan->object_id == 1) {
-				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
+			$vlan_id = $vlan->object_id;
+			logTofile("*** startVLANForDevice  vlan_id: ".$vlan_id."\n");
+
+			if ($vlan_id == 1) {
+				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
 			} else {
-				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
+				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
 			}
-			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan->object_id;
+			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan_id;
 		}
 		
-		logTofile(debug_dump($context ["Nodes"], "*** TOPOLOGY Nodes ***"));
+		logTofile(debug_dump($context ['Nodes'], "*** startVLANForDevice Nodes ***\n"));
 		return false;
 	} else {
-		logTofile("WARNING: managed entity ".$deviceId." has no vlan microservice attached");
+		logTofile("WARNING: startVLANForDevice: managed entity ".$deviceId." has no vlan microservice attached");
 	}
 }
 ?>
