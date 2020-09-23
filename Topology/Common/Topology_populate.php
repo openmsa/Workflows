@@ -80,7 +80,7 @@ function createTopologyNetwork($nodeId, $name, $subtype, $image) {
 			"primary_key" => $nodeId
 	);
 	logTofile("***  createTopologyNetwork nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place."\n");
-	logTofile(debug_dump($context, "*** createTopologyNetwork context ***"));
+	//logTofile(debug_dump($context, "*** createTopologyNetwork context ***"));
 
 	return $place;
 }

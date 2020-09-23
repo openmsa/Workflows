@@ -102,7 +102,7 @@ function startVLANForDevice($deviceId, $name, $device_nature) {
 			}
 			
 			if ($vlan->object_id == 1) {
-				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "", "#AA3BF2");
+				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
 			} else {
 				createTopologyNetwork($vlan->object_id, $vlan->name, "vlan", "");
 			}
