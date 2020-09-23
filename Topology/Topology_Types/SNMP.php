@@ -20,10 +20,10 @@ function topology_create_view() {
 		$device_nature = $device_info->wo_newparams->sdNature;
 		$status = getStatus($deviceId);
 
-		$error = singleSNMP($deviceId, $name, $device_nature);
+		$error = singleSNMP($deviceId, $name, $device_nature, $status);
 		
 		if ($error != "") {
-			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
+			logTofile(debug_dump($error, "*** topology_create_view ERROR ***"));
 		}
 	}
 	
@@ -49,10 +49,12 @@ function topology_update_view() {
 		$name = $value->name;
         $device_info = json_decode(_device_read_by_id ($deviceId));
         $device_nature = $device_info->wo_newparams->sdNature;
-		$error = singleSNMP($deviceId, $name, $device_nature, $context ["view_type"]);
+		$status = getStatus($deviceId);
+		
+		$error = singleSNMP($deviceId, $name, $device_nature, $status);
 		
 		if ($error != "") {
-			logTofile(debug_dump($error, "***TOPOLOGY CREATE ERROR***"));
+			logTofile(debug_dump($error, "*** topology_update_view ERROR ***"));
 		}
 	}
 	
@@ -60,9 +62,9 @@ function topology_update_view() {
 }
 
 // **********SERVICE FUNCTIONS********** //
-function singleSNMP($device_id, $name, $device_nature) {
+function singleSNMP($device_id, $name, $device_nature, $status) {
 	try {
-		$status = getStatus($device_id);
+		//$status = getStatus($device_id);
 		if($status == "UP") {
 			startSNMPForDevice($device_id, $name, $device_nature);
 		} else {
@@ -75,7 +77,7 @@ function singleSNMP($device_id, $name, $device_nature) {
 			}
 		}
 	} catch (Exception $e) {
-		logTofile(debug_dump($e, "**************TOPOLOGY ERROR **************"));
+		logTofile(debug_dump($e, "************** singleSNMP ERROR **************"));
 		echo prepare_json_response(FAILED, "FAILED", $context, true);
 		exit;
 	}
@@ -110,13 +112,13 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 					}
 				}
 			} else {
-				logTofile(debug_dump($value, "***TOPOLOGY START ERROR_1***\n"));
+				logTofile(debug_dump($value, "*** startSNMPForDevice ERROR_1***\n"));
 			}
 		} catch (Exception $e) {
-			logTofile(debug_dump($e->getMessage(), "***TOPOLOGY START ERROR_2***\n"));
+			logTofile(debug_dump($e->getMessage(), "*** startSNMPForDevice ERROR_2***\n"));
 		}
 	} else {
-		logTofile(debug_dump($error, "***TOPOLOGY START ERROR_3***\n"));
+		logTofile(debug_dump($error, "*** startSNMPForDevice ERROR_3 ***\n"));
 	}
 }
 
@@ -132,7 +134,9 @@ function checkSNMPResponds($community, $address) {
 }
 
 function searchAdress($search, &$matches) {
-	return preg_match_all('#([0-9]{1,3})(\.[0-9]{1,3}){3}#', $search, $matches);
+	$res = preg_match_all('#([0-9]{1,3})(\.[0-9]{1,3}){3}#', $search, $matches);
+	logToFile("searchAdress : search " . $search  . " result:".$res."\n");
+	return $res;
 }
 
 function readInformationsFromDevice($device_id, &$community, &$address) {
@@ -142,7 +146,7 @@ function readInformationsFromDevice($device_id, &$community, &$address) {
 		return $info ["wo_comment"];
 	}
 	
-	logTofile(debug_dump($info, "***TOPOLOGY READINFO INFODEVICE***\n"));
+	logTofile(debug_dump($info, "*** readInformationsFromDevice ***\n"));
 	
 	$address = $info ["wo_newparams"] ["managementAddress"];
 	$community = $info ["wo_newparams"] ["snmpCommunity"];
