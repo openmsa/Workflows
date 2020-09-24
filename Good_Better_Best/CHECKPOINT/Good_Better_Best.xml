@@ -64,6 +64,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Good Better Best</name>
-    <group/>
+    <group>Checkpoint</group>
   </information>
 </ObjectDefinition>
