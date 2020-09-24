@@ -3,89 +3,7 @@ require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php'
 require_once '/opt/fmc_repository/Process/Topology/Common/Topology_common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest.php';
 
-// **********SERVICE LAUNCHERS********** //
-function topology_create_view() {
-	global $context;
-	
-	$context ['Nodes'] = array ();
-	$context ['Nodes_MAJ'] = array ();
-		  
-	$customer_ref = get_customer_ref();
-	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
-
-	foreach ($list->wo_newparams as $value) {
-		$deviceId = $value->id;
-		$name = $value->name;
-        $device_info = json_decode(_device_read_by_id ($deviceId));
-		$device_nature = $device_info->wo_newparams->sdNature;
-		$status = getStatus($deviceId);
-
-		$error = singleSNMP($deviceId, $name, $device_nature, $status);
-		
-		if ($error != "") {
-			logTofile(debug_dump($error, "*** topology_create_view ERROR ***"));
-		}
-	}
-	
-	return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
-}
-
-function topology_update_view() {
-	global $context;
-	
-	if (!isset($context ["Nodes"])) {
-		$context ['Nodes'] = array ();
-	}
-	
-	if (!isset($context ["Nodes_MAJ"])) {
-		$context ['Nodes_MAJ'] = array ();
-	}
-
-	$customer_ref = get_customer_ref();
-	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
-	
-	foreach ($list->wo_newparams as $value) {
-		$deviceId = $value->id;
-		$name = $value->name;
-        $device_info = json_decode(_device_read_by_id ($deviceId));
-        $device_nature = $device_info->wo_newparams->sdNature;
-		$status = getStatus($deviceId);
-		
-		$error = singleSNMP($deviceId, $name, $device_nature, $status);
-		
-		if ($error != "") {
-			logTofile(debug_dump($error, "*** topology_update_view ERROR ***"));
-		}
-	}
-	
-	return prepare_json_response(ENDED, "Topology  fully loaded", $context, false);
-}
-
-// **********SERVICE FUNCTIONS********** //
-function singleSNMP($device_id, $name, $device_nature, $status) {
-	try {
-		//$status = getStatus($device_id);
-		if($status == "UP") {
-			startSNMPForDevice($device_id, $name, $device_nature);
-		} else {
-			if($status == "UNREACHABLE") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
-			} else if($status == "NEVERREACHED") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
-			} else if($status == "CRITICAL") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
-			}
-		}
-	} catch (Exception $e) {
-		logTofile(debug_dump($e, "************** singleSNMP ERROR **************"));
-		echo prepare_json_response(FAILED, "FAILED", $context, true);
-		exit;
-	}
-}
-
-
-
-function startSNMPForDevice($deviceId, $name, $device_nature) {
+function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	global $context;
 	
 	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
@@ -95,7 +13,7 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 		try {
 			checkSNMPResponds($community, $address);
 			$cmd = "snmpwalk -v2c -c $community $address IP-MIB::ipAdEntNetMask 2>&1";
-			logTofile("*** startSNMPForDevice SNMP COMMAND: ".$cmd."\n");
+			logTofile("*** calculateDeviceTopology SNMP COMMAND: ".$cmd."\n");
 			exec($cmd, $value, $error);
 			if (!$error) {
 				foreach ($value as $search) {
@@ -113,13 +31,13 @@ function startSNMPForDevice($deviceId, $name, $device_nature) {
 					}
 				}
 			} else {
-				logTofile(debug_dump($value, "*** startSNMPForDevice ERROR_1***\n"));
+				logTofile(debug_dump($value, "*** calculateDeviceTopology ERROR_1***\n"));
 			}
 		} catch (Exception $e) {
-			logTofile(debug_dump($e->getMessage(), "*** startSNMPForDevice ERROR_2***\n"));
+			logTofile(debug_dump($e->getMessage(), "*** calculateDeviceTopology ERROR_2***\n"));
 		}
 	} else {
-		logTofile(debug_dump($error, "*** startSNMPForDevice ERROR_3 ***\n"));
+		logTofile(debug_dump($error, "*** calculateDeviceTopology ERROR_3 ***\n"));
 	}
 }
 
