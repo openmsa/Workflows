@@ -12,7 +12,7 @@
     <variable displayName="IP" name="params.ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Good_Better_Best/New">
+  <process name="Process/Good_Better_Best/CHECKPOINT/New">
     <displayName>New</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
@@ -25,7 +25,7 @@
       <displayName>Synchronise</displayName>
     </task>
   </process>
-  <process name="Process/Good_Better_Best/Switch_Profile">
+  <process name="Process/Good_Better_Best/CHECKPOINT/Switch_Profile">
     <displayName>Switch Profile</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
@@ -38,7 +38,7 @@
       <displayName>Synchronise</displayName>
     </task>
   </process>
-  <process name="Process/Good_Better_Best/Terminate">
+  <process name="Process/Good_Better_Best/CHECKPOINT/Terminate">
     <displayName>Terminate</displayName>
     <type>DELETE</type>
     <visibility>0</visibility>
@@ -47,7 +47,7 @@
       <displayName>Terminate</displayName>
     </task>
   </process>
-  <process name="Process/Good_Better_Best/New_Service_with_existing_Gateway">
+  <process name="Process/Good_Better_Best/CHECKPOINT/New_Service_with_existing_Gateway">
     <displayName>New Service with existing Gateway</displayName>
     <type>CREATE</type>
     <visibility>0</visibility>
