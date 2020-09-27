@@ -1,6 +1,7 @@
 <?php
 
 function topology_create_view() {
+	logToFile("*** topology_create_view")
 	global $context;
 	
 	$context ['Nodes'] = array ();
@@ -27,6 +28,7 @@ function topology_create_view() {
 }
 
 function topology_update_view() {
+	logToFile("*** topology_update_view")
 	global $context;
 	
 	if (!isset($context ["Nodes"])) {
@@ -57,6 +59,7 @@ function topology_update_view() {
 }
 
 function processDevice($device_id, $name, $device_nature, $status) {
+	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status")
 	try {
 		//$status = getStatus($device_id);
 		if($status == "UP") {
