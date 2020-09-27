@@ -6,9 +6,9 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest
 function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	global $context;
 
-  logTofile("*** calculateDeviceTopology  deviceId: ".$deviceId." name: ".$name."\n");
+    logTofile("*** calculateDeviceTopology  deviceId: ".$deviceId." name: ".$name."\n");
 
-  $nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+    $nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 	
 	$instances_objname = "vlan";
 	$array = array (

@@ -1,15 +1,16 @@
 <?php
 require_once '/opt/fmc_repository/Process/Topology/Common/Topology_populate.php';
+require_once '/opt/fmc_repository/Process/Topology/Common/Topology_common.php';
+require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest.php';
 
-// **********SERVICE LAUNCHERS********** //
-
-function topology_create_view() {
+function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	global $context;
-	return prepare_json_response(ENDED, "The topology has fully loaded", $context, true);
-}
 
-function topology_update_view() {
-	global $context;
-	return prepare_json_response(ENDED, "The topology has fully loaded", $context, true);
+  	logTofile("*** calculateDeviceTopology  deviceId: ".$deviceId." name: ".$name."\n");
+
+	/*
+	 * create the managed entity node
+	 */
+  	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
 }
 ?>
