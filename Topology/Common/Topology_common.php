@@ -1,9 +1,10 @@
 <?php
 
 function topology_create_view() {
-	logToFile("*** topology_create_view")
 	global $context;
-	
+
+	logToFile("*** topology_create_view")
+
 	$context ['Nodes'] = array ();
 	$context ['Nodes_MAJ'] = array ();
 		  
@@ -28,8 +29,9 @@ function topology_create_view() {
 }
 
 function topology_update_view() {
-	logToFile("*** topology_update_view")
 	global $context;
+
+	logToFile("*** topology_update_view")
 	
 	if (!isset($context ["Nodes"])) {
 		$context ['Nodes'] = array ();
