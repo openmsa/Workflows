@@ -61,7 +61,7 @@ function topology_update_view() {
 }
 
 function processDevice($device_id, $name, $device_nature, $status) {
-	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status")
+	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
 	try {
 		//$status = getStatus($device_id);
 		if($status == "UP") {
