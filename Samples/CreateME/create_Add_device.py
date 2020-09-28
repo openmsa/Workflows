@@ -4,7 +4,7 @@ from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
 
-dev_var.add('customer_id', var_type='Integer')
+dev_var.add('customer_id', var_type='Customer')
 dev_var.add('managed_device_name')
 dev_var.add('manufacturer_id', var_type='Integer')
 dev_var.add('model_id', var_type='Integer')
