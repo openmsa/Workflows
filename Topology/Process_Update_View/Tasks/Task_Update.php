@@ -17,8 +17,11 @@ $view_type = $context["view_type"];
 
 $pos = strpos($view_type, "..");
 if($pos === false) {
-	require_once '/opt/fmc_repository/Process/Topology/Topology_Types/' . $view_type . '.php';
-	echo topology_update_view();
+	$topo_script = '/opt/fmc_repository/Process/Topology/Topology_Types/' . $view_type . '.php';
+	logToFile("using topology script: ".$topo_script."\n");
+  	require_once $topo_script;
+	$res = topology_update_view();
+	echo $res;  
 } else {
 	echo prepare_json_response(FAILED, "Do not use a file from another folder", $context, false);
 }

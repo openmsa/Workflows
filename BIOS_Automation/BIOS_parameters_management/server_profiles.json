@@ -202,5 +202,32 @@
 				"AdminEmail": "test@ubiqube.com"
 			}
 		}
+	},
+	"DELL": {
+		"OUI": ["F8CAB8", "F8BC12", "F8B156", "F48E38", "F40270"],
+		"Default Credentials": {
+			"Username": "root",
+			"Password": "redfish"
+		},
+		"BIOS profiles": {
+			"Performance": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Enabled",
+				"SriovGlobalEnable": "Enabled"
+			},
+			"Low-Latency": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Disabled",
+				"SriovGlobalEnable": "Enabled"
+			},
+			"Energy-effency": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Disabled",
+				"SriovGlobalEnable": "Disabled"
+			}
+		},
+		"Miscellaneous parameters": {
+			"JobManager": true
+		}
 	}
 }

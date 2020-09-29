@@ -1,5 +1,87 @@
 <?php
 
+function topology_create_view() {
+	global $context;
+
+	logToFile("*** topology_create_view");
+
+	$context ['Nodes'] = array ();
+	$context ['Nodes_MAJ'] = array ();
+		  
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
+
+	foreach ($list->wo_newparams as $value) {
+		$deviceId = $value->id;
+		$name = $value->name;
+        $device_info = json_decode(_device_read_by_id ($deviceId));
+		$device_nature = $device_info->wo_newparams->sdNature;
+		$status = getStatus($deviceId);
+
+		$error = processDevice($deviceId, $name, $device_nature, $status);
+		
+		if ($error != "") {
+			logTofile(debug_dump($error, "*** topology_create_view ERROR***"));
+		}
+	}
+	
+	return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
+}
+
+function topology_update_view() {
+	global $context;
+
+	logToFile("*** topology_update_view");
+	
+	if (!isset($context ["Nodes"])) {
+		$context ['Nodes'] = array ();
+	}
+	
+	if (!isset($context ["Nodes_MAJ"])) {
+		$context ['Nodes_MAJ'] = array ();
+	}
+
+	$customer_ref = get_customer_ref();
+	$list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
+	
+	foreach ($list->wo_newparams as $value) {
+		$deviceId = $value->id;
+		$name = $value->name;
+        $device_info = json_decode(_device_read_by_id ($deviceId));
+        $device_nature = $device_info->wo_newparams->sdNature;
+		$status = getStatus($deviceId);
+		$error = processDevice($deviceId, $name, $device_nature, $status);
+		
+		if ($error != "") {
+			logTofile(debug_dump($error, "*** topology_update_view  ERROR ***"));
+		}
+	}
+	
+	return prepare_json_response(ENDED, "Topology  fully loaded", $context, false);
+}
+
+function processDevice($device_id, $name, $device_nature, $status) {
+	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
+	try {
+		//$status = getStatus($device_id);
+		if($status == "UP") {
+			calculateDeviceTopology($device_id, $name, $device_nature);
+		} else {
+			if($status == "UNREACHABLE") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
+			} else if($status == "NEVERREACHED") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
+			} else if($status == "CRITICAL") {
+				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
+			}
+		}
+	} catch (Exception $e) {
+		logTofile(debug_dump($e, "************** processDevice ERROR **************"));
+		echo prepare_json_response(FAILED, "FAILED", $context, true);
+		exit;
+	}
+}
+
 function getStatus($device_id) {
 	$info = json_decode(_device_get_status($device_id), true);
 	$status = $info ["wo_newparams"];
@@ -27,7 +109,6 @@ function get_customer_ref() {
 	$customer_ref = $response['wo_newparams']['externalReference'];
 	return $customer_ref;
 }
-
 
 function calcMask($maskAdr) {
 	$maskPart = explode(".", $maskAdr);

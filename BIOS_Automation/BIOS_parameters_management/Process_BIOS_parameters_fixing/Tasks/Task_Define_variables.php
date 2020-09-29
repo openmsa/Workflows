@@ -52,7 +52,8 @@ $context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfi
                                         'BIOS upgrade process'        =>  'redfish_bios_version',
                                         'Redfish account manipulation'=>  'redfish_server_accounts',
                                         'Server power managment'      =>  'redfish_server_actions',
-                                        'Server inventory'            =>  'redfish_server_general'
+                                        'Server inventory'            =>  'redfish_server_general',
+                                        'Job manager'                 =>  'redfish_job_manager'
                                         );
 
 
@@ -61,7 +62,6 @@ $response = update_asynchronous_task_details($context, "Checking variables and i
 
 $vendor_array = json_decode(file_get_contents($server_profiles_file_path), True);
 while ((list($vendor, $properties) = each($vendor_array)) and ($context['server_vendor'] == 'UNKNOWN')) {
-  logToFile(debug_dump($properties, "DEBUG: PROPERTIES"));
   if (in_array($mac_oui, $properties['OUI'])) {
     $context['server_vendor'] = $vendor;
     $context['username'] = $properties['Default Credentials']['Username'];
@@ -71,6 +71,9 @@ while ((list($vendor, $properties) = each($vendor_array)) and ($context['server_
                                                       "Original Value" => NULL,
                                                       "was_it_changed" => 'false'
                                                     );
+    }
+    if (array_key_exists('Miscellaneous parameters', $properties)) {
+      $context['misc_server_params'] = $properties['Miscellaneous parameters'];
     }
   }
 }
