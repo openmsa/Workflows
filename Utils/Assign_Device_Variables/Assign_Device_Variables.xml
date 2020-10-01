@@ -46,6 +46,6 @@
     <order>10000</order>
     <visibility>0</visibility>
     <name>Assign Device Variables</name>
-    <group/>
+    <group>MSA|UTILS</group>
   </information>
 </ObjectDefinition>
