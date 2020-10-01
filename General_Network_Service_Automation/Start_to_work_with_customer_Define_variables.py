@@ -4,7 +4,7 @@ import json
 import re
 
 """
-The prposals of the task are:
+The proposals of the task are:
   - Retrive variables from customer;
   - Retrieve microservice variables from file
   - Put the variables to context
@@ -25,7 +25,7 @@ context['ipam_device_id'] = re.match('^\D+?(\d+?)$', context['ipam_device_id']).
 
 
 #Import microservice alias list
-with open('/opt/fmc_repository/Process/General_network_service_automation/microservices_list.json', 'r') as alias_file:
+with open('/opt/fmc_repository/Process/General_Network_Service_Automation/microservices_list.json', 'r') as alias_file:
   	context['ipam_ms_aliases'] = json.load(alias_file)
 
 

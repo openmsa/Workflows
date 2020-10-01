@@ -16,7 +16,7 @@
   <process name="Process/General_Network_Service_Automation/Start_to_work_with_customer">
     <displayName>Start to work with customer</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Start_to_work_with_customer_Define_variables.py">
       <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
       <displayName>Define variables</displayName>
@@ -29,12 +29,12 @@
   <process name="Process/General_Network_Service_Automation/Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
   </process>
   <process name="Process/General_Network_Service_Automation/New_CE">
     <displayName>New CE</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="New_CE_Create_CE_device.py">
       <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
       <displayName>Create CE device</displayName>
@@ -47,7 +47,7 @@
   <process name="Process/General_Network_Service_Automation/New_L3VPN">
     <displayName>New L3VPN</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="New_L3VPN_Prepare_IP_address_schema.py">
       <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
       <displayName>Prepare IP address schema</displayName>
@@ -64,7 +64,7 @@
   <process name="Process/General_Network_Service_Automation/New_L2VPN">
     <displayName>New L2VPN</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -72,7 +72,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>General network service automation</name>
     <group/>
   </information>
