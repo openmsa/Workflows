@@ -2,7 +2,7 @@
   "IPAM IPv4 addresses": "ip_address",
   "IPAM IPv4 prefixes": "prefix",
   "IPAM Sites": "sites",
-  "IPAM Tenants": "tenant",
+  "IPAM Tenants": "tenants",
   "IPAM VLANs": "vlan",
   "IPAM VRFs": "vrf",
   "IPAM Devices": "devices",
