@@ -26,7 +26,7 @@ check_mandatory_param('variable_value');
 Grab correct device_id
 */
 logToFile(debug_dump($context['device_id'], 'DEBUG: DEVICE ID'));
-preg_match("/\S*?(?<device_id>\d{3})$/", $context['device_id'], $matches);
+preg_match("/\S*?(?<device_id>\d+?)$/", $context['device_id'], $matches);
 $context['device_id'] = $matches['device_id'];
 
 $device_id = $context['device_id'];
