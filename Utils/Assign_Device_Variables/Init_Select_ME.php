@@ -15,7 +15,7 @@ function list_args()
 
 check_mandatory_param('device_id');
 
-$context["me_ref"] = $context['device_id'];
+$context["me_ref"] = $context['PROCESSINSTANCEID']."-".$context['device_id'];
 
 
 /*
