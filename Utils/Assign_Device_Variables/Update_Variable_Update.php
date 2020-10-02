@@ -10,7 +10,10 @@ The process recieves server IP and MAC address as parameters
 */
 function list_args()
 {
+  create_var_def('variable_name', 'String');
   create_var_def('variable_value', 'String');
+    create_var_def('variable_type', 'String');
+
 }
 
 
