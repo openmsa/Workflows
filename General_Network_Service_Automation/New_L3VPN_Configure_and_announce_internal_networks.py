@@ -40,7 +40,7 @@ site                         = context['site']
 site_asn                     = context['site_asn']
 asn                          = '65042'
 
-ms_file                  = '/opt/fmc_repository/CommandDefinition/NETBOX/Netbox___Avaliable_Prefix.xml'
+ms_file                  = '/opt/fmc_repository/CommandDefinition/NETBOX/available_prefix.xml'
 ms_ipam_tenant           = context['ipam_ms_aliases']['IPAM Tenants']
 ms_ipam_site             = context['ipam_ms_aliases']['IPAM Sites']
 ms_ipam_device           = context['ipam_ms_aliases']['IPAM Devices']
