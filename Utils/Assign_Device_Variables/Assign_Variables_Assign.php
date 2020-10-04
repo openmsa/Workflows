@@ -32,9 +32,25 @@ $variable_value = $context['variable_value'];
 
 _configuration_variable_create ($device_id, $variable_name, $variable_value, $type = "String", $comment = "");
 
-$context['variables'][]['name'] = $variable_name;
-$context['variables'][]['value'] = $variable_value;
+$response = _configuration_variable_list ($device_id);
+logToFile(debug_dump($response, "VAR LIST\n"));
 
+$response = json_decode($response, true);
+if ($response['wo_status'] !== ENDED) {
+	$response = json_encode($response);
+	echo $response;
+	exit();
+}
+if (isset($response['wo_newparams']) && ! empty($response['wo_newparams'])) {
+  $index = 0;
+  foreach ($response['wo_newparams'] as &$conf_variable) {
+		$name = $conf_variable['name'];
+		$value = $conf_variable['value'];
+      	$context['variables'][$index]['name'] = $name;
+       	$context['variables'][$index]['value'] = $value;
+    	$index++;
+	}
+}
 task_success('The variable '.$variable_name.' with value '.$variable_value.' has been added to device '.$device_id.' successfully');
 
 ?>
