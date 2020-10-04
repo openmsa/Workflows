@@ -8,39 +8,39 @@
     <variable displayName="Value" name="params.variables.0.value" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="false" arrayCanRemove="false" arrayCanMove="false" arrayCanEdit="false" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Assign_Device_Variables/Assign_Variables">
+  <process name="Process/Manage_Device_Conf_Variables/Assign_Variables">
     <displayName>Assign Variables</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
     <task name="Assign_Variables_Assign.php">
-      <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
+      <processPath>/opt/fmc_repository/Process/Manage_Device_Conf_Variables</processPath>
       <displayName>Assign</displayName>
     </task>
   </process>
-  <process name="Process/Assign_Device_Variables/Delete_Variable">
+  <process name="Process/Manage_Device_Conf_Variables/Delete_Variable">
     <displayName>Delete Variable</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <task name="Delete_Variable_Delete.php">
-      <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
+      <processPath>/opt/fmc_repository/Process/Manage_Device_Conf_Variables</processPath>
       <displayName>Delete</displayName>
     </task>
   </process>
-  <process name="Process/Assign_Device_Variables/Update_Variable">
+  <process name="Process/Manage_Device_Conf_Variables/Update_Variable">
     <displayName>Update Variable</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <task name="Update_Variable_Update.php">
-      <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
+      <processPath>/opt/fmc_repository/Process/Manage_Device_Conf_Variables</processPath>
       <displayName>Update</displayName>
     </task>
   </process>
-  <process name="Process/Assign_Device_Variables/Init">
+  <process name="Process/Manage_Device_Conf_Variables/Init">
     <displayName>Init</displayName>
     <type>CREATE</type>
     <visibility>0</visibility>
     <task name="Init_Select_ME.php">
-      <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
+      <processPath>/opt/fmc_repository/Process/Manage_Device_Conf_Variables</processPath>
       <displayName>Select ME</displayName>
     </task>
   </process>
@@ -49,11 +49,11 @@
     <type>UPDATE</type>
     <visibility>0</visibility>
     <task name="List_Variables_List_Variables.php">
-      <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
+      <processPath>/opt/fmc_repository/Process/Manage_Device_Conf_Variables</processPath>
       <displayName>List Variables</displayName>
     </task>
   </process>
-  <process name="Process/Assign_Device_Variables/Delete">
+  <process name="Process/Manage_Device_Conf_Variables/Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
     <visibility>0</visibility>
