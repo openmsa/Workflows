@@ -17,18 +17,13 @@
       <displayName>Assign</displayName>
     </task>
   </process>
-  <process name="Process/Assign_Device_Variables/Delete">
-    <displayName>Delete</displayName>
-    <type>DELETE</type>
-    <visibility>5</visibility>
-  </process>
   <process name="Process/Assign_Device_Variables/Delete_Variable">
     <displayName>Delete Variable</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
-    <task name="Delete_Variable_delete.php">
+    <task name="Delete_Variable_Delete.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
-      <displayName>delete</displayName>
+      <displayName>Delete</displayName>
     </task>
   </process>
   <process name="Process/Assign_Device_Variables/Update_Variable">
@@ -57,6 +52,11 @@
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>List Variables</displayName>
     </task>
+  </process>
+  <process name="Process/Assign_Device_Variables/Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
