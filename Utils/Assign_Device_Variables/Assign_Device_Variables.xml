@@ -11,7 +11,7 @@
   <process name="Process/Assign_Device_Variables/Assign_Variables">
     <displayName>Assign Variables</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Assign_Variables_Assign.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>Assign</displayName>
@@ -20,12 +20,12 @@
   <process name="Process/Assign_Device_Variables/Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
   </process>
   <process name="Process/Assign_Device_Variables/Delete_Variable">
     <displayName>Delete Variable</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Delete_Variable_delete.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>delete</displayName>
@@ -34,7 +34,7 @@
   <process name="Process/Assign_Device_Variables/Update_Variable">
     <displayName>Update Variable</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="Update_Variable_Update.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>Update</displayName>
@@ -43,7 +43,7 @@
   <process name="Process/Assign_Device_Variables/Init">
     <displayName>Init</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Init_Select_ME.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>Select ME</displayName>
@@ -52,7 +52,7 @@
   <process name="Process/Manage_Device_Variables/List_Variables">
     <displayName>List Variables</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="List_Variables_List_Variables.php">
       <processPath>/opt/fmc_repository/Process/Assign_Device_Variables</processPath>
       <displayName>List Variables</displayName>
@@ -60,11 +60,11 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>Tool to manage device config variables</description>
     <displayField>me_ref</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Manage Device Variables</name>
     <group>MSA|UTILS</group>
   </information>
