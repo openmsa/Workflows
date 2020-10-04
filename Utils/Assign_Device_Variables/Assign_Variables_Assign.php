@@ -3,6 +3,7 @@
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
+require_once 'Common.php';
 
 
 /*

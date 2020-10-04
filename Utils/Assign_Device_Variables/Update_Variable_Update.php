@@ -12,7 +12,6 @@ function list_args()
   create_var_def('variable_value', 'String');
 }
 
-
 $device_id = $context['device_id'];
 $variable_name = $context['variable_name'];
 $variable_value = $context['variable_value'];
