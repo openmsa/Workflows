@@ -10,7 +10,7 @@
   <process name="Process/Jira_Integration/Create_Ticket">
     <displayName>Create Ticket</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Create_Ticket_Create_new_Ticket.php">
       <processPath>/opt/fmc_repository/Process/Jira_Integration</processPath>
       <displayName>Create new Ticket</displayName>
@@ -19,7 +19,7 @@
   <process name="Process/Jira_Integration/Mark_as_Done">
     <displayName>Mark as Done</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Mark_as_Done_Move_to_done.php">
       <processPath>/opt/fmc_repository/Process/Jira_Integration</processPath>
       <displayName>Move to done</displayName>
@@ -31,7 +31,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Jira Integration</name>
     <group>Ticketing|Jira</group>
   </information>
