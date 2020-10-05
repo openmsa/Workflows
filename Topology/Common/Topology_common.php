@@ -14,8 +14,8 @@ function topology_create_view() {
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
 		$name = $value->name;
-		$device = _device_read_by_id ($deviceId);
-        $device_info = json_decode($device);
+		$response = _device_read_by_id ($deviceId);
+        $device_info = json_decode($response);
 		$device_nature = $device_info->wo_newparams->sdNature;
 		$status = getStatus($deviceId);
 
@@ -48,9 +48,9 @@ function topology_update_view() {
 	foreach ($list->wo_newparams as $value) {
 		$deviceId = $value->id;
 		$name = $value->name;
-		$device = _device_read_by_id ($deviceId);
-		$device_info = json_decode($device);
-		logToFile(debug_dump($device_info, "DEVICE INFO: \n"));
+		$response = _device_read_by_id ($deviceId);
+		logToFile(debug_dump($response, "DEVICE INFO: \n"));
+		$device_info = json_decode($response);
         $device_nature = $device_info->wo_newparams->sdNature;
 		$status = getStatus($deviceId);
 		$error = processDevice($deviceId, $name, $device_nature, $status);
