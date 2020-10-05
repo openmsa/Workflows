@@ -15,17 +15,22 @@ function list_args()
 
 check_mandatory_param('device_id');
 
-$context["me_ref"] = "Instance: ".$context['SERVICEINSTANCEID']." / ME: ".$context['device_id'];
-
+$ubi_id = $context['device_id'];
 
 /*
 Grab correct device_id
 */
-logToFile(debug_dump($context['device_id'], 'DEBUG: DEVICE ID'));
+logToFile('Device ID: '.$context['device_id']);
 preg_match("/\S*?(?<device_id>\d+?)$/", $context['device_id'], $matches);
 $context['device_id'] = $matches['device_id'];
 
-task_success('ME '.$context['device_id'].' selected');
+$device_info = json_decode(_device_read_by_id ($context['device_id']));
+$device_name = $device_info->wo_newparams->name;
 
+
+$context["me_ref"] = $context['SERVICEINSTANCEID']." - [".$ubi_id."] - ".$device_name  ;
+
+
+task_success('ME '.$context['device_id'].' selected');
 
 ?>
