@@ -126,7 +126,7 @@ function _device_get_status ($device_id) {
  */
 function _device_read_by_id ($device_id) {
 	
-	$msa_rest_api = "device/id/{$device_id}";
+	$msa_rest_api = "device/v2/{$device_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE BY ID");
 	$response = json_decode($response, true);
