@@ -54,7 +54,7 @@ if ($response['wo_status'] !== ENDED) {
 //Wait when provisioning will be completed
 $response = json_decode(wait_for_provisioning_completion($device_id, $process_params), True);
 if ($response['wo_status'] !== ENDED) {
-  echo $response;
+  echo json_encode($response);
   exit;
 }
 
