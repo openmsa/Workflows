@@ -23,7 +23,8 @@ if (array_key_exists('JobManager', $misc_server_params)) {
     $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... ");
     //Syncing microservices
     $are_all_job_completed = False;
-    while ($are_all_job_completed === False) {
+    $countdown = 20;
+    while ($are_all_job_completed === False and $countdown > 0) {
       $are_all_job_completed = True;
       $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
       if ($response['wo_status'] !== ENDED) {
@@ -48,8 +49,9 @@ if (array_key_exists('JobManager', $misc_server_params)) {
         if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
           $are_all_job_completed = False;
         }
-      sleep(10);
       }
+      --$countdown;
+      sleep(10);
     }
     $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... OK");
     sleep(3);
