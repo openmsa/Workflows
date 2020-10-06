@@ -6,7 +6,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 $service_id = $context['service_id'];
 
 //Create bash string
-$kill_command = '/bin/kill -s TERM $(ps aux | grep -v awk | awk \'/^ncuser.+?'.$service_id.'/ {print $2}\')';
+$kill_command = '/bin/kill -s TERM $(ps aux | grep -v awk | awk \'/^jboss.+?'.$service_id.'/ {print $2}\')';
 
 $result = exec($kill_command);
 task_success('Task OK');

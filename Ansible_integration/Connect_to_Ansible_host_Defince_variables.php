@@ -29,10 +29,10 @@ $context['microservice_variables'] = array(
 );
 
 //Define path to MS to read playbook content. THE MICROSERVICE SHOULD BE ATTACHED TO ANSIBLE ME DEPLOYMENT SETTINGS
-$context['read_playbook_file'] = '/opt/fmc_repository/CommandDefinition/OpenMSA/ANSIBLE/Read_playbook_file.xml';
+$context['read_playbook_file'] = '/opt/fmc_repository/CommandDefinition/ANSIBLE/Read_playbook_file.xml';
 
 //Define path to MS to import list of playbook files. THE MICROSERVICE SHOULD BE ATTACHED TO ANSIBLE ME DEPLOYMENT SETTINGS
-$context['retrieve_playbook_files'] = '/opt/fmc_repository/CommandDefinition/OpenMSA/ANSIBLE/Retrieve_playbook_files_list.xml';
+$context['retrieve_playbook_files'] = '/opt/fmc_repository/CommandDefinition/ANSIBLE/Retrieve_playbook_files_list.xml';
 
 //Name of a microservice to read playbook file content
 $context['microservice_name'] = 'Read_playbook_file';

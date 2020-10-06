@@ -23,7 +23,7 @@ while ($do_monitor_changes === 'true') {
   $announce = update_asynchronous_task_details($context, "Syncing Ansible host... ");
   $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
   if ($response['wo_status'] !== ENDED) {
- 		echo $response;
+ 		echo json_encode($response);
  		exit;
   }
   $response = json_decode(import_objects($device_id, array('Retrieve_playbook_files_list')), True);

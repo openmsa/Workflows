@@ -1,6 +1,7 @@
 <?php
 
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
+require_once '/opt/fmc_repository/Process/Reference/Common/Library/asset_rest.php';
 
 //Gather variables from context
 $variables_line = $context['variables_line'];
