@@ -24,8 +24,9 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 						$model_id, $login, $password, $password_admin,
 						$management_address, $device_external_reference = "",
 						$log_enabled = "true", $log_more_enabled = "true", 
-						$mail_alerting = "true", $reporting = "false", $snmp_community = SNMP_COMMUNITY_DEFAULT, 
-						$managementInterface = "", $hostname = "" , $management_port = 22) {
+						$mail_alerting = "true", $reporting = "false", 
+						$snmp_community = SNMP_COMMUNITY_DEFAULT, 
+						$managementInterface = "", $management_port = 22) {
 
 	$array = array('name' => $device_name,
 			'manufacturerId' => $manufacturer_id,
@@ -38,11 +39,10 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 			'mailAlerting' => $mail_alerting,
 			'reporting' => $reporting,
 			'managementAddress' => $management_address,
+			'managementPort' => $management_port,
 			'externalReference' => $device_external_reference,
-			'snmpCommunity' => $snmp_community,
-			'hostname' => $hostname,
-			'managementPort' => $management_port
-	);
+			'snmpCommunity' => $snmp_community
+			);
   if (isset($managementInterface) && $managementInterface){
     $array['managementInterface'] = $managementInterface;
   }  
@@ -126,7 +126,7 @@ function _device_get_status ($device_id) {
  */
 function _device_read_by_id ($device_id) {
 	
-	$msa_rest_api = "device/v2/{$device_id}";
+	$msa_rest_api = "device/id/{$device_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE BY ID");
 	$response = json_decode($response, true);
@@ -165,9 +165,7 @@ function _device_read_by_reference ($device_reference) {
  * @param  $device_id
  */
 function _device_get_hostname_by_id ($device_id) {
-	//$msa_rest_api = "device/v1/hostname/{$device_id}";
-	$msa_rest_api = "device/v2/{$device_id}";
-
+	$msa_rest_api = "device/v1/hostname/{$device_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE HOSTNAME BY ID");
 	$response = json_decode($response, true);
@@ -188,7 +186,6 @@ function _device_get_hostname_by_id ($device_id) {
  */
 function _device_set_hostname_by_id ($device_id, $hostname) {
 	$msa_rest_api = "device/v1/{$device_id}/hostname/{$hostname}";
-
 	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "SET DEVICE HOSTNAME BY ID");
 	return $response;
