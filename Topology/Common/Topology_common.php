@@ -1,5 +1,71 @@
 <?php
 
+
+function topology_create_service_view($ipam_device_id) {
+	global $context;
+
+        logToFile("*** topology_create_view");
+
+        
+        $context ['Nodes'] = array ();
+        $context ['Nodes_MAJ'] = array ();
+
+
+        $response = json_decode(import_objects($ipam_device_id, array('vrf')), True);
+	$object_ids_array = $response['wo_newparams']['vrf'];
+	
+	foreach ($object_ids_array as $vrf => $details) {
+		createTopologyNetwork($details['rd'], $details['object_id'], "network", "");
+        }	
+
+
+        $customer_ref = get_customer_ref();
+        $list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
+
+        foreach ($list->wo_newparams as $value) {
+		if (strpos($value->name, 'PE') !== false) {
+			$deviceId = $value->id;
+			$name = $value->name;
+			$response = _device_read_by_id ($deviceId);
+			$device_info = json_decode($response);
+			logToFile(debug_dump($device_info, "DEBUG: DEVICE INFO"));
+ 			$device_nature = $device_info->wo_newparams->sdNature;
+			$status = getStatus($deviceId);
+
+			$error = processDevice($deviceId, $name, $device_nature, $status);
+
+			if ($error != "") {
+				logTofile(debug_dump($error, "*** topology_create_view ERROR***"));
+			}
+		}
+        }
+
+        foreach ($list->wo_newparams as $value) {
+                if (strpos($value->name, 'CE') !== false) {
+                        $deviceId = $value->id;
+                        $name = $value->name;
+                        $response = _device_read_by_id ($deviceId);
+                        $device_info = json_decode($response);
+                        logToFile(debug_dump($device_info, "DEBUG: DEVICE INFO"));
+                        $device_nature = $device_info->wo_newparams->sdNature;
+                        $status = getStatus($deviceId);
+
+                        $error = processDevice($deviceId, $name, $device_nature, $status);
+
+                        if ($error != "") {
+                                logTofile(debug_dump($error, "*** topology_create_view ERROR***"));
+                        }
+                }
+        }
+
+
+        return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
+
+}
+
+
+
+
 function topology_create_view() {
 	global $context;
 
@@ -27,6 +93,73 @@ function topology_create_view() {
 	}
 	
 	return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
+}
+
+
+function topology_update_service_view($ipam_device_id) {
+        global $context;
+
+
+        logToFile("*** topology_update_view");
+
+        if (!isset($context ["Nodes"])) {
+                $context ['Nodes'] = array ();
+        }
+
+        if (!isset($context ["Nodes_MAJ"])) {
+                $context ['Nodes_MAJ'] = array ();
+        }
+
+
+        $response = json_decode(import_objects($ipam_device_id, array('vrf')), True);
+        $object_ids_array = $response['wo_newparams']['vrf'];
+
+        foreach ($object_ids_array as $vrf => $details) {
+                createTopologyNetwork($details['rd'], $details['object_id'], "network", "");
+        }
+
+
+        $customer_ref = get_customer_ref();
+        $list = json_decode(_lookup_list_devices_by_customer_reference($customer_ref), false);
+
+        foreach ($list->wo_newparams as $value) {
+                if (strpos($value->name, 'PE') !== false) {
+                        $deviceId = $value->id;
+                        $name = $value->name;
+                        $response = _device_read_by_id ($deviceId);
+                        $device_info = json_decode($response);
+                        $device_nature = $device_info->wo_newparams->sdNature;
+                        $status = getStatus($deviceId);
+
+                        $error = processDevice($deviceId, $name, $device_nature, $status);
+
+                        if ($error != "") {
+                                logTofile(debug_dump($error, "*** topology_update_view ERROR***"));
+                        }
+                }
+        }
+
+
+        foreach ($list->wo_newparams as $value) {
+                if (strpos($value->name, 'CE') !== false) {
+                        $deviceId = $value->id;
+                        $name = $value->name;
+                        $response = _device_read_by_id ($deviceId);
+                        $device_info = json_decode($response);
+                        logToFile(debug_dump($device_info, "DEBUG: DEVICE INFO"));
+                        $device_nature = $device_info->wo_newparams->sdNature;
+                        $status = getStatus($deviceId);
+
+                        $error = processDevice($deviceId, $name, $device_nature, $status);
+
+                        if ($error != "") {
+                                logTofile(debug_dump($error, "*** topology_create_view ERROR***"));
+                        }
+                }
+        }
+
+        return prepare_json_response(ENDED, "The topology has fully loaded", $context, false);
+
 }
 
 function topology_update_view() {
