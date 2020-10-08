@@ -109,7 +109,7 @@ ce_device_local_context = json.loads(json.dumps(xmltodict.parse(ce_device['local
 
 CeDeviceObject = Device(customer_id = re.match('^\D+?(\d+?)$',context['UBIQUBEID']).group(1), 
                         name = ce_device['object_id'], 
-                        device_external = ce_device['object_id'],
+                        device_external = re.sub(r'[\.\[\]-]', "_", ce_device['object_id']),
                         manufacturer_id = ce_device_local_context['msa_specific']['manufacture_id'],
                         password_admin = ce_device_local_context['enable_password'],
                         model_id = ce_device_local_context['msa_specific']['model_id'],
@@ -127,7 +127,8 @@ time.sleep(3)
 context['ce_device_details'] = dict()
 context['ce_device_details']['local_context']       = ce_device_local_context
 context['ce_device_details']['device_id']           = CeDeviceObject.device_id
-context['ce_device_details']['external_reference']  = ce_device['object_id']
+context['ce_device_details']['ce_device_name']		= ce_device['object_id']
+context['ce_device_details']['external_reference']  = re.sub(r'[\.\[\]-]', "_", ce_device['object_id'])
 
 success_comment = 'New MSA ME for CE device has been created successfully'
 print(CeDeviceObject.process_content('ENDED', success_comment, context, True))
