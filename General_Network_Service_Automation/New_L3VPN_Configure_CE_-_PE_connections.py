@@ -129,15 +129,9 @@ for interface, connection in ce_connections.items():
     Orchestration.update_asynchronous_task_details(*async_update_list, 'Configuring PE device... Configuring VRF... ')
     does_customer_vrf_exist = False
     counter = 0
-    objects_list = IpamOrderObject.command_objects_instances(ms_router_vrf)
-
-    if len(objects_list) > 0:
-      while not does_customer_vrf_exist or counter < len(objects_list):
-        if objects_list[counter]['object_id'] == customer_vrf:
-          does_customer_vrf_exist = True
-        counter += 1
-
-    if not does_customer_vrf_exist:
+    objects_list = pe_order_list[-1].command_objects_instances(ms_router_vrf)
+    
+    if customer_vrf not in objects_list:
       #Create custromer VRF on PE
       #Grab RD from IPAM
       vrf_object = IpamOrderObject.command_objects_instances_by_id(ms_ipam_vrf, 

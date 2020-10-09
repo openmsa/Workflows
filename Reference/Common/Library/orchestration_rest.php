@@ -148,6 +148,21 @@ function _orchestration_execute_service ($ubiqube_id, $service_name, $process_na
 	return $response;
 }
 
+function _orchestration_launch_process_instance ($ubiqube_id, $service_id, $process_name, $json_body = "") {
+
+        $msa_rest_api = "orchestration/process/execute/{$ubiqube_id}/{$service_id}?processName={$process_name}";
+        $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
+        $response = perform_curl_operation($curl_cmd, "LAUNCH PROCESS INSTANCE");
+        $response = json_decode($response, true);
+        if ($response['wo_status'] !== ENDED) {
+                $response = json_encode($response);
+                return $response;
+        }
+        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+        return $response;
+}
+
+
 /**
 	curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/orchestration/service/execute/{ubiqubeId}?serviceName={serviceName}&processName={processName} -d '
 	{
