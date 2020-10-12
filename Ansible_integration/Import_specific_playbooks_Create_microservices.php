@@ -52,7 +52,7 @@ logToFile(debug_dump($playbook_attributes_array, 'DEBUG: PLAYBOOK ATTRIBUTES'));
 foreach ($object_ids_array as $object_id => $object_details) {
   $announce = update_asynchronous_task_details($context, "Working with playbook... ".$object_details['object_id'].'... Extract attributes... ');
   logToFile(debug_dump($object_details['object_id'], 'DEBUG: CURRENT PLAYBOOK'));
-  if (array_key_exists($object_details['object_id'], $playbook_attributes_array)) {
+  if (in_array($object_details['object_id'], $playbook_attributes_array)) {
   	$playbook_attributes_array[md5($object_details['object_id'])] = array('playbook_attributes' => array(),
   	                                                                      'microservice_attributes' => array()
   	                                                                      );
