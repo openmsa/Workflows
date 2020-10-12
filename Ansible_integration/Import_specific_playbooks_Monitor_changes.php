@@ -2,6 +2,7 @@
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 
 
+
 if ($context['do_monitor_changes'] !== 'false') {
 	$microservice_name_prefix = $context['microservice_name_prefix'];
 	$microservice_file = $context['read_playbook_file'];
@@ -17,9 +18,8 @@ if ($context['do_monitor_changes'] !== 'false') {
 	$do_monitor_changes = True;
 	$monitoring_delay = $context['monitoring_delay'];
 } else {
-    $do_monitor_changes = False;
+  $do_monitor_changes = False;
 }
-
 
 while ($do_monitor_changes) {
   
@@ -57,40 +57,6 @@ while ($do_monitor_changes) {
       $announce = update_asynchronous_task_details($context, "Checking file ".$object_details['object_id'].'... file was modifyed. Create new microservice... DONE');
         
       }
-    } else {
-      //This is new file, create new micorservice
-      $announce = update_asynchronous_task_details($context, "Checking file ".$object_details['object_id'].'... new file. Create new microservice...');
-      //Create new microservice
-      $playbook_attributes_array[md5($object_details['object_id'])] = array('playbook_attributes' => array(),
-                                                                            'microservice_attributes' => array()
-                                                                            );
-      $playbook_attributes_array[md5($object_details['object_id'])]['playbook_attributes']['path'] = $object_details['object_id'];
-      $playbook_attributes_array[md5($object_details['object_id'])]['playbook_attributes']['md5sum'] = $object_details['md5sum'];
-   
-   
-      //Create microservice name
-      $result = preg_match('|^(\S+?)([^/]+?\.yml)|', $object_details['object_id'], $matches);
-      $playbook_microservice_name = $microservice_name_prefix.' (based on '.str_replace('.yml', '', $matches[2]).')';
-      $playbook_attributes_array[md5($object_details['object_id'])]['microservice_attributes']['name'] = $playbook_microservice_name;
-     
-      //Gather microservice skeleton path and name
-      $result = preg_match('|^(\S+?)([^/]+?\.xml)|', $microservice_skeleton, $matches);
-      $microservice_skeleton_path = $matches[1];
-      $microservice_skeleton_name = $matches[2];
-      //Sanitize file name
-      $playbook_microservice_file_name = $playbook_microservice_name;
-      $playbook_microservice_file_name = preg_replace('/[| @()]/', '_', $playbook_microservice_file_name).'.xml';
-      $playbook_attributes_array[md5($object_details['object_id'])]['microservice_attributes']['file_name'] = $playbook_microservice_file_name;
-      $playbook_attributes_array[md5($object_details['object_id'])]['microservice_attributes']['path'] = $microservice_dir.$playbook_microservice_file_name;
-   
-      $attributes_to_create_microservice = array('playbook'           => $playbook_attributes_array[md5($object_details['object_id'])]['playbook_attributes']['path'],
-                                                 'microservice_name'      => $playbook_attributes_array[md5($object_details['object_id'])]['microservice_attributes']['name'],
-                                                 'microservice_skeleton' => $microservice_skeleton
-                                                );
- 
-      $result = _orchestration_launch_process_instance($ubiqube_id, $service_id, $processName, json_encode($attributes_to_create_microservice));
-      sleep(15);
-      $announce = update_asynchronous_task_details($context, "Checking file ".$object_details['object_id'].'... new file. Create new microservice... DONE');
     }
   }
   $context['playbook_attributes_array'] = $playbook_attributes_array;
