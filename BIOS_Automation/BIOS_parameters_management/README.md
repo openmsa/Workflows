@@ -18,8 +18,8 @@ The current implementation works with server Intel and Dell which support Redfis
  - Adopte [the microservices](https://github.com/openmsa/Microservices/tree/master/REDFISHAPI/Generic) for new vendor;
  - Add new vendor defenition to [this server description file](https://github.com/openmsa/Workflows/blob/master/BIOS_Automation/BIOS_parameters_management/server_profiles.json);
  - If the vendor Redfish implementation supports job management, add the attribute using this JSON section:
- '''
+```
                  "Miscellaneous parameters": {
                         "JobManager": true
                 }
-'''
+```
