@@ -45,8 +45,10 @@ if (array_key_exists('JobManager', $misc_server_params)) {
       $response = json_decode(import_objects($device_id, array($ms_job_manager)), True);
       $current_job = $response['wo_newparams'][$ms_job_manager];
       foreach ($current_job as $job_name => $job_params) {
-        if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
-          $are_all_job_completed = False;
+        if (array_key_exists('type', $job_params) and array_key_exists('state', $job_params)) {
+        	if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
+          		$are_all_job_completed = False;
+        	}
         }
       }
       --$countdown;
