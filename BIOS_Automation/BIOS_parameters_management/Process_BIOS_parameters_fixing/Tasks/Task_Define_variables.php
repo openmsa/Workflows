@@ -41,7 +41,7 @@ if(isset($parameters)) {
 }
 
 
-if (!isset($context['server_device'])) {
+if ($context['server_device'] === 'NULL') {
 	check_mandatory_param('server_ip_address');
 	check_mandatory_param('server_mac_address');
 	check_mandatory_param('server_port');
@@ -77,7 +77,7 @@ $context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfi
                                         );
 
 
-if (!isset($context['server_device'])) {
+if ($context['server_device'] === 'NULL') {
 	$normalizated_mac = preg_replace('/:|-/', '', $context['server_mac_address']);
 	$mac_oui = strtoupper(substr($normalizated_mac, 0, 6));
 	$context['server_vendor'] = $context['username'] = $context['password'] = 'UNKNOWN';

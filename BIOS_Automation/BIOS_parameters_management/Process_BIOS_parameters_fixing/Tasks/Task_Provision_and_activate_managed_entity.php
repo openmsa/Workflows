@@ -12,7 +12,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
                         'EXECNUMBER' => $EXECNUMBER,
                         'TASKID' => $TASKID);
 
-if (!isset($context['server_device'])) {
+if ($context['server_device'] === 'NULL') {
 	$server_vendor = $context['server_vendor'];
 	$profile_name = $context['profile_name'] = strtolower('redfish_'.$server_vendor.'_profile');
 	$device_id = $context['device_id'];

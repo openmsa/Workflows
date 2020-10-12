@@ -4,7 +4,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
 
 
-if (!isset($context['server_device'])) {
+if ($context['server_device'] === 'NULL') {
 
 	//Retrive variables from $context() and define the new ones
 	$server_name = $context['server_name'] = $context['server_vendor']."[".$context['server_ip_address']."]";
