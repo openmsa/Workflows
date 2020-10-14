@@ -18,7 +18,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 $device_id = substr($context['device_id'], 3);
 $device_reference = $context['device_id'];
 
-if (isset($context['conf_profile_reference'])) {
+if (isset($context['conf_profile_reference']) && $context['conf_profile_reference'] != "") {
   $conf_profile_ref = $context['conf_profile_reference'];
   $response = _profile_attach_to_device_by_reference ($conf_profile_ref, $device_reference );
   $response = json_decode($response, true);
