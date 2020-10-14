@@ -15,12 +15,15 @@ function list_args() {
 	create_var_def('snmp_community', 'String');
 }
 
-check_mandatory_param('customer_id');
 //check_mandatory_param('managed_device_name');
 check_mandatory_param('manufacturer_id');
 check_mandatory_param('model_id');
 check_mandatory_param('login');
 check_mandatory_param('new_password');
+
+if (!isset($context['customer_id'])) {
+	$context['customer_id'] = $context['UBIQUBEID'];
+}
 
 // MSA device creation parameters
 $customer_id = $context['customer_id'];

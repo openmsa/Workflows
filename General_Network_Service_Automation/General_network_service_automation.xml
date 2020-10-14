@@ -1,0 +1,79 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Customer name" name="params.customer_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Planet Express Inc." isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="IPAM ME" name="params.ipam_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Site" name="params.site" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.ipam_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>sites</class>
+      </classes>
+      <values>
+        <values>New New York</values>
+        <values>Wong Ranch</values>
+      </values>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/General_Network_Service_Automation/Start_to_work_with_customer">
+    <displayName>Start to work with customer</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="Start_to_work_with_customer_Define_variables.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Define variables</displayName>
+    </task>
+    <task name="Start_to_work_with_customer_Retrieve_information_about_customer.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Retrieve information about customer</displayName>
+    </task>
+  </process>
+  <process name="Process/General_Network_Service_Automation/Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <process name="Process/General_Network_Service_Automation/New_CE">
+    <displayName>New CE</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="New_CE_Create_CE_device.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Create CE device</displayName>
+    </task>
+    <task name="New_CE_Provision_and_activate_CE_device.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Provision and activate CE device</displayName>
+    </task>
+  </process>
+  <process name="Process/General_Network_Service_Automation/New_L3VPN">
+    <displayName>New L3VPN</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="New_L3VPN_Prepare_IP_address_schema.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Prepare IP address schema</displayName>
+    </task>
+    <task name="New_L3VPN_Configure_CE_-_PE_connections.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Configure CE - PE connections</displayName>
+    </task>
+    <task name="New_L3VPN_Configure_and_announce_internal_networks.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Configure and announce internal networks</displayName>
+    </task>
+  </process>
+  <process name="Process/General_Network_Service_Automation/New_L2VPN">
+    <displayName>New L2VPN</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>General network service automation</name>
+    <group/>
+  </information>
+</ObjectDefinition>

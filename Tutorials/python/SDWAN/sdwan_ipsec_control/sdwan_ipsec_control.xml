@@ -32,12 +32,12 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>SD-WAN IPsec Control</description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
-    <name>sdwan_ipsec_control</name>
+    <visibility>5</visibility>
+    <name>SD-WAN IPsec Control</name>
     <group>minilab|SDWAN</group>
   </information>
 </ObjectDefinition>

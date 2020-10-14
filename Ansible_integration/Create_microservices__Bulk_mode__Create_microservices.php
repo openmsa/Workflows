@@ -12,7 +12,6 @@ function list_args()
 
 check_mandatory_param('microservice_name_prefix');
 check_mandatory_param('do_monitor_changes');
-check_mandatory_param('monitoring_delay');
 
 $microservice_name_prefix = $context['microservice_name_prefix'];
 $microservice_file = $context['read_playbook_file'];

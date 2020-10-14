@@ -13,14 +13,14 @@ require_once COMMON_DIR . 'utility.php';
 function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "",
 										$connection_timeout = 60, $max_time = 60) {
 
-	global $CURL_CMD;
+	global $CURL_CMD, $context;
 	
 	$HTTP_HOST = "msa_api"; // get_vars_value(WEB_NODE_PRIV_IP)"";
 	$HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
 	$USERNAME = "ncroot";
 	//$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
 	$password = "ubiqube"; //shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
-	$auth_token = get_auth_token($USERNAME, rtrim($password), $HTTP_HOST, $HTTP_PORT, $connection_timeout, $max_time);
+	$auth_token = $context['TOKEN'];
 
 	if (strpos($msa_rest_api, "?") !== false) {
 		list($uri, $data) = explode("?", $msa_rest_api);
@@ -421,24 +421,6 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 	return $response;
 }
 
-function get_auth_token($username, $password, $host, $port, $connection_timeout, $max_time) {
-
-    $curl = create_token_auth_request($username, $password, $host, $port, $connection_timeout, $max_time);
-
-    $output_array = array();
-    exec($curl, $output_array);
-    $result = process_rest_reponse($output_array);
-    if ($result !== 'no_token') {
-        $index = strrpos($result, ':');
-        $result = substr($result, $index + 1);
-        $result = rtrim($result);
-        return $result;
-    }
-
-    return '';
-
-}
-
 function process_rest_reponse($output_array) {
     foreach ($output_array as $line) {
         logToFile('line .......:-----' . $line);
@@ -447,13 +429,6 @@ function process_rest_reponse($output_array) {
     	}
     }
     return 'no_token';
-}
-
-function create_token_auth_request($username, $password, $host, $port, $connection_timeout, $max_time) {
-	$curl = "curl -isw '\nHTTP_CODE=%{http_code}' --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: application/json\" -X POST http://$host:$port/ubi-api-rest/auth/token";
-    $curl .= " -d '" . pretty_print_json("{\"username\":\"$username\", \"password\":\"$password\"}") . "'";
-    logToFile("Curl Request : $curl\n");
-    return $curl;
 }
 
 function encode_uri($uri) {

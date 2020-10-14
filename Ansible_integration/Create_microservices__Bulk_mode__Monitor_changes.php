@@ -2,28 +2,32 @@
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 
 
-$microservice_name_prefix = $context['microservice_name_prefix'];
-$microservice_file = $context['read_playbook_file'];
-$microservice_name = $context['microservice_name'];
-$variable_skeleton = $context['variable_skeleton'];
-$microservice_skeleton = $context['microservice_skeleton'];
-$microservice_dir = $context['microservice_dir'];
-$device_id = $context['device_id'];
-$processName = $context['processName'];
-$service_id = $context['service_id'];
-$ubiqube_id = $context['UBIQUBEID'];
-$playbook_attributes_array = $context['playbook_attributes_array'];
-$do_monitor_changes = $context['do_monitor_changes'];
-$monitoring_delay = $context['monitoring_delay'];
+if ($context['do_monitor_changes'] !== 'false') {
+	$microservice_name_prefix = $context['microservice_name_prefix'];
+	$microservice_file = $context['read_playbook_file'];
+	$microservice_name = $context['microservice_name'];
+	$variable_skeleton = $context['variable_skeleton'];
+	$microservice_skeleton = $context['microservice_skeleton'];
+	$microservice_dir = $context['microservice_dir'];
+	$device_id = $context['device_id'];
+	$processName = $context['processName'];
+	$service_id = $context['service_id'];
+	$ubiqube_id = $context['UBIQUBEID'];
+	$playbook_attributes_array = $context['playbook_attributes_array'];
+	$do_monitor_changes = True;
+	$monitoring_delay = $context['monitoring_delay'];
+} else {
+    $do_monitor_changes = False;
+}
 
 
-while ($do_monitor_changes === 'true') {
+while ($do_monitor_changes) {
   
   //Syncing Ansible host
   $announce = update_asynchronous_task_details($context, "Syncing Ansible host... ");
   $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
   if ($response['wo_status'] !== ENDED) {
- 		echo $response;
+ 		echo json_encode($response);
  		exit;
   }
   $response = json_decode(import_objects($device_id, array('Retrieve_playbook_files_list')), True);

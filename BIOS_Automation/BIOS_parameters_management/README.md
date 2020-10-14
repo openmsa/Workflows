@@ -23,3 +23,4 @@ The current implementation works with server Intel and Dell which support Redfis
                         "JobManager": true
                 }
 ```
+

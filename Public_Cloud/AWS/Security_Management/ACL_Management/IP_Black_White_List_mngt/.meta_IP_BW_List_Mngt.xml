@@ -2,35 +2,38 @@
 <metadata>
     <map>
         <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1600362827219</value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>Process</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1600362827214</value>
+        </entry>
+        <entry>
+            <key>MODEL</key>
+            <value>0</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+        </entry>
+        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
-            <key>DATE_MODIFICATION</key>
-            <value>1570177998396</value>
-        </entry>
-        <entry>
-            <key>COMMENT</key>
-            <value></value>
-        </entry>
-        <entry>
-            <key>REPOSITORY</key>
-        </entry>
-        <entry>
-            <key>DATE_CREATION</key>
-            <value>1564496943284</value>
-        </entry>
-        <entry>
-            <key>CONFIGURATION_FILTER</key>
-            <value></value>
+            <key>MANUFACTURER</key>
+            <value>0</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>FILE</value>
         </entry>
         <entry>
-            <key>TAG</key>
-            <value>IP_BW_List_Mngt.xml</value>
+            <key>COMMENT</key>
         </entry>
     </map>
 </metadata>
