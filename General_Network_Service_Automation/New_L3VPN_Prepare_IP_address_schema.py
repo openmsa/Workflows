@@ -208,7 +208,7 @@ Orchestration.update_asynchronous_task_details(*async_update_list, 'Find out a I
 time.sleep(3)
 #Modify microservice to grab avaliable prefix from cusotmer prefix
 rewrite_string = '<xpath>/api/ipam/prefixes/{id}/available-prefixes/</xpath>'.format(id = customer_prefix['id'])
-sed_command = 'sed -i \'s@<xpath>/api/ipam/prefixes/.*</xpath>@{rewrite_string}@\' {ms_file}'.format(rewrite_string = rewrite_string,
+sed_command = 'sed -i \'s@<xpath>/api/ipam/prefixes/</xpath>@{rewrite_string}@\' {ms_file}'.format(rewrite_string = rewrite_string,
                                                                                                      ms_file = ms_file)
 os.system(sed_command)
 
@@ -249,7 +249,11 @@ for interface, connection in ce_connections.items():
     connection['neighbour']['ip_address'] = '{}/{}'.format(str(list(site_prefix_list[-1][1].hosts())[0]), site_prefix_list[-1][1].prefixlen)
     connection['ip_address'] = '{}/{}'.format(str(list(site_prefix_list[-1][1].hosts())[1]), site_prefix_list[-1][1].prefixlen)
 
-
+#Modify microservice to original state back
+rewrite_string = '<xpath>/api/ipam/prefixes/</xpath>'.format(id = customer_prefix['id'])
+sed_command = 'sed -i \'s@<xpath>/api/ipam/prefixes/.*</xpath>@{rewrite_string}@\' {ms_file}'.format(rewrite_string = rewrite_string,
+                                                                                                     ms_file = ms_file)
+os.system(sed_command)
 
 Orchestration.update_asynchronous_task_details(*async_update_list, 'Create prefixes for the site... OK')
 time.sleep(3)
