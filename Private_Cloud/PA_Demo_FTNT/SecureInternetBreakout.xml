@@ -1,319 +1,246 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ObjectDefinition>  <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description/>
-    <displayField>server_name</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group>Private Cloud|Openstack</group>
-    <icon>/images/repository/CommandDefinition/icons/carrier routing system.jpg</icon>
-    <name>Private Cloud VNF Management</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <serviceTaskType>php</serviceTaskType>
-    <showDetailedServiceInstances>true</showDetailedServiceInstances>
-    <showProcessExecConsole>true</showProcessExecConsole>
-    <showVariables>false</showVariables>
-    <visibility>5</visibility>
-  </information>  <variables frozen="0">
-    <variable displayName="Openstack Device Id" displayOrder="0" editable="false" keepOnImport="true" maxLength="165" name="params.openstack_device_id" numberOfRowMax="0" startIncrement="0" type="String">
-      <values>
-        <value displayValue="Openstack Train">UBI174</value>
-      </values>
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Openstack Device Id" name="params.openstack_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="true" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI1268" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="14020603" modId="16051904"/>
+      </sdTypes>
     </variable>
-    <variable default="13b551ae-6c66-4075-b32e-5132e17a989f" displayName="Floating Ip Network" displayOrder="1" editable="false" maxLength="100" name="params.floating_ip_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Floating Ip Network" name="params.floating_ip_network" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="13b551ae-6c66-4075-b32e-5132e17a989f" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Floating IP Address </section>
+        <sections>Floating IP Address </sections>
       </sections>
       <classes>
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="29c460835a2146f892f2776759cd3cac" displayName="Tenant" displayOrder="2" editable="false" maxLength="100" name="params.tenant" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Tenant" name="params.tenant" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="29c460835a2146f892f2776759cd3cac" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Floating IP Address </section>
+        <sections>Floating IP Address </sections>
       </sections>
       <classes>
         <class>tenants</class>
       </classes>
     </variable>
-    <variable default="FGT_VNF" displayName="Server Name" displayOrder="3" maxLength="100" name="params.server_name" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Server Name" name="params.server_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="FGT_VNF" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
     </variable>
-    <variable default="nova" displayName="Availability Zone" displayOrder="4" editable="false" maxLength="100" name="params.availability_zone" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Availability Zone" name="params.availability_zone" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="nova" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
       <classes>
         <class>availability_zones</class>
       </classes>
     </variable>
-    <variable default="7e74b682-d19a-49d5-9c97-d4d50eedf1fc" displayName="Flavor" displayOrder="5" editable="false" maxLength="100" name="params.flavor" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Flavor" name="params.flavor" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="7e74b682-d19a-49d5-9c97-d4d50eedf1fc" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
       <classes>
         <class>flavors</class>
       </classes>
     </variable>
-    <variable default="5f19dd49-e553-4dda-a6c7-747305bf8a72" displayName="Image" displayOrder="6" editable="false" maxLength="100" name="params.image" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Image" name="params.image" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="5f19dd49-e553-4dda-a6c7-747305bf8a72" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
       <classes>
         <class>images</class>
       </classes>
     </variable>
-    <variable default="65a613ad-ad7e-4263-b491-234e792f35af" displayName="Management Network" displayOrder="7" editable="false" maxLength="100" name="params.onm_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="Management Network" name="params.onm_network" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="65a613ad-ad7e-4263-b491-234e792f35af" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
       <classes>
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="192.168.2.5" displayName="Management Ip" displayOrder="8" maxLength="100" name="params.onm_network_ip" numberOfRowMax="0" startIncrement="0" type="IpAddress">
+    <variable displayName="Management Ip" name="params.onm_network_ip" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="192.168.2.5" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
     </variable>
-    <variable default="fdf30193-6408-491c-8437-675e64176422" displayName="WAN Network" displayOrder="9" editable="false" maxLength="100" name="params.external_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
+    <variable displayName="WAN Network" name="params.external_network" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="fdf30193-6408-491c-8437-675e64176422" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
-      </sections>
-      <classes>
-        <class>networks</class>
-      </classes>
-    </variable>
-    <variable default="31e873aa-4a91-4ee1-9163-9685264a9f17" displayName="LAN Network" displayOrder="10" editable="false" maxLength="100" name="params.private_network" numberOfRowMax="0" refDeviceIdVar="params.openstack_device_id" startIncrement="0" type="OBMFRef">
-      <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
       </sections>
       <classes>
         <class>networks</class>
       </classes>
     </variable>
-    <variable default="172.16.0.1" displayName="LAN Port IP" displayOrder="11" maxLength="100" name="params.private_network_ip" numberOfRowMax="0" startIncrement="0" type="IpAddress">
+    <variable displayName="LAN Network" name="params.private_network" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" refDeviceIdVar="params.openstack_device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="31e873aa-4a91-4ee1-9163-9685264a9f17" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>VNF</section>
+        <sections>VNF</sections>
+      </sections>
+      <classes>
+        <class>networks</class>
+      </classes>
+    </variable>
+    <variable displayName="LAN Port IP" name="params.private_network_ip" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="172.16.0.1" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VNF</sections>
       </sections>
     </variable>
-    <variable default="20" displayName="Customer Id" displayOrder="12" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="Integer">
+    <variable displayName="Customer Id" name="params.customer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="20" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="FGT_VNF" displayName="Managed Device Name" displayOrder="13" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Managed Device Name" name="params.managed_device_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="FGT_VNF" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="FGT_VNF" displayName="Device External Reference" displayOrder="14" maxLength="100" name="params.device_external_reference" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Device External Reference" name="params.device_external_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="FGT_VNF" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="17" displayName="Manufacturer Id" displayOrder="15" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" type="Integer">
+    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="17" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="15102617" displayName="Model Id" displayOrder="16" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" type="Integer">
+    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="15102617" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable displayName="Device Ip Address" displayOrder="17" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" startIncrement="0" type="IpAddress">
+    <variable displayName="Device Ip Address" name="params.device_ip_address" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="admin" displayName="Login" displayOrder="18" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Login" name="params.login" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="18" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="admin" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="Ubiqube38" displayName="Password" displayOrder="19" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" type="Password">
+    <variable displayName="Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Ubiqube38" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable default="Ubiqube38" displayName="Password Admin" displayOrder="20" maxLength="100" name="params.password_admin" numberOfRowMax="0" startIncrement="0" type="Password">
+    <variable displayName="Password Admin" name="params.password_admin" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Ubiqube38" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>MSA</section>
+        <sections>MSA</sections>
       </sections>
     </variable>
-    <variable displayName="Device Id" displayOrder="21" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Device Id" name="params.device_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Initial Provisioning</section>
+        <sections>Initial Provisioning</sections>
       </sections>
     </variable>
-    <variable default="PRE_CONFIG" displayName="Templates Position" displayOrder="22" maxLength="100" name="params.position" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Templates Position" name="params.position" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="PRE_CONFIG" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Initial Provisioning</section>
+        <sections>Initial Provisioning</sections>
       </sections>
     </variable>
-    <variable default="Configuration/FORTINET/FortigateVA/PA_initial_config" displayName="Templates" displayOrder="23" maxLength="100" name="params.uris.0.uri" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Templates" name="params.uris.0.uri" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="23" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Configuration/FORTINET/FortigateVA/PA_initial_config" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Initial Provisioning</section>
+        <sections>Initial Provisioning</sections>
       </sections>
     </variable>
-    <variable displayName="Server Id" displayOrder="40" maxLength="100" name="params.server_id" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Server Id" name="params.server_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="40" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Delete Instance</section>
+        <sections>Delete Instance</sections>
       </sections>
     </variable>
-    <variable default="Social Networking" displayName="Url Category" displayOrder="72" maxLength="100" name="params.url_category" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Url Category" name="params.url_category" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="72" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Social Networking" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Create Address Objects</sections>
+      </sections>
       <values>
-        <value displayValue="Social Networking">Social Networking</value>
-        <value displayValue="Sports">Sports</value>
+        <values displayValue="Social Networking">Social Networking</values>
+        <values displayValue="Sports">Sports</values>
       </values>
+    </variable>
+    <variable displayName="Policy Id" name="params.policy_id" startIncrement="103" type="AutoIncrement" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="91" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Address Objects</section>
+        <sections>Create Firewall Policy</sections>
       </sections>
     </variable>
-    <variable displayName="Policy Id" displayOrder="91" maxLength="100" name="params.policy_id" numberOfRowMax="0" startIncrement="103" type="AutoIncrement">
+    <variable displayName="Jira Device Id" name="params.jira_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="114" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI735" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Firewall Policy</section>
+        <sections>Create Jira Task</sections>
       </sections>
     </variable>
-  </variables>  <example>    <content>
-      <?php?>
-    </content>  </example>
-  <process name="Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF">
-    <visibility>5</visibility>
+    <variable displayName="VNF Deployment Settings Reference" name="params.conf_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="129" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBIPR165" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VNF External Reference" name="params.dev_ext_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="130" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="FGT_VNF" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>
+</content>
+  </example>
+  <process name="Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF">
     <displayName>Deploy VNF</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-  <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Neutron/Task_openstack_get_available_floating_ip.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Neutron/Task_openstack_get_available_floating_ip.php">
+      <processPath/>
       <displayName>Get an available Floating IP Address</displayName>
     </task>
     <task name="Task_Instantiate_VNF.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Instantiate VNF</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Nova/Task_openstack_associate_floatingip_to_server.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Associate Floating IP to the VNF</displayName>
     </task>
     <task name="Task_Disable_Port_Security_on_Traffic_Interfaces.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Disable Port Security on Traffic Interfaces</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_create.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Create Managed Entity in MSA</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/DeviceConfiguration/Task_msa_attach_files_to_device.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <processPath/>
       <displayName>Attach Day0 Template</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_ping_check.php">
       <processPath/>
       <displayName>Wait for Ping</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_DeployVNF/Tasks/Task_Initial_Provisioning.php">
-      <processPath/>
+    <task name="Task_Initial_Provisioning.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
       <displayName>Initial Provsioning</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_mark_device_as_provisioned.php">
       <processPath/>
       <displayName>Activate Entity</displayName>
     </task>
+    <task name="Task_Create_Jira_Task.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <displayName>Create Jira Task</displayName>
+    </task>
+    <task name="Task_Associate_DS_to_the_ME.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
+      <displayName>Associate DS to the ME</displayName>
+    </task>
   </process>
-
-
-
-<process name="Process/Openstack_demo/PA_Demo_FTNT/Process_URL_Filtering">
-    <visibility>5</visibility>
+  <process name="Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering">
     <displayName>URL Filtering</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    
-  <task name="Task_Create_Address_Objects.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
+    <visibility>5</visibility>
+    <task name="Task_Create_Address_Objects.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
       <displayName>Create Address Objects</displayName>
     </task>
     <task name="Task_Create_Firewall_Policy.php">
-      <processPath>/opt/fmc_repository/Process/Openstack_demo/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
       <displayName>Create Firewall Policy</displayName>
     </task>
   </process>
-<process name="Process/Openstack_demo/PA_Demo_FTNT/Process_Decommission_VNF">
-    <visibility>5</visibility>
+  <process name="Process/Private_Cloud/PA_Demo_FTNT/Process_Decommission_VNF">
     <displayName>Decommission VNF</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Nova/Task_openstack_server_delete.php">
       <processPath/>
       <displayName>Delete VNF Instance</displayName>
@@ -322,14 +249,24 @@
       <processPath/>
       <displayName>Delete in MSA</displayName>
     </task>
+    <task name="Task_Move_Jira_to_Done.php">
+      <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_Decommission_VNF/Tasks/</processPath>
+      <displayName>Move Jira to Done</displayName>
+    </task>
   </process>
-  <process name="Process/Openstack_demo/PA_Demo_FTNT/Process_Move_to_Trash">
-    <visibility>5</visibility>
+  <process name="Process/Private_Cloud/PA_Demo_FTNT/Process_Move_to_Trash">
     <displayName>Move to Trash</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
+    <visibility>5</visibility>
   </process>
+  <information>
+    <icon>/images/repository/CommandDefinition/icons/carrier routing system.jpg</icon>
+    <description/>
+    <displayField>server_name</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Private Cloud Management</name>
+    <group>Private Cloud|Openstack</group>
+  </information>
 </ObjectDefinition>
