@@ -12,7 +12,7 @@ $TASKID = $context['TASKID'];
 $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
                         'EXECNUMBER' => $EXECNUMBER,
                         'TASKID' => $TASKID);
-$ce_device_detils = $context['ce_device_details']
+$ce_device_detils = $context['ce_device_details'];
 $ce_device_id = $ce_device_detils['ce_device_id'];
 $device_external_reference = $ce_device_detils['object_id'];
 $device_models = $context['device_models_array'];
