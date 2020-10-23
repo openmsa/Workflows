@@ -66,6 +66,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>L3VPN Automation</name>
-    <group/>
+    <group>automation|security|VPN</group>
   </information>
 </ObjectDefinition>
