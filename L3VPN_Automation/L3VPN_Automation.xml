@@ -1,0 +1,71 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Customer Name" name="params.customer_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="IPAM System" name="params.ipam_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="1078" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Site name" name="params.site" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.ipam_device_id" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>Netbox___Sites</class>
+      </classes>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/L3VPN_Automation/Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <task name="Delete_Define_variables.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Define variables</displayName>
+    </task>
+  </process>
+  <process name="Process/L3VPN_Automation/Start_to_work_with_customer">
+    <displayName>Start to work with customer</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Start_to_work_with_customer_Define_Variables.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Define Variables</displayName>
+    </task>
+    <task name="Start_to_work_with_customer_Retrieve_information_about_customer.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Retrieve information about customer</displayName>
+    </task>
+  </process>
+  <process name="Process/L3VPN_Automation/New_CE">
+    <displayName>New CE</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="New_CE_Define_variables.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Define variables</displayName>
+    </task>
+    <task name="New_CE_Create_managed_entity.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Create managed entity</displayName>
+    </task>
+    <task name="New_CE_Provision_and_activate_managed_entity.php">
+      <processPath>/opt/fmc_repository/Process/L3VPN_Automation</processPath>
+      <displayName>Provision and activate managed entity</displayName>
+    </task>
+  </process>
+  <process name="Process/L3VPN_Automation/New_L3VPN">
+    <displayName>New L3VPN</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+  </process>
+  <process name="Process/L3VPN_Automation/New_Pseudowire">
+    <displayName>New Pseudowire</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>The workflow is proposed to automate L3VPN service provisioning</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>L3VPN Automation</name>
+    <group/>
+  </information>
+</ObjectDefinition>
