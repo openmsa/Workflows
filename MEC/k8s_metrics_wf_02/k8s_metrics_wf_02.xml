@@ -1,0 +1,74 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="SUBTENANT" name="params.subtenant" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="SERVICE NAMESPACE" name="params.namespace" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="PACKET SIZE" name="params.packet_size" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="PACKET COUNT" name="params.packet_count" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="USER APP" name="params.user_app" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="USER NAMESPACE" name="params.user_ns" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/k8s_metrics_wf_02/INITIALIZE">
+    <displayName>INITIALIZE</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="INITIALIZE_retrieve_user_input_data.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>retrieve user input data</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s_metrics_wf_02/DEPLOY_PROBATION">
+    <displayName>DEPLOY PROBATION</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="DEPLOY_PROBATION_construct_probation_network.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>construct probation network</displayName>
+    </task>
+    <task name="DEPLOY_PROBATION_deploy_pods.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>deploy pods</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s_metrics_wf_02/DEPLOY_MEC_APP">
+    <displayName>DEPLOY MEC APP</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="DEPLOY_MEC_APP_collect_metrics_from_pods.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>collect metrics from pods</displayName>
+    </task>
+    <task name="DEPLOY_MEC_APP_deploy_user_app.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>deploy user app</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s_metrics_wf_02/CLEANUP">
+    <displayName>CLEANUP</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="CLEANUP_remove_pods_and_apps.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>remove pods and apps</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s_metrics_wf_02/EXIT">
+    <displayName>EXIT</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="EXIT_remove_workflow_instance.py">
+      <processPath>/opt/fmc_repository/Process/k8s_metrics_wf_02</processPath>
+      <displayName>remove workflow instance</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>k8s_metrics_wf_02</name>
+    <group/>
+  </information>
+</ObjectDefinition>
