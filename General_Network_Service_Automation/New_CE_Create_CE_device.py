@@ -68,7 +68,7 @@ for site in objects_list:
 
 #Find all devices on the site
 site_device_list = list()
-for device in context['customer_details']['devices_list'].values():
+for device in context['customer_details']['devices_list']:
     device_object = IpamOrderObject.command_objects_instances_by_id(ms_ipam_device, 
                                                                     device)[ms_ipam_device][device]
     try:
