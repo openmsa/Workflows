@@ -1,0 +1,127 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Spreadsheets Directory" name="params.spreadsheets_directory" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Datafiles/GWAN_RAB" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections></sections>
+      </sections>
+      <values>
+        <values displayValue="/opt/fmc_repository/Datafiles/GWAN_RAB">/opt/fmc_repository/Datafiles/GWAN_RAB</values>
+      </values>
+    </variable>
+    <variable displayName="Spreadsheets Extension" name="params.spreadsheets_extension" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default=".xlsx" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="XLSX">.xlsx</values>
+        <values displayValue="XLS">.xls</values>
+      </values>
+    </variable>
+    <variable displayName="Select" name="params.spreadsheet_list.0.is_selected" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Spreadsheet " name="params.spreadsheet_list.0.spreadsheet" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate">
+    <displayName>SO Instantiate</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="SO_Instantiate_Spreadsheet_List_Acquisition.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate</processPath>
+      <displayName>Spreadsheet List Acquisition</displayName>
+    </task>
+  </process>
+  <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add">
+    <displayName>SO Add</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="SO_Add_Read_Service_Order_Spreadsheet.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Read Service Order Spreadsheet</displayName>
+    </task>
+    <task name="SO_Common_Pre-operation_work.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Pre-operation work</displayName>
+    </task>
+    <task name="SO_Add_Remove_service_policy_from_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Remove service policy from interface</displayName>
+    </task>
+    <task name="SO_Add_Create_named_ALC_and_all_ACL_entries.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Create named ALC and all ACL entries</displayName>
+    </task>
+    <task name="SO_Add_Create_the_class_map.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Create the class map</displayName>
+    </task>
+    <task name="SO_Add_Add_class_map_to_the_policy_map.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Add class map to the policy map</displayName>
+    </task>
+    <task name="SO_Add_Add_the_service_policy_to_the_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Add the service policy to the interface</displayName>
+    </task>
+    <task name="SO_Add_Create_the_static_route.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+      <displayName>Create the static route</displayName>
+    </task>
+    <task name="SO_Common_Post-operation_work.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Post-operation work</displayName>
+    </task>
+  </process>
+  <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete">
+    <displayName>SO Delete</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="SO_Delete_Read_Service_Order_Spreadsheet.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Read Service Order Spreadsheet</displayName>
+    </task>
+    <task name="SO_Common_Pre-operation_work.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Pre-operation work</displayName>
+    </task>
+    <task name="SO_Delete_Delete_static_route.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Delete static route</displayName>
+    </task>
+    <task name="SO_Delete_Remove_service_policy_from_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Remove service policy from interface</displayName>
+    </task>
+    <task name="SO_Delete_Remove_class_map_from_policy_map.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Remove class map from policy map</displayName>
+    </task>
+    <task name="SO_Delete_Delete_the_class_map.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Delete the class map</displayName>
+    </task>
+    <task name="SO_Delete_Delete_ACL.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Delete ACL</displayName>
+    </task>
+    <task name="SO_Delete_Add_the_service_policy_to_the_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+      <displayName>Add the service policy to the interface</displayName>
+    </task>
+    <task name="SO_Common_Post-operation_work.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Post-operation work</displayName>
+    </task>
+  </process>
+  <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate">
+    <displayName>SO Terminate</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>GWAN RAB Service Order Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>
