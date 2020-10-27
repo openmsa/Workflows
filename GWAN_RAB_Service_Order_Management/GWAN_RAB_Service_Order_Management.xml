@@ -31,7 +31,7 @@
     <displayName>SO Add</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
-    <task name="SO_Add_Service_Order_Spreadsheet.py">
+    <task name="SO_Add_Read_Service_Order_Spreadsheet.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
     </task>
