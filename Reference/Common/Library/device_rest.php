@@ -26,7 +26,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 						$log_enabled = "true", $log_more_enabled = "true", 
 						$mail_alerting = "true", $reporting = "false", 
 						$snmp_community = SNMP_COMMUNITY_DEFAULT, 
-						$managementInterface = "", $management_port = 22) {
+						$managementInterface = "", $hostname = "",  $management_port = 22) {
 
 	$array = array('name' => $device_name,
 			'manufacturerId' => $manufacturer_id,
@@ -40,6 +40,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 			'reporting' => $reporting,
 			'managementAddress' => $management_address,
 			'managementPort' => $management_port,
+			'hostname' => $hostname,
 			'externalReference' => $device_external_reference,
 			'snmpCommunity' => $snmp_community
 			);
