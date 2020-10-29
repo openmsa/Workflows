@@ -48,7 +48,7 @@
   <process name="Process/BIOS_Automation/Process_BIOS_parameters_fixing">
     <displayName>BIOS parameters fixing</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Define_variables.php">
       <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_BIOS_parameters_fixing/Tasks/</processPath>
       <displayName>Define variables</displayName>
@@ -89,7 +89,7 @@
   <process name="Process/BIOS_Automation/Process_Rollback_BIOS_parameters">
     <displayName>Rollback BIOS parameters</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Rollback_BIOS_parameters.php">
       <processPath>/opt/fmc_repository/Process/BIOS_Automation/BIOS_parameters_management/Process_Rollback_BIOS_parameters/Tasks/</processPath>
       <displayName>Rollback BIOS parameters</displayName>
@@ -106,7 +106,7 @@
   <process name="Process/BIOS_Automation/Process_Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
@@ -114,7 +114,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>BIOS parameters automation</name>
     <group>IT|BIOS|AUTOMATION</group>
   </information>
