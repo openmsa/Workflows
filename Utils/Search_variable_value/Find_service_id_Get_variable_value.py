@@ -41,10 +41,10 @@ for workflow, details in active_workflow.items():
           matched_workflow[workflow][instance['id']] = {'state': instance['state'], 			  											'variable_list': list()}
         matched_workflow[workflow][instance['id']]['variable_list'].append(var)
 
-#Copy to context fo future needs
+#Create context variable to show in GUI
 context['matched'] = list()
 
-#Finish successfully
+#Finish successfully if at least one WF was found, show warning else
 if not len(matched_workflow):
   ret = MSA_API.process_content('WARNING', 'There is no workflow with requested value', context, True)
 else:

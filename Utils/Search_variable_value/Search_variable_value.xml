@@ -24,7 +24,7 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>The utilitiy is propose to search a variable value across all workflow instances of particular subtenant</description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
