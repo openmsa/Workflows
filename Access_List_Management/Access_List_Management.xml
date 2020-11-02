@@ -1,0 +1,62 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <process name="New_Service">
+    <displayName>New Service</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="New_Service_Instantiate_Service.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
+      <displayName>Instantiate Service</displayName>
+    </task>
+  </process>
+  <process name="Add_ACL">
+    <displayName>Add ACL</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Add_ACL_Ensure_ACL_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
+      <displayName>Ensure ACL do not exist in the device</displayName>
+    </task>
+    <task name="Add_ACL_Add_ACL_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
+      <displayName>Add ACL in the device</displayName>
+    </task>
+    <task name="Add_ACL_Ensure_ACL_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
+      <displayName>Ensure ACL exist in the device</displayName>
+    </task>
+  </process>
+  <process name="Delete_ACL">
+    <displayName>Delete ACL</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Delete_ACL_Ensure_ACL_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
+      <displayName>Ensure ACL exist in the device</displayName>
+    </task>
+    <task name="Delete_ACL_Delete_ACL_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
+      <displayName>Delete ACL in the device</displayName>
+    </task>
+    <task name="Delete_ACL_Ensure_ACL_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
+      <displayName>Ensure ACL do not exist in the device</displayName>
+    </task>
+  </process>
+  <process name="Delete_Service">
+    <displayName>Delete Service</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Access List Management</name>
+    <group>GWAN RAB | Baseline WF</group>
+  </information>
+</ObjectDefinition>
