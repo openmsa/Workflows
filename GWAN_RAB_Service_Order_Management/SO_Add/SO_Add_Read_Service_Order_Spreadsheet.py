@@ -10,8 +10,15 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('spreadsheet_list.0.spreadsheet', var_type='String')
 dev_var.add('spreadsheet_list.0.is_selected', var_type='Boolean')
+dev_var.add('spreadsheet_list.0.device_external_ref', var_type='String')
 
 context = Variables.task_call(dev_var)
+
+####################################################
+#                                                  #
+#                FUNCTIONS                         #
+#                                                  #
+####################################################
 
 '''
 Get rows indexes by value in specific column.
@@ -135,9 +142,12 @@ def policy_map_replace_item_key_by_sheet_header_name(config_row_list, tab_header
             count += 1
     return config_row_list
     
-''' #######################
-MAIN:
-####################### ''' 
+
+####################################################
+#                                                  #
+#                MAIN CODE                         #
+#                                                  #
+####################################################
 
 #Constant variables
 STATIC_ROUTING = 'StaticRouting'
@@ -148,7 +158,7 @@ POLICY_MAP = 'PolicyMap'
 FILTER_TAB_FLAG = 'Flag'
 FILTER_COLUMN_NAME = 'Unnamed: 1'
 ORDER_TYPE = 'ADD'
-
+context['order_type'] = ORDER_TYPE
 
 # Check multiple or missing spreadsheet file selection.
 selected_number = 0
@@ -164,13 +174,15 @@ else:
 	print(ret)
     
 # Retrieve selected spreadsheet_filename from the list.
+spreadsheet_filename = ''
 if selected_number == 1:
 	for st in context.get('spreadsheet_list'):
 		if st.get('is_selected') == True:
 			if st.get('spreadsheet'):
-				spreadsheet_filename = st.get('spreadsheet')
+                #spreadsheets_dir = context['spreadsheets_directory']
+				spreadsheet_filename = context['spreadsheets_directory'] + '/' + st.get('spreadsheet')
 			else:
-				ret = MSA_API.process_content('FAILED', 'Seletd spreadsheet filename is empty from the service instance context.', context, True)
+				ret = MSA_API.process_content('FAILED', 'Selected spreadsheet filename is empty from the service instance context.', context, True)
 				print(ret)
 			break
 else:
