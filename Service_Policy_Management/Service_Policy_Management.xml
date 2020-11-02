@@ -1,0 +1,62 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <process name="New_Service">
+    <displayName>New Service</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="New_Service_Instantiate_Service.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
+      <displayName>Instantiate Service</displayName>
+    </task>
+  </process>
+  <process name="Add_Service_Policy">
+    <displayName>Add Service Policy</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Add_Service_Policy_Ensure_Service_Policy_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Add_Service_Policy</processPath>
+      <displayName>Ensure Service Policy do not exist in the device</displayName>
+    </task>
+    <task name="Add_Service_Policy_Add_Service_Policy_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Add_Service_Policy</processPath>
+      <displayName>Add Service Policy in the device</displayName>
+    </task>
+    <task name="Add_Service_Policy_Ensure_Service_Policy_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Add_Service_Policy</processPath>
+      <displayName>Ensure Service Policy exist in the device</displayName>
+    </task>
+  </process>
+  <process name="Delete_Service_Policy">
+    <displayName>Delete Service Policy</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Delete_Service_Policy_Ensure_Service_Policy_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Delete_Service_Policy</processPath>
+      <displayName>Ensure Service Policy exist in the device</displayName>
+    </task>
+    <task name="Delete_Service_Policy_Delete_Service_Policy_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Delete_Service_Policy</processPath>
+      <displayName>Delete Service Policy in the device</displayName>
+    </task>
+    <task name="Delete_Service_Policy_Ensure_Service_Policy_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Delete_Service_Policy</processPath>
+      <displayName>Ensure Service Policy do not exist in the device</displayName>
+    </task>
+  </process>
+  <process name="Delete_Service">
+    <displayName>Delete Service</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Service Policy Management</name>
+    <group>GWAN RAB | Baseline WF</group>
+  </information>
+</ObjectDefinition>
