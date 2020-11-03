@@ -22,6 +22,7 @@
         <sections></sections>
       </sections>
     </variable>
+    <variable displayName="Device Name" name="params.device_external_ref" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate">
@@ -127,7 +128,7 @@
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>GWAN RAB Service Order Management</name>
-    <group/>
+    <name>Service Order Management</name>
+    <group>GWAN RAB | Master WF</group>
   </information>
 </ObjectDefinition>
