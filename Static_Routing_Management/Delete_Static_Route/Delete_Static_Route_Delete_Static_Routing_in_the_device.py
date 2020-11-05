@@ -35,9 +35,15 @@ params = dict(static_route=object)
 
 response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 
-#check operation status from response
-    
-    #TODO
+if is_order_op_success(response) != True:
+    detials = ''
+    if 'wo_newparams' in response:
+        detials = response.get('wo_newparams')
+    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+    print(ret)
+
+#store OBMF command execution response in context
+context['response'] = response.get('wo_newparams')
 
 ret = MSA_API.process_content('ENDED', 'Delete static route operation is done successfully.', context, True)
 print(ret)
