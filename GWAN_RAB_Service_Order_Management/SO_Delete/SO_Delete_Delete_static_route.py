@@ -48,5 +48,5 @@ for route in static_routing:
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
             print(ret) 
 
-ret = MSA_API.process_content('ENDED', 'Static Routing deleted successfully to the device' + device_ref, context, True)
+ret = MSA_API.process_content('ENDED', 'Static Routing deleted successfully to the device ' + device_ref, context, True)
 print(ret)
