@@ -142,7 +142,19 @@ def policy_map_replace_item_key_by_sheet_header_name(config_row_list, tab_header
             count += 1
     return config_row_list
     
+'''
+Remove configuration dictionaries from the service context.
 
+@param name_list
+    configuration name list (e.g: [ACL, StaticRouting]).
+@param context
+    service instance context.
+'''
+def pop_config_dict_from_context(name_list, context):
+    for name in name_list:
+        if name in context:
+            context.pop(name)
+    
 ####################################################
 #                                                  #
 #                MAIN CODE                         #
@@ -179,8 +191,9 @@ if selected_number == 1:
 	for st in context.get('spreadsheet_list'):
 		if st.get('is_selected') == True:
 			if st.get('spreadsheet'):
-                #spreadsheets_dir = context['spreadsheets_directory']
-				spreadsheet_filename = context['spreadsheets_directory'] + '/' + st.get('spreadsheet')
+                                #store device_external_ref in the context
+                                spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
+                                context['device_external_ref'] = st.get('device_external_ref')
 			else:
 				ret = MSA_API.process_content('FAILED', 'Selected spreadsheet filename is empty from the service instance context.', context, True)
 				print(ret)
@@ -189,7 +202,7 @@ else:
 	ret = MSA_API.process_content('FAILED', 'Only one spreadsheet must and allows to be selected.', context, True)
 	print(ret)
   
-# List sheet name in spreadsheet 
+# List sheet name in spreadsheet.
 #spreadsheet_filename = '/opt/fmc_repository/Datafiles/GWAN_RAB/UBIQUBE_MSA_configuration_sheet_20200918.xlsx'
 sheet_names = ''
 
@@ -197,12 +210,8 @@ if spreadsheet_filename:
     xl = pandas.ExcelFile('file:' + spreadsheet_filename)
     sheet_names = xl.sheet_names  # see all sheet names
     
-# unset configurations dictionaries in context before to read the spreadsheet
-context.pop('ACL')
-context.pop('ServicePolicy')
-context.pop('ClassMap')
-context.pop('policyMaps')
-context.pop('StaticRouting')
+#Remove configuration dictionaries from the service context.
+pop_config_dict_from_context(sheet_names, context)
 
 # Read sheet to json
 acl_rules_dict = {}
