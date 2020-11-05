@@ -11,7 +11,7 @@
   <process name="New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="New_Service_Instantiate_Service.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
       <displayName>Instantiate Service</displayName>
@@ -20,7 +20,7 @@
   <process name="Add_Static_Route">
     <displayName>Add Static Route</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Add_Static_Route_Ensure_Static_Routing_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Add_Static_Route</processPath>
       <displayName>Ensure Static Routing do not exist in the device</displayName>
@@ -37,7 +37,7 @@
   <process name="Delete_Static_Route">
     <displayName>Delete Static Route</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Delete_Static_Route_Ensure_Static_Routing_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Delete_Static_Route</processPath>
       <displayName>Ensure Static Routing exist in the device</displayName>
@@ -54,7 +54,7 @@
   <process name="Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
@@ -62,7 +62,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <name>Static Routing Management</name>
     <group>GWAN RAB | Baseline WF</group>
   </information>

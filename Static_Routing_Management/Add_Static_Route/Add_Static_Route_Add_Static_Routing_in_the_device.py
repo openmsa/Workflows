@@ -29,7 +29,13 @@ source_address = context['source_address'] #MS input variable value
 subnet_mask = context['subnet_mask'] #MS input variable value
 nexthop = context['nexthop'] #MS input variable value
 
+#build MS the dictionary input object 
 config = dict(object_id=source_address, mask=subnet_mask, next_hop=nexthop)
+if 'vlan_id' in context:
+    config['vlan_id'] = context['vlan_id']
+if 'distance' in context:
+    config['distance'] = context['distance']
+  
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(static_route=obj)
 context['ms_params'] = params
