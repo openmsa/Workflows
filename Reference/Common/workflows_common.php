@@ -369,4 +369,51 @@ function create_msa_workflow_task ($task_dir, $task_name, $additional_import_fil
 	shell_exec("chmod 750 $task_file");	
 }
 
+function msa_micro_service_variables_to_workflow_variables_with_mapping ($micro_service_uri) {
+    
+    $myXMLData=file_get_contents(FMC_REPOSITORY_DIRECTORY.$micro_service_uri);
+    $pattern = '/(\<value\sdisplayValue=.*\>)(.*)(\<\/value\>)/i';
+    $replacement = '$1<val>$2</val>$3';
+    $myXMLData = preg_replace($pattern, $replacement, $myXMLData);
+    $xml = simplexml_load_string($myXMLData);
+    $micro_service_defition = json_decode(json_encode($xml), true);
+    $variables = $micro_service_defition['variables']['variable'];
+    $micro_service_variables = array();
+    $index = 0;
+    foreach ($variables as $variable) {
+        foreach ($variable as $key => $value) {
+            if ($key === "@attributes") {
+                foreach ($value as $attribute_key => $attribute_value) {
+                    $micro_service_variables[$index][$attribute_key] = $attribute_value;
+                }
+            } else if($key === "values") {
+                foreach ($value as $valu) {
+                    foreach ($valu as $val) {
+                        if(is_array($val)) {
+                        $micro_service_variables[$index][$key][$val["val"]] = $val["@attributes"]["displayValue"];
+                        }
+                    }
+                }
+            }
+            else {
+                $micro_service_variables[$index][$key] = $value;
+            }
+        }
+        $index++;
+    }
+    logToFile(debug_dump($micro_service_variables, "MICRO SERVICE VARIABLES : $micro_service_uri\n"));
+    return $micro_service_variables;
+}
+
+
+function msa_micro_service_information_to_workflow_variables ($micro_service_uri) {
+    $micro_service_information = array();
+    $xml = simplexml_load_file(MICRO_SERVICES_HOME_DIR . $micro_service_uri);
+    $micro_service_defition = json_decode(json_encode($xml), true);
+    $micro_service_information = $micro_service_defition['information'];
+
+    logToFile(debug_dump($micro_service_information, "MICRO SERVICE INFORMATIONS : $micro_service_uri\n"));
+    return $micro_service_information;
+}
+
 ?>

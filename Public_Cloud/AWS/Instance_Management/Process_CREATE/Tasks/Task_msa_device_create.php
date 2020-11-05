@@ -15,12 +15,15 @@ function list_args() {
 	create_var_def('snmp_community', 'String');
 }
 
-check_mandatory_param('customer_id');
 //check_mandatory_param('managed_device_name');
 check_mandatory_param('manufacturer_id');
 check_mandatory_param('model_id');
 check_mandatory_param('login');
 check_mandatory_param('new_password');
+
+if (!isset($context['customer_id'])) {
+	$context['customer_id'] = $context['UBIQUBEID'];
+}
 
 // MSA device creation parameters
 $customer_id = $context['customer_id'];
@@ -34,13 +37,12 @@ $password_admin = $context['new_password'];
 $device_ip_address = $context['device_ip_address'];
 $device_external_reference = "";
 $snmp_community = $context['snmp_community'];
-
-if (array_key_exists('device_external_reference', $context)) {
-	$device_external_reference = $context['device_external_reference'];
-}
+$device_hostname = str_replace(".", "-", $device_ip_address);
+$context['hostname'] = "host-".$device_hostname;
+$device_hostname = $context['hostname'];
 
 $response = _device_create($customer_db_id, $managed_device_name, $manufacturer_id,
-							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "true", $snmp_community);
+							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "true", $snmp_community, $device_hostname);
 
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {
@@ -59,7 +61,7 @@ $device_id_long = substr($context['device_id'], 3);
 /**
 * generate a hostname based on the public IP
 * this is necessary for sysloct collection
-*/
+
 $device_hostname = str_replace(".", "-", $device_ip_address);
 $context['hostname'] = "host-".$device_hostname;
 $device_hostname = $context['hostname'];
@@ -70,7 +72,7 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-
+*/
 /**
 * mark the device as provisioned so that it's getting monitored as soon as it's IP is accessible
 */ 

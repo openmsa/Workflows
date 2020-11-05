@@ -15,7 +15,8 @@ check_mandatory_param('variable_value');
 
 logToFile("Add variable ".$context['variable_name']." value ".$context['variable_value']." to ".$context['device_id']);
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id=getIdFromUbiId ($device_id);
 $response = _configuration_variable_create($device_id, $context['variable_name'], $context['variable_value']);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED || $response['wo_newparams'] !== "") {

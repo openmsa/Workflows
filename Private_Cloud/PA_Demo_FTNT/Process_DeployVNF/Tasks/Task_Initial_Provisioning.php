@@ -15,7 +15,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 
 $server_interface_details = $context['server_interface_details'];
 $onm_ip = $server_interface_details[0]['ip_address'];
@@ -43,11 +43,14 @@ if ($response['wo_status'] !== ENDED) {
 	
 $response = wait_for_provisioning_completion($device_id, $process_params);
 $response = json_decode($response, true);
+//Not waiting for successful completion as expected the connection will be lost 
+//while we configure the same interfaces of the Fgt using which we are provisioning
 /*if ($response['wo_status'] !== ENDED) {
 	$response = json_encode($response);
 	echo $response;
 	exit;
 }*/
+
 $wo_comment = $response['wo_comment'];
 $response = prepare_json_response(ENDED, "MSA Device $device_id Provisioned successfully.\n$wo_comment", $context, true);
 echo $response;

@@ -2,35 +2,30 @@
 <metadata>
     <map>
         <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1602669082524</value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>Process</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1602669082516</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+        </entry>
+        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
-            <key>DATE_MODIFICATION</key>
-            <value>1570547649794</value>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
-            <value></value>
-        </entry>
-        <entry>
-            <key>REPOSITORY</key>
-        </entry>
-        <entry>
-            <key>DATE_CREATION</key>
-            <value>1524752853346</value>
-        </entry>
-        <entry>
-            <key>CONFIGURATION_FILTER</key>
-            <value></value>
-        </entry>
-        <entry>
-            <key>TAG</key>
-            <value>Task_msa_attach_config_profil.php</value>
-        </entry>
-        <entry>
-            <key>TYPE</key>
-            <value>UPLOAD</value>
         </entry>
     </map>
 </metadata>

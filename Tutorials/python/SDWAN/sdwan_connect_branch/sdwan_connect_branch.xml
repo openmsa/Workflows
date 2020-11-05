@@ -1,0 +1,83 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Site Left" name="params.site_left" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Site Right" name="params.site_right" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Left Subnet" name="params.leftsubnet" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Right Subnet" name="params.rightsubnet" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Secret" name="params.secret" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="ID" name="params.id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/sdwan_connect_branch/CREATE">
+    <displayName>CREATE</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="CREATE_task_01_retrieve_data.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_01_retrieve_data</displayName>
+    </task>
+    <task name="CREATE_task_02_create_configuration.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_02_create_configuration</displayName>
+    </task>
+    <task name="CREATE_task_03_create_loopbacks.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_03_create_loopbacks</displayName>
+    </task>
+    <task name="CREATE_task_04_create_secrets.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_04_create_secrets</displayName>
+    </task>
+    <task name="CREATE_task_05_create_policy.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_05_create_policy</displayName>
+    </task>
+    <task name="CREATE_task_06_create_cryptomap.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_06_create_cryptomap</displayName>
+    </task>
+  </process>
+  <process name="Process/sdwan_connect_branch/DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="DELETE_task_01.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_connect_branch</processPath>
+      <displayName>task_01</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>SD-WAN Connect Branch</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>SD-WAN Connect Branch</name>
+    <group>minilab|SDWAN</group>
+  </information>
+</ObjectDefinition>

@@ -5,7 +5,7 @@
  */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
-require '/opt/sms/bin/php/vendor/autoload.php';
+require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
 use Aws\Ec2\Ec2Client;
 
@@ -51,7 +51,7 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
-$region = $response['wo_newparams']['hostName'];
+$region = $response['wo_newparams']['hostname'];
 $context["region"] = $region;
 
 

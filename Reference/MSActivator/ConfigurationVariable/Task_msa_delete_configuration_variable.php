@@ -13,7 +13,8 @@ check_mandatory_param('variable_name');
 
 logToFile("Delete variable ".$context['variable_name']." to ".$context['device_id']);
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id=getIdFromUbiId ($device_id);
 $response = _configuration_variable_delete($device_id, $context['variable_name']);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED || $response['wo_newparams'] !== "") {

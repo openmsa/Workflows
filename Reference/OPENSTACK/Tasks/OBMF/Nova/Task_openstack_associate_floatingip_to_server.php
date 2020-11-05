@@ -25,7 +25,7 @@ if ($response['wo_status'] !== ENDED) {
 	exit;
 }
 	
-$response = prepare_json_response(ENDED, "Floating IP $floating_ip_id associated successfully to the server $server_id.", $context, true);
+$response = prepare_json_response(ENDED, "Floating IP $floating_ip_address associated successfully to the server $server_id.", $context, true);
 echo $response;
 
 ?>

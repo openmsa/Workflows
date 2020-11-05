@@ -4,7 +4,7 @@
  * This file is necessary to include to use all the in-built libraries of /opt/fmc_repository/Reference/Common
  */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require '/opt/sms/bin/php/vendor/autoload.php';
+require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
 use Aws\Ec2\Ec2Client;
 
@@ -16,8 +16,6 @@ function list_args()
   create_var_def('AwsDeviceId', 'Device');
   create_var_def('deviceId', 'Device');
   create_var_def('ImageId', 'String');
-  create_var_def('MaxCount', 'Integer');
-  create_var_def('MinCount', 'Integer');
   create_var_def('InstanceType', 'String');
   create_var_def('security_group', 'String');
   create_var_def('SubnetId', 'OBMFref');
@@ -25,8 +23,6 @@ function list_args()
 
 check_mandatory_param('ImageId');
 check_mandatory_param('InstanceType');
-check_mandatory_param('MaxCount');
-check_mandatory_param('MinCount');
 check_mandatory_param('SubnetId');
 
 
@@ -63,8 +59,8 @@ $ec2Client = Ec2Client::factory(array(
 logToFile("ec2 client successful");
 
 $array = array("ImageId" => $context["ImageId"], 
-               "MinCount" => $context["MinCount"], 
-               "MaxCount" => $context["MaxCount"],
+               "MinCount" => 1, 
+               "MaxCount" => 1,
                "InstanceType" => $context['InstanceType'], 
                "Placement.AvailabilityZone" => $context["region"], 
                "SubnetId" => $context["SubnetId"], 
@@ -100,6 +96,18 @@ try {
    task_exit(FAILED, "Error : $e");
 }
 
+$array_tag = array(
+		'Resources' => array("1" => $context ['InstanceId']),
+		'Tags' => array (
+				"1" => array('Key' => 'Project', 'Value' => 'AWS demo'),
+				"2" => array('Key' => 'Name', 'Value' => 'FGT VNF'),
+				),
+		);
+logToFile ( debug_dump ( $array_tag, "AWS tag instance request array\n" ) );
+
+$result = $ec2Client->createTags ( $array_tag );
+
+logToFile ( "tag instances successful : $result" );
 
 $device_ip_address = $context["device_ip_address"];
 

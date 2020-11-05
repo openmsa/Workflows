@@ -255,6 +255,7 @@
     </task>
   </process>
   <process name="Process/Private_Cloud/PA_Demo_FTNT/Process_Move_to_Trash">
+    <visibility>5</visibility>
     <displayName>Move to Trash</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>

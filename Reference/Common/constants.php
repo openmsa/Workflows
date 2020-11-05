@@ -4,8 +4,19 @@ $CURL_CMD = "/usr/bin/curl";
 $CURL_OPENSTACK = "";
 
 // Process logs file
-define('PROCESS_LOGS_FILE', '/opt/jboss/latest/logs/processLog/process.log');
+define('PROCESS_LOGS_DIRECTORY', '/opt/wildfly/logs/processLog/');
+define('PROCESS_LOGS_FILE', '/opt/wildfly/logs/processLog/process.log');
 define('UBI_JENTREPRISE_DIRECTORY', '/opt/ubi-jentreprise/');
+
+// FMC Repository directories
+define('FMC_REPOSITORY_DIRECTORY', '/opt/fmc_repository/');
+define('MICRO_SERVICE_DIRECTORY', 'CommandDefinition');
+define('TEMPLATE_DIRECTORY', 'Configuration');
+define('WORKFLOW_DIRECTORY', 'Process');
+define('LICENSE_DIRECTORY', 'License');
+define('FIRMWARE_DIRECTORY', 'Firmware');
+define('REPORT_DIRECTORY', 'Reports');
+define('DOCUMENTATION_DIRECTORY', 'Documentation');
 
 // Filepaths and variable to get the ncroot password
 define('VARS_CTX_FILE', '/opt/configurator/vars.ubiqube.net.ctx');
@@ -25,6 +36,10 @@ define('OP_GET', 'GET');
 define('OP_PUT', 'PUT');
 define('OP_PATCH', 'PATCH');
 define('OP_DELETE', 'DELETE');
+
+// SNMP COMMUNITY DEFAULT VALUE
+define('SNMP_COMMUNITY_DEFAULT', 'Default');
+
 
 // New Line/Line Break Symbol in XML
 define('NEW_LINE', '&#10;');
@@ -55,6 +70,8 @@ define('PUSH_CONFIG_CHECK_SLEEP', 10);
 define('PUSH_CONFIG_TIMEOUT', 600);
 define('UPDATE_CONFIG_CHECK_SLEEP', 10);
 define('UPDATE_CONFIG_TIMEOUT', 600);
+define('DEVICE_BACKUP_CHECK_SLEEP', 10);
+define('DEVICE_BACKUP_TIMEOUT', 600);
 define('PROCESS_STATUS_CHECK_SLEEP', 10);
 define('STATUS_BLINK_SLEEP', 2);
 
@@ -96,5 +113,9 @@ define('MICRO_SERVICES_HOME_DIR', '/opt/fmc_repository/CommandDefinition/');
 define('WORKFLOWS_HOME_DIR', '/opt/fmc_repository/Process/');
 
 $workflow_internal_params = array('EXECNUMBER', 'PROCESSINSTANCEID', 'SERVICEINSTANCEID', 'SERVICEINSTANCEREFERENCE', 'TASKID', 'UBIQUBEID', 'service_id');
+
+//objects sync timeouts
+define('OBJECTS_SYNCHRONIZATION_CONNECTION_TIMEOUT', 600);
+define('OBJECTS_SYNCHRONIZATION_MAX_TIME', 600)
 
 ?>

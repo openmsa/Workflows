@@ -1,147 +1,97 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ObjectDefinition>  <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description/>
-    <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group>Public Cloud|AWS</group>
-    <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>IP Black/White List Mngt</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <showDetailedServiceInstances>true</showDetailedServiceInstances>
-    <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>true</showVariables>
-    <visibility>5</visibility>
-  </information>  <variables frozen="0">
-    <variable displayName="Aws Region" displayOrder="0" keepOnImport="true" maxLength="165" name="params.aws_region" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
-      <sections>
-        <section>select ACL</section>
-      </sections>
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
-        <sdType manId="17010301" modId="17010301"/>
+        <sdTypes/>
       </sdTypes>
     </variable>
-    <variable displayName="Acl Id" displayOrder="1" editable="false" isMandatory="true" maxLength="100" name="params.network_acl_id" numberOfRowMax="0" refDeviceIdVar="params.aws_region" startIncrement="0" tableSizeFix="false" type="OBMFRef">
-      <sections>
-        <section>select ACL</section>
-      </sections>
+    <variable displayName="Acl Id" name="params.network_acl_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" refDeviceIdVar="params.aws_region" keepOnImport="false" editable="false" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>network_acl</class>
       </classes>
     </variable>
-    <variable default="https://ext-alb-1238716996.us-west-2.elb.amazonaws.com/feeds/Output_SOC_L3BL_L3BL_IPv4Dst" displayName="Url Ip Provider" displayOrder="2" maxLength="100" name="params.url_IP_provider" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>select ACL</section>
-      </sections>
+    <variable displayName="Url Ip Provider" name="params.url_IP_provider" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="https://ext-alb-1238716996.us-west-2.elb.amazonaws.com/feeds/Output_SOC_L3BL_L3BL_IPv4Dst" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+ 
     </variable>
-    <variable default="false" displayName="Default" displayOrder="3" maxLength="100" name="params.default" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Default" name="params.default" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable displayName="Rule Number" displayOrder="4" maxLength="100" name="params.entries.0.rule_number" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Rule Number" name="params.entries.0.rule_number" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable default="false" displayName="Egress" displayOrder="5" maxLength="100" name="params.entries.0.egress" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Egress" name="params.entries.0.egress" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable default="-1" displayName="Protocol" displayOrder="6" isMandatory="true" isUserLocked="true" maxLength="100" name="params.entries.0.protocol" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Protocol" name="params.entries.0.protocol" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="-1" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable displayName="Port From" displayOrder="7" maxLength="100" name="params.entries.0.port_range_from" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Port From" name="params.entries.0.port_range_from" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+ 
     </variable>
-    <variable displayName="Port To" displayOrder="8" maxLength="100" name="params.entries.0.port_range_to" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Port To" name="params.entries.0.port_range_to" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable displayName="Cidr Block" displayOrder="9" maxLength="100" name="params.entries.0.cidr_block" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Cidr Block" name="params.entries.0.cidr_block" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+
     </variable>
-    <variable default="deny" displayName="Action" displayOrder="10" maxLength="100" name="params.entries.0.rule_action" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Rule</section>
-      </sections>
+    <variable displayName="Action" name="params.entries.0.rule_action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="deny" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+ 
     </variable>
-  </variables>  <example>    <content/>  </example>
-<process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_initialize">
-    <visibility>5</visibility>
+  </variables>
+  <example/>
+  <process name="Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_initialize">
     <displayName>initialize</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>CREATE</type>
+    <visibility>0</visibility>
     <task name="Task_select_ACL.php">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_initialize/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_initialize/Tasks/</processPath>
       <displayName>select ACL</displayName>
     </task>
   </process>
-<process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete">
-    <visibility>5</visibility>
+  <process name="Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete">
     <displayName>delete</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
+    <visibility>0</visibility>
   </process>
-<process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_black_list_single_IP">
-    <visibility>5</visibility>
+  <process name="Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_black_list_single_IP">
     <displayName>blacklist_single_IP</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    
-  <task name="Task_create_ACL_entry.php">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_black_list_single_IP/Tasks/</processPath>
+    <visibility>0</visibility>
+    <task name="Task_create_ACL_entry.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_black_list_single_IP/Tasks/</processPath>
       <displayName>create ACL entry</displayName>
     </task>
   </process>
-<process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP">
-    <visibility>5</visibility>
+  <process name="Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP">
     <displayName>blacklist_list_of_IP</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
+    <visibility>0</visibility>
     <task name="Task_get_IP_from_URL.php">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
       <displayName>get_IP_from_URL</displayName>
     </task>
     <task name="Task_create_ACL_rules.php">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_blacklist_list_of_IP/Tasks/</processPath>
       <displayName>create_ACL_rules</displayName>
     </task>
   </process>
-<process name="Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules">
-    <visibility>5</visibility>
+  <process name="Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules">
     <displayName>delete_all_ACL_rules</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <compensation/>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
+    <visibility>0</visibility>
     <task name="Task_delete_ACL_rules.php">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules/Tasks/</processPath>
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Security_Management/ACL_Management/IP_Black_White_List_mngt/Process_delete_all_ACL_rules/Tasks/</processPath>
       <displayName>delete_ACL_rules</displayName>
     </task>
   </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>IP Black/White List Mngt</name>
+    <group>Public Cloud|AWS</group>
+  </information>
 </ObjectDefinition>

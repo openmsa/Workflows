@@ -4,7 +4,7 @@
  * This file is necessary to include to use all the in-built libraries of /opt/fmc_repository/Reference/Common
  */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require '/opt/sms/bin/php/vendor/autoload.php';
+require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
 use Aws\Ec2\Ec2Client;
 
@@ -33,7 +33,10 @@ if ($response['wo_status'] !== ENDED) {
 	exit;
 }
 $ping_status_message = $response['wo_comment'];
-
+/*
+sleep(120);
+task_exit(ENDED, "the AWS instance ". $context["InstanceId"] . " is now available (SSH and ICMP). IP = " . $context["device_ip_address"]);
+*/
 /* test SSH */
 $port_no = SSH_DEFAULT_PORT_NO;
 $response = wait_for_ssh_status($device_ip_address, $port_no, $process_params);

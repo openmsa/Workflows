@@ -1,358 +1,244 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
-	<information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description/>
-    <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group>Public Cloud|AWS</group>
-    <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>Instance Management on AWS</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <showDetailedServiceInstances>true</showDetailedServiceInstances>
-    <showProcessExecConsole>true</showProcessExecConsole>
-    <showVariables>false</showVariables>
-    <visibility>5</visibility>
-  </information>
-	<variables frozen="0">
-    <variable displayName=" AWS Region" displayOrder="0" editable="false" isMandatory="true" keepOnImport="true" maxLength="165" name="params.AwsDeviceId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
-      <sections>
-        <section>Sync AWS cloud</section>
-      </sections>
+  <variables frozen="0">
+    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
-        <sdType manId="17010301" modId="17010301"/>
+        <sdTypes/>
       </sdTypes>
     </variable>
-    <variable displayName="Deviceid" displayOrder="1" maxLength="100" name="params.deviceId" numberOfRowMax="0" startIncrement="0" type="Device" visible="false">
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
+    <variable displayName="Deviceid" name="params.deviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes/>
+      </sdTypes>
     </variable>
-    <variable cols="150" displayName="Image ID" displayOrder="2" isMandatory="true" maxLength="150" name="params.ImageId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Image ID" name="params.ImageId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="ami-0b1bed84cc40437e7" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
-        <value displayValue="FortiGate-VM64 6.0.6 [London] ">ami-0b1bed84cc40437e7</value>
-        <value displayValue="FortiGate-VM64 6.2.1 [London] ">ami-08cce3d57081f5137</value>
-        <value displayValue="FortiGate-VM64 6.2.1 [Seoul] ">ami-0a796272ef341a29d</value>
-        <value displayValue="FortiGate-VM64 6.2.2 [Oregon] ">ami-038bd389458ba36d8</value>
+        <values displayValue="FortiGate-VM64 6.0.6 [London] ">ami-0b1bed84cc40437e7</values>
       </values>
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
     </variable>
-    <variable default="1" displayName="Maxcount" displayOrder="3" maxLength="100" name="params.MaxCount" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false">
+    <variable displayName="Instance Type" name="params.InstanceType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="t2.small" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Instantiate VNFC</section>
+        <sections>Instantiate VNFC</sections>
       </sections>
-    </variable>
-    <variable default="1" displayName="Mincount" displayOrder="4" maxLength="100" name="params.MinCount" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false">
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
-    </variable>
-    <variable default="t2.small" displayName="Instance Type" displayOrder="5" isMandatory="true" maxLength="100" name="params.InstanceType" numberOfRowMax="0" startIncrement="0" type="String">
       <values>
-        <value>t2.small</value>
-        <value>c5.large</value>
-        <value>c5.xlarge</value>
-        <value>c5.2xlarge</value>
+        <values>t2.small</values>
+        <values>c5.large</values>
       </values>
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
     </variable>
-    <variable displayName="Security Group" displayOrder="6" editable="false" isMandatory="true" maxLength="100" name="params.security_group" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" tableSizeFix="false" type="OBMFRef">
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
+    <variable displayName="Security Group" name="params.security_group" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="sg-032da9f74527acf71 " isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>security_groups</class>
       </classes>
     </variable>
-    <variable displayName="Instance Id" displayOrder="7" isUserLocked="true" maxLength="100" name="params.InstanceId" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Instance Id" name="params.InstanceId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Instantiate VNFC</section>
+        <sections>Instantiate VNFC</sections>
       </sections>
     </variable>
-    <variable displayName="Subnet ID" displayOrder="8" isMandatory="true" maxLength="100" name="params.SubnetId" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" type="OBMFRef">
-      <sections>
-        <section>Instantiate VNFC</section>
-      </sections>
+    <variable displayName="Subnet ID" name="params.SubnetId" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="subnet-a7e3edcf" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="Managed Device Name" displayOrder="9" maxLength="100" name="params.managed_device_name" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="Managed Device Name" name="params.managed_device_name" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
+        <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable default="17" displayName="Manufacturer Id" displayOrder="10" maxLength="100" name="params.manufacturer_id" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false">
+    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="17" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
+        <sections>Create matching MSA device</sections>
+      </sections>
+      <values>
+        <values displayValue="Fortinet">17</values>
+      </values>
+    </variable>
+    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="15102617" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Create matching MSA device</sections>
+      </sections>
+      <values>
+        <values displayValue="Fortigate">15102617</values>
+      </values>
+    </variable>
+    <variable displayName="Device Ip Address" name="params.device_ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable default="15102617" displayName="Model Id" displayOrder="11" maxLength="100" name="params.model_id" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false">
+    <variable displayName="Login" name="params.login" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="admin" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
+        <sections>Create matching MSA device</sections>
+      </sections>
+      <values>
+        <values>admin</values>
+      </values>
+    </variable>
+    <variable displayName="Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="Device Ip Address" displayOrder="12" isUserLocked="true" maxLength="100" name="params.device_ip_address" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="New Password" name="params.new_password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="AZERTY_09876" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
+        <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable default="admin" displayName="Login" displayOrder="13" maxLength="100" name="params.login" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+    <variable displayName="Subtenant" name="params.customer_id" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Snmp Community" name="params.snmp_community" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="myCommunity" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
+        <sections>Create matching MSA device</sections>
       </sections>
+      <values>
+        <values displayValue="myCommunity">myCommunity</values>
+      </values>
     </variable>
-    <variable displayName="Password" displayOrder="14" maxLength="100" name="params.password" numberOfRowMax="0" startIncrement="0" type="Password" visible="false">
+    <variable displayName="Network interfaces ID" name="params.NetworkInterfaces.0.Id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="18" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create matching MSA device</section>
-      </sections>
-    </variable>
-    <variable displayName="New Password" displayOrder="15" isMandatory="true" maxLength="100" name="params.new_password" numberOfRowMax="0" startIncrement="0" type="Password">
-      <sections>
-        <section>Create matching MSA device</section>
-      </sections>
-    </variable>
-    <variable displayName="Customer Id" displayOrder="16" editable="false" isMandatory="true" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Customer">
-      <sections>
-        <section>Create matching MSA device</section>
-      </sections>
-    </variable>
-    <variable default="myCommunity" displayName="Snmp Community" displayOrder="17" maxLength="100" name="params.snmp_community" numberOfRowMax="0" startIncrement="0" type="String">
-      <sections>
-        <section>Create matching MSA device</section>
-      </sections>
-    </variable>
-    <variable displayName="Network interfaces ID" displayOrder="18" maxLength="100" name="params.NetworkInterfaces.0.Id" numberOfRowMax="0" refDeviceIdVar="params.AwsDeviceId" startIncrement="0" type="OBMFRef">
-      <sections>
-        <section>Manage VNFCi network interfaces</section>
+        <sections>Manage VNFCi network interfaces</sections>
       </sections>
       <classes>
         <class>network_interfaces</class>
       </classes>
     </variable>
-    <variable displayName="Device Id" displayOrder="19" isUserLocked="true" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="Device" visible="false">
+    <variable displayName="Force" name="params.force" startIncrement="0" type="Boolean" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Do MSA device initial provisioning</section>
+        <sections>Stop VNFCi</sections>
       </sections>
     </variable>
-    <variable displayName="Abc" displayOrder="21" maxLength="100" name="params.abc" numberOfRowMax="0" startIncrement="0" type="ServiceRef" visible="false">
+    <variable displayName="Deployment Setting Reference" name="params.conf_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="FGT_FW" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Terminate VNFCi from AWS</section>
+        <sections>Attach Configuration</sections>
       </sections>
-    </variable>
-    <variable default="false" displayName="Force" displayOrder="22" maxLength="100" name="params.force" numberOfRowMax="0" startIncrement="0" type="Boolean">
-      <sections>
-        <section>Stop VNFCi</section>
-      </sections>
-    </variable>
-    <variable default="FGT_FW" displayName="Profile Reference" displayOrder="25" maxLength="100" name="params.conf_profile_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Attach Configuration</section>
-      </sections>
-    </variable>
-    <variable default="FGT_MON" displayName="Profile Reference" displayOrder="26" maxLength="100" name="params.mon_profile_reference" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
-      <sections>
-        <section>Attach Monitoring</section>
-      </sections>
+      <values>
+        <values>FGT_FW</values>
+      </values>
     </variable>
   </variables>
-	<example>
-		<content/>
-	</example>
-	<process name="Process/OpenMSA/Public_Cloud/AWS/Process_New_service">
-		<visibility>5</visibility>
-		<displayName>New Service</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>CREATE</type>
-		<task name="Task_Synchronization_to_AWS_cloud.php">
-			<processPath>/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/
-			</processPath>
-			<displayName>Synchronization with AWS</displayName>
-		</task>
-		<compensation/>
-	</process>
-
-	<process name="Process/OpenMSA/Public_Cloud/AWS_WF/Process_CREATE">
-		<visibility>5</visibility>
-		<displayName>Launch Instance</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>		
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
-      <processPath/>
-      <displayName>Launch Instance</displayName>
+  <example/>
+  <process name="Process/Public_Cloud/AWS/Process_New_service">
+    <displayName>New service</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Task_Synchronization_to_AWS_cloud.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/</processPath>
+      <displayName>Synchronization with AWS</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_wait_for_instance.php">
+  </process>
+  <process name="Process/Public_Cloud/AWS_WF/Process_CREATE">
+    <displayName>Launch Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
+      <processPath/>
+      <displayName>Instantiate VNFC</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_wait_for_instance.php">
       <processPath/>
       <displayName>Wait for Instance</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_device_create.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_device_create.php">
       <processPath/>
-      <displayName>Create Device</displayName>
+      <displayName>Create MSA device</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Update_VNFCi_user_password.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Instance_Management/Process_CREATE/Tasks/</processPath>
-      <displayName>Update Instance Credentials</displayName>
+      <displayName>Update VNFCi user password</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_attach_network_interfaces_to_VNFC_instance.php">
       <processPath/>
-      <displayName>Update Instance Interfaces</displayName>
+      <displayName>Manage VNFCi network interfaces</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
       <processPath/>
-      <displayName>Restart Instance</displayName>
+      <displayName>Restart VNFCi</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
       <processPath/>
-      <displayName>Wait for Connectivity</displayName>
+      <displayName>Wait for instance</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
       <processPath/>
-      <displayName>Initial Provisioning</displayName>
+      <displayName>Do MSA device initial provisioning</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Set_device_ports_configuration_as_DHCP_mode.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Set_device_ports_configuration_as_DHCP_mode.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS_WF/Process_CREATE/Tasks/</processPath>
-      <displayName>Set Ports Configuration to DHCP mode</displayName>
+      <displayName>Set device ports configuration as DHCP mode</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_msa_attach_config_profil.php">
       <processPath/>
-      <displayName>Attach Configuration Settings</displayName>
+      <displayName>Attach profiles to device</displayName>
     </task>
-  <compensation/>
   </process>
-
-	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC">
-		<visibility>5</visibility>
-		<displayName>Start Instance</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-		
-		
-		
-	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
+  <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC">
+    <displayName>Start Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
       <processPath/>
-      <displayName>Start Instance</displayName>
+      <displayName>Start VNFCi</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
       <processPath/>
-      <displayName>Wait for Connectivity</displayName>
+      <displayName>Wait VNFCi ping</displayName>
     </task>
-  <compensation/>
   </process>
-
-	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC">
-		<visibility>5</visibility>
-		<displayName>Stop Instance</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-
-
-
-		
-		
-	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
+  <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC">
+    <displayName>Stop Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
       <processPath/>
-      <displayName>Stop Instance</displayName>
+      <displayName>Stop VNFCi</displayName>
     </task>
-  <compensation/>
   </process>
-	<process name="Process/Public_Cloud/AWS_WF/Process_Restart_VNFC">
-		<visibility>5</visibility>
-		<displayName>Restart Instance</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-
-
-
-
-
-		
-		
-		
-	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
+  <process name="Process/Public_Cloud/AWS_WF/Process_Restart_VNFC">
+    <displayName>Resart Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
       <processPath/>
-      <displayName>Restart Instance</displayName>
+      <displayName>Restart VNFCi</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
       <processPath/>
-      <displayName>Wait for Connectivity</displayName>
+      <displayName>Wait VNFCi ping</displayName>
     </task>
-  <compensation/>
   </process>
-	<process name="Process/Public_Cloud/AWS_WF/Process_Terminate_service">
-		<visibility>5</visibility>
-		<displayName>Terminate service</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-
-
-
-
-
-
-
-		
-		
-		
-		
-	<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
+  <process name="Process/Public_Cloud/AWS_WF/Process_Terminate_service">
+    <displayName>Terminate Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
       <processPath/>
-      <displayName>Terminate Instance</displayName>
-    </task>
-    <task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Wait.php">
-      <processPath/>
-      <displayName>Wait</displayName>
+      <displayName>Terminate VNFCi from AWS</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
       <processPath/>
-      <displayName>Delete Device</displayName>
+      <displayName>Remove device from MSA</displayName>
     </task>
-  <compensation/>
   </process>
-
-
-	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Move_To_Trash">
-		<visibility>5</visibility>
-		<displayName>Move To Trash</displayName>
-		<icon/>
-		<allowSchedule>false</allowSchedule>
-		<type>DELETE</type>
-		<compensation/>
-	</process>
-	<process name="Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_Sync_with_AWS">
-		<visibility>5</visibility>
-		<displayName>Synchronize with AWS</displayName>
-		<icon/>
-		<poolId>0</poolId>
-		<compensation/>
-		<allowSchedule>false</allowSchedule>
-		<type>UPDATE</type>
-		<task name="/opt/fmc_repository/Process/OpenMSA/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/Task_Synchronization_to_AWS_cloud.php">
-			<processPath/>
-			<displayName>Synchronization with AWS</displayName>
-		</task>
-	</process>
+  <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Move_To_Trash">
+    <displayName>Move To Trash</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Sync_with_AWS">
+    <displayName>Sync with Cloud</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/Task_Synchronization_to_AWS_cloud.php">
+      <processPath/>
+      <displayName>Synchronization with AWS</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>VNF Orchestration on a Public Cloud (AWS)</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Public Cloud VNF Management</name>
+    <group>Public Cloud|AWS</group>
+  </information>
 </ObjectDefinition>

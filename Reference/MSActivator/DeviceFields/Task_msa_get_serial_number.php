@@ -8,7 +8,8 @@ function list_args() {
 
 check_mandatory_param('device_id');
 
-$device_id = substr($context['device_id'], 3);
+$device_id=$context['device_id'];
+$device_id=getIdFromUbiId ($device_id);
 $response = _device_fields_get_serial_number($device_id);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {

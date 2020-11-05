@@ -16,10 +16,10 @@ function list_args()
 $id=$context['policy_id'];
 $grp_name=$context['grp_name'];
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 
 $fw_policy=array();
-$fw_policy['name']='URL_Filter';
+$fw_policy['name']='URL_Filter_'."$id";
 $fw_policy['srcintf']='port2';
 $fw_policy['dstintf']='port3';
 $fw_policy['srcaddr']='all';

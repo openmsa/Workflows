@@ -16,7 +16,7 @@ function list_args()
 
 $cat=$context['url_category'];
 $device_id=$context['device_id'];
-$device_id = preg_replace('/[A-Z]+/', '', $device_id);
+$device_id=getIdFromUbiId ($device_id);
 $fqdns = array();
 
 if( $cat === 'Games' || $cat === 'Sports'){

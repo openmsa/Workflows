@@ -4,7 +4,7 @@
  * This file is necessary to include to use all the in-built libraries of /opt/fmc_repository/Reference/Common
  */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require '/opt/sms/bin/php/vendor/autoload.php';
+require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
 use Aws\Ec2\Ec2Client;
 
@@ -13,7 +13,7 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-   create_var_def("abc", "ServiceRef");
+
 }
 
 $ec2Client = Ec2Client::factory(array(

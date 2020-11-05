@@ -4,7 +4,7 @@
  * This file is necessary to include to use all the in-built libraries of /opt/fmc_repository/Reference/Common
  */
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
-require '/opt/vendor/autoload.php';
+require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
 use Aws\Ec2\Ec2Client;
 
@@ -19,14 +19,14 @@ function list_args()
 check_mandatory_param('KeyName');
 
 $ec2Client = Ec2Client::factory(array(
-    'key'    => 'AKIAIVVB6I6URUCAGREQ',
-    'secret' => 'oMdIyzsAsWk9VyYNHRt6myUqO380InZegnsYtg3D',
-    'region' => 'eu-west-1' // (e.g., us-east-1)
+    'key'    => 'SET YOU OWN',
+    'secret' => 'SET YOU OWN',
+    'region' => 'SET YOU OWN' // (e.g., us-east-1)
 ));
 
-$context["Key"] = 'AKIAIVVB6I6URUCAGREQ';
-$context["secret"] = 'oMdIyzsAsWk9VyYNHRt6myUqO380InZegnsYtg3D';
-$context["region"] = 'eu-west-1';
+$context["Key"] = 'SET YOU OWN';
+$context["secret"] = 'SET YOU OWN';
+$context["region"] = 'SET YOU OWN';
 
 $KeyName = $context["KeyName"];
 $array = array("KeyName" => $KeyName);
