@@ -196,6 +196,13 @@ sheet_names = ''
 if spreadsheet_filename:
     xl = pandas.ExcelFile('file:' + spreadsheet_filename)
     sheet_names = xl.sheet_names  # see all sheet names
+    
+# unset configurations dictionaries in context before to read the spreadsheet
+context.pop('ACL')
+context.pop('ServicePolicy')
+context.pop('ClassMap')
+context.pop('policyMaps')
+context.pop('StaticRouting')
 
 # Read sheet to json
 acl_rules_dict = {}
