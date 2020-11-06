@@ -2,9 +2,10 @@
 	"Cisco": {
 		"OUI": ["FACE38", "FACE39"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -47,9 +48,10 @@
 	"Intel": {
 		"OUI": ["FACE40", "A4BF01"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -92,9 +94,10 @@
 	"AMD": {
 		"OUI": ["00001A", "FACE41"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -137,9 +140,10 @@
 	"HPE": {
 		"OUI": ["9440C9", "FACE42"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcVirtualization": "Enabled",
@@ -207,8 +211,9 @@
 		"OUI": ["F8CAB8", "F8BC12", "F8B156", "F48E38", "F40270"],
 		"Default Credentials": {
 			"Username": "root",
-			"Password": "redfish"
+			"Password": "calvin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcTurboMode": "Enabled",
@@ -228,6 +233,31 @@
 		},
 		"Miscellaneous parameters": {
 			"JobManager": true
+		}
+	},
+	"Lanner": {
+		"OUI": ["00900B"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "admin"
+		},
+		"Interface": "IPMI",
+		"BIOS profiles": {
+			"Performance": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			},
+			"Low-Latency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Enable"
+			},
+			"Energy-effency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			}
 		}
 	}
 }

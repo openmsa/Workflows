@@ -9,6 +9,7 @@ if (isset($context['username']) and isset($context['password'])) {
 	$delay = 90;
 	$device_id = $context['device_id'];
 	$microservices_array = $context['microservices_array'];
+    $ms_account_mgmt = $microservices_array['Redfish account manipulation'];
 	$username = $context['username'];
 	$server_ip_address = $context['server_ip_address'];
 	$server_mac_address = $context['server_mac_address'];
@@ -22,14 +23,37 @@ if (isset($context['username']) and isset($context['password'])) {
 	$response = update_asynchronous_task_details($context, "Creating new password... OK. The new password is ".$new_password);
 	sleep(3);
 
-
-	//Update BMC password on server
-	$response = update_asynchronous_task_details($context, "Updating the new password on BMC... ");
-	$micro_service_vars_array = array ();
-	$micro_service_vars_array ['object_id'] = $username;
-	$micro_service_vars_array ['password'] = $new_password;
-	$ms_array = array('redfish_server_accounts' => array ($username => $micro_service_vars_array));
-	$response = execute_command_and_verify_response( $device_id, CMD_UPDATE, $ms_array, "UPDATE password");
+    if ($context['mgmt_interface'] == 'REDFISH') {
+		//Update BMC password on server
+		$response = update_asynchronous_task_details($context, "Updating the new password on BMC... ");
+		$micro_service_vars_array = array ();
+		$micro_service_vars_array ['object_id'] = $username;
+		$micro_service_vars_array ['password'] = $new_password;
+		$ms_array = array($ms_account_mgmt => array ($username => $micro_service_vars_array));
+		$response = execute_command_and_verify_response( $device_id, CMD_UPDATE, $ms_array, "UPDATE password");
+    }
+  
+    if ($context['mgmt_interface'] == 'IPMI') {
+		//Update BMC password on server
+      
+      
+        //Import current server power state
+        $response = update_asynchronous_task_details($context, "Updating the new password on BMC... ");
+		$response = json_decode(import_objects($device_id, array($ms_account_mgmt)), True);
+		$object_ids_array = $response['wo_newparams'][$ms_account_mgmt];
+        foreach ($object_ids_array as $object => $details) {
+          if ($details['name'] == $username) {
+            $user_id = $details['object_id'];
+          }
+        }
+      
+		$micro_service_vars_array = array ();
+		$micro_service_vars_array ['object_id'] = $user_id;
+		$micro_service_vars_array ['password'] = $new_password;
+		$ms_array = array($ms_account_mgmt => array ($username => $micro_service_vars_array));
+		$response = execute_command_and_verify_response( $device_id, CMD_UPDATE, $ms_array, "UPDATE password");
+    }
+    
 	
 	$response = json_decode($response, true);
 	if ($response['wo_status'] !== ENDED) {
