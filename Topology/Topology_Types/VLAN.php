@@ -8,7 +8,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 
     logTofile("*** calculateDeviceTopology  deviceId: ".$deviceId." name: ".$name."\n");
 
-    $nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+    $nodePlace = createTopology($deviceId, $name, $device_nature, "router");
 	
 	$instances_objname = "vlan";
 	$array = array (
@@ -27,9 +27,9 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 			logTofile("*** calculateDeviceTopology  vlan_id: ".$vlan_id."\n");
 
 			if ($vlan_id == 1) {
-				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
+				createTopologyNetwork($vlan_id, $vlan_id, "network");
 			} else {
-				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
+				createTopologyNetwork($vlan_id, $vlan_id, "network");
 			}
 			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan_id;
 		}

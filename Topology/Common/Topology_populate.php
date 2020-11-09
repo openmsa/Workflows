@@ -30,8 +30,6 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image="") {
 			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
-			//"image" => $image,
-			//"color" => "#acd7e5",
 			"hidden" => "false",
 			"cluster_id" => ""
 		);
@@ -69,8 +67,6 @@ function createTopologyNetwork($nodeId, $name, $subtype, $image="") {
 			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
-			//"image" => $image,
-			//"color" => "#acd7e5",
 			"hidden" => "false",
 			"cluster_id" => ""
 		);

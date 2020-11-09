@@ -9,7 +9,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 
     logTofile("*** calculateDeviceTopology  deviceId: ".$deviceId." name: ".$name."\n");
     $customer_ref = get_customer_ref();
-    $nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+    $nodePlace = createTopology($deviceId, $name, $device_nature, "router");
     if (strpos($name, 'PE') !== false) {	
 	$instances_objname = "vrf";
 	$array = array (
