@@ -8,10 +8,10 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	
 	if ($name == "MSActivator") {
 		logToFile("calculateDeviceTopology - use image: style/topology/img/msa.svg\n");
-		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/logo-MSActivator.svg");
+		$nodePlace = createTopology($deviceId, $name, "MSA", "router");
 	} else {
 		logToFile("calculateDeviceTopology - use image: style/topology/img/router_OK.svg\n");
-		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+		$nodePlace = createTopology($deviceId, $name, $device_nature, "router");
 	}
 	$error = readInformationsFromDevice($deviceId, $community, $address);
 	
@@ -31,7 +31,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 							$mask = calcMask($maskAdr);
 							$address_link_masked = getNetworkByAddressAndMask($address_link, $mask);
 							$addressAndMask = $address_link_masked . "/" . $mask;
-							createTopologyNetwork(str_replace(".", "_", $addressAndMask), $addressAndMask, "network", "");
+							createTopologyNetwork(str_replace(".", "_", $addressAndMask), $addressAndMask, "network");
 							$context ['Nodes'] [$nodePlace] ["links"] [] = $addressAndMask;
 						}
 					}

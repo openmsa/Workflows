@@ -15,7 +15,7 @@ function _topology_exist_object_this_instance($nodeId) {
  * creates a new topology element for a managed entity
  * return: the node index in the array $context['Nodes']
  */ 
-function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
+function createTopology($nodeId, $name, $device_nature, $subtype, $image="") {
 	global $context;
 	
 	$place = _topology_exist_object_this_instance($nodeId);
@@ -30,8 +30,8 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
-			"image" => $image,
-			"color" => "#acd7e5",
+			//"image" => $image,
+			//"color" => "#acd7e5",
 			"hidden" => "false",
 			"cluster_id" => ""
 		);
@@ -69,8 +69,8 @@ function createTopologyNetwork($nodeId, $name, $subtype, $image) {
 			"y" => "",
 			"description" => "",
 			"subtype" => $subtype,
-			"image" => $image,
-			"color" => "#acd7e5",
+			//"image" => $image,
+			//"color" => "#acd7e5",
 			"hidden" => "false",
 			"cluster_id" => ""
 		);
