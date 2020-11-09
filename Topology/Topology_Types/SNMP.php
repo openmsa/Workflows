@@ -7,6 +7,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	global $context;
 	
 	if ($name == "MSActivator") {
+		logToFile("calculateDeviceTopology - use image: style/topology/img/msa.svg\n");
 		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/msa.svg");
 	} else {
 		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
