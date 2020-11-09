@@ -4,14 +4,14 @@ from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
 dev_var.add('acl_name', var_type='String')
-dev_var.add('conditions', var_type='String')
-dev_var.add('protocol', var_type='String')
-dev_var.add('source_address', var_type='String')
-dev_var.add('source_wildcardmask', var_type='String')
-dev_var.add('source_port', var_type='String')
-dev_var.add('destination_address', var_type='String')
-dev_var.add('destination_wildcardmask', var_type='String')
-dev_var.add('destination_port', var_type='String')
+dev_var.add('acl.0.condition', var_type='String')
+dev_var.add('acl.0.protocol', var_type='String')
+dev_var.add('acl.0.src_address', var_type='String')
+dev_var.add('acl.0.src_wildcard', var_type='String')
+dev_var.add('acl.0.src_port', var_type='String')
+dev_var.add('acl.0.dst_address', var_type='String')
+dev_var.add('acl.0.dst_wildcard', var_type='String')
+dev_var.add('acl.0.dst_port', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -24,29 +24,12 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'CREATE' # MS method corresponding on ADD Static route operation
 
+#acl name as object_id
 object_id = context.get('acl_name')
-condition = context.get('conditions')
-protocol = context.get('protocol')
-src_address = context.get('source_address')
-src_wildcard = context.get('source_wildcardmask')
-src_port = context.get('source_port')
-dst_address = context.get('destination_address')
-dst_wildcard = context.get('destination_wildcardmask')
-dst_port = context.get('destination_port')
-
+#acl entry list
+acl_list = context.get('acl')
 #build MS the dictionary input object 
-config = dict(object_id=object_id)
-if all (k in context for k in ('conditions', 'protocol')):
-    if condition:
-        config['condition'] = condition
-        config['protocol'] = protocol
-        config['src_address'] = src_address
-        config['src_wildcard'] = src_wildcard
-        config['src_port'] = src_port
-        config['dst_address'] = dst_address
-        config['dst_wildcard'] = dst_wildcard
-        config['dst_port'] = dst_port
-    
+config = dict(object_id=object_id, acl=acl_list)
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(access_lists=obj)
 

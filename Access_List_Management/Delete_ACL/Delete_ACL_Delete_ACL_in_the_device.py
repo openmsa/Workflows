@@ -4,14 +4,6 @@ from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
 dev_var.add('acl_name', var_type='String')
-dev_var.add('conditions', var_type='String')
-dev_var.add('protocol', var_type='String')
-dev_var.add('source_address', var_type='String')
-dev_var.add('source_wildcardmask', var_type='String')
-dev_var.add('source_port', var_type='String')
-dev_var.add('destination_address', var_type='String')
-dev_var.add('destination_wildcardmask', var_type='String')
-dev_var.add('destination_port', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -25,14 +17,6 @@ obmf = Order(device_id)
 command = 'DELETE' # MS method corresponding on DELETE Static route operation
 
 object_id = context.get('acl_name')
-condition = context.get('conditions')
-protocol = context.get('protocol')
-src_address = context.get('source_address')
-src_wildcard = context.get('source_wildcardmask')
-src_port = context.get('source_port')
-dst_address = context.get('destination_address')
-dst_wildcard = context.get('destination_wildcardmask')
-dst_port = context.get('destination_port')
 
 #build MS the dictionary input object 
 config = dict(object_id=object_id)
