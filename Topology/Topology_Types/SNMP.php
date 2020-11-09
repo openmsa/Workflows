@@ -6,7 +6,11 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest
 function calculateDeviceTopology($deviceId, $name, $device_nature) {
 	global $context;
 	
-	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+	if ($name == "MSActivator") {
+		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/msa.svg");
+	} else {
+		$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg");
+	}
 	$error = readInformationsFromDevice($deviceId, $community, $address);
 	
 	if ($error == "") {
