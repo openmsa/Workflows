@@ -22,8 +22,8 @@ context = Variables.task_call(dev_var)
 ####################################################
 
 #Get device id (router) from context (e.g: UBI2455).
-device_ext_ref = context['device_external_ref']
-device_ref = context['device_id']
+device_ref = context['device_external_ref']
+#device_ref = context['device_id']
 device_id = device_ref[3:]
 
 #Get StaticRouting dictionary object from context.

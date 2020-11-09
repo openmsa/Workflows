@@ -22,8 +22,8 @@ context = Variables.task_call(dev_var)
 ####################################################
 
 #Get device id (router) from context (e.g: UBI2455).
-device_ext_ref = context['device_external_ref']
-device_ref = context['device_id']
+device_ref = context['device_external_ref']
+#device_ref = context['device_id']
 device_id = device_ref[3:]
 
 #Get StaticRouting dictionary object from context.
@@ -43,6 +43,7 @@ for route in static_routing:
     if isinstance(data, dict):
         service_ext_ref = context.get('static_routing_service_instance').get('external_ref')
         response = orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        context['wf_response'] = response
         status = response.get('status').get('status')
         if status != 'ENDED':
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)

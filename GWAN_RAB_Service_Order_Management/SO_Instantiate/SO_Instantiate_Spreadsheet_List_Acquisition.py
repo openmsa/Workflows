@@ -79,8 +79,9 @@ for st in spreadsheet_list:
 	spreadsheet_basename = osp.basename(st)
 	spreadsheet_list_restructured = [dict(spreadsheet=spreadsheet_basename, is_selected='false', device_external_ref=device_ext_ref)]
 	#store in the context 'device_external_ref' and 'spreadsheet_list'
-	context['device_external_ref'] = device_ext_ref
-	context['spreadsheet_list'] = spreadsheet_list_restructured;
+	#context['device_external_ref'] = device_ext_ref
+	context['spreadsheet_list'] = spreadsheet_list_restructured
+
 
 ret = MSA_API.process_content('ENDED', 'Spreadsheet list acquisition is done successfully.', context, True)
 print(ret)
