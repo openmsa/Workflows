@@ -10,7 +10,7 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('object_id', var_type='String')
 dev_var.add('method', var_type='String')
-dev_var.add('access.0.acl', var_type='String')
+dev_var.add('acl', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -33,9 +33,9 @@ command = 'CREATE'
 
 class_map_name = context['object_id'] #MS input variable value
 method = context['method'] #MS input variable value
-acl_name = context['access'] #MS input variable value
+acl_name = context['acl'] #MS input variable value
 
-config = dict(object_id=class_map_name, method=method, access=acl_name)
+config = dict(object_id=class_map_name, method=method, acl=acl_name)
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(class_map=obj)
 context['ms_params'] = params
