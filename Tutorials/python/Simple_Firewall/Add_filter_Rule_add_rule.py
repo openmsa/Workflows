@@ -16,7 +16,7 @@ process_id = context['SERVICEINSTANCEID']
 devices = context['devices']
 for device in devices:  
   # extract the database ID
-  devicelongid = device['id'][-3:]
+  device_db_id = device['id'][-3:]
 
   # build the Microservice JSON params for the CREATE
   micro_service_vars_array = {"object_id": context['id'],
@@ -28,7 +28,7 @@ for device in devices:
   simple_firewall = {"simple_firewall": {object_id: micro_service_vars_array}}
 
   # call the CREATE for simple_firewall MS for each device
-  order = Order(devicelongid)
+  order = Order(device_db_id)
   order.command_execute('CREATE', simple_firewall)
 
   # convert dict object into json
