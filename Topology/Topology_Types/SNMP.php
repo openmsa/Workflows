@@ -31,7 +31,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature) {
 							$mask = calcMask($maskAdr);
 							$address_link_masked = getNetworkByAddressAndMask($address_link, $mask);
 							$addressAndMask = $address_link_masked . "/" . $mask;
-							createTopologyNetwork(str_replace(".", "_", $addressAndMask), $addressAndMask);
+							createTopologyNetwork(str_replace(".", "_", $addressAndMask), $addressAndMask, "network");
 							$context ['Nodes'] [$nodePlace] ["links"] [] = $addressAndMask;
 						}
 					}
