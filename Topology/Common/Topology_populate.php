@@ -40,7 +40,7 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image="") {
 	} else {
 		unset($context['Nodes'][$place]["link"]);
 		$context['Nodes'][$place]["name"] = $name;
-		$context['Nodes'][$place]["image"] = $image;
+		//$context['Nodes'][$place]["image"] = $image;
 	}
 
 	$context['Nodes_MAJ'][] = array(
