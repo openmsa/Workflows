@@ -46,8 +46,8 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Pre-operation work</displayName>
     </task>
-    <task name="SO_Add_Remove_service_policy_from_interface.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+    <task name="SO_Common_Remove_service_policy_from_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Remove service policy from interface</displayName>
     </task>
     <task name="SO_Add_Create_named_ALC_and_all_ACL_entries.py">
@@ -62,8 +62,8 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Add class map to the policy map</displayName>
     </task>
-    <task name="SO_Add_Add_the_service_policy_to_the_interface.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
+    <task name="SO_Common_Add_the_service_policy_to_the_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Add the service policy to the interface</displayName>
     </task>
     <task name="SO_Add_Create_the_static_route.py">
@@ -91,8 +91,8 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
       <displayName>Delete static route</displayName>
     </task>
-    <task name="SO_Delete_Remove_service_policy_from_interface.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+    <task name="SO_Common_Remove_service_policy_from_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Remove service policy from interface</displayName>
     </task>
     <task name="SO_Delete_Remove_class_map_from_policy_map.py">
@@ -107,8 +107,8 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
       <displayName>Delete ACL</displayName>
     </task>
-    <task name="SO_Delete_Add_the_service_policy_to_the_interface.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
+    <task name="SO_Common_Add_the_service_policy_to_the_interface.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Add the service policy to the interface</displayName>
     </task>
     <task name="SO_Common_Post-operation_work.py">
