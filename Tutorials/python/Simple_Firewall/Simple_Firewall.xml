@@ -1,6 +1,6 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Managed firewall" name="params.device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="Security Managed Entity" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Managed firewall" name="params.devices.0.id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="Security Managed Entity" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
         <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
       </behaviors>
