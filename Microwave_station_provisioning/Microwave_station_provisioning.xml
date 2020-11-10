@@ -1,0 +1,55 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Microwave station IP address" name="params.ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="192.168.1.11" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Hostname" name="params.hostname" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="TEST_VR_STATION" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VLAN ID" name="params.vlan_list.0.id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="1212" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VLAN Name" name="params.vlan_list.0.name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="TEST_VLAN" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Trunk port" name="params.trunk_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="0/4" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="0/1">0/1</values>
+        <values displayValue="0/2">0/2</values>
+        <values displayValue="0/3">0/3</values>
+        <values displayValue="0/4">0/4</values>
+        <values displayValue="0/5">0/5</values>
+        <values displayValue="0/6">0/6</values>
+      </values>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/Microwave_station_provisioning/Provision_microwave_station">
+    <displayName>Provision microwave station</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="Provision_microwave_station_Check_microwave_station_availablility.py">
+      <processPath>/opt/fmc_repository/Process/Microwave_station_provisioning</processPath>
+      <displayName>Check microwave station availablility</displayName>
+    </task>
+    <task name="Provision_microwave_station_Create_and_activate_managed_entity.py">
+      <processPath>/opt/fmc_repository/Process/Microwave_station_provisioning</processPath>
+      <displayName>Create and activate managed entity</displayName>
+    </task>
+    <task name="Provision_microwave_station_Configure_microwave_station.py">
+      <processPath>/opt/fmc_repository/Process/Microwave_station_provisioning</processPath>
+      <displayName>Configure microwave station</displayName>
+    </task>
+    <task name="Provision_microwave_station_Verify_configuration.py">
+      <processPath>/opt/fmc_repository/Process/Microwave_station_provisioning</processPath>
+      <displayName>Verify configuration</displayName>
+    </task>
+  </process>
+  <process name="Process/Microwave_station_provisioning/DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+  </process>
+  <information>
+    <icon/>
+    <description>The workflow provides a zero touch provisioning demo for NEC iPasolink microwave stations</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Microwave station provisioning</name>
+    <group/>
+  </information>
+</ObjectDefinition>
