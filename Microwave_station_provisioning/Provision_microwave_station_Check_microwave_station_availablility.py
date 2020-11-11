@@ -30,9 +30,17 @@ TaskVariables.add('hostname', var_type = 'String')
 TaskVariables.add('vlan_list.0.id', var_type = 'String')
 TaskVariables.add('vlan_list.0.name', var_type = 'String')
 TaskVariables.add('trunk_port', var_type = 'String')
-
+TaskVariables.add('ipam_device', var_type = 'Device')
+TaskVariables.add('site', var_type = 'String')
+TaskVariables.add('use_ipam', var_type = 'String')
 #Add vars to context
 context = Variables.task_call(TaskVariables)
+
+#Import microservice alias list
+with open('/opt/fmc_repository/Process/Microwave_station_provisioning/microservices_list.json', 'r') as alias_file:
+  	context['ms_aliases'] = json.load(alias_file)
+    
+ms_ipam_vlan = context['ms_aliases']['IPAM VLAN management']
 
 #Variables to finish the task properlly
 fail_comment = str()
@@ -44,10 +52,34 @@ success_string = f'{{"wo_status": "ENDED", "wo_comment": "{success_comment}"}}'
 Orchestration = Orchestration(context['UBIQUBEID'])
 async_update_list = (context['PROCESSINSTANCEID'], context['TASKID'], context['EXECNUMBER'])
 
-#Import microservice alias list
-with open('/opt/fmc_repository/Process/Microwave_station_provisioning/microservices_list.json', 'r') as alias_file:
-  	context['ms_aliases'] = json.load(alias_file)
 
+#Create VLAN list if IPAM is used
+if context['use_ipam'] == 'yes':
+  Orchestration.update_asynchronous_task_details(*async_update_list, 'IPAM integration is used. Retrive VLAN info from IPAM... ')
+  context['ipam_device'] = re.match('^\D+?(\d+?)$', context['ipam_device']).group(1)
+  
+  #Retrive information about VLANs
+  IpamOrderObject = Order(context['ipam_device'])
+  IpamOrderObject.command_synchronize(300)
+  
+  objects_list = IpamOrderObject.command_objects_instances(ms_ipam_vlan)
+  vlan_string = str()
+  counter = 0
+  context['vlan_list'] = dict()
+  for vlan_name in objects_list:
+    vlan_object = IpamOrderObject.command_objects_instances_by_id(ms_ipam_vlan, vlan_name)[ms_ipam_vlan][vlan_name]
+    if 'site' in vlan_object:
+      if vlan_object['site'] == context['site']:
+        context['vlan_list'][counter] = {'id': vlan_object['vid'], 
+                                         'name': vlan_object['object_id'], 
+                                         "__index__": counter
+                                        }
+        vlan_string += '{} '.format(vlan_object['object_id'])
+        counter += 1
+
+  Orchestration.update_asynchronous_task_details(*async_update_list, 'IPAM integration is used. Retrive VLAN info from IPAM... OK. VLANs: {}'.format(vlan_string))
+  time.sleep(3)
+    
 #Flag to know when microwave station becoms available
 is_available = False
 
