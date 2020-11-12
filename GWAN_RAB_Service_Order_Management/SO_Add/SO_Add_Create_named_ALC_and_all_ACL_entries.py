@@ -86,7 +86,7 @@ for key, acl_list  in acl_dicts.items():
         data['acl'] = data_acl_list
 
     #execute 'Access_List_Management' process 'Add_ACL'
-    if isinstance(data, dict):
+    if isinstance(data, dict) and acl_name:
         service_ext_ref = context.get('acl_service_instance').get('external_ref')
         orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
         response = json.loads(orch.content)
@@ -94,6 +94,6 @@ for key, acl_list  in acl_dicts.items():
         if status == 'FAIL':
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
             print(ret)
-        
+
 ret = MSA_API.process_content('ENDED', 'Access-list added successfully to the device ' + device_ref, context, True)
 print(ret)
