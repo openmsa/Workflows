@@ -42,10 +42,10 @@ for route in static_routing:
     data = dict(source_address=route['source_address'], subnet_mask=route['subnet_mask'], vlan_id=route['vlan_id'], nexthop=route['nexthop'], distance=route['distance'])  
     if isinstance(data, dict):
         service_ext_ref = context.get('static_routing_service_instance').get('external_ref')
-        response = orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-        context['wf_response'] = response
+        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        response = json.loads(orch.content)
         status = response.get('status').get('status')
-        if status != 'ENDED':
+        if status == 'FAIL':
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
             print(ret) 
 
