@@ -63,9 +63,10 @@ for sp in service_policy_list:
     data = dict(interface_name=sp['interface_name'], direction=sp['direction'], policy_name=sp['policy_name'])  
     if isinstance(data, dict):
         service_ext_ref = context.get('service_policy_service_instance').get('external_ref')
-        response = orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        response = json.loads(orch.content)
         status = response.get('status').get('status')
-        if status != 'ENDED':
+        if status == 'FAIL':
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
             print(ret) 
 
