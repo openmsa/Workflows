@@ -10,13 +10,15 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('policy_map_name', var_type='String')
 dev_var.add('policy.0.class_map', var_type='String')
-dev_var.add('policy.0.cir', var_type='String')
-dev_var.add('policy.0.bc', var_type='String')
-dev_var.add('policy.0.be', var_type='String')
-dev_var.add('policy.0.conform', var_type='String')
-dev_var.add('policy.0.exceed', var_type='String')
-dev_var.add('policy.0.violate', var_type='String')
-
+dev_var.add('policy.0.cir_before', var_type='String')
+dev_var.add('policy.0.cir_after', var_type='String')
+dev_var.add('policy.0.bc_before', var_type='String')
+dev_var.add('policy.0.bc_after', var_type='String')
+dev_var.add('policy.0.be_before', var_type='String')
+dev_var.add('policy.0.be_after', var_type='String')
+dev_var.add('policy.0.conform_action', var_type='String')
+dev_var.add('policy.0.exceed_action', var_type='String')
+dev_var.add('policy.0.violate_action', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -32,7 +34,7 @@ command = 'CREATE'
 object_id = context.get('policy_map_name')
 policy_list = context.get('policy')
 
-config = dict(object_id=policy_map_name, policy=policy_list)
+config = dict(object_id=object_id, policy=policy_list)
 obj = {"":config}
 
 params = dict(policy_map=obj)
@@ -44,7 +46,7 @@ if response.get('wo_status') == 'FAIL':
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+        ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
         print(ret)
 
 context['response'] = response.get('wo_newparams')

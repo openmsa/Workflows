@@ -9,13 +9,6 @@ from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
 dev_var.add('policy_map_name', var_type='String')
-dev_var.add('policy.0.class_map', var_type='String')
-dev_var.add('policy.0.cir', var_type='String')
-dev_var.add('policy.0.bc', var_type='String')
-dev_var.add('policy.0.be', var_type='String')
-dev_var.add('policy.0.conform', var_type='String')
-dev_var.add('policy.0.exceed', var_type='String')
-dev_var.add('policy.0.violate', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -41,8 +34,8 @@ if response.get('wo_status') == 'FAIL':
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
-    print(ret)
+        ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+        print(ret)
 
 context['response'] = response.get('wo_newparams')
 
