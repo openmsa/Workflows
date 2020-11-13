@@ -28,7 +28,7 @@ direction = context['direction'] #MS input variable value
 policy_name = context['policy_name'] #MS input variable value
 
 #build MS the dictionary input object 
-config = dict(object_id=object_id, direction=direction, policy_name=policy_name)
+config = dict(object_id=object_id, direction=direction, policy_map=policy_name)
   
 obj = {object_id:config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
 #MS XML file name
