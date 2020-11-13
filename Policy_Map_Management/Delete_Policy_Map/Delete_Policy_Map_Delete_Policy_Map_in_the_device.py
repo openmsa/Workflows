@@ -27,7 +27,6 @@ obmf = Order(device_id)
 
 command = 'DELETE'
 
-
 object_id = context.get('policy_map_name')
 
 config = dict(object_id=object_id)
@@ -49,5 +48,4 @@ context['response'] = response.get('wo_newparams')
 
 ret = MSA_API.process_content('ENDED', 'Delete policy map operation is done successfully.', context, True)
 print(ret)
-
 

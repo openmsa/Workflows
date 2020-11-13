@@ -17,7 +17,7 @@ dev_var.add('distance', var_type='String')
 context = Variables.task_call(dev_var)
 
 #get device_id from context
-device_id = context['device_id']
+device_id = context['device_id'][3:]
 
 #Initiate Order object with the device_id
 obmf = Order(device_id)
@@ -29,15 +29,28 @@ source_address = context['source_address'] #MS input variable value
 subnet_mask = context['subnet_mask'] #MS input variable value
 nexthop = context['nexthop'] #MS input variable value
 
-obj_id = source_address
-object = dict(obj_id=dict(object_id=obj_id, gateway=nexthop)) #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
-params = dict(static_route=object)
+#build MS the dictionary input object 
+object_id = source_address
+config = dict(object_id=object_id, mask=subnet_mask, next_hop=nexthop)
+if 'vlan_id' in context:
+    config['vlan_id'] = context['vlan_id']
+if 'distance' in context:
+    config['distance'] = context['distance']
+
+obj = dict(object_id=config) #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
+params = dict(static_route=obj)
 
 response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 
-#check operation status from response
-    
-    #TODO
+if response.get('wo_status') == 'FAIL':
+    detials = ''
+    if 'wo_newparams' in response:
+        detials = response.get('wo_newparams')
+    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+    print(ret)
+
+#store OBMF command execution response in context
+context['response'] = response.get('wo_newparams')
 
 ret = MSA_API.process_content('ENDED', 'Delete static route operation is done successfully.', context, True)
 print(ret)

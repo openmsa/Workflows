@@ -1,4 +1,4 @@
-''
+'''
 Guide used for developing this task script: https://msa2.ubiqube.com/msa_sdk/order.html#msa_sdk.order.Order.command_execute
 
 '''
@@ -17,6 +17,7 @@ dev_var.add('policy.0.conform', var_type='String')
 dev_var.add('policy.0.exceed', var_type='String')
 dev_var.add('policy.0.violate', var_type='String')
 
+
 context = Variables.task_call(dev_var)
 
 #get device_id from context
@@ -26,6 +27,7 @@ device_id = context['device_id'][3:]
 obmf = Order(device_id)
 
 command = 'CREATE'
+
 
 object_id = context.get('policy_map_name')
 policy_list = context.get('policy')
@@ -49,4 +51,5 @@ context['response'] = response.get('wo_newparams')
 
 ret = MSA_API.process_content('ENDED', 'Add policy map operation is done successfully.', context, True)
 print(ret)
+
 
