@@ -26,11 +26,17 @@ Get parameters values from class_map dictionary.
     Parameter value.
 '''
 def get_config_param_val(context, policy_map, param, is_madatory=True):
-    value = class_map.get(param)
-    if not value and is_madatory == True:
-        ret = MSA_API.process_content('FAILED', 'Missing required input "' + param + '" value.', context, True)
+    value = ''
+    if param in policy_map:
+        value = policy_map.get(param)
+        if is_madatory == True:
+            if not value:
+                ret = MSA_API.process_content('FAILED', 'The required input "' + param + '" value is empty.', context, True)
+                print(ret)
+    elif is_madatory == True:
+        ret = MSA_API.process_content('FAILED', 'Miss required input parameter "' + param + '" key in the policy_map object.', context, True)
         print(ret)
-
+        
     return value
 
 ####################################################
@@ -79,31 +85,36 @@ if not 'policy_map_service_instance' in context:
 
 #Loop in policy_map dictionaries and in policy_map list by calling the Policy_Map_Management process 'Add_ACL'.
 data = dict()
-data_policy_map_list = list()
-data_policy_map_dict = dict()
-count = 0
 for key, policy_map_list  in policy_map_dicts.items():
     policy_map_name = ''
     #ensure policy_map_list is not empty otherwise break the loop.
     if len(policy_map_list):
-        #loop in policy_map list.
+        count = 0
+        data_policy_map_list = list()
+        #loop in policy_map list (specific sheet config).
         for policy_map in policy_map_list:
+            data_policy_map_dict = dict()
             if isinstance(policy_map, dict):
                 if count == 0:
                     policy_map_name = get_config_param_val(context, policy_map, 'policy_map_name')
-            count +=1
+                else:
+                    data_policy_map_dict['class_map'] = get_config_param_val(context, policy_map, 'class_name')
+                if data_policy_map_dict:
+                    data_policy_map_list.append(data_policy_map_dict.copy())
+                count +=1
         #prepare data dict
         data['policy_map_name'] = policy_map_name
-
-    #execute 'Policy_Map_Management' process 'Delete_Policy_Map'
-    if isinstance(data, dict):
-        service_ext_ref = context.get('policy_map_service_instance').get('external_ref')
-        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-        response = json.loads(orch.content)
-        status = response.get('status').get('status')
-        if status == 'FAIL':
-            ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
-            print(ret)
+        data['policy'] = data_policy_map_list
+        #execute 'Policy_Map_Management' process 'Delete_Policy_Map'
+        if isinstance(data, dict):
+            context['delete_policy_map_data'] = data
+            service_ext_ref = context.get('policy_map_service_instance').get('external_ref')
+            orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+            response = json.loads(orch.content)
+            status = response.get('status').get('status')
+            if status == 'FAIL':
+                ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
+                print(ret)
 
 ret = MSA_API.process_content('ENDED', 'Policy-map configuration deleted successfully to the device ' + device_ref, context, True)
 print(ret)
