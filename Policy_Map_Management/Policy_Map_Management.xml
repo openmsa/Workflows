@@ -17,7 +17,7 @@
   <process name="New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="New_Service_Instantiate_Service.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
       <displayName>Instantiate Service</displayName>
@@ -26,7 +26,7 @@
   <process name="Add_Policy_Map">
     <displayName>Add Policy Map</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Add_Policy_Map_Ensure_Policy_Map_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Add_Policy_Map</processPath>
       <displayName>Ensure Policy Map do not exist in the device</displayName>
@@ -43,7 +43,7 @@
   <process name="Delete_Policy_Map">
     <displayName>Delete Policy Map</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Delete_Policy_Map_Ensure_Policy_Map_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Delete_Policy_Map</processPath>
       <displayName>Ensure Policy Map exist in the device</displayName>
@@ -60,7 +60,7 @@
   <process name="Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
@@ -68,7 +68,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Policy Map Management</name>
     <group>GWAN RAB | Baseline WF</group>
   </information>
