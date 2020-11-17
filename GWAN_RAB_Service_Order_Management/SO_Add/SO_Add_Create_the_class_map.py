@@ -12,12 +12,12 @@ context = Variables.task_call(dev_var)
 #                                                  #
 ####################################################
 '''
-Get parameters values from class_map dictionary.
+Get parameters values from dictionary.
 
 @param context:
     Service instance context.
-@param class_map:
-    Class-map dictionary.
+@param dict:
+    data dictionary.
 @param param: 
     Parameter key name.
 @param is_madatory:
@@ -25,10 +25,16 @@ Get parameters values from class_map dictionary.
 @return: 
     Parameter value.
 '''
-def get_config_param_val(context, class_map, param, is_madatory=True):
-    value = class_map.get(param)
-    if not value:
-        ret = MSA_API.process_content('FAILED', 'Missing required input "' + param + '" value.', context, True)
+def get_config_param_val(context, dict, param, is_madatory=True):
+    value = ''
+    if param in dict:
+        value = dict.get(param)
+        if is_madatory == True:
+            if not value:
+                ret = MSA_API.process_content('FAILED', 'The required input "' + param + '" value is empty.', context, True)
+                print(ret)
+    elif is_madatory == True:
+        ret = MSA_API.process_content('FAILED', 'The required input parameter "' + param + '" key in the policy_map object is missing.', context, True)
         print(ret)
         
     return value
@@ -94,6 +100,6 @@ for class_map in class_map_list:
         status = response.get('status').get('status')
         if status == 'FAIL':
             ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
-            print(ret) 
+            print(ret)
 ret = MSA_API.process_content('ENDED', 'Class Map added successfully to the device ' + device_ref, context, True)
 print(ret)

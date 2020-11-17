@@ -1,4 +1,5 @@
 import json
+import copy
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -11,7 +12,33 @@ context = Variables.task_call(dev_var)
 #                FUNCTIONS                         #
 #                                                  #
 ####################################################
+'''
+Get parameters values from dictionary.
 
+@param context:
+    Service instance context.
+@param dict:
+    data dictionary.
+@param param:
+    Parameter key name.
+@param is_madatory:
+    True or False is parameter is mandatory or not.
+@return:
+    Parameter value.
+'''
+def get_config_param_val(context, dict, param, is_madatory=True):
+    value = ''
+    if param in dict:
+        value = dict.get(param)
+        if is_madatory == True:
+            if not value:
+                ret = MSA_API.process_content('FAILED', 'The required input "' + param + '" value is empty.', context, True)
+                print(ret)
+    elif is_madatory == True:
+        ret = MSA_API.process_content('FAILED', 'The required input parameter "' + param + '" key in the policy_map object is missing.', context, True)
+        print(ret)
+
+    return value
 ####################################################
 #                                                  #
 #                MAIN CODE                         #
@@ -58,42 +85,43 @@ if not 'acl_service_instance' in context:
 
 #Loop in acl dictionaries and in acl list by calling the Access_List_Management process 'Add_ACL'.
 data = dict()
-data_acl_list = list()
-data_acl_dict = dict()
-count = 0
 for key, acl_list  in acl_dicts.items():
     acl_name = ''
     #ensure acl_list is not empty otherwise break the loop.
     if len(acl_list):
+        count = 0
+        data_acl_list = list()
         #loop in acl list.
         for acl in acl_list:
+            data_acl_dict = dict()
             if isinstance(acl, dict):
                 if count == 0:
                     acl_name = acl.get('acl_name')
                 else:
-                    data_acl_dict['condition'] = acl.get('conditions')
-                    data_acl_dict['protocol'] = acl.get('protocol')
-                    data_acl_dict['src_address'] = acl.get('source_address')
-                    data_acl_dict['src_wildcard'] = acl.get('source_wildcardmask')
-                    data_acl_dict['src_port'] = acl.get('source_port')
-                    data_acl_dict['dst_address'] = acl.get('destination_address')
-                    data_acl_dict['dst_wildcard'] = acl.get('destination_wildcardmask')
-                    data_acl_dict['dst_port'] = acl.get('destination_port')
-                    data_acl_list.append(data_acl_dict)
-            count +=1    
+                    data_acl_dict['condition'] = get_config_param_val(context, acl, 'conditions')
+                    data_acl_dict['protocol'] = get_config_param_val(context, acl, 'protocol')
+                    data_acl_dict['src_address'] = get_config_param_val(context, acl, 'source_address')
+                    data_acl_dict['src_wildcard'] = get_config_param_val(context, acl, 'source_wildcardmask')
+                    data_acl_dict['src_port'] = get_config_param_val(context, acl, 'source_port', False)
+                    data_acl_dict['dst_address'] = get_config_param_val(context, acl, 'destination_address')
+                    data_acl_dict['dst_wildcard'] = get_config_param_val(context, acl, 'destination_wildcardmask')
+                    data_acl_dict['dst_port'] = get_config_param_val(context, acl, 'destination_port', False)
+
+                if data_acl_dict:
+                    data_acl_list.append(data_acl_dict.copy())
+                count +=1
         #prepare data dict
         data['acl_name'] = acl_name
         data['acl'] = data_acl_list
-
-    #execute 'Access_List_Management' process 'Add_ACL'
-    if isinstance(data, dict) and acl_name:
-        service_ext_ref = context.get('acl_service_instance').get('external_ref')
-        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-        response = json.loads(orch.content)
-        status = response.get('status').get('status')
-        if status == 'FAIL':
-            ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
-            print(ret)
+        #execute 'Access_List_Management' process 'Add_ACL'
+        if isinstance(data, dict) and acl_name:
+            service_ext_ref = context.get('acl_service_instance').get('external_ref')
+            orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+            response = json.loads(orch.content)
+            status = response.get('status').get('status')
+            if status == 'FAIL':
+                ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
+                print(ret)
 
 ret = MSA_API.process_content('ENDED', 'Access-list added successfully to the device ' + device_ref, context, True)
 print(ret)
