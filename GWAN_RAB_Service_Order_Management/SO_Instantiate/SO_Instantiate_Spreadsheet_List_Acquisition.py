@@ -2,6 +2,7 @@ import pandas
 import glob
 import json
 import os.path as osp
+from msa_sdk import constants
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
@@ -62,7 +63,7 @@ spreadsheet_list = glob.glob(pattern)
 
 # check if at least one spreadsheet file is available. If not exit and return failed.
 if not spreadsheet_list:
-    ret = MSA_API.process_content('FAILED', 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
+    ret = MSA_API.process_content(FAILED, 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
     print(ret)	
 
 #spreadsheet_list_restructured = [dict(spreadsheet=st, is_selected='false') for st in spreadsheet_list]
@@ -74,7 +75,7 @@ for st in spreadsheet_list:
     device_ext_ref = get_device_reference_from_sheet(df, SHEET_DEVICE_REF_ROW_INDEX, FILTER_COLUMN_NAME)
     #device_external_ref is mandatory, if it is empty return FAILED.
     if not device_ext_ref:
-        ret = MSA_API.process_content('FAILED', 'Device external reference (hostname) is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_REF + '.', context, True)
+        ret = MSA_API.process_content(FAILED, 'Device external reference (hostname) is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_REF + '.', context, True)
         print(ret)
     #create spreadsheet dictionaries list.
     spreadsheet_basename = osp.basename(st)
@@ -84,6 +85,6 @@ for st in spreadsheet_list:
 context['spreadsheet_list'] = spreadsheet_list_restructured
 
 
-ret = MSA_API.process_content('ENDED', 'Spreadsheet list acquisition is done successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Spreadsheet list acquisition is done successfully.', context, True)
 print(ret)
 

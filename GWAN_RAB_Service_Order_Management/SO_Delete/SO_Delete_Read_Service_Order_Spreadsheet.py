@@ -4,6 +4,7 @@ import glob
 import json
 import numpy as np
 from re import search
+from msa_sdk import constants
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
@@ -182,7 +183,7 @@ if spreadsheet_list:
         if st.get('is_selected') == True:
             selected_number += 1
 else:
-	ret = MSA_API.process_content('FAILED', 'Spreadsheet list is empty.', context, True)
+	ret = MSA_API.process_content(constants.FAILED, 'Spreadsheet list is empty.', context, True)
 	print(ret)
     
 # Retrieve selected spreadsheet_filename from the list.
@@ -195,11 +196,11 @@ if selected_number == 1:
                                 spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
                                 context['device_external_ref'] = st.get('device_external_ref')
 			else:
-				ret = MSA_API.process_content('FAILED', 'Selected spreadsheet filename is empty from the service instance context.', context, True)
+				ret = MSA_API.process_content(constants.FAILED, 'Selected spreadsheet filename is empty from the service instance context.', context, True)
 				print(ret)
 			break
 else:
-	ret = MSA_API.process_content('FAILED', 'Only one spreadsheet must and allows to be selected.', context, True)
+	ret = MSA_API.process_content(constants.FAILED, 'Only one spreadsheet must and allows to be selected.', context, True)
 	print(ret)
   
 # List sheet name in spreadsheet.
@@ -249,5 +250,5 @@ context['ACL'] = acl_rules_dict
 context['policyMaps'] = policy_map_dict
 context['spreadsheet_filename'] = spreadsheet_filename
 
-ret = MSA_API.process_content('ENDED', 'Spreadsheet file is parsed successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Spreadsheet file is parsed successfully.', context, True)
 print(ret)

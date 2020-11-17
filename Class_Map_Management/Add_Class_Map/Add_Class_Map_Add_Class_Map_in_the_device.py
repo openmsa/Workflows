@@ -2,7 +2,7 @@
 Guide used for developing this task script: https://msa2.ubiqube.com/msa_sdk/order.html#msa_sdk.order.Order.command_execute
 
 '''
-
+from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -19,7 +19,7 @@ def is_order_op_success(response):
     if response:
         if 'wo_status' in response:
             #if status equals ENDED operation is success otherwise FAILED
-            if response.get('wo_status') == 'ENDED':
+            if response.get('wo_status') == constants.ENDED:
                 return True  
     return False
 
@@ -42,14 +42,14 @@ context['ms_params'] = params
 
 response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 
-if response.get('wo_status') == 'FAIL':
+if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
     print(ret)
 
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content('ENDED', 'Add class map operation is done successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Add class map operation is done successfully.', context, True)
 print(ret)

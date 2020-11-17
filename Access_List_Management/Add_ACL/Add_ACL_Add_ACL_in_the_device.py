@@ -1,3 +1,4 @@
+from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -37,15 +38,15 @@ context['ns_params_create'] = params
 
 response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 
-if response.get('wo_status') == 'FAIL':
+if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
     print(ret)
 
 #store OBMF command execution response in context
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content('ENDED', 'Add ACL operation is done successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Add ACL operation is done successfully.', context, True)
 print(ret)
