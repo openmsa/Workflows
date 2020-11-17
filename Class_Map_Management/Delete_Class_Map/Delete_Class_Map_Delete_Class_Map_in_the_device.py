@@ -2,7 +2,7 @@
 Guide used for developing this task script: https://msa2.ubiqube.com/msa_sdk/order.html#msa_sdk.order.Order.command_execute
 
 '''
-
+from msa_sdk import constants 
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -34,14 +34,14 @@ context['ms_params'] = params
 
 response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 
-if response.get('wo_status') == 'FAIL':
+if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content('FAILED', 'Failure details: ' + detials, context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
     print(ret)
 
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content('ENDED', 'Delete class map operation is done successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Delete class map operation is done successfully.', context, True)
 print(ret)
