@@ -1,4 +1,5 @@
 import json
+from msa_sdk import constants
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -45,9 +46,9 @@ for route in static_routing:
         orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
         response = json.loads(orch.content)
         status = response.get('status').get('status')
-        if status == 'FAIL':
-            ret = MSA_API.process_content('FAILED', 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
+        if status == constants.FAILED:
+            ret = MSA_API.process_content(constants.FAILED, 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
             print(ret) 
 
-ret = MSA_API.process_content('ENDED', 'Static Routing deleted successfully to the device ' + device_ref, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Static Routing deleted successfully to the device ' + device_ref, context, True)
 print(ret)
