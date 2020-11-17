@@ -138,72 +138,21 @@
 		}
 	},
 	"HPE": {
-		"OUI": ["9440C9", "FACE42"],
+		"OUI": ["9440C9", "9640C9"],
 		"Default Credentials": {
-			"Username": "admin",
-			"Password": "admin"
+			"Username": "ubiqube",
+			"Password": "NewPassword123!"
 		},
 		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
-				"ProcVirtualization": "Enabled",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Disabled",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+				"AdminEmail": "performance@test.test"
 			},
 			"Low-Latency": {
-				"ProcVirtualization": "Disable",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Disabled",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+				"AdminEmail": "low-latency@test.test"
 			},
 			"Energy-effency": {
-				"ProcVirtualization": "Enabled",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Enable",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+                                "AdminEmail": "energy-effency@test.test"
 			}
 		}
 	},
