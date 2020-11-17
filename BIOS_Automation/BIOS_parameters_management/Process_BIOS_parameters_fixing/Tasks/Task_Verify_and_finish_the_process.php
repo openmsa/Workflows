@@ -13,13 +13,12 @@ $microservices_array = $context['microservices_array'];
 $ms_server_inventory = $microservices_array['Server inventory'];
 $ms_server_power = $microservices_array['Server power managment'];
 $ms_bios_params = $microservices_array['BIOS parameters manipulation'];
-$ms_job_manager = $microservices_array['Job manager'];
-if (array_key_exists('misc_server_params', $context)) {
-  $misc_server_params = $context['misc_server_params'];
+
+if (array_key_exists('Job manager', $microservices_array)) {
+    $ms_job_manager = $microservices_array['Job manager']; 
 }
 
-if (array_key_exists('JobManager', $misc_server_params)) {
-  if ($misc_server_params['JobManager']) {
+if ($context['job_management'] == 'True') {
     $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... ");
     //Syncing microservices
     $are_all_job_completed = False;
@@ -58,7 +57,6 @@ if (array_key_exists('JobManager', $misc_server_params)) {
     }
     $response = update_asynchronous_task_details($context, "Waiting when BIOS configuration job has been done... OK");
     sleep(3);
-  }
 } else {
   $response = update_asynchronous_task_details($context, "Device syncing... ");
 
@@ -98,14 +96,19 @@ $current_bios_parameters = $response['wo_newparams'][$ms_bios_params];
 $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ");
 foreach ($bios_parameters as $parameter_name => &$parameter_values) {
   if ($parameter_values['was_it_changed'] === "true") {
-    if (array_key_exists($parameter_name, $current_bios_parameters)) {
-      $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_bios_parameters[$parameter_name]['value']."... ");
-      if ($current_bios_parameters[$parameter_name]['value'] !== $parameter_values['Required Value']) {
-        $modifying_failed .= $parameter_name.", ";
-        $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_bios_parameters[$parameter_name]['value']."... Failed");
-      } else {
-        $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_bios_parameters[$parameter_name]['value']."... OK");
-      }
+    reset($current_bios_parameters);
+    foreach ($current_bios_parameters as $current_parameter_name => $current_parameter_value) {
+    	if ($current_parameter_value['name'] == $parameter_name)  {
+    	  $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_parameter_value['value']."... ");
+    	  if ($current_parameter_value['value'] !== $parameter_values['Required Value']) {
+    	    $modifying_failed .= $parameter_name.", ";
+    	    $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_parameter_value['value']."... Failed");
+          break;
+    	  } else {
+    	    $response = update_asynchronous_task_details($context, "Verifying BIOS parameters... ".$parameter_name.": Required value: ".$parameter_values['Required Value']." Current value:".$current_parameter_value['value']."... OK");
+          break;
+    	  }
+    	}
     }
   }
 }
@@ -116,7 +119,7 @@ unset($parameter_values);
 if ($modifying_failed !== '') {
   task_error('The following BIOS params were not changed'.$modifying_failed);
 } else {
-  if ($server_power_state == 'On') {
+  if (strtolower($server_power_state) == 'on') {
     task_success('BIOS params have been changed sucessfully. Server has been turned on');
   } else {
     task_error("Server is not turned on. Current state is ".$server_power_state);

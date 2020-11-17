@@ -67,16 +67,6 @@ $server_profiles_file_path = '/opt/fmc_repository/Process/BIOS_Automation/BIOS_p
 //bios_parameters_array contains BIOS parameters what should be changed, their required values, original values and changing flag
 $context['bios_parameters_array'] = array();
 
-//microservice_array contains microservice's description and name
-$context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfish_bios_settings',
-                                        'BIOS upgrade process'        =>  'redfish_bios_version',
-                                        'Redfish account manipulation'=>  'redfish_server_accounts',
-                                        'Server power managment'      =>  'redfish_server_actions',
-                                        'Server inventory'            =>  'redfish_server_general',
-                                        'Job manager'                 =>  'redfish_job_manager'
-                                        );
-
-
 if ($context['server_device'] === 'NULL') {
 	$normalizated_mac = preg_replace('/:|-/', '', $context['server_mac_address']);
 	$mac_oui = strtoupper(substr($normalizated_mac, 0, 6));
@@ -91,21 +81,55 @@ if ($context['server_device'] === 'NULL') {
 	    $context['server_vendor'] = $vendor;
 	    $context['username'] = $properties['Default Credentials']['Username'];
 	    $context['password'] = $properties['Default Credentials']['Password'];
+        $context['mgmt_interface'] = $properties['Interface'];
 	    foreach ($properties['BIOS profiles'][$server_bios_profile] as $key => $value) {
 	      $context['bios_parameters_array'][$key] = array("Required Value" => $value,
-	                                                      "Original Value" => NULL,
+	                                                      "Original Value" => 'NULL',
+                                                          "Object ID"	   => 'NULL',
 	                                                      "was_it_changed" => 'false'
 	                                                    );
 	    }
 	    if (array_key_exists('Miscellaneous parameters', $properties)) {
 	      $context['misc_server_params'] = $properties['Miscellaneous parameters'];
-	    }
+          if (array_key_exists('JobManager', $context['misc_server_params'])) {
+			//Check if Job management is avaliable for the server
+            if ($context['misc_server_params']['JobManager']) {
+              $context['job_management'] = "True";
+            } else {
+              $context['job_management'] = "False";
+            }
+          } else {
+              $context['job_management'] = "False";      
+          }
+	    } else {
+              $context['job_management'] = "False";
+        }
 	  }
 	}
 
 	//If server vendor has been identify correctly then finish the task
 	if ($context['username'] !== 'UNKNOWN' and $context['password'] !== 'UNKNOWN') {
 	  $wo_comment = "Server vendor and default credentials were identified correctly";
+      if ($context['mgmt_interface'] == 'REDFISH') {
+      //microservice_array contains microservice's description and name
+	  $context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfish_bios_settings',
+                                        	  'BIOS upgrade process'        =>  'redfish_bios_version',
+                                        	  'Redfish account manipulation'=>  'redfish_server_accounts',
+                                        	  'Server power managment'      =>  'redfish_server_actions',
+                                        	  'Server inventory'            =>  'redfish_server_general',
+                                        	  'Job manager'                 =>  'redfish_job_manager'
+                                        	  );
+      }
+      if ($context['mgmt_interface'] == 'IPMI') {
+      //microservice_array contains microservice's description and name
+	  $context['microservices_array'] = array('BIOS parameters manipulation'=>  'bios_parameters',
+                                        	  'Redfish account manipulation'=>  'server_users',
+                                        	  'Server power managment'      =>  'server_power_state',
+                                        	  'Server inventory'            =>  'server_general'
+                                        	  );
+      }
+      
+      
 	  task_success('Checking variables and identifying server vendor... Server vendor is '.$context['server_vendor']);
 	} else {
 	  task_error("Checking variables and identifying server vendor... the server hasn't been identivied correctly. The task is failed.");
@@ -117,17 +141,51 @@ if ($context['server_device'] === 'NULL') {
 	$vendor_array = json_decode(file_get_contents($server_profiles_file_path), True);
 	while ((list($vendor, $properties) = each($vendor_array)) and !$context['bios_parameters_array']) {
 	  if ($vendor === $context['server_vendor']) {
+        $context['mgmt_interface'] = $properties['Interface'];
 	    foreach ($properties['BIOS profiles'][$server_bios_profile] as $key => $value) {
 	      $context['bios_parameters_array'][$key] = array("Required Value" => $value,
-	                                                      "Original Value" => NULL,
+	                                                      "Original Value" => 'NULL',
+                                                          "Object ID" 	   => 'NULL',
 	                                                      "was_it_changed" => 'false'
 	                                                    );
 	    }
 	    if (array_key_exists('Miscellaneous parameters', $properties)) {
 	      $context['misc_server_params'] = $properties['Miscellaneous parameters'];
-	    }
+          if (array_key_exists('JobManager', $context['misc_server_params'])) {
+			//Check if Job management is avaliable for the server
+            if ($context['misc_server_params']['JobManager']) {
+              $context['job_management'] = "True";
+            } else {
+              $context['job_management'] = "False";
+            }
+          } else {
+              $context['job_management'] = "False";      
+          }
+	    } else {
+              $context['job_management'] = "False";
+        }
 	  }
 	}
+  
+    if ($context['mgmt_interface'] == 'REDFISH') {
+        //microservice_array contains microservice's description and name
+	    $context['microservices_array'] = array('BIOS parameters manipulation'=>  'redfish_bios_settings',
+                                          	  'BIOS upgrade process'        =>  'redfish_bios_version',
+                                          	  'Redfish account manipulation'=>  'redfish_server_accounts',
+                                          	  'Server power managment'      =>  'redfish_server_actions',
+                                          	  'Server inventory'            =>  'redfish_server_general',
+                                          	  'Job manager'                 =>  'redfish_job_manager'
+                                          	  );
+        }
+        if ($context['mgmt_interface'] == 'IPMI') {
+        //microservice_array contains microservice's description and name
+	  $context['microservices_array'] = array('BIOS parameters manipulation'=>  'bios_parameters',
+                                        	  'Redfish account manipulation'=>  'server_users',
+                                        	  'Server power managment'      =>  'server_power_state',
+                                        	  'Server inventory'            =>  'server_general'
+                                        	  );
+        }
+    
   	$response = update_asynchronous_task_details($context, "Identify avaliable profiles for vendor ".$context['server_vendor']."... OK");
     sleep(3);
   	task_success('Server is already provisioned. Activation is not needed');

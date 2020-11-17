@@ -39,6 +39,7 @@
         <values>Cisco</values>
         <values>DELL</values>
         <values>HPE</values>
+        <values>Lanner</values>
       </values>
     </variable>
   </variables>

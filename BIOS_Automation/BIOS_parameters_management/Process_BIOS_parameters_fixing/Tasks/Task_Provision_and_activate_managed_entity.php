@@ -14,7 +14,12 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 
 if ($context['server_device'] === 'NULL') {
 	$server_vendor = $context['server_vendor'];
-	$profile_name = $context['profile_name'] = strtolower('redfish_'.$server_vendor.'_profile');
+    if ($context['mgmt_interface'] == 'REDFISH') {
+	   $profile_name = $context['profile_name'] = strtolower('redfish_'.$server_vendor.'_profile');
+    }
+    if ($context['mgmt_interface'] == 'IPMI') {
+	   $profile_name = $context['profile_name'] = strtolower('ipmi_'.$server_vendor.'_profile');
+    }
 	$device_id = $context['device_id'];
 	$device_external_reference = $context['device_external_reference'];
 	
