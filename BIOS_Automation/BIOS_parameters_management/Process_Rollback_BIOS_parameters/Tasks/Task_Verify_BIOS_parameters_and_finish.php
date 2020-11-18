@@ -6,7 +6,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.ph
 
 //Retrive variables from $context and define the new ones
 $modifying_failed = '';
-$delay = 30;
+$delay = 90;
 $device_id = $context['device_id'];
 $bios_parameters = $context['bios_parameters_array'];
 $microservices_array = $context['microservices_array'];
@@ -41,14 +41,15 @@ if ($context['job_management'] == 'True') {
       }
   
       $response = json_decode(import_objects($device_id, array($ms_job_manager)), True);
-      $current_job = $response['wo_newparams'][$ms_job_manager];
-  
-      foreach ($current_job as $job_name => $job_params) {
-        if (array_key_exists('type', $job_params) and array_key_exists('state', $job_params)) {
-        	if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
-          		$are_all_job_completed = False;
+      if (array_key_exists($ms_job_manager, $response['wo_newparams'])) {
+      	$current_job = $response['wo_newparams'][$ms_job_manager];
+      	foreach ($current_job as $job_name => $job_params) {
+        	if (array_key_exists('type', $job_params) and array_key_exists('state', $job_params)) {
+        		if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
+          			$are_all_job_completed = False;
+        		}
         	}
-        }
+      	}
       }
       --$countdown;
       sleep(10);
@@ -59,7 +60,9 @@ if ($context['job_management'] == 'True') {
   $response = update_asynchronous_task_details($context, "Device syncing... ");
 
   //Waiting until new parameters have been applied
-  sleep($delay);
+  if ($context['is_password_updated'] == 'False') {
+     sleep($delay);
+  }
 }
 
 //Sync up the ME MSs

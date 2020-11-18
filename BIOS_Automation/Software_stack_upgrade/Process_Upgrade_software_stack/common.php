@@ -205,7 +205,7 @@ function make_upgrade($info_prefix, $context, $upgrade_array, $upgrade_stack_pat
   $device_id = $context['device_id'];
   uasort($upgrade_array, 'compare_order');
   foreach ($upgrade_array as $sw_type => $vars) {
-    if ($context['is_emulation'] === 'true') {
+    if ($context['is_emulation'] === 'True') {
       $files = '';
       foreach ($vars['files'] as $key => $value) {
         $files .= $value['form'].": ".$upgrade_stack_path."/".$value['file']."\n";
@@ -236,7 +236,7 @@ function make_upgrade($info_prefix, $context, $upgrade_array, $upgrade_stack_pat
 
     //When upgrade is finished, reboot server
     $response = update_asynchronous_task_details($context, $info_prefix."Upgrade process for the stage has been finished. Reboot server. Rebooting... ");
-    if ($context['is_emulation'] === "true") {
+    if ($context['is_emulation'] === "True") {
       sleep(5);
       $response = update_asynchronous_task_details($context, $info_prefix."Upgrade process for the stage has been finished. Reboot server. Rebooting... DONE");
     } else {
