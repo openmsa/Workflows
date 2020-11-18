@@ -73,10 +73,12 @@ if (isset($context['username']) and isset($context['password'])) {
 	
 	//Sleep before connect to BMC again
 	sleep($delay);
+    $context['is_password_updated'] = 'True';
 	$response = update_asynchronous_task_details($context, "Updating the new password on BMC... OK");
 	
 	task_success("BMC password was updated successfylly to ".$new_password."\n Verify BIOS parameters next.");
 } else {
+    $context['is_password_updated'] = 'False';
   	task_success("BMC password was not updated since ME already exists.\n Verify BIOS parameters next.");
 }
 

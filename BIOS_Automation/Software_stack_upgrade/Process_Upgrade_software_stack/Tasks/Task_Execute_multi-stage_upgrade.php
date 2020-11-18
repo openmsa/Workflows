@@ -60,7 +60,7 @@ foreach ($upgrade_stages as $num => $stack_version) {
     $upgrade_array = prepare_upgrade($prerequisite_check, $model_dir_file_path.$stack_version);
     make_upgrade($prefix, $context, $upgrade_array, $model_dir_file_path.$stack_version);
   }
-  if ($context['is_emulation'] === "true") {
+  if ($context['is_emulation'] === "True") {
     $current_sw_stack = get_current_sw_stack_fake($prerequisite_check);
   } else {
     $current_sw_stack = get_current_sw_stack($device_id, $ms_software_inventory);
