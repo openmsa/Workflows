@@ -9,7 +9,7 @@
   <process name="New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="New_Service_Instantiate_Service.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
       <displayName>Instantiate Service</displayName>
@@ -18,41 +18,41 @@
   <process name="Add_Class_Map">
     <displayName>Add Class Map</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
-    <task name="Add_Class_Map_Ensure_Class_Map_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Add_Class_Map</processPath>
+    <visibility>5</visibility>
+    <task name="Common_Ensure_Class_Map_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
       <displayName>Ensure Class Map do not exist in the device</displayName>
     </task>
     <task name="Add_Class_Map_Add_Class_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Add_Class_Map</processPath>
       <displayName>Add Class Map in the device</displayName>
     </task>
-    <task name="Add_Class_Map_Ensure_Class_Map_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Add_Class_Map</processPath>
+    <task name="Common_Ensure_Class_Map_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
       <displayName>Ensure Class Map exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_Class_Map">
     <displayName>Delete Class Map</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
-    <task name="Delete_Class_Map_Ensure_Class_Map_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Delete_Class_Map</processPath>
+    <visibility>5</visibility>
+    <task name="Common_Ensure_Class_Map_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
       <displayName>Ensure Class Map exist in the device</displayName>
     </task>
     <task name="Delete_Class_Map_Delete_Class_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Delete_Class_Map</processPath>
       <displayName>Delete Class Map in the device</displayName>
     </task>
-    <task name="Delete_Class_Map_Ensure_Class_Map_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Delete_Class_Map</processPath>
+    <task name="Common_Ensure_Class_Map_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
       <displayName>Ensure Class Map do not exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_service">
     <displayName>Delete service</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
@@ -60,7 +60,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Class Map Management</name>
     <group>GWAN RAB | Baseline WF</group>
   </information>
