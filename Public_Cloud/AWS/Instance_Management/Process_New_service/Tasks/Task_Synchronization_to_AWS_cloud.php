@@ -7,7 +7,7 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 require_once '/opt/fmc_repository/Process/Reference/Common/Library/msa_common.php';
 require '/opt/devops/OpenMSA_Adapters/vendor/autoload.php';
 
-use Aws\Ec2\Ec2Client;
+use Aws\Ec2\Ec2Client; 
 
 /**
  * List all the parameters required by the task

@@ -17,15 +17,13 @@ function list_args()
   create_var_def('deviceId', 'Device');
   create_var_def('ImageId', 'String');
   create_var_def('InstanceType', 'String');
-  create_var_def('security_group', 'String');
-  create_var_def('SubnetId', 'OBMFref');
+  create_var_def('security_group', 'ObjectRef');
+  create_var_def('SubnetId', 'ObjectRef');
 }
 
 check_mandatory_param('ImageId');
 check_mandatory_param('InstanceType');
 check_mandatory_param('SubnetId');
-
-
 
 $PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];
 $EXECNUMBER = $context['EXECNUMBER'];
