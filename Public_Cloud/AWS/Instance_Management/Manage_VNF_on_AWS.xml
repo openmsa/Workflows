@@ -130,7 +130,7 @@
     <type>CREATE</type>
     <visibility>0</visibility>
     <task name="Task_Synchronization_to_AWS_cloud.php">
-      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/</processPath>
+      <processPath></processPath>
       <displayName>Synchronization with AWS</displayName>
     </task>
   </process>
