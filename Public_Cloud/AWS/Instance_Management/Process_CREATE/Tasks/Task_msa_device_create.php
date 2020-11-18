@@ -3,16 +3,16 @@
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 
 function list_args() {
-	create_var_def('customer_id', 'Integer');
+	create_var_def('customer_id');
 	//create_var_def('managed_device_name', 'String');
 	//create_var_def('device_external_reference', 'String');
-	create_var_def('manufacturer_id', 'Integer');
-	create_var_def('model_id', 'Integer');
-	create_var_def('device_ip_address', 'IP Address');
-	create_var_def('login', 'String');
-	create_var_def('password', 'Password');
-	create_var_def('new_password', 'Password');
-	create_var_def('snmp_community', 'String');
+	create_var_def('manufacturer_id');
+	create_var_def('model_id');
+	create_var_def('device_ip_address');
+	create_var_def('login');
+	create_var_def('password');
+	create_var_def('new_password');
+	create_var_def('snmp_community');
 }
 
 //check_mandatory_param('managed_device_name');
