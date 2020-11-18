@@ -14,17 +14,44 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 
 if ($context['server_device'] === 'NULL') {
 	$server_vendor = $context['server_vendor'];
-	$profile_name = $context['profile_name'] = strtolower('redfish_'.$server_vendor.'_profile');
+    if ($context['mgmt_interface'] == 'REDFISH') {
+	   $profile_name = $context['profile_name'] = strtolower('redfish_'.$server_vendor.'_profile');
+    }
+    if ($context['mgmt_interface'] == 'IPMI') {
+	   $profile_name = $context['profile_name'] = strtolower('ipmi_'.$server_vendor.'_profile');
+    }
 	$device_id = $context['device_id'];
 	$device_external_reference = $context['device_external_reference'];
 	
 	$response = update_asynchronous_task_details($context, "Attaching configuration profile... ");
+    
+    
+    //Retrive all configuration profiles of the customer and find out the one what has same name as required
+  	//Extract numeric customer ID
+	if (preg_match('/.{3}\D*?(\d+)/', $context['UBIQUBEID'], $matches) === 1) {
+		$customer_db_id = $context['customer_db_id'] = $matches[1];
+	} else {
+		$customer_db_id = $context['customer_db_id'] = -1;
+	}
 	
-	//Attach configuration profile to managed device
-	$response = json_decode(_profile_attach_to_device_by_reference ($profile_name, $device_external_reference), True);
+    $profile_list = _profile_configuration_list_by_customer_id($customer_db_id);
+    $profile_reference = $context['profile_reference'] = 'NULL';
+    logToFile(debug_dump($profile_list, 'DEBUG: Profile list'));
+    foreach ($profile_list as $profile_number => $profile_details) {
+    	if ($profile_details['name'] === $profile_name) {
+          $profile_reference = $context['profile_reference'] = $profile_details['externalReference'];
+        }
+    }
+	
+	//Attach configuration profile to managed device if reference has been found
+  if ($profile_reference != 'NULL') {
+	$response = json_decode(_profile_attach_to_device_by_reference ($profile_reference, $device_external_reference), True);
 	if ($response['wo_status'] !== ENDED) {
 	  echo $response;
 	}
+  } else {
+    task_failed("Configration profile is has not been found");
+  }
 
 	$response = update_asynchronous_task_details($context, "Attaching configuration profile... OK");
 	sleep(3);

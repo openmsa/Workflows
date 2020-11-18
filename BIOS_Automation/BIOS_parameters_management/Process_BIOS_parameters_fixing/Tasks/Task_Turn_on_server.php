@@ -20,8 +20,13 @@ $server_object_id = $object_params['object_id'];
 $server_power_state = $object_params['power_state'];
 $response = update_asynchronous_task_details($context, "Checking server power state... ".$server_power_state);
 
-if ($server_power_state !== 'Off') {
-	$action = 'ForceRestart';
+if (strtolower($server_power_state) !== 'off') {
+    if ($context['mgmt_interface'] == 'REDFISH') {
+       $action = 'ForceRestart';
+    }
+    if ($context['mgmt_interface'] == 'IPMI') {
+       $action = 'reset';
+    }
 	$response = update_asynchronous_task_details($context, "Checking server power state... ".$server_power_state." Lets use ".$action);
 	$micro_service_vars_array = array ();
 	$micro_service_vars_array ['object_id'] = $action;
@@ -36,15 +41,20 @@ if ($server_power_state !== 'Off') {
     	} 
     } else {
     	//Import avaliable power actions
-		$response = json_decode(import_objects($device_id, array($ms_server_power)), True);
-		$object_ids_array = $response['wo_newparams'][$ms_server_power];
-		$action = 'UNKNOWN';
-		$possible_action = array('ForceOn', 'On');
-		while ((list($object_id, $object_details) = each($object_ids_array)) and ($action === 'UNKNOWN')) {
-			if (in_array($object_details['object_id'], $possible_action)) {
-				$action = $object_details['object_id'];
+        if ($context['mgmt_interface'] == 'REDFISH') {
+			$response = json_decode(import_objects($device_id, array($ms_server_power)), True);
+			$object_ids_array = $response['wo_newparams'][$ms_server_power];
+			$action = 'UNKNOWN';
+			$possible_action = array('ForceOn', 'On');
+			while ((list($object_id, $object_details) = each($object_ids_array)) and ($action === 'UNKNOWN')) {
+				if (in_array($object_details['object_id'], $possible_action)) {
+					$action = $object_details['object_id'];
+				}
 			}
-		}
+        }
+        if ($context['mgmt_interface'] == 'IPMI') {
+          $action = 'on'; 
+        }
 		$response = update_asynchronous_task_details($context, "Checking server power state... ".$server_power_state." Lets use ".$action);
 		$micro_service_vars_array = array ();
 		$micro_service_vars_array ['object_id'] = $action;

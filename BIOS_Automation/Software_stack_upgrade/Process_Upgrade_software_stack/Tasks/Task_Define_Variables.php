@@ -19,6 +19,11 @@ function list_args()
 
 check_mandatory_param('is_emulation');
 check_mandatory_param('is_part_of_BPM');
+if ($context['is_emulation']) {
+  $context['is_emulation'] = 'True';
+} else {
+  $context['is_emulation'] = 'False';
+}
 if ($context['is_part_of_BPM']) {
   check_mandatory_param('device_ip');
   $response = json_decode(_lookup_list_device_ids(), True);

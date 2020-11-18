@@ -22,9 +22,14 @@ $server_power_state = $object_params['power_state'];
 $response = update_asynchronous_task_details($context, "Import current power state... ".$server_power_state);
 
 //Shutdown server if it is turned on now
-if ($server_power_state !== 'Off') {
+if (strtolower($server_power_state) !== 'off') {
 	$response = update_asynchronous_task_details($context, "Import current power state... ".$server_power_state." Shutting down...");
-	$action = 'ForceOff';
+	if ($context['mgmt_interface'] == 'REDFISH') {
+       $action = 'ForceOff';
+    }
+    if ($context['mgmt_interface'] == 'IPMI') {
+       $action = 'off';
+    }
 	$micro_service_vars_array = array ();
 	$micro_service_vars_array ['object_id'] = $action;
 	$micro_service_vars_array ['action'] = $action;
@@ -67,7 +72,7 @@ if ($server_power_state !== 'Off') {
 }
 
 
-if ($server_power_state === 'Off') {
+if (strtolower($server_power_state) === 'off') {
 	task_success('Server is shutted down now');
 } else {
 	task_error('Server is staying up');
