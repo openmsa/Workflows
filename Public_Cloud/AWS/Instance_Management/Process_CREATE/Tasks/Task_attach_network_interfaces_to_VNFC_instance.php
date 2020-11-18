@@ -13,7 +13,7 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-	create_var_def('NetworkInterfaces.0.Id', 'ObjectRef');
+	create_var_def('NetworkInterfaces.0.Id', 'OBMFRef');
 }
 
 $ec2Client = Ec2Client::factory(array(
