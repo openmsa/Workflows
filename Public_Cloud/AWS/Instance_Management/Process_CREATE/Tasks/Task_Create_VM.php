@@ -77,6 +77,7 @@ try {
 	logToFile(debug_dump($res, "AWS response\n"));
 
 	$context["InstanceId"] = $res["Instances"][0]["InstanceId"];
+	$context["wf_instance_id_for_display"] = $context['InstanceId']." - ".$context["SERVICEINSTANCEID"] ;
 
 	$ec2Client->waitUntilInstanceRunning(array(
 		'InstanceIds' => array($context["InstanceId"])

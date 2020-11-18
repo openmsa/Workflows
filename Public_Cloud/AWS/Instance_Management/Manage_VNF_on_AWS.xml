@@ -122,6 +122,7 @@
         <values>FGT_FW</values>
       </values>
     </variable>
+    <variable displayName="wf_instance_id_for_display" name="params.wf_instance_id_for_display" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Public_Cloud/AWS/Process_New_service">
@@ -243,7 +244,7 @@
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <description>VNF Orchestration on a Public Cloud (AWS)</description>
-    <displayField>service_id</displayField>
+    <displayField>wf_instance_id_for_display</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>0</visibility>
