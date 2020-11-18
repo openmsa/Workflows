@@ -10,18 +10,26 @@
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
+<<<<<<< HEAD
             <value>1559815134798</value>
         </entry>
         <entry>
             <key>COMMENT</key>
             <value></value>
+=======
+            <value>1605696419460</value>
+>>>>>>> 90a0450... review variable layout
         </entry>
         <entry>
             <key>REPOSITORY</key>
         </entry>
         <entry>
             <key>DATE_CREATION</key>
+<<<<<<< HEAD
             <value>1524580518116</value>
+=======
+            <value>1605696419456</value>
+>>>>>>> 90a0450... review variable layout
         </entry>
         <entry>
             <key>MANUFACTURER</key>
