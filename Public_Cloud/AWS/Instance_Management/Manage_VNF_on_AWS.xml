@@ -28,7 +28,7 @@
         <values>c5.large</values>
       </values>
     </variable>
-    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="17" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="Vendor" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="17" isMandatory="true" isUserLocked="false" isGrouped="true" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Instance type</sections>
       </sections>
@@ -36,7 +36,7 @@
         <values displayValue="Fortinet">17</values>
       </values>
     </variable>
-    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="15102617" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="Vendor" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="15102617" isMandatory="true" isUserLocked="false" isGrouped="true" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Instance type</sections>
       </sections>
@@ -127,7 +127,7 @@
   <process name="Process/Public_Cloud/AWS/Process_New_service">
     <displayName>New service</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="Task_Synchronization_to_AWS_cloud.php">
       <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/</processPath>
       <displayName>Synchronization with AWS</displayName>
@@ -136,7 +136,7 @@
   <process name="Process/Public_Cloud/AWS_WF/Process_CREATE">
     <displayName>Launch Instance</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Create_VM.php">
       <processPath/>
       <displayName>Instantiate VNFC</displayName>
@@ -181,7 +181,7 @@
   <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC">
     <displayName>Start Instance</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Start_VNFC/Tasks/Task_start_vnfc.php">
       <processPath/>
       <displayName>Start VNFCi</displayName>
@@ -194,7 +194,7 @@
   <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC">
     <displayName>Stop Instance</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Stop_VNFC/Tasks/Task_stop_vnfc.php">
       <processPath/>
       <displayName>Stop VNFCi</displayName>
@@ -203,7 +203,7 @@
   <process name="Process/Public_Cloud/AWS_WF/Process_Restart_VNFC">
     <displayName>Resart Instance</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Restart_VNFC/Tasks/Task_Restart_VNFC.php">
       <processPath/>
       <displayName>Restart VNFCi</displayName>
@@ -216,7 +216,7 @@
   <process name="Process/Public_Cloud/AWS_WF/Process_Terminate_service">
     <displayName>Terminate Instance</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Terminate_VNFC/Tasks/Task_Delete_VM_on_AWS.php">
       <processPath/>
       <displayName>Terminate VNFCi from AWS</displayName>
@@ -229,12 +229,12 @@
   <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Move_To_Trash">
     <displayName>Move To Trash</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <process name="Process/Public_Cloud/AWS/Instance_Management/Process_Sync_with_AWS">
     <displayName>Sync with Cloud</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_New_service/Tasks/Task_Synchronization_to_AWS_cloud.php">
       <processPath/>
       <displayName>Synchronization with AWS</displayName>
@@ -246,7 +246,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Public Cloud VNF Management</name>
     <group>Public Cloud|AWS</group>
   </information>
