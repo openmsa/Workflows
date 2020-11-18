@@ -17,11 +17,11 @@
             <key>TAG</key>
         </entry>
         <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
+            <key>TAG</key>
         </entry>
         <entry>
-            <key>TAG</key>
+            <key>FILE_TYPE</key>
+            <value>text</value>
         </entry>
         <entry>
             <key>TYPE</key>

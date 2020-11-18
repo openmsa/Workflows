@@ -19,6 +19,8 @@ function list_args()
 
 check_mandatory_param("AwsDeviceId");
 
+// set 
+$context["wf_instance_id_for_display"] = $context['SERVICEINSTANCEID'];
 
 logToFile(debug_dump($context, "MSA CONTEXT:\n"));
 
