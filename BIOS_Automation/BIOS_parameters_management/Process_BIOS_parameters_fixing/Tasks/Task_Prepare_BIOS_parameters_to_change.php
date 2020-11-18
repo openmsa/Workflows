@@ -21,13 +21,21 @@ sleep(3);
 //For each required BIOS parameter check whether is required value equal the original one
 $response = update_asynchronous_task_details($context, "Identify BIOS parameters to change... ");
 foreach ($bios_parameters as $parameter_name => &$parameter_values) {
-	if (array_key_exists($parameter_name, $current_bios_parameters)) {
-		$parameter_values['Original Value'] = $current_bios_parameters[$parameter_name]['value'];
-		if ($parameter_values['Original Value'] !== $parameter_values['Required Value']) {
-			$parameter_values['was_it_changed'] = "true";
-			$change_candidate .= $parameter_name.", ";
+	reset($current_bios_parameters);
+     while ((list($current_parameter_name, $current_parameter_value) = each($current_bios_parameters)) and ($parameter_values['Original Value'] == 'NULL')) {
+       logToFile(debug_dump($parameter_name, 'DEBUG: PARAMETER NAME'));
+       logToFile(debug_dump($current_parameter_value, 'DEBUG: CURRENT PARAMETER VALUE'));
+       logToFile(debug_dump(array_search($parameter_name, $current_parameter_value), "DEBUG: SEARCH RESULT"));
+       if ($current_parameter_value['name'] == $parameter_name) {
+            logToFile(debug_dump($current_parameter_value['value'], 'DEBUG: MATCH'));
+			$parameter_values['Original Value'] = $current_parameter_value['value'];
+			if ($parameter_values['Original Value'] !== $parameter_values['Required Value']) {
+				$parameter_values['was_it_changed'] = "true";
+                $parameter_values['Object ID'] = $current_parameter_name;
+				$change_candidate .= $parameter_name.", ";
+			}
 		}
-	}
+    }
 }
 unset($parameter_name);
 unset($parameter_values);

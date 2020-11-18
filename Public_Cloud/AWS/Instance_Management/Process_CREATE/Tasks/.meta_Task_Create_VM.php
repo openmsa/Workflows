@@ -21,6 +21,10 @@
             <value>text</value>
         </entry>
         <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
             <key>TYPE</key>
             <value>UPLOAD</value>
         </entry>

@@ -9,9 +9,8 @@ $bios_parameters = $context['bios_parameters_array'];
 $device_id = $context['device_id'];
 $microservices_array = $context['microservices_array'];
 $ms_bios_params = $microservices_array['BIOS parameters manipulation'];
-$ms_job_manager = $microservices_array['Job manager'];
-if (array_key_exists('misc_server_params', $context)) {
-	$misc_server_params = $context['misc_server_params'];
+if (array_key_exists('Job manager', $microservices_array)) {
+    $ms_job_manager = $microservices_array['Job manager']; 
 }
 
 //Change BIOS parameters for each parameter what has was_it_changed is True
@@ -20,9 +19,10 @@ foreach ($bios_parameters as $parameter_name => $parameter_values) {
 	if ($parameter_values['was_it_changed'] === "true") {
 		$response = update_asynchronous_task_details($context, "Modyfing BIOS parameters... ".$parameter_name."... ");
 		$micro_service_vars_array = array ();
-		$micro_service_vars_array ['object_id'] = $parameter_name;
+		$micro_service_vars_array ['object_id'] = $parameter_values['Object ID'];
+        $micro_service_vars_array ['name'] = $parameter_name;
 		$micro_service_vars_array ['value'] = $parameter_values['Required Value'];
-		$ms_array = array($ms_bios_params => array ($parameter_name => $micro_service_vars_array));
+		$ms_array = array($ms_bios_params => array ($parameter_values['Object ID'] => $micro_service_vars_array));
 		$response = json_decode(execute_command_and_verify_response ( $device_id, CMD_UPDATE, $ms_array, "UPDATE BIOS parameter ".$parameter_name." to ".$parameter_values['Required Value']), True);
     	if ($response['wo_status'] !== ENDED) {
     	    $response = json_encode($response);
@@ -32,11 +32,18 @@ foreach ($bios_parameters as $parameter_name => $parameter_values) {
       $response = update_asynchronous_task_details($context, "Modyfing BIOS parameters... ".$parameter_name."... OK");
 	}
 	sleep($delay);
+    if ($context['mgmt_interface'] == 'IPMI') {
+      $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+      if ($response['wo_status'] !== ENDED) {
+        $response = json_encode($response);
+        echo $response;
+        exit;
+      }
+    }
 }
 
 //Check if the paticular Redfish API implementation uses job manager to modify BIOS parameters
-if (array_key_exists('JobManager', $misc_server_params)) {
-	if ($misc_server_params['JobManager']) {
+if ($context['job_management'] == 'True') {
 		#Create new job for BIOS configuration
 			$response = update_asynchronous_task_details($context, "Creating Job... ");
 			$micro_service_vars_array = array ();
@@ -87,7 +94,6 @@ if (array_key_exists('JobManager', $misc_server_params)) {
 		} else {
   			task_error("A job to update BIOS parameters was not created successfully.");
 		}
-	}
 }
 
 task_success('BIOS parameters have been changed succesfully. Server will be rebooted');
