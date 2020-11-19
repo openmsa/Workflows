@@ -25,16 +25,16 @@
     <displayName>Add ACL</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    <task name="Add_ACL_Ensure_ACL_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
+    <task name="Common_Ensure_ACL_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Common</processPath>
       <displayName>Ensure ACL do not exist in the device</displayName>
     </task>
     <task name="Add_ACL_Add_ACL_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
       <displayName>Add ACL in the device</displayName>
     </task>
-    <task name="Add_ACL_Ensure_ACL_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Add_ACL</processPath>
+    <task name="Common_Ensure_ACL_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Common</processPath>
       <displayName>Ensure ACL exist in the device</displayName>
     </task>
   </process>
@@ -42,16 +42,16 @@
     <displayName>Delete ACL</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
-    <task name="Delete_ACL_Ensure_ACL_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
+    <task name="Common_Ensure_ACL_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Common</processPath>
       <displayName>Ensure ACL exist in the device</displayName>
     </task>
     <task name="Delete_ACL_Delete_ACL_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
       <displayName>Delete ACL in the device</displayName>
     </task>
-    <task name="Delete_ACL_Ensure_ACL_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Delete_ACL</processPath>
+    <task name="Common_Ensure_ACL_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Access_List_Management/Common</processPath>
       <displayName>Ensure ACL do not exist in the device</displayName>
     </task>
   </process>
