@@ -25,11 +25,11 @@ context = Variables.task_call(dev_var)
 Get parameters values from dictionary.
 
 @param input_acl_dict:
-    data dictionary.
+    Input Access-list dictionary to be added or deleted.
 @param device_acls_dict: 
-    Parameter key name.
-@return: 
-    Parameter value.
+    Access-list dictionary from device running configuration.
+@return is_all_acl_entries_matched: 
+    True if all the access-list entries from device running configuration are matched to the input access-list entries otherwise False.
 '''
 def is_input_acl_matched_to_device_acl(input_acl_dict, device_acls_dict):
     #if one of the ACL entry is not matched to the input ACL entries from the device ACL entries return False.
