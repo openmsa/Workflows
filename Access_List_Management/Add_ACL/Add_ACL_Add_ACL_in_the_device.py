@@ -13,7 +13,6 @@ dev_var.add('acl.0.src_port', var_type='String')
 dev_var.add('acl.0.dst_address', var_type='String')
 dev_var.add('acl.0.dst_wildcard', var_type='String')
 dev_var.add('acl.0.dst_port', var_type='String')
-
 context = Variables.task_call(dev_var)
 
 #get device_id from context
