@@ -77,7 +77,7 @@ if __name__ == "__main__":
         entity = Device(customer_id=cust_id,
                         name=list(vm.keys())[0],
                         manufacturer_id="14020601",
-                        model_id="14020601",
+                        model_id="19112020",
                         login=context['vm_username'],
                         password=context['vm_secret'],
                         password_admin=context['vm_secret'],
