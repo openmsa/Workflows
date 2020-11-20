@@ -11,6 +11,8 @@ dev_var.add('profile', var_type='String')
 
 context = Variables.task_call(dev_var)
 
+context['service_id_display']=f'{context["SERVICEINSTANCEID"]} - Firewall {context["device"]}';
+
 # read the ID of the selected managed entity
 device_id = context['device']
 object_id = context['gateway']
