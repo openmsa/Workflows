@@ -1,11 +1,21 @@
 <ObjectDefinition>
   <variables frozen="0">
     <variable displayName="Customer name" name="params.customer_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Planet Express Inc." isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="IPAM ME" name="params.ipam_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="IPAM ME" name="params.ipam_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="191119" modId="29092020"/>
+      </sdTypes>
+    </variable>
     <variable displayName="Site" name="params.site" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="1244" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>sites</class>
       </classes>
+    </variable>
+    <variable displayName="Status for CE device after decommision" name="params.status" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="staged" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values>decommisioning</values>
+        <values>staged</values>
+      </values>
     </variable>
   </variables>
   <example/>
@@ -61,6 +71,32 @@
     <displayName>New L2VPN</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
+  </process>
+  <process name="Process/General_network_service_automation/Remove_L3VPN">
+    <displayName>Remove L3VPN</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Remove_L3VPN_Gather_information_from_IPAM.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Gather information from IPAM</displayName>
+    </task>
+    <task name="Remove_L3VPN_Clean_up_CE_and_PE_devices.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Clean up CE and PE devices</displayName>
+    </task>
+    <task name="Remove_L3VPN_Clean_up_IPAM.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Clean up IPAM</displayName>
+    </task>
+  </process>
+  <process name="Process/General_network_service_automation/Decommission_CE">
+    <displayName>Decommission CE</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Decommission_CE_Remove_CE_and_update_IPAM.py">
+      <processPath>/opt/fmc_repository/Process/General_Network_Service_Automation</processPath>
+      <displayName>Remove CE and update IPAM</displayName>
+    </task>
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
