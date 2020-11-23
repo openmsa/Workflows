@@ -21,16 +21,16 @@
     <displayName>Add Static Route</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
-    <task name="Add_Static_Route_Ensure_Static_Routing_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Add_Static_Route</processPath>
+    <task name="Common_Ensure_Static_Routing_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
       <displayName>Ensure Static Routing do not exist in the device</displayName>
     </task>
     <task name="Add_Static_Route_Add_Static_Routing_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Add_Static_Route</processPath>
       <displayName>Add Static Routing in the device</displayName>
     </task>
-    <task name="Add_Static_Route_Ensure_Static_Routing_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Add_Static_Route</processPath>
+    <task name="Common_Ensure_Static_Routing_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
       <displayName>Ensure Static Routing exist in the device</displayName>
     </task>
   </process>
@@ -38,16 +38,16 @@
     <displayName>Delete Static Route</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
-    <task name="Delete_Static_Route_Ensure_Static_Routing_do_not_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Delete_Static_Route</processPath>
+    <task name="Common_Ensure_Static_Routing_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
       <displayName>Ensure Static Routing exist in the device</displayName>
     </task>
     <task name="Delete_Static_Route_Delete_Static_Routing_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Delete_Static_Route</processPath>
       <displayName>Delete Static Routing in the device</displayName>
     </task>
-    <task name="Delete_Static_Route_Ensure_Static_Routing_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Delete_Static_Route</processPath>
+    <task name="Common_Ensure_Static_Routing_do_not_exist_in_the_device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
       <displayName>Ensure Static Routing do not exist in the device</displayName>
     </task>
   </process>
