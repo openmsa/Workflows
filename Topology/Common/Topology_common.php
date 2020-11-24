@@ -214,7 +214,8 @@ function processDevice($device_id, $name, $device_nature, $status) {
 function getStatus($device_id) {
 	$info = json_decode(_device_get_status($device_id), true);
 	$status = $info ["wo_newparams"];
-	
+	logToFile("*** getStatus <$device_id> => $status");
+
 	if (empty($status) || $status == "") {
 		return "Managed Entity with id " . $device_id . " was not found";
 	} else {
