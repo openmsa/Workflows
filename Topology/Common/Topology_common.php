@@ -200,7 +200,7 @@ function processDevice($device_id, $name, $device_nature, $status) {
 	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
 	try {
 		if($status == "UP") {
-			calculateDeviceTopology($device_id, $name, $device_nature, $status);
+			calculateDeviceTopology($device_id, $name, $device_nature, "OK");
 		} else {
 			createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_".$status.".svg", $status);
 		}
