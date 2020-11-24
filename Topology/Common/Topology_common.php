@@ -199,17 +199,10 @@ function topology_update_view() {
 function processDevice($device_id, $name, $device_nature, $status) {
 	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
 	try {
-		//$status = getStatus($device_id);
 		if($status == "UP") {
 			calculateDeviceTopology($device_id, $name, $device_nature);
 		} else {
-			if($status == "UNREACHABLE") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
-			} else if($status == "NEVERREACHED") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
-			} else if($status == "CRITICAL") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
-			}
+			createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_".$status.".svg" , $status);
 		}
 	} catch (Exception $e) {
 		logTofile(debug_dump($e, "************** processDevice ERROR **************"));
