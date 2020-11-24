@@ -50,7 +50,7 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image, $statu
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
 	);
-	logTofile(debug_dump($context, "*** createTopology context \n"));
+	//logTofile(debug_dump($context, "*** createTopology context \n"));
 
 	return $place;
 }
