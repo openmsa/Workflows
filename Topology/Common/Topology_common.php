@@ -199,10 +199,10 @@ function topology_update_view() {
 function processDevice($device_id, $name, $device_nature, $status) {
 	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
 	try {
-		if($status == "UP") {
-			calculateDeviceTopology($device_id, $name, $device_nature, "OK");
+		if($status == "OK") {
+			calculateDeviceTopology($device_id, $name, $device_nature, $status);
 		} else {
-			createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_".$status.".svg", $status);
+			createTopology($device_id, $name, $device_nature, "router", "", $status);
 		}
 	} catch (Exception $e) {
 		logTofile(debug_dump($e, "************** processDevice ERROR **************"));
@@ -219,7 +219,14 @@ function getStatus($device_id) {
 	if (empty($status) || $status == "") {
 		return "Managed Entity with id " . $device_id . " was not found";
 	} else {
-		return $status;
+		if ($status == "UP") {
+			return "OK";
+		} else if ($status == "UNREACHABLE") {
+			return "ERROR";
+		} else if ($status == "CRITICAL") {
+			return "CRITICAL";
+		}
+		return "NEVERREACHED";
 	}
 }
 
