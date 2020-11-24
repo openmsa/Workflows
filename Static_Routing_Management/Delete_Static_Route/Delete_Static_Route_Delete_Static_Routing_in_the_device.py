@@ -2,6 +2,7 @@
 Guide used for developing this task script: https://msa2.ubiqube.com/msa_sdk/order.html#msa_sdk.order.Order.command_execute
 
 '''
+import json
 from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
@@ -40,7 +41,8 @@ if 'distance' in context:
 obj = dict(object_id=config) #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(static_route=obj)
 
-response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+response = json.loads(obmf.content)
 
 if response.get('wo_status') == constants.FAILED:
     detials = ''

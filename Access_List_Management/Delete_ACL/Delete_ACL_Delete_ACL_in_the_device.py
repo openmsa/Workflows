@@ -1,3 +1,4 @@
+import json
 from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
@@ -25,7 +26,8 @@ obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1
 params = dict(access_lists=obj)
 context['ms_params'] = params
 
-response = obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+response = json.loads(obmf.content)
 
 if response.get('wo_status') == constants.FAILED:
     detials = ''
