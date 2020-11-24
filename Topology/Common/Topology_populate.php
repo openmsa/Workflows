@@ -22,10 +22,10 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image) {
 
 	if ($place == -1) {
 		$context['Nodes'][] = array(
-			"primary_key" => $nodeId,
+			"primary_key" => (string)$nodeId,
 			"device_nature" => $device_nature,
 			"name" => $name,
-			"object_id" => $nodeId,
+			"object_id" => (string)$nodeId,
 			"x" => "",
 			"y" => "",
 			"description" => "",
