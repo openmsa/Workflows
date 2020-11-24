@@ -5,8 +5,10 @@ require_once '/opt/fmc_repository/Process/Reference/Common/Library/topology_rest
 
 function calculateDeviceTopology($deviceId, $name, $device_nature, $status) {
 	global $context;
-	
-	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "style/topology/img/router_OK.svg", $status);
+
+	logTofile("*** calculateDeviceTopology  deviceId: $deviceId name: $name status: $status \n");
+
+	$nodePlace = createTopology($deviceId, $name, $device_nature, "router", "", $status);
 	$error = readInformationsFromDevice($deviceId, $community, $address);
 	
 	if ($error == "") {
