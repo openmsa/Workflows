@@ -41,8 +41,7 @@ $device_hostname = str_replace(".", "-", $device_ip_address);
 $context['hostname'] = "host-".$device_hostname;
 $device_hostname = $context['hostname'];
 
-$response = _device_create($customer_db_id, $managed_device_name, $manufacturer_id,
-							$model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "true", $snmp_community, $device_hostname);
+$response = _device_create($customer_db_id, $managed_device_name, $manufacturer_id, $model_id, $login, $password, $password_admin, $device_ip_address, $device_external_reference, $log_enabled = "true", $log_more_enabled = "true",$mail_alerting = "true", $reporting = "true", $snmp_community, "", $device_hostname, 22);
 
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {
