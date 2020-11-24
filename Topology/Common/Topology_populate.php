@@ -15,9 +15,10 @@ function _topology_exist_object_this_instance($nodeId) {
  * creates a new topology element for a managed entity
  * return: the node index in the array $context['Nodes']
  */ 
-function createTopology($nodeId, $name, $device_nature, $subtype, $image, $status = "") {
+function createTopology($nodeId, $name, $device_nature, $subtype, $image, $status) {
 	global $context;
-	
+	logTofile("*** createTopology  nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." status ".$status." \n");
+
 	$place = _topology_exist_object_this_instance($nodeId);
 
 	if ($place == -1) {
@@ -49,7 +50,6 @@ function createTopology($nodeId, $name, $device_nature, $subtype, $image, $statu
 			"object_id" => $nodeId,
 			"primary_key" => $nodeId
 	);
-	logTofile("*** createTopology  nodeId: ".$nodeId. " name " .$name." subtype ". $subtype." place ". $place." status ".$status."\n");
 	logTofile(debug_dump($context, "*** createTopology context \n"));
 
 	return $place;

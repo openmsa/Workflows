@@ -202,7 +202,7 @@ function processDevice($device_id, $name, $device_nature, $status) {
 		if($status == "UP") {
 			calculateDeviceTopology($device_id, $name, $device_nature);
 		} else {
-			createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_".$status.".svg" , $status);
+			createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_".$status.".svg", $status);
 		}
 	} catch (Exception $e) {
 		logTofile(debug_dump($e, "************** processDevice ERROR **************"));
