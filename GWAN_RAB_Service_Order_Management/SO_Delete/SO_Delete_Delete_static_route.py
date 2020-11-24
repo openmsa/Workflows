@@ -1,4 +1,5 @@
 import json
+import time
 from msa_sdk import constants
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
@@ -14,8 +15,34 @@ context = Variables.task_call(dev_var)
 #                FUNCTIONS                         #
 #                                                  #
 ####################################################
+'''
+Retrieve process instance by service instance ID.
 
+@param orch:
+    Ochestration class object reference.
+@param process_id:
+    Baseline workflow process ID.
+@param timeout:
+    loop duration before to break.
+@param interval:
+    loop time interval.
+@return:
+    Response of the get process instance execution.
+'''
+def get_process_instance(orch, process_id, timeout=60, interval=5):
+    response = {}
+    global_timeout = time.time() + timeout
+    while True:
+        #get service instance execution status.
+        orch.get_process_instance(process_id)
+        response = json.loads(orch.content)
+        status = response.get('status').get('status')
+        #context.update(get_process_instance=status)
+        if status != constants.RUNNING or time.time() > global_timeout:
+            break
+        time.sleep(interval)
 
+    return response
 ####################################################
 #                                                  #
 #                MAIN CODE                         #
@@ -37,18 +64,44 @@ orch = Orchestration(ubiqube_id)
 #Static Routing Management WF service name constant variable.
 SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Static_Routing_Management/Static_Routing_Management'
 ADD_PROCESS_NAME = 'Delete_Static_Route'
-
+service_id = ''
+service_ext_ref = ''
+#Instantiate new Static_Routing_Management WF dedicated for the device_id.
+if not 'static_routing_service_instance' in context:
+    data = dict(device_id=device_ref)
+    orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
+    response = json.loads(orch.content)
+    context['response'] = response
+    status = response.get('status').get('status')
+    if status == constants.ENDED:
+        if 'serviceId' in response:
+            service_id = response.get('serviceId').get('id')
+            service_ext_ref = response.get('serviceId').get('serviceExternalReference')
+            #Store service_instance_id of Static_Routing_Management WF in context.
+            context['static_routing_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
+        else:
+            ret = MSA_API.process_content(constants.FAILED, 'Missing service id return by orchestration operation.', context, True)
+            print(ret) 
+    else:
+        ret = MSA_API.process_content(constants.FAILED, 'Execute service operation failed.', context, True)
+        print(ret) 
+        
 #Loop in StaticRouting dictionary object by calling the Static_Routing_Management process 'Add Static routing'.
 for route in static_routing:
     data = dict(source_address=route['source_address'], subnet_mask=route['subnet_mask'], vlan_id=route['vlan_id'], nexthop=route['nexthop'], distance=route['distance'])  
     if isinstance(data, dict):
         service_ext_ref = context.get('static_routing_service_instance').get('external_ref')
+        #execute service by ref.
         orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
         response = json.loads(orch.content)
+        process_id = response.get('processId').get('id')
+        #get service process details.
+        response = get_process_instance(orch, process_id)
         status = response.get('status').get('status')
+        details = response.get('status').get('details')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
-            print(ret) 
+            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
+            print(ret)  
 
 ret = MSA_API.process_content(constants.ENDED, 'Static Routing deleted successfully to the device ' + device_ref, context, True)
 print(ret)

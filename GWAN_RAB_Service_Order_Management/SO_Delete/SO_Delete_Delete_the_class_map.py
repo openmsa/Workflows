@@ -1,4 +1,5 @@
 import json
+import time
 from msa_sdk import constants
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
@@ -39,6 +40,35 @@ def get_config_param_val(context, dict, param, is_madatory=True):
         print(ret)
         
     return value
+
+'''
+Retrieve process instance by service instance ID.
+
+@param orch:
+    Ochestration class object reference.
+@param process_id:
+    Baseline workflow process ID.
+@param timeout:
+    loop duration before to break.
+@param interval:
+    loop time interval.
+@return:
+    Response of the get process instance execution.
+'''
+def get_process_instance(orch, process_id, timeout=60, interval=5):
+    response = {}
+    global_timeout = time.time() + timeout
+    while True:
+        #get service instance execution status.
+        orch.get_process_instance(process_id)
+        response = json.loads(orch.content)
+        status = response.get('status').get('status')
+        #context.update(get_process_instance=status)
+        if status != constants.RUNNING or time.time() > global_timeout:
+            break
+        time.sleep(interval)
+
+    return response
 ####################################################
 #                                                  #
 #                MAIN CODE                         #
@@ -66,7 +96,8 @@ service_ext_ref = ''
 #Instantiate new Class_Map_Service_Mangement WF dedicated for the device_id.
 if not 'class_map_service_instance' in context:
     data = dict(device_id=device_ref)
-    response = orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
+    orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
+    response = json.loads(orch.content)
     context['response'] = response
     status = response.get('status').get('status')
     if status == constants.ENDED:
@@ -98,9 +129,13 @@ for class_map in class_map_list:
         #execute Class_Map_Management WF 
         orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
         response = json.loads(orch.content)
+        process_id = response.get('processId').get('id')
+        #get service process details.
+        response = get_process_instance(orch, process_id)
         status = response.get('status').get('status')
+        details = response.get('status').get('details')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service by reference operation is failed. More details are available in Static Routing Management with service instance external ref. ' + service_ext_ref, context, True)
+            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
             print(ret) 
 
 ret = MSA_API.process_content(constants.ENDED, 'Class Map deleted successfully to the device ' + device_ref, context, True)
