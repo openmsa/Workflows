@@ -88,9 +88,10 @@ is_acl_matched = False
 #ensure that all acl rules from context['acl'] dict are in response['acl']
 if response:
     if object_id in response.get(object_name):
-        input_acl_list = context.get('acl')
-        device_acls_dict = response.get(object_name).get(object_id).get('acl')
-        is_acl_matched = is_input_acl_matched_to_device_acl(input_acl_list, device_acls_dict)
+        is_acl_matched = True
+        #input_acl_list = context.get('acl')
+        #device_acls_dict = response.get(object_name).get(object_id).get('acl')
+        #is_acl_matched = is_input_acl_matched_to_device_acl(input_acl_list, device_acls_dict)
 
 #if response equals empty dictionary it means class map object is not exist in the device yet.
 if is_acl_matched != True:

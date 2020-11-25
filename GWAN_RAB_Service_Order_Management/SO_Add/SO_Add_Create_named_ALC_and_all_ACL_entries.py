@@ -133,10 +133,10 @@ for key, acl_list  in acl_dicts.items():
                     data_acl_dict['condition'] = get_config_param_val(context, acl, 'conditions')
                     data_acl_dict['protocol'] = get_config_param_val(context, acl, 'protocol')
                     data_acl_dict['src_address'] = get_config_param_val(context, acl, 'source_address')
-                    data_acl_dict['src_wildcard'] = get_config_param_val(context, acl, 'source_wildcardmask')
+                    data_acl_dict['src_wildcard'] = get_config_param_val(context, acl, 'source_wildcardmask', False)
                     data_acl_dict['src_port'] = get_config_param_val(context, acl, 'source_port', False)
                     data_acl_dict['dst_address'] = get_config_param_val(context, acl, 'destination_address')
-                    data_acl_dict['dst_wildcard'] = get_config_param_val(context, acl, 'destination_wildcardmask')
+                    data_acl_dict['dst_wildcard'] = get_config_param_val(context, acl, 'destination_wildcardmask', False)
                     data_acl_dict['dst_port'] = get_config_param_val(context, acl, 'destination_port', False)
 
                 if data_acl_dict:
