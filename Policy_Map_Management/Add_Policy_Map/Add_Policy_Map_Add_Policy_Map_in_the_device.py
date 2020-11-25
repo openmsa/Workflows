@@ -52,11 +52,6 @@ if response.get('wo_status') == constants.FAILED:
         print(ret)
 
 context['response'] = response.get('wo_newparams')
-#remove contextvariable 'policy_old'.
-if 'policy_old' in context:
-    context.pop('policy_old')
-#move the context variable 'policy' to 'policy_old', then avoir conflict during Delete prcoess execution.
-context['policy_old'] = context.pop('policy')
 
 ret = MSA_API.process_content(constants.ENDED, 'Add policy map operation is done successfully.', context, True)
 print(ret)
