@@ -28,6 +28,15 @@ dev_var.add('policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
+def is_order_op_success(response):
+    # check if response if not empty
+    if response:
+        if 'wo_status' in response:
+            #if status equals ENDED operation is success otherwise FAILED
+            if response.get('wo_status') == constants.ENDED:
+                return True  
+    return False
+
 #get device_id from context
 device_id = context['device_id'][3:]
 
@@ -37,16 +46,17 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'CREATE' # MS method corresponding on ADD Static route operation
 
-object_id = context['interface_name'] #MS input variable value
+interface_name = context['interface_name'] #MS input variable value
 direction = context['direction'] #MS input variable value
 policy_name = context['policy_name'] #MS input variable value
 
 #build MS the dictionary input object 
-config = dict(object_id=object_id, direction=direction, policy_map=policy_name)
+config = dict(object_id=interface_name, direction=direction, policy_map=policy_name)
   
 obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
 #MS XML file name
-ms_xml_filename = 'service_policy'
+#ms_xml_filename = 'service_policy'
+
 params = dict(service_policy=obj)
 context['ms_params'] = params
 
