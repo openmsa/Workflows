@@ -32,7 +32,7 @@
     <displayName>Provision microwave station</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
-    <task name="Provision_microwave_station_Check_microwave_station_availablility.py">
+    <task name="Provision_microwave_station_Check_microwave_station_availability.py">
       <processPath>/opt/fmc_repository/Process/Microwave_station_provisioning</processPath>
       <displayName>Check microwave station availablility</displayName>
     </task>
