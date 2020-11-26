@@ -23,7 +23,7 @@ $upgrade_stages       = $context['upgrade_stages'];
 ksort($upgrade_stages);
 //Grab current software stack
 $response = update_asynchronous_task_details($context, "Getting current software stack... ");
-if ($context['is_emulation'] === 'true') {
+if ($context['is_emulation'] === 'True') {
     $current_sw_stack = $context['current_sw_stack'];    
 } else {
     $current_sw_stack = get_current_sw_stack($device_id, $ms_software_inventory);

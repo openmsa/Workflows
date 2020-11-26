@@ -13,12 +13,12 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-  create_var_def('AwsDeviceId', 'Device');
-  create_var_def('deviceId', 'Device');
-  create_var_def('ImageId', 'String');
-  create_var_def('InstanceType', 'String');
-  create_var_def('security_group', 'String');
-  create_var_def('SubnetId', 'OBMFref');
+  create_var_def('AwsDeviceId');
+  create_var_def('deviceId');
+  create_var_def('ImageId');
+  create_var_def('InstanceType');
+  create_var_def('security_group');
+  create_var_def('SubnetId');
 }
 
 check_mandatory_param('ImageId');
@@ -77,6 +77,7 @@ try {
 	logToFile(debug_dump($res, "AWS response\n"));
 
 	$context["InstanceId"] = $res["Instances"][0]["InstanceId"];
+	$context["wf_instance_id_for_display"] = $context['SERVICEINSTANCEID']." - ".$context["InstanceId"] ;
 
 	$ec2Client->waitUntilInstanceRunning(array(
 		'InstanceIds' => array($context["InstanceId"])

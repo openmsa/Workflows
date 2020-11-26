@@ -2,9 +2,10 @@
 	"Cisco": {
 		"OUI": ["FACE38", "FACE39"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -47,9 +48,10 @@
 	"Intel": {
 		"OUI": ["FACE40", "A4BF01"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -92,9 +94,10 @@
 	"AMD": {
 		"OUI": ["00001A", "FACE41"],
 		"Default Credentials": {
-			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Username": "admin",
+			"Password": "admin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -135,71 +138,21 @@
 		}
 	},
 	"HPE": {
-		"OUI": ["9440C9", "FACE42"],
+		"OUI": ["9440C9", "9640C9"],
 		"Default Credentials": {
 			"Username": "ubiqube",
-			"Password": "4XDptRyt3nIo*"
+			"Password": "NewPassword123!"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
-				"ProcVirtualization": "Enabled",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Disabled",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+				"AdminEmail": "performance@test.test"
 			},
 			"Low-Latency": {
-				"ProcVirtualization": "Disable",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Disabled",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+				"AdminEmail": "low-latency@test.test"
 			},
 			"Energy-effency": {
-				"ProcVirtualization": "Enabled",
-				"IntelProcVtd": "Enabled",
-				"Sriov": "Enabled",
-				"ProcTurbo": "Enabled",
-				"EnergyEfficientTurbo": "Enable",
-				"ProcHyperthreading": "Disabled",
-				"DynamicPowerCapping": "Disabled",
-				"PowerRegulator": "StaticHighPerf",
-				"EnergyPerfBias": "MaxPerf",
-				"WorkloadProfile": "Custom",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePkgState": "NoState",
-				"MinProcIdlePower": "NoCStates",
-				"ThermalConfig": "MaxCooling",
-				"ThermalShutdown": "Enabled",
-				"FanFailPolicy": "Shutdown",
-				"ProcAes": "Enabled",
-				"AdminEmail": "test@ubiqube.com"
+                                "AdminEmail": "energy-efficiency@test.test"
 			}
 		}
 	},
@@ -207,8 +160,9 @@
 		"OUI": ["F8CAB8", "F8BC12", "F8B156", "F48E38", "F40270"],
 		"Default Credentials": {
 			"Username": "root",
-			"Password": "redfish"
+			"Password": "calvin"
 		},
+		"Interface": "REDFISH",
 		"BIOS profiles": {
 			"Performance": {
 				"ProcTurboMode": "Enabled",
@@ -228,6 +182,31 @@
 		},
 		"Miscellaneous parameters": {
 			"JobManager": true
+		}
+	},
+	"Lanner": {
+		"OUI": ["00900B"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "admin"
+		},
+		"Interface": "IPMI",
+		"BIOS profiles": {
+			"Performance": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			},
+			"Low-Latency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Enable"
+			},
+			"Energy-effency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			}
 		}
 	}
 }

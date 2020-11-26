@@ -1,0 +1,401 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="OID" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Tenant ID" name="params.tenant_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Client ID" name="params.client_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Client Secret" name="params.client_secret" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Subscription ID" name="params.subscription_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Resource Group" name="params.resource_group" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-cluster" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Location" name="params.location" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="westeurope" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Global</sections>
+      </sections>
+    </variable>
+    <variable displayName="Sec Group Name" name="params.sec_gr_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-sec-group" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Sec Group</sections>
+      </sections>
+    </variable>
+    <variable displayName="Rule Name" name="params.rule_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="ssh_22" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Sec Group</sections>
+      </sections>
+    </variable>
+    <variable displayName="HOST WHERE TO DEPLOY" name="params.proxy_host" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Proxy Type" name="params.proxy_type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="K8S MASTERS" name="params.k8s_master.0.host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Priority" name="params.priority" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="110" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Rule</sections>
+      </sections>
+    </variable>
+    <variable displayName="IP addr" name="params.permit_ip_addr" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Rule</sections>
+      </sections>
+    </variable>
+    <variable displayName="Protocol" name="params.permit_proto" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="TCP" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Rule</sections>
+      </sections>
+    </variable>
+    <variable displayName="Port" name="params.permit_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="22" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Rule</sections>
+      </sections>
+    </variable>
+    <variable displayName="Name" name="params.virt_net_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-internal-net" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Virtual Network</sections>
+      </sections>
+    </variable>
+    <variable displayName="Prefix" name="params.virt_net_ip_prefix" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="172.18.0.0/16" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Virtual Network</sections>
+      </sections>
+    </variable>
+    <variable displayName="Name" name="params.subnet_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="18" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-internal-subnet" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Subnet</sections>
+      </sections>
+    </variable>
+    <variable displayName="Prefix" name="params.subnet_ip_prefix" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="172.18.0.0/24" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Subnet</sections>
+      </sections>
+    </variable>
+    <variable displayName="Name" name="params.public_ip_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-public-ip" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Public IP Address</sections>
+      </sections>
+    </variable>
+    <variable displayName="FQDN" name="params.vm_label" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-node" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Public IP Address</sections>
+      </sections>
+    </variable>
+    <variable displayName="Name" name="params.net_iface_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-node" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>NIC</sections>
+      </sections>
+    </variable>
+    <variable displayName="Name" name="params.vm_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="23" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-node" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="vmSize" name="params.vmSize" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="24" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Standard_D2s_v3" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="sku" name="params.sku" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="18.04-LTS" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="offer" name="params.offer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="26" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="UbuntuServer" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="publisher" name="params.publisher" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="27" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Canonical" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="version" name="params.version" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="28" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="latest" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="Username" name="params.vm_username" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="29" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="Password" name="params.vm_secret" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="30" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="VM qty" name="params.vm_qty" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="39" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="4" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="Master qty" name="params.master_qty" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="40" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="2" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>VM info</sections>
+      </sections>
+    </variable>
+    <variable displayName="SEC GR NAME" name="params.new_sec_gr_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="31" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="k8s-sec-group" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="SEC RULE NAME" name="params.new_sec_rule_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="32" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="IP PREFIX" name="params.new_ip_prefix" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="33" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="MSA fqdn" name="params.msa_fqdn" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="34" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA info</sections>
+      </sections>
+    </variable>
+    <variable displayName="MSA user" name="params.msa_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="35" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA info</sections>
+      </sections>
+    </variable>
+    <variable displayName="MSA pass" name="params.msa_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="36" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA info</sections>
+      </sections>
+    </variable>
+    <variable displayName="Action" name="params.sec_rule_action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="37" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="add" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="ADD">add</values>
+        <values displayValue="DEL">del</values>
+      </values>
+    </variable>
+    <variable displayName="WF NAME" name="params.wf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="38" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Scale Level" name="params.scale_lvl" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="41" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="1" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VM role" name="params.scale_vm_role" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="42" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="worker" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="worker">worker</values>
+        <values displayValue="master">master</values>
+      </values>
+    </variable>
+    <variable displayName="DPL SET for k8s" name="params.dpl_k8s" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="43" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA DPL</sections>
+      </sections>
+    </variable>
+    <variable displayName="DPL SET linux" name="params.dpl_linux" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="44" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA DPL</sections>
+      </sections>
+    </variable>
+    <variable displayName="Jira FQDN" name="params.jira_fqdn" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="45" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Jira</sections>
+      </sections>
+    </variable>
+    <variable displayName="JIra User" name="params.jira_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="46" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Jira</sections>
+      </sections>
+    </variable>
+    <variable displayName="Project ID" name="params.jira_project_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="48" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Jira</sections>
+      </sections>
+    </variable>
+    <variable displayName="Jira Password" name="params.jira_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="47" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Jira</sections>
+      </sections>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/azure-k8s-management-scale/_1__K8S_CLUSTER_CONFIGURATION">
+    <displayName>(1) K8S CLUSTER CONFIGURATION</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="_1__K8S_CLUSTER_CONFIGURATION_CREATE_WORKFLOW_INSTANCE.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CREATE WORKFLOW INSTANCE</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_2__DEPLOY_AZURE_ENVIRONMENT">
+    <displayName>(2) DEPLOY AZURE ENVIRONMENT</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_NETWORK_SECURITY_GROUP.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>NETWORK SECURITY GROUP</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_SECURITY_RULES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>SECURITY RULES</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_VIRTUAL_NETWORK.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>VIRTUAL NETWORK</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_SUBNET.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>SUBNET</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_PUBLIC_IP_ADDRESSES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>PUBLIC IP ADDRESSES</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_NICs.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>NICs</displayName>
+    </task>
+    <task name="_2__DEPLOY_AZURE_ENVIRONMENT_VMs.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>VMs</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_x__DELETE_WF_INSTANCE">
+    <displayName>(x) DELETE WF INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="_x__DELETE_WF_INSTANCE_DELETE.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>DELETE</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_3__FETCH_AZURE_VM_INFO">
+    <displayName>(3) FETCH AZURE VM INFO</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="_3__FETCH_AZURE_VM_INFO_GET_IP_ADDRESSES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>GET IP ADDRESSES</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_4__REGISTER_K8S_VMs">
+    <displayName>(4) REGISTER K8S VMs</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="_4__REGISTER_K8S_VMs_CREATE_VMs_in_MSA.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CREATE VMs in MSA</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_5__DEPLOY_K8S_CLUSTER">
+    <displayName>(5) DEPLOY K8S CLUSTER</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="_5__DEPLOY_K8S_CLUSTER_CONFIGURATION.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CONFIGURATION</displayName>
+    </task>
+    <task name="_5__DEPLOY_K8S_CLUSTER_LOADBALANCER.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>LOADBALANCER</displayName>
+    </task>
+    <task name="_5__DEPLOY_K8S_CLUSTER_K8S_INSTALLATION.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>K8S INSTALLATION</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_6__SETUP_K8S">
+    <displayName>(6) SETUP K8S</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="_6__SETUP_K8S_MASTER_NODES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>MASTER NODES</displayName>
+    </task>
+    <task name="_6__SETUP_K8S_WORKER_NODES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>WORKER NODES</displayName>
+    </task>
+    <task name="_6__SETUP_K8S_API.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>API</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/_-__CLEANUP">
+    <displayName>(-) CLEANUP</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="_-__CLEANUP_DELETE_MEs.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>DELETE MEs</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/____UPDATE_NETWORK_SEC_GR">
+    <displayName>(!) UPDATE NETWORK SEC GR</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="____UPDATE_NETWORK_SEC_GR_SECURITY_GROUP.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>SECURITY GROUP</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/__--___SCALE">
+    <displayName>&lt;&lt;-->> SCALE</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="__--___SCALE_PREPARE_DATA.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>PREPARE DATA</displayName>
+    </task>
+    <task name="__--___SCALE_CLEANUP.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CLEANUP</displayName>
+    </task>
+    <task name="__--___SCALE_PUBLIC_IP_ADDRESS.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>PUBLIC IP ADDRESS</displayName>
+    </task>
+    <task name="__--___SCALE_NICs.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>NICs</displayName>
+    </task>
+    <task name="__--___SCALE_VMs.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>VMs</displayName>
+    </task>
+    <task name="__--___SCALE_GET_IP_ADDRESSES.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>GET IP ADDRESSES</displayName>
+    </task>
+    <task name="__--___SCALE_CREATE_VMs_in_MSA.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CREATE VMs in MSA</displayName>
+    </task>
+    <task name="__--___SCALE_K8S_INSTALLATION.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>K8S INSTALLATION</displayName>
+    </task>
+    <task name="__--___SCALE_MASTERS.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>MASTERS</displayName>
+    </task>
+    <task name="__--___SCALE_WORKERS.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>WORKERS</displayName>
+    </task>
+  </process>
+  <process name="Process/azure-k8s-management-scale/______JIRA_TICKET">
+    <displayName>(...) JIRA TICKET</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="______JIRA_TICKET_CREATE_TICKET.py">
+      <processPath>/opt/fmc_repository/Process/azure-k8s-management-scale</processPath>
+      <displayName>CREATE TICKET</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>azure-k8s-management-scale</name>
+    <group/>
+  </information>
+</ObjectDefinition>

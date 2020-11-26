@@ -283,7 +283,8 @@ for interface, connection in ce_connections.items():
                                                          'status':    'active',
                                                          'tenant':    customer_name,
                                                          'vrf':       customer_vrf,
-                                                         'interface': interface_tuple[1]
+                                                         'interface': interface_tuple[1],
+                                                         'tags':      {'0': {'tag': 'site:{}'.format(site)}}
                                                          }
                                     }
                     }
@@ -313,7 +314,8 @@ for prefix_tuple in site_prefix_list:
                                                             'status':    'active',
                                                             'tenant':    customer_name,
                                                             'vrf':       customer_vrf,
-                                                            'interface': ce_internal_interface_name
+                                                            'interface': ce_internal_interface_name,
+                                                            'tags':      {'0': {'tag': 'site:{}'.format(site)}}
                                                             }
                                 }
                 }

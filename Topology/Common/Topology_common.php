@@ -199,17 +199,10 @@ function topology_update_view() {
 function processDevice($device_id, $name, $device_nature, $status) {
 	logToFile("*** processDevice <$name> ID: $device_id STATUS: $status");
 	try {
-		//$status = getStatus($device_id);
-		if($status == "UP") {
-			calculateDeviceTopology($device_id, $name, $device_nature);
+		if($status == "OK") {
+			calculateDeviceTopology($device_id, $name, $device_nature, $status);
 		} else {
-			if($status == "UNREACHABLE") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_ERROR.svg");
-			} else if($status == "NEVERREACHED") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_NEVERREACHED.svg");
-			} else if($status == "CRITICAL") {
-				createTopology($device_id, $name, $device_nature, "router", "style/topology/img/router_CRITICAL.svg");
-			}
+			createTopology($device_id, $name, $device_nature, "router", "", $status);
 		}
 	} catch (Exception $e) {
 		logTofile(debug_dump($e, "************** processDevice ERROR **************"));
@@ -221,11 +214,19 @@ function processDevice($device_id, $name, $device_nature, $status) {
 function getStatus($device_id) {
 	$info = json_decode(_device_get_status($device_id), true);
 	$status = $info ["wo_newparams"];
-	
+	logToFile("*** getStatus <$device_id> => $status");
+
 	if (empty($status) || $status == "") {
 		return "Managed Entity with id " . $device_id . " was not found";
 	} else {
-		return $status;
+		if ($status == "UP") {
+			return "OK";
+		} else if ($status == "UNREACHABLE") {
+			return "ERROR";
+		} else if ($status == "CRITICAL") {
+			return "CRITICAL";
+		}
+		return "NEVERREACHED";
 	}
 }
 
