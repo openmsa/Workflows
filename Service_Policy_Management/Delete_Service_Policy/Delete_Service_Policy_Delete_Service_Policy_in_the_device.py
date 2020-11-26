@@ -24,16 +24,18 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'DELETE' # MS method corresponding on ADD Static route operation
 
-object_id = context['interface_name'] #MS input variable value
+interface_name = context['interface_name'] #MS input variable value
 direction = context['direction'] #MS input variable value
 policy_name = context['policy_name'] #MS input variable value
 
 #build MS the dictionary input object 
-config = dict(object_id=object_id, direction=direction, policy_map=policy_name)
+object_id=interface_name
+config = dict(object_id=interface_name, direction=direction, policy_map=policy_name)
   
 obj = {object_id:config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
 #MS XML file name
-ms_xml_filename = 'service_policy'
+#ms_xml_filename = 'service_policy'
+
 params = dict(service_policy=obj)
 context['ms_params'] = params
 

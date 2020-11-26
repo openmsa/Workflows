@@ -40,6 +40,10 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
       <displayName>Ensure Service Policy exist in the device</displayName>
     </task>
+    <task name="Check_Interface_Is_Down_Device.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Delete_Service_Policy</processPath>
+      <displayName>Check that the interface is down</displayName>
+    </task>
     <task name="Delete_Service_Policy_Delete_Service_Policy_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Delete_Service_Policy</processPath>
       <displayName>Delete Service Policy in the device</displayName>
