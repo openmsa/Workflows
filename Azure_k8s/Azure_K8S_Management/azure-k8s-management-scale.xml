@@ -213,7 +213,7 @@
     </variable>
   </variables>
   <example/>
-  <process name="Process/Azure_k8s/Azure_K8S_Management/azure-k8s-management-scale/_1__K8S_CLUSTER_CONFIGURATION">
+  <process name="Process/azure-k8s-management-scale/_1__K8S_CLUSTER_CONFIGURATION">
     <displayName>(1) K8S CLUSTER CONFIGURATION</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
