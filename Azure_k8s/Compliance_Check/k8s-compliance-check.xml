@@ -10,7 +10,7 @@
     <type>CREATE</type>
     <visibility>0</visibility>
     <task name="CREATE_COMPLIANCE_CHECK_SERVICE_INSTANCE.py">
-      <processPath>/opt/fmc_repository/Process/k8s-compliance-check</processPath>
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
       <displayName>SERVICE INSTANCE</displayName>
     </task>
   </process>
@@ -19,7 +19,7 @@
     <type>UPDATE</type>
     <visibility>0</visibility>
     <task name="UPDATE_CHECK_STATUS_PROBE.py">
-      <processPath>/opt/fmc_repository/Process/k8s-compliance-check</processPath>
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
       <displayName>PROBE</displayName>
     </task>
   </process>
@@ -28,7 +28,7 @@
     <type>DELETE</type>
     <visibility>0</visibility>
     <task name="DELETE_SERVICE_INSTANCE_CLEANUP.py">
-      <processPath>/opt/fmc_repository/Process/k8s-compliance-check</processPath>
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
       <displayName>CLEANUP</displayName>
     </task>
   </process>
