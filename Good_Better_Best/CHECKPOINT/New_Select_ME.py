@@ -11,7 +11,7 @@ dev_var.add('profile', var_type='String')
 
 context = Variables.task_call(dev_var)
 
-context['service_id_display']=f'{context["SERVICEINSTANCEID"]} - Firewall {context["device"]}';
+context['service_id_display']=f'{context["SERVICEINSTANCEID"]}';
 
 # read the ID of the selected managed entity
 device_id = context['device']
@@ -20,7 +20,7 @@ ip_address = context['ip_address']
 profile = context['profile']
 
 # extract the database ID
-devicelongid = device_id[-3:]
+devicelongid = device_id[3:]
 
 # build the Microservice JSON params for the CREATE
 #{"Gateway":{"undefined":{"name":"hgu001","ipv4_address":"1.1.1.1","firewall":true,"vpn":true}}}
@@ -95,5 +95,7 @@ else:
                                   f'Gateway Creation failed \
                                   - {order.content}',
                                   context, True)
+
+context['service_id_display']=f'{context["SERVICEINSTANCEID"]} - Firewall {context["device"]}';
 
 print(ret)

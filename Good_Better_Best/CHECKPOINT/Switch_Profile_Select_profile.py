@@ -15,7 +15,7 @@ object_id = context['gateway']
 profile = context['profile']
 
 # extract the database ID
-devicelongid = device_id[-3:]
+devicelongid = device_id[3:]
 
 # build the Microservice JSON params for the CREATE
 #{"Gateway":{"undefined":{"name":"hgu001","ipv4_address":"1.1.1.1","firewall":true,"vpn":true}}}
