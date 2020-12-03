@@ -69,11 +69,15 @@ if response:
       if backup_status == "OK":
         ret = MSA_API.process_content(constants.ENDED, 'Device "' + device_id + '" backup done, status '+backup_status, context, True)
         print(ret)
-  backup_response= ''
-  if 'message' in response:
-    backup_response=response.get('message')
-  ret = MSA_API.process_content(constants.FAILED, 'Backup failed on device "' + device_id + '"' + ',  backup_start='+ backup_start+ ', backup_response="'+ str(backup_response) +'"', context, True)
-  print(ret)
+#  backup_response= ''
+#  if 'message' in response:
+#    backup_response=response.get('message')
+#  ret = MSA_API.process_content(constants.FAILED, 'Backup failed on device "' + device_id + '"' + ',  backup_start='+ backup_start+ ', backup_response="'+ str(backup_response) +'"', context, True)
+#  print(ret)
 
-ret = MSA_API.process_content(constants.FAILED, 'Backup failed on device "' + device_id + '"', context, True)
+#ret = MSA_API.process_content(constants.FAILED, 'Backup failed on device "' + device_id + '"', context, True)
+#print(ret)
+
+ret = MSA_API.process_content(constants.FAILED, 'Backup started on device "' + device_id + '", TODO get the backup_id', context, True)
 print(ret)
+
