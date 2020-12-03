@@ -1,0 +1,45 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="OID" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="K8S API" name="params.k8s_api" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="wf_name" name="params.wf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/k8s-compliance-check/CREATE_COMPLIANCE_CHECK">
+    <displayName>CREATE COMPLIANCE CHECK</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="CREATE_COMPLIANCE_CHECK_SERVICE_INSTANCE.py">
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
+      <displayName>SERVICE INSTANCE</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-compliance-check/UPDATE_CHECK_STATUS">
+    <displayName>UPDATE CHECK STATUS</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="UPDATE_CHECK_STATUS_PROBE.py">
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
+      <displayName>PROBE</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-compliance-check/DELETE_SERVICE_INSTANCE">
+    <displayName>DELETE SERVICE INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="DELETE_SERVICE_INSTANCE_CLEANUP.py">
+      <processPath>/opt/fmc_repository/Process/Azure_k8s/Compliance_Check/</processPath>
+      <displayName>CLEANUP</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>wf_name</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>k8s-compliance-check</name>
+    <group>Azure|k8s</group>
+  </information>
+</ObjectDefinition>
