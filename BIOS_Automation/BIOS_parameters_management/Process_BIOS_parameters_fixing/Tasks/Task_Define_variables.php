@@ -15,7 +15,6 @@ function list_args()
   create_var_def('server_bios_profile', 'String');
   create_var_def('server_port', 'Integer');
   create_var_def('server_device', 'Device');
-  create_var_def('server_vendor', 'String');
   
 }
 
@@ -35,9 +34,6 @@ if(isset($parameters)) {
     if (isset($parameters['server_bios_profile'])) {
       $context['server_bios_profile'] = $parameters['server_bios_profile'];
     }
-    if (isset($parameters['server_vendor'])) {
-      $context['server_vendor'] = $parameters['server_vendor'];
-    }
 }
 
 
@@ -47,7 +43,8 @@ if ($context['server_device'] === 'NULL') {
 	check_mandatory_param('server_port');
 } else {
     check_mandatory_param('server_device');
-    check_mandatory_param('server_vendor');
+    preg_match("/\S*?(?<device_id>\d+?)$/", $context['server_device'], $matches);
+    $context['server_device'] = $matches['device_id'];
   
 }
 if (isset($context['server_bios_profile']) === False) {
@@ -78,10 +75,12 @@ if ($context['server_device'] === 'NULL') {
 	$vendor_array = json_decode(file_get_contents($server_profiles_file_path), True);
 	while ((list($vendor, $properties) = each($vendor_array)) and ($context['server_vendor'] == 'UNKNOWN')) {
 	  if (in_array($mac_oui, $properties['OUI'])) {
-	    $context['server_vendor'] = $vendor;
-	    $context['username'] = $properties['Default Credentials']['Username'];
-	    $context['password'] = $properties['Default Credentials']['Password'];
-        $context['mgmt_interface'] = $properties['Interface'];
+	    $context['server_vendor']          = $vendor;
+	    $context['username']               = $properties['Default Credentials']['Username'];
+	    $context['password']               = $properties['Default Credentials']['Password'];
+        $context['server_manufacturer_id'] = $properties['MSA specific']['manufacture_id'];
+        $context['server_model_id']        = $properties['MSA specific']['model_id'];
+        $context['mgmt_interface']         = $properties['MSA specific']['Interface'];
 	    foreach ($properties['BIOS profiles'][$server_bios_profile] as $key => $value) {
 	      $context['bios_parameters_array'][$key] = array("Required Value" => $value,
 	                                                      "Original Value" => 'NULL',
@@ -135,17 +134,24 @@ if ($context['server_device'] === 'NULL') {
 	  task_error("Checking variables and identifying server vendor... the server hasn't been identivied correctly. The task is failed.");
 	}
 } else {
-  	//Determine server vendor based on MAC address and fill in bios_parameters_array
-	$response = update_asynchronous_task_details($context, "Identify avaliable profiles for vendor ".$context['server_vendor']."... ");
+  //Identify server vendor
+  $server_details = json_decode(_device_read_by_id($context['server_device']), True)['wo_newparams'];
+  $context['server_manufacturer_id'] = $server_details['manufacturerId'];
+  $context['server_model_id'] = $server_details['modelId'];
+  
+
+
+	$response = update_asynchronous_task_details($context, "Identify server vendor... ");
 	
 	$vendor_array = json_decode(file_get_contents($server_profiles_file_path), True);
 	while ((list($vendor, $properties) = each($vendor_array)) and !$context['bios_parameters_array']) {
-	  if ($vendor === $context['server_vendor']) {
-        $context['mgmt_interface'] = $properties['Interface'];
+	  if ($context['server_manufacturer_id'] == $properties['MSA specific']['manufacture_id'] and $context['server_model_id'] == $properties['MSA specific']['model_id']) {
+      $context['mgmt_interface'] = $properties['MSA specific']['Interface'];
+      $context['server_vendor']  = $vendor;
 	    foreach ($properties['BIOS profiles'][$server_bios_profile] as $key => $value) {
 	      $context['bios_parameters_array'][$key] = array("Required Value" => $value,
 	                                                      "Original Value" => 'NULL',
-                                                          "Object ID" 	   => 'NULL',
+                                                        "Object ID" 	   => 'NULL',
 	                                                      "was_it_changed" => 'false'
 	                                                    );
 	    }
@@ -186,7 +192,7 @@ if ($context['server_device'] === 'NULL') {
                                         	  );
         }
     
-  	$response = update_asynchronous_task_details($context, "Identify avaliable profiles for vendor ".$context['server_vendor']."... OK");
+  	$response = update_asynchronous_task_details($context, "Identify server vendor...  ".$context['server_vendor']."... OK");
     sleep(3);
   	task_success('Server is already provisioned. Activation is not needed');
 }
