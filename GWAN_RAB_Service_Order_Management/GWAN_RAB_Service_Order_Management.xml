@@ -23,12 +23,13 @@
       </sections>
     </variable>
     <variable displayName="Device Name" name="params.device_external_ref" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Parsed Configuration" name="params.parsed_config" startIncrement="0" type="Link" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate">
     <displayName>SO Instantiate</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="SO_Instantiate_Spreadsheet_List_Acquisition.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate</processPath>
       <displayName>Spreadsheet List Acquisition</displayName>
@@ -37,7 +38,7 @@
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add">
     <displayName>SO Add</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="SO_Add_Read_Service_Order_Spreadsheet.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
@@ -78,7 +79,7 @@
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete">
     <displayName>SO Delete</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="SO_Delete_Read_Service_Order_Spreadsheet.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
@@ -119,7 +120,7 @@
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate">
     <displayName>SO Terminate</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
   </process>
   <information>
     <icon/>
@@ -127,7 +128,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Service Order Management</name>
     <group>GWAN RAB | Master WF</group>
   </information>
