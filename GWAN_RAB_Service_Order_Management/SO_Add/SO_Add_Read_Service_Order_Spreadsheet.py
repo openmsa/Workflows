@@ -20,6 +20,51 @@ context = Variables.task_call(dev_var)
 #                FUNCTIONS                         #
 #                                                  #
 ####################################################
+'''
+Remove dictionary element if its key is empty or instance of integer.
+
+@param list: List
+    The list to be cleaned up.
+'''
+def common_clean_up_list(list):
+    for d in list:
+        d_copy = d.copy()
+        for key in d_copy:
+            try:
+                if not key:
+                    del d[key]
+                elif isinstance(int(key), int):
+                    del d[key]
+            except ValueError:
+                pass
+    return list
+'''
+Remove dictionary element if its key is empty or instance of integer.
+This function is dedicated for StaticRouting, Class-Map and Service Policy configurations.
+
+@param list: List
+    The list to be cleaned up.
+@return: List
+    The cleaned up dictionary.
+'''
+def clean_up_list(list):
+    return common_clean_up_list(list)
+
+'''
+Remove dictionary element if its key is empty or instance of integer.
+This function is dedicated for ACL and Policy-Map configurations.
+
+@param dict:
+    The dictionary containing the lists to be cleaned up.
+@return: List
+    The cleaned up dictionary.
+
+'''
+def clean_up_dict(dict):
+    for key, list  in dict.items():
+        common_clean_up_list(list)
+
+    return dict
 
 '''
 Get rows indexes by value in specific column.
@@ -235,7 +280,7 @@ for sheet_name in sheet_names:
                 if sheet_name == STATIC_ROUTING or sheet_name == SERVICE_POLICY or sheet_name == CLASS_MAP:
                     config_list = static_routing_replace_item_key_by_sheet_header_name(config_row_list, tab_header_row_index_list)
                     # add staticRouting or ServicePolicy or ClassMap configurations in WF service context DB.
-                    context[sheet_name] = config_list
+                    context[sheet_name] = clean_up_list(config_list)
                 #                 
                 elif search(ACL, sheet_name):
                     acl_rules_list = acl_replace_item_key_by_sheet_header_name(config_row_list, tab_header_row_index_list)
@@ -245,8 +290,8 @@ for sheet_name in sheet_names:
                     policy_map_list = policy_map_replace_item_key_by_sheet_header_name(config_row_list, tab_header_row_index_list)
                     policy_map_dict.update({sheet_name: policy_map_list})
 
-context['ACL'] = acl_rules_dict
-context['policyMaps'] = policy_map_dict
+context['ACL'] = clean_up_dict(acl_rules_dict)
+context['policyMaps'] = clean_up_dict(policy_map_dict)
 context['spreadsheet_filename'] = spreadsheet_filename
 
 ret = MSA_API.process_content(constants.ENDED, 'Spreadsheet file is parsed successfully.', context, True)
