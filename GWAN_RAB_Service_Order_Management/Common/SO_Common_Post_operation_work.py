@@ -48,6 +48,7 @@ service_instance_name = 'backup_configuration_service_instance'
 #create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
 
 #execute do backup of the device running-configuration service process.
+details = ''
 #details = execute_do_backup_config_process(context, orch, SERVICE_NAME, ADD_PROCESS_NAME, service_instance_name)
 
 ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully: ' + details, context, True)
