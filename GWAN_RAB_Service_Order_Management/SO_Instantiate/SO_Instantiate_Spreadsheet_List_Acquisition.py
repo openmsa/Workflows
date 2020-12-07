@@ -63,7 +63,7 @@ spreadsheet_list = glob.glob(pattern)
 
 # check if at least one spreadsheet file is available. If not exit and return failed.
 if not spreadsheet_list:
-    ret = MSA_API.process_content(FAILED, 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
     print(ret)	
 
 #spreadsheet_list_restructured = [dict(spreadsheet=st, is_selected='false') for st in spreadsheet_list]
