@@ -43,7 +43,7 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
     </task>
-    <task name="SO_Common_Pre-operation_work.py">
+    <task name="SO_Common_Pre_operation_work.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Pre-operation work</displayName>
     </task>
@@ -71,7 +71,7 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Create the static route</displayName>
     </task>
-    <task name="SO_Common_Post-operation_work.py">
+    <task name="SO_Common_Post_operation_work.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Post-operation work</displayName>
     </task>
@@ -84,7 +84,7 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
     </task>
-    <task name="SO_Common_Pre-operation_work.py">
+    <task name="SO_Common_Pre_operation_work.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Pre-operation work</displayName>
     </task>
@@ -112,7 +112,7 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Add the service policy to the interface</displayName>
     </task>
-    <task name="SO_Common_Post-operation_work.py">
+    <task name="SO_Common_Post_operation_work.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Post-operation work</displayName>
     </task>
