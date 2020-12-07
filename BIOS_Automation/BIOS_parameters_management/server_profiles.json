@@ -5,7 +5,11 @@
 			"Username": "admin",
 			"Password": "admin"
 		},
-		"Interface": "REDFISH",
+                "MSA specific": {
+                	"Interface": "REDFISH",
+			"manufacture_id": 1,
+			"model_id": 12345678
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -51,7 +55,11 @@
 			"Username": "admin",
 			"Password": "admin"
 		},
-		"Interface": "REDFISH",
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 2120120,
+                        "model_id": 21201201
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -97,7 +105,11 @@
 			"Username": "admin",
 			"Password": "admin"
 		},
-		"Interface": "REDFISH",
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 2314123,
+                        "model_id": 73524682
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"ProcessorVmxEnable": 1,
@@ -143,7 +155,11 @@
 			"Username": "ubiqube",
 			"Password": "NewPassword123!"
 		},
-		"Interface": "REDFISH",
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 17071301,
+                        "model_id": 17171399
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"AdminEmail": "performance@test.test"
@@ -152,7 +168,7 @@
 				"AdminEmail": "low-latency@test.test"
 			},
 			"Energy-effency": {
-                                "AdminEmail": "energy-efficiency@test.test"
+                                "AdminEmail": "energy-effency@test.test"
 			}
 		}
 	},
@@ -160,9 +176,13 @@
 		"OUI": ["F8CAB8", "F8BC12", "F8B156", "F48E38", "F40270"],
 		"Default Credentials": {
 			"Username": "root",
-			"Password": "calvin"
+			"Password": "redfish"
 		},
-		"Interface": "REDFISH",
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 1120120,
+                        "model_id": 11201201
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"ProcTurboMode": "Enabled",
@@ -188,9 +208,13 @@
 		"OUI": ["00900B"],
 		"Default Credentials": {
 			"Username": "admin",
-			"Password": "admin"
+			"Password": "Ub!lanner"
 		},
-		"Interface": "IPMI",
+                "MSA specific": {
+                        "Interface": "IPMI",
+                        "manufacture_id": 14020602,
+                        "model_id": 14020602
+                },
 		"BIOS profiles": {
 			"Performance": {
 				"VMX": "Disable",
