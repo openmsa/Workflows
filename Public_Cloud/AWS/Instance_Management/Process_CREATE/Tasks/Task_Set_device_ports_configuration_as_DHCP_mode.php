@@ -13,7 +13,7 @@ $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
 	
-if (isset($context['NetworkInterfaces'])) {
+if (isset($context['NetworkInterfaces']) && sizeof($context['NetworkInterfaces']) > 0) {
 $device_id = substr($context['device_id'], 3);
 $netInterfaceCount =  count($context['NetworkInterfaces']);
 
