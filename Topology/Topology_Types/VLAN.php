@@ -31,7 +31,7 @@ function calculateDeviceTopology($deviceId, $name, $device_nature, $status) {
 			} else {
 				createTopologyNetwork($vlan_id, $vlan_id, "network", "");
 			}
-			$context ['Nodes'] [$nodePlace] ["link"] [] ["id"] = $vlan_id;
+			$context ['Nodes'] [$nodePlace] ["links"] [] = $vlan_id;
 		}
 		
 		logTofile(debug_dump($context ['Nodes'], "*** calculateDeviceTopology Nodes ***\n"));
