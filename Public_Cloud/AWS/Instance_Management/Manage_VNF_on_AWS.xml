@@ -1,6 +1,6 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes/>
       </sdTypes>
@@ -148,16 +148,6 @@
       <processPath/>
       <displayName>Manage VNFCi network interfaces</displayName>
     </task>
-    <!-- bug fix http://jira.ubiqube.com/browse/MARK-167
-    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_Reboot_VNFC/Tasks/Task_Reboot_VNFC.php">
-      <processPath/>
-      <displayName>Restart VNFCi</displayName>
-    </task>
-    <task name="/opt/fmc_repository/Process/Public_Cloud/AWS/Instance_Management/Process_CREATE/Tasks/Task_Wait_for_device_Ping.php">
-      <processPath/>
-      <displayName>Wait for instance</displayName>
-    </task>
-    -->
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_do_initial_provisioning.php">
       <processPath/>
       <displayName>Do MSA device initial provisioning</displayName>
