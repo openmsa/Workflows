@@ -212,8 +212,8 @@
 		},
                 "MSA specific": {
                         "Interface": "IPMI",
-                        "manufacture_id": 14020602,
-                        "model_id": 14020602
+                        "manufacture_id": 20120801,
+                        "model_id": 20120801
                 },
 		"BIOS profiles": {
 			"Performance": {
