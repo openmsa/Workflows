@@ -49,7 +49,7 @@ if status == constants.FAILED:
 
 return_message = response.get('message')
 # TO COMMENT LED 
-return_message ="[In] Default.  [Out] Default.";
+return_message ="[In] Default.  [Out] Default."
 # TO COMMENT LED 
 
 # matchObj = re.match( r'(.*) are (.*?) .*', line, re.M|re.I)
