@@ -26,7 +26,7 @@
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure that the interface is down</displayName>
+      <displayName>Ensure interface is down</displayName>
     </task>
     <task name="Check_Qos_Is_Not_Apply_To_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -38,7 +38,7 @@
     </task>
     <task name="Common_Ensure_Service_Policy_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure that the Service Policy exist in the device</displayName>
+      <displayName>Ensure Service Policy exist in the device</displayName>
     </task>
     <task name="Check_Qos_Is_Apply_To_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -51,11 +51,11 @@
     <visibility>5</visibility>
     <task name="Common_Ensure_Service_Policy_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure that the Service Policy exist in the device</displayName>
+      <displayName>Ensure Service Policy exist in the device</displayName>
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure that the interface is down</displayName>
+      <displayName>Ensure interface is down</displayName>
     </task>
     <task name="Check_Qos_Is_Apply_To_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -67,7 +67,7 @@
     </task>
     <task name="Common_Ensure_Service_Policy_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure that the Service Policy do not exist in the device</displayName>
+      <displayName>Ensure Service Policy do not exist in the device</displayName>
     </task>
     <task name="Check_Qos_Is_Not_Apply_To_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
