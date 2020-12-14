@@ -62,7 +62,7 @@ if response:
     status = response.get('status')
     context.update(device_backup_status_end=response)
     if status == constants.FAILED:
-      ret = MSA_API.process_content(constants.FAILED, 'Device backup failed.', context, True)
+      ret = MSA_API.process_content(constants.FAILED, 'Device backup failed. ', context, True)
       print(ret)
     backup_revisionId = response.get('revisionId')
     context.update(backup_revisionId=backup_revisionId)
