@@ -1,0 +1,104 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Object ID" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Subtenant" name="params.subtenant" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="User Namespace" name="params.user_namespace" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="user-namespace" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Namespaces</sections>
+      </sections>
+    </variable>
+    <variable displayName="Service Namespace" name="params.service_namespace" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="network-metrics" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Namespaces</sections>
+      </sections>
+    </variable>
+    <variable displayName="Packet Size, bytes" name="params.pkt_size" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="50" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Probes</sections>
+      </sections>
+    </variable>
+    <variable displayName="Packet Count" name="params.pkt_count" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="5" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Probes</sections>
+      </sections>
+    </variable>
+    <variable displayName="Application Name" name="params.app_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Application</sections>
+      </sections>
+      <values>
+        <values displayValue="nginx">nginx</values>
+        <values displayValue="alpine">alpine</values>
+        <values displayValue="haproxy">haproxy</values>
+      </values>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/k8s-workload-placement/CREATE_SERVICE">
+    <displayName>CREATE SERVICE</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="CREATE_SERVICE_GET_DATA.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>GET DATA</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-workload-placement/PROBATION_NETWORK">
+    <displayName>PROBATION NETWORK</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="PROBATION_NETWORK_COMPOSE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>COMPOSE</displayName>
+    </task>
+    <task name="PROBATION_NETWORK_CHECK_NAMESPACE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>CHECK NAMESPACE</displayName>
+    </task>
+    <task name="PROBATION_NETWORK_DEPLOY.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>DEPLOY</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-workload-placement/DEPLOY_APP">
+    <displayName>DEPLOY APP</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="DEPLOY_APP_ANALYZE_LOG.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>ANALYZE LOG</displayName>
+    </task>
+    <task name="DEPLOY_APP_DEPLOY_USER_APP.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>DEPLOY USER APP</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-workload-placement/CLEANUP">
+    <displayName>CLEANUP</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="CLEANUP_REMOVE_PODS_AND_APPS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>REMOVE PODS AND APPS</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-workload-placement/DELETE_WF_INSTANCE">
+    <displayName>DELETE WF INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="DELETE_WF_INSTANCE_REMOVE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
+      <displayName>REMOVE</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>k8s-workload-placement</name>
+    <group>k8s|MEC</group>
+  </information>
+</ObjectDefinition>
