@@ -8,7 +8,6 @@ from msa_sdk.device import Device
 from builtins import isinstance
 
 dev_var = Variables()
-dev_var.add('policy_map_name', var_type='String')
 context = Variables.task_call(dev_var)
 
 def self_end_of_backup(device_obj, timeout=60, interval=5):
