@@ -7,7 +7,6 @@ dev_var = Variables()
 dev_var.add('interface_name', var_type='String')
 dev_var.add('direction', var_type='String')
 dev_var.add('policy_name', var_type='String')
-dev_var.add('vlan_id', var_type='String')
 
 context = Variables.task_call(dev_var)
 
