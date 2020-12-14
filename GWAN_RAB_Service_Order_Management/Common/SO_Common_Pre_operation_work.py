@@ -2,6 +2,7 @@ import json
 import os
 import errno
 import time
+import re
 from json2html import *
 from msa_sdk import constants
 from msa_sdk.orchestration import Orchestration
@@ -190,11 +191,17 @@ ADD_PROCESS_NAME = 'Backup_Configuration_Management'
 service_instance_name = 'backup_configuration_service_instance'
 
 #instantiate Configuration Backup Management WF.
-#create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
+create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
 
 #execute do backup of the device running-configuration service process.
-details = ''
-#details = execute_do_backup_config_process(context, orch, SERVICE_NAME, ADD_PROCESS_NAME, service_instance_name)
+details = execute_do_backup_config_process(context, orch, SERVICE_NAME, ADD_PROCESS_NAME, service_instance_name)
 
-ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully: ' + details, context, True)
+#extract backup revisionId from 'execute_do_backup_config_process()' response details.
+ret = re.search(':(\d+)', details, re.IGNORECASE)
+if ret:
+    revision_id = ret.group(1)
+    context.update(pre_op_backup_revision_id=revision_id)
+
+#    
+ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully with revision_id: ' + revision_id, context, True)
 print(ret)
