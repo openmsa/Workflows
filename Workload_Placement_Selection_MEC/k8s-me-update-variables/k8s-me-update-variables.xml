@@ -1,0 +1,83 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="MSA fqdn" name="params.msa_fqdn" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA</sections>
+      </sections>
+    </variable>
+    <variable displayName="MSA user" name="params.msa_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA</sections>
+      </sections>
+    </variable>
+    <variable displayName="MSA pass" name="params.msa_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>MSA</sections>
+      </sections>
+    </variable>
+    <variable displayName="K8S port" name="params.k8s_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>K8S</sections>
+      </sections>
+    </variable>
+    <variable displayName="K8S token" name="params.k8s_token" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>K8S</sections>
+      </sections>
+    </variable>
+    <variable displayName="K8S device" name="params.k8s_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>K8S</sections>
+      </sections>
+      <sdTypes>
+        <sdTypes manId="20060101" modId="20060101"/>
+      </sdTypes>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/k8s-me-update-variables/SET_VARIABLES">
+    <displayName>SET_VARIABLES</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="SET_VARIABLES_GET_VARS_FROM_USER.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-me-update-variables</processPath>
+      <displayName>GET VARS FROM USER</displayName>
+    </task>
+    <task name="SET_VARIABLES_SET_VARS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-me-update-variables</processPath>
+      <displayName>SET VARS</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-me-update-variables/UPDATE_VARIABLES">
+    <displayName>UPDATE_VARIABLES</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="UPDATE_VARIABLES_GET_VARS_FROM_USER.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-me-update-variables</processPath>
+      <displayName>GET VARS FROM USER</displayName>
+    </task>
+    <task name="UPDATE_VARIABLES_SET_VARS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-me-update-variables</processPath>
+      <displayName>SET VARS</displayName>
+    </task>
+  </process>
+  <process name="Process/k8s-me-update-variables/DELETE_WF_INSTANCE">
+    <displayName>DELETE WF INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="DELETE_WF_INSTANCE_DELETE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-me-update-variables</processPath>
+      <displayName>DELETE</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>k8s-me-update-variables</name>
+    <group>k8s|MEC</group>
+  </information>
+</ObjectDefinition>
