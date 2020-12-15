@@ -53,10 +53,11 @@ details = execute_do_backup_config_process(context, orch, SERVICE_NAME, ADD_PROC
 
 #extract backup revisionId from 'execute_do_backup_config_process()' response details.
 ret = re.search(':(\d+)', details, re.IGNORECASE)
+
 if ret:
     revision_id = ret.group(1)
     context.update(post_op_backup_revision_id=revision_id)
     
 #
-ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully with revision_id: ' + revision_id, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully with revision_id: ' + details, context, True)
 print(ret)
