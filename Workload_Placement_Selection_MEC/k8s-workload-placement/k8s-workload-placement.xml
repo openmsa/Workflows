@@ -37,7 +37,7 @@
   <process name="Process/k8s-workload-placement/CREATE_SERVICE">
     <displayName>CREATE SERVICE</displayName>
     <type>CREATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="CREATE_SERVICE_GET_DATA.py">
       <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
       <displayName>GET DATA</displayName>
@@ -46,7 +46,7 @@
   <process name="Process/k8s-workload-placement/PROBATION_NETWORK">
     <displayName>PROBATION NETWORK</displayName>
     <type>UPDATE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="PROBATION_NETWORK_COMPOSE.py">
       <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
       <displayName>COMPOSE</displayName>
@@ -63,7 +63,7 @@
   <process name="Process/k8s-workload-placement/DEPLOY_APP">
     <displayName>DEPLOY APP</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="DEPLOY_APP_ANALYZE_LOG.py">
       <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
       <displayName>ANALYZE LOG</displayName>
@@ -76,7 +76,7 @@
   <process name="Process/k8s-workload-placement/CLEANUP">
     <displayName>CLEANUP</displayName>
     <type>UPDATE</type>
-    <visibility>5</visibility>
+    <visibility>0</visibility>
     <task name="CLEANUP_REMOVE_PODS_AND_APPS.py">
       <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
       <displayName>REMOVE PODS AND APPS</displayName>
@@ -85,7 +85,7 @@
   <process name="Process/k8s-workload-placement/DELETE_WF_INSTANCE">
     <displayName>DELETE WF INSTANCE</displayName>
     <type>DELETE</type>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <task name="DELETE_WF_INSTANCE_REMOVE.py">
       <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement</processPath>
       <displayName>REMOVE</displayName>
@@ -97,7 +97,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>k8s-workload-placement</name>
     <group>k8s|MEC</group>
   </information>
