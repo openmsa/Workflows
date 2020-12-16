@@ -1,3 +1,4 @@
+import re
 import json
 import random
 import time
@@ -23,6 +24,12 @@ def info_message(text, timeout=1):
 def rand_int():
     return ''.join(random.choice('0123456789') for i in range(8))
   
+def check_pod_name(text):
+    # ip address like pattern for container name
+    # ex. 10_10_10_10, 192_168_0_100
+    return bool(re.search('(\d{1,3}_){3}\d{1,3}', text))
+
+
 if __name__ == "__main__":
 ########################################################################################################
 #                                         MATH ALGORITHM                                               #
@@ -36,12 +43,13 @@ if __name__ == "__main__":
         info_message(f'Processing metrics from: {d_name}...')
         cost_summary[device] = float()
         order = Order(device)
-        order.command_objects_instances('log')
+        order.command_objects_instances('logs')
 
         for ms_item in json.loads(order.content):
-            order.command_objects_instances_by_id('log', ms_item)
-            cost = json.loads(order.content['log'][ms_item]['min'])
-            cost_summary[device] += float(cost)        
+            if check_pod_name(ms_item):
+                order.command_objects_instances_by_id('logs', ms_item)
+                cost = json.loads(order.content)['logs'][ms_item]['min']
+                cost_summary[device] += float(cost)        
 
 
     target_device_id = min(cost_summary, key=cost_summary.get)
