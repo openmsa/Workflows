@@ -8,7 +8,13 @@ $nw_grp_id=$context['nw_grp_id'];
 
 $fe_order_id=$context['fe_order_id'];
 
-$full_url  = "https://www.flx-u.com/flexibleentry-api/api/v1/orderDetail/TMF_POC_03/BASE/$fe_order_id";
+if($context['isVpnRequest'] === 'No'){
+  $tmf_id="TMF_POC12";
+}else{
+  $tmf_id="TMF_POC13";
+}
+
+$full_url  = "https://www.flx-u.com/flexibleentry-api/api/v1/orderDetail/$tmf_id/BASE/$fe_order_id";
 $HTTP_M = "PATCH";
 
 $est=date("yy-m-d");

@@ -10,24 +10,26 @@ $vpn_id=$context['nw_grp_id'];
 $lineId=$context['LineId'];
 $fe_order_id=$context['fe_order_id'];
 
-$full_url  = "https://www.flx-u.com/flexibleentry-api/api/v1/orderDetail/TMF_POC_03/BASE/$fe_order_id";
 $HTTP_M = "PATCH";
 
 $est=date("yy-m-d");
 $context['ActualDeliveryDate']=$est;
 if($context['isVpnRequest'] === 'No'){
   $body = array(
-   "LineId" =>"$lineId",
-   "ActualDeliveryDate"=>"$est"
+   "access_line_id" =>"$lineId",
+   "Actual_Delivery_Date"=>"$est"
   );
+  $tmf_id="TMF_POC12";
 }else{
   $body = array(
-   "NW_Gr_ID" =>"$nw_grp_id",
-   "VPN-ID" => "$vpn_id",
-   "ActualDeliveryDate" => $est
+   "nw_grpr_id" =>"$nw_grp_id",
+   "vpn_id" => "$vpn_id",
+   "Actual_Delivery_Date" => $est
   );
+  $tmf_id="TMF_POC13";
 }
 
+$full_url  = "https://www.flx-u.com/flexibleentry-api/api/v1/orderDetail/$tmf_id/BASE/$fe_order_id";
 
 $head='corp: p1=TMFPOC01&cnt=1&d=42a9c684be4950b3b0d6c29645641e350457784ef7cfb4804ec31d9a2f4184a2';
 
