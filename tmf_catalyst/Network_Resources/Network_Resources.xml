@@ -1,0 +1,47 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Autonomous Domain Router" name="params.rtr" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Core Cloud IP" name="params.dst" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Sub Order ID" name="params.sub_order" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Service Order ID" name="params.service_order" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Status" name="params.status" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Network_Resources/Create_Network_Resource">
+    <displayName>Create Network Resource</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="Create_Network_Resource_Create_New.php">
+      <processPath>/opt/fmc_repository/Process/Network_Resources</processPath>
+      <displayName>Create New</displayName>
+    </task>
+  </process>
+  <process name="Process/Network_Resources/Confirm_Allocation">
+    <displayName>Confirm Allocation</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Confirm_Allocation_Create_Static_Route.php">
+      <processPath>/opt/fmc_repository/Process/Network_Resources</processPath>
+      <displayName>Create Static Route</displayName>
+    </task>
+  </process>
+  <process name="Process/Network_Resources/Free">
+    <displayName>Free</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="Free_Remove_Route.php">
+      <processPath>/opt/fmc_repository/Process/Network_Resources</processPath>
+      <displayName>Remove Route</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>Netowrk Resources (VPN Groups) for the Automous Domain- Now Only Static Routes</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Network Resources</name>
+    <group/>
+  </information>
+</ObjectDefinition>

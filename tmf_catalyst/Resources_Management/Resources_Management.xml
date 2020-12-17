@@ -1,0 +1,85 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Associated Order" name="params.order_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Sub Order ID" name="params.infra_order_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>AD Lines</sections>
+      </sections>
+    </variable>
+    <variable displayName="VPN ID" name="params.vlan" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Acess Infra Resource ID" name="params.al_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>AD Lines</sections>
+      </sections>
+    </variable>
+    <variable displayName="Line ID" name="params.interface" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>AD Lines</sections>
+      </sections>
+    </variable>
+    <variable displayName="Network Resource ID" name="params.nw_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections></sections>
+      </sections>
+    </variable>
+    <variable displayName="Network Suborder" name="params.nw_sub_order_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Resources_Management/Allocate_New_Resources">
+    <displayName>Allocate New Resources</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="Allocate_New_Resources_Create_New_Resource_Set.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Create New Resource Set</displayName>
+    </task>
+    <task name="Allocate_New_Resources_Allocate_Infra_Resource.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Allocate Infra Resource</displayName>
+    </task>
+    <task name="Allocate_New_Resources_Allocate_Newtwork_Resource.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Allocate Newtwork Resource</displayName>
+    </task>
+  </process>
+  <process name="Process/Resources_Management/Update_Allocation">
+    <displayName>Update Allocation</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Update_Allocation_Associate_Order.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Associate Order</displayName>
+    </task>
+    <task name="Update_Allocation_Confirm_Infra_Allocation.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Confirm Infra Allocation</displayName>
+    </task>
+    <task name="Update_Allocation_Confirm_Network_Allocation.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Confirm Network Allocation</displayName>
+    </task>
+  </process>
+  <process name="Process/Resources_Management/Free_Resources">
+    <displayName>Free Resources</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="Free_Resources_Free_Access_Infra.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Free Access Infra</displayName>
+    </task>
+    <task name="Free_Resources_Free_Network_Resource.php">
+      <processPath>/opt/fmc_repository/Process/Resources_Management</processPath>
+      <displayName>Free Network Resource</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>ANH: Workflow to Manage Resources</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Resources Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>
