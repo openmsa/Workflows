@@ -63,6 +63,7 @@ orch = Orchestration(ubiqube_id)
 
 #Static Routing Management WF service name constant variable.
 SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Static_Routing_Management/Static_Routing_Management'
+CREATE_PROCESS_NAME = 'New_Service'
 ADD_PROCESS_NAME = 'Delete_Static_Route'
 service_id = ''
 service_ext_ref = ''
