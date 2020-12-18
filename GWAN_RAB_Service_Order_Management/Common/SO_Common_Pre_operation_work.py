@@ -174,7 +174,7 @@ file_name = write_configs_to_http_repo()
 #set link value in the context varible 'parsed_config'.
 context['parsed_config'] = file_name
     
-if skip_config_review == 'False':    
+if skip_config_review == 'False' or skip_config_review == 'false' or skip_config_review == False:
     #display to the GUI the configuration file URL.
     ret = MSA_API.process_content(constants.PAUSED, 'To review the configuration, click on the "Parsed Configuration" link.' , context, True)
     print(ret)
