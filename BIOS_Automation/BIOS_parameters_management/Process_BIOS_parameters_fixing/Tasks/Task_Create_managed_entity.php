@@ -12,17 +12,9 @@ if ($context['server_device'] === 'NULL') {
 	$server_port = $context['server_port'];
 	$device_external_reference = $context['device_external_reference'] = hash('crc32', md5($context['server_vendor'].$context['server_ip_address'].$context['server_mac_address']));
 	
-	//model and manufacture IDs should be changed properlly
-    if ($context['mgmt_interface'] == 'REDFISH') {
-	   $manufacture_id = $context['manufacture_id'] = '191200';
-	   $model_id = $context['model_id'] = '191200';
-    }
-  
-    if ($context['mgmt_interface'] == 'IPMI' and $context['server_vendor'] == 'Lanner') {
-	   $manufacture_id = $context['manufacture_id'] = '14020602';
-	   $model_id = $context['model_id'] = '14020602';
-    }
-	
+	$manufacture_id = $context['server_manufacturer_id'];
+    $model_id = $context['server_model_id'];
+    
 	$username = $context['username'];
 	$password = $password_admin = $context['password'];
 	

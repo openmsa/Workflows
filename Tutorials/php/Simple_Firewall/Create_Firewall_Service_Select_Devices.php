@@ -10,13 +10,13 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
  */
 function list_args()
 {
-  create_var_def('device', 'Device');
+  create_var_def('devices.0.id', 'Device');
 }
 
 
 /**
  * End of the task do not modify after this point
  */
-task_exit(ENDED, "Firewall service created. Managed Entity: " . $context['device']);
+task_exit(ENDED, "Firewall service created. ".sizeof($context['devices'])." Managed Entity selected");
 
 ?>
