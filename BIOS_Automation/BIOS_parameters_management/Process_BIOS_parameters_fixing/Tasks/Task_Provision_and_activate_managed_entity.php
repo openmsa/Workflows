@@ -50,7 +50,7 @@ if ($context['server_device'] === 'NULL') {
 	  echo $response;
 	}
   } else {
-    task_failed("Configration profile not found");
+    task_error("Configration profile not found");
   }
 
 	$response = update_asynchronous_task_details($context, "Attaching configuration profile... OK");
