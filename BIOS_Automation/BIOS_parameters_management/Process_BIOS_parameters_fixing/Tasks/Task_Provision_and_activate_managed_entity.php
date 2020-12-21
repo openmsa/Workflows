@@ -50,13 +50,13 @@ if ($context['server_device'] === 'NULL') {
 	  echo $response;
 	}
   } else {
-    task_failed("Configration profile is has not been found");
+    task_failed("Configration profile not found");
   }
 
 	$response = update_asynchronous_task_details($context, "Attaching configuration profile... OK");
 	sleep(3);
 	
-	$response = update_asynchronous_task_details($context, "Activating device... ");
+	$response = update_asynchronous_task_details($context, "Activating managed entity... ");
 	
 	//Make initial provisioning
 	$response = json_decode(_device_do_initial_provisioning_by_id($device_id), True);
@@ -72,7 +72,7 @@ if ($context['server_device'] === 'NULL') {
 	  exit;
 	}
 	
-	$response = update_asynchronous_task_details($context, "Activating device... OK");
+	$response = update_asynchronous_task_details($context, "Activating managed entity... OK");
 	sleep(3);
 	
 	//Waiting until the managed device will be finally avaliable
@@ -84,7 +84,7 @@ if ($context['server_device'] === 'NULL') {
 	
 	sleep (30);
 	
-	$response = update_asynchronous_task_details($context, "Device syncing... ");
+	$response = update_asynchronous_task_details($context, "Managed entity syncing... ");
 	
 	//Sync up the ME MSs
 	$response = json_decode(synchronize_objects_and_verify_response($device_id), true);
@@ -100,12 +100,12 @@ if ($context['server_device'] === 'NULL') {
 	  exit;
 	}
 	
-	$response = update_asynchronous_task_details($context, "Device syncing... OK");
+	$response = update_asynchronous_task_details($context, "Managed entity syncing... OK");
 	sleep(3);
 	  
-	task_success("MSA Device $device_id is provisioned and reachable successfully.");
+	task_success("Managed Entity $device_id is activated and reachable.");
 } else {
-  task_success("Device is already provisioned successfully.");
+  task_success("Managed Entity  is already activated.");
 }
 	
 ?>
