@@ -18,4 +18,5 @@ $response = _orchestration_update_service_instance_reference ($context['UBIQUBEI
 
 logToFile(debug_dump($response,"===============service instance ref update================"));
 task_success('Task OK');
+task_error('Task FAILED');
 ?>

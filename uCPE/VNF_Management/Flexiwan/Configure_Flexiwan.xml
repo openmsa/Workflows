@@ -1,124 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ObjectDefinition>  <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
-    <description/>
-    <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group/>
-    <icon>/images/repository/CommandDefinition/icons/3174 (desktop).jpg</icon>
-    <name>Configure SDWAN VNF</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
-    <serviceTaskType>php</serviceTaskType>
-    <showDetailedServiceInstances>false</showDetailedServiceInstances>
-    <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>false</showVariables>
-    <visibility>5</visibility>
-  </information>  <variables frozen="0">
-    <variable default="UBI633" displayName="Device Id" displayOrder="0" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Device">
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Device Id" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI633" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Synchronise with Fleximanager</section>
+        <sections>Synchronise with Fleximanager</sections>
       </sections>
     </variable>
-    <variable default="flexiwanVNF" displayName="Name" displayOrder="1" maxLength="100" name="params.name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Name" name="params.name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="flexiwanVNF" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Approve VNF</section>
+        <sections>Approve VNF</sections>
       </sections>
     </variable>
-    <variable default="192.168.0.10" displayName="Default Route" displayOrder="2" maxLength="100" name="params.defaultRoute" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="IpAddress">
+    <variable displayName="Default Route" name="params.defaultRoute" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="192.168.0.10" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Approve VNF</section>
+        <sections>Approve VNF</sections>
       </sections>
     </variable>
-    <variable default="true" displayName="Approved" displayOrder="3" maxLength="100" name="params.isApproved" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Boolean">
+    <variable displayName="Approved" name="params.isApproved" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Approve VNF</section>
+        <sections>Approve VNF</sections>
       </sections>
     </variable>
-    <variable default="48.0.0.3/16" displayName="Destination Network" displayOrder="7" maxLength="100" name="params.destination_network" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Destination Network" name="params.destination_network" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="48.0.0.3/16" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Static Route</section>
+        <sections>Create Static Route</sections>
       </sections>
     </variable>
-    <variable default="192.168.0.10" displayName="Gateway Ip" displayOrder="8" maxLength="100" name="params.gateway_ip" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String">
+    <variable displayName="Gateway Ip" name="params.gateway_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="192.168.0.10" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Static Route</section>
+        <sections>Create Static Route</sections>
       </sections>
     </variable>
-    <variable default="1" displayName="Exec Delay" displayOrder="15" maxLength="100" name="params.exec_delay" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="Integer">
+    <variable displayName="Exec Delay" name="params.exec_delay" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="1" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Synchronise with Fleximanager</section>
+        <sections>Synchronise with Fleximanager</sections>
       </sections>
     </variable>
-  </variables>  <example>    <content/>  </example>
-<process name="Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan">
-    <visibility>5</visibility>
-    <displayName>Setup SDWAN</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
+  </variables>
+  <example/>
+  <process name="Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan">
+    <displayName>Setup Flexiwan</displayName>
     <type>CREATE</type>
-    
-    
-    
-    
-  
-    
-    
-    
-  
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
-  <task name="Task_Synchronise_with_Fleximanager.php">
+    <visibility>0</visibility>
+    <task name="Task_Synchronise_with_Fleximanager.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
-      <displayName>Synchronise with Manager</displayName>
+      <displayName>Synchronise with Fleximanager</displayName>
     </task>
     <task name="Task_Approve_VNF.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
@@ -128,13 +53,50 @@
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
       <displayName>Wait for Device Ready</displayName>
     </task>
+    <task name="test_Assign_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan</processPath>
+      <displayName>Assign Interfaces</displayName>
+    </task>
+    <task name="Task_Start_Flexiwan_Edge.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Start Flexiwan Edge</displayName>
+    </task>
     <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Tunnel.php">
       <processPath/>
       <displayName>Create Tunnel</displayName>
     </task>
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Static_Route.php">
+      <processPath/>
+      <displayName>Create Static Route</displayName>
+    </task>
+  </process>
+  <process name="Process/ENEA/VNF_Management/Flexiwan/Process_Retry_Setup_Flexiwan">
+    <displayName>Retry Setup Flexiwan</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="Task_Synchronise_with_Fleximanager.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Synchronise with Fleximanager</displayName>
+    </task>
+    <task name="Task_Approve_VNF.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Approve VNF</displayName>
+    </task>
+    <task name="Task_Wait_for_Device_Ready.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
+      <displayName>Wait for Device Ready</displayName>
+    </task>
+    <task name="test_Assign_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan</processPath>
+      <displayName>Assign Interfaces</displayName>
+    </task>
     <task name="Task_Start_Flexiwan_Edge.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/</processPath>
-      <displayName>Start Edge Entity</displayName>
+      <displayName>Start Flexiwan Edge</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Tunnel.php">
+      <processPath/>
+      <displayName>Create Tunnel</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Setup_Flexiwan/Tasks/Task_Create_Static_Route.php">
       <processPath/>
@@ -142,24 +104,10 @@
     </task>
   </process>
   <process name="Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup">
-    <visibility>5</visibility>
     <displayName>Delete Setup</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
     <type>UPDATE</type>
-    
-    
-    
-  
-    
-  
-    
-    
-  
-    
-    
-  <task name="Task_Delete_Tunnel.php">
+    <visibility>0</visibility>
+    <task name="Task_Delete_Tunnel.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup/Tasks/</processPath>
       <displayName>Delete Tunnel</displayName>
     </task>
@@ -169,15 +117,31 @@
     </task>
     <task name="Task_Stop_Flexi-Edge.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan/Process_Delete_Setup/Tasks/</processPath>
-      <displayName>Stop Edge Entity</displayName>
+      <displayName>Stop Flexi-Edge</displayName>
     </task>
   </process>
-<process name="Process/ENEA/VNF_Management/Flexiwan/Process_Move_to_Trash">
-    <visibility>5</visibility>
+  <process name="Process/ENEA/VNF_Management/Flexiwan/Process_Move_to_Trash">
     <displayName>Move to Trash</displayName>
-    <icon/>
-    <poolId>0</poolId>
-    <allowSchedule>false</allowSchedule>
     <type>DELETE</type>
+    <visibility>0</visibility>
   </process>
+  <process name="Process/Configure_Flexiwan_SDWAN/test">
+    <displayName>test</displayName>
+    <type>UPDATE</type>
+    <visibility>0</visibility>
+    <task name="test_Assign_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Flexiwan</processPath>
+      <displayName>Assign Interfaces</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/repository/CommandDefinition/icons/3174 (desktop).jpg</icon>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Configure Flexiwan SDWAN</name>
+    <group/>
+  </information>
 </ObjectDefinition>

@@ -1,84 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Device Id" displayOrder="0" maxLength="100" name="params.device_id" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Device Id" name="params.device_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Rule</section>
+        <sections>Create Rule</sections>
       </sections>
     </variable>
-    <variable default="pass" displayName="Action" displayOrder="2" maxLength="100" name="params.action" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Action" name="params.action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="pass" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Create Fire</sections>
+      </sections>
       <values>
-        <value displayValue="pass">pass</value>
-        <value displayValue="reject">reject</value>
-        <value displayValue="block">block</value>
+        <values displayValue="pass">pass</values>
+        <values displayValue="reject">reject</values>
+        <values displayValue="block">block</values>
       </values>
+    </variable>
+    <variable displayName="Target Int" name="params.target_int" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="lan" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="lan" displayName="Target Int" displayOrder="3" maxLength="100" name="params.target_int" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Proto" name="params.proto" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="tcp" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="tcp" displayName="Proto" displayOrder="4" maxLength="100" name="params.proto" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Source Net" name="params.source_net" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable displayName="Source Net" displayOrder="5" maxLength="100" name="params.source_net" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Source Port" name="params.source_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="80" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="80" displayName="Source Port" displayOrder="6" maxLength="100" name="params.source_port" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Source Addr" name="params.source_addr" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="43.3.0.0/16" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="43.3.0.0/16" displayName="Source Addr" displayOrder="7" maxLength="100" name="params.source_addr" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Dst Net" name="params.dst_net" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="lan" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="lan" displayName="Dst Net" displayOrder="8" maxLength="100" name="params.dst_net" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Dst Addr" name="params.dst_addr" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable displayName="Dst Addr" displayOrder="9" maxLength="100" name="params.dst_addr" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Dst Port" name="params.dst_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable displayName="Dst Port" displayOrder="10" maxLength="100" name="params.dst_port" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Descr" name="params.descr" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Pass traffic from Network" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Create Fire</sections>
       </sections>
     </variable>
-    <variable default="Pass traffic from Network" displayName="Descr" displayOrder="11" maxLength="100" name="params.descr" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="policy_id" name="params.policy_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Vnf Name" name="params.vnf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Create Fire</section>
+        <sections>Snychonise with Firewall</sections>
       </sections>
     </variable>
-    <variable displayName="policy_id" displayOrder="12" maxLength="100" name="params.policy_id" numberOfRowMax="0" startIncrement="0" type="String"/>
-    <variable displayName="Vnf Name" displayOrder="13" maxLength="100" name="params.vnf_name" numberOfRowMax="0" startIncrement="0" type="String">
+    <variable displayName="Exec Delay" name="params.exec_delay" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="1" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <section>Snychonise with Firewall</section>
-      </sections>
-    </variable>
-    <variable default="1" displayName="Exec Delay" displayOrder="15" maxLength="100" name="params.exec_delay" numberOfRowMax="0" startIncrement="0" type="Integer">
-      <sections>
-        <section>Snychonise with Firewall</section>
+        <sections>Snychonise with Firewall</sections>
       </sections>
     </variable>
   </variables>
   <example>
-    <content/>
+    <content></content>
   </example>
   <process name="Process/ENEA/VNF_Management/Pfsense/Process_Add_Firewall_Rule">
     <displayName>Add Firewall Rule</displayName>
     <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Task_Synchronise_with_Firewall.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Pfsense/Process_Add_Firewall_Rule/Tasks/</processPath>
+      <displayName>Synchronise with Firewall</displayName>
+    </task>
+    <task name="Task_Create_Fire.php">
+      <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Pfsense/Process_Add_Firewall_Rule/Tasks/</processPath>
+      <displayName>Create Firewall Rule</displayName>
+    </task>
+  </process>
+  <process name="Process/ENEA/VNF_Management/Pfsense/Process_Retry_Firewall_Rule">
+    <displayName>Retry Firewall Rule</displayName>
+    <type>UPDATE</type>
     <visibility>5</visibility>
     <task name="Task_Synchronise_with_Firewall.php">
       <processPath>/opt/fmc_repository/Process/ENEA/VNF_Management/Pfsense/Process_Add_Firewall_Rule/Tasks/</processPath>
@@ -108,21 +120,13 @@
     <visibility>5</visibility>
   </process>
   <information>
-    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
     <description/>
     <displayField>service_id</displayField>
-    <executionDetailsVisibility>5</executionDetailsVisibility>
-    <executionMode>TRANSACTION</executionMode>
-    <group/>
-    <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <name>Configure Firewall VNF</name>
-    <order>10000</order>
-    <poolId>0</poolId>
-    <readVariableVisibility>5</readVariableVisibility>
     <serviceTaskType>php</serviceTaskType>
-    <showDetailedServiceInstances>false</showDetailedServiceInstances>
-    <showProcessExecConsole>false</showProcessExecConsole>
-    <showVariables>false</showVariables>
+    <order>10000</order>
     <visibility>5</visibility>
+    <name>Configure PFsense firewall</name>
+    <group/>
   </information>
 </ObjectDefinition>

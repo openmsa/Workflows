@@ -25,8 +25,9 @@ check_mandatory_param("device_id");
 $device_id = substr($context['device_id'], 3);
 
 
+for($m=0; $m<70; $m++){
 /**
-* call to Microservice IMPORT to synchronize the MSA database with the PFsense firewall*/
+* call to Microservice IMPORT to synchronize the MSA database with the Flexiwan Manager*/
 $arr= array("Devices");
 $response = import_objects($device_id, $arr);
 
@@ -50,22 +51,23 @@ $flexiwans = $response["wo_newparams"]["Devices"];
 foreach($flexiwans as $row)
 {
   
-
+$v="";
   if($row["fromToken"] =="vnf" && $row["isApproved"] == "false")
   {
     $context["flex_vnfid"] = $row["object_id"];
           $context["flex_org"] = $row["org"];
-
+	$v=$context["flex_vnfid"];
   }
   elseif($row["fromToken"] =="vnf")
   {
     $temp_flex_id = $row["object_id"];
     $temp_flex_org =  $row["org"];
+    $v=$temp_flex_id;
   }
-
-  if($row["fromToken"] =="msk2")
-  {
-    $context["flex_vnfid2"] = $row["object_id"];
+  if($row["fromToken"] =="msk1")
+  { 
+    $var=$row["object_id"];
+    $context["flex_vnfid2"] = $var;
   }
  
 }
@@ -75,7 +77,12 @@ if($context["flex_vnfid"] == "")
   $context["flex_vnfid"] = $temp_flex_id;
         $context["flex_org"] = $temp_flex_org;
 }
-
+if(!empty($v)){
+  logToFile('kaka--breaking');
+  break;
+}
+sleep(2);
+}
 if( $context["flex_vnfid"] == "") {
   task_exit(ERROR, "Flexiwan VNF id not found please check VNF is up and running correctly");
   exit;

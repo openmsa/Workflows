@@ -1,0 +1,35 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Worklfow Name" name="params.wf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/ENEA/VNF_Management/VNF_Management" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Empty_Bin/Initiate">
+    <displayName>Initiate</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+  </process>
+  <process name="Process/Empty_Bin/Clear_Bin">
+    <displayName>Clear Bin</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Clear_Bin_Empty.php">
+      <processPath>/opt/fmc_repository/Process/Empty_Bin</processPath>
+      <displayName>Empty</displayName>
+    </task>
+  </process>
+  <process name="Process/Empty_Bin/Move_To_Trash">
+    <displayName>Move To Trash</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>0</visibility>
+    <name>Empty Bin</name>
+    <group/>
+  </information>
+</ObjectDefinition>
