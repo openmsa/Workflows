@@ -43,7 +43,7 @@ for instance_name in instance_names:
       orch.path = "/orchestration/v1/service/instance/"+str(instance_id)
 
       orch.call_delete()
-      #context['delete_instance_'+instance_name] = instance_id
+      context['delete_instance_'+instance_name] = instance_id
       if orch and orch.content:
         response = json.loads(orch.content)
         #context['delete_resultjson_'+instance_name] = response 
@@ -54,11 +54,8 @@ for instance_name in instance_names:
       else:
         # no return if OK
         all_removed_instances = all_removed_instances +   ' ,' +instance_name
-    else:
-      context['new_'+instance_name] = instance_id
   else:
    error[instance_name] = 'Can not find instance id of ' + instance_name;
-   context['new_'+instance_name] = instance_id
 
 ret = MSA_API.process_content(constants.ENDED, 'All instances "' + all_removed_instances + '" removed', context, True)
 print(ret)
