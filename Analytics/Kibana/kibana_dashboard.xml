@@ -26,7 +26,7 @@
     <variable displayName=" Kibana Url" name="params.kibanaUrl" startIncrement="0" type="Link" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Kibanaport" name="params.kibanaPort" startIncrement="0" type="Integer" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Kibanaipaddress" name="params.kibanaIpAddress" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Filter type" name="params.filterType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="- Advanced : your write all fields and their values  with operators ( OR, AND ) in Advanced filter input&#xa;- Basic : you have Basic Fitler table that you can put fields and select your operator.  Then you can decide if you want to apply your filter directly or just save it" groupSeparator="" groupDisplayName="" displayOrder="38" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Advanced" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Filter type" name="params.filterType" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="- Advanced : your write all fields and their values  with operators ( OR, AND ) in Advanced filter input&#xa;- Basic : you have Basic Fitler table that you can put fields and select your operator.  Then you can decide if you want to apply your filter directly or just save it" groupSeparator="" groupDisplayName="" displayOrder="38" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Advanced" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Filtering</sections>
       </sections>
@@ -77,7 +77,7 @@
         <behaviour displayName="Field" displayOrder="0" maxLength="100" name="params.filter.0.field" selectorValue="Basic " startIncrement="0" type="String"/>
       </behaviors>
       <sections>
-        <sections>Basic Filter</sections>
+        <sections></sections>
       </sections>
     </variable>
     <variable displayName="Value" name="params.filter.0.value" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="51" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -86,7 +86,7 @@
         <behaviour displayName="Value" displayOrder="0" maxLength="100" name="params.filter.0.value" selectorValue="Basic " startIncrement="0" type="String"/>
       </behaviors>
       <sections>
-        <sections>Basic Filter</sections>
+        <sections></sections>
       </sections>
     </variable>
     <variable displayName="Operator" name="params.filter.0.operator" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="52" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -95,12 +95,12 @@
         <behaviour displayName="Operator" displayOrder="0" maxLength="100" name="params.filter.0.operator" selectorValue="Basic " startIncrement="0" type="String"/>
       </behaviors>
       <sections>
-        <sections>Basic Filter</sections>
+        <sections></sections>
       </sections>
     </variable>
     <variable displayName="Resultbasictfilter" name="params.filter.0.resultBasictFilter" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="53" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
-        <sections>Basic Filter</sections>
+        <sections></sections>
       </sections>
     </variable>
     <variable displayName="Apply" name="params.filter.0.apply" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="54" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -109,10 +109,10 @@
         <behaviour displayName="Apply" displayOrder="0" maxLength="100" name="params.filter.0.apply" selectorValue="Basic " startIncrement="0" type="Boolean"/>
       </behaviors>
       <sections>
-        <sections>Basic Filter</sections>
+        <sections></sections>
       </sections>
     </variable>
-    <variable displayName="Level" name="params.levelView" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="In according your selection, the dashboard that your are going to deploy will be display in the appropriated tab" groupSeparator="" groupDisplayName="" displayOrder="143" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="service" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Level" name="params.levelView" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="In according your selection, the dashboard that your are going to deploy will be display in the appropriated tab" groupSeparator="" groupDisplayName="" displayOrder="143" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="service" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Level View</sections>
       </sections>
@@ -187,7 +187,7 @@
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <description></description>
+    <description/>
     <displayField>dashboardName</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
