@@ -27,6 +27,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Alarm Action</name>
-    <group/>
+    <group>minilab|alarm</group>
   </information>
 </ObjectDefinition>
