@@ -7,6 +7,6 @@ function list_args()
   create_var_def('rawlog', 'String');
 }
 
-task_success('even:'.$context['rawlog']);
+task_success('Event:'.$context['rawlog']);
 
 ?>
