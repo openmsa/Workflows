@@ -21,12 +21,12 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>Simple workflow to trigger from an alarm, for testing purpose</description>
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>Alarm Action</name>
+    <name>Security Event Detection</name>
     <group>minilab|alarm</group>
   </information>
 </ObjectDefinition>
