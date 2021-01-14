@@ -4,7 +4,7 @@
   </variables>
   <example/>
   <process name="Process/Alarm_Action/Process_Execute_Process">
-    <displayName>Execute Process</displayName>
+    <displayName>Event Detected</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
