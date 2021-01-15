@@ -35,7 +35,7 @@
         <values displayValue="Advanced">Advanced</values>
       </values>
     </variable>
-    <variable displayName="Advanced filter" name="params.advancedFilter" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="Write your filter in according index fields (ex. port:&lt;50 OR protocol:UDP)" groupSeparator="" groupDisplayName="" displayOrder="39" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Advanced filter" name="params.advancedFilter" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="Write your filter in according index fields (ex. port:&lt;50 OR protocol:UDP)" groupSeparator="" groupDisplayName="" displayOrder="39" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
         <behaviour displayName="Advanced filter" displayOrder="0" maxLength="100" name="params.advancedFilter" selectorValue="Advanced" startIncrement="0" type="String"/>
         <behaviour displayName="advancedFilter" displayOrder="0" maxLength="100" name="params.advancedFilter" selectorValue="Basic " startIncrement="0" type="String"/>
