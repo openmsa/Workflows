@@ -140,9 +140,7 @@ function _device_read_by_id ($device_id) {
 }
 
 /**
- <pre>
- curl -u ncroot:ubiqube  -X GET http://localhost:8080/ubi-api-rest/device/reference/DEVICE_REF1234
- </pre>
+ * curl -u ncroot:ubiqube  -X GET http://localhost:8080/ubi-api-rest/device/reference/DEVICE_REF1234
  *
  * @param unknown $device_reference
  * @return Ambigous <unknown, mixed>
@@ -192,6 +190,35 @@ function _device_set_hostname_by_id ($device_id, $hostname) {
 	return $response;
 }
 
+/**
+ * reads, from the database, the nature set for a device
+ * @param  $device_id
+ */
+function _device_get_nature_by_id ($device_id) {
+	$msa_rest_api = "device/v1/nature/{$device_id}";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "READ DEVICE NATURE BY ID");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
+/**
+ * this function sets the nature of a device in the database
+ * it uses the REST API: PUT device/v1/{$device_id}/nature/{$hostname}
+ * @param device_id: the database identifier of the device, It should be a type long
+ * @param nature: one of VPUB, PHSL, VPRV
+ */
+function _device_set_nature_by_id ($device_id, $nature = "VPRV") {
+	$msa_rest_api = "device/v1/{$device_id}/nature/{$nature}";
+	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "SET DEVICE NATURE BY ID");
+	return $response;
+}
 
 /**
  * REST endpoint available in MSA NB
