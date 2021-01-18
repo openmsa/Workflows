@@ -121,6 +121,11 @@
     <displayName>SO Terminate</displayName>
     <type>DELETE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
+    <task name="SO_Terminate_Delete_Instances.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate</processPath>
+      <displayName>Delete WF Instances</displayName>
+    </task>
   </process>
   <information>
     <icon/>
