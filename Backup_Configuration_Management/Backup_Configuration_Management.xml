@@ -2,12 +2,14 @@
   <variables frozen="0">
     <variable displayName="Device" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Backup_id" name="params.backup_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Backup Revision Id" name="params.revision_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="New_Service_Instantiate_Service.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
       <displayName>Instantiate Service</displayName>
@@ -17,24 +19,27 @@
     <displayName>Make Device Configuration Backup</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="Make_Device_Configuration_Backup.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Backup_Configuration_Management/Common</processPath>
       <displayName>Make Device Configuration Backup</displayName>
     </task>
   </process>
-  <process name="Delete_Backup_Configuration_Management">
-    <displayName>Delete Backup Configuration Management</displayName>
+  <process name="Restore_Configuration_Management">
+    <displayName>Restore Device Configuration</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
-    <task name="Common_Ensure_Policy_Map_exist_in_the_device.py">
-      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Backup_Configuration_Management/Common</processPath>
-      <displayName>Ensure Backup Configuration Management exist in the device</displayName>
+    <allowSchedule/>
+    <task name="Restore_Device_Configuration.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Backup_Configuration_Management/Restore_Configuration_Management</processPath>
+      <displayName>Restore Device Configuration Based-on revisionId</displayName>
     </task>
   </process>
   <process name="Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
   </process>
   <information>
     <icon/>
@@ -42,7 +47,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Backup Configuration Management</name>
     <group>GWAN RAB | Baseline WF</group>
   </information>
