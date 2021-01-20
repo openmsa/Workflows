@@ -17,14 +17,13 @@ function list_args()
 check_mandatory_param('instance_id');
 check_mandatory_param('aws_device_id');
 
-
 $PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];
 $EXECNUMBER = $context['EXECNUMBER'];
 $TASKID = $context['TASKID'];
 $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
-$context['service_id'] = $context['SERVICEINSTANCEID']." - ".$context['instance_id'];
+$context['id_for_display'] = $context['SERVICEINSTANCEID']." - ".$context['instance_id'];
 
 $device_id = substr($context['aws_device_id'], 3);
 
