@@ -49,12 +49,12 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>Onboards an existing instance and provides start/stop actions</description>
     <displayField>id_for_display</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
     <name>Simple Instance Management on AWS</name>
-    <group/>
+    <group>training|util</group>
   </information>
 </ObjectDefinition>
