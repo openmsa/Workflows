@@ -1,0 +1,14 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Simple VNF Management on AWS</name>
+    <group/>
+  </information>
+</ObjectDefinition>
