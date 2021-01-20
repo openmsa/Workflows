@@ -13,7 +13,6 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-   create_var_def("force", "Boolean");
 }
 
 $ec2Client = Ec2Client::factory(array(
@@ -22,12 +21,9 @@ $ec2Client = Ec2Client::factory(array(
     'region' => $context["region"]
 ));
 
-logToFile("ec2 client successful:" . $context["InstanceId"] . " Region: " . $context["region"]);
+logToFile("ec2 client successful:" . $context["instance_id"] . " Region: " . $context["region"]);
 
 $force = true;
-if ($context["force"] === "false") {
-   $force = false;
-}
 $array = array("Force" => $force, "InstanceIds" => array($context["instance_id"]));
 
 $result = $ec2Client->stopInstances($array);

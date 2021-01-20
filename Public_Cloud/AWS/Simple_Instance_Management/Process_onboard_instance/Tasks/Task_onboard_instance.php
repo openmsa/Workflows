@@ -24,9 +24,9 @@ $TASKID = $context['TASKID'];
 $process_params = array('PROCESSINSTANCEID' => $PROCESSINSTANCEID,
 						'EXECNUMBER' => $EXECNUMBER,
 						'TASKID' => $TASKID);
-$context['service_id'] = $context['SERVICEINSTANCEID']." - ".$context['instance_id']
+$context['service_id'] = $context['SERVICEINSTANCEID']." - ".$context['instance_id'];
 
-$device_id = substr($context['AwsDeviceId'], 3);
+$device_id = substr($context['aws_device_id'], 3);
 
 $response = synchronize_objects_and_verify_response($device_id);
 
@@ -42,10 +42,6 @@ $context["key"] = $key;
 $secret = $response['wo_newparams']['password'];
 $context["secret"] = $secret;
 
-$region = $context["region"];
-$key=$context["key"];
-$secret = $context["secret"];
-
 
 $response = _device_get_hostname_by_id($device_id);
 $response = json_decode($response, true);
@@ -54,8 +50,10 @@ if ($response['wo_status'] !== ENDED) {
 	echo $response;
 	exit;
 }
+
 $region = $response['wo_newparams']['hostname'];
 $context["region"] = $region;
 
-task_success($context['instance_id']." onboarded");
+$instance_id = $context['instance_id'];
+task_success("$instance_id onboarded");
 ?>
