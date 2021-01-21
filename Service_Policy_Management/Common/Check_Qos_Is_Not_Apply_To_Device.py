@@ -83,9 +83,7 @@ def is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_pattern, st
 
         return_message = response.get('message')
 
-        # matchObj = re.match( r'(.*) are (.*?) .*', line, re.M|re.I)
-        #matchObj = re.match( r'\[In\] (.*). ', return_message, re.M|re.I)
-        matchObj = re.match(qos_pattern, return_message, re.M|re.I)
+        matchObj = return_message.find(qos_pattern)
         if matchObj:
             is_qos = True
     return is_qos
@@ -105,7 +103,7 @@ vlan_id = extract_vlan_id_from_interface_name(context)
 context.update(vlan_id=vlan_id)
 
 #check QoS cancellation if vlan_id exits
-qos_cancellation_pattern = r'\[In\] Default. '
+qos_cancellation_pattern = '[In] Default.'
 matchObj = is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_cancellation_pattern)
 
 return_message = ''

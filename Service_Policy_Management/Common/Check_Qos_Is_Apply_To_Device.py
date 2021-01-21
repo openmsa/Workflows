@@ -33,7 +33,7 @@ vlan_id = extract_vlan_id_from_interface_name(context)
 context.update(vlan_id=vlan_id)
 
 #check QoS cancellation if vlan_id exits
-qos_application_pattern = r'\[In\] Policy map is ' + input_policy_name
+qos_application_pattern = '[In] Policy map is ' + input_policy_name
 matchObj = is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_application_pattern)
 
 return_message = ''
