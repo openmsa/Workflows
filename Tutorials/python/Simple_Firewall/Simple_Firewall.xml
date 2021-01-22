@@ -1,23 +1,23 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Managed firewall" name="params.devices.0.id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="Security Managed Entity" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Managed firewall" name="params.devices.0.id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="Security Managed Entity" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
-        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0"/>
       </behaviors>
     </variable>
     <variable displayName="Rule ID" name="params.id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="Firewall rule ID" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
-        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0"/>
       </behaviors>
     </variable>
     <variable displayName="Source IP" name="params.src_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="source IP address to block" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
-        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0"/>
       </behaviors>
     </variable>
     <variable displayName="Destination port" name="params.dst_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="Destination port to block" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
-        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0"/>
       </behaviors>
     </variable>
   </variables>
@@ -26,6 +26,7 @@
     <displayName>Create Firewall Service</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
     <task name="Create_Firewall_Service_Select_Devices.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>Select Devices</displayName>
@@ -35,6 +36,7 @@
     <displayName>Add Filter Rule</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
+    <allowSchedule>false</allowSchedule>
     <task name="Add_filter_Rule_add_rule.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>add rule</displayName>
@@ -44,6 +46,7 @@
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
     <task name="Delete_Service_delete_service.py">
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>delete service</displayName>
