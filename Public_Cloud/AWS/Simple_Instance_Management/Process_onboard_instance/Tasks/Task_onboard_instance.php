@@ -14,7 +14,6 @@ function list_args()
   create_var_def('instance_id', 'String');
 }
 
-check_mandatory_param('instance_id');
 check_mandatory_param('aws_device_id');
 
 $PROCESSINSTANCEID = $context['PROCESSINSTANCEID'];

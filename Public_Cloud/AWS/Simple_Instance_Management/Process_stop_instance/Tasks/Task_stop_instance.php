@@ -22,21 +22,31 @@ $ec2Client = Ec2Client::factory(array(
 ));
 
 logToFile("ec2 client successful:" . $context["instance_id"] . " Region: " . $context["region"]);
-
-$force = true;
-$array = array("Force" => $force, "InstanceIds" => array($context["instance_id"]));
-
-$result = $ec2Client->stopInstances($array);
-
 try {
+  update_asynchronous_task_details($context, "stopping instance ".$context["instance_id"]);
+
+  $force = true;
+  $array = array("Force" => $force, "InstanceIds" => array($context["instance_id"]));
+  $result = $ec2Client->stopInstances($array);
+
   $res = $result->toArray();
   logToFile(debug_dump($res, "AWS response\n"));
- 
 }
 catch (Exception $e) {
    task_exit(FAILED, "Error : $e");
 }
 
-task_exit(ENDED, "VM successfully stopped. Id : " . $context["instance_id"]);
+try {
+    update_asynchronous_task_details($context, "waiting for instance to stop ".$context["instance_id"]);
+	$ec2Client->waitUntilInstanceStopped(array(
+		'InstanceIds' => array($context["instance_id"])
+	));
+}
+catch (Exception $e) {
+   task_exit(FAILED, "Error : $e");
+}
+
+
+task_exit(ENDED, "Instance stopped. Id : " . $context["instance_id"]);
 
 ?>
