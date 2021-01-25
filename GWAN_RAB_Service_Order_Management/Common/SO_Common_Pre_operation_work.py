@@ -3,6 +3,7 @@ import os
 import errno
 import time
 import re
+import sys
 from json2html import *
 from msa_sdk import constants
 from msa_sdk.orchestration import Orchestration
@@ -178,6 +179,7 @@ if skip_config_review == 'False' or skip_config_review == 'false' or skip_config
     #display to the GUI the configuration file URL.
     ret = MSA_API.process_content(constants.PAUSED, 'To review the configuration, click on the "Parsed Configuration" link.' , context, True)
     print(ret)
+    sys.exit()
 
 ########## Do backup of the device running-config. 
 
@@ -191,7 +193,8 @@ ADD_PROCESS_NAME = 'Backup_Configuration_Management'
 service_instance_name = 'backup_configuration_service_instance'
 
 #instantiate Configuration Backup Management WF.
-create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
+if not 'backup_configuration_service_instance' in context: 
+    create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
 
 #execute do backup of the device running-configuration service process.
 details = execute_do_backup_config_process(context, orch, SERVICE_NAME, ADD_PROCESS_NAME, service_instance_name)
