@@ -179,6 +179,7 @@
     <displayName>Deploy VNF</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
     <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Neutron/Task_openstack_get_available_floating_ip.php">
       <processPath/>
       <displayName>Get an available Floating IP Address</displayName>
@@ -228,6 +229,7 @@
     <displayName>URL Filtering</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
     <task name="Task_Create_Address_Objects.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_URL_Filtering/Tasks/</processPath>
       <displayName>Create Address Objects</displayName>
@@ -241,6 +243,7 @@
     <displayName>Decommission VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
     <task name="/opt/fmc_repository/Process/Reference/OPENSTACK/Tasks/OBMF/Nova/Task_openstack_server_delete.php">
       <processPath/>
       <displayName>Delete VNF Instance</displayName>
@@ -258,6 +261,7 @@
     <displayName>Move to Trash</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
+    <allowSchedule/>
   </process>
   <information>
     <icon>/images/repository/CommandDefinition/icons/carrier routing system.jpg</icon>
@@ -266,7 +270,7 @@
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>Private Cloud Management</name>
+    <name>Private Cloud VNF Management</name>
     <group>Private Cloud|Openstack</group>
   </information>
 </ObjectDefinition>
