@@ -61,7 +61,7 @@ if ($context['job_management'] == 'True') {
   $response = update_asynchronous_task_details($context, "Device syncing... ");
 
   //Waiting until new parameters have been applied
-  if ($context['is_password_updated'] == 'False') {
+  if ($context['is_password_updated'] == 'True') {
      sleep($delay);
   }
 }
