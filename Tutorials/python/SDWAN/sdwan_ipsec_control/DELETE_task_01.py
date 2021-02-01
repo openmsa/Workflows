@@ -8,7 +8,7 @@ context = Variables.task_call()
 
 try:
   order = Order(context['short_device_id'])
-  order.command_execute('DELETE', {"sdwan_ipsec_start": context['ms_sdwan_ipsec_start']})
+  order.command_execute('DELETE', {"sdwan_ipsec_start": context['id']})
 except Exception as e:
     ret = MSA_API.process_content('FAILED',
                                   f'ERROR: {str(e)}',
