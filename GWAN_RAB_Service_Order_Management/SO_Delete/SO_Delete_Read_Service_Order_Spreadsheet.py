@@ -288,7 +288,7 @@ for sheet_name in sheet_names:
                 elif search(ACL, sheet_name):
                     acl_rules_list = acl_replace_item_key_by_sheet_header_name(config_row_list, tab_header_row_index_list)
                     #check if at least one ACL entry exits otherwise skip adding this ACL in the acl_rules_dict.
-                    if len(acl_rules_list) > 1:
+                    if len(acl_rules_list) > 0:
                         acl_rules_dict.update({sheet_name: acl_rules_list})
 
                 elif search(POLICY_MAP, sheet_name):
