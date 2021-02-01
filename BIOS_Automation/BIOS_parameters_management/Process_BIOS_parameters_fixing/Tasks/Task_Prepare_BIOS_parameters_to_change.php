@@ -46,8 +46,10 @@ sleep(3);
 $context['bios_parameters_array'] = $bios_parameters;
 
 if ($change_candidate) {
+    $context['are_changes_needed'] = 'true';
 	task_success("There are following BIOS options will be changed:\n".$change_candidate);
 } else {
+    $context['are_changes_needed'] = 'false';
 	task_success("All BIOS options are in reqiured state\n");
 }
 

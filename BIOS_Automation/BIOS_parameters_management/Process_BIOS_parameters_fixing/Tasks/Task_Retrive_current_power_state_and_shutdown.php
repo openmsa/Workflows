@@ -8,8 +8,33 @@ $microservices_array = $context['microservices_array'];
 $ms_server_inventory = $microservices_array['Server inventory'];
 $ms_server_power = $microservices_array['Server power managment'];
 $device_id = $context['device_id'];
-//How much wa are waiting 
+//How much we are waiting 
 $delay = 15;
+
+if (array_key_exists('Job manager', $microservices_array)) {
+    $ms_job_manager = $microservices_array['Job manager']; 
+}
+
+
+#Check unfinished BIOS configuration jobs
+if ($context['job_management'] == 'True') {
+    $are_all_job_completed = True;
+    $response = update_asynchronous_task_details($context, "Check existed BIOS jobs... ");
+    $response = json_decode(import_objects($device_id, array($ms_job_manager)), True);
+    if (array_key_exists($ms_job_manager, $response['wo_newparams'])) {
+    	$current_job = $response['wo_newparams'][$ms_job_manager];
+    	foreach ($current_job as $job_name => $job_params) {
+      	  if (array_key_exists('type', $job_params) and array_key_exists('state', $job_params)) {
+      		if ($job_params['type'] == 'BIOSConfiguration' and $job_params['state'] != 'Completed') {
+        			$are_all_job_completed = False;
+      		}
+      	  }
+    	}
+    }
+  if (!$are_all_job_completed) {
+    task_error('Server has some BIOS configuration jobs unfinished. Please review the jobs and finish them before to start the workflow again.');
+  }
+}
 
 
 //Import current server power state
