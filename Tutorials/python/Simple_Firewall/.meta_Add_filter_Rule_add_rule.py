@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>Add_filter_Rule_add_rule.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1604657524699</value>
+            <value>1612356937581</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1604657524693</value>
+            <value>1612356937577</value>
         </entry>
         <entry>
             <key>TAG</key>

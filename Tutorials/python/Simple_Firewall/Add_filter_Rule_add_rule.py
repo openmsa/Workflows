@@ -7,9 +7,10 @@ from msa_sdk import util
 
 # List all the parameters required by the task
 dev_var = Variables()
-dev_var.add('id', var_type='Integer')
-dev_var.add('src_ip', var_type='String')
-dev_var.add('dst_port', var_type='Integer')
+dev_var.add('id')
+dev_var.add('protocol')
+dev_var.add('src_ip')
+dev_var.add('dst_port')
 context = Variables.task_call(dev_var)
 process_id = context['SERVICEINSTANCEID']
 
