@@ -60,6 +60,7 @@ obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'p
 params = dict(service_policy=obj)
 context['ms_params'] = params
 
+
 obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
 

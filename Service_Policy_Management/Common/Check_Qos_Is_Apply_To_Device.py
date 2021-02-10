@@ -42,10 +42,10 @@ if 'device_push_conf_end_reponse' in context:
 
 if vlan_id:
     if matchObj != False:
-        ret = MSA_API.process_content(constants.ENDED, 'OK Qos applied for vlan : '+vlan_id+' : '+return_message, context, True)
+        ret = MSA_API.process_content(constants.ENDED, 'OK Qos [In] applied for vlan : '+vlan_id+' : '+return_message, context, True)
         print(ret)
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos Policy map '+input_policy_name+' not found : '+return_message, context, True)
+        ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos [In] Policy map '+input_policy_name+' not found : '+return_message, context, True)
         print(ret)
 
 ret = MSA_API.process_content(constants.ENDED, 'SKIPPED, VLAN-ID is missing from interface_name input: '+input_policy_name, context, True)
