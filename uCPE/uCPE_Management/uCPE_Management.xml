@@ -143,6 +143,10 @@
       <processPath>/opt/fmc_repository/Process/uCPE_Management</processPath>
       <displayName>Associate the Floating IP</displayName>
     </task>
+    <task name="Deploy_VNF_Disable_Port_Security_on_Traffic_Interfaces.php">
+      <processPath>/opt/fmc_repository/Process/uCPE_Management</processPath>
+      <displayName>Disable Port Security on Traffic Interfaces</displayName>
+    </task>
     <task name="Deploy_VNF_Create_ME_in_MSA.php">
       <processPath>/opt/fmc_repository/Process/uCPE_Management</processPath>
       <displayName>Create ME in MSA</displayName>
