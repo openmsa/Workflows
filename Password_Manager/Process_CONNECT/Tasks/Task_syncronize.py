@@ -11,14 +11,6 @@ from msa_sdk.order import Order
 from msa_sdk.msa_api import MSA_API
 from msa_sdk.orchestration import Orchestration
 
-dev_var = Variables()
-context = Variables.task_call()
-
-Orchestration = Orchestration(context['UBIQUBEID'])
-async_update_list = (context['PROCESSINSTANCEID'],
-                     context['TASKID'], context['EXECNUMBER'])
-
-
 class MSAConnect():
 
     def __init__(self, hostname, username, password):
@@ -100,13 +92,10 @@ class MSAConnect():
                       },
                       "vendor": {
                           "id": 14020601,
-                          "name": "KUBERNETES"
+                          "name": "Linux"
                       },
                       "microserviceUris": [
-                          # credentials_ms.xml
-                          "CommandDefinition/KUBERNETES/Generic/Nodes.xml",
-                          "CommandDefinition/KUBERNETES/Generic/k8_pods_list.xml",
-                          "CommandDefinition/KUBERNETES/Generic/k8_services_list.xml"
+                          "CommandDefinition/LINUX_PASSWORD_MANAGER/credentials_ms.xml"
                       ],
                       "templateUris": [],
                       "attachedManagedEntities": [
@@ -128,12 +117,12 @@ class MSAConnect():
 
 if __name__ == "__main__":
 
-    if context['k8s_status'] != 200:
-        ret = MSA_API.process_content('WARNING',
-                                      f'CHECK CONNECTION. STATUS CODE: {context["k8s_status"]}',
-                                      context, True)
-        print(ret)
-        exit()
+    dev_var = Variables()
+    context = Variables.task_call()
+
+    Orchestration = Orchestration(context['UBIQUBEID'])
+    async_update_list = (context['PROCESSINSTANCEID'],
+                         context['TASKID'], context['EXECNUMBER'])
 
     # (1) Create TOKEN
     try:
@@ -146,6 +135,9 @@ if __name__ == "__main__":
                                           context, True)
             print(ret)
             exit()
+        context['msa_fqdn'] = ''
+        context['msa_user'] = ''
+        context['msa_pass'] = ''
     except Exception as e:
         ret = MSA_API.process_content('WARNING',
                                       f'HTTP error occured: {e}',
@@ -161,7 +153,7 @@ if __name__ == "__main__":
     try:
         r = msa_call.create_dpl_set(context['UBIQUBEID'][4:],
                                     context['entity_id'],
-                                    "k8s_dpl_set")
+                                    "pass_man_dpl_set")
     except Exception as e:
         ret = MSA_API.process_content('WARNING',
                                       f'Can\'t create dpl_set for {context["entity_id"]} : check {str(e)}',
@@ -170,7 +162,7 @@ if __name__ == "__main__":
         exit()
 
     Orchestration.update_asynchronous_task_details(*async_update_list,
-                                                   f'K8S DEPLOYMENT SET CREATED...')
+                                                   f'DEPLOYMENT SET CREATED...')
     time.sleep(2)
 
     # (3) Syncronize
@@ -180,6 +172,6 @@ if __name__ == "__main__":
                                                    f'Entity Syncronized...')
     time.sleep(2)
 
-    ret = MSA_API.process_content('ENDED', f'Please check K8S cluster now connected {r.text}', context, True)
+    ret = MSA_API.process_content('ENDED', f'Password manager is now connected {r.text}', context, True)
     print(ret)
 

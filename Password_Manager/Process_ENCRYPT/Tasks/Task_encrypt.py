@@ -33,7 +33,7 @@ if __name__ == "__main__":
     context['plain_text_value'] = ''
     context['key'] = ''
     
-    order = Order(context["device"][3:])
+    order = Order(context["entity_id"])
     order.command_synchronize(timeout=60)
   
     # get next key id

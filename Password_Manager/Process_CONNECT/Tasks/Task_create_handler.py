@@ -1,14 +1,26 @@
+import time
 from msa_sdk.variables import Variables
+from msa_sdk.device import Device
 from msa_sdk.msa_api import MSA_API
-
-dev_var = Variables()
-dev_var.add('device', var_type='Device')
-context = Variables.task_call(dev_var)
+from msa_sdk.orchestration import Orchestration
 
 
 if __name__ == "__main__":
+  
+    dev_var = Variables()
+    dev_var.add('ip_addr', var_type='String')
+    dev_var.add('linux_username', var_type='String')
+    dev_var.add('linux_password', var_type='Password')
+    dev_var.add('msa_fqdn', var_type='String')
+    dev_var.add('msa_user', var_type='String')
+    dev_var.add('msa_pass', var_type='Password')
+    context = Variables.task_call(dev_var)
+  
+    Orchestration = Orchestration(context['UBIQUBEID'])
+    async_update_list = (context['PROCESSINSTANCEID'],
+                         context['TASKID'], context['EXECNUMBER'])
 
-    # create me
+    # (1) create me
     try:
         cust_id = context["UBIQUBEID"][4:]
 
@@ -22,6 +34,8 @@ if __name__ == "__main__":
                         management_address=context['ip_addr'])
 
         entity.create()
+        context["entity_id"] = entity.device_id
+        context['linux_password'] = ''
     except Exception as e:
         ret = MSA_API.process_content('WARNING',
                                       f'Can\'t create Entity : {str(e)} {cust_id}',
@@ -34,7 +48,7 @@ if __name__ == "__main__":
 
     time.sleep(2)
     
-    # assign dpl and ms
+    # (2) activate me
     try:
         entity.activate()
     except Exception as e:
