@@ -49,7 +49,7 @@ if response:
             else:
                 if interface_is_status_down == True:
                   ret = MSA_API.process_content(constants.FAILED, 'Interface Down and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
-                else
+                else:
                   ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                 print(ret)
 
