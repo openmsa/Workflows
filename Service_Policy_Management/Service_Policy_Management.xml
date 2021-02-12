@@ -25,7 +25,7 @@
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure interface is down</displayName>
+      <displayName>Get the interface status</displayName>
     </task>
     <task name="Common_Ensure_Service_Policy_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -49,7 +49,7 @@
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure interface is down</displayName>
+      <displayName>Get the interface status</displayName>
     </task>
     <task name="Common_Ensure_Service_Policy_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -66,7 +66,7 @@
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Get interface status</displayName>
+      <displayName>Get the interface status</displayName>
     </task>
     <task name="Common_Ensure_Service_Policy_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -94,7 +94,7 @@
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Get interface status</displayName>
+      <displayName>Get the interface status</displayName>
     </task>
     <task name="Common_Ensure_Service_Policy_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>

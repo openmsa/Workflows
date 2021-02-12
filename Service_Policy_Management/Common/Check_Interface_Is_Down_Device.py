@@ -42,7 +42,7 @@ context.update(interface_is_status_down=is_status_down)
 #the status should be down
 if is_status_down == False:
     #ret = MSA_API.process_content(constants.FAILED, 'The interface status is "'+ret_interface_status+'" for "' + object_id + '", the status should be down', context, True)
-    ret = MSA_API.process_content(constants.ENDED, 'Good, the interface status is "' + is_status_down + '" for "' + object_id + '" on the device.', context, True)
+    ret = MSA_API.process_content(constants.ENDED, 'Good, the interface status is "' + ret_interface_status + '" for "' + object_id + '" on the device.', context, True)
     print(ret)
 
 ret = MSA_API.process_content(constants.ENDED, 'Good, the interface status is "down" for "' + object_id + '" on the device.', context, True)
