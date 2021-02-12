@@ -60,6 +60,15 @@ obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'p
 params = dict(service_policy=obj)
 context['ms_params'] = params
 
+#Store service Policy action
+context.update(service_policy_action='ADD_SERVICE_POLICY')
+
+is_policy_name_matched = context.get('is_policy_name_matched')
+if is_policy_name_matched == True:
+    ret = MSA_API.process_content(constants.ENDED, 'Skipped, Service Policy already exist.', context, True)
+    print(ret)
+
+
 obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
 

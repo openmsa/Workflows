@@ -17,6 +17,8 @@ obmf  = Order(device_id=device_id)
 timeout = 60
 obmf.command_synchronize(timeout)
 
+interface_is_status_down = context.get('interface_is_status_down')
+
 #get microservices instance by microservice object ID.
 object_name = 'service_policy'
 object_id = str(context.get('interface_name'))
@@ -45,11 +47,21 @@ if response:
             if ret_policy_name == input_policy_name:
                 is_policy_name_matched = True
             else:
-                ret = MSA_API.process_content(constants.FAILED, 'Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                if interface_is_status_down == True:
+                  ret = MSA_API.process_content(constants.FAILED, 'Interface Down and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                else:
+                  ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                 print(ret)
+
+context.update(is_policy_name_matched=is_policy_name_matched)
 #if is_policy_name_matched equals False it means Service Policy object doesn't exist in the device yet.
 if is_policy_name_matched == False:
-    ret = MSA_API.process_content(constants.FAILED, 'On interface "' + object_id + '", the Service Policy  "' + input_policy_name + '" does not exists in the device.', context, True)
+    if interface_is_status_down == True:
+         # IF Down and policy-map not applied
+         ret = MSA_API.process_content(constants.FAILED, 'Interface Down, but the Service Policy  "' + input_policy_name + '" does not exists in the interface  "' + object_id + '"', context, True)
+    else:
+         # IF UP and policy-map not applied
+         ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" not found on the device.', context, True)
     print(ret)
 ret = MSA_API.process_content(constants.ENDED, 'On interface "' + object_id + '", the Service Policy  "' + input_policy_name + '" exists in the device.', context, True)
 print(ret)

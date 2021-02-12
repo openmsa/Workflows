@@ -40,12 +40,17 @@ return_message = ''
 if 'device_push_conf_end_reponse' in context:
     return_message = context.get('device_push_conf_end_reponse').get('message')
 
+interface_is_status_down = context.get('interface_is_status_down')
+
 if vlan_id:
     if matchObj != False:
-        ret = MSA_API.process_content(constants.ENDED, 'OK Qos applied for vlan : '+vlan_id+' : '+return_message, context, True)
+        ret = MSA_API.process_content(constants.ENDED, 'OK Qos [In] applied for vlan : '+vlan_id+' : '+return_message, context, True)
         print(ret)
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos Policy map '+input_policy_name+' not found : '+return_message, context, True)
+        if interface_is_status_down == True:
+            ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface Down and Qos [In] Policy map '+input_policy_name+' not found : '+return_message, context, True)
+        else:
+            ret = MSA_API.process_content(constants.FAILED, 'NOK because Interface Up, but Qos [In] Policy map '+input_policy_name+' not found : '+return_message, context, True)
         print(ret)
 
 ret = MSA_API.process_content(constants.ENDED, 'SKIPPED, VLAN-ID is missing from interface_name input: '+input_policy_name, context, True)
