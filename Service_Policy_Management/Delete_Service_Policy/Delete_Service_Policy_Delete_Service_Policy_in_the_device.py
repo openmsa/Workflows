@@ -25,6 +25,9 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'DELETE' # MS method corresponding on ADD Static route operation
 
+#Store service Policy action
+context.update(service_policy_action='DELETE_SERVICE_POLICY')
+
 interface_name = context['interface_name'] #MS input variable value
 direction = context['direction'] #MS input variable value
 policy_name = context['policy_name'] #MS input variable value
@@ -44,6 +47,12 @@ obj = {object_id:config} #object = {'':{'object_id':'Service_pol', 'direction':'
 
 params = dict(service_policy=obj)
 context['ms_params'] = params
+
+is_policy_name_matched = context.get('is_policy_name_matched')
+if is_policy_name_matched == False:
+    ret = MSA_API.process_content(constants.ENDED, 'Skipped , policy name was not found', context, True)
+    print(ret)
+
 
 obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
 response = json.loads(obmf.content)

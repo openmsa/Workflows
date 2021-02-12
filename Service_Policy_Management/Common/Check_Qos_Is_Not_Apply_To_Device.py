@@ -97,6 +97,8 @@ def is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_pattern, st
 device_id = context['device_id'][3:]
 # instantiate device object
 device = Device(device_id=device_id)
+service_policy_action = context.get('service_policy_action')   # 'DELETE_SERVICE_POLICY' / 'ADD_SERVICE_POLICY' 
+interface_is_status_down = context.get('interface_is_status_down')
 
 #extract vlan_id from interface_name
 vlan_id = extract_vlan_id_from_interface_name(context)
@@ -106,16 +108,26 @@ context.update(vlan_id=vlan_id)
 qos_cancellation_pattern = '[In] Default.'
 matchObj = is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_cancellation_pattern)
 
+
 return_message = ''
 if 'device_push_conf_end_reponse' in context:
     return_message = context.get('device_push_conf_end_reponse').get('message')
 
 if vlan_id:
-    if matchObj != False:
+    if matchObj == True:
         ret = MSA_API.process_content(constants.ENDED, 'OK Qos not applied for vlan : '+vlan_id+' : '+return_message, context, True)
         print(ret)
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos already exist : '+return_message, context, True)
+        if service_policy_action == 'DELETE_SERVICE_POLICY' :
+            ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos not removed : '+return_message, context, True)
+        else:
+            if interface_is_status_down == True:
+               #Interface DOWN and Qos applied
+               ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface Donw Qos already exist : '+return_message, context, True)
+            else:
+               #Interface UP and Qos applied
+               ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface UP and Qos already exist : '+return_message, context, True)
+
         print(ret)
 
 ret = MSA_API.process_content(constants.ENDED, 'SKIPPED, VLAN-ID is missing from interface_name input: '+context.get('interface_name'), context, True)
