@@ -61,7 +61,7 @@ if is_policy_name_matched == False:
          ret = MSA_API.process_content(constants.FAILED, 'Interface Down, but the Service Policy  "' + input_policy_name + '" does not exists in the interface  "' + object_id + '"', context, True)
     else:
          # IF UP and policy-map not applied
-         ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" not found on the device.', context, True)
+         ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Service Policy "'+input_policy_name+'" for interface "' + object_id + '" not found on the device.', context, True)
     print(ret)
 ret = MSA_API.process_content(constants.ENDED, 'On interface "' + object_id + '", the Service Policy  "' + input_policy_name + '" exists in the device.', context, True)
 print(ret)
