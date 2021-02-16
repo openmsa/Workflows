@@ -32,5 +32,5 @@ if response:
 if found_interface_name == False:
     ret = MSA_API.process_content(constants.FAILED, 'Can not find the interface "'+object_id+'" on the device', context, True)
     print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Good, the interface "'+object_id+'" exist on the device ', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Good, the interface "'+object_id+'" exists on the device ', context, True)
 print(ret)
