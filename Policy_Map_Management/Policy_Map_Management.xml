@@ -29,7 +29,7 @@
     <visibility>0</visibility>
     <task name="Common_Ensure_Policy_Map_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Common</processPath>
-      <displayName>Ensure Policy Map do not exist in the device</displayName>
+      <displayName>Ensure Policy Map does not exist in the device</displayName>
     </task>
     <task name="Add_Policy_Map_Add_Policy_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Add_Policy_Map</processPath>
@@ -37,7 +37,7 @@
     </task>
     <task name="Common_Ensure_Policy_Map_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Common</processPath>
-      <displayName>Ensure Policy Map exist in the device</displayName>
+      <displayName>Ensure Policy Map exists in the device</displayName>
     </task>
   </process>
   <process name="Delete_Policy_Map">
@@ -46,7 +46,7 @@
     <visibility>0</visibility>
     <task name="Common_Ensure_Policy_Map_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Common</processPath>
-      <displayName>Ensure Policy Map exist in the device</displayName>
+      <displayName>Ensure Policy Map exists in the device</displayName>
     </task>
     <task name="Delete_Policy_Map_Delete_Policy_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Delete_Policy_Map</processPath>
@@ -54,7 +54,7 @@
     </task>
     <task name="Common_Ensure_Policy_Map_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Policy_Map_Management/Common</processPath>
-      <displayName>Ensure Policy Map do not exist in the device</displayName>
+      <displayName>Ensure Policy Map does not exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_Service">
