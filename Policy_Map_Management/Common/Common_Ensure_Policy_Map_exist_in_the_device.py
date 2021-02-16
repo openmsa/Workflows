@@ -45,7 +45,7 @@ def is_policy_map_matched(device_policy_dict, input_policy_dict):
             #loop in device (configuration) policy-map dictionary.
             for key, d_policy  in device_policy_dict.items():
                 device_class_map = d_policy.get('class_map')
-                if device_class_map == input_class_map:
+                if device_class_map == input_class_map and device_class_map != "CM_DISCARD":
                     return False
     return True
 ####################################################
