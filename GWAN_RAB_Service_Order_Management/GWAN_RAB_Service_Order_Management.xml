@@ -51,9 +51,9 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Remove service policy from interface</displayName>
     </task>
-    <task name="SO_Add_Create_named_ALC_and_all_ACL_entries.py">
+    <task name="SO_Add_Create_named_ACL_and_all_ACL_entries.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
-      <displayName>Create named ALC and all ACL entries</displayName>
+      <displayName>Create named ACL and all ACL entries</displayName>
     </task>
     <task name="SO_Add_Create_the_class_map.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
