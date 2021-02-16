@@ -84,7 +84,7 @@ def is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_pattern, st
         return_message = response.get('message')
 
         matchObj = return_message.find(qos_pattern)
-        if matchObj:
+        if matchObj != -1:
             is_qos = True
     return is_qos
 ####################################################
@@ -118,15 +118,18 @@ if vlan_id:
         ret = MSA_API.process_content(constants.ENDED, 'OK Qos not applied for vlan : '+vlan_id+' : '+return_message, context, True)
         print(ret)
     else:
-        if service_policy_action == 'DELETE_SERVICE_POLICY' :
-            ret = MSA_API.process_content(constants.FAILED, 'NOK, Qos not removed : '+return_message, context, True)
-        else:
-            if interface_is_status_down == True:
-               #Interface DOWN and Qos applied
-               ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface Donw Qos already exist : '+return_message, context, True)
+        if interface_is_status_down == True:
+            #Check 'Interface Vlan-IF Number is disabled'
+            matchObj = return_message.find('Interface Vlan-IF Number is disabled')
+            if matchObj == -1:
+                #condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is displayed
+                ret = MSA_API.process_content(constants.ENDED, 'NOK, Interface Down and "Interface Vlan-IF Number is disabled" is displayed: '+return_message, context, True)
             else:
-               #Interface UP and Qos applied
-               ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface UP and Qos already exist : '+return_message, context, True)
+                #Failure condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is NOT displayed
+                ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface Down and "Interface Vlan-IF Number is disabled" is not displayed: '+return_message, context, True)
+        else:
+            #Interface UP and Qos applied
+            ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface UP and Qos already exists : '+return_message, context, True)
 
         print(ret)
 
