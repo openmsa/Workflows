@@ -30,6 +30,7 @@
     <displayName>SO Instantiate</displayName>
     <type>CREATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="SO_Instantiate_Spreadsheet_List_Acquisition.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate</processPath>
       <displayName>Spreadsheet List Acquisition</displayName>
@@ -39,6 +40,7 @@
     <displayName>SO Add</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="SO_Add_Read_Service_Order_Spreadsheet.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Add</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
@@ -80,6 +82,7 @@
     <displayName>SO Delete</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="SO_Delete_Read_Service_Order_Spreadsheet.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete</processPath>
       <displayName>Read Service Order Spreadsheet</displayName>
@@ -133,7 +136,7 @@
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
-    <visibility>0</visibility>
+    <visibility>5</visibility>
     <name>Service Order Management</name>
     <group>GWAN RAB | Master WF</group>
   </information>

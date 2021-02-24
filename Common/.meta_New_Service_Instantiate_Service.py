@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>New_Service_Instantiate_Service.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1604316234856</value>
+            <value>1614007759059</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1604316234852</value>
+            <value>1614007759054</value>
         </entry>
         <entry>
             <key>TAG</key>

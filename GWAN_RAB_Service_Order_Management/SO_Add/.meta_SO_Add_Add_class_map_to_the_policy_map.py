@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>SO_Add_Add_class_map_to_the_policy_map.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1605536328619</value>
+            <value>1614156381000</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
