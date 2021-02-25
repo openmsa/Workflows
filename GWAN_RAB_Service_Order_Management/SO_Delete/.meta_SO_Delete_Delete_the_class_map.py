@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>SO_Delete_Delete_the_class_map.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1604997838020</value>
+            <value>1614266109150</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
