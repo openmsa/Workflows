@@ -8,7 +8,7 @@ from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
 context = Variables.task_call(dev_var)
-                  
+
 ####################################################
 #                                                  #
 #                FUNCTIONS                         #
@@ -96,7 +96,7 @@ service_id = ''
 service_ext_ref = ''
 #Instantiate new Policy_Map_Management WF dedicated for the device_id.
 if not 'policy_map_service_instance' in context:
-    data = dict(device_id=device_ref)
+    data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
     orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
     response = json.loads(orch.content)
     context['response'] = response
@@ -118,7 +118,7 @@ if not 'policy_map_service_instance' in context:
 
 #Loop in policy_map dictionaries and in policy_map list by calling the Policy_Map_Management process 'Add_ACL'.
 #loop which handling list of sheets
-data = dict()
+data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
 for key, policy_map_list  in policy_map_dicts.items():
     policy_map_name = ''
     #ensure policy_map_list is not empty otherwise break the loop.
@@ -155,14 +155,15 @@ for key, policy_map_list  in policy_map_dicts.items():
             #execute service by ref.
             orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
             response = json.loads(orch.content)
+            service_id = response.get('serviceId').get('id')
             process_id = response.get('processId').get('id')
             #get service process details.
             response = get_process_instance(orch, process_id)
             status = response.get('status').get('status')
             details = response.get('status').get('details')
             if status == constants.FAILED:
-                ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
+                ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
                 print(ret)
 
-ret = MSA_API.process_content(constants.ENDED, 'Policy-map configuration added successfully to the device ' + device_ref, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Policy-map configuration added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
 print(ret)
