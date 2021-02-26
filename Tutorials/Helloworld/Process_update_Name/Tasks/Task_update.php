@@ -10,10 +10,15 @@ require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
  */
 function list_args()
 {
+  create_var_def('name', 'String');
 }
 
-$name=$context['name'];
+check_mandatory_param('name');
 
+/**
+ * get the value of name from the context and create a variable out of it
+ */
+$name=$context['name'];
 /**
  * print the value in the log file /opt/jboss/latest/log/process.log 
  */
