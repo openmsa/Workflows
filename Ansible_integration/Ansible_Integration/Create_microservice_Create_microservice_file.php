@@ -36,6 +36,7 @@ $sed_command = '/bin/sed -i \'s@<operation></operation>@'.$microservice_create_l
 $result = shell_exec($sed_command);
 
 $context['microservice_path'] = $microservice_dir.$microservice_file_name;
+$context['microservice_file_name'] = $microservice_file_name;
   
 //Looks like we have finished. COngrats!
 task_success('Success. Microservice '.$microservice_file_name.'has been created successfully.');

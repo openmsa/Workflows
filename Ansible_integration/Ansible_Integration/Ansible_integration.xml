@@ -19,6 +19,7 @@
       </classes>
     </variable>
     <variable displayName="Do import hosts from Ansible server?" name="params.do_import_hosts" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="A workflow to execute Ansible-based microservice" name="params.execute_workflow" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/Ansible_integration/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/_TEST_Ansible_integration/Connect_to_Ansible_host">
@@ -69,6 +70,10 @@
     <task name="Create_microservice_Add_microservice_to_deployment_settings.php">
       <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
       <displayName>Add microservice to deployment settings</displayName>
+    </task>
+    <task name="Task_Update_default_values.php">
+      <processPath>/opt/fmc_repository/Process/_TEST_Ansible_integration/Create_microservice/Tasks</processPath>
+      <displayName>Update default values</displayName>
     </task>
   </process>
   <process name="Process/Ansible_integration/Ansible_Integration/Import_specific_playbooks">
