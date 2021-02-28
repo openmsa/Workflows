@@ -1,0 +1,21 @@
+{
+  "IPAM IPv4 addresses": "ip_address",
+  "IPAM IPv4 prefixes": "prefix",
+  "IPAM Sites": "sites",
+  "IPAM Tenants": "tenants",
+  "IPAM VLANs": "vlan",
+  "IPAM VRFs": "vrf",
+  "IPAM Devices": "devices",
+  "IPAM Interfaces": "interfaces",
+  "IPAM Interface Connections": "interface_connections",
+  "IPAM Available Prefixes": "available_prefix",
+  "Router OSPF configuration": "OSPFv2_Configuration",
+  "Router OSPF General": "OSPFv2_General",
+  "Router OSPF LSDB LSA 1": "OSPFv2_LSDB_LSA_1",
+  "Router Standard ACL": "Standard_Access_Control_List",
+  "Router Interface": "interfaces",
+  "Router LLDP neighbour details": "lldp_neighbour_details",
+  "Router LLDP neighbour": "lldp_neighbours",
+  "Router prefix filter": "prefix_filter",
+  "Router static route": "static_route"
+}

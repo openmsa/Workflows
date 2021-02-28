@@ -1,0 +1,43 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="IPAM device ID" name="params.ipam_device_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Site name" name="params.site" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Grenoble" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Tenant name" name="params.tenant" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Ansible Demo" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="File to share data between workflows" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Ansible_integration/Import_from_IPAM/Process_Import_from_IPAM">
+    <displayName>Import from IPAM</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Define_vars.py">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Import_from_IPAM/Process_Import_from_IPAM/Tasks</processPath>
+      <displayName>Define vars</displayName>
+    </task>
+    <task name="Task_Import_site_router.py">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Import_from_IPAM/Process_Import_from_IPAM/Tasks</processPath>
+      <displayName>Import site router</displayName>
+    </task>
+    <task name="Task_Import_site_prefix.py">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Import_from_IPAM/Process_Import_from_IPAM/Tasks</processPath>
+      <displayName>Import site prefix</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/Import_from_IPAM/Process_DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>Import from IPAM</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Import from IPAM</name>
+    <group>ANSIBLE|DEMO</group>
+  </information>
+</ObjectDefinition>

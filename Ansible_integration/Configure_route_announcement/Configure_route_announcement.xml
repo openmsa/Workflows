@@ -1,0 +1,32 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Exchange_file" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Ansible_integration/Configure_route_announcement/Process_Configure_route_announcement">
+    <displayName>Configure route announcement</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Configure_route_announcement.py">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Configure_route_announcement/Process_Configure_route_announcement/Tasks</processPath>
+      <displayName>Configure route announcement</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/Configure_route_announcement/Process_DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>The workflow is part of Ansible Demo</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Configure route announcement</name>
+    <group>ANSIBLE|DEMO</group>
+  </information>
+</ObjectDefinition>
