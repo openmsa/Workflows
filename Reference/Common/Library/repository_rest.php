@@ -210,4 +210,40 @@ function _repository_list_files ($uri) {
 	return $response;
 }
 
+/**
+ * curl -u ncroot:NCROOT_PWD  -XGET "http://localhost:10080/ubi-api-rest/repository/v2/resource/workflow?uri={uri}"
+ */
+function _repository_get_workflow_definition ($uri) {
+        $msa_rest_api = "repository/v2/resource/workflow?uri={$uri}";
+        $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+        $response = perform_curl_operation($curl_cmd, "REPOSITORY GET WORKFLOW DEFINITION");
+        $response = json_decode($response, true);
+        if ($response['wo_status'] !== ENDED) {
+                $response = json_encode($response);
+                return $response;
+        }
+        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+        return $response;
+}
+
+/**
+ * curl -u ncroot:NCROOT_PWD  -XPOST "http://localhost:10080/ubi-api-rest/repository/v2/resource/workflow?uri={uri} -d '{"content": "xyz"}'"
+ */
+function _repository_change_workflow_definition ($uri, $content) {
+        $msa_rest_api = "repository/v2/resource/workflow?uri={$uri}";
+        $content_array = json_decode($content, True);
+        if (!$content_array['example']) {
+           $content_array['example'] = new ArrayObject();
+        }
+        foreach ($content_array['process'] as $process => &$process_details) {
+           if (!$process_details['tasks']) {
+              $process_details['tasks'] = array();
+           }
+        }
+        $content = json_encode($content_array);
+        $curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api, $content);
+        $response = perform_curl_operation($curl_cmd, "REPOSITORY CHANGE WORKFLOW");
+        return $response;
+}
+
 ?>
