@@ -88,7 +88,7 @@ def create_new_service(context, orch, service_name, process_name, service_instan
 
     #Instantiate new Backup_Configuration_Service_Mangement WF dedicated for the device_id.
     if not service_instance_name in context:
-        data = dict(device_id=device_ref)
+        data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
         orch.execute_service(service_name, process_name, data)
         response = json.loads(orch.content)
         context['response'] = response
@@ -140,6 +140,8 @@ Do backup of the device running-configuration.
 '''
 def execute_do_backup_config_process(context, orch, service_name, process_name, service_instance_name, data={}):
     service_ext_ref = context.get(service_instance_name).get('external_ref')
+    data['SO_service_instance_id']  = context['SERVICEINSTANCEID']
+    data['SO_service_external_ref'] = context['SERVICEINSTANCEREFERENCE']
     #execute Backup_Configuration_Management WF 
     orch.execute_service_by_reference(ubiqube_id, service_ext_ref, service_name, process_name, data)
     response = json.loads(orch.content)
