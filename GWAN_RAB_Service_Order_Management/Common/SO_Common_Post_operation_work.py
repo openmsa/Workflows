@@ -59,5 +59,5 @@ if ret:
     context.update(post_op_backup_revision_id=revision_id)
     
 #
-ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully with revision_id: ' + details, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully (#'+str(context['backup_config_process_service_id'])+') with revision_id: ' + details , context, True)
 print(ret)

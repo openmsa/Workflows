@@ -146,10 +146,14 @@ def execute_do_backup_config_process(context, orch, service_name, process_name, 
     orch.execute_service_by_reference(ubiqube_id, service_ext_ref, service_name, process_name, data)
     response = json.loads(orch.content)
     process_id = response.get('processId').get('id')
+    service_id = response.get('serviceId').get('id')
     #get service process details.
     response = get_process_instance(orch, process_id)
     status = response.get('status').get('status')
     details = response.get('status').get('details')
+    context.update(execute_do_backup_config_process_details=details)
+    context.update(backup_config_process_service_id=service_id)
+
     if status == constants.FAILED:
         ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
         print(ret)
@@ -209,5 +213,5 @@ if ret:
     context.update(pre_op_backup_revision_id=revision_id)
 
 #    
-ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully with revision_id: ' + details, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully (#'+str(context['backup_config_process_service_id'])+') with revision_id: ' + details, context, True)
 print(ret)
