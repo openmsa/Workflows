@@ -37,9 +37,15 @@ with open(context['exchange_file'], 'r') as exchange_file:
 process_id = context['SERVICEINSTANCEID']
 ms_router_lldp = context['ms_aliases']['Router LLDP neighbour details']    
 
+
+#Wait when LLDP neighbours become available
+time.sleep(30)
 #Create site router Order object
 RouterOrderObject = Order(exchange_dict['router_device_id'])
 RouterOrderObject.command_synchronize(300)
+time.sleep(3)
+RouterOrderObject.command_synchronize(300)
+
 
 #Find a router interface where a site server is connected to
 objects_list = RouterOrderObject.command_objects_instances(ms_router_lldp)

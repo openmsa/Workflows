@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Execute_Ansible_based_microservice.xml</value>
+            <value>Task_Update_DNS_records.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1614698792558</value>
+            <value>1614761487389</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,11 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1614698792549</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1614761487385</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -29,12 +25,8 @@
             <value>text</value>
         </entry>
         <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>

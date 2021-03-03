@@ -9,13 +9,14 @@
   "IPAM Interfaces": "interfaces",
   "IPAM Interface Connections": "interface_connections",
   "IPAM Available Prefixes": "available_prefix",
-  "Router OSPF configuration": "OSPFv2_Configuration",
-  "Router OSPF General": "OSPFv2_General",
-  "Router OSPF LSDB LSA 1": "OSPFv2_LSDB_LSA_1",
-  "Router Standard ACL": "Standard_Access_Control_List",
+  "Router OSPF configuration": "ospfv2_configuration",
+  "Router OSPF General": "ospfv2_general",
+  "Router OSPF LSDB LSA 1": "ospfv2_lsdb_lsa_1",
+  "Router Standard ACL": "std_acl",
   "Router Interface": "interfaces",
   "Router LLDP neighbour details": "lldp_neighbour_details",
   "Router LLDP neighbour": "lldp_neighbours",
   "Router prefix filter": "prefix_filter",
-  "Router static route": "static_route"
+  "Router static route": "static_route",
+  "Router DNS host records": "host_records"
 }
