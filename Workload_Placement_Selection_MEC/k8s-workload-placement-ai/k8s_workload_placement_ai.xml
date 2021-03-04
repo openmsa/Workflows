@@ -1,0 +1,122 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Object ID" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Subtenant" name="params.subtenant" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="User Namespace" name="params.user_namespace" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Service Namespace" name="params.service_namespace" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Packet Size, bytes" name="params.pkt_size" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Packet Count" name="params.pkt_count" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Application Name" name="params.app_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_CREATE_SERVICE">
+    <displayName>CREATE SERVICE</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_GET_NETWORK_PARAMETERS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_CREATE_SERVICE/Tasks</processPath>
+      <displayName>GET NETWORK PARAMETERS</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_CONSTRUCT_PROBATION">
+    <displayName>CONSTRUCT PROBATION</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_COMPOSE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_CONSTRUCT_PROBATION/Tasks</processPath>
+      <displayName>COMPOSE</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_CREATE_NAMESPACES">
+    <displayName>CREATE NAMESPACES</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_CREATE_IF_NOT_EXISTS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_CREATE_NAMESPACES/Tasks</processPath>
+      <displayName>CREATE IF NOT EXISTS</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_DEPLOY_PROBATION_NETWORK">
+    <displayName>DEPLOY PROBATION NETWORK</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_DEPLOY.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_DEPLOY_PROBATION_NETWORK/Tasks</processPath>
+      <displayName>DEPLOY</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_IMPORT_METRICS">
+    <displayName>IMPORT METRICS</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_PROBATION_METRICS.py">
+      <processPath>n/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_IMPORT_METRICS/Tasks</processPath>
+      <displayName>PROBATION METRICS</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_DEPLOY_USER_APP__AVERAGE_LATENCY_">
+    <displayName>DEPLOY USER APP [AVERAGE LATENCY]</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_DEPLOY_APP.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_DEPLOY_USER_APP__AVERAGE_LATENCY_/Tasks</processPath>
+      <displayName>DEPLOY APP</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_DEPLOY_USER_APP__ULTRA_LOW_LATENCY_">
+    <displayName>DEPLOY USER APP [ULTRA LOW LATENCY]</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_DEPLOY_APP.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_DEPLOY_USER_APP__ULTRA_LOW_LATENCY_/Tasks</processPath>
+      <displayName>DEPLOY APP</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_DEPLOY_USER_APP__HIGH_QUALITY_">
+    <displayName>DEPLOY USER APP [HIGH QUALITY]</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_DEPLOY_APP.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_DEPLOY_USER_APP__HIGH_QUALITY_/Tasks</processPath>
+      <displayName>DEPLOY APP</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_CLEAN_UP">
+    <displayName>CLEAN UP</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_REMOVE_PODS_AND_APPS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_CLEAN_UP/Tasks</processPath>
+      <displayName>REMOVE PODS AND APPS</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/k8s_workload_placement_ai/Process_DELETE_WF_INSTANCE">
+    <displayName>DELETE WF INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_REMOVE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_DELETE_WF_INSTANCE/Tasks</processPath>
+      <displayName>REMOVE</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>k8s-workload-placement-ai</name>
+    <group>k8s|MEC|AI|dev</group>
+  </information>
+</ObjectDefinition>
