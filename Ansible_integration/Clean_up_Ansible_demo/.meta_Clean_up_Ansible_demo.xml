@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Create_microservices__Bulk_mode__Monitor_changes.php</value>
+            <value>Clean_up_Ansible_demo.xml</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1614772403489</value>
+            <value>1614938154265</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,11 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1614772403485</value>
+            <value>1614938154247</value>
+        </entry>
+        <entry>
+            <key>MODEL</key>
+            <value>0</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -25,8 +29,12 @@
             <value>text</value>
         </entry>
         <entry>
+            <key>MANUFACTURER</key>
+            <value>0</value>
+        </entry>
+        <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>FILE</value>
         </entry>
         <entry>
             <key>COMMENT</key>

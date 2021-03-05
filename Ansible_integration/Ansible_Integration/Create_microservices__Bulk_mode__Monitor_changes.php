@@ -2,7 +2,7 @@
 require_once '/opt/fmc_repository/Process/Reference/Common/common.php';
 
 
-if (!$context['do_monitor_changes']) {
+if ($context['do_monitor_changes'] !== 'false') {
 	$microservice_name_prefix = $context['microservice_name_prefix'];
 	$microservice_file = $context['read_playbook_file'];
 	$microservice_name = $context['microservice_name'];
