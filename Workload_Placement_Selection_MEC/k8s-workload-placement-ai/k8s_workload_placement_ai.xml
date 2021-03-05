@@ -55,7 +55,7 @@
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_PROBATION_METRICS.py">
-      <processPath>n/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_IMPORT_METRICS/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_IMPORT_METRICS/Tasks</processPath>
       <displayName>PROBATION METRICS</displayName>
     </task>
   </process>
