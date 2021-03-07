@@ -53,12 +53,14 @@ RepositoryObject = Repository()
 deployment_settings_list = CustomerObject.get_deployment_settings_by_customer_id(customer_id)
 ansible_profile = dict()
 counter = 0
-while not ansible_profile and conunter < len(deployment_settings_list):
-  if context['ansible_device_id'] in deployment_settings_list[counter]['attachedManagedEntities']:
+while not ansible_profile and counter < len(deployment_settings_list):
+  if int(context['ansible_device_id']) in deployment_settings_list[counter]['attachedManagedEntities']:
     ansible_profile = deployment_settings_list[counter]
-  counter =+ 1
+  counter += 1
 ms_list = list()
-for microservice_uri, microservice_details in ansible_profile.items():
+util.log_to_process_file(process_id, ansible_profile)
+for microservice_uri, microservice_details in ansible_profile['microserviceUris'].items():
+  util.log_to_process_file(process_id, microservice_details)
   if 'Ansible-based' in microservice_details['groups']:
     ms_list.append(microservice_uri)
 
@@ -66,6 +68,17 @@ RepositoryObject.detach_microserviceis_from_configuration_profile(ansible_profil
 
 for microservice_uri in ms_list:
   RepositoryObject.delete_repository_resource(microservice_uri)
+  
+workflow_details = RepositoryObject.get_workflow_definition(context['ansible_execute_wf'])
+util.log_to_process_file(process_id, 'WORKFLOW DETAILS BEFORE: {}'.format(workflow_details))
+
+for variable, details in workflow_details.items():
+  if details['name'] == 'params.ansible_microservice':
+    details['values'] = list()
+    
+util.log_to_process_file(process_id, 'WORKFLOW DETAILS AFTER: {}'.format(workflow_details))
+
+RepositoryObject.change_workflow_definition(context['ansible_execute_wf'], workflow_details)
 
 result = MSA_API.process_content('ENDED', 'Ansible-based microservices have been removed', context, True)
 print(result)

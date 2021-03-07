@@ -54,7 +54,7 @@ RouterOrderObject.command_synchronize(300)
 objects_list = RouterOrderObject.command_objects_instances(ms_router_dns_records)
 
 for host_record_object in objects_list:
-   ms_dict = {ms_router_dns_records: {host_record_object: dict()}
+   ms_dict = {ms_router_dns_records: {host_record_object: dict()}}
    RouterOrderObject.command_execute('DELETE', ms_dict)
 
 result = MSA_API.process_content('ENDED', 'DNS Records have been updated', context, True)

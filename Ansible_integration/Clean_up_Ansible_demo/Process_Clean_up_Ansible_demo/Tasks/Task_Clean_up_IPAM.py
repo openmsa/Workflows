@@ -29,6 +29,7 @@ TaskVariables.add('ipam_device_id', var_type = 'Device')
 TaskVariables.add('ansible_device_id', var_type = 'Device')
 TaskVariables.add('dns_server_device_id', var_type = 'Device')
 TaskVariables.add('ansible_rollback_ms', var_type = 'String')
+TaskVariables.add('exchange_file', var_type = 'String')
 
 #Add vars to context
 context = Variables.task_call(TaskVariables)
@@ -41,10 +42,11 @@ with open(context['exchange_file'], 'r') as exchange_file:
     exchange_dict = json.load(exchange_file)
 
 #Import microservice alias list
-with open('/opt/fmc_repository/Process/Ansible_integration/Import_from_IPAM/ipam_microservice_list.json', 'r') as alias_file:
-  	context['ipam_ms_aliases'] = json.load(alias_file)
+with open('/opt/fmc_repository/Process/Ansible_integration/microservice_list.json', 'r') as alias_file:
+  	context['ms_aliases'] = json.load(alias_file)
 
 process_id               = context['SERVICEINSTANCEID']
+ipam_device_id 			 = context['ipam_device_id']
 ms_ipam_tenant           = context['ms_aliases']['IPAM Tenants']
 ms_ipam_site             = context['ms_aliases']['IPAM Sites']
 ms_ipam_device           = context['ms_aliases']['IPAM Devices']
@@ -78,10 +80,13 @@ counter = 0
 while ip_address_list and (counter < len(objects_list)):
   object = IpamOrderObject.command_objects_instances_by_id(ms_ipam_address, 
                                                            objects_list[counter])[ms_ipam_address][objects_list[counter]]
-  if object['tenant'] == exchange_dict['tenant'] and object['object_id'] in ip_address_list:
-    ms_dict = {ms_ipam_address: {object['object_id']: dict()}}
-    IpamOrderObject.command_execute('DELETE', ms_dict)
-    ip_address_list.remove(object['object_id'])
+  if 'tenant' in list(object.keys()):
+    if object['tenant'] == exchange_dict['tenant'] and object['object_id'] in ip_address_list:
+      ms_dict = {ms_ipam_address: {object['object_id']: dict()}}
+      IpamOrderObject.command_execute('DELETE', ms_dict)
+      ip_address_list.remove(object['object_id'])
+  counter += 1
+  
     
 #Clean up prefix
 objects_list = IpamOrderObject.command_objects_instances(ms_ipam_prefix)
@@ -90,9 +95,12 @@ is_removed = False
 while not is_removed and (counter < len(objects_list)):
   object = IpamOrderObject.command_objects_instances_by_id(ms_ipam_prefix, 
                                                            objects_list[counter])[ms_ipam_prefix][objects_list[counter]]
-  if object['tenant'] == exchange_dict['tenant'] and exchange_dict['site_prefix'] == object['object_id']:
-    ms_dict = {ms_ipam_prefix: {object['object_id']: dict()}}
-    IpamOrderObject.command_execute('DELETE', ms_dict)
+  if 'tenant' in list(object.keys()):
+    if object['tenant'] == exchange_dict['tenant'] and exchange_dict['site_prefix'] == object['object_id']:
+      ms_dict = {ms_ipam_prefix: {object['object_id']: dict()}}
+      IpamOrderObject.command_execute('DELETE', ms_dict)
+      is_removed = True
+  counter += 1
 
 result = MSA_API.process_content('ENDED', 'IPAM has been updated', context, True)
 print(result)

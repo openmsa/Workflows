@@ -78,7 +78,7 @@ objects_list = RouterOrderObject.command_objects_instances(ms_router_ospf_config
 ospf_process_object = RouterOrderObject.command_objects_instances_by_id(ms_router_ospf_config, objects_list[0])[ms_router_ospf_config][objects_list[0]]
 
 #Remove new network to announce
-for index, value in ospf_process_object['interface']:
+for index, value in ospf_process_object['interface'].items():
   if value['network_address'] == exchange_dict['site_prefix']:
   	del ospf_process_object['interface'][index]
 

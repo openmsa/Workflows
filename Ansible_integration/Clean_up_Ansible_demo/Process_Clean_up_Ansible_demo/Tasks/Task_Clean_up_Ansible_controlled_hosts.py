@@ -57,9 +57,7 @@ microservice_variables = RepositoryObject.get_microservice_variables_default_val
 #Else - empty string
 object_dict = dict()
 for variable in microservice_variables:
-	if variable in ansible_variables_dict:
-		object_dict[variable] = ansible_variables_dict[variable]
-	elif variable == 'playbook_path':
+	if variable == 'playbook_path':
 		object_dict[variable] = microservice_variables['playbook_path'] 
 	else:
 		object_dict[variable] = str()
@@ -67,7 +65,7 @@ for variable in microservice_variables:
 ms_dict = {context['ansible_rollback_ms']: {'': object_dict}}
 AnsibleOrderObject.command_execute('CREATE', ms_dict)
 
-success_comment = 'Microservice {} has executed Ansible playbook successfully'.format(context['ansible_microservice'])
+success_comment = 'Microservice {} has executed Ansible playbook successfully'.format(context['ansible_rollback_ms'])
 
 #Finish the task correctlly
 print(MSA_API.process_content('ENDED', success_comment , context, True))
