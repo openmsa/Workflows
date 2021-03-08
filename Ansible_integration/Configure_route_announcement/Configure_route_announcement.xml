@@ -21,7 +21,7 @@
   </process>
   <information>
     <icon/>
-    <description>The workflow is part of Ansible Demo</description>
+    <description>The workflow is part of Ansible demo. The workflow is proposed to configure server subnet announcement via OSPF </description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>

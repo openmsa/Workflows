@@ -32,7 +32,7 @@
   </process>
   <information>
     <icon/>
-    <description>Import from IPAM</description>
+    <description>The workflow is part of Ansible integration demo. The workflow is proposed to get info about available prefixes in IPAM and create a new prefix for server subnet. </description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>

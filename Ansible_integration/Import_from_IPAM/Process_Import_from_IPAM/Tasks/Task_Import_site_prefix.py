@@ -17,6 +17,8 @@ import os
 
 """
 The proposals of the task are:
+ - Find out available IPv4 prefix for the provided site;
+ - Create IPv4 prefix for the new server segment
 
 
 """

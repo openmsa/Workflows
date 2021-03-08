@@ -5,8 +5,7 @@ import re
 
 """
 The proposals of the task are:
-
-
+ - Define variables
 """
 
 

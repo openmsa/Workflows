@@ -22,7 +22,7 @@
   </process>
   <information>
     <icon/>
-    <description>The workflow is part of Ansible demo</description>
+    <description>The workflow is part of Ansible demo. The workflow is proposed to configure servers FQDN on DNS server</description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>

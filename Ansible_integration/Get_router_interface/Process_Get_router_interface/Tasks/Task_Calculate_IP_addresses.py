@@ -17,6 +17,8 @@ import os
 
 """
 The proposals of the task are:
+ - Calculate IPv4 addresses to configure on 
+ router interface and on server interfaces
 
 
 """

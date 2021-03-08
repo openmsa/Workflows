@@ -17,6 +17,7 @@ import os
 
 """
 The proposals of the task are:
+ - Configure router interface
 
 
 """

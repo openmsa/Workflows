@@ -47,7 +47,6 @@ RepositoryObject = Repository()
 
 #Get default values for microservice
 deployment_settings_id = AnsibleOrderObject.command_get_deployment_settings_id()
-util.log_to_process_file(process_id, 'PROFILE ID {}'.format(deployment_settings_id))
 microservice_path = RepositoryObject.get_microservice_path_by_name(context['ansible_microservice'], deployment_settings_id)
 microservice_variables = RepositoryObject.get_microservice_variables_default_value(microservice_path)
     

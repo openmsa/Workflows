@@ -26,6 +26,7 @@ while ($do_monitor_changes) {
   //Syncing Ansible host
   $announce = update_asynchronous_task_details($context, "Syncing Ansible host... ");
   $response = json_decode(synchronize_objects_and_verify_response($device_id), true);
+  sleep(15);
   if ($response['wo_status'] !== ENDED) {
  		echo json_encode($response);
  		exit;

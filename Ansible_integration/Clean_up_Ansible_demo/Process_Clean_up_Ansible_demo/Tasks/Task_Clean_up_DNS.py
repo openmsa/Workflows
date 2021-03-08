@@ -17,7 +17,7 @@ import os
 
 """
 The proposals of the task are:
-
+ - Remove server FQDN records from DNS server
 
 """
 

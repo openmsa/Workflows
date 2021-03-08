@@ -15,6 +15,7 @@ import sys
 import os
 """
 The proposals of the task are:
+ - Get router interface name where servers are connected to
 
 
 """
@@ -49,12 +50,10 @@ RouterOrderObject.command_synchronize(300)
 
 #Find a router interface where a site server is connected to
 objects_list = RouterOrderObject.command_objects_instances(ms_router_lldp)
-util.log_to_process_file(process_id, objects_list)
 counter = 0
 router_interface = None
 while router_interface is None and counter < len(objects_list):
     neighbour_object = RouterOrderObject.command_objects_instances_by_id(ms_router_lldp, objects_list[counter])[ms_router_lldp][objects_list[counter]]
-    util.log_to_process_file(process_id, '{} {}'.format(neighbour_object['system_name'], exchange_dict['site']))
     if re.search(exchange_dict['site'].lower(), neighbour_object['system_name'].lower()):
       router_interface = neighbour_object['local_interface']
     counter += 1

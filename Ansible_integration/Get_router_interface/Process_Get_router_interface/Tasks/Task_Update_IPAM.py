@@ -17,6 +17,7 @@ import os
 
 """
 The proposals of the task are:
+ - Update IPAM by new IPv4 addresses
 
 
 """

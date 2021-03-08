@@ -14,6 +14,8 @@ import time
 
 """
 The proposals of the tasks are:
+ - Find out a MSA ME what represents site router
+ - Put the ME device id to context
 
 """
 

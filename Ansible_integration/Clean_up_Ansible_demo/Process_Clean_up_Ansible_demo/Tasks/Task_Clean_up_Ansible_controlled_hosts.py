@@ -16,9 +16,11 @@ import re
 
 """
 The proposals of the tasks are:
- - Get variables values for Ansible-based microservices from exchange file;
- - Get variables names from provided Ansible-based microservice;
- - Execute provided Ansible-based microservice with variables from exchange file.
+ - Execute a playbook what cleans Linux host states:
+  - Remove lldpd packet;
+  - Flush Iptables;
+  - Flush routes;
+  - Flush interface config
 
 """
 
@@ -56,14 +58,15 @@ microservice_variables = RepositoryObject.get_microservice_variables_default_val
 #Walk through the provided Ansible-based microservice variables. If the variable exists in exchange dict --> get the value.
 #Else - empty string
 object_dict = dict()
-for variable in microservice_variables:
-	if variable == 'playbook_path':
-		object_dict[variable] = microservice_variables['playbook_path'] 
-	else:
-		object_dict[variable] = str()
+if microservice_variables:
+	for variable in microservice_variables:
+		if variable == 'playbook_path':
+			object_dict[variable] = microservice_variables['playbook_path'] 
+		else:
+			object_dict[variable] = str()
 
-ms_dict = {context['ansible_rollback_ms']: {'': object_dict}}
-AnsibleOrderObject.command_execute('CREATE', ms_dict)
+	ms_dict = {context['ansible_rollback_ms']: {'': object_dict}}
+	AnsibleOrderObject.command_execute('CREATE', ms_dict)
 
 success_comment = 'Microservice {} has executed Ansible playbook successfully'.format(context['ansible_rollback_ms'])
 

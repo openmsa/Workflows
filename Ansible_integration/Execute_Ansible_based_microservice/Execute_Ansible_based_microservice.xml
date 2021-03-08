@@ -31,7 +31,7 @@
   </process>
   <information>
     <icon/>
-    <description/>
+    <description>The workflow is part of Ansible demo. The workflow is proposed to execute Ansible-based microservice inside BPM. It gets microservice name as input and looking for the microservice variables in exchange file </description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>

@@ -19,7 +19,8 @@ import os
 
 """
 The proposals of the task are:
-
+ - Remove default values for ansible-based microservice name in 
+ the workflow what executes  ansible-based microservices
 
 """
 
@@ -58,25 +59,20 @@ while not ansible_profile and counter < len(deployment_settings_list):
     ansible_profile = deployment_settings_list[counter]
   counter += 1
 ms_list = list()
-util.log_to_process_file(process_id, ansible_profile)
 for microservice_uri, microservice_details in ansible_profile['microserviceUris'].items():
-  util.log_to_process_file(process_id, microservice_details)
   if 'Ansible-based' in microservice_details['groups']:
     ms_list.append(microservice_uri)
-
 RepositoryObject.detach_microserviceis_from_configuration_profile(ansible_profile['id'], ms_list)
 
 for microservice_uri in ms_list:
   RepositoryObject.delete_repository_resource(microservice_uri)
-  
-workflow_details = RepositoryObject.get_workflow_definition(context['ansible_execute_wf'])
-util.log_to_process_file(process_id, 'WORKFLOW DETAILS BEFORE: {}'.format(workflow_details))
 
-for variable, details in workflow_details.items():
+workflow_details = RepositoryObject.get_workflow_definition(context['ansible_execute_wf'])
+
+for variable, details in enumerate(workflow_details['variables']['variable']):
   if details['name'] == 'params.ansible_microservice':
     details['values'] = list()
     
-util.log_to_process_file(process_id, 'WORKFLOW DETAILS AFTER: {}'.format(workflow_details))
 
 RepositoryObject.change_workflow_definition(context['ansible_execute_wf'], workflow_details)
 

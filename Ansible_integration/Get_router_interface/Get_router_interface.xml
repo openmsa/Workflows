@@ -29,7 +29,7 @@
   </process>
   <information>
     <icon/>
-    <description>The workflow is part of Ansible Demo</description>
+    <description>The workflow is part of Ansible demo. The workflow is proposed to get information about router interface where servers are connected to.</description>
     <displayField>service_id</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>

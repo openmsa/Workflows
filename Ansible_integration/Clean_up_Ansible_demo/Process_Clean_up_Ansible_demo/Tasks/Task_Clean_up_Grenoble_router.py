@@ -17,7 +17,8 @@ import os
 
 """
 The proposals of the task are:
-
+ - Remove IPv4 address from router interface
+ - Remove IPv4 network from OSPF announcment
 
 """
 
@@ -78,9 +79,13 @@ objects_list = RouterOrderObject.command_objects_instances(ms_router_ospf_config
 ospf_process_object = RouterOrderObject.command_objects_instances_by_id(ms_router_ospf_config, objects_list[0])[ms_router_ospf_config][objects_list[0]]
 
 #Remove new network to announce
+index_to_remove = None
 for index, value in ospf_process_object['interface'].items():
-  if value['network_address'] == exchange_dict['site_prefix']:
-  	del ospf_process_object['interface'][index]
+  if value['network_address'] == exchange_dict['site_prefix'].split('/')[0]:
+    index_to_remove = index
+    break
+if index_to_remove is not None:
+    del ospf_process_object['interface'][index_to_remove]
 
 #Configure OSPF
 ms_dict = {ms_router_ospf_config: {ospf_process_object['object_id']: ospf_process_object}}

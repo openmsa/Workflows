@@ -17,6 +17,7 @@ import os
 
 """
 The proposals of the task are:
+ - Clean up IPv4 prefixes and IPv4 addresses in IPAM
 
 
 """
