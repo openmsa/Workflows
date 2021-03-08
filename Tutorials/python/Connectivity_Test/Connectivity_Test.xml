@@ -1,0 +1,47 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="IP" name="params.addresses.0.ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Ping Status" name="params.addresses.0.status" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Tutorials/python/Connectivity_Test/Process_Create">
+    <displayName>Create</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_register_addresses.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Connectivity_Test/Process_Create/Tasks</processPath>
+      <displayName>register addresses</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/python/Connectivity_Test/Process_Test_Connectivity">
+    <displayName>Test Connectivity</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_test_connectivity.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Connectivity_Test/Process_Test_Connectivity/Tasks</processPath>
+      <displayName>test connectivity</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/python/Connectivity_Test/Process_Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_delete.py">
+      <processPath>/opt/fmc_repository/Process/Tutorials/python/Connectivity_Test/Process_Delete/Tasks</processPath>
+      <displayName>delete</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Connectivity Test</name>
+    <group/>
+  </information>
+</ObjectDefinition>
