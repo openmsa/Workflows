@@ -129,6 +129,10 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate</processPath>
       <displayName>Delete WF Instances</displayName>
     </task>
+    <task name="Task_Delete_Reviewed_Configuration_File.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate/Tasks</processPath>
+      <displayName>Delete Reviewed Configuration File</displayName>
+    </task>
   </process>
   <information>
     <icon/>
