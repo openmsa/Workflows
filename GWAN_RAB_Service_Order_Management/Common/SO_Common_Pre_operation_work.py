@@ -48,6 +48,9 @@ def write_configs_to_http_repo():
     file_extension = '.html'
     file_name = repo_path + path_separator + device_external_ref + '_configuration_' + service_instance_id + file_extension
     filename_full_path = repo_base + file_name
+
+    context.update(displayed_config_filename=filename_full_path)
+
     #create file in http server directory.
     if not os.path.exists(os.path.dirname(filename_full_path)):
         try:
