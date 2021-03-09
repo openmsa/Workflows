@@ -63,8 +63,13 @@ response = self_device_push_conf_status_ret(device, 60)
 #the status should be down
 status = response.get('status')
 context.update(device_push_conf_end_reponse=response)
-if status == constants.FAILED:
-	ret = MSA_API.process_content(constants.FAILED, 'No push config response.', context, True)
+
+#parse the terrafom success operation message from response
+return_message = response.get('message')
+is_op_completed = return_message.find("Terraform has been successfully initialized!")
+
+if status == constants.FAILED or is_op_completed == -1:
+	ret = MSA_API.process_content(constants.FAILED, 'Terraform initialization is failed: ' + return_message, context, True)
 	print(ret)
 
 return_message = response.get('message')
