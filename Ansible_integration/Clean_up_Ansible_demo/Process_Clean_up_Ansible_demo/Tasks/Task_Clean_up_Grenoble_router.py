@@ -34,6 +34,7 @@ context = Variables.task_call(TaskVariables)
 with open(context['exchange_file'], 'r') as exchange_file:
     exchange_dict = json.load(exchange_file)
 
+#Define additional variables
 process_id                   = context['SERVICEINSTANCEID']
 router_device_id             = exchange_dict['router_device_id']
 subnet						 = exchange_dict['site_prefix']

@@ -45,7 +45,7 @@ for service in service_list:
 'Process/Ansible_integration/Import_from_IPAM/Import_from_IPAM',
 'Process/Ansible_integration/Ansible_Integration/Ansible_integration',
 'Process/Ansible_integration/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice',
-'Process/Ansible_integration/Clean_up_Ansible_demo/Clean_up_Ansible_demo.xml'):
+'Process/Ansible_integration/Clean_up_Ansible_demo/Clean_up_Ansible_demo'):
       is_finished = True
       response = Orchestration.list_process_instances_by_service(service['id'])
       for process in json.loads(Orchestration.content):

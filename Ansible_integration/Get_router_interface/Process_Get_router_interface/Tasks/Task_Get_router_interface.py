@@ -44,7 +44,7 @@ time.sleep(30)
 #Create site router Order object
 RouterOrderObject = Order(exchange_dict['router_device_id'])
 RouterOrderObject.command_synchronize(300)
-time.sleep(3)
+time.sleep(10)
 RouterOrderObject.command_synchronize(300)
 
 

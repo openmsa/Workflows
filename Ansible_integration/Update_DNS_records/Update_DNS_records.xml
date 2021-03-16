@@ -28,6 +28,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Update DNS records</name>
-    <group/>
+    <group>ANSIBLE|DEMO</group>
   </information>
 </ObjectDefinition>

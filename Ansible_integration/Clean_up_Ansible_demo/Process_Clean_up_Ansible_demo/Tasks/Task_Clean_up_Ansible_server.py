@@ -72,7 +72,6 @@ workflow_details = RepositoryObject.get_workflow_definition(context['ansible_exe
 for variable, details in enumerate(workflow_details['variables']['variable']):
   if details['name'] == 'params.ansible_microservice':
     details['values'] = list()
-    
 
 RepositoryObject.change_workflow_definition(context['ansible_execute_wf'], workflow_details)
 

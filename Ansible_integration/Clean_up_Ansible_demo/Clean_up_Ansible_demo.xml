@@ -52,6 +52,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Clean up Ansible demo</name>
-    <group/>
+    <group>ANSIBLE|DEMO</group>
   </information>
 </ObjectDefinition>

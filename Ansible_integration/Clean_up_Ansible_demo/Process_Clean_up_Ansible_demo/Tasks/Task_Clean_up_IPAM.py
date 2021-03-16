@@ -46,6 +46,7 @@ with open(context['exchange_file'], 'r') as exchange_file:
 with open('/opt/fmc_repository/Process/Ansible_integration/microservice_list.json', 'r') as alias_file:
   	context['ms_aliases'] = json.load(alias_file)
 
+#Define additional variables
 process_id               = context['SERVICEINSTANCEID']
 ipam_device_id 			 = context['ipam_device_id']
 ms_ipam_tenant           = context['ms_aliases']['IPAM Tenants']
