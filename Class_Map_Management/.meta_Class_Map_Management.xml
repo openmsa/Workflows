@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>Class_Map_Management.xml</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1605709310760</value>
+            <value>1614266126667</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1605709310754</value>
+            <value>1614266126660</value>
         </entry>
         <entry>
             <key>MODEL</key>

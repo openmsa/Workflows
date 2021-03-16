@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>SO_Common_Pre_operation_work.py</value>
+            <value>Task_Delete_Reviewed_Configuration_File.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1614699530637</value>
+            <value>1615305350684</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1614699530633</value>
+            <value>1615305350680</value>
         </entry>
         <entry>
             <key>TAG</key>

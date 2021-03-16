@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>SO_Common_Remove_service_policy_from_interface.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1605023764606</value>
+            <value>1614162411294</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1605023764601</value>
+            <value>1614068017769</value>
         </entry>
         <entry>
             <key>TAG</key>

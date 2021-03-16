@@ -95,7 +95,7 @@ service_id = ''
 service_ext_ref = ''
 #Instantiate new Class_Map_Service_Mangement WF dedicated for the device_id.
 if not 'class_map_service_instance' in context:
-    data = dict(device_id=device_ref)
+    data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
     orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
     response = json.loads(orch.content)
     context['response'] = response
@@ -123,19 +123,20 @@ for class_map in class_map_list:
     acl = get_config_param_val(context, class_map, 'acl_name')
     
     #build data input parameter for Class_Map_Management baseline WF
-    data = dict(method=method, object_id=class_map_name, acl=acl) 
+    data = dict(method=method, object_id=class_map_name, acl=acl, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE']) 
     if isinstance(data, dict):
         service_ext_ref = context.get('class_map_service_instance').get('external_ref')
         #execute Class_Map_Management WF 
         orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
         response = json.loads(orch.content)
+        service_id = response.get('serviceId').get('id')
         process_id = response.get('processId').get('id')
         #get service process details.
         response = get_process_instance(orch, process_id)
         status = response.get('status').get('status')
         details = response.get('status').get('details')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
+            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
             print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Class Map added successfully to the device ' + device_ref, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Class Map added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
 print(ret)
