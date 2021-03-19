@@ -70,10 +70,11 @@ if __name__ == "__main__":
 
     ms_vars_dict = {"object_id": oid,
                     "namespace": context['user_namespace'],
-                    "app_name": context['app_name']
+                    "app_name": context['app_name'],
+                    "label": context['label']
                     }
 
-    Order(target_device_id).command_execute('CREATE', {'k8_pods_list': {oid: ms_vars_dict}})
+    Order(target_device_id).command_execute('CREATE', {'k8_pods_list_label': {oid: ms_vars_dict}})
 
 
     ret = MSA_API.process_content('ENDED',

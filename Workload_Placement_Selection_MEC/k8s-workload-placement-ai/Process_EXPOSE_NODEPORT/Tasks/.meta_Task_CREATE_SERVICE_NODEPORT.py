@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_DEPLOY_APP.py</value>
+            <value>Task_CREATE_SERVICE_NODEPORT.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1616169835112</value>
+            <value>1616169083581</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1614867087402</value>
+            <value>1616166029866</value>
         </entry>
         <entry>
             <key>TAG</key>

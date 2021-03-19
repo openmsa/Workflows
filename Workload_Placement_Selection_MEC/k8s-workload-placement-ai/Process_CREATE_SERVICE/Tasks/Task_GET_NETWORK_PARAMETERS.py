@@ -11,6 +11,10 @@ dev_var.add('service_namespace', var_type='String')
 dev_var.add('pkt_size', var_type='Integer')
 dev_var.add('pkt_count', var_type='Integer')
 dev_var.add('app_name', var_type='String')
+dev_var.add('port', var_type='Integer')
+dev_var.add('target_port', var_type='Integer')
+dev_var.add('node_port', var_type='Integer')
+dev_var.add('label', var_type='String')
 context = Variables.task_call(dev_var)
 
 if __name__ == "__main__":
@@ -19,7 +23,8 @@ if __name__ == "__main__":
     device_ip_list = []
 
     search = Lookup()
-    search.look_list_device_by_customer_ref(context['subtenant'])
+    # search.look_list_device_by_customer_ref(context['subtenant'])
+    search.look_list_device_by_customer_ref('TyrellCorp')
     device_list = search.content
     device_list = json.loads(device_list)
 
