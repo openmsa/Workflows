@@ -8,7 +8,7 @@ from msa_sdk import util
 # List all the parameters required by the task
 dev_var = Variables()
 dev_var.add('id')
-dev_var.add('protocol')
+dev_var.add('icmp')
 dev_var.add('src_ip')
 dev_var.add('dst_port')
 context = Variables.task_call(dev_var)
@@ -19,6 +19,8 @@ for device in devices:
   # extract the database ID
   device_db_id = device['id'][-3:]
 
+  if context['icmp'] == 'true':
+    context['dst_port'] = 'null'
   # build the Microservice JSON params for the CREATE
   micro_service_vars_array = {"object_id": context['id'],
                               "src_ip": context['src_ip'],
