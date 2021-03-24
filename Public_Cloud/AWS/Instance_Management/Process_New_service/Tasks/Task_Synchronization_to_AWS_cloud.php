@@ -20,7 +20,7 @@ function list_args()
 check_mandatory_param("AwsDeviceId");
 
 // set 
-$context["wf_instance_id_for_display"] = $context['SERVICEINSTANCEID'];
+$context["service_id"] = $context['SERVICEINSTANCEID'];
 
 logToFile(debug_dump($context, "MSA CONTEXT:\n"));
 
@@ -56,6 +56,7 @@ if ($response['wo_status'] !== ENDED) {
 $region = $response['wo_newparams']['hostname'];
 $context["region"] = $region;
 
+$context["service_id"] = $context['SERVICEINSTANCEID'] + " - " + $region;
 
 task_exit(ENDED, "Synchronisation to AWS cloud is successful.");
 
