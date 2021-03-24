@@ -32,7 +32,11 @@ $managed_device_name = $context["InstanceId"];
 $manufacturer_id = $context['manufacturer_id'];
 $model_id = $context['model_id'];
 $login = $context['login'];
-$password = $context["InstanceId"];
+if (!isset($context["password"])) {
+    $password = $context["InstanceId"];
+} else {
+    $password = $context["password"];
+}
 $password_admin = $context['new_password'];
 $device_ip_address = $context['device_ip_address'];
 $device_external_reference = "";

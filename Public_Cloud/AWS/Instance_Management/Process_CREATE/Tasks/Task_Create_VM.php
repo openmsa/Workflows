@@ -101,7 +101,7 @@ $array_tag = array(
 		'Resources' => array("1" => $context ['InstanceId']),
 		'Tags' => array (
 				"1" => array('Key' => 'Project', 'Value' => 'AWS demo'),
-				"2" => array('Key' => 'Name', 'Value' => 'FGT VNF'),
+				"2" => array('Key' => 'Name', 'Value' => 'Demo VNF'),
 				),
 		);
 logToFile ( debug_dump ( $array_tag, "AWS tag instance request array\n" ) );
