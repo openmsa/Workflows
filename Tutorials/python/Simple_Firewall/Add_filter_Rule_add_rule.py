@@ -19,8 +19,8 @@ for device in devices:
   # extract the database ID
   device_db_id = device['id'][-3:]
 
-  if context['icmp'] == 'true':
-    context['dst_port'] = 'null'
+  if context['icmp'] == 'true': context['dst_port'] = 'null'
+  
   # build the Microservice JSON params for the CREATE
   micro_service_vars_array = {"object_id": context['id'],
                               "src_ip": context['src_ip'],
