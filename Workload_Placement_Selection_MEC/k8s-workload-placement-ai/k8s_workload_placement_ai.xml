@@ -123,6 +123,40 @@
       <displayName>CREATE SERVICE NODEPORT</displayName>
     </task>
   </process>
+  <process name="Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO">
+    <displayName>AIO</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_CREATE_SERVICE.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>CREATE_SERVICE</displayName>
+    </task>
+    <task name="Task_CONSTRUCT_PROBATION.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>CONSTRUCT_PROBATION</displayName>
+    </task>
+    <task name="Task_CREATE_NAMESPACES.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>CREATE_NAMESPACES</displayName>
+    </task>
+    <task name="Task_DEPLPOY_PROBATION_NETWORK.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>DEPLPOY_PROBATION_NETWORK</displayName>
+    </task>
+    <task name="Task_IMPORT_METRICS.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>IMPORT_METRICS</displayName>
+    </task>
+    <task name="Task_DEPLOY_USER_APP.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>DEPLOY_USER_APP</displayName>
+    </task>
+    <task name="Task_EXPOSE_NODE_PORT.py">
+      <processPath>/opt/fmc_repository/Process/Workload_Placement_Selection_MEC/k8s-workload-placement-ai/Process_AIO/Tasks</processPath>
+      <displayName>EXPOSE_NODE_PORT</displayName>
+    </task>
+  </process>
   <information>
     <icon/>
     <description/>
