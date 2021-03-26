@@ -25,7 +25,7 @@
     <allowSchedule/>
     <task name="Common_Ensure_Class_Map_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
-      <displayName>Ensure Class Map do not exist in the device</displayName>
+      <displayName>Ensure Class Map does not exist in the device</displayName>
     </task>
     <task name="Add_Class_Map_Add_Class_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Add_Class_Map</processPath>
@@ -33,7 +33,7 @@
     </task>
     <task name="Common_Ensure_Class_Map_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
-      <displayName>Ensure Class Map exist in the device</displayName>
+      <displayName>Ensure Class Map exists in the device</displayName>
     </task>
   </process>
   <process name="Delete_Class_Map">
@@ -43,7 +43,7 @@
     <allowSchedule/>
     <task name="Common_Ensure_Class_Map_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
-      <displayName>Ensure Class Map exist in the device</displayName>
+      <displayName>Ensure Class Map exists in the device</displayName>
     </task>
     <task name="Delete_Class_Map_Delete_Class_Map_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Delete_Class_Map</processPath>
@@ -51,7 +51,7 @@
     </task>
     <task name="Common_Ensure_Class_Map_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Class_Map_Management/Common</processPath>
-      <displayName>Ensure Class Map do not exist in the device</displayName>
+      <displayName>Ensure Class Map does not exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_service">
