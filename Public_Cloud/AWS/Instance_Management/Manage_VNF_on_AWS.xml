@@ -12,10 +12,10 @@
     </variable>
     <variable displayName="Image ID" name="params.ImageId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
+        <values displayValue="Centos7 [London]">ami-0478ddb96ff667afc</values>
+        <values displayValue="Centos7 [Ireland]">ami-0dacaa0236a59b303</values>
         <values displayValue="FortiGate-VM64 6.0.6 [London] ">ami-0b1bed84cc40437e7</values>
-        <values displayValue="Centos7 (Ireland)">ami-0dacaa0236a59b303</values>
         <values displayValue="FortiGate-VM64 6.4.5 [Ireland] ">ami-04acaa2b439d0ab7a</values>
-        <values displayValue="Centos7 (London)">ami-0478ddb96ff667afc</values>
       </values>
     </variable>
     <variable displayName="Instance Type" name="params.InstanceType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="t2.small" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
