@@ -90,7 +90,6 @@ if ($response['wo_status'] !== ENDED) {
 
 if (isset($context["KeyName"])) {
 	_configuration_variable_create ($device_id_long, "SSH_KEY", "/home/ncuser/.ssh/".$context["KeyName"].".pem");
-  	_configuration_variable_create ($device_id_long, "CONN_CLASS", "LinuxsshKeyConnection");
 }
 
 $response = prepare_json_response(ENDED, "MSA Device created successfully.\n$wo_comment", $context, true);
