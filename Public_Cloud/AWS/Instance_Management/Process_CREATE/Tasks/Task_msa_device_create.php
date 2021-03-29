@@ -29,10 +29,15 @@ if (!isset($context['customer_id'])) {
 $customer_id = $context['customer_id'];
 $customer_db_id = substr($customer_id,4);
 $managed_device_name = $context["InstanceId"];
+$context["service_id"]  = $context["service_id"] + " - " + $context["InstanceId"];
 $manufacturer_id = $context['manufacturer_id'];
 $model_id = $context['model_id'];
 $login = $context['login'];
-$password = $context["InstanceId"];
+if (!isset($context["password"])) {
+    $password = $context["InstanceId"];
+} else {
+    $password = $context["password"];
+}
 $password_admin = $context['new_password'];
 $device_ip_address = $context['device_ip_address'];
 $device_external_reference = "";
@@ -81,6 +86,11 @@ if ($response['wo_status'] !== ENDED) {
 	$response = json_encode($response);
 	echo $response;
 	exit;
+}
+
+if (isset($context["KeyName"])) {
+	_configuration_variable_create ($device_id_long, "SSH_KEY", "/home/ncuser/.ssh/".$context["KeyName"].".pem");
+  	_configuration_variable_create ($device_id_long, "CONN_CLASS", "LinuxsshKeyConnection");
 }
 
 $response = prepare_json_response(ENDED, "MSA Device created successfully.\n$wo_comment", $context, true);

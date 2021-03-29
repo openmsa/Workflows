@@ -18,7 +18,8 @@ function list_args()
   create_var_def('ImageId');
   create_var_def('InstanceType');
   create_var_def('security_group');
-  create_var_def('SubnetId');
+  create_var_def('SubnetId');  
+  create_var_def('KeyName');
 }
 
 check_mandatory_param('ImageId');
@@ -58,13 +59,24 @@ $ec2Client = Ec2Client::factory(array(
 
 logToFile("ec2 client successful");
 
-$array = array("ImageId" => $context["ImageId"], 
+if (isset($context["KeyName"])) {
+  $array = array("ImageId" => $context["ImageId"], 
+               "KeyName" => $context["KeyName"], 
                "MinCount" => 1, 
                "MaxCount" => 1,
                "InstanceType" => $context['InstanceType'], 
                "Placement.AvailabilityZone" => $context["region"], 
                "SubnetId" => $context["SubnetId"], 
                "SecurityGroupIds" => array ("1" => $context["security_group"]));
+} else {
+    $array = array("ImageId" => $context["ImageId"], 
+               "MinCount" => 1, 
+               "MaxCount" => 1,
+               "InstanceType" => $context['InstanceType'], 
+               "Placement.AvailabilityZone" => $context["region"], 
+               "SubnetId" => $context["SubnetId"], 
+               "SecurityGroupIds" => array ("1" => $context["security_group"]));
+}
 
 logToFile(debug_dump($array, "AWS request array\n"));
 
@@ -101,7 +113,7 @@ $array_tag = array(
 		'Resources' => array("1" => $context ['InstanceId']),
 		'Tags' => array (
 				"1" => array('Key' => 'Project', 'Value' => 'AWS demo'),
-				"2" => array('Key' => 'Name', 'Value' => 'FGT VNF'),
+				"2" => array('Key' => 'Name', 'Value' => 'Demo VNF'),
 				),
 		);
 logToFile ( debug_dump ( $array_tag, "AWS tag instance request array\n" ) );
