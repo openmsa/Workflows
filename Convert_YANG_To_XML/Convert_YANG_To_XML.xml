@@ -44,7 +44,7 @@
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>Convert_YANG_To_XML</name>
-    <group/>
+    <name>YANG to XML Converter</name>
+    <group>tool|yang</group>
   </information>
 </ObjectDefinition>
