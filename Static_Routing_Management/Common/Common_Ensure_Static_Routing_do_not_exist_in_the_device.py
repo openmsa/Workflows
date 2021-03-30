@@ -38,6 +38,9 @@ if response:
         sr = response.get(object_name).get(obj_id)
         ret_static_route_ip = sr.get('object_id')
         ret_static_route_mask = sr.get('mask')
+        ret_static_route_vlan_id = sr.get('vlan_id')
+        ret_static_route_next_hop = sr.get('next_hop')
+        ret_static_route_distance = sr.get('distance')
         if object_id == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
             is_static_route_matched = True
 
