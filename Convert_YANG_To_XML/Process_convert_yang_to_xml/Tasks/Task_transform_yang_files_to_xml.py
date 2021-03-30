@@ -65,8 +65,8 @@ context['yang_filenames'] = yang_filenames
 if selected_number ==0:
   ret = MSA_API.process_content(constants.FAILED, 'No yang file selected', context, True)
 
-output_file =  yang_filename.replace(context['yangs_extension'],'') + '_output.xml'
-context['output_file'] = output_file
+xml_output_file =  yang_filename.replace(context['yangs_extension'],'') + '_output.xml'
+context['xml_output_file'] = xml_output_file
 
 #Run pyang on all files together
 # pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config -o generated_conf.xml oneos-staticroute.yang dependency/oneos-common.yang dependency/oneos-glob.yang dependency/oneos-vrf.yang dependency/oneos-route-glob.yang
@@ -75,7 +75,7 @@ context['output_file'] = output_file
 # sh confd-basic-7.5.1.linux.x86_64.installer.bin /opt/yang/confd-basic
 
 #Try pyang simple
-pyang_command = ' pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config  -o ' + output_file + " " + " ".join(map(str, yang_filenames))
+pyang_command = ' pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config  -o ' + xml_output_file + " " + " ".join(map(str, yang_filenames))
  
 try:
   #Try pyang simple
@@ -93,11 +93,12 @@ context['pyang_command'] = pyang_command
 
 
 if len(yang_filenames) >1:
-  #ret = MSA_API.process_content(constants.ENDED, 'Yangs files "' + " ,".join(map(str, yang_filenames)) + '" are parsed successfully into "'+ output_file + '"' , context, True)
-  ret = MSA_API.process_content(constants.ENDED, 'New XML output file: "'+ output_file + '"' , context, True)
+  #ret = MSA_API.process_content(constants.ENDED, 'Yangs files "' + " ,".join(map(str, yang_filenames)) + '" are parsed successfully into "'+ xml_output_file + '"' , context, True)
+  ret = MSA_API.process_content(constants.ENDED, 'New XML output file: "'+ xml_output_file + '"' , context, True)
 else:
-  ret = MSA_API.process_content(constants.ENDED, 'New XML output file: "'+ output_file + '"'  , context, True)
+  ret = MSA_API.process_content(constants.ENDED, 'New XML output file: "'+ xml_output_file + '"'  , context, True)
 
 print(ret)
+
 
 
