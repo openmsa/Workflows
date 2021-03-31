@@ -3,6 +3,7 @@ from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+
 dev_var = Variables()
 dev_var.add('source_address', var_type='IPAddress')
 dev_var.add('subnet_mask', var_type='IPMask')
@@ -24,7 +25,7 @@ object_name = 'static_route'
 object_id = context.get('source_address')
 src_mask = context.get('subnet_mask')
 vlan_id = context.get('vlan_id')
-next_hop = context.get('next_hop')
+next_hop = context.get('nexthop')
 distance = context.get('distance')
 obmf.command_objects_instances_by_id(object_name, object_id)
 response = json.loads(obmf.content)
@@ -41,7 +42,10 @@ if response:
         ret_static_route_vlan_id = sr.get('vlan_id')
         ret_static_route_next_hop = sr.get('next_hop')
         ret_static_route_distance = sr.get('distance')
-        if object_id = ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
+        if distance == '1' and ret_static_route_distance == "null":
+            # Set the default 'Distance' value in th Catalyst ME.
+            ret_static_route_distance = '1'
+        if object_id == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
             is_static_route_matched = True    
 
 #if response equals empty dictionary it means class map object is not exist in the device yet.
