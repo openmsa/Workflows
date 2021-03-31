@@ -4,7 +4,7 @@
     <variable displayName="Source IP Address" name="params.source_address" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Subnet Mask" name="params.subnet_mask" startIncrement="0" type="IpMask" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Nexthop" name="params.nexthop" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="VLAN Id" name="params.vlan_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="VLAN Id" name="params.vlan_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Distance" name="params.distance" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="SO Service Instance ID." name="params.SO_service_instance_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="SO Service Instance ID." groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="SO Service External Ref." name="params.SO_service_external_ref" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="SO Service External Ref." groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
@@ -14,6 +14,7 @@
     <displayName>New Service</displayName>
     <type>CREATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="New_Service_Instantiate_Service.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Common</processPath>
       <displayName>Instantiate Service</displayName>
@@ -23,9 +24,10 @@
     <displayName>Add Static Route</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="Common_Ensure_Static_Routing_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
-      <displayName>Ensure Static Routing do not exist in the device</displayName>
+      <displayName>Ensure Static Routing does not exist in the device</displayName>
     </task>
     <task name="Add_Static_Route_Add_Static_Routing_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Add_Static_Route</processPath>
@@ -33,16 +35,17 @@
     </task>
     <task name="Common_Ensure_Static_Routing_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
-      <displayName>Ensure Static Routing exist in the device</displayName>
+      <displayName>Ensure Static Routing exists in the device</displayName>
     </task>
   </process>
   <process name="Delete_Static_Route">
     <displayName>Delete Static Route</displayName>
     <type>UPDATE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
     <task name="Common_Ensure_Static_Routing_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
-      <displayName>Ensure Static Routing exist in the device</displayName>
+      <displayName>Ensure Static Routing exists in the device</displayName>
     </task>
     <task name="Delete_Static_Route_Delete_Static_Routing_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Delete_Static_Route</processPath>
@@ -50,13 +53,14 @@
     </task>
     <task name="Common_Ensure_Static_Routing_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Static_Routing_Management/Common</processPath>
-      <displayName>Ensure Static Routing do not exist in the device</displayName>
+      <displayName>Ensure Static Routing does not exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_Service">
     <displayName>Delete Service</displayName>
     <type>DELETE</type>
     <visibility>0</visibility>
+    <allowSchedule/>
   </process>
   <information>
     <icon/>
