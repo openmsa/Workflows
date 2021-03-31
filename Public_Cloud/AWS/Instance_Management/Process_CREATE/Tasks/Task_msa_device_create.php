@@ -62,6 +62,9 @@ $context['device_id'] = $device_id;
 
 $device_id_long = substr($context['device_id'], 3);
 
+_device_set_nature_by_id($device_id_long, "VPUB");
+
+
 /**
 * generate a hostname based on the public IP
 * this is necessary for sysloct collection
