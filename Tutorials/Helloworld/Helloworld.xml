@@ -51,6 +51,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Helloworld</name>
-    <group/>
+    <group>tutorial</group>
   </information>
 </ObjectDefinition>
