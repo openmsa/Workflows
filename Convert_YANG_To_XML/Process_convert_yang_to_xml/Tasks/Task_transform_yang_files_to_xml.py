@@ -2,6 +2,7 @@ import copy
 import glob
 import json
 import subprocess
+import os
 
 import numpy as np
 from re import search
@@ -52,7 +53,6 @@ for st in yang_list:
                    # { "yang": "/opt/fmc_repository/Datafiles/YANG/example-2.yang", "is_selected": "false"  } ]
   if st.get('is_selected') == True:
     if st.get('yang'):
-      #yang_filename = context.get('yangs_directory') + '/' + st.get('yang')
       yang_filename = context.get('yangs_directory') + '/' + st.get('yang')
       yang_filenames.append(yang_filename)
 
@@ -67,27 +67,15 @@ if selected_number ==0:
 
 xml_output_file =  yang_filename.replace(context['yangs_extension'],'') + '_output.xml'
 context['xml_output_file'] = xml_output_file
+yang_path = os.path.dirname(yang_filename) # run pyang in the given directorie to be able to load other yang generic library dependency 
 
-#Run pyang on all files together
-# pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config -o generated_conf.xml oneos-staticroute.yang dependency/oneos-common.yang dependency/oneos-glob.yang dependency/oneos-vrf.yang dependency/oneos-route-glob.yang
-# Before, you have to install  confd-basic-7.5.1.linux.x86_64.zip   from https://developer.cisco.com/site/confD/downloads/   
-# Unzip and run to install :
-# sh confd-basic-7.5.1.linux.x86_64.installer.bin /opt/yang/confd-basic
-
-#Try pyang simple
-pyang_command = ' pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config  -o ' + xml_output_file + " " + " ".join(map(str, yang_filenames))
+pyang_command = ' cd "'+yang_path+'";  pyang -f sample-xml-skeleton --sample-xml-skeleton-doctype=config  -o ' + xml_output_file + " " + " ".join(map(str, yang_filenames))
  
 try:
-  #Try pyang simple
   output = subprocess.check_output(pyang_command, shell=True, stderr=subprocess.STDOUT)
 except subprocess.CalledProcessError:
-  #Try pyang with confD to load some cisco config functions, needed for some yang files
-  pyang_command = 'source /opt/yang/confd-basic/confdrc; ' + pyang_command 
-  try:
-    output = subprocess.check_output(pyang_command, shell=True, stderr=subprocess.STDOUT)
-  except subprocess.CalledProcessError:
-    ret = MSA_API.process_content(constants.FAILED, 'Error:' + stderr, context, True)
-    print(ret) 
+  ret = MSA_API.process_content(constants.FAILED, 'Error:' + stderr, context, True)
+  print(ret) 
 
 context['pyang_command'] = pyang_command
 

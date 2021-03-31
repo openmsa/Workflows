@@ -1,11 +1,7 @@
 This WF is used to convert some YANG files into XML files.
 It can convert many selected YANG files together into one xml file
 
-If you want to convert some Cisco ConfD YANG files, you have to install first the ConfD librairie :
-   Download confd-basic-7.5.1.linux.x86_64.zip or newer from https://developer.cisco.com/site/confD/downloads/   
-   # Unzip and run to install :
-   sh confd-basic-7.5.1.linux.x86_64.installer.bin /opt/yang/confd-basic
- 
+If your YANG files need some the generic library dependency, you should put all generic library dependency files into the same directorie ans your YANG files.
 
 The YANG file should be by default in the directory '/opt/fmc_repository/Datafiles/YANG'
 The output xml will be created in the same directory.
