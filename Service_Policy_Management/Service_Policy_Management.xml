@@ -95,7 +95,7 @@
     </task>
     <task name="Check_Interface_Name_Exist.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure Interface Name exist in the device</displayName>
+      <displayName>Ensure Interface Name exists in the device</displayName>
     </task>
     <task name="Check_Interface_Is_Down_Device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
@@ -103,7 +103,7 @@
     </task>
     <task name="Common_Ensure_Service_Policy_do_not_exist_in_the_device.py">
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/Service_Policy_Management/Common</processPath>
-      <displayName>Ensure Service Policy do not exist in the device</displayName>
+      <displayName>Ensure Service Policy does not exist in the device</displayName>
     </task>
   </process>
   <process name="Delete_Service">
