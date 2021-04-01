@@ -27,5 +27,5 @@ context.update(obmf_sync_resp=response)
 if response:
     ret = MSA_API.process_content(constants.FAILED, 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
     print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Class Map with id="' + object_id + '" does not exist in the device yet.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Class Map with id="' + object_id + '" does not exist in the device.', context, True)
 print(ret)
