@@ -37,7 +37,7 @@ if response:
                 context.update(ret_acl_name=ret_acl_name)
 #if response equals empty dictionary it means class map object is not exist in the device yet.
 if not ret_acl_name or is_class_map_name != True:
-    ret = MSA_API.process_content(constants.FAILED, 'Class Map with id="' + object_id + '" does not exist or is not associated to ACL ' + context.get('acl') + 'in the device.', context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'Class Map with id="' + object_id + '" does not exist or is not associated with ACL "' + context.get('acl') + '".', context, True)
     print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Class Map with id="' + object_id + '" exists in the device.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Class Map with id="' + object_id + '" exists and is associated with ACL "' + ret_acl_name + '".', context, True)
 print(ret)
