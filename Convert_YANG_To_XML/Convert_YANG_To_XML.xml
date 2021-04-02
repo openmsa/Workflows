@@ -38,6 +38,12 @@
       <displayName>Convert Yang files to XML</displayName>
     </task>
   </process>
+  <process name="Process/OpenMSA/Convert_YANG_To_XML/Process_Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
   <information>
     <icon/>
     <description>Convert Yang files into xml files</description>
