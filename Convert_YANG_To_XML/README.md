@@ -13,11 +13,11 @@ Login to a live MSA as root and perform the following:
   cd /opt/fmc_repository
   git clone https://github.com/openmsa/Workflows OpenMSA_WF
   chown -R ncuser. OpenMSA_WF/
-  cd Process/
-  ln -s ../OpenMSA_WF/ OpenMSA
+  cd /opt/fmc_repository/Process
+  ln -sfn ../OpenMSA_WF/Convert_YANG_To_XML Convert_YANG_To_XML
 
 Browse to the MSA GUI, open "Manage Repository".
 
 The new entry "OpenMSA" should be available and browsable under `Automation > Workflows`.
 
-The WF path should be /opt/fmc_repository/Process/OpenMSA/Convert_YANG_To_XML/
+The WF path should be /opt/fmc_repository/Process/Convert_YANG_To_XML/

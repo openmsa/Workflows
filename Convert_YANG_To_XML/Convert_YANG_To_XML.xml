@@ -24,7 +24,7 @@
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_create_instance.py">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Convert_YANG_To_XML/Process_create_instance/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_XML/Process_create_instance/Tasks</processPath>
       <displayName>create_instance</displayName>
     </task>
   </process>
@@ -34,11 +34,11 @@
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_transform_yang_files_to_xml.py">
-      <processPath>/opt/fmc_repository/Process/OpenMSA/Convert_YANG_To_XML/Process_convert_yang_to_xml/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_XML/Process_convert_yang_to_xml/Tasks</processPath>
       <displayName>Convert Yang files to XML</displayName>
     </task>
   </process>
-  <process name="Process/OpenMSA/Convert_YANG_To_XML/Process_Delete">
+  <process name="Process/Convert_YANG_To_XML/Process_Delete">
     <displayName>Delete</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
