@@ -1,0 +1,73 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Subtenant Name" name="params.subtenant_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="MSA FQDN" name="params.msa_fqdn" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="MSA User" name="params.msa_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="MSA Password" name="params.msa_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Email" name="params.email" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="WF File Path" name="params.wf_path" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="WF File Name" name="params.wf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/TRIAL_USER_ENVIRONMENT/Process_CREATE_SUBTENANT">
+    <displayName>CREATE SUBTENANT</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_SUBTENANT.py">
+      <processPath>/opt/fmc_repository/Process/workflows/TRIAL_USER_ENVIRONMENT/Process_CREATE_SUBTENANT/Tasks</processPath>
+      <displayName>SUBTENANT</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/TRIAL_USER_ENVIRONMENT/Process_CREATE_MANAGER">
+    <displayName>CREATE MANAGER</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_MANAGER.py">
+      <processPath>/opt/fmc_repository/Process/workflows/TRIAL_USER_ENVIRONMENT/Process_CREATE_MANAGER/Tasks</processPath>
+      <displayName>MANAGER</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/TRIAL_USER_ENVIRONMENT/Process_ATTACH_WF_TO_SUBTENANT">
+    <displayName>ATTACH WF TO SUBTENANT</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_WORKFLOW.py">
+      <processPath>/opt/fmc_repository/Process/workflows/TRIAL_USER_ENVIRONMENT/Process_ATTACH_WF_TO_SUBTENANT/Tasks</processPath>
+      <displayName>WORKFLOW</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/TRIAL_USER_ENVIRONMENT/Process_DELETE_MANAGER">
+    <displayName>DELETE MANAGER</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_MANAGER.py">
+      <processPath>/opt/fmc_repository/Process/workflows/TRIAL_USER_ENVIRONMENT/Process_DELETE_MANAGER/Tasks</processPath>
+      <displayName>MANAGER</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/TRIAL_USER_ENVIRONMENT/Process_DELETE_SUBTENANT">
+    <displayName>DELETE SUBTENANT</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_SUBTENANT.py">
+      <processPath>/opt/fmc_repository/Process/workflows/TRIAL_USER_ENVIRONMENT/Process_DELETE_SUBTENANT/Tasks</processPath>
+      <displayName>SUBTENANT</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>TRIAL USER ENVIRONMENT</name>
+    <group/>
+  </information>
+</ObjectDefinition>
