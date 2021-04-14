@@ -1,0 +1,127 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Ansible Server" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="This is Ansible ME. The ME should be attached to deployment settings with the following MS:&#xa; - Ansibleplaybook;&#xa; - Read playbook file;&#xa; - Retrieve playbook files list&#xa;&#xa;New MS will be added to the deployment settings" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI1774" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Playbook reference name" name="params.microservice_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="The variable is new microservice name for Create microservice (single) task" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Ansible Playbook iptables" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Microservice Skeleton (Template)" name="params.microservice_skeleton" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="This is a template to create new microservices. File name is ansible_playbook_skeleton.xml (md5 2f68d0a95de286ed58b4864cc91fe5bb)" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="/opt/fmc_repository/CommandDefinition/ANSIBLE/ansible_playbook_skeleton.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Path to playbook to work with" name="params.playbook" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="Path to playbook to create MSA microservice based on the playbook. It is used in Create microservice (single) task" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>Retrieve_playbook_files_list</class>
+      </classes>
+    </variable>
+    <variable displayName="Path to playbook directory" name="params.playbook_path" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="This is path to playbook directory on Ansible host" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="/opt/playbooks" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Playbook references name prefix" name="params.microservice_name_prefix" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="This is prefix for new microservices what are created based on playbooks. It is used in Create microservices (Bulk mode)" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Do monitor playbook changes?" name="params.do_monitor_changes" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="If true, MSA monitors changes periodically and updates microservices automatically" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Directory where microservices will be created" name="params.microservice_dir" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="The directory where new microservices will be located in. It should be inside /opt/fmc_repository/CommandDefinition directory" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/CommandDefinition/dynamic_ansible_microservices/" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="How often check playbook changes" name="params.monitoring_delay" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="An interval (in seconds) between attempts when MSA check playbook changes. " groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="30" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Path to playbook" name="params.playbook_list.0.playbook" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" refDeviceIdVar="1774" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>CommandDefinition/ANSIBLE/Retrieve_playbook_files_list.xml</class>
+      </classes>
+    </variable>
+    <variable displayName="Do import hosts from Ansible server?" name="params.do_import_hosts" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="A workflow to execute Ansible-based microservice" name="params.execute_workflow" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/Ansible_integration/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/_TEST_Ansible_integration/Connect_to_Ansible_host">
+    <displayName>Retrive playbook list from Ansible server</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Connect_to_Ansible_host_Defince_variables.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Defince variables</displayName>
+    </task>
+    <task name="Connect_to_Ansible_host_Retrieve_playbook_list.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Retrieve playbook list</displayName>
+    </task>
+    <task name="Task_Retrieve_host_list.php">
+      <processPath>/opt/fmc_repository/Process/_TEST_Ansible_integration/Connect_to_Ansible_host/Tasks</processPath>
+      <displayName>Retrieve host list</displayName>
+    </task>
+  </process>
+  <process name="Process/_TEST_Ansible_integration/DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <process name="Process/_TEST_Ansible_integration/Create_microservice">
+    <displayName>Import a playbook</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Create_microservice_Modify_microservice_to_read_.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Modify microservice to read </displayName>
+    </task>
+    <task name="Create_microservice_Extract_playbook_variables.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Extract playbook variables</displayName>
+    </task>
+    <task name="Create_microservice_Create_playbook_microservice.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Create playbook microservice</displayName>
+    </task>
+    <task name="Create_microservice_Create_microservice_file.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Create microservice file</displayName>
+    </task>
+    <task name="Create_microservice_Add_microservice_to_deployment_settings.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Add microservice to deployment settings</displayName>
+    </task>
+    <task name="Task_Update_default_values.php">
+      <processPath>/opt/fmc_repository/Process/_TEST_Ansible_integration/Create_microservice/Tasks</processPath>
+      <displayName>Update default values</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/Ansible_Integration/Import_specific_playbooks">
+    <displayName>Import specific playbooks</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Import_specific_playbooks_Create_microservices.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Create microservices</displayName>
+    </task>
+    <task name="Import_specific_playbooks_Monitor_changes.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Monitor changes</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/Ansible_Integration/Create_microservices__Bulk_mode_">
+    <displayName>Import all playbooks</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Create_microservices__Bulk_mode__Create_microservices.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Create microservices</displayName>
+    </task>
+    <task name="Create_microservices__Bulk_mode__Monitor_changes.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Monitor changes</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/Ansible_Integration/Stop_playbook_monitoring">
+    <displayName>Stop playbook monitoring</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Stop_playbook_monitoring_Stop_monitoring.php">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
+      <displayName>Stop monitoring</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>The workflow is proposed to create MSA microservice based on Ansible playbooks. These new created microservices could be used directly from MSA GUI, or via MSA REST API or as part of automation workflow.</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Ansible integration</name>
+    <group>ANSIBLE|DEMO</group>
+  </information>
+</ObjectDefinition>
