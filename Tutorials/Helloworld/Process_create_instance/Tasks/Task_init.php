@@ -24,10 +24,6 @@ $name=$context['name'];
  */
 logToFile($name);
 
-if ($name != "Antoine") {
-  task_exit(FAILED, "Incorrect name: " . $name);
-}
-
 /**
  * End of the task do not modify after this point
  */
