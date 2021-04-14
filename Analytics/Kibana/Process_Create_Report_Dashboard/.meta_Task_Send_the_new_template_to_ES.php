@@ -2,28 +2,34 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>Task_Send_the_new_template_to_ES.php</value>
+        </entry>
+        <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1618372868065</value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>Process</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1618372868061</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+        </entry>
+        <entry>
             <key>FILE_TYPE</key>
             <value>text</value>
         </entry>
         <entry>
-            <key>DATE_MODIFICATION</key>
-            <value>1563214805701</value>
+            <key>TYPE</key>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
-            <value></value>
-        </entry>
-        <entry>
-            <key>DATE_CREATION</key>
-            <value>1473866345335</value>
-        </entry>
-        <entry>
-            <key>TAG</key>
-            <value></value>
-        </entry>
-        <entry>
-            <key>TYPE</key>
-            <value>UPLOAD</value>
         </entry>
     </map>
 </metadata>

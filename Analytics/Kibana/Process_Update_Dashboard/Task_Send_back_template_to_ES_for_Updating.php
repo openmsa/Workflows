@@ -150,7 +150,7 @@ file_put_contents($context['f'], $filecontent);
 						/** ***** End *****/
 
 /**
-curl -XPOST "10.30.18.116:5601/api/kibana/dashboards/import?exclude=index-pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+curl -XPOST "10.30.18.116:5601/kibana/api/kibana/dashboards/import?exclude=index-pattern" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
 {
   "objects": [
     {"attributes":{"description":"","hits":0,"kibanaSavedObjectMeta":{"searchSourceJSON":"{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"customer_id:0\",\"analyze_wildcard\":true}}}]}"},"optionsJSON":"{\"darkTheme\":false}","panelsJSON":"[{\"col\":1,\"panelIndex\":2,\"row\":1,\"size_x\":8,\"size_y\":2,\"panelRefName\":\"panel_0\"},{\"col\":1,\"panelIndex\":4,\"row\":3,\"size_x\":8,\"size_y\":2,\"panelRefName\":\"panel_1\"},{\"col\":9,\"panelIndex\":6,\"row\":3,\"size_x\":4,\"size_y\":2,\"panelRefName\":\"panel_2\"},{\"col\":9,\"panelIndex\":7,\"row\":7,\"size_x\":4,\"size_y\":2,\"panelRefName\":\"panel_3\"},{\"col\":9,\"panelIndex\":8,\"row\":5,\"size_x\":4,\"size_y\":2,\"panelRefName\":\"panel_4\"},{\"col\":1,\"panelIndex\":9,\"row\":5,\"size_x\":8,\"size_y\":2,\"panelRefName\":\"panel_5\"},{\"col\":1,\"panelIndex\":10,\"row\":7,\"size_x\":8,\"size_y\":2,\"panelRefName\":\"panel_6\"},{\"panelIndex\":11,\"size_x\":4,\"size_y\":2,\"col\":9,\"row\":1,\"panelRefName\":\"panel_7\"}]","timeRestore":false,"title":"template_default","uiStateJSON":"{}","version":1},"id":"template_default","migrationVersion":{"dashboard":"7.0.0"},"references":[{"id":"default-Log-View-EVENTS-OVER-TIME","name":"panel_0","type":"visualization"},{"id":"default-Devices_ID","name":"panel_1","type":"visualization"},{"id":"default-Visualization_type","name":"panel_2","type":"visualization"},{"id":"default-count-devices","name":"panel_3","type":"visualization"},{"id":"default-Indexed-EVENTS","name":"panel_4","type":"visualization"},{"id":"default-TOP10-IpDest","name":"panel_5","type":"visualization"},{"id":"default-TOP10-IpSrc","name":"panel_6","type":"visualization"},{"id":"timeFilter","name":"panel_7","type":"visualization"}],"type":"dashboard","updated_at":"2019-07-12T12:53:34.410Z","version":"WzEwMjcsMV0="}
@@ -161,7 +161,7 @@ curl -XPOST "10.30.18.116:5601/api/kibana/dashboards/import?exclude=index-patter
 **/
 
 
-$context['uriDeleteES']='http://'.$context['ipAddress'].':'.$context['port'].'/api/saved_objects/dashboard/'.$context['Hash'].'';
+$context['uriDeleteES']='http://'.$context['ipAddress'].':'.$context['port'].$context['basePath'].'/api/saved_objects/dashboard/'.$context['Hash'].'';
 
 $ci = curl_init();
     curl_setopt($ci, CURLOPT_URL, $context['uriDeleteES']);
@@ -173,7 +173,7 @@ $ci = curl_init();
     $response2 = curl_exec($ci);
 
 
-$context['uriPutES']='http://'.$context['ipAddress'].':'.$context['port'].'/api/kibana/dashboards/import?exclude=index-pattern';
+$context['uriPutES']='http://'.$context['ipAddress'].':'.$context['port'].$context['basePath'].'/api/kibana/dashboards/import?exclude=index-pattern';
 $json_doc='{"objects": [ '.$filecontent.']}';
 
 
