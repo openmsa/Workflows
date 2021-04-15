@@ -4,25 +4,25 @@
     <variable displayName="Ansible microservice to execute" name="params.ansible_microservice" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="TEST__based_on_grenoble_server_firewall_" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Ansible_integration/Block_IP_if_auth_failed/Process_Block_IP">
+  <process name="Process/Ansible_integration/DEMO/Block_IP_if_auth_failed/Process_Block_IP">
     <displayName>Block IP</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Get_Ansible_hosts.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
       <displayName>Get Ansible hosts</displayName>
     </task>
     <task name="Task_Check_conditions.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
       <displayName>Check conditions</displayName>
     </task>
     <task name="Task_Block_IP.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Block_IP_if_auth_failed/Process_Block_IP/Tasks</processPath>
       <displayName>Block IP</displayName>
     </task>
   </process>
-  <process name="Process/Ansible_integration/Block_IP_if_auth_failed/Process_DELETE">
+  <process name="Process/Ansible_integration/DEMO/Block_IP_if_auth_failed/Process_DELETE">
     <displayName>DELETE</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>

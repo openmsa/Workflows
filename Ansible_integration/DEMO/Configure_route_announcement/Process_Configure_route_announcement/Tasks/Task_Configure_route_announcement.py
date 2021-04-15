@@ -30,7 +30,7 @@ TaskVariables = Variables()
 context = Variables.task_call(TaskVariables)
 
 #Import microservice alias list
-with open('/opt/fmc_repository/Process/Ansible_integration/Get_router_interface/microservice_list.json', 'r') as alias_file:
+with open('/opt/fmc_repository/Process/Ansible_integration/DEMO/Get_router_interface/microservice_list.json', 'r') as alias_file:
   	context['ms_aliases'] = json.load(alias_file)
 
 #Udate exchange file

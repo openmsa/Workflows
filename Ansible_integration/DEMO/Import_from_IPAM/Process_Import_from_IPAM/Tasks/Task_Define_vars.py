@@ -22,7 +22,7 @@ context = Variables.task_call(TaskVariables)
 context['ipam_device_id'] = re.match('^\D+?(\d+?)$', context['ipam_device_id']).group(1)
 
 #Import microservice alias list
-with open('/opt/fmc_repository/Process/Ansible_integration/microservice_list.json', 'r') as alias_file:
+with open('/opt/fmc_repository/Process/Ansible_integration/DEMO/microservice_list.json', 'r') as alias_file:
   	context['ipam_ms_aliases'] = json.load(alias_file)
 
 

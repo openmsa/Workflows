@@ -43,7 +43,7 @@ with open(context['exchange_file'], 'r') as exchange_file:
     exchange_dict = json.load(exchange_file)
 
 #Import microservice alias list
-with open('/opt/fmc_repository/Process/Ansible_integration/microservice_list.json', 'r') as alias_file:
+with open('/opt/fmc_repository/Process/Ansible_integration/DEMO/microservice_list.json', 'r') as alias_file:
   	context['ms_aliases'] = json.load(alias_file)
 
 #Define additional variables

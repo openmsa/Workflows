@@ -1,27 +1,27 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Exchange file" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Exchange file" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/DEMO/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Ansible_integration/Get_router_interface/Process_Get_router_interface">
+  <process name="Process/Ansible_integration/DEMO/Get_router_interface/Process_Get_router_interface">
     <displayName>Get router interface</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Get_router_interface.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
       <displayName>Get router interface</displayName>
     </task>
     <task name="Task_Calculate_IP_addresses.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
       <displayName>Calculate IP addresses</displayName>
     </task>
     <task name="Task_Update_IPAM.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Get_router_interface/Process_Get_router_interface/Tasks</processPath>
       <displayName>Update IPAM</displayName>
     </task>
   </process>
-  <process name="Process/Ansible_integration/Get_router_interface/Process_DELETE">
+  <process name="Process/Ansible_integration/DEMO/Get_router_interface/Process_DELETE">
     <displayName>DELETE</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>

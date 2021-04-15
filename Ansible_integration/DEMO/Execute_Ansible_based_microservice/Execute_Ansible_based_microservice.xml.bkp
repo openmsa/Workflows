@@ -2,20 +2,20 @@
   <variables frozen="0">
     <variable displayName="Ansible server ME" name="params.ansible_device_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Ansible playbook-based microservice" name="params.ansible_microservice" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="JSON file to exchange between workflows" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="JSON file to exchange between workflows" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/DEMO/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Ansible_integration/Execute_Ansible_based_microservice/Process_Execute_microservice">
+  <process name="Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Process_Execute_microservice">
     <displayName>Execute microservice</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Execute_microservice.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Execute_Ansible_based_microservice/Process_Execute_microservice/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Process_Execute_microservice/Tasks</processPath>
       <displayName>Execute microservice</displayName>
     </task>
   </process>
-  <process name="Process/Ansible_integration/Execute_Ansible_based_microservice/Process_DELETE">
+  <process name="Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Process_DELETE">
     <displayName>DELETE</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>

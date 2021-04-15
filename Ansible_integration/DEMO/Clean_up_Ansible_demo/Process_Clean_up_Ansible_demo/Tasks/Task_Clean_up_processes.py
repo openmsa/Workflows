@@ -32,20 +32,20 @@ response = Orchestration.list_service_instances()
 service_list = json.loads(Orchestration.content)
 
 
-Orchestration.execute_service('Process/Ansible_integration/Ansible_Integration/Ansible_integration', 'Process/Ansible_integration/Ansible_Integration/Stop_playbook_monitoring', dict())
+Orchestration.execute_service('Process/Ansible_integration/DEMO/Ansible_Integration/Ansible_integration', 'Process/Ansible_integration/Ansible_Integration/Stop_playbook_monitoring', dict())
 time.sleep(5)
-Orchestration.execute_service('Process/Ansible_integration/Ansible_Integration/Ansible_integration', 'Process/_TEST_Ansible_integration/DELETE', dict())
+Orchestration.execute_service('Process/Ansible_integration/DEMO/Ansible_Integration/Ansible_integration', 'Process/_TEST_Ansible_integration/DELETE', dict())
 time.sleep(5)
 for service in service_list:
   if service['state'] == 'ACTIVE':
-    if service['name'] in ('Process/Ansible_integration/Configure_router_interface/Configure_router_interface',
-'Process/Ansible_integration/Configure_route_announcement/Configure_route_announcement',
-'Process/Ansible_integration/Update_DNS_records/Update_DNS_records',
-'Process/Ansible_integration/Get_router_interface/Get_router_interface',
-'Process/Ansible_integration/Import_from_IPAM/Import_from_IPAM',
-'Process/Ansible_integration/Ansible_Integration/Ansible_integration',
-'Process/Ansible_integration/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice',
-'Process/Ansible_integration/Clean_up_Ansible_demo/Clean_up_Ansible_demo'):
+    if service['name'] in ('Process/Ansible_integration/DEMO/Configure_router_interface/Configure_router_interface',
+'Process/Ansible_integration/DEMO/Configure_route_announcement/Configure_route_announcement',
+'Process/Ansible_integration/DEMO/Update_DNS_records/Update_DNS_records',
+'Process/Ansible_integration/DEMO/Get_router_interface/Get_router_interface',
+'Process/Ansible_integration/DEMO/Import_from_IPAM/Import_from_IPAM',
+'Process/Ansible_integration/DEMO/Ansible_Integration/Ansible_integration',
+'Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice',
+'Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Clean_up_Ansible_demo'):
       is_finished = True
       response = Orchestration.list_process_instances_by_service(service['id'])
       for process in json.loads(Orchestration.content):

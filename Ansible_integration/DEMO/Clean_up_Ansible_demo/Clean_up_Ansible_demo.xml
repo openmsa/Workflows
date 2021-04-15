@@ -5,40 +5,40 @@
     <variable displayName="DNS server device ID" name="params.dns_server_device_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="UBI1801" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Exchange file" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/OpenMSA_WF_Ansible_integration/Ansible_integration/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Micorservice to clean up Ansible-controlled hosts" name="params.ansible_rollback_ms" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="ANSIBLE_MS__based_on_grenoble_server_demo_rollback_" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Wrokflow to execute Ansible-based microservice" name="params.ansible_execute_wf" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/Ansible_integration/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Wrokflow to execute Ansible-based microservice" name="params.ansible_execute_wf" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo">
+  <process name="Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo">
     <displayName>Clean up Ansible demo</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Clean_up_IPAM.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up IPAM</displayName>
     </task>
     <task name="Task_Clean_up_Grenoble_router.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up Grenoble router</displayName>
     </task>
     <task name="Task_Clean_up_DNS.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up DNS</displayName>
     </task>
     <task name="Task_Clean_up_Ansible_controlled_hosts.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up Ansible-controlled hosts</displayName>
     </task>
     <task name="Task_Clean_up_Ansible_server.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up Ansible server</displayName>
     </task>
     <task name="Task_Clean_up_processes.py">
-      <processPath>/opt/fmc_repository/Process/Ansible_integration/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_Clean_up_Ansible_demo/Tasks</processPath>
       <displayName>Clean up processes</displayName>
     </task>
   </process>
-  <process name="Process/Ansible_integration/Clean_up_Ansible_demo/Process_DELETE">
+  <process name="Process/Ansible_integration/DEMO/Clean_up_Ansible_demo/Process_DELETE">
     <displayName>DELETE</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
