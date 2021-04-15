@@ -36,7 +36,7 @@
       <displayName>Retrieve playbook list</displayName>
     </task>
     <task name="Task_Retrieve_host_list.php">
-      <processPath>/opt/fmc_repository/Process/_TEST_Ansible_integration/Connect_to_Ansible_host/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
       <displayName>Retrieve host list</displayName>
     </task>
   </process>
@@ -72,7 +72,7 @@
       <displayName>Add microservice to deployment settings</displayName>
     </task>
     <task name="Task_Update_default_values.php">
-      <processPath>/opt/fmc_repository/Process/_TEST_Ansible_integration/Create_microservice/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/Ansible_Integration</processPath>
       <displayName>Update default values</displayName>
     </task>
   </process>
