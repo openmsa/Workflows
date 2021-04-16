@@ -1,0 +1,33 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Exchange file" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/DEMO/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="DNS Server" name="params.dns_server" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="UBI1573" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Ansible_integration/DEMO/Update_DNS_records/Process_Update_DNS_records">
+    <displayName>Update DNS records</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Update_DNS_records.py">
+      <processPath>/opt/fmc_repository/Process/Ansible_integration/DEMO/Update_DNS_records/Process_Update_DNS_records/Tasks</processPath>
+      <displayName>Update DNS records</displayName>
+    </task>
+  </process>
+  <process name="Process/Ansible_integration/DEMO/Update_DNS_records/Process_DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>The workflow is part of Ansible demo. The workflow is proposed to configure servers FQDN on DNS server</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Update DNS records</name>
+    <group>ANSIBLE|DEMO</group>
+  </information>
+</ObjectDefinition>
