@@ -35,17 +35,17 @@ $context['microservice_variables'] = array(
 );
 
 //Define path to MS to read playbook content. THE MICROSERVICE SHOULD BE ATTACHED TO ANSIBLE ME DEPLOYMENT SETTINGS
-$context['read_playbook_file'] = '/opt/fmc_repository/CommandDefinition/ANSIBLE/Read_playbook_file.xml';
+$context['read_playbook_file'] = '/opt/fmc_repository/CommandDefinition/Ansible_integration/ANSIBLE/Read_playbook_file.xml';
 
 //Define path to MS to import list of playbook files. THE MICROSERVICE SHOULD BE ATTACHED TO ANSIBLE ME DEPLOYMENT SETTINGS
-$context['retrieve_playbook_files'] = '/opt/fmc_repository/CommandDefinition/ANSIBLE/Retrieve_playbook_files_list.xml';
+$context['retrieve_playbook_files'] = '/opt/fmc_repository/CommandDefinition/Ansible_integration/ANSIBLE/Retrieve_playbook_files_list.xml';
 
 //Name of a microservice to read playbook file content
 $context['microservice_name'] = 'Read_playbook_file';
 $context['variable_skeleton'] = '    <variable displayName="%s" name="params.%s" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="%s" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>';
 
 //Process name to create new MS
-$context['processName'] = 'Process/_TEST_Ansible_integration/Create_microservice';
+$context['processName'] = 'Process/Ansible_integration/Ansible_Integration/Import_single_microservice';
 
 $announce = update_asynchronous_task_details($context, "Identifying variables... OK");
 
