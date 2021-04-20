@@ -9,12 +9,12 @@ function list_args()
 
 /**
 
-curl -XDELETE "localhost:5601/api/saved_objects/dashboard/1e57e98993aa04d700f3a754781adcb7babac109" -H 'kbn-xsrf: true'
+curl -XDELETE "localhost:5601/kibana/api/saved_objects/dashboard/1e57e98993aa04d700f3a754781adcb7babac109" -H 'kbn-xsrf: true'
 
 **/
 
 
-$context['uriDeleteES']='http://'.$context['ipAddress'].':'.$context['port'].'/api/saved_objects/dashboard/'.$context['Hash'].'';
+$context['uriDeleteES']='http://'.$context['ipAddress'].':'.$context['port'].$context['basePath'].'/api/saved_objects/dashboard/'.$context['Hash'].'';
 
 $ci = curl_init();
     curl_setopt($ci, CURLOPT_URL, $context['uriDeleteES']);
