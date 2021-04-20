@@ -11,7 +11,8 @@ function list_args()
 check_mandatory_param('device_id');
 
 $device_id = $context['device_id'];
-$device_id = getIdFromUbiId ($device_id);
+$prefix = substr($device_id, 0, 3);
+$device_id = str_replace($prefix, '', $device_id);
 
 OBJECT_PARAMETERS
 
