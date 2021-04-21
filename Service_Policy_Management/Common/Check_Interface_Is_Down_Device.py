@@ -1,7 +1,10 @@
 import json
+import time
+import re
 from msa_sdk import constants
 from msa_sdk.order import Order
 from msa_sdk.variables import Variables
+from msa_sdk.device import Device
 from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('interface_name', var_type='String')
@@ -9,41 +12,98 @@ dev_var.add('direction', var_type='String')
 dev_var.add('policy_name', var_type='String')
 context = Variables.task_call(dev_var)
 
+####################################################
+#                                                  #
+#                FUNCTIONS                         #
+#                                                  #
+####################################################
+
+def self_device_push_conf_status_ret(device, timeout=60, interval=5):
+    response = {}
+    global_timeout = time.time() + timeout
+    while True:
+        #check push config status.
+        device.push_configuration_status()
+        response = json.loads(device.content)
+        context.update(device_push_conf_status_ret=response)
+        status = response.get('status')
+        if status == constants.FAILED:
+            ret = MSA_API.process_content(constants.FAILED, 'Push Configuration FAILED.', context, True)
+            print(ret)
+        elif status != constants.RUNNING or time.time() > global_timeout:
+            break
+        time.sleep(interval)
+    return response
+
+'''
+Check interface is in 'shutdown' status.
+
+@param context: Dict
+    Service Instance context (database).
+@param ifce_name: String
+    Device interface name.
+@param ifce_status_pattern: String
+    Regular expression pattern allows to confirme interface status is shotdown or not.
+@return: Boolean
+    True or False to confirme interface status is shotdown or not.
+
+'''
+def is_interface_shutdown(context, device, ifce_name, ifce_status_pattern):
+    is_shutdown = False
+    if ifce_name:
+        #push configuration to device.
+        data = dict(configuration="do show run interface " + ifce_name)
+
+        device.push_configuration(json.dumps(data))
+        response = json.loads(device.content)
+
+        #get asynchronous push config status
+        context.update(device_push_conf_ret=response)
+        response = self_device_push_conf_status_ret(device, 60)
+
+        #the status should be down
+        status = response.get('status')
+        context.update(device_push_conf_end_reponse=response)
+        if status == constants.FAILED:
+            ret = MSA_API.process_content(constants.FAILED, 'No push config response.', context, True)
+            print(ret)
+
+        return_message = response.get('message')
+
+        if return_message != None:
+            matchObj = return_message.find(ifce_status_pattern)
+            if matchObj != -1:
+                is_shutdown = True
+    return is_shutdown
+
+####################################################
+#                                                  #
+#                MAIN CODE                         #
+#                                                  #
+####################################################
+
 #get device_id from context
+device_ref = context['device_id']
 device_id = context['device_id'][3:]
-# instantiate device object
-obmf  = Order(device_id=device_id)
-#synchronise device all microservices
-timeout = 60
-obmf.command_synchronize(timeout)
 
-#get microservices instance by microservice object ID.
-object_name = 'interfaces_status'
-object_id = str(context.get('interface_name'))
-obmf.command_objects_instances_by_id(object_name, object_id)
-response = json.loads(obmf.content)
-context.update(obmf_inter_status_resp=response)
+#initiate Device object
+device = Device(device_id=device_id)
 
-#ensure the object inputs are in the response.
-is_status_down = False
-ret_interface_status = '?'
-if response:
-    if object_id in response.get(object_name):
-        ret_service_policy_dict = response.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","status": "down"}
-        if 'status' in ret_service_policy_dict:
-            ret_interface_status = ret_service_policy_dict.get('status')
-            if ret_interface_status == 'down':
-                is_status_down = True
+#get interface name
+interface_name = context.get('interface_name')
+
+return_message = ''
+
+#check interface status from the device running-configuration.
+ifce_status_pattern = 'shutdown'
+is_status_shutdown = is_interface_shutdown(context, device, interface_name, ifce_status_pattern)
 
 #Store interface status in the context to used it later
-context.update(interface_is_status_down=is_status_down)
+context.update(interface_is_status_down=is_status_shutdown)
 
-
-#the status should be down
-if is_status_down == False:
-    #ret = MSA_API.process_content(constants.FAILED, 'The interface status is "'+ret_interface_status+'" for "' + object_id + '", the status should be down', context, True)
-    ret = MSA_API.process_content(constants.ENDED, 'Good, the interface status is "' + ret_interface_status + '" for "' + object_id + '" on the device.', context, True)
+if is_status_shutdown == True:
+    ret = MSA_API.process_content(constants.ENDED, 'The interface status is "SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
     print(ret)
 
-ret = MSA_API.process_content(constants.ENDED, 'Good, the interface status is "down" for "' + object_id + '" on the device.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'The interface status is "NOT SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
 print(ret)
