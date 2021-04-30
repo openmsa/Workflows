@@ -12,6 +12,7 @@ dev_var.add('yangs_directory', var_type='String')
 dev_var.add('yangs_extension', var_type='String')
 dev_var.add('yang_list.0.yang', var_type='String')
 dev_var.add('yang_list.0.is_selected', var_type='Boolean')
+dev_var.add('yang_list.0.is_yangmainfile', var_type='Boolean')
 
 
 context = Variables.task_call(dev_var)
@@ -53,13 +54,13 @@ for root, dirnames, filenames in os.walk(yangs_directory):
 
 # check if at least one yang file is available. If not exit and return failed.
 if not yang_list:
-    ret = MSA_API.process_content(constants.FAILED, 'No Yang files found from \'' + yangs_directory + '\' directory. with extension \'' + yangs_extension +'\'', context, True)
+    ret = MSA_API.process_content(constants.FAILED, 'No YANG files found from \'' + yangs_directory + '\' directory. with extension \'' + yangs_extension +'\'', context, True)
     print(ret)	
 
 yang_list_restructured = [dict(yang=st, is_selected='false') for st in yang_list]
 #store in the context 'yang_list'
 context['yang_list'] = yang_list_restructured
 
-ret = MSA_API.process_content(constants.ENDED, 'yang list acquisition is done successfully.', context, True)
+ret = MSA_API.process_content(constants.ENDED, 'YANG list acquisition is done successfully.', context, True)
 print(ret)
 
