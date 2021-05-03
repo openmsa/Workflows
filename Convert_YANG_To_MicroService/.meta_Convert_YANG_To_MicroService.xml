@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Process_convert_yang_to_xml</value>
+            <value>Convert_YANG_To_MicroService.xml</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1616080840816</value>
+            <value>1619793743117</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,14 +15,14 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1616080840812</value>
+            <value>1619793743117</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>DIRECTORY</value>
+            <value>FILE</value>
         </entry>
         <entry>
             <key>COMMENT</key>
