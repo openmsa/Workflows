@@ -81,7 +81,7 @@ lookup = Lookup()
 
 #Get all devices available
 lookup.look_list_device_ids()
-all_devices = json.loads(lookup.content)
+all_devices = lookup.response.json()
 device_ref_by_hostname = {}
 for device in all_devices:
   # device = {'id': 125, 'prefix': 'RAB', 'ubiId': 'RAB125', 'externalReference': 'RAB125', 'name': 'CISCO-IOS'}
