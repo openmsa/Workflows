@@ -12,6 +12,7 @@ dev_var = Variables()
 dev_var.add('spreadsheet_list.0.spreadsheet', var_type='String')
 dev_var.add('spreadsheet_list.0.is_selected', var_type='Boolean')
 dev_var.add('spreadsheet_list.0.device_external_ref', var_type='String')
+dev_var.add('spreadsheet_list.0.device_hostname', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -237,8 +238,9 @@ if selected_number == 1:
 	for st in context.get('spreadsheet_list'):
 		if st.get('is_selected') == True:
 			if st.get('spreadsheet'):
-                                spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
-                                context['device_external_ref'] = st.get('device_external_ref')
+				spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
+				context['device_external_ref'] = st.get('device_external_ref')
+				context['device_hostname']     = st.get('device_hostname')
 			else:
 				ret = MSA_API.process_content(constants.FAILED, 'Selected spreadsheet filename is empty from the service instance context.', context, True)
 				print(ret)
