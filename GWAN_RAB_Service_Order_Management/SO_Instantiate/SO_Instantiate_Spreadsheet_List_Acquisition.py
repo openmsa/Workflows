@@ -79,8 +79,9 @@ spreadsheet_list_restructured = []
 #get all devices for the customer
 lookup = Lookup()
 
-#check interface status from the device running-configuration.
-all_devices = lookup.look_list_device_ids()
+#Get all devices available
+lookup.look_list_device_ids()
+all_devices = json.loads(lookup.content)
 device_ref_by_hostname = {}
 for device in all_devices:
   # device = {'id': 125, 'prefix': 'RAB', 'ubiId': 'RAB125', 'externalReference': 'RAB125', 'name': 'CISCO-IOS'}
