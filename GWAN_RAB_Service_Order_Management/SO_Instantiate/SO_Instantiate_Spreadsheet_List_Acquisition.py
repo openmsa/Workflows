@@ -5,12 +5,14 @@ import os.path as osp
 from msa_sdk import constants
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+from msa_sdk.lookup import Lookup
 
 dev_var = Variables()
 dev_var.add('spreadsheets_directory', var_type='String')
 dev_var.add('spreadsheets_extension', var_type='String')
 dev_var.add('spreadsheet_list.0.spreadsheet', var_type='String')
 dev_var.add('spreadsheet_list.0.is_selected', var_type='Boolean')
+dev_var.add('spreadsheet_list.0.device_hostname', var_type='String')
 dev_var.add('spreadsheet_list.0.device_external_ref', var_type='String')
 
 
@@ -29,6 +31,11 @@ def get_device_reference_from_sheet(df, device_ref_row_index, column_filter):
             
     return device_ref
 
+def get_device_hostname_from_sheet(df, device_ref_row_index, column_filter):
+    for key, value in df.iteritems():
+        if key == column_filter:
+            hostname = df.iloc[device_ref_row_index][key]
+    return hostname
 
 ####################################################
 #                                                  #
@@ -39,11 +46,14 @@ def get_device_reference_from_sheet(df, device_ref_row_index, column_filter):
 #Constant variables
 #
 #Sheet name where is located the device external reference (Hostname)
-SHEET_NAME_CONTAINING_DEVICE_REF = 'Main'
+SHEET_NAME_CONTAINING_DEVICE_HOSTNAME = 'Main'
 #Sheet Columns key (name) where is located the device external reference (Hostname)
 FILTER_COLUMN_NAME = 'Unnamed: 1'
 #Sheet row index where is located the device external reference (Hostname)
 SHEET_DEVICE_REF_ROW_INDEX = 2
+NO_FOUND_DEVICE_MESSAGE = 'NOT FOUND'
+
+context['no_found_device_message'] = NO_FOUND_DEVICE_MESSAGE
 
 '''
 List spreadsheet files from repository.
@@ -69,17 +79,34 @@ if not spreadsheet_list:
 #spreadsheet_list_restructured = [dict(spreadsheet=st, is_selected='false') for st in spreadsheet_list]
 spreadsheet_list_restructured = []
 
+#get all devices for the customer
+lookup = Lookup()
+
+#Get all devices available
+lookup.look_list_device_ids()
+all_devices = lookup.response.json()
+device_ref_by_hostname = {}
+for device in all_devices:
+  # device = {'id': 125, 'prefix': 'RAB', 'ubiId': 'RAB125', 'externalReference': 'RAB125', 'name': 'CISCO-IOS'}
+  device_ref_by_hostname[device['name']] = device['externalReference']
+
 for st in spreadsheet_list:
-    df = pandas.read_excel('file:' + st, sheet_name=SHEET_NAME_CONTAINING_DEVICE_REF)
+    df = pandas.read_excel('file:' + st, sheet_name=SHEET_NAME_CONTAINING_DEVICE_HOSTNAME)
     #defined the position of the device reference from the sheet name 'Main'
-    device_ext_ref = get_device_reference_from_sheet(df, SHEET_DEVICE_REF_ROW_INDEX, FILTER_COLUMN_NAME)
-    #device_external_ref is mandatory, if it is empty return FAILED.
-    if not device_ext_ref:
-        ret = MSA_API.process_content(FAILED, 'Device external reference (hostname) is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_REF + '.', context, True)
+    #device_ext_ref = get_device_reference_from_sheet(df, SHEET_DEVICE_REF_ROW_INDEX, FILTER_COLUMN_NAME)
+    device_hostname = get_device_hostname_from_sheet(df, SHEET_DEVICE_REF_ROW_INDEX, FILTER_COLUMN_NAME)
+    #device_hostname is mandatory, if it is empty return FAILED.
+    if not device_hostname:
+        ret = MSA_API.process_content(FAILED, 'Device Hostname is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_HOSTNAME + '.', context, True)
         print(ret)
     #create spreadsheet dictionaries list.
     spreadsheet_basename = osp.basename(st)
-    spreadsheet_dict = dict(spreadsheet=spreadsheet_basename, is_selected='false', device_external_ref=device_ext_ref)
+    if (device_ref_by_hostname.get(device_hostname)):
+      device_external_ref = device_ref_by_hostname[device_hostname]
+    else:
+      #device_external_ref = 'Not found, hostname "xxx" corresponding managed entity'
+      device_external_ref = NO_FOUND_DEVICE_MESSAGE
+    spreadsheet_dict = dict(spreadsheet=spreadsheet_basename, is_selected='false', device_external_ref=device_external_ref, device_hostname=device_hostname)
     spreadsheet_list_restructured.append(spreadsheet_dict)
 #store in the context 'device_external_ref' and 'spreadsheet_list'
 context['spreadsheet_list'] = spreadsheet_list_restructured
