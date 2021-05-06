@@ -249,6 +249,10 @@ else:
 	ret = MSA_API.process_content(constants.FAILED, 'Only one spreadsheet must and allows to be selected.', context, True)
 	print(ret)
   
+if context['device_external_ref'] == context['no_found_device_message']:
+	ret = MSA_API.process_content(constants.FAILED, 'Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)
+	print(ret)
+
 # List sheet name in spreadsheet 
 #spreadsheet_filename = '/opt/fmc_repository/Datafiles/GWAN_RAB/UBIQUBE_MSA_configuration_sheet_20200918.xlsx'
 sheet_names = ''

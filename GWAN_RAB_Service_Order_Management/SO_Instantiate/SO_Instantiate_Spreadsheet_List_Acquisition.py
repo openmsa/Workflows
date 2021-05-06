@@ -51,6 +51,9 @@ SHEET_NAME_CONTAINING_DEVICE_HOSTNAME = 'Main'
 FILTER_COLUMN_NAME = 'Unnamed: 1'
 #Sheet row index where is located the device external reference (Hostname)
 SHEET_DEVICE_REF_ROW_INDEX = 2
+NO_FOUND_DEVICE_MESSAGE = 'NOT FOUND'
+
+context['no_found_device_message'] = NO_FOUND_DEVICE_MESSAGE
 
 '''
 List spreadsheet files from repository.
@@ -101,7 +104,8 @@ for st in spreadsheet_list:
     if (device_ref_by_hostname.get(device_hostname)):
       device_external_ref = device_ref_by_hostname[device_hostname]
     else:
-      device_external_ref = '???'
+      #device_external_ref = 'Not found, hostname "xxx" corresponding managed entity'
+      device_external_ref = NO_FOUND_DEVICE_MESSAGE
     spreadsheet_dict = dict(spreadsheet=spreadsheet_basename, is_selected='false', device_external_ref=device_external_ref, device_hostname=device_hostname)
     spreadsheet_list_restructured.append(spreadsheet_dict)
 #store in the context 'device_external_ref' and 'spreadsheet_list'
