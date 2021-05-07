@@ -26,6 +26,8 @@
     <variable displayName="Device External Ref" name="params.device_external_ref" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Device HostName" name="params.device_hostname" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Parsed Configuration" name="params.parsed_config" startIncrement="0" type="Link" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Spreadsheets Selected" name="params.spreadsheet_filename" startIncrement="0" type="Link" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Service Instance and Device Name" name="params.instanceid_hostname" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Instantiate">
@@ -79,6 +81,10 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Post-operation work</displayName>
     </task>
+    <task name="SO_Common_Rename_Spreadsheets_File.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Rename Spreadsheets File and put into folder 'old'</displayName>
+    </task>
   </process>
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Delete">
     <displayName>SO Delete</displayName>
@@ -121,6 +127,10 @@
       <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
       <displayName>Post-operation work</displayName>
     </task>
+    <task name="SO_Common_Rename_Spreadsheets_File.py">
+      <processPath>/opt/fmc_repository/Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/Common</processPath>
+      <displayName>Rename Spreadsheets File and put into folder 'old'</displayName>
+    </task>
   </process>
   <process name="Process/nttcw-gwan-rab-wf/GWAN_RAB_Service_Order_Management/SO_Terminate">
     <displayName>SO Terminate</displayName>
@@ -139,7 +149,7 @@
   <information>
     <icon/>
     <description/>
-    <displayField>service_id</displayField>
+    <displayField>instanceid_hostname</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
