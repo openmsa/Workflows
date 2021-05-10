@@ -41,5 +41,5 @@ if not os.path.isfile(spreadsheet_filename):
 
 os.rename(spreadsheet_filename, new_spreadsheet_filename)
 
-ret = MSA_API.process_content(constants.ENDED, " Spreadsheet Filename '" + spreadsheet_filename + "' move to +'" + new_spreadsheet_filename + "'" , context, True)
+ret = MSA_API.process_content(constants.ENDED, " Spreadsheet Filename '" + spreadsheet_filename + "' move to '" + new_spreadsheet_filename + "'" , context, True)
 print(ret)
