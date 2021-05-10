@@ -71,6 +71,9 @@ if not spreadsheets_extension:
 pattern = spreadsheets_directory + '/*' + spreadsheets_extension
 spreadsheet_list = glob.glob(pattern)
 
+context['instanceid_hostname'] = context['SERVICEINSTANCEID'] + '_NoDeviceSelected' # we don't have yet the device selected
+
+
 # check if at least one spreadsheet file is available. If not exit and return failed.
 if not spreadsheet_list:
     ret = MSA_API.process_content(constants.FAILED, 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
