@@ -39,6 +39,14 @@ if not os.path.isfile(spreadsheet_filename):
   print(ret) 
   sys.exit()
 
+#Check that the directorie old exist, else create it 
+if not os.path.exists(OLD_FOLDER):
+    try:
+        os.makedirs(OLD_FOLDER)
+    except OSError as exc: # Guard against race condition
+        if exc.errno != errno.EEXIST:
+            raise
+
 os.rename(spreadsheet_filename, new_spreadsheet_filename)
 
 ret = MSA_API.process_content(constants.ENDED, " Spreadsheet Filename '" + spreadsheet_filename + "' move to '" + new_spreadsheet_filename + "'" , context, True)
