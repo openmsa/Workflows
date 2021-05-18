@@ -44,6 +44,24 @@ function _profile_configuration_list_by_customer_id ($customer_id) {
 }
 
 /**
+ * List all configuration profiles by customer ID
+ *
+ * curl -u ncroot:PWD  -XGET "http://localhost:10080/ubi-api-rest/conf-profile/v2/list/customer/{customerId}"
+ */
+function _profile_configuration_list_by_customer_id ($customer_id) {
+
+        $msa_rest_api = "conf-profile/v2/list/customer/{$customer_id}";
+        $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+        $response = perform_curl_operation($curl_cmd, "LIST CONFIGURATION PROFILE");
+        $response = json_decode($response, true);
+        if ($response['wo_status'] !== ENDED) {
+                $response = json_encode($response);
+                return $response;
+        }
+        return json_decode($response['wo_newparams']['response_body'], true);
+}
+
+/**
  * Attach Files to configuration profile
  * 
  * curl -u ncroot:ubiqube  -XPUT http://localhost:10080/ubi-api-rest/profile/configuration/attach/2355/files/AUTO  -d '
