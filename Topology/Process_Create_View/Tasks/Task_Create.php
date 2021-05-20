@@ -19,8 +19,8 @@ preg_match("/\S*?(?<device_id>\d+?)$/", $context['ipam_device_id'], $matches);
 $context['ipam_device_id'] = $matches['device_id'];
 
 $view_type = $context["view_type"];
-if ($context['ipam_device_id']) {
-  $ipam_device_id = $context['ipam_device_id'];
+if (isset($context['ipam_device_id'])) {
+	$ipam_device_id = $context['ipam_device_id'];
 }
 
 $pos = strpos($view_type, "..");
