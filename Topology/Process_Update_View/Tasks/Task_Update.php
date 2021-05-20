@@ -14,7 +14,7 @@ check_mandatory_param('view_name');
 check_mandatory_param('view_type');
 
 $view_type = $context["view_type"];
-if ($context['ipam_device_id']) {
+if (isset($context['ipam_device_id'])) {
   $ipam_device_id = $context['ipam_device_id'];
 }
 
