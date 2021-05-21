@@ -249,12 +249,12 @@
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
-    <description>VNF Orchestration on a Public Cloud (AWS)</description>
+    <description>AWS EC2 Management</description>
     <displayField>service_id</displayField>
     <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>Public Cloud VNF Management</name>
+    <name>Public Cloud AWS EC2</name>
     <group>Public Cloud|AWS</group>
   </information>
 </ObjectDefinition>
