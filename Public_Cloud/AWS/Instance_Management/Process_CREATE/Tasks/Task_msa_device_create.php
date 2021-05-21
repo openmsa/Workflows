@@ -62,6 +62,9 @@ $context['device_id'] = $device_id;
 
 $device_id_long = substr($context['device_id'], 3);
 
+_device_set_nature_by_id($device_id_long, "VPUB");
+
+
 /**
 * generate a hostname based on the public IP
 * this is necessary for sysloct collection
@@ -89,7 +92,7 @@ if ($response['wo_status'] !== ENDED) {
 }
 
 if (isset($context["KeyName"])) {
-	_configuration_variable_create ($device_id_long, "SSH_KEY", "/home/ncuser/.ssh/".$context["KeyName"].".pem");
+	_configuration_variable_create ($device_id_long, "SSH_KEY", "/opt/devops/ssh/".$context["KeyName"].".pem");
 }
 
 $response = prepare_json_response(ENDED, "MSA Device created successfully.\n$wo_comment", $context, true);
