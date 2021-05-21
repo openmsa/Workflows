@@ -6,4 +6,5 @@ The workflow support the following integration options:
  - **Import a playbook**          The integration allows user to create a MSA microservice based on a specific playbook;
  - **Import specific playbooks**  The integration allows user to create a few MSA microservices based on specific playbooks. Also, there is option to monitor changes in the playbooks and modyfy MSA microservices respectively; 
  - **Import all playbooks**      The integration allows to create MSA miscroservices based on all playbooks what located in specific directory. Also, there is option to monitor changes in the playbooks and modyfy MSA microservices respectively;
- 
+## Demo
+You can use Ansible Integration workflow for own purposes or as part of demo what demonstrates Ansible integration capabilities in case of multi-domain and multi-engine automation

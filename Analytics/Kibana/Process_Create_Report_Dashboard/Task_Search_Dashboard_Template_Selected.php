@@ -15,6 +15,7 @@ function list_args()
  create_var_def('customer_id', 'Integer');
  create_var_def('Hash', 'String');
  create_var_def('dashboardName', 'String');
+ create_var_def('basePath', 'String');
 
 
  //create_var_def('kibanaUrl', 'String');
@@ -138,7 +139,7 @@ $context['kibanaPort']="5601";
 
 
 /**
-curl -XPOST "10.30.18.116:5601/api/saved_objects/_export" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+curl -XPOST "10.30.18.116:5601/kibana/api/saved_objects/_export" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
 {
   "objects": [
     {
@@ -155,7 +156,8 @@ curl -XPOST "10.30.18.116:5601/api/saved_objects/_export" -H 'kbn-xsrf: true' -H
 //$_H=get_vars_value(HOST_ES);
 $context['ipAddress']="msa_kibana";
 
-
+/* ** Set basePath ** */
+$context['basePath']="/kibana";
 
 /* ** recove customer_id) ** */
 preg_match('/(?<digit>\d+)/',$context['UBIQUBEID'],$matches);
@@ -168,7 +170,7 @@ $context['Hash']=sha1(uniqid($context['customer_id'] . mt_rand(), true));
 
 
 /* ** Url and Method to Find selected Dashboard **** */ 
-$context['searchingURI']='http://'.$context['ipAddress'].':'.$context['port'].'/api/saved_objects/_export';
+$context['searchingURI']='http://'.$context['ipAddress'].':'.$context['port'].$context['basePath'].'/api/saved_objects/_export';
 
 $body_request='
 {
@@ -204,7 +206,7 @@ $context['result']=$result;
 
 /* ** Store Kibana  Url  ***/ 
 
-$context['kibanaUrl']='http://'.$context['kibanaIpAddress'].':'.$context['kibanaPort'].'/app/kibana#/dashboard/'.$context['Hash'].'/';
+$context['kibanaUrl']='http://'.$context['kibanaIpAddress'].':'.$context['kibanaPort'].'/kibana/app/kibana#/dashboard/'.$context['Hash'].'/';
 
 
 $check=json_decode($result,true);

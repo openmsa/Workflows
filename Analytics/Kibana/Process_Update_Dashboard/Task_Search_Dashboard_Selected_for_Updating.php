@@ -121,7 +121,7 @@ $context['kibanaPort']="5601";
 
 
 /**
-curl -XPOST "10.30.18.116:5601/api/saved_objects/_export" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+curl -XPOST "10.30.18.116:5601/kibana/api/saved_objects/_export" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
 {
   "objects": [
     {
@@ -138,7 +138,8 @@ curl -XPOST "10.30.18.116:5601/api/saved_objects/_export" -H 'kbn-xsrf: true' -H
 //$_H=get_vars_value(HOST_ES);
 $context['ipAddress']="msa_kibana";
 
-
+/* ** Set basePath ** */
+$context['basePath']="/kibana";
 
 /* ** recove customer_id) ** */
 preg_match('/(?<digit>\d+)/',$context['UBIQUBEID'],$matches);
@@ -148,7 +149,7 @@ $context['customer_id']=$matches[1];
 
 
 /* ** Url and Method to Find selected Dashboard **** */ 
-$context['searchingURI']='http://'.$context['ipAddress'].':'.$context['port'].'/api/saved_objects/_export';
+$context['searchingURI']='http://'.$context['ipAddress'].':'.$context['port'].$context['basePath'].'/api/saved_objects/_export';
 
 $body_request='
 {

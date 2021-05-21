@@ -76,6 +76,6 @@
     <order>10000</order>
     <visibility>5</visibility>
     <name>Terraform Configuration Management</name>
-    <group/>
+    <group>cloud|infra</group>
   </information>
 </ObjectDefinition>
