@@ -39,7 +39,7 @@ function logToFile($msg, $filename = PROCESS_LOGS_FILE) {
 	$to_log = "$date|".$context['PROCESSINSTANCEID']."|$msg";
     if(strstr($msg, "\n")) {
         //ending the process specific logs for pretty print json
-        $to_log .= "$date|".$context['PROCESSINSTANCEID']."|";
+        $to_log .= "$date|".$context['PROCESSINSTANCEID']."--|";
     }
 	file_put_contents($filename, "$to_log\n", FILE_APPEND);
 }
