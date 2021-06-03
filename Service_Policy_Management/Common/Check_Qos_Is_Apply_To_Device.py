@@ -17,7 +17,7 @@ input_policy_name = context.get('policy_name')
 #                                                  #
 ####################################################
 
-def self_device_push_conf_status_ret(device, timeout=60, interval=5):
+def self_device_push_conf_status_ret(device, timeout = 300, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:

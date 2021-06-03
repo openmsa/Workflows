@@ -10,7 +10,7 @@ from builtins import isinstance
 dev_var = Variables()
 context = Variables.task_call(dev_var)
 
-def self_end_of_backup(device_obj, timeout=60, interval=5):
+def self_end_of_backup(device_obj, timeout = 300, interval=5):
     time.sleep(interval)
     #We check the end of the back
     #Get Back up status from /conf-backup/v1/backup-status/{deviceId}  

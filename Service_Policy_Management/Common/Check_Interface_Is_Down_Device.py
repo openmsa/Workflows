@@ -18,7 +18,7 @@ context = Variables.task_call(dev_var)
 #                                                  #
 ####################################################
 
-def self_device_push_conf_status_ret(device, timeout=60, interval=5):
+def self_device_push_conf_status_ret(device, timeout = 300, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:
@@ -59,7 +59,7 @@ def is_interface_shutdown(context, device, ifce_name, ifce_status_pattern):
 
         #get asynchronous push config status
         context.update(device_push_conf_ret=response)
-        response = self_device_push_conf_status_ret(device, 60)
+        response = self_device_push_conf_status_ret(device, 300)
 
         #the status should be down
         status = response.get('status')
