@@ -69,7 +69,7 @@ if is_policy_name_matched == True:
     print(ret)
 
 
-obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
 
 if response.get('wo_status') == constants.FAILED:

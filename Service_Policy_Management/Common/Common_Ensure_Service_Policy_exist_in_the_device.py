@@ -14,7 +14,7 @@ device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
 #synchronise device microservices
-timeout = 60
+timeout = 300
 obmf.command_synchronize(timeout)
 
 interface_is_status_down = context.get('interface_is_status_down')

@@ -11,7 +11,7 @@ dev_var = Variables()
 dev_var.add('revision_id', var_type='int')
 context = Variables.task_call(dev_var)
 
-def self_end_of_restore(device_obj, timeout=60, interval=5):
+def self_end_of_restore(device_obj, timeout= 300, interval=5):
     time.sleep(interval)
     #We check the end of the back
     #Get restore-config status from /conf-backup/v1/restore-status/{deviceId}  

@@ -36,7 +36,7 @@ params = dict(access_lists=obj)
 
 context['ns_params_create'] = params
 
-obmf.command_execute(command, params, timeout=60) #execute the MS ADD static route operation
+obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
 
 if response.get('wo_status') == constants.FAILED:

@@ -14,7 +14,7 @@ context = Variables.task_call(dev_var)
 #                                                  #
 ####################################################
 
-def self_device_push_conf_status_ret(device, timeout=60, interval=5):
+def self_device_push_conf_status_ret(device, timeout = 300, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:
