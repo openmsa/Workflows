@@ -46,12 +46,10 @@ device = Device(device_id=device_id)
 configuration_file = context.get('configuration_file')
 work_directory = os.path.dirname(configuration_file)
 
-#workspace directory
-terraform_workspace_dir = work_directory
-context.update(terraform_workspace_dir=terraform_workspace_dir)
-
 #push configuration to device.
-data = dict(configuration='cd ' + terraform_workspace_dir + ' && terraform destroy -auto-approve' + work_directory)
+tfstate_filename = 'terraform.tfstate'
+data = dict(configuration='cat ' + work_directory + '/' + tfstate_filename)
+#data = dict(configuration='cat ' + work_directory)
 
 device.push_configuration(json.dumps(data))
 response = json.loads(device.content)
@@ -66,12 +64,12 @@ context.update(device_push_conf_end_reponse=response)
 
 #parse the terrafom success operation message from response
 return_message = response.get('message')
-is_op_completed = return_message.find("Destroy complete!")
+context.update(terraform_tfstate_content=return_message)
 
-if status == constants.FAILED or is_op_completed == -1:
-	ret = MSA_API.process_content(constants.FAILED, 'Terraform destroy execution is failed: ' + return_message, context, True)
+if status == constants.FAILED:
+	ret = MSA_API.process_content(constants.FAILED, 'Retriving of the terraform tfstate file content is failed: ' + return_message, context, True)
 	print(ret)
 
-ret = MSA_API.process_content(constants.ENDED, 'Terraform plan is executed successfully: ' + return_message, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'terraform tfstate file content is retrivied successfully: ' + return_message, context, True)
 print(ret)
 
