@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Destroy_configuration.py</value>
+            <value>Tasks</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1622720603223</value>
+            <value>1622037511928</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,18 +15,14 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1615284520295</value>
+            <value>1622037511924</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>DIRECTORY</value>
         </entry>
         <entry>
             <key>COMMENT</key>

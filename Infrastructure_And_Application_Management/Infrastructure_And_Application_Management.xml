@@ -1,0 +1,130 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Infrastructure Manager (Terraform)" name="params.terraform_managed_entity" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="2132021" modId="2032021"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Infrastructure Description" name="params.terraform_configuration" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="Terraform confiuration describing the infrastructure to provision." groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" refDeviceIdVar="params.terraform_managed_entity" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>Terraform_configuration_inventory</class>
+      </classes>
+    </variable>
+    <variable displayName="Terraform baseline service instance ref." name="params.terraform_service_ext_ref" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Ansible ME" name="params.ansible_me" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="22062020" modId="22062020"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Path to playbook to work with" name="params.playbook_filename" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" refDeviceIdVar="params.ansible_me" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>Retrieve_playbook_files_list</class>
+      </classes>
+    </variable>
+    <variable displayName="Do import hosts " name="params.do_import_hosts" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Path to playbook directory" name="params.playbook_path" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/playbooks" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Playbook reference name" name="params.playbook_ms_ref_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="K8s_PLAYBOOK_MS_EXEC" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Microservice Skeleton (Template)" name="params.microservice_skeleton" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="This is a template to create new microservices. File name is ansible_playbook_skeleton.xml (md5 2f68d0a95de286ed58b4864cc91fe5bb)" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/CommandDefinition/ANSIBLE/ansible_playbook_skeleton.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Directory where microservices will be created" name="params.microservice_dir" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="The directory where new microservices will be located in. It should be inside /opt/fmc_repository/CommandDefinition directory" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/CommandDefinition/dynamic_ansible_microservices/" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="A workflow to execute Ansible-based microservice" name="params.execute_workflow" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Process/Ansible_integration/DEMO/Execute_Ansible_based_microservice/Execute_Ansible_based_microservice.xml" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="JSON file to exchange between workflows" name="params.exchange_file" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="The variable is proposed to get a path to exchange file. The file is used to exchange variables between workflows in BPM.  " groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Process/Ansible_integration/DEMO/exchange_file.json" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Playbook Dedicated Hosts File" name="params.playbook_hosts_filename" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/etc/ansible/hosts" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Create_Instance">
+    <displayName>Create Instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Terraform_configuration_inventory_IMPORT.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Create_Instance/Tasks</processPath>
+      <displayName>Synchronise Terreform Configuration MS</displayName>
+    </task>
+    <task name="Task_Synchronise_Ansible_MS.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Create_Instance/Tasks</processPath>
+      <displayName>Synchronise Ansible MS</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Provision_Infrastructure">
+    <displayName>Provision Infrastructure</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Terraform_init.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Infrastructure/Tasks</processPath>
+      <displayName>Terraform init</displayName>
+    </task>
+    <task name="Task_Terraform_plan.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Infrastructure/Tasks</processPath>
+      <displayName>Terraform plan</displayName>
+    </task>
+    <task name="Task_Terraform_apply.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Infrastructure/Tasks</processPath>
+      <displayName>Terraform apply</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Generate_Host_Inventory">
+    <displayName>Generate Host Inventory</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Retrieve_from__terraform_tfstate_hosts_details.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Generate_Host_Inventory/Tasks</processPath>
+      <displayName>Retrieve from  terraform tfstate hosts details</displayName>
+    </task>
+    <task name="Task_Copy_generated_hosts_inventory_to_ansible_server.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Generate_Host_Inventory/Tasks</processPath>
+      <displayName>Copy generated hosts inventory to ansible server</displayName>
+    </task>
+    <task name="Task_Copy_SSH_key_between_Ansible_server_and_host.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Generate_Host_Inventory/Tasks</processPath>
+      <displayName>Copy SSH key between Ansible server and host</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Provision_Application">
+    <displayName>Provision Application</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Retrive_playbook_list_from_Ansible_server.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Application/Tasks</processPath>
+      <displayName>Retrive playbook list from Ansible server</displayName>
+    </task>
+    <task name="Task_Import_a_playbook.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Application/Tasks</processPath>
+      <displayName>Import a playbook</displayName>
+    </task>
+    <task name="Task_Execute_Ansible_based_microservice.py">
+      <processPath>/opt/fmc_repository/Process/Infrastructure_And_Application_Management/Process_Provision_Application/Tasks</processPath>
+      <displayName>Execute Ansible-based microservice</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Terminate_Infrastructure">
+    <displayName>Terminate Infrastructure</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Terminate_Application">
+    <displayName>Terminate Application</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <process name="Process/workflows/Infrastructure_And_Application_Management/Process_Delete_Instance">
+    <displayName>Delete Instance</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>This workflow allows to deploy infrastructure and application into the hybrid cloud platform.</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Infrastructure And Application Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>

@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Destroy_configuration.py</value>
+            <value>Connect_to_Ansible_host_Retrieve_host_list.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1622720603223</value>
+            <value>1620396536967</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1615284520295</value>
+            <value>1620396536961</value>
         </entry>
         <entry>
             <key>TAG</key>
