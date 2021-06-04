@@ -232,7 +232,7 @@ function _repository_get_workflow_definition ($uri) {
 function _repository_change_workflow_definition ($uri, $content) {
         $msa_rest_api = "repository/v2/resource/workflow?uri={$uri}";
         $content_array = json_decode($content, True);
-        if (!$content_array['example']) {
+        if (!isset($content_array['example'])) {
            $content_array['example'] = new ArrayObject();
         }
         foreach ($content_array['process'] as $process => &$process_details) {
