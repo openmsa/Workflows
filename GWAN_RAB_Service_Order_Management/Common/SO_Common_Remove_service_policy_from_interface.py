@@ -105,5 +105,4 @@ for sp in service_policy_list:
         if status == constants.FAILED:
             MSA_API.task_error( 'Execute service operation is failed: ' + details + ', (#' + str(service_id) + ')',context , True)
  
-True)
 MSA_API.task_success('Service Policy deleted successfully to the device ' + device_ref + ' (#' + str(service_id)+')', context , True)
