@@ -76,8 +76,7 @@ context['instanceid_hostname'] = context['SERVICEINSTANCEID'] + '_NoDeviceSelect
 
 # check if at least one spreadsheet file is available. If not exit and return failed.
 if not spreadsheet_list:
-    ret = MSA_API.process_content(constants.FAILED, 'No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
-    print(ret)	
+    MSA_API.task_error('No spreadsheed file found from \'' + spreadsheets_directory + '\' directory.', context, True)
 
 #spreadsheet_list_restructured = [dict(spreadsheet=st, is_selected='false') for st in spreadsheet_list]
 spreadsheet_list_restructured = []
@@ -115,6 +114,5 @@ for st in spreadsheet_list:
 context['spreadsheet_list'] = spreadsheet_list_restructured
 
 
-ret = MSA_API.process_content(constants.ENDED, 'Spreadsheet list acquisition is done successfully.', context, True)
-print(ret)
+MSA_API.task_success('Spreadsheet list acquisition is done successfully.', context, True)
 

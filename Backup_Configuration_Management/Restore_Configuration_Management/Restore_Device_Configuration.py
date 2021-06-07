@@ -26,8 +26,7 @@ def self_end_of_restore(device_obj, timeout= 300, interval=5):
       context.update(device_restore_status=response)
       status = response.get('status')
       if status == constants.FAILED:
-          ret = MSA_API.process_content(constants.FAILED, 'Device Restore-config FAILED.', context, True)
-          print(ret)
+          MSA_API.task_error('Device Restore-config FAILED.', context, True)
       elif status != constants.RUNNING or time.time() > global_timeout:
           break
       time.sleep(interval)
@@ -64,12 +63,8 @@ if response:
     status = response.get('status')
     context.update(device_restore_status_end=response)
     if status == constants.FAILED:
-      ret = MSA_API.process_content(constants.FAILED, 'Device restore failed. ', context, True)
-      print(ret) 
-      
-    ret = MSA_API.process_content(constants.ENDED, 'Device "' +  context['device_id'] + '" RESTORE done', context, True)
-    print(ret)
+      MSA_API.task_error( 'Device restore failed. ', context, True)
 
+    MSA_API.task_success('Device "' +  context['device_id'] + '" RESTORE done', context, True)
 
-ret = MSA_API.process_content(constants.FAILED, 'Restore configuration failed on device "' + device_id , context, True)
-print(ret)
+MSA_API.task_success('Restore configuration failed on device "' + device_id +'"', context, True)

@@ -81,7 +81,5 @@ if response:
 
 #if response equals empty dictionary it means class map object is not exist in the device yet.
 if is_p_map_matched != False:
-    ret = MSA_API.process_content(constants.FAILED, 'Policy-map with id="' + object_id + ', one class at least exits in the device.', context, True)
-    print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Policy-map with id="' + object_id + '", no class exists in the device yet.', context, True)
-print(ret)
+    MSA_API.task_error('Policy-map with id="' + object_id + ', one class at least exits in the device.', context, True)
+MSA_API.task_success('Policy-map with id="' + object_id + '", no class exists in the device yet.', context, True)

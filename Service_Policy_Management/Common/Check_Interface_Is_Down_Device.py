@@ -28,8 +28,7 @@ def self_device_push_conf_status_ret(device, timeout = 300, interval=5):
         context.update(device_push_conf_status_ret=response)
         status = response.get('status')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Push Configuration FAILED.', context, True)
-            print(ret)
+            MSA_API.task_error('Push Configuration FAILED.', context, True)
         elif status != constants.RUNNING or time.time() > global_timeout:
             break
         time.sleep(interval)
@@ -65,8 +64,7 @@ def is_interface_shutdown(context, device, ifce_name, ifce_status_pattern):
         status = response.get('status')
         context.update(device_push_conf_end_reponse=response)
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'No push config response.', context, True)
-            print(ret)
+            MSA_API.task_error('No push config response.', context, True)
 
         return_message = response.get('message')
 
@@ -102,8 +100,7 @@ is_status_shutdown = is_interface_shutdown(context, device, interface_name, ifce
 context.update(interface_is_status_down=is_status_shutdown)
 
 if is_status_shutdown == True:
-    ret = MSA_API.process_content(constants.ENDED, 'The interface status is "SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
-    print(ret)
+    MSA_API.task_success('The interface status is "SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
 
-ret = MSA_API.process_content(constants.ENDED, 'The interface status is "NOT SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
+MSA_API.task_success('The interface status is "NOT SHUTDOWN" for "' + interface_name + '" on the device.', context, True)
 print(ret)

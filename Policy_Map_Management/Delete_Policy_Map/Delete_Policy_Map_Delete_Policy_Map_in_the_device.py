@@ -38,11 +38,9 @@ if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-        ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
-        print(ret)
+        MSA_API.task_error('Failure details: ' + detials, context, True)
 
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content(constants.ENDED, 'Delete policy map operation is done successfully.', context, True)
-print(ret)
+MSA_API.task_success('Delete policy map operation is done successfully.', context, True)
 

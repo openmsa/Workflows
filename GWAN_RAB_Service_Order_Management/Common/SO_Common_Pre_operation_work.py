@@ -103,11 +103,9 @@ def create_new_service(context, orch, service_name, process_name, service_instan
                 #Store service_instance_id of Backup_Configuration_Service_Mangement WF in context.
                 context[service_instance_name] = dict(external_ref=service_ext_ref, instance_id=service_id)
             else:
-                ret = MSA_API.process_content(constants.FAILED, 'Missing service id return by orchestration operation.', context, True)
-                print(ret)
+                MSA_API.task_error('Missing service id return by orchestration operation.', context, True)
         else:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation failed.', context, True)
-            print(ret)
+            MSA_API.task_error('Execute service operation failed.', context, True)
  
 '''
 Retrieve process instance by service instance ID.
@@ -158,8 +156,7 @@ def execute_do_backup_config_process(context, orch, service_name, process_name, 
     context.update(backup_config_process_service_id=service_id)
 
     if status == constants.FAILED:
-        ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details, context, True)
-        print(ret)
+        MSA_API.task_error( 'Execute service operation is failed: ' + details, context, True)
     return details
 ####################################################
 #                                                  #
@@ -186,8 +183,7 @@ context['parsed_config'] = file_name
     
 if skip_config_review == 'False' or skip_config_review == 'false' or skip_config_review == False:
     #display to the GUI the configuration file URL.
-    ret = MSA_API.process_content(constants.PAUSED, 'To review the configuration, click on the "Parsed Configuration" link.' , context, True)
-    print(ret)
+    MSA_API.task_error('To review the configuration, click on the "Parsed Configuration" link.' , context, True)
     sys.exit()
 
 ########## Do backup of the device running-config. 
@@ -216,5 +212,4 @@ if ret:
     context.update(pre_op_backup_revision_id=revision_id)
 
 #    
-ret = MSA_API.process_content(constants.ENDED, 'Device running-configuration backup is created successfully (#'+str(context['backup_config_process_service_id'])+') with revision_id: ' + details, context, True)
-print(ret)
+MSA_API.task_success('Device running-configuration backup is created successfully (#'+str(context['backup_config_process_service_id'])+') with revision_id: ' + details, context, True)

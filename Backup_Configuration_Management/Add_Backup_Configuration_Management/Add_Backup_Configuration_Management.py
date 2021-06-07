@@ -20,7 +20,5 @@ obmf = Order(device_id)
 
 command = 'CREATE'
 
-ret = MSA_API.process_content(constants.ENDED, 'Add Device_Configuration_Backup operation is done successfully.', context, True)
-print(ret)
-
+MSA_API.task_success('Add Device_Configuration_Backup operation is done successfully.', context, True)
 

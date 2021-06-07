@@ -25,10 +25,9 @@ def self_end_of_backup(device_obj, timeout = 300, interval=5):
       context.update(device_backup_status=response)
       status = response.get('status')
       if status == constants.FAILED:
-          ret = MSA_API.process_content(constants.FAILED, 'Device Backup FAILED.', context, True)
-          print(ret)
+         MSA_API.task_error('Device Backup FAILED.', context, True)
       elif status != constants.RUNNING or time.time() > global_timeout:
-          break
+         break
       time.sleep(interval)
     return response
 
@@ -61,14 +60,10 @@ if response:
     status = response.get('status')
     context.update(device_backup_status_end=response)
     if status == constants.FAILED:
-      ret = MSA_API.process_content(constants.FAILED, 'Device backup failed. ', context, True)
-      print(ret)
+      MSA_API.task_error( 'Device backup failed. ', context, True)
     backup_revisionId = response.get('revisionId')
     context.update(backup_revisionId=backup_revisionId)
-    ret = MSA_API.process_content(constants.ENDED, 'Device "' +  context['device_id'] + '" backup done, revisionId :'+ str(backup_revisionId), context, True)
-    print(ret)
+    MSA_API.task_success( 'Device "' +  context['device_id'] + '" backup done, revisionId :'+ str(backup_revisionId), context, True)
 
-
-ret = MSA_API.process_content(constants.FAILED, 'Backup failed on device "' + device_id , context, True)
-print(ret)
+MSA_API.task_error('Backup failed on device "' + device_id +'"', context, True)
 

@@ -15,6 +15,4 @@ context = Variables.task_call(dev_var)
 
 device_id = context['device_id'] 
 
-ret = MSA_API.process_content(constants.ENDED, 'Service instantiated for device: ' + device_id + '.', context, True)
-print(ret)
-
+MSA_API.task_success('Service instantiated for device: ' + device_id + '.', context, True)

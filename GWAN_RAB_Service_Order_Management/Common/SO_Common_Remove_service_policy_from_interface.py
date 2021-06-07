@@ -79,11 +79,11 @@ if not 'service_policy_service_instance' in context:
             #Store service_instance_id of Static_Routing_Management WF in context.
             context['service_policy_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
         else:
-            ret = MSA_API.process_content(constants.FAILED, 'Missing service id return by orchestration operation, (#' + str(service_id) + ')' , context, True)
-            print(ret) 
+            MSA_API.task_error('Missing service id return by orchestration operation, (#' + str(service_id) + ')',context , True)
+
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'Execute service operation failed, (#' + str(service_id) + ')', context, True)
-        print(ret) 
+        MSA_API.task_error('Execute service operation failed, (#' + str(service_id) + ')',context , True)
+
 #Update service_instance external reference to "SERVICE_POLICY_" + device_ext_ref (e.g: SERVICE_POLICY_UBI2455).
 #service_ext_ref = 'SERVICE_POLICY_' + device_ext_ref
 
@@ -103,8 +103,7 @@ for sp in service_policy_list:
         status = response.get('status').get('status')
         details = response.get('status').get('details')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details + ', (#' + str(service_id) + ')', context, True)
-            print(ret) 
-
-ret = MSA_API.process_content(constants.ENDED, 'Service Policy deleted successfully to the device ' + device_ref + ' (#' + str(service_id)+')', context, True)
-print(ret)
+            MSA_API.task_error( 'Execute service operation is failed: ' + details + ', (#' + str(service_id) + ')',context , True)
+ 
+True)
+MSA_API.task_success('Service Policy deleted successfully to the device ' + device_ref + ' (#' + str(service_id)+')', context , True)

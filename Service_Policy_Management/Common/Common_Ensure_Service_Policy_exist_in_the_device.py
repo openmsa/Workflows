@@ -48,20 +48,17 @@ if response:
                 is_policy_name_matched = True
             else:
                 if interface_is_status_down == True:
-                  ret = MSA_API.process_content(constants.FAILED, 'Interface Down and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                  MSA_API.task_error('Interface Down and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                 else:
-                  ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
-                print(ret)
+                  MSA_API.task_success('Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
 
 context.update(is_policy_name_matched=is_policy_name_matched)
 #if is_policy_name_matched equals False it means Service Policy object doesn't exist in the device yet.
 if is_policy_name_matched == False:
     if interface_is_status_down == True:
          # IF Down and policy-map not applied
-         ret = MSA_API.process_content(constants.FAILED, 'Interface Down, but the Service Policy  "' + input_policy_name + '" does not exists in the interface  "' + object_id + '"', context, True)
+         MSA_API.task_error('Interface Down, but the Service Policy  "' + input_policy_name + '" does not exists in the interface  "' + object_id + '"', context, True)
     else:
          # IF UP and policy-map not applied
-         ret = MSA_API.process_content(constants.ENDED, 'Interface UP and Service Policy "'+input_policy_name+'" for interface "' + object_id + '" not found on the device.', context, True)
-    print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'On interface "' + object_id + '", the Service Policy  "' + input_policy_name + '" exists in the device.', context, True)
-print(ret)
+         MSA_API.task_success('Interface UP and Service Policy "'+input_policy_name+'" for interface "' + object_id + '" not found on the device.', context, True)
+MSA_API.task_success('On interface "' + object_id + '", the Service Policy  "' + input_policy_name + '" exists in the device.', context, True)
