@@ -55,16 +55,13 @@ if is_policy_name_matched == True:
     if interface_is_status_down == True:
       #Interface DOWN and matche
       if service_policy_action == 'DELETE_SERVICE_POLICY' :
-          MSA_API.task_error(
-'On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
+          MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
       else:
-          MSA_API.task_error(
-'On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
+          MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
     else:
       #Interface UP and matche
       if service_policy_action == 'DELETE_SERVICE_POLICY' :
-          MSA_API.task_error(
-'On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
+          MSA_API.task_error('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
       else:
           MSA_API.task_success('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
 
