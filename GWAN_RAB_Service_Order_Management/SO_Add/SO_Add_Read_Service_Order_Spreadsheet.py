@@ -244,7 +244,7 @@ if selected_number == 1:
 				MSA_API.task_error('Selected spreadsheet filename is empty from the service instance context.', context, True)
 			break
 else:
-  MSA_API.task_error('Only one spreadsheet must and allows to be selected.', context, True)
+	MSA_API.task_error('Only one spreadsheet must and allows to be selected.', context, True)
   
 if context['device_external_ref'] == context['no_found_device_message']:
 	MSA_API.task_error('Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)

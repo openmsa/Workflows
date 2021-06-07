@@ -46,8 +46,7 @@ if response:
                        MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                 else:
                    #Interface UP and other policy
-                   MSA_API.task_error(
-'Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                   MSA_API.task_error('Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
 
 context.update(is_policy_name_matched=is_policy_name_matched)
 

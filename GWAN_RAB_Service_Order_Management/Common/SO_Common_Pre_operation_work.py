@@ -183,7 +183,8 @@ context['parsed_config'] = file_name
     
 if skip_config_review == 'False' or skip_config_review == 'false' or skip_config_review == False:
     #display to the GUI the configuration file URL.
-    MSA_API.task_error('To review the configuration, click on the "Parsed Configuration" link.' , context, True)
+    ret = MSA_API.process_content(constants.PAUSED, 'To review the configuration, click on the "Parsed Configuration" link.' , context, True)
+    print(ret)
     sys.exit()
 
 ########## Do backup of the device running-config. 

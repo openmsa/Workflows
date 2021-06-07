@@ -67,4 +67,4 @@ if response:
 
     MSA_API.task_success('Device "' +  context['device_id'] + '" RESTORE done', context, True)
 
-MSA_API.task_success('Restore configuration failed on device "' + device_id +'"', context, True)
+MSA_API.task_error('Restore configuration failed on device "' + device_id +'"', context, True)
