@@ -99,8 +99,7 @@ for st in spreadsheet_list:
     device_hostname = get_device_hostname_from_sheet(df, SHEET_DEVICE_REF_ROW_INDEX, FILTER_COLUMN_NAME)
     #device_hostname is mandatory, if it is empty return FAILED.
     if not device_hostname:
-        ret = MSA_API.process_content(FAILED, 'Device Hostname is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_HOSTNAME + '.', context, True)
-        print(ret)
+        MSA_API.task_error('Device Hostname is empty from sheet called ' + SHEET_NAME_CONTAINING_DEVICE_HOSTNAME + '.', context, True)
     #create spreadsheet dictionaries list.
     spreadsheet_basename = osp.basename(st)
     if (device_ref_by_hostname.get(device_hostname)):
