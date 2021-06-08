@@ -117,8 +117,7 @@ interface_is_status_down = context.get('interface_is_status_down')
 
 if vlan_id:
     if matchObj != False:
-        ret = MSA_API.process_content(constants.ENDED, 'OK Qos [In] applied for vlan : '+vlan_id+' : '+return_message, context, True)
-        print(ret)
+        MSA_API.task_success('OK Qos [In] applied for vlan : '+vlan_id+' : '+return_message, context, True)
     else:
         if interface_is_status_down == True:
             #Check 'Interface Vlan-IF Number is disabled'

@@ -16,9 +16,7 @@ if 'displayed_config_filename' in context:
         except OSError:
             pass
     
-        ret = MSA_API.process_content(constants.ENDED, 'Configuration file was deleted successfully from: ' + displayed_config_filename + '.', context, True)
-        print(ret)
+        MSA_API.task_success('Configuration file was deleted successfully from: ' + displayed_config_filename + '.', context, True)
         sys.exit()
     
-ret = MSA_API.process_content(constants.ENDED, 'There is no configuration to be deleted.', context, True)
-print(ret)
+MSA_API.task_success('There is no configuration to be deleted.', context, True)
