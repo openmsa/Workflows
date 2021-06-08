@@ -41,13 +41,12 @@ if response:
                 if interface_is_status_down == True:
                    #Interface DOWN and other policy
                    if service_policy_action == 'DELETE_SERVICE_POLICY' :
-                       ret = MSA_API.process_content(constants.ENDED, 'Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                       MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                    else:
-                       ret = MSA_API.process_content(constants.ENDED, 'Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
+                       MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                 else:
                    #Interface UP and other policy
-                   ret = MSA_API.process_content(constants.FAILED, 'Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
-                print(ret)
+                   MSA_API.task_error('Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
 
 context.update(is_policy_name_matched=is_policy_name_matched)
 
@@ -56,17 +55,15 @@ if is_policy_name_matched == True:
     if interface_is_status_down == True:
       #Interface DOWN and matche
       if service_policy_action == 'DELETE_SERVICE_POLICY' :
-          ret = MSA_API.process_content(constants.FAILED, 'On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
+          MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
       else:
-          ret = MSA_API.process_content(constants.FAILED, 'On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
+          MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
     else:
       #Interface UP and matche
       if service_policy_action == 'DELETE_SERVICE_POLICY' :
-          ret = MSA_API.process_content(constants.FAILED, 'On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
+          MSA_API.task_error('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
       else:
-          ret = MSA_API.process_content(constants.ENDED, 'On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
-    print(ret)
+          MSA_API.task_success('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
 
-ret = MSA_API.process_content(constants.ENDED, 'On interface "' + object_id + '", the Service Policy  "'+input_policy_name+'" does not exist in the device yet.', context, True)
+MSA_API.task_success('On interface "' + object_id + '", the Service Policy  "'+input_policy_name+'" does not exist in the device yet.', context, True)
 
-print(ret)

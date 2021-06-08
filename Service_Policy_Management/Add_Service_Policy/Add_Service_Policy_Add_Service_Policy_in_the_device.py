@@ -65,8 +65,7 @@ context.update(service_policy_action='ADD_SERVICE_POLICY')
 
 is_policy_name_matched = context.get('is_policy_name_matched')
 if is_policy_name_matched == True:
-    ret = MSA_API.process_content(constants.ENDED, 'Skipped, Service Policy already exist.', context, True)
-    print(ret)
+    MSA_API.task_success('Skipped, Service Policy already exist.', context, True)
 
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
@@ -76,11 +75,9 @@ if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
-    print(ret)
+    MSA_API.task_error('Failure details: ' + detials, context, True)
 
 #store OBMF command execution response in context
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content(constants.ENDED, 'Add Service Policy operation is done successfully.', context, True)
-print(ret)
+MSA_API.task_success('Add Service Policy operation is done successfully.', context, True)

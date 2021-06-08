@@ -25,7 +25,5 @@ response = json.loads(obmf.content)
 context.update(obmf_sync_resp=response)
 #if response equals empty dictionary it means class map object is not exist in the device yet.
 if response:
-    ret = MSA_API.process_content(constants.FAILED, 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
-    print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Class Map with id="' + object_id + '" does not exist in the device.', context, True)
-print(ret)
+    MSA_API.task_error( 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
+MSA_API.task_success('Class Map with id="' + object_id + '" does not exist in the device.', context, True)

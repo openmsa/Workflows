@@ -34,8 +34,7 @@ policy_name = context['policy_name'] #MS input variable value
 
 is_policy_name_matched=context['is_policy_name_matched']
 if is_policy_name_matched == False:
-    ret = MSA_API.process_content(constants.ENDED, 'Skipped, the service Policy  "' +   policy_name + '" does not exists in the device.', context, True)
-    print(ret)
+    MSA_API.task_success('Skipped, the service Policy  "' +   policy_name + '" does not exists in the device.', context, True)
 
 #build MS the dictionary input object 
 object_id=interface_name
@@ -50,8 +49,7 @@ context['ms_params'] = params
 
 is_policy_name_matched = context.get('is_policy_name_matched')
 if is_policy_name_matched == False:
-    ret = MSA_API.process_content(constants.ENDED, 'Skipped , policy name was not found', context, True)
-    print(ret)
+    MSA_API.task_success('Skipped , policy name was not found', context, True)
 
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
@@ -61,11 +59,9 @@ if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    ret = MSA_API.process_content(constants.FAILED, 'Failure details: ' + detials, context, True)
-    print(ret)
+    MSA_API.task_error('Failure details: ' + detials, context, True)
 
 #store OBMF command execution response in context
 context['response'] = response.get('wo_newparams')
 
-ret = MSA_API.process_content(constants.ENDED, 'Delete Service Policy  operation is done successfully.', context, True)
-print(ret)
+MSA_API.task_success('Delete Service Policy  operation is done successfully.', context, True)

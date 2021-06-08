@@ -229,8 +229,7 @@ if spreadsheet_list:
         if st.get('is_selected') == True:
             selected_number += 1
 else:
-	ret = MSA_API.process_content(constants.FAILED, 'Spreadsheet list is empty.', context, True)
-	print(ret)
+	MSA_API.task_error('Spreadsheet list is empty.', context, True)
     
 # Retrieve selected spreadsheet_filename from the list.
 spreadsheet_filename = ''
@@ -242,16 +241,13 @@ if selected_number == 1:
 				context['device_external_ref'] = st.get('device_external_ref')
 				context['device_hostname']     = st.get('device_hostname')
 			else:
-				ret = MSA_API.process_content(constants.FAILED, 'Selected spreadsheet filename is empty from the service instance context.', context, True)
-				print(ret)
+				MSA_API.task_error('Selected spreadsheet filename is empty from the service instance context.', context, True)
 			break
 else:
-	ret = MSA_API.process_content(constants.FAILED, 'Only one spreadsheet must and allows to be selected.', context, True)
-	print(ret)
+	MSA_API.task_error('Only one spreadsheet must and allows to be selected.', context, True)
   
 if context['device_external_ref'] == context['no_found_device_message']:
-	ret = MSA_API.process_content(constants.FAILED, 'Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)
-	print(ret)
+	MSA_API.task_error('Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)
 
 context['instanceid_hostname'] = context['SERVICEINSTANCEID'] + '_' + context['device_hostname']  
 
@@ -307,5 +303,4 @@ context['ACL'] = clean_up_dict(acl_rules_dict)
 context['policyMaps'] = clean_up_dict(policy_map_dict)
 context['spreadsheet_filename'] = spreadsheet_filename
 
-ret = MSA_API.process_content(constants.ENDED, 'Spreadsheet file is parsed successfully.', context, True)
-print(ret)
+MSA_API.task_success('Spreadsheet file is parsed successfully.', context, True)

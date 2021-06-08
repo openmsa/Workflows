@@ -35,8 +35,7 @@ filename = 'run_'+ fullday + '_' + filename
 new_spreadsheet_filename = OLD_FOLDER + '/' + filename
 # Test file exists
 if not os.path.isfile(spreadsheet_filename):
-  ret = MSA_API.process_content(constants.FAILED, " Spreadsheet Filename  '" + spreadsheet_filename + "' not found", context, True)
-  print(ret) 
+  MSA_API.task_error(" Spreadsheet Filename  '" + spreadsheet_filename + "' not found", context, True)
   sys.exit()
 
 #Check that the directorie old exist, else create it 
@@ -49,5 +48,4 @@ if not os.path.exists(OLD_FOLDER):
 
 os.rename(spreadsheet_filename, new_spreadsheet_filename)
 
-ret = MSA_API.process_content(constants.ENDED, " Spreadsheet Filename '" + spreadsheet_filename + "' move to '" + new_spreadsheet_filename + "'" , context, True)
-print(ret)
+MSA_API.task_success(" Spreadsheet Filename '" + spreadsheet_filename + "' move to '" + new_spreadsheet_filename + "'", context, True)

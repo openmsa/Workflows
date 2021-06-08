@@ -34,11 +34,9 @@ def get_config_param_val(context, policy_map, param, is_madatory=True):
         value = policy_map.get(param)
         if is_madatory == True:
             if not value:
-                ret = MSA_API.process_content(constants.FAILED, 'The required input "' + param + '" value is empty.', context, True)
-                print(ret)
+                MSA_API.task_error('The required input "' + param + '" value is empty.', context, True)
     elif is_madatory == True:
-        ret = MSA_API.process_content(constants.FAILED, 'The required input parameter "' + param + '" key in the policy_map object is missing.', context, True)
-        print(ret)
+        MSA_API.task_error('The required input parameter "' + param + '" key in the policy_map object is missing.', context, True)
 
     return value
 
@@ -108,11 +106,9 @@ if not 'policy_map_service_instance' in context:
             #Store service_instance_id of Policy_Map_Management WF in context.
             context['policy_map_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
         else:
-            ret = MSA_API.process_content(constants.FAILED, 'Missing service id return by orchestration operation.', context, True)
-            print(ret)
+            MSA_API.task_error('Missing service id return by orchestration operation.', context, True)
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'Execute service operation failed.', context, True)
-        print(ret)
+        MSA_API.task_error( 'Execute service operation failed.', context, True)
 #Update service_instance external reference to "ACL_" + device_ext_ref (e.g: ACL_UBI2455).
 #service_ext_ref = 'ACL_' + device_ext_ref
 
@@ -162,8 +158,7 @@ for key, policy_map_list  in policy_map_dicts.items():
             status = response.get('status').get('status')
             details = response.get('status').get('details')
             if status == constants.FAILED:
-                ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-                print(ret)
+                MSA_API.task_error( 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
 
-ret = MSA_API.process_content(constants.ENDED, 'Policy-map configuration added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
-print(ret)
+
+MSA_API.task_success('Policy-map configuration added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)

@@ -27,8 +27,7 @@ def self_device_push_conf_status_ret(device, timeout = 300, interval=5):
         context.update(device_push_conf_status_ret=response)
         status = response.get('status')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Push Configuration FAILED.', context, True)
-            print(ret)
+            MSA_API.task_error('Push Configuration FAILED.', context, True)
         elif status != constants.RUNNING or time.time() > global_timeout:
             break
         time.sleep(interval)
@@ -81,8 +80,7 @@ def is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_pattern, st
         status = response.get('status')
         context.update(device_push_conf_end_reponse=response)
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'No push config response.', context, True)
-            print(ret)
+            MSA_API.task_error('No push config response.', context, True)
 
         return_message = response.get('message')
 
@@ -127,14 +125,12 @@ if vlan_id:
             matchObj = return_message.find('Interface Vlan-IF Number is disabled')
             if matchObj == -1:
                 #condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is displayed
-                ret = MSA_API.process_content(constants.ENDED, 'NOK, Interface Down and "Interface Vlan-IF Number is disabled" is displayed: '+return_message, context, True)
+                MSA_API.task_success('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is displayed: '+return_message, context, True)
             else:
                 #Failure condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is NOT displayed
-                ret = MSA_API.process_content(constants.FAILED, 'NOK, Interface Down and "Interface Vlan-IF Number is disabled" is not displayed: '+return_message, context, True)
+                MSA_API.task_error('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is not displayed: '+return_message, context, True)
         else:
-            ret = MSA_API.process_content(constants.FAILED, 'NOK because Interface Up, but Qos [In] Policy map '+input_policy_name+' not found : '+return_message, context, True)
-        print(ret)
+            MSA_API.task_error('NOK because Interface Up, but Qos [In] Policy map '+input_policy_name+' not found : '+return_message, context, True)
 
-ret = MSA_API.process_content(constants.ENDED, 'SKIPPED, VLAN-ID is missing from interface_name input: '+input_policy_name, context, True)
-print(ret)
+MSA_API.task_success('SKIPPED, VLAN-ID is missing from interface_name input: '+input_policy_name, context, True)
 

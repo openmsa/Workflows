@@ -95,7 +95,5 @@ if response:
 
 #if response equals empty dictionary it means class map object is not exist in the device yet.
 if is_acl_matched != True:
-    ret = MSA_API.process_content(constants.FAILED, 'ACL with id="' + object_id + '" does not exist in the device.', context, True)
-    print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'ACL with id="' + object_id + '" exists in the device.', context, True)
-print(ret)
+    MSA_API.task_error('ACL with id="' + object_id + '" does not exist in the device.', context, True)
+MSA_API.task_success('ACL with id="' + object_id + '" exists in the device.', context, True)

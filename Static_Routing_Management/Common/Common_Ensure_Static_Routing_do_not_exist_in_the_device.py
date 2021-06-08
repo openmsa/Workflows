@@ -50,7 +50,5 @@ if response:
 
 #if response equals empty dictionary it means StaticRouting object is not exist in the device yet.
 if is_static_route_matched != False:
-    ret = MSA_API.process_content(constants.FAILED, 'Static Routing with id="' + obj_id + '" exists in the device.', context, True)
-    print(ret)
-ret = MSA_API.process_content(constants.ENDED, 'Static Routing with id="' + obj_id + '" does not exist in the device.', context, True)
-print(ret)
+    MSA_API.task_error('Static Routing with id="' + obj_id + '" exists in the device.', context, True)
+MSA_API.task_success('Static Routing with id="' + obj_id + '" does not exist in the device.', context, True)

@@ -81,11 +81,12 @@ if not 'static_routing_service_instance' in context:
             #Store service_instance_id of Static_Routing_Management WF in context.
             context['static_routing_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
         else:
-            ret = MSA_API.process_content(constants.FAILED, 'Missing service id return by orchestration operation.', context, True)
-            print(ret) 
+            MSA_API.task_error('Missing service id return by orchestration operation.',context , True)
+
+
     else:
-        ret = MSA_API.process_content(constants.FAILED, 'Execute service operation failed.', context, True)
-        print(ret) 
+        MSA_API.task_error( 'Execute service operation failed.',context , True)
+
         
 #Loop in StaticRouting dictionary object by calling the Static_Routing_Management process 'Add Static routing'.
 for route in static_routing:
@@ -102,8 +103,7 @@ for route in static_routing:
         status = response.get('status').get('status')
         details = response.get('status').get('details')
         if status == constants.FAILED:
-            ret = MSA_API.process_content(constants.FAILED, 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-            print(ret)  
+            MSA_API.task_error( 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')',context , True)
+  
 
-ret = MSA_API.process_content(constants.ENDED, 'Static Routing deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
-print(ret)
+MSA_API.task_success( 'Static Routing deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)

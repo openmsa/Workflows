@@ -55,5 +55,4 @@ for instance_name in instance_names:
         # no return if OK
         all_removed_instances = all_removed_instances +   ' ,' +instance_name
 
-ret = MSA_API.process_content(constants.ENDED, 'All instances "' + all_removed_instances + '" removed', context, True)
-print(ret)
+MSA_API.task_success('All instances "' + all_removed_instances + '" removed', context, True)
