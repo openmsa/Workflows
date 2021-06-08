@@ -32,6 +32,7 @@ def get_config_param_val(context, policy_map, param, is_madatory=True):
     if param in policy_map:
         value = policy_map.get(param)
         if is_madatory == True:
+            if not value:
                 MSA_API.task_error( 'The required input "' + param + '" value is empty.',context , True)
 
     elif is_madatory == True:
