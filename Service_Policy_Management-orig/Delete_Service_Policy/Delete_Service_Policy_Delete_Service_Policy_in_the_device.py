@@ -9,9 +9,9 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('service_policy.0.interface_name', var_type='String')
-dev_var.add('service_policy.0.direction', var_type='String')
-dev_var.add('service_policy.0.policy_name', var_type='String')
+dev_var.add('interface_name', var_type='String')
+dev_var.add('direction', var_type='String')
+dev_var.add('policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
