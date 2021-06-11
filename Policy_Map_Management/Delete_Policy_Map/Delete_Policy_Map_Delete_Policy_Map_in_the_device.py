@@ -9,8 +9,8 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('policy_map_name', var_type='String')
-dev_var.add('policy.0.class_map', var_type='String')
+dev_var.add('policy_map_list.0.policy_map_name', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.class_map', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -22,10 +22,9 @@ obmf = Order(device_id)
 
 command = 'DELETE'
 
-object_id = context.get('policy_map_name')
-policy_list = context.get('policy')
+policy_map_list = context.get('policy_map_list')
 
-config = dict(object_id=object_id, policy=policy_list)
+config = dict(policy_map_list=policy_map_list)
 obj = {"":config}
 
 params = dict(policy_map=obj)
