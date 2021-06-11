@@ -9,12 +9,11 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('source_address', var_type='String')
-dev_var.add('subnet_mask', var_type='String')
-dev_var.add('vlan_id', var_type='String')
-dev_var.add('nexthop', var_type='String')
-dev_var.add('distance', var_type='String')
-
+dev_var.add('static_routing.0.source_address', var_type='IPAddress')
+dev_var.add('static_routing.0.subnet_mask', var_type='IPMask')
+dev_var.add('static_routing.0.vlan_id', var_type='Interger')
+dev_var.add('static_routing.0.nexthop', var_type='IPAddress')
+dev_var.add('static_routing.0.distance', var_type='Interger')
 context = Variables.task_call(dev_var)
 
 #get device_id from context
@@ -26,19 +25,12 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'DELETE' # MS method corresponding on ADD Static route operation
 
-source_address = context['source_address'] #MS input variable value
-subnet_mask = context['subnet_mask'] #MS input variable value
-nexthop = context['nexthop'] #MS input variable value
+static_routing = context.get('static_routing')
 
 #build MS the dictionary input object 
-object_id = source_address
-config = dict(object_id=object_id, mask=subnet_mask, next_hop=nexthop)
-if 'vlan_id' in context:
-    config['vlan_id'] = context['vlan_id']
-if 'distance' in context:
-    config['distance'] = context['distance']
+config = dict(static_routing=static_routing)
 
-obj = dict(object_id=config) #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
+obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(static_route=obj)
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
