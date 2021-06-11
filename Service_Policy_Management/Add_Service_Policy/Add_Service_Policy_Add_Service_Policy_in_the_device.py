@@ -17,7 +17,7 @@ from msa_sdk.msa_api import MSA_API
 #            "flag": "ADD",
 #            "interface_name": "Vlan3002",
 #            "direction": "input",
-#            "policy_name": "PM_600104"
+#            "policy_map": "PM_600104"
 #        } ],
  
 
@@ -27,6 +27,7 @@ dev_var.add('service_policy.0.direction', var_type='String')
 dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
+
 
 def is_order_op_success(response):
     # check if response if not empty
@@ -51,7 +52,7 @@ service_policies = context.get('service_policy')
 #build MS the dictionary input object 
 config = dict(service_policies=service_policies)
   
-obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
+obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_map':'POLAAA-555'}}
 #MS XML file name
 #ms_xml_filename = 'service_policy'
 

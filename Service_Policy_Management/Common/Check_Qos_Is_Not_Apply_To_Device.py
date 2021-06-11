@@ -147,14 +147,11 @@ if service_policy:
       #MSA_API.task_success('SKIPPED, VLAN-ID is missing from interface_name input: '+context.get('interface_name'), context, True)
       good_values[interface_name]= 1    
 
-                    
-
 
 if (len(good_values)):
   good_values_string =  " ,".join(good_values.keys())
 else: 
   good_values_string =  ""
-good_values_string =  " ,".join(good_values.keys())
 
 MSA_API.task_success('Good, Interfaces ('+good_values_string+') are OK', context, True)
 

@@ -15,6 +15,7 @@ dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
+
 #get device_id from context
 device_id = context['device_id'][3:]
 
@@ -33,17 +34,12 @@ service_policies = context.get('service_policy')
 #build MS the dictionary input object 
 config = dict(service_policies=service_policies)
   
-obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
+obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_map':'POLAAA-555'}}
 #MS XML file name
 #ms_xml_filename = 'service_policy'
 
 params = dict(service_policy=obj)
 context['ms_params'] = params
-
-is_policy_name_matched = context.get('is_policy_name_matched')
-if is_policy_name_matched == False:
-    MSA_API.task_success('Skipped , policy name was not found', context, True)
-
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
