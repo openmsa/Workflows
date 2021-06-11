@@ -87,7 +87,7 @@ if not 'service_policy_service_instance' in context:
 
 #Loop in StaticRouting dictionary object by calling the Static_Routing_Management process 'Add Static routing'.
 for sp in service_policy_list:
-    data = dict(interface_name=sp['interface_name'], direction=sp['direction'], policy_name=sp['policy_name'], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
+    data = dict(interface_name=sp['interface_name'], direction=sp['direction'], policy_map=sp['policy_map'], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
     if isinstance(data, dict):
         service_ext_ref = context.get('service_policy_service_instance').get('external_ref')
         #execute service by ref.

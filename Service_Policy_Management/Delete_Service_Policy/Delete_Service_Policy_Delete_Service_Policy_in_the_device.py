@@ -15,6 +15,7 @@ dev_var.add('service_policy.0.policy_map', var_type='String')
 
 context = Variables.task_call(dev_var)
 
+
 #get device_id from context
 device_id = context['device_id'][3:]
 
@@ -30,22 +31,22 @@ context.update(service_policy_action='DELETE_SERVICE_POLICY')
 
 service_policies = context.get('service_policy')
 
-is_policy_name_matched=context['is_policy_name_matched']
-if is_policy_name_matched == False:
-    MSA_API.task_success('Skipped, the service Policy  "' +   policy_name + '" does not exists in the device.', context, True)
+is_policy_map_matched=context['is_policy_map_matched']
+if is_policy_map_matched == False:
+    MSA_API.task_success('Skipped, the service Policy  does not exists in the device.', context, True)
 
 #build MS the dictionary input object 
 config = dict(service_policies=service_policies)
   
-obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
+obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_map':'POLAAA-555'}}
 #MS XML file name
 #ms_xml_filename = 'service_policy'
 
 params = dict(service_policy=obj)
 context['ms_params'] = params
 
-is_policy_name_matched = context.get('is_policy_name_matched')
-if is_policy_name_matched == False:
+is_policy_map_matched = context.get('is_policy_map_matched')
+if is_policy_map_matched == False:
     MSA_API.task_success('Skipped , policy name was not found', context, True)
 
 
