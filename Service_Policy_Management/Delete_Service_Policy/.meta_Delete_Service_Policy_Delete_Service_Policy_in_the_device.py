@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>Delete_Service_Policy_Delete_Service_Policy_in_the_device.py</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1606304196395</value>
+            <value>1623410004794</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
