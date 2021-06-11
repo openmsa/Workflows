@@ -9,9 +9,9 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('object_id', var_type='String')
-dev_var.add('method', var_type='String')
-dev_var.add('acl', var_type='String')
+dev_var.add('class_map_list.0.class_map_name', var_type='String')
+dev_var.add('class_map_list.0.method', var_type='String')
+dev_var.add('class_map_list.0.acl_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -32,11 +32,9 @@ obmf = Order(device_id)
 
 command = 'CREATE'
 
-class_map_name = context['object_id'] #MS input variable value
-method = context['method'] #MS input variable value
-acl_name = context['acl'] #MS input variable value
+class_map_list = context.get('class_map_list')
 
-config = dict(object_id=class_map_name, method=method, acl=acl_name)
+config = dict(class_map_list=class_map_list)
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(class_map=obj)
 context['ms_params'] = params

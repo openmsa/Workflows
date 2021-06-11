@@ -4,9 +4,9 @@ from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
-dev_var.add('object_id', var_type='String')
-dev_var.add('method', var_type='String')
-dev_var.add('acl', var_type='String')
+dev_var.add('class_map_list.0.class_map_name', var_type='String')
+dev_var.add('class_map_list.0.method', var_type='String')
+dev_var.add('class_map_list.0.acl_name', var_type='String')
 context = Variables.task_call(dev_var)
 
 #get device_id from context
