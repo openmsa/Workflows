@@ -112,12 +112,13 @@ if not 'acl_service_instance' in context:
 #service_ext_ref = 'ACL_' + device_ext_ref
 
 #Loop in acl dictionaries and in acl list by calling the Access_List_Management process 'Add_ACL'.
-data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
+data = dict(access_lists=[], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
 for key, acl_list  in acl_dicts.items():
     acl_name = ''
     #ensure acl_list is not empty otherwise break the loop.
     if len(acl_list):
         count = 0
+        access_lists_dict = dict()
         #loop in acl list.
         for acl in acl_list:
             if isinstance(acl, dict):
@@ -125,7 +126,8 @@ for key, acl_list  in acl_dicts.items():
                     acl_name = get_config_param_val(context, acl, 'acl_name')
                 count +=1
         #prepare data dict.
-        data['acl_name'] = acl_name
+        access_lists_dict['acl_name'] = acl_name
+        data['access_lists'].append(access_lists_dict.copy())
         #execute 'Access_List_Management' process 'Add_ACL'.
         if isinstance(data, dict) and acl_name:
             service_ext_ref = context.get('acl_service_instance').get('external_ref')
