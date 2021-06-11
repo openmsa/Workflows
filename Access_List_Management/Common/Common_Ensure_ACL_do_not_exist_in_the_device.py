@@ -4,15 +4,15 @@ from msa_sdk.order import Order
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
-dev_var.add('acl_name', var_type='String')
-dev_var.add('acl.0.condition', var_type='String')
-dev_var.add('acl.0.protocol', var_type='String')
-dev_var.add('acl.0.src_address', var_type='String')
-dev_var.add('acl.0.src_wildcard', var_type='String')
-dev_var.add('acl.0.src_port', var_type='String')
-dev_var.add('acl.0.dst_address', var_type='String')
-dev_var.add('acl.0.dst_wildcard', var_type='String')
-dev_var.add('acl.0.dst_port', var_type='String')
+dev_var.add('access_lists.0.acl_name', var_type='String')
+dev_var.add('access_lists.0.acl.0.condition', var_type='String')
+dev_var.add('access_lists.0.acl.0.protocol', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_address', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_wildcard', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_port', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_address', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_wildcard', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_port', var_type='String')
 context = Variables.task_call(dev_var)
 
 #get device_id from context
