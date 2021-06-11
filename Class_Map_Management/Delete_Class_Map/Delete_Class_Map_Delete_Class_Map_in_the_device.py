@@ -37,7 +37,7 @@ if response.get('wo_status') == constants.FAILED:
     detials = ''
     if 'wo_newparams' in response:
         detials = response.get('wo_newparams')
-    MSA_API.task_error('Failure details: ' + detials,, context, False)
+    MSA_API.task_error('Failure details: ' + detials, context, False)
 
 context['response'] = response.get('wo_newparams')
 
