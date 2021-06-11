@@ -104,7 +104,12 @@ if service_policy:
       is_status_shutdown = is_interface_shutdown(context, device, interface_name, ifce_status_pattern)
 
       #Store interface status in the context to used it later
-      context.update(interface_is_status_down='interface '+interface_name+' is '+is_status_shutdown)
+      if (context.get('interfaces_is_status_down') == None):
+        interfaces_is_status_down = dict()
+      else:
+        interfaces_is_status_down = context["interfaces_is_status_down"]
+      interfaces_is_status_down[interface_name] = is_status_shutdown
+      context.update(interfaces_is_status_down=interfaces_is_status_down)
       if is_status_shutdown == True:
         good_values[interface_name]= 1
       else:
@@ -120,9 +125,9 @@ good_values_string =  " ,".join(good_values.keys())
 if (len(bad_values)):
   bad_values_string =  " ,".join(bad_values.keys())
   if (len(bad_values)):
-    MSA_API.task_error('The interfaces ('+bad_values_string+')are "NOT SHUTDOWN" on the device, but interfaces ('+good_values_string+') are "SHUTDOWN"', context, True)
+    MSA_API.task_success('The interfaces ('+bad_values_string+') are "NOT SHUTDOWN" on the device, but interfaces ('+good_values_string+') are "SHUTDOWN"', context, True)
   else:
-    MSA_API.task_error('The interfaces ('+ bad_values_string +')are "NOT SHUTDOWN" on the device', context, True)
+    MSA_API.task_success('The interfaces ('+ bad_values_string +') are "NOT SHUTDOWN" on the device', context, True)
 else: 
   MSA_API.task_success('Good, Interfaces ('+good_values_string+') are all "SHUTDOWN" on the device ', context, True)
 

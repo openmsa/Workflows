@@ -38,13 +38,11 @@ Extract VLAN ID from interface name input variable of the service instance proce
 @return: String
     VLAN ID if it exitsor empty.
 '''
-def extract_vlan_id_from_interface_name(context):
+def extract_vlan_id_from_interface_name(context, interface_name):
     vlan_id = ''
-    if 'interface_name' in context:
-        interface_name = context.get('interface_name')
-        vlan_id_parsing = re.search('vlan(\d+)', interface_name, re.IGNORECASE)
-        if vlan_id_parsing:
-            vlan_id = vlan_id_parsing.group(1)
+    vlan_id_parsing = re.search('vlan(\d+)', interface_name, re.IGNORECASE)
+    if vlan_id_parsing:
+      vlan_id = vlan_id_parsing.group(1)
     return vlan_id
 
 '''
@@ -77,7 +75,7 @@ def is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_pattern, st
         status = response.get('status')
         context.update(device_push_conf_end_reponse=response)
         if status == constants.FAILED:
-            MSA_API.task_error('No push config response.', context, True)
+            MSA_API.task_error('No push config response for vlan_id='+vlan_id , context, True)
 
         return_message = response.get('message')
 
@@ -96,38 +94,67 @@ device_id = context['device_id'][3:]
 # instantiate device object
 device = Device(device_id=device_id)
 service_policy_action = context.get('service_policy_action')   # 'DELETE_SERVICE_POLICY' / 'ADD_SERVICE_POLICY' 
-interface_is_status_down = context.get('interface_is_status_down')
-
-#extract vlan_id from interface_name
-vlan_id = extract_vlan_id_from_interface_name(context)
-context.update(vlan_id=vlan_id)
-
-#check QoS cancellation if vlan_id exits
-qos_cancellation_pattern = '[In] Default.'
-matchObj = is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_cancellation_pattern)
 
 
-return_message = ''
-if 'device_push_conf_end_reponse' in context:
-    return_message = context.get('device_push_conf_end_reponse').get('message')
+service_policy = context['service_policy']
+bad_values = dict()
+good_values = dict()
+interfaces_is_status_down = context['interfaces_is_status_down']
 
-if vlan_id:
-    if matchObj == True:
-        MSA_API.task_success('OK Qos not applied for vlan : '+vlan_id+' : '+return_message, context, True)
-    else:
-        if interface_is_status_down == True:
-            #Check 'Interface Vlan-IF Number is disabled'
-            matchObj = return_message.find('Interface Vlan-IF Number is disabled')
-            if matchObj == -1:
-                #condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is displayed
-                MSA_API.task_success('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is displayed: '+return_message, context, True)
-            else:
-                #Failure condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is NOT displayed
-                MSA_API.task_error('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is not displayed: '+return_message, context, True)
-        else:
-            #Interface UP and Qos applied
-            MSA_API.task_error('NOK, Interface UP and Qos already exists : '+return_message, context, True)
+if service_policy:
+  for rule in service_policy:
+    interface_name =  str(rule.get('interface_name'))
+    if good_values.get(interface_name) == None and bad_values.get(interface_name) == None :
+      #don't need to check twice the same interface
+
+      interface_is_status_down = interfaces_is_status_down.get(interface_name)
+
+      #extract vlan_id from interface_name
+      vlan_id = extract_vlan_id_from_interface_name(context, interface_name)
+      context.update(vlan_id=vlan_id)
+
+      #check QoS cancellation if vlan_id exits
+      qos_cancellation_pattern = '[In] Default.'
+      matchObj = is_qos_applied_or_not_to_device_vlan_iface(context, vlan_id, qos_cancellation_pattern)
 
 
-MSA_API.task_success('SKIPPED, VLAN-ID is missing from interface_name input: '+context.get('interface_name'), context, True)
+      return_message = ''
+      if 'device_push_conf_end_reponse' in context:
+          return_message = context.get('device_push_conf_end_reponse').get('message')
+
+      if vlan_id:
+          if matchObj == True:
+              #MSA_API.task_success('OK Qos not applied for vlan : '+vlan_id+' : '+return_message, context, True)
+              good_values[interface_name]= 1    
+
+          else:
+              if interface_is_status_down == True:
+                  #Check 'Interface Vlan-IF Number is disabled'
+                  matchObj = return_message.find('Interface Vlan-IF Number is disabled')
+                  if matchObj == -1:
+                      #condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is displayed
+                      #MSA_API.task_success('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is displayed: '+return_message, context, True)
+                      good_values[interface_name]= 1                        
+
+                  else:
+                      #Failure condition: "Interface is shutdown AND "Interface Vlan-IF Number is disabled" is NOT displayed
+                      MSA_API.task_error('NOK, Interface Down and "Interface Vlan-IF Number is disabled" is not displayed: '+return_message, context, True)
+              else:
+                  #Interface UP and Qos applied
+                  MSA_API.task_error('NOK, Interface UP and Qos already exists : '+return_message, context, True)
+
+
+      #MSA_API.task_success('SKIPPED, VLAN-ID is missing from interface_name input: '+context.get('interface_name'), context, True)
+      good_values[interface_name]= 1    
+
+                    
+
+
+if (len(good_values)):
+  good_values_string =  " ,".join(good_values.keys())
+else: 
+  good_values_string =  ""
+good_values_string =  " ,".join(good_values.keys())
+
+MSA_API.task_success('Good, Interfaces ('+good_values_string+') are OK', context, True)
 
