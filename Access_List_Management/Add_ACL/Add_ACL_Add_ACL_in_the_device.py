@@ -5,15 +5,15 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('acl_name', var_type='String')
-dev_var.add('acl.0.condition', var_type='String')
-dev_var.add('acl.0.protocol', var_type='String')
-dev_var.add('acl.0.src_address', var_type='String')
-dev_var.add('acl.0.src_wildcard', var_type='String')
-dev_var.add('acl.0.src_port', var_type='String')
-dev_var.add('acl.0.dst_address', var_type='String')
-dev_var.add('acl.0.dst_wildcard', var_type='String')
-dev_var.add('acl.0.dst_port', var_type='String')
+dev_var.add('access_lists.0.acl_name', var_type='String')
+dev_var.add('access_lists.0.acl.0.condition', var_type='String')
+dev_var.add('access_lists.0.acl.0.protocol', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_address', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_wildcard', var_type='String')
+dev_var.add('access_lists.0.acl.0.src_port', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_address', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_wildcard', var_type='String')
+dev_var.add('access_lists.0.acl.0.dst_port', var_type='String')
 context = Variables.task_call(dev_var)
 
 #get device_id from context
@@ -25,12 +25,10 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'CREATE' # MS method corresponding on ADD Static route operation
 
-#acl name as object_id
-object_id = context.get('acl_name')
-#acl entry list
-acl_list = context.get('acl')
-#build MS the dictionary input object 
-config = dict(object_id=object_id, acl=acl_list)
+#build MS the dictionary input object
+access_lists = context.get('access_lists')
+
+config = dict(access_lists=access_lists)
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(access_lists=obj)
 
