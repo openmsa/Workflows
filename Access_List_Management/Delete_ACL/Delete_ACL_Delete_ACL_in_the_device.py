@@ -5,7 +5,7 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('acl_name', var_type='String')
+dev_var.add('access_lists.0.acl_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -18,10 +18,10 @@ obmf = Order(device_id)
 #Execute DELETE method of StaticRouting Microservice to add route in the device
 command = 'DELETE' # MS method corresponding on DELETE Static route operation
 
-object_id = context.get('acl_name')
+#build MS the dictionary input object
+access_lists = context.get('access_lists')
 
-#build MS the dictionary input object 
-config = dict(object_id=object_id)
+config = dict(access_lists=access_lists)
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(access_lists=obj)
 context['ms_params'] = params
