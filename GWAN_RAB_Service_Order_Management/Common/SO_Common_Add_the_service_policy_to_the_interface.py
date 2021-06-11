@@ -85,21 +85,20 @@ if not 'service_policy_service_instance' in context:
 #Update service_instance external reference to "SERVICE_POLICY_" + device_ext_ref (e.g: SERVICE_POLICY_UBI2455).
 #service_ext_ref = 'SERVICE_POLICY_' + device_ext_ref
 
-#Loop in StaticRouting dictionary object by calling the Static_Routing_Management process 'Add Static routing'.
-for sp in service_policy_list:
-    data = dict(interface_name=sp['interface_name'], direction=sp['direction'], policy_map=sp['policy_map'], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
-    if isinstance(data, dict):
-        service_ext_ref = context.get('service_policy_service_instance').get('external_ref')
-        #execute service by ref.
-        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-        response = json.loads(orch.content)
-        service_id = response.get('serviceId').get('id')
-        process_id = response.get('processId').get('id')
-        #get service process details.
-        response = get_process_instance(orch, process_id)
-        status = response.get('status').get('status')
-        details = response.get('status').get('details')
-        if status == constants.FAILED:
-            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True) 
+#Loop in service_policy dictionary object by calling the Static_Routing_Management process 'Add service policy'.
+data = dict(service_policy=service_policy_list, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
+if isinstance(data, dict):
+    service_ext_ref = context.get('service_policy_service_instance').get('external_ref')
+    #execute service by ref.
+    orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+    response = json.loads(orch.content)
+    service_id = response.get('serviceId').get('id')
+    process_id = response.get('processId').get('id')
+    #get service process details.
+    response = get_process_instance(orch, process_id)
+    status = response.get('status').get('status')
+    details = response.get('status').get('details')
+    if status == constants.FAILED:
+        MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True) 
 
 MSA_API.task_success( 'Service Policy added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)

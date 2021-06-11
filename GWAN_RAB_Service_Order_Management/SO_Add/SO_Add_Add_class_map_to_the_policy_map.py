@@ -114,13 +114,14 @@ if not 'policy_map_service_instance' in context:
 
 #Loop in policy_map dictionaries and in policy_map list by calling the Policy_Map_Management process 'Add_ACL'.
 #loop which handling list of sheets
-data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
+data = dict(policy_map_list=[], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
 for key, policy_map_list  in policy_map_dicts.items():
     policy_map_name = ''
     #ensure policy_map_list is not empty otherwise break the loop.
     if len(policy_map_list):
         count = 0
         data_policy_map_list = list()
+        policy_map_dict = dict()
         #loop in policy_map list (specific sheet config).
         for policy_map in policy_map_list:
             data_policy_map_dict = dict()
@@ -143,8 +144,9 @@ for key, policy_map_list  in policy_map_dicts.items():
                     data_policy_map_list.append(data_policy_map_dict.copy())
                 count +=1
         #prepare data dict
-        data['policy_map_name'] = policy_map_name
-        data['policy'] = data_policy_map_list
+        policy_map_dict['policy_map_name'] = policy_map_name
+        policy_map_dict['policy'] = data_policy_map_list
+        data['policy_map_list'].append(policy_map_dict.copy())
         #execute 'Policy_Map_Management' process 'Add_Policy_Map'
         if isinstance(data, dict):
             service_ext_ref = context.get('policy_map_service_instance').get('external_ref')

@@ -11,7 +11,7 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('service_policy.0.interface_name', var_type='String')
 dev_var.add('service_policy.0.direction', var_type='String')
-dev_var.add('service_policy.0.policy_map', var_type='String')
+dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -31,10 +31,6 @@ context.update(service_policy_action='DELETE_SERVICE_POLICY')
 
 service_policies = context.get('service_policy')
 
-is_policy_map_matched=context['is_policy_map_matched']
-if is_policy_map_matched == False:
-    MSA_API.task_success('Skipped, the service Policy  does not exists in the device.', context, True)
-
 #build MS the dictionary input object 
 config = dict(service_policies=service_policies)
   
@@ -44,11 +40,6 @@ obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'p
 
 params = dict(service_policy=obj)
 context['ms_params'] = params
-
-is_policy_map_matched = context.get('is_policy_map_matched')
-if is_policy_map_matched == False:
-    MSA_API.task_success('Skipped , policy name was not found', context, True)
-
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)

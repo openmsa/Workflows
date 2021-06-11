@@ -24,7 +24,7 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('service_policy.0.interface_name', var_type='String')
 dev_var.add('service_policy.0.direction', var_type='String')
-dev_var.add('service_policy.0.policy_map', var_type='String')
+dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -61,11 +61,6 @@ context['ms_params'] = params
 
 #Store service Policy action
 context.update(service_policy_action='ADD_SERVICE_POLICY')
-
-is_policy_map_matched = context.get('is_policy_map_matched')
-if is_policy_map_matched == True:
-    MSA_API.task_success('Skipped, Service Policy already exist.', context, True)
-
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)

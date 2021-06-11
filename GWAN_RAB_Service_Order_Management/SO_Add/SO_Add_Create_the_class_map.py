@@ -109,29 +109,22 @@ if not 'class_map_service_instance' in context:
             MSA_API.task_error('Missing service id return by orchestration operation.', context, True)
     else:
         MSA_API.task_error('Execute service operation failed.', context, True)
-#Update service_instance external reference to "CLASS_MAP_" + device_ext_ref (e.g: CLASS_MAP_UBI2455).
-#service_ext_ref = 'CLASS_MAP_' + device_ext_ref
 
-#Loop in StaticRouting dictionary object by calling the Class_Map_Management process 'Add Class Map'.
-for class_map in class_map_list:
-    # get parameters values from class_map dict
-    method = get_config_param_val(context, class_map, 'method')
-    class_map_name = get_config_param_val(context, class_map, 'class_map_name')
-    acl = get_config_param_val(context, class_map, 'acl_name')
-    
-    #build data input parameter for Class_Map_Management baseline WF
-    data = dict(method=method, object_id=class_map_name, acl=acl, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE']) 
-    if isinstance(data, dict):
-        service_ext_ref = context.get('class_map_service_instance').get('external_ref')
-        #execute Class_Map_Management WF 
-        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-        response = json.loads(orch.content)
-        service_id = response.get('serviceId').get('id')
-        process_id = response.get('processId').get('id')
-        #get service process details.
-        response = get_process_instance(orch, process_id)
-        status = response.get('status').get('status')
-        details = response.get('status').get('details')
-        if status == constants.FAILED:
-            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+#Loop in class_map dictionary object by calling the Class_Map_Management process 'Add Class Map'.
+#build data input parameter for Class_Map_Management baseline WF
+data = dict(class_map_list=class_map_list, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE']) 
+if isinstance(data, dict):
+    service_ext_ref = context.get('class_map_service_instance').get('external_ref')
+    #execute Class_Map_Management WF 
+    orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+    response = json.loads(orch.content)
+    service_id = response.get('serviceId').get('id')
+    process_id = response.get('processId').get('id')
+    #get service process details.
+    response = get_process_instance(orch, process_id)
+    status = response.get('status').get('status')
+    details = response.get('status').get('details')
+    if status == constants.FAILED:
+        MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+
 MSA_API.task_success('Class Map added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
