@@ -16,12 +16,15 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
+
+object_name = 'static_route'
+
+command = 'IMPORT'
+params = dict(object_name="0")
+#synchronise the given device microservice
+obmf.command_call(command, 1, params) # put 1 to update the DB
 
 #get microservices instance by microservice object ID.
-object_name = 'static_route'
 object_id = context.get('source_address')
 src_mask = context.get('subnet_mask')
 vlan_id = context.get('vlan_id')

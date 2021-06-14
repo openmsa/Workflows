@@ -14,12 +14,16 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
+
+object_name = 'service_policy'
+
+command = 'IMPORT'
+params = dict(object_name="0")
+#synchronise the given device microservice
+obmf.command_call(command, 1, params) # put 1 to update the DB
+
 
 #get microservices instance by microservice object ID.
-object_name = 'service_policy'
 object_id = str(context.get('interface_name'))
 obmf.command_objects_instances_by_id(object_name, object_id)
 response = json.loads(obmf.content)
