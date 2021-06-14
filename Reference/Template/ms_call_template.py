@@ -22,7 +22,7 @@ object_parameters = {}
 
 OBJECT_PARAMETERS
 
-# call the CREATE for simple_firewall MS for each device
+# call the CREATE for the specified MS for each device
 order = Order(devicelongid)
 order.command_execute('CMD_NAME', object_parameters)
 
