@@ -19,7 +19,7 @@ def self_end_of_backup(device_obj, timeout = 300, interval=5):
     global_timeout = time.time() + timeout
     while True:
       # We will wait the end of the device backup
-      device_obj.call_get()
+      device_obj._call_get()
       response = json.loads(device_obj.content)
       # response: {"date" : "11-12-2020 16:19:37",  "message" : "BACKUP processed", "result" : null, "revisionId" : 12, "status" : "ENDED"
       context.update(device_backup_status=response)
@@ -42,7 +42,7 @@ device_obj = Device(device_id=device_id)
 device_obj.action = 'Backup Configuration Device'
 # API /conf-backup/v1/backup/{deviceId}   : Backup
 device_obj.path = "/conf-backup/v1/backup/"+device_id
-device_obj.call_post()
+device_obj._call_post()
 
 response = json.loads(device_obj.content)
 context.update(device_obj_respo=response)
