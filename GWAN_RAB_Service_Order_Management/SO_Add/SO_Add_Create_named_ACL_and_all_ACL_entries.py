@@ -154,6 +154,6 @@ for key, acl_list  in acl_dicts.items():
             status = response.get('status').get('status')
             details = response.get('status').get('details')
             if status == constants.FAILED:
-                MSA_API.task_error(Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+                MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
 
 MSA_API.task_success('Access-list added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
