@@ -64,7 +64,8 @@ if service_policy:
                       else:
                          #Interface UP and other policy
                          MSA_API.task_error('Interface UP and Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
-
+              else:
+                  good_values[interface_name]= 1                        
       if (context.get('all_is_policy_map_matched') == None):
          all_is_policy_map_matched = dict()
       else:

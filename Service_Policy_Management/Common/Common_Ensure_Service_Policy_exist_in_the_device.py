@@ -57,6 +57,7 @@ if service_policies:
                   ret_policy_map = ret_service_policy_dict.get('policy_map')
                   if ret_policy_map == input_policy_map:
                       is_policy_map_matched = True
+                      good_values[interface_name]= 1  
                   else:
                       if interface_is_status_down == True:
                         MSA_API.task_error('Interface Down and Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
@@ -80,4 +81,4 @@ if (len(good_values)):
 else: 
   good_values_string =  ""
 
-MSA_API.task_success('For all interfaces "' +good_values_string + '", the Service Policy  exists in the device.', context, True)
+MSA_API.task_success('For all interfaces (' +good_values_string + '), the Service Policy  exists in the device.', context, True)
