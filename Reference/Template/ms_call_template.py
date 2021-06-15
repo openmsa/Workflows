@@ -15,7 +15,7 @@ device_id = context['device_id']
 # extract the database ID
 devicelongid = device_id[3:]
 
-# build the Microservice JSON params for IMPORT
+# build the Microservice JSON params
 #{"Gateway":"0"}
 #micro_service_vars_array = {"object_id":object_id}
 object_parameters = {}
