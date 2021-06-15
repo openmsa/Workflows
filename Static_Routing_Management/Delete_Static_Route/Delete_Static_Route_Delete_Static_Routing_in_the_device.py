@@ -27,22 +27,25 @@ command = 'DELETE' # MS method corresponding on ADD Static route operation
 
 static_routing = context.get('static_routing')
 
-#build MS the dictionary input object 
-config = dict(static_routing=static_routing)
+if static_routing:
+  #build MS the dictionary input object 
+  config = dict(static_routing=static_routing)
 
-obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
-params = dict(static_route=obj)
+  obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
+  params = dict(static_route=obj)
 
-obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
-response = json.loads(obmf.content)
+  obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
+  response = json.loads(obmf.content)
 
-if response.get('wo_status') == constants.FAILED:
-    detials = ''
-    if 'wo_newparams' in response:
-        detials = response.get('wo_newparams')
-    MSA_API.task_error('Failure details: ' + detials, context, True)
+  if response.get('wo_status') == constants.FAILED:
+      detials = ''
+      if 'wo_newparams' in response:
+          detials = response.get('wo_newparams')
+      MSA_API.task_error('Failure details: ' + detials, context, True)
 
-#store OBMF command execution response in context
-context['response'] = response.get('wo_newparams')
+  #store OBMF command execution response in context
+  context['response'] = response.get('wo_newparams')
 
-MSA_API.task_success('Delete static route operation is done successfully.', context, True)
+  MSA_API.task_success('Delete static route operation is done successfully.', context, True)
+else:
+  MSA_API.task_success('OK no static rule to delete', context, True)

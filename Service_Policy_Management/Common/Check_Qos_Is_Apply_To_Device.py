@@ -147,7 +147,7 @@ if service_policies:
                   
 
 if (len(good_values)):
-  good_values_string =  " ,".join(good_values.keys())
+  good_values_string =  ", ".join(good_values.keys())
 else: 
   good_values_string =  ""
 

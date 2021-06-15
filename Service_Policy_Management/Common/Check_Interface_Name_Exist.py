@@ -47,13 +47,13 @@ if service_policy:
 
 
 if (len(good_values)):
-  good_values_string =  " ,".join(good_values.keys())
+  good_values_string =  ", ".join(good_values.keys())
 else: 
   good_values_string =  ""
-good_values_string =  " ,".join(good_values.keys())
+good_values_string =  ", ".join(good_values.keys())
 
 if (len(bad_values)):
-  bad_values_string =  " ,".join(bad_values.keys())
+  bad_values_string =  ",".join(bad_values.keys())
   if (len(bad_values)):
     MSA_API.task_error('Can not find interfaces ('+bad_values_string+') on the device, but find interfaces ('+good_values_string+') ', context, True)
   else:
