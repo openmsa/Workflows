@@ -121,7 +121,7 @@ Retrieve process instance by service instance ID.
 @return:
     Response of the get process instance execution.
 '''
-def get_process_instance(orch, process_id, timeout = 300, interval=5):
+def get_process_instance(orch, process_id, timeout = 600, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:
