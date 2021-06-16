@@ -19,11 +19,27 @@ obmf.command_synchronize(timeout)
 
 #get microservices instance by microservice object ID.
 object_name = 'class_map'
-object_id = context.get('object_id')
-obmf.command_objects_instances_by_id(object_name, object_id)
-response = json.loads(obmf.content)
-context.update(obmf_sync_resp=response)
-#if response equals empty dictionary it means class map object is not exist in the device yet.
-if response:
-    MSA_API.task_error( 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
-MSA_API.task_success('Class Map with id="' + object_id + '" does not exist in the device.', context, True)
+
+class_map_list = context['class_map_list']
+bad_values = dict()
+good_values = dict()
+
+if class_map_list:
+  for rule in class_map_list:
+    object_id     =  str(rule.get('class_map_name'))
+
+    obmf.command_objects_instances_by_id(object_name, object_id)
+    response = json.loads(obmf.content)
+    context.update(obmf_sync_resp=response)
+    #if response equals empty dictionary it means class map object is not exist in the device yet.
+    if response:
+        MSA_API.task_error( 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
+    #MSA_API.task_success('Class Map with id="' + object_id + '" does not exist in the device.', context, True)
+    good_values[object_id]= 1    
+
+if (len(good_values)):
+  good_values_string =  ", ".join(good_values.keys())
+else: 
+  good_values_string =  ""
+
+MSA_API.task_success('Good, Class Map with id=(' + good_values_string + ') not exist in the device. ', context, True)
