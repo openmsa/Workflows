@@ -27,7 +27,8 @@ if ($response['wo_status'] !== ENDED) {
 	exit;
 }
 
-$context = $response['wo_newparams'];
+$context['floating_ip_address']=$response['wo_newparams']['floating_ip_address'];
+$context['floating_ip_id']=$response['wo_newparams']['floating_ip_id'];
 $response = prepare_json_response(ENDED, $response['wo_comment'], $context, true);
 echo $response;
 
