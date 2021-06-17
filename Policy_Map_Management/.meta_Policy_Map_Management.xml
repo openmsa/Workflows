@@ -2,8 +2,12 @@
 <metadata>
     <map>
         <entry>
+            <key>DISPLAYNAME</key>
+            <value>Policy_Map_Management.xml</value>
+        </entry>
+        <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1606143442477</value>
+            <value>1623939518995</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -11,22 +15,10 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1606143442473</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1623939518995</value>
         </entry>
         <entry>
             <key>TAG</key>
-        </entry>
-        <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
-        </entry>
-        <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
         </entry>
         <entry>
             <key>TYPE</key>

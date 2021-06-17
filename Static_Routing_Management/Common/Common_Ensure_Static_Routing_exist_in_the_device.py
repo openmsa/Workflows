@@ -16,27 +16,36 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
+
+object_name = 'static_route'
+
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
 
 #get microservices instance by microservice object ID.
-object_name = 'static_route'
 object_id = context.get('source_address')
 src_mask = context.get('subnet_mask')
 vlan_id = context.get('vlan_id')
 next_hop = context.get('nexthop')
 distance = context.get('distance')
-obmf.command_objects_instances_by_id(object_name, object_id)
 response = json.loads(obmf.content)
 context.update(obmf_sync_resp=response)
 
 #ensure the object inputs are in the response.
 is_static_route_matched = False
 obj_id = object_id.replace('.', "_")
-if response:
-    if obj_id in response.get(object_name): 
-        sr = response.get(object_name).get(obj_id)
+
+#response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"sms_status":"OK"}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None} 
+message = response.get('entity').get('message')
+
+if message:
+    #Convert message into array
+    message = json.loads(message)
+    if obj_id in message.get(object_name):
+        sr = message.get(object_name).get(obj_id)
         ret_static_route_ip = sr.get('object_id')
         ret_static_route_mask = sr.get('mask')
         ret_static_route_vlan_id = sr.get('vlan_id')

@@ -14,14 +14,17 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
+
+object_name = 'service_policy'
+
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
 
 #get microservices instance by microservice object ID.
-object_name = 'service_policy'
 object_id = str(context.get('interface_name'))
-obmf.command_objects_instances_by_id(object_name, object_id)
 response = json.loads(obmf.content)
 context.update(obmf_sync_resp=response)
 #if response equals empty dictionary it means class map object is not exist in the device yet.
@@ -30,9 +33,16 @@ input_policy_name = context.get('policy_name')
 interface_is_status_down = context.get('interface_is_status_down')
 service_policy_action = context.get('service_policy_action')   # 'DELETE_SERVICE_POLICY' / 'ADD_SERVICE_POLICY' 
 
-if response:
-    if object_id in response.get(object_name):
-        ret_service_policy_dict = response.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
+#response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"service_policy":{"GigabitEthernet1":{"object_id":"GigabitEthernet1"},"GigabitEthernet2":{"object_id":"GigabitEthernet2"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","direction":"input","policy_map":"PM_600105"}}}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None} 
+message = response.get('entity').get('message')
+#MSA_API.task_error('Test, response='+str(response), context, True)
+
+if message:
+    #Convert message into array
+    message = json.loads(message)
+
+    if object_id in message.get(object_name):
+        ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
         if 'policy_map' in ret_service_policy_dict:
             ret_policy_name = ret_service_policy_dict.get('policy_map')
             if ret_policy_name == input_policy_name:
