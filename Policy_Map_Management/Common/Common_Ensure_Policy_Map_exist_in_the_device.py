@@ -64,23 +64,41 @@ obmf.command_synchronize(timeout)
 
 #get microservices instance by microservice object ID.
 object_name = 'policy_map'
-object_id = context.get('policy_map_name')
-obmf.command_objects_instances_by_id(object_name, object_id)
-response = json.loads(obmf.content)
-context.update(obmf_sync_resp=response)
-#ensure the object inputs are in the response.
-is_p_map_matched = False
-#ensure that all acl rules from context['acl'] dict are in response['acl']
-if response:
-    if object_id in response.get(object_name):
-        ret_policy_map_dict = response.get(object_name).get(object_id)
-        if 'policy' in ret_policy_map_dict:
-            device_policy_dict = ret_policy_map_dict.get('policy')
-            input_policy_dict = context.get('policy')
-            is_p_map_matched = is_policy_map_matched(device_policy_dict, input_policy_dict)
-        
-context.update(is_p_map_matched=is_p_map_matched)
-#if response equals empty dictionary it means class map object is not exist in the device yet.
-if is_p_map_matched == False:
-    MSA_API.task_error('Policy-map with id="' + object_id + '", no class exist in the device.', context, True)
-MSA_API.task_success('Policy-map with id="' + object_id + '", one class at least exists in the device.', context, True)
+
+ 
+policy_map_list = context['policy_map_list']
+bad_values = dict()
+good_values = dict()
+
+if policy_map_list:
+  for rule in policy_map_list:
+    object_id   = str(rule.get('policy_map_name'))
+    policies    = rule.get('policy')
+    obmf.command_objects_instances_by_id(object_name, object_id)
+    response = json.loads(obmf.content)
+    context.update(obmf_sync_resp=response)
+    #ensure the object inputs are in the response.
+    is_p_map_matched = False
+    #ensure that all acl rules from context['acl'] dict are in response['acl']
+    if response:
+        if object_id in response.get(object_name):
+            ret_policy_map_dict = response.get(object_name).get(object_id)
+            if 'policy' in ret_policy_map_dict:
+                device_policy_dict = ret_policy_map_dict.get('policy')
+                input_policy_dict  = policies
+                is_p_map_matched   = is_policy_map_matched(device_policy_dict, input_policy_dict)
+            
+    context.update(is_p_map_matched=is_p_map_matched)
+    #if response equals empty dictionary it means class map object is not exist in the device yet.
+    if is_p_map_matched == False:
+        MSA_API.task_error('Policy-map with id="' + object_id + '", no class exist in the device.', context, True)
+    #MSA_API.task_success('Policy-map with id="' + object_id + '", one class at least exists in the device.', context, True)
+    good_values[object_id]= 1                        
+
+
+if (len(good_values)):
+  good_values_string =  ", ".join(good_values.keys())
+else: 
+  good_values_string =  ""
+
+MSA_API.task_success('Good, Policy-map with ids('+good_values_string+') one class at least exists in the device.', context, True)
