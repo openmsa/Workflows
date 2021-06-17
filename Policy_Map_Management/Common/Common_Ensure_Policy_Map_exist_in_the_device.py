@@ -67,7 +67,6 @@ object_name = 'policy_map'
 
  
 policy_map_list = context['policy_map_list']
-bad_values = dict()
 good_values = dict()
 
 if policy_map_list:

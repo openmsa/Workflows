@@ -78,22 +78,40 @@ obmf.command_synchronize(timeout)
 
 #get microservices instance by microservice object ID.
 object_name = 'access_lists'
-object_id = context.get('acl_name')
-obmf.command_objects_instances_by_id(object_name, object_id)
-response = json.loads(obmf.content)
-context.update(obmf_sync_resp=response)
 
-#ensure the object inputs are in the response.
-is_acl_matched = False
-#ensure that all acl rules from context['acl'] dict are in response['acl']
-if response:
-    if object_id in response.get(object_name):
-        is_acl_matched = True
-        #input_acl_list = context.get('acl')
-        #device_acls_dict = response.get(object_name).get(object_id).get('acl')
-        #is_acl_matched = is_input_acl_matched_to_device_acl(input_acl_list, device_acls_dict)
 
-#if response equals empty dictionary it means class map object is not exist in the device yet.
-if is_acl_matched != True:
-    MSA_API.task_error('ACL with id="' + object_id + '" does not exist in the device.', context, True)
-MSA_API.task_success('ACL with id="' + object_id + '" exists in the device.', context, True)
+access_lists = context['access_lists']
+good_values = dict()
+
+if access_lists:
+  for rule in access_lists:
+    object_id   = str(rule.get('acl_name'))
+
+    obmf.command_objects_instances_by_id(object_name, object_id)
+    response = json.loads(obmf.content)
+    context.update(obmf_sync_resp=response)
+
+    #ensure the object inputs are in the response.
+    is_acl_matched = False
+    #ensure that all acl rules from context['acl'] dict are in response['acl']
+    if response:
+        if object_id in response.get(object_name):
+            is_acl_matched = True
+            #input_acl_list = context.get('acl')
+            #input_acl_list = rule.get('acl')
+            #device_acls_dict = response.get(object_name).get(object_id).get('acl')
+            #is_acl_matched = is_input_acl_matched_to_device_acl(input_acl_list, device_acls_dict)
+
+    #if response equals empty dictionary it means class map object is not exist in the device yet.
+    if is_acl_matched != True:
+        MSA_API.task_error('ACL with id="' + object_id + '" does not exist in the device.', context, True)
+    #MSA_API.task_success('ACL with id="' + object_id + '" exists in the device.', context, True)
+    good_values[object_id]= 1                        
+
+
+if (len(good_values)):
+  good_values_string =  ", ".join(good_values.keys())
+else: 
+  good_values_string =  ""
+
+MSA_API.task_success('Good, ACL with ids('+good_values_string+') exists in the device.', context, True)
