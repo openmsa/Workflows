@@ -111,4 +111,4 @@ if 'StaticRouting' in context:
 
     MSA_API.task_success( 'Static Routing added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
 
-MSA_API.task_success( 'No Static Routing to be added to the device.')', context, True)
+MSA_API.task_success( 'No Static Routing to be added to the device.', context, True)
