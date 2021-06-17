@@ -5,6 +5,7 @@ import time
 import re
 from json2html import *
 from msa_sdk import constants
+from msa_sdk.order import Order
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -44,6 +45,11 @@ SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Backup_Configuration_Management/Backup
 CREATE_PROCESS_NAME = 'New_Service'
 ADD_PROCESS_NAME = 'Backup_Configuration_Management'
 service_instance_name = 'backup_configuration_service_instance'
+
+obmf  = Order(device_id=device_id)
+#synchronise all device microservices
+timeout = 500
+obmf.command_synchronize(timeout)
 
 #instantiate Configuration Backup Management WF.
 create_new_service(context, orch, SERVICE_NAME, CREATE_PROCESS_NAME, service_instance_name)
