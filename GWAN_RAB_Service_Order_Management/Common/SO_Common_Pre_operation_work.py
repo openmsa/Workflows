@@ -28,16 +28,32 @@ Write in http server repository file the configurations from the context.
 '''
 def write_configs_to_http_repo():
     #retrieve configuration from the context.
-    acl_config = json.dumps(context['ACL'])
-    acl_config = json2html.convert(json = acl_config)
-    service_policy_config = json.dumps(context['ServicePolicy'])
-    service_policy_config = json2html.convert(json = service_policy_config)
-    class_map_config = json.dumps(context['ClassMap'])
-    class_map_config = json2html.convert(json = class_map_config)
-    policy_map_config = json.dumps(context['policyMaps'])
-    policy_map_config = json2html.convert(json = policy_map_config)
-    static_routing_config = json.dumps(context['StaticRouting'])
-    static_routing_config = json2html.convert(json = static_routing_config)
+    EMPTY_JSON = json2html.convert(json = {})
+    
+    acl_config = EMPTY_JSON
+    if 'ACL' in context:
+        acl_config = json.dumps(context['ACL'])
+        acl_config = json2html.convert(json = acl_config)
+
+    service_policy_config = EMPTY_JSON
+    if 'ServicePolicy' in context:
+        service_policy_config = json.dumps(context['ServicePolicy'])
+        service_policy_config = json2html.convert(json = service_policy_config)
+    
+    class_map_config = EMPTY_JSON
+    if 'ClassMap' in context:
+        class_map_config = json.dumps(context['ClassMap'])
+        class_map_config = json2html.convert(json = class_map_config)
+
+    policy_map_config = EMPTY_JSON
+    if 'policyMaps' in context:
+        policy_map_config = json.dumps(context['policyMaps'])
+        policy_map_config = json2html.convert(json = policy_map_config)
+    
+    static_routing_config = EMPTY_JSON
+    if 'StaticRouting' in context:
+        static_routing_config = json.dumps(context['StaticRouting'])
+        static_routing_config = json2html.convert(json = static_routing_config)
     
     #filename is created based-on the device external reference
     path_separator = '/'
@@ -121,7 +137,7 @@ Retrieve process instance by service instance ID.
 @return:
     Response of the get process instance execution.
 '''
-def get_process_instance(orch, process_id, timeout = 300, interval=5):
+def get_process_instance(orch, process_id, timeout = 600, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:

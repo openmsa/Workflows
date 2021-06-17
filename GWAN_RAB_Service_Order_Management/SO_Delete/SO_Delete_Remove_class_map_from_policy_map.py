@@ -54,7 +54,7 @@ Retrieve process instance by service instance ID.
 @return:
     Response of the get process instance execution.
 '''
-def get_process_instance(orch, process_id, timeout = 300, interval=5):
+def get_process_instance(orch, process_id, timeout = 600, interval=5):
     response = {}
     global_timeout = time.time() + timeout
     while True:
@@ -74,81 +74,85 @@ def get_process_instance(orch, process_id, timeout = 300, interval=5):
 #                                                  #
 ####################################################
 
-#Get device id (router) from context (e.g: UBI2455).
-device_ref = context['device_external_ref']
-device_id = device_ref[3:]
+if 'policyMaps' in context:
 
-#Get StaticRouting dictionary object from context.
-policy_map_dicts = context['policyMaps']
+    #Get device id (router) from context (e.g: UBI2455).
+    device_ref = context['device_external_ref']
+    device_id = device_ref[3:]
 
-#Initiate orchestraction object.
-ubiqube_id = context['UBIQUBEID']
-orch = Orchestration(ubiqube_id)
+    #Get StaticRouting dictionary object from context.
+    policy_map_dicts = context['policyMaps']
 
-#Static Routing Management WF service name constant variable.
-SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Policy_Map_Management/Policy_Map_Management'
-CREATE_PROCESS_NAME = 'New_Service'
-ADD_PROCESS_NAME = 'Delete_Policy_Map'
-service_id = ''
-service_ext_ref = ''
-#Instantiate new Policy_Map_Management WF dedicated for the device_id.
-if not 'policy_map_service_instance' in context:
-    data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
-    orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
-    response = json.loads(orch.content)
-    #context['response'] = response
-    status = response.get('status').get('status')
-    if status == constants.ENDED:
-        if 'serviceId' in response:
-            service_id = response.get('serviceId').get('id')
-            service_ext_ref = response.get('serviceId').get('serviceExternalReference')
-            #Store service_instance_id of Policy_Map_Management WF in context.
-            context['policy_map_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
+    #Initiate orchestraction object.
+    ubiqube_id = context['UBIQUBEID']
+    orch = Orchestration(ubiqube_id)
+
+    #Static Routing Management WF service name constant variable.
+    SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Policy_Map_Management/Policy_Map_Management'
+    CREATE_PROCESS_NAME = 'New_Service'
+    ADD_PROCESS_NAME = 'Delete_Policy_Map'
+    service_id = ''
+    service_ext_ref = ''
+    #Instantiate new Policy_Map_Management WF dedicated for the device_id.
+    if not 'policy_map_service_instance' in context:
+        data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
+        orch.execute_service(SERVICE_NAME, CREATE_PROCESS_NAME, data)
+        response = json.loads(orch.content)
+        #context['response'] = response
+        status = response.get('status').get('status')
+        if status == constants.ENDED:
+            if 'serviceId' in response:
+                service_id = response.get('serviceId').get('id')
+                service_ext_ref = response.get('serviceId').get('serviceExternalReference')
+                #Store service_instance_id of Policy_Map_Management WF in context.
+                context['policy_map_service_instance'] = dict(external_ref=service_ext_ref, instance_id=service_id)
+            else:
+                MSA_API.task_error( 'Missing service id return by orchestration operation.', context , True)
+
         else:
-            MSA_API.task_error( 'Missing service id return by orchestration operation.', context , True)
+            MSA_API.task_error( 'Execute service operation failed.', context , True)
 
-    else:
-        MSA_API.task_error( 'Execute service operation failed.', context , True)
+    #Update service_instance external reference to "POLICY_MAP_" + device_ext_ref (e.g: POLICY_MAP_UBI2455).
+    #service_ext_ref = 'POLICY_MAP_' + device_ext_ref
 
-#Update service_instance external reference to "POLICY_MAP_" + device_ext_ref (e.g: POLICY_MAP_UBI2455).
-#service_ext_ref = 'POLICY_MAP_' + device_ext_ref
+    #Loop in policy_map dictionaries and in policy_map list by calling the Policy_Map_Management process 'Add_ACL'.
+    data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
+    for key, policy_map_list  in policy_map_dicts.items():
+        policy_map_name = ''
+        #ensure policy_map_list is not empty otherwise break the loop.
+        if len(policy_map_list):
+            count = 0
+            data_policy_map_list = list()
+            #loop in policy_map list (specific sheet config).
+            for policy_map in policy_map_list:
+                data_policy_map_dict = dict()
+                if isinstance(policy_map, dict):
+                    if count == 0:
+                        policy_map_name = get_config_param_val(context, policy_map, 'policy_map_name')
+                    else:
+                        data_policy_map_dict['class_map'] = get_config_param_val(context, policy_map, 'class_name')
+                    if data_policy_map_dict:
+                        data_policy_map_list.append(data_policy_map_dict.copy())
+                    count +=1
+            #prepare data dict
+            data['policy_map_name'] = policy_map_name
+            data['policy'] = data_policy_map_list
+            #execute 'Policy_Map_Management' process 'Delete_Policy_Map'
+            if isinstance(data, dict):
+                context['delete_policy_map_data'] = data
+                service_ext_ref = context.get('policy_map_service_instance').get('external_ref')
+                #execute service by ref.
+                orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+                response = json.loads(orch.content)
+                service_id = response.get('serviceId').get('id')
+                process_id = response.get('processId').get('id')
+                #get service process details.
+                response = get_process_instance(orch, process_id)
+                status = response.get('status').get('status')
+                details = response.get('status').get('details')
+                if status == constants.FAILED: 
+                    MSA_API.task_error( 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')',context , True)
 
-#Loop in policy_map dictionaries and in policy_map list by calling the Policy_Map_Management process 'Add_ACL'.
-data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
-for key, policy_map_list  in policy_map_dicts.items():
-    policy_map_name = ''
-    #ensure policy_map_list is not empty otherwise break the loop.
-    if len(policy_map_list):
-        count = 0
-        data_policy_map_list = list()
-        #loop in policy_map list (specific sheet config).
-        for policy_map in policy_map_list:
-            data_policy_map_dict = dict()
-            if isinstance(policy_map, dict):
-                if count == 0:
-                    policy_map_name = get_config_param_val(context, policy_map, 'policy_map_name')
-                else:
-                    data_policy_map_dict['class_map'] = get_config_param_val(context, policy_map, 'class_name')
-                if data_policy_map_dict:
-                    data_policy_map_list.append(data_policy_map_dict.copy())
-                count +=1
-        #prepare data dict
-        data['policy_map_name'] = policy_map_name
-        data['policy'] = data_policy_map_list
-        #execute 'Policy_Map_Management' process 'Delete_Policy_Map'
-        if isinstance(data, dict):
-            context['delete_policy_map_data'] = data
-            service_ext_ref = context.get('policy_map_service_instance').get('external_ref')
-            #execute service by ref.
-            orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-            response = json.loads(orch.content)
-            service_id = response.get('serviceId').get('id')
-            process_id = response.get('processId').get('id')
-            #get service process details.
-            response = get_process_instance(orch, process_id)
-            status = response.get('status').get('status')
-            details = response.get('status').get('details')
-            if status == constants.FAILED: 
-                MSA_API.task_error( 'Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')',context , True)
+    MSA_API.task_success('Policy-map configuration deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
 
-MSA_API.task_success('Policy-map configuration deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
+MSA_API.task_success('No Policy-map configuration to be deleted in the device.', context, True)
