@@ -15,7 +15,6 @@ device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
 
-#get microservices instance by microservice object ID.
 object_name = 'service_policy'
 
 command = 'IMPORT'
