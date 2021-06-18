@@ -46,13 +46,12 @@ if service_policy:
 
       #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"service_policy":{"GigabitEthernet1":{"object_id":"GigabitEthernet1"},"GigabitEthernet2":{"object_id":"GigabitEthernet2"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","direction":"input","policy_map":"PM_600105"}}}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None} 
       message = response.get('entity').get('message')
-      #MSA_API.task_error('Test, response='+str(response), context, True)
 
       if message:
           #Convert message into array
           message = json.loads(message)
 
-          if object_id in response.get(object_name):
+          if object_id in message.get(object_name):
               ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
               if 'policy_map' in ret_service_policy_dict:
                   ret_policy_map = ret_service_policy_dict.get('policy_map')

@@ -52,6 +52,9 @@ if service_policies:
       #ensure the object inputs are in the response.
       is_policy_map_matched = False
       input_policy_map = rule.get('policy_map')
+
+      message = response.get('entity').get('message')
+
       if message:
           #Convert message into array
           message = json.loads(message)
@@ -65,7 +68,7 @@ if service_policies:
                       good_values[interface_name]= 1  
                   else:
                       if interface_is_status_down == True:
-                        MSA_API.task_error('Interface Down and Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
+                        MSA_API.task_error('Interface Down and Found one other Service Policy "'+str(ret_policy_map)+'" for interface "' + object_id + '" on the device, instead of "'+str(input_policy_map)+'"', context, True)
                       else:
                         #MSA_API.task_success('Interface UP and Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
                         good_values[interface_name]= 1  

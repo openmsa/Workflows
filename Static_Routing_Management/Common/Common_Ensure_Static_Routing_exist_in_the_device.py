@@ -7,18 +7,17 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('static_routing.0.source_address', var_type='IPAddress')
 dev_var.add('static_routing.0.subnet_mask',    var_type='IPMask')
-dev_var.add('static_routing.0.vlan_id',        var_type='Interger')
+dev_var.add('static_routing.0.vlan_id',        var_type='String')
 dev_var.add('static_routing.0.nexthop',        var_type='IPAddress')
 dev_var.add('static_routing.0.distance',       var_type='Interger')
 context = Variables.task_call(dev_var)
-
+ 
 #get device_id from context
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
 
 static_routing = context['static_routing']
-bad_values = dict()
 good_values = dict()
 object_name = 'static_route'
 
@@ -54,24 +53,24 @@ if static_routing:
         #Convert message into array
         message = json.loads(message)
         if message.get(object_name) and obj_id in message.get(object_name):
-
             sr = message.get(object_name).get(obj_id)
-            ret_static_route_ip = sr.get('object_id')
-            ret_static_route_mask = sr.get('mask')
-            ret_static_route_vlan_id = sr.get('vlan_id')
-            ret_static_route_next_hop = sr.get('next_hop')
-            ret_static_route_distance = sr.get('distance')
-            if distance is None or distance =='':
-              distance = "null"
-            if distance == '1' and ret_static_route_distance == "null":
+            ret_static_route_ip         = sr.get('object_id')
+            ret_static_route_mask       = sr.get('mask')
+            ret_static_route_vlan_id    = sr.get('vlan_id')
+            ret_static_route_next_hop   = sr.get('next_hop')
+            ret_static_route_distance   = sr.get('distance')
+            if distance is None or distance =='' or distance == None:
+              distance = '1'
+            if distance == '1' and (ret_static_route_distance == "null" or ret_static_route_distance == None):
                 # Set the default 'Distance' value in th Catalyst ME.
                 ret_static_route_distance = '1'
             if object_id == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
                 is_static_route_matched = True    
-            error = 'Found|wanted static rule with IP='+ ret_static_route_ip + '|' + object_id +', mask= ' + ret_static_route_mask + '|' +  src_mask +', vlan_id=' + ret_static_route_vlan_id + '|' + vlan_id + ', next_hop='+ret_static_route_next_hop + '|' +next_hop+', dist='+ ret_static_route_distance+'|'+ distance
+            if object_id == ret_static_route_ip:
+              error = 'Found|wanted static rule with IP='+ str(ret_static_route_ip) + '|' + str(object_id) +', mask= ' + str(ret_static_route_mask) + '|' +  str(src_mask) +', vlan_id=' + str(ret_static_route_vlan_id) + '|' + str(vlan_id) + ', next_hop=' + str(ret_static_route_next_hop) + '|' + str(next_hop) +', dist='+ str(ret_static_route_distance) + '|' + str(distance)
     #if response equals empty dictionary it means class map object is not exist in the device yet.
     if is_static_route_matched != True:
-      if error is None:
+      if error == None:
         MSA_API.task_error('Static Routing with id="' + obj_id + '" does not exist in the device.', context, True)
       else:
         MSA_API.task_error('Static Routing with id="' + obj_id + '" does not match exactly in the device: '+ error, context, True)

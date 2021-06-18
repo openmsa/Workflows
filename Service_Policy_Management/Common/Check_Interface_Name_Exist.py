@@ -34,6 +34,8 @@ if service_policy:
       response = json.loads(obmf.content)
       context.update(obmf_inter_status_resp=response)
 
+      message = response.get('entity').get('message')
+
       #ensure the object inputs are in the response.
       found_interface_name = False
       if message:

@@ -9,7 +9,7 @@ dev_var = Variables()
 
 dev_var.add('static_routing.0.source_address', var_type='IPAddress')
 dev_var.add('static_routing.0.subnet_mask',    var_type='IPMask')
-dev_var.add('static_routing.0.vlan_id',        var_type='Interger')
+dev_var.add('static_routing.0.vlan_id',        var_type='String')
 dev_var.add('static_routing.0.nexthop',        var_type='IPAddress')
 dev_var.add('static_routing.0.distance',       var_type='Interger')
 context = Variables.task_call(dev_var)
@@ -20,6 +20,8 @@ device_id = context['device_id'][3:]
 obmf  = Order(device_id=device_id)
 
 static_routing = context['static_routing']
+
+good_values = dict()
 
 object_name = 'static_route'
 
