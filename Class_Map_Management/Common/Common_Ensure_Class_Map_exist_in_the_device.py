@@ -30,7 +30,7 @@ if class_map_list:
   for rule in class_map_list:
     object_id     =  str(rule.get('class_map_name'))
 
-    obmf.command_objects_instances_by_id(object_name, object_id)
+    #LED obmf.command_objects_instances_by_id(object_name, object_id)
     response = json.loads(obmf.content)
     context.update(obmf_sync_resp=response)
 

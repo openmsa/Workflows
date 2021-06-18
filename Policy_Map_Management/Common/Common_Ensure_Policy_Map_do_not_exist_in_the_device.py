@@ -61,7 +61,7 @@ obmf  = Order(device_id=device_id)
 #get microservices instance by microservice object ID.
 object_name = 'policy_map'
 
- command = 'IMPORT'
+command = 'IMPORT'
 params = dict()
 params[object_name] = "0"
 #synchronise the given device microservice
@@ -75,7 +75,7 @@ if policy_map_list:
     object_id   = str(rule.get('policy_map_name'))
     policies    = rule.get('policy')
 
-    obmf.command_objects_instances_by_id(object_name, object_id)
+    #LED obmf.command_objects_instances_by_id(object_name, object_id)
     response = json.loads(obmf.content)
     context.update(obmf_sync_resp=response)
     #ensure the object inputs are in the response.

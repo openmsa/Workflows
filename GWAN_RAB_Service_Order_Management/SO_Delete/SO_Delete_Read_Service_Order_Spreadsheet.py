@@ -231,27 +231,27 @@ if spreadsheet_list:
         if st.get('is_selected') == True:
             selected_number += 1
 else:
-	MSA_API.task_error('Spreadsheet list is empty.', context, True)
+    MSA_API.task_error('Spreadsheet list is empty.', context, True)
     
 # Retrieve selected spreadsheet_filename from the list.
 spreadsheet_filename = ''
 if selected_number == 1:
-	for st in context.get('spreadsheet_list'):
-		if st.get('is_selected') == True:
-			if st.get('spreadsheet'):
-				#store device_external_ref in the context
-				spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
-				context['device_external_ref'] = st.get('device_external_ref')
-				context['device_hostname']     = st.get('device_hostname')
+    for st in context.get('spreadsheet_list'):
+        if st.get('is_selected') == True:
+            if st.get('spreadsheet'):
+                #store device_external_ref in the context
+                spreadsheet_filename = context.get('spreadsheets_directory') + '/' + st.get('spreadsheet')
+                context['device_external_ref'] = st.get('device_external_ref')
+                context['device_hostname']     = st.get('device_hostname')
 
-			else:
-				MSA_API.task_error('Selected spreadsheet filename is empty from the service instance context.', context, True)
-			break
+            else:
+                MSA_API.task_error('Selected spreadsheet filename is empty from the service instance context.', context, True)
+            break
 else:
-	MSA_API.task_error('Only one spreadsheet must and allows to be selected.', context, True)
+    MSA_API.task_error('Only one spreadsheet must and allows to be selected.', context, True)
 
 if context['device_external_ref'] == context['no_found_device_message']:
-	MSA_API.task_error( 'Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)
+    MSA_API.task_error( 'Not found, hostname "' + context['device_hostname'] +'" corresponding managed entity', context, True)
   
 context['instanceid_hostname'] = context['SERVICEINSTANCEID'] + '_' + context['device_hostname']  
 
@@ -271,7 +271,7 @@ acl_rules_dict = {}
 policy_map_dict = {}
 sheet_name_patterns = [STATIC_ROUTING, ACL, SERVICE_POLICY, CLASS_MAP, POLICY_MAP]
 for sheet_name in sheet_names:
-  	for pattern in sheet_name_patterns:
+      for pattern in sheet_name_patterns:
             is_sheet_name_exist = search(pattern, sheet_name)
             if is_sheet_name_exist:
                 df = pandas.read_excel('file:' + spreadsheet_filename, sheet_name=sheet_name)
