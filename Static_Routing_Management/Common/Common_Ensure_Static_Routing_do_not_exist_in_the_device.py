@@ -48,7 +48,7 @@ message = response.get('entity').get('message')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if obj_id in message.get(object_name):
+    if message.get(object_name) and obj_id in message.get(object_name):
 
         sr = message.get(object_name).get(obj_id)
         ret_static_route_ip = sr.get('object_id')

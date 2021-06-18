@@ -38,7 +38,7 @@ message = response.get('entity').get('message')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
         is_class_map_name = True
         class_map_obj = message.get(object_name).get(object_id)
         if 'access' in class_map_obj:

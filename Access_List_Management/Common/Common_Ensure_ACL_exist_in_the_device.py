@@ -96,7 +96,7 @@ message = response.get('entity').get('message')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
 
         is_acl_matched = True
         #input_acl_list = context.get('acl')
