@@ -1,0 +1,36 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="TEST VAR 01" name="params.test_var_01" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/WF_TEST_01/Process_MY_NEW_PROCESS">
+    <displayName>MY NEW PROCESS</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_TASK_01.py">
+      <processPath>/opt/fmc_repository/Process/workflows/WF_TEST_01/Process_MY_NEW_PROCESS/Tasks</processPath>
+      <displayName>TASK 01</displayName>
+    </task>
+    <task name="Task_TASK_02.py">
+      <processPath>/opt/fmc_repository/Process/workflows/WF_TEST_01/Process_MY_NEW_PROCESS/Tasks</processPath>
+      <displayName>TASK 02</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/WF_TEST_01/Process_DELETE_MY_NEW_INSTANCE">
+    <displayName>DELETE MY NEW INSTANCE</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>Description Description Description Description Description Description Description Description</description>
+    <displayField>test_var_01</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>WF_TEST_01</name>
+    <group>ALAXALA|TRAINING|ADVANCED</group>
+  </information>
+</ObjectDefinition>
