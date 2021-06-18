@@ -72,30 +72,41 @@ def is_input_acl_matched_to_device_acl(input_acl_dict, device_acls_dict):
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
-#get microservices instance by microservice object ID.
 object_name = 'access_lists'
 
 
 access_lists = context['access_lists']
+
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
+
+
 good_values = dict()
 
 if access_lists:
   for rule in access_lists:
     object_id   = str(rule.get('acl_name'))
 
-    obmf.command_objects_instances_by_id(object_name, object_id)
+    ####LED  obmf.command_objects_instances_by_id(object_name, object_id)
     response = json.loads(obmf.content)
     context.update(obmf_sync_resp=response)
 
     #ensure the object inputs are in the response.
     is_acl_matched = False
     #ensure that all acl rules from context['acl'] dict are in response['acl']
-    if response:
-        if object_id in response.get(object_name):
+
+    #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"access_lists":{"A":{"object_id":"A"},"AL_600104-6003G011":{"object_id":"AL_600104-6003G011","acl":{"10":{"index":"10","condition":"permit","protocol":"ip","any_src":"","src_address_host":"","src_address":"10.166.174.16","src_wildcard":"0.0.0.15","src_op":"","src_port":"","any_dst":"","dst_address_host":"","dst_address":"10.188.94.192","dst_wildcard":"0.0.0.15","dst_op":"","dst_port":"","opt":""},"20":{"index":"20","condition":"permit","protocol":"ip","any_src":"","src_address_host":"","src_address":"10.166.174.1","src_wildcard":"0.0.0.16","src_op":"","src_port":"","any_dst":"","dst_address_host":"","dst_address":"10.188.94.193","dst_wildcard":"0.0.0.16","dst_op":"","dst_port":"","opt":""}}},"IP-Adm-V4-Int-ACL-global":{"object_id":"IP-Adm-V4-Int-ACL-global","acl":{"10":{"index":"10","condition":"..:........
+    message = response.get('entity').get('message')
+
+    if message:
+        #Convert message into array
+        message = json.loads(message)
+        if message.get(object_name) and object_id  in message.get(object_name):
+
             is_acl_matched = True
             #input_acl_list = context.get('acl')
             #input_acl_list = rule.get('acl')

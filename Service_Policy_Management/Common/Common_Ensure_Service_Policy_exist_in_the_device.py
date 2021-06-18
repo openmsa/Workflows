@@ -13,13 +13,15 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
-#get microservices instance by microservice object ID.
 object_name = 'service_policy'
  
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
+
 service_policies = context['service_policy']
 bad_values = dict()
 good_values = dict()
@@ -33,7 +35,7 @@ if service_policies:
       object_id = interface_name
       interface_is_status_down = interfaces_is_status_down.get(interface_name)
 
-      obmf.command_objects_instances_by_id(object_name, object_id)
+      #LED obmf.command_objects_instances_by_id(object_name, object_id)
       response = json.loads(obmf.content)
       context.update(obmf_sync_resp=response)
       #   "obmf_sync_resp": {
@@ -50,9 +52,12 @@ if service_policies:
       #ensure the object inputs are in the response.
       is_policy_map_matched = False
       input_policy_map = rule.get('policy_map')
-      if response:
-          if object_id in response.get(object_name):
-              ret_service_policy_dict = response.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
+      if message:
+          #Convert message into array
+          message = json.loads(message)
+          if message.get(object_name) and object_id  in message.get(object_name):
+
+              ret_service_policy_dict =  message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
               if 'policy_map' in ret_service_policy_dict:
                   ret_policy_map = ret_service_policy_dict.get('policy_map')
                   if ret_policy_map == input_policy_map:

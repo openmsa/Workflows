@@ -18,14 +18,20 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
 static_routing = context['static_routing']
-bad_values = dict()
-good_values = dict()
+
 object_name = 'static_route'
+
+command = 'IMPORT'
+params = dict(object_name="0")
+#synchronise the given device microservice
+
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
+
 
 if static_routing:
   for rule in static_routing:
@@ -36,16 +42,23 @@ if static_routing:
     next_hop  = rule.get('nexthop')
     distance  = rule.get('distance')
 
-    obmf.command_objects_instances_by_id(object_name, object_id)
+    #LED obmf.command_objects_instances_by_id(object_name, object_id)
     response = json.loads(obmf.content)
     context.update(obmf_sync_resp=response)
 
     #ensure the object inputs are in the response.
     is_static_route_matched = False
     obj_id = object_id.replace('.', "_")
-    if response:
-        if obj_id in response.get(object_name): 
-            sr = response.get(object_name).get(obj_id)
+    #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"static_route":{"10_100_100_32":{"object_id":"10.100.100.32","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_33":{"object_id":"10.100.100.33","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_34":{"object_id":"10.100.100.34","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_35":{"object_id":"10.100.100.35","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_36":{"object_id":"10.100.100.36","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_37":{"object_id":"10.100.100.37","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_38":{"object_id":"10.100.100.38","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_39":{"object_id":"10.100.100.39","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_40":{"object_id":"10.100.100.40","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"10_100_100_41":{"object_id":"10.100.100.41","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"1...
+
+    message = response.get('entity').get('message')
+
+    if message:
+        #Convert message into array
+        message = json.loads(message)
+        if message.get(object_name) and obj_id in message.get(object_name):
+
+            sr = message.get(object_name).get(obj_id)
             ret_static_route_ip = sr.get('object_id')
             ret_static_route_mask = sr.get('mask')
             ret_static_route_vlan_id = sr.get('vlan_id')

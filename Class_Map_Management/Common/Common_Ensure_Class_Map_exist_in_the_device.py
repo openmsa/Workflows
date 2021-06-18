@@ -13,12 +13,15 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
 #get microservices instance by microservice object ID.
 object_name = 'class_map'
+
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
 
 class_map_list = context['class_map_list']
 bad_values = dict()
@@ -35,10 +38,17 @@ if class_map_list:
     #ensure the object inputs are in the response.
     is_class_map_name = False
     ret_acl_name = ''
-    if response:
-        if object_id in response.get(object_name):
+    #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"class_map":{"TestAuto":{"method":"match-all","object_id":"TestAuto","access":{"0":{"acl":"acl-auto"}}},"CM_DISCARD":{"method":"match-all","object_id":"CM_DISCARD"},"class-default":{"method":"match-any","object_id":"class-default"}}}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None}
+
+    message = response.get('entity').get('message')
+
+    if message:
+        #Convert message into array
+        message = json.loads(message)
+        if message.get(object_name) and object_id  in message.get(object_name):
+
             is_class_map_name = True
-            class_map_obj = response.get(object_name).get(object_id)
+            class_map_obj = message.get(object_name).get(object_id)
             if 'access' in class_map_obj:
                 if 'acl' in class_map_obj.get('access').get('0'):
                     ret_acl_name = class_map_obj.get('access').get('0').get('acl')

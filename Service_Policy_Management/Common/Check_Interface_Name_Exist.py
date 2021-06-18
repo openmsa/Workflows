@@ -11,13 +11,15 @@ context = Variables.task_call(dev_var)
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device all microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
-#get microservices instance by microservice object ID.
 object_name = 'interfaces_status'
 
+command = 'IMPORT'
+
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
 
 service_policy = context['service_policy']
 bad_values = dict()
@@ -28,16 +30,20 @@ if service_policy:
     interface_name =  str(rule.get('interface_name'))
     if good_values.get(interface_name) == None and bad_values.get(interface_name) == None :
       #don't need to check twice the same interface
-      obmf.command_objects_instances_by_id(object_name, interface_name)
+      #LED obmf.command_objects_instances_by_id(object_name, interface_name)
       response = json.loads(obmf.content)
       context.update(obmf_inter_status_resp=response)
 
       #ensure the object inputs are in the response.
       found_interface_name = False
-      if response:
-        if interface_name in response.get(object_name):
-          ret_service_policy_dict = response.get(object_name).get(interface_name) # {"direction": "input","interface_name": "GigabitEthernet2","status": "down"}
-          found_interface_name = True
+      if message:
+          #Convert message into array
+          message = json.loads(message)
+          #message = {"interfaces_status":{"GigabitEthernet1":{"object_id":"GigabitEthernet1","status":"up"},"GigabitEthernet2":{"object_id":"GigabitEthernet2","status":"down"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","status":"down"}}}
+          if message.get(object_name) and interface_name  in message.get(object_name):
+	 
+            ret_service_policy_dict =  message.get(object_name).get(interface_name) # {"direction": "input","interface_name": "GigabitEthernet2","status": "down"}
+            found_interface_name = True
 
       if found_interface_name == True:
         good_values[interface_name]= 1

@@ -6,6 +6,7 @@ import re
 import sys
 from json2html import *
 from msa_sdk import constants
+from msa_sdk.order import Order
 from msa_sdk.orchestration import Orchestration
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
@@ -28,16 +29,32 @@ Write in http server repository file the configurations from the context.
 '''
 def write_configs_to_http_repo():
     #retrieve configuration from the context.
-    acl_config = json.dumps(context['ACL'])
-    acl_config = json2html.convert(json = acl_config)
-    service_policy_config = json.dumps(context['ServicePolicy'])
-    service_policy_config = json2html.convert(json = service_policy_config)
-    class_map_config = json.dumps(context['ClassMap'])
-    class_map_config = json2html.convert(json = class_map_config)
-    policy_map_config = json.dumps(context['policyMaps'])
-    policy_map_config = json2html.convert(json = policy_map_config)
-    static_routing_config = json.dumps(context['StaticRouting'])
-    static_routing_config = json2html.convert(json = static_routing_config)
+    EMPTY_JSON = json2html.convert(json = {})
+    
+    acl_config = EMPTY_JSON
+    if 'ACL' in context:
+        acl_config = json.dumps(context['ACL'])
+        acl_config = json2html.convert(json = acl_config)
+
+    service_policy_config = EMPTY_JSON
+    if 'ServicePolicy' in context:
+        service_policy_config = json.dumps(context['ServicePolicy'])
+        service_policy_config = json2html.convert(json = service_policy_config)
+    
+    class_map_config = EMPTY_JSON
+    if 'ClassMap' in context:
+        class_map_config = json.dumps(context['ClassMap'])
+        class_map_config = json2html.convert(json = class_map_config)
+
+    policy_map_config = EMPTY_JSON
+    if 'policyMaps' in context:
+        policy_map_config = json.dumps(context['policyMaps'])
+        policy_map_config = json2html.convert(json = policy_map_config)
+    
+    static_routing_config = EMPTY_JSON
+    if 'StaticRouting' in context:
+        static_routing_config = json.dumps(context['StaticRouting'])
+        static_routing_config = json2html.convert(json = static_routing_config)
     
     #filename is created based-on the device external reference
     path_separator = '/'
@@ -197,6 +214,11 @@ SERVICE_NAME = 'Process/nttcw-gwan-rab-wf/Backup_Configuration_Management/Backup
 CREATE_PROCESS_NAME = 'New_Service'
 ADD_PROCESS_NAME = 'Backup_Configuration_Management'
 service_instance_name = 'backup_configuration_service_instance'
+
+obmf  = Order(device_id=device_id)
+#synchronise all device microservices
+timeout = 500
+obmf.command_synchronize(timeout)
 
 #instantiate Configuration Backup Management WF.
 if not 'backup_configuration_service_instance' in context: 

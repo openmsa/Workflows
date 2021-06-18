@@ -58,13 +58,15 @@ def is_policy_map_matched(device_policy_dict, input_policy_dict):
 device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
-#synchronise device microservices
-timeout = 300
-obmf.command_synchronize(timeout)
 
 #get microservices instance by microservice object ID.
 object_name = 'policy_map'
 
+command = 'IMPORT'
+params = dict()
+params[object_name] = "0"
+#synchronise the given device microservice
+obmf.command_call(command, 0, params) # put 0 to not update the db
  
 policy_map_list = context['policy_map_list']
 good_values = dict()
@@ -73,15 +75,23 @@ if policy_map_list:
   for rule in policy_map_list:
     object_id   = str(rule.get('policy_map_name'))
     policies    = rule.get('policy')
-    obmf.command_objects_instances_by_id(object_name, object_id)
+    #LED obmf.command_objects_instances_by_id(object_name, object_id)
     response = json.loads(obmf.content)
     context.update(obmf_sync_resp=response)
     #ensure the object inputs are in the response.
     is_p_map_matched = False
     #ensure that all acl rules from context['acl'] dict are in response['acl']
-    if response:
-        if object_id in response.get(object_name):
-            ret_policy_map_dict = response.get(object_name).get(object_id)
+
+    #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"policy_map":{"policy_auto":{"object_id":"policy_auto","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G012":{"object_id":"CM_600104-6003G012","policy":{"0":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G011":{"object_id":"CM_600104-6003G011"},"PM_600104":{"object_id":"PM_600104","policy":{"0":{"class_map":"CM_DISCARD"}}},"PM_600105":{"object_id":"PM_600105","policy":{"0":{"class_map":"CM_DISCARD"}}},"P":{"object_id":"P"},"MyTest":{"object_id":"MyTest","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"PM_QA":{"object_id":"PM_QA"},...
+
+    message = response.get('entity').get('message')
+
+    if message:
+        #Convert message into array
+        message = json.loads(message)
+        if message.get(object_name) and object_id  in message.get(object_name):
+
+            ret_policy_map_dict = message.get(object_name).get(object_id)
             if 'policy' in ret_policy_map_dict:
                 device_policy_dict = ret_policy_map_dict.get('policy')
                 input_policy_dict  = policies
