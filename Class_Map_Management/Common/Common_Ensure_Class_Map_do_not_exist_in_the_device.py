@@ -34,7 +34,7 @@ message = response.get('entity').get('message')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
       #if response equals empty dictionary it means class map object is not exist in the device yet.
       MSA_API.task_error( 'Class Map with id="' + object_id + '" is already exists in the device.', context, True)
 MSA_API.task_success('Class Map with id="' + object_id + '" does not exist in the device.', context, True)

@@ -38,7 +38,7 @@ input_policy_name = context.get('policy_name')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
         ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
         if 'policy_map' in ret_service_policy_dict:
             ret_policy_name = ret_service_policy_dict.get('policy_map')

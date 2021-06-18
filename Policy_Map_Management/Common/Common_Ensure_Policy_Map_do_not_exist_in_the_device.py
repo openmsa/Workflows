@@ -81,7 +81,7 @@ message = response.get('entity').get('message')
 if message:
     #Convert message into array
     message = json.loads(message)
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
         ret_policy_map_dict = message.get(object_name).get(object_id)
         if 'policy' in ret_policy_map_dict:
             device_policy_dict = ret_policy_map_dict.get('policy')

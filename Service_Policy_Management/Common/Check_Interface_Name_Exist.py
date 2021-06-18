@@ -36,7 +36,7 @@ if message:
     #Convert message into array
     message = json.loads(message)
     #message = {"interfaces_status":{"GigabitEthernet1":{"object_id":"GigabitEthernet1","status":"up"},"GigabitEthernet2":{"object_id":"GigabitEthernet2","status":"down"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","status":"down"}}}
-    if object_id in message.get(object_name):
+    if message.get(object_name) and object_id  in message.get(object_name):
         ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","status": "donw"}
         found_interface_name = True
 
