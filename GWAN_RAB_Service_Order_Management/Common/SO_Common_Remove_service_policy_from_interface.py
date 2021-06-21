@@ -48,7 +48,7 @@ def get_process_instance(orch, process_id, timeout = 600, interval=5):
 ####################################################
 
 #Get ServicePolicy dictionary object from context.
-if 'ServicePolicy' in context:
+if 'ServicePolicy' in context and context['ServicePolicy']:
 	#Get device id (router) from context (e.g: UBI2455).
 	device_ref = context['device_external_ref']
 	#device_ref = context['device_id']

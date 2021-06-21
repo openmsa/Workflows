@@ -51,7 +51,7 @@ def get_process_instance(orch, process_id, timeout = 600, interval=5):
 
 
 #Get StaticRouting dictionary object from context.
-if 'StaticRouting' in context:
+if 'StaticRouting' in context and context['StaticRouting']:
 
     #Get device id (router) from context (e.g: UBI2455).
     device_ref = context['device_external_ref']

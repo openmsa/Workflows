@@ -6,7 +6,7 @@ from msa_sdk.msa_api import MSA_API
 dev_var = Variables()
 dev_var.add('service_policy.0.interface_name', var_type='String')
 dev_var.add('service_policy.0.direction', var_type='String')
-dev_var.add('service_policy.0.policy_map', var_type='String')
+dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
 
@@ -39,12 +39,12 @@ if service_policy:
       response = json.loads(obmf.content)
       context.update(obmf_sync_resp=response) 
       #if response equals empty dictionary it means class map object is not exist in the device yet.
-      is_policy_map_matched = False
-      input_policy_map = rule.get('policy_map')
+      is_policy_name_matched = False
+      input_policy_name = rule.get('policy_name')
       interface_is_status_down = interfaces_is_status_down.get(interface_name)
       service_policy_action = context.get('service_policy_action')   # 'DELETE_SERVICE_POLICY' / 'ADD_SERVICE_POLICY' 
 
-      #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"service_policy":{"GigabitEthernet1":{"object_id":"GigabitEthernet1"},"GigabitEthernet2":{"object_id":"GigabitEthernet2"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","direction":"input","policy_map":"PM_600105"}}}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None} 
+      #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"service_policy":{"GigabitEthernet1":{"object_id":"GigabitEthernet1"},"GigabitEthernet2":{"object_id":"GigabitEthernet2"},"GigabitEthernet3":{"object_id":"GigabitEthernet3","direction":"input","policy_name":"PM_600105"}}}'}, 'variant': {'language': None, 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'encoding': None, 'languageString': None}, 'annotations': [], 'mediaType': {'type': 'application', 'subtype': 'json', 'parameters': {}, 'wildcardType': False, 'wildcardSubtype': False}, 'language': None, 'encoding': None} 
       message = response.get('entity').get('message')
 
       if message:
@@ -52,46 +52,46 @@ if service_policy:
           message = json.loads(message)
 
           if object_id in message.get(object_name):
-              ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_map": "PM_600104"}
-              if 'policy_map' in ret_service_policy_dict:
-                  ret_policy_map = ret_service_policy_dict.get('policy_map')
-                  if ret_policy_map == input_policy_map:
-                      is_policy_map_matched = True
+              ret_service_policy_dict = message.get(object_name).get(object_id) # {"direction": "input","object_id": "GigabitEthernet2","param": {"_order": "2000"},"policy_name": "PM_600104"}
+              if 'policy_name' in ret_service_policy_dict:
+                  ret_policy_name = ret_service_policy_dict.get('policy_name')
+                  if ret_policy_name == input_policy_name:
+                      is_policy_name_matched = True
                   else:
                       if interface_is_status_down == True:
                          #Interface DOWN and other policy
                          if service_policy_action == 'DELETE_SERVICE_POLICY' :
-                             #MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
+                             #MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                              good_values[interface_name]= 1                        
                          else:
-                             #MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
+                             #MSA_API.task_success('Interface Down, Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
                              good_values[interface_name]= 1                        
                       else:
                          #Interface UP and other policy
-                         MSA_API.task_error('Interface UP and Found one other Service Policy "'+ret_policy_map+'" for interface "' + object_id + '" on the device.', context, True)
+                         MSA_API.task_error('Interface UP and Found one other Service Policy "'+ret_policy_name+'" for interface "' + object_id + '" on the device.', context, True)
               else:
                   good_values[interface_name]= 1                        
-      if (context.get('all_is_policy_map_matched') == None):
-         all_is_policy_map_matched = dict()
+      if (context.get('all_is_policy_name_matched') == None):
+         all_is_policy_name_matched = dict()
       else:
-         all_is_policy_map_matched = context['all_is_policy_map_matched']
-      all_is_policy_map_matched[interface_name] = is_policy_map_matched
-      context.update(all_is_policy_map_matched  = all_is_policy_map_matched)
+         all_is_policy_name_matched = context['all_is_policy_name_matched']
+      all_is_policy_name_matched[interface_name] = is_policy_name_matched
+      context.update(all_is_policy_name_matched  = all_is_policy_name_matched)
 
-      #if is_policy_map_matched equals True it means Service Policy object doesn't exist in the device yet.
-      if is_policy_map_matched == True:
+      #if is_policy_name_matched equals True it means Service Policy object doesn't exist in the device yet.
+      if is_policy_name_matched == True:
           if interface_is_status_down == True:
             #Interface DOWN and matche
             if service_policy_action == 'DELETE_SERVICE_POLICY' :
-                MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_map+'" always exists in the device.', context, True)
+                MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
             else:
-                MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_map+'" already exists in the device.', context, True)
+                MSA_API.task_error('On interface Down "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
           else:
             #Interface UP and matche
             if service_policy_action == 'DELETE_SERVICE_POLICY' :
-                MSA_API.task_error('On interface UP "' + object_id + '", the Service Policy "'+input_policy_map+'" always exists in the device.', context, True)
+                MSA_API.task_error('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" always exists in the device.', context, True)
             else:
-                #MSA_API.task_success('On interface UP "' + object_id + '", the Service Policy "'+input_policy_map+'" already exists in the device.', context, True)
+                #MSA_API.task_success('On interface UP "' + object_id + '", the Service Policy "'+input_policy_name+'" already exists in the device.', context, True)
                 good_values[interface_name]= 1                        
 
 if (len(good_values)):
@@ -99,6 +99,6 @@ if (len(good_values)):
 else: 
   good_values_string =  ""
 
-#MSA_API.task_success('On interface "' + object_id + '", the Service Policy  "'+input_policy_map+'" does not exist in the device yet.', context, True)
+#MSA_API.task_success('On interface "' + object_id + '", the Service Policy  "'+input_policy_name+'" does not exist in the device yet.', context, True)
 MSA_API.task_success('Good, Interfaces ('+good_values_string+'), all given Service Policies no exist in the device yet', context, True)
 
