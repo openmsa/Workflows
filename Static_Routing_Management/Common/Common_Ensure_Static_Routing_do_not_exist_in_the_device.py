@@ -66,7 +66,7 @@ if static_routing:
             ret_static_route_vlan_id = sr.get('vlan_id')
             ret_static_route_next_hop = sr.get('next_hop')
             ret_static_route_distance = sr.get('distance')
-            if distance == '1' and ret_static_route_distance == 'null':
+            if distance == '1' and (ret_static_route_distance == "null" or ret_static_route_distance == None):
                 # Set the default 'Distance' value in th Catalyst ME.
                 ret_static_route_distance = '1'
             if object_id == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
