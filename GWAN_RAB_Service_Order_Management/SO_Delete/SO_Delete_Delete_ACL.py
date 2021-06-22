@@ -130,20 +130,22 @@ if 'ACL' in context and context['ACL']:
             #prepare data dict.
             access_lists_dict['acl_name'] = acl_name
             data['access_lists'].append(access_lists_dict.copy())
-            #execute 'Access_List_Management' process 'Add_ACL'.
-            if isinstance(data, dict) and acl_name:
-                service_ext_ref = context.get('acl_service_instance').get('external_ref')
-                #execute service by ref.
-                orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-                response = json.loads(orch.content)
-                service_id = response.get('serviceId').get('id')
-                process_id = response.get('processId').get('id')
-                #get service process details.
-                response = get_process_instance(orch, process_id)
-                status = response.get('status').get('status')
-                details = response.get('status').get('details')
-                if status == constants.FAILED:
-                    MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+    
+
+    #execute 'Access_List_Management' process 'Add_ACL' 1 times
+    if data['access_lists'] and isinstance(data, dict) and acl_name:
+        service_ext_ref = context.get('acl_service_instance').get('external_ref')
+        #execute service by ref.
+        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        response = json.loads(orch.content)
+        service_id = response.get('serviceId').get('id')
+        process_id = response.get('processId').get('id')
+        #get service process details.
+        response = get_process_instance(orch, process_id)
+        status = response.get('status').get('status')
+        details = response.get('status').get('details')
+        if status == constants.FAILED:
+            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
               
     
     MSA_API.task_success('Access-list deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)

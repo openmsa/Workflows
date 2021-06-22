@@ -2,6 +2,7 @@ import copy
 import pandas
 import glob
 import json
+import os
 import numpy as np
 from re import search
 from msa_sdk import constants
@@ -302,5 +303,7 @@ for sheet_name in sheet_names:
 context['ACL'] = clean_up_dict(acl_rules_dict)
 context['policyMaps'] = clean_up_dict(policy_map_dict)
 context['spreadsheet_filename'] = spreadsheet_filename
+filename = os.path.basename(spreadsheet_filename)
 
-MSA_API.task_success('Spreadsheet file is parsed successfully.', context, True)
+MSA_API.task_success('Spreadsheet file "'+filename+'" is parsed successfully.', context, True)
+
