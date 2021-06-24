@@ -51,13 +51,14 @@ def get_process_instance(orch, process_id, timeout = 600, interval=5):
 
 
 #Get StaticRouting dictionary object from context.
-if 'StaticRouting' in context:
+if 'StaticRouting' in context and context['StaticRouting']:
 
     #Get device id (router) from context (e.g: UBI2455).
     device_ref = context['device_external_ref']
     #device_ref = context['device_id']
     device_id = device_ref[3:]
 
+    #Get StaticRouting dictionary object from context.
     static_routing = context['StaticRouting']
 
     #Initiate orchestraction object.
@@ -70,8 +71,6 @@ if 'StaticRouting' in context:
     ADD_PROCESS_NAME = 'Add_Static_Route'
     service_id = ''
     service_ext_ref = ''
-
-
     #Instantiate new Static_Routing_Management WF dedicated for the device_id.
     if not 'static_routing_service_instance' in context:
         data = dict(device_id=device_ref, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
@@ -92,23 +91,21 @@ if 'StaticRouting' in context:
     #Update service_instance external reference to "STATIC_ROUTING_" + device_ext_ref (e.g: STATIC_ROUTING_UBI2455).
     #service_ext_ref = 'STATIC_ROUTING_' + device_ext_ref
 
-    #Loop in StaticRouting dictionary object by calling the Static_Routing_Management process 'Add Static routing'.
-    for route in static_routing:
-        data = dict(source_address=route['source_address'], subnet_mask=route['subnet_mask'], vlan_id=route['vlan_id'], nexthop=route['nexthop'], distance=route['distance'], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
-        if isinstance(data, dict):
-            service_ext_ref = context.get('static_routing_service_instance').get('external_ref')
-            #execute service by ref.
-            orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-            response = json.loads(orch.content)
-            service_id = response.get('serviceId').get('id')
-            process_id = response.get('processId').get('id')
-            #get service process details.
-            response = get_process_instance(orch, process_id)
-            status = response.get('status').get('status')
-            details = response.get('status').get('details')
-            if status == constants.FAILED:
-                MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+    #Forward the StaticRouting dictionary object to the Static_Routing_Management process 'Add Static routing'.
+    data = dict(static_routing=static_routing, SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])  
+    if isinstance(data, dict):
+        service_ext_ref = context.get('static_routing_service_instance').get('external_ref')
+        #execute service by ref.
+        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        response = json.loads(orch.content)
+        service_id = response.get('serviceId').get('id')
+        process_id = response.get('processId').get('id')
+        #get service process details.
+        response = get_process_instance(orch, process_id)
+        status = response.get('status').get('status')
+        details = response.get('status').get('details')
+        if status == constants.FAILED:
+            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
 
     MSA_API.task_success( 'Static Routing added successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
-
 MSA_API.task_success( 'No Static Routing to be added to the device.', context, True)

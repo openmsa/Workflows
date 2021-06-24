@@ -5,17 +5,17 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('policy_map_name', var_type='String')
-dev_var.add('policy.0.class_map', var_type='String')
-dev_var.add('policy.0.cir_before', var_type='String')
-dev_var.add('policy.0.cir_after', var_type='String')
-dev_var.add('policy.0.bc_before', var_type='String')
-dev_var.add('policy.0.bc_after', var_type='String')
-dev_var.add('policy.0.be_before', var_type='String')
-dev_var.add('policy.0.be_after', var_type='String')
-dev_var.add('policy.0.conform_action', var_type='String')
-dev_var.add('policy.0.exceed_action', var_type='String')
-dev_var.add('policy.0.violate_action', var_type='String')
+dev_var.add('policy_map_list.0.policy_map_name', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.class_map', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.cir_before', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.cir_after', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.bc_before', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.bc_after', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.be_before', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.be_after', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.conform_action', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.exceed_action', var_type='String')
+dev_var.add('policy_map_list.0.policy.0.violate_action', var_type='String')
 dev_var = Variables()
 
 context = Variables.task_call(dev_var)
@@ -58,6 +58,7 @@ device_id = context['device_id'][3:]
 # instantiate device object
 obmf  = Order(device_id=device_id)
 
+#get microservices instance by microservice object ID.
 object_name = 'policy_map'
 
 command = 'IMPORT'
@@ -66,30 +67,46 @@ params[object_name] = "0"
 #synchronise the given device microservice
 obmf.command_call(command, 0, params) # put 0 to not update the db
 
-#get microservices instance by microservice object ID.
-object_id = context.get('policy_map_name')
-response = json.loads(obmf.content)
-context.update(obmf_sync_resp=response)
-#ensure the object inputs are in the response.
-is_p_map_matched = False
-#ensure that all acl rules from context['acl'] dict are in response['acl']
+policy_map_list = context['policy_map_list']
+good_values = dict()
 
-#response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"policy_map":{"policy_auto":{"object_id":"policy_auto","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G012":{"object_id":"CM_600104-6003G012","policy":{"0":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G011":{"object_id":"CM_600104-6003G011"},"PM_600104":{"object_id":"PM_600104","policy":{"0":{"class_map":"CM_DISCARD"}}},"PM_600105":{"object_id":"PM_600105","policy":{"0":{"class_map":"CM_DISCARD"}}},"P":{"object_id":"P"},"MyTest":{"object_id":"MyTest","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"PM_QA":{"object_id":"PM_QA"},...
+if policy_map_list:
+  for rule in policy_map_list:
+    object_id   = str(rule.get('policy_map_name'))
+    policies    = rule.get('policy')
 
-message = response.get('entity').get('message')
+    #LED obmf.command_objects_instances_by_id(object_name, object_id)
+    response = json.loads(obmf.content)
+    context.update(obmf_sync_resp=response)
+    #ensure the object inputs are in the response.
+    is_p_map_matched = False
+    #ensure that all acl rules from context['acl'] dict are in response['acl']
+    #response={'entity': {'commandId': 0, 'status': 'OK', 'message': '{"policy_map":{"policy_auto":{"object_id":"policy_auto","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G012":{"object_id":"CM_600104-6003G012","policy":{"0":{"class_map":"CM_DISCARD"}}},"CM_600104-6003G011":{"object_id":"CM_600104-6003G011"},"PM_600104":{"object_id":"PM_600104","policy":{"0":{"class_map":"CM_DISCARD"}}},"PM_600105":{"object_id":"PM_600105","policy":{"0":{"class_map":"CM_DISCARD"}}},"P":{"object_id":"P"},"MyTest":{"object_id":"MyTest","policy":{"0":{"class_map":"TestAuto"},"1":{"class_map":"CM_DISCARD"}}},"PM_QA":{"object_id":"PM_QA"},...
 
-if message:
-    #Convert message into array
-    message = json.loads(message)
-    if message.get(object_name) and object_id  in message.get(object_name):
-        ret_policy_map_dict = message.get(object_name).get(object_id)
-        if 'policy' in ret_policy_map_dict:
-            device_policy_dict = ret_policy_map_dict.get('policy')
-            context.update(main_device_policy_dict=device_policy_dict)
-            input_policy_dict = context.get('policy')
-            is_p_map_matched = is_policy_map_matched(device_policy_dict, input_policy_dict)
+    message = response.get('entity').get('message')
 
-#if response equals empty dictionary it means class map object is not exist in the device yet.
-if is_p_map_matched != False:
-    MSA_API.task_error('Policy-map with id="' + object_id + ', one class at least exits in the device.', context, True)
-MSA_API.task_success('Policy-map with id="' + object_id + '", no class exists in the device yet.', context, True)
+    if message:
+        #Convert message into array
+        message = json.loads(message)
+        if message.get(object_name) and object_id  in message.get(object_name):
+
+            ret_policy_map_dict = message.get(object_name).get(object_id)
+            if 'policy' in ret_policy_map_dict:
+                device_policy_dict = ret_policy_map_dict.get('policy')
+                context.update(main_device_policy_dict=device_policy_dict)
+                input_policy_dict = policies
+                is_p_map_matched = is_policy_map_matched(device_policy_dict, input_policy_dict)
+
+    #if response equals empty dictionary it means class map object is not exist in the device yet.
+    if is_p_map_matched != False:
+        MSA_API.task_error('Policy-map with id="' + object_id + ', one class at least exits in the device.', context, True)
+    #MSA_API.task_success('Policy-map with id="' + object_id + '", no class exists in the device yet.', context, True)
+    good_values[object_id]= 1                        
+
+
+if (len(good_values)):
+  good_values_string =  ", ".join(good_values.keys())
+else: 
+  good_values_string =  ""
+
+MSA_API.task_success('Good, Policy-map with ids('+good_values_string+') no class exists in the device yet', context, True)

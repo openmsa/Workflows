@@ -73,7 +73,7 @@ def get_process_instance(orch, process_id, timeout = 600, interval=5):
 #                                                  #
 ####################################################
 
-if 'ACL' in context:
+if 'ACL' in context and context['ACL']:
 
     #Get device id (router) from context (e.g: UBI2455).
     device_ref = context['device_external_ref']
@@ -114,12 +114,13 @@ if 'ACL' in context:
     #service_ext_ref = 'ACL_' + device_ext_ref
 
     #Loop in acl dictionaries and in acl list by calling the Access_List_Management process 'Add_ACL'.
-    data = dict(SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
+    data = dict(access_lists=[], SO_service_instance_id=context['SERVICEINSTANCEID'], SO_service_external_ref=context['SERVICEINSTANCEREFERENCE'])
     for key, acl_list  in acl_dicts.items():
         acl_name = ''
         #ensure acl_list is not empty otherwise break the loop.
         if len(acl_list):
             count = 0
+            access_lists_dict = dict()
             #loop in acl list.
             for acl in acl_list:
                 if isinstance(acl, dict):
@@ -127,23 +128,25 @@ if 'ACL' in context:
                         acl_name = get_config_param_val(context, acl, 'acl_name')
                     count +=1
             #prepare data dict.
-            data['acl_name'] = acl_name
-            #execute 'Access_List_Management' process 'Add_ACL'.
-            if isinstance(data, dict) and acl_name:
-                service_ext_ref = context.get('acl_service_instance').get('external_ref')
-                #execute service by ref.
-                orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
-                response = json.loads(orch.content)
-                service_id = response.get('serviceId').get('id')
-                process_id = response.get('processId').get('id')
-                #get service process details.
-                response = get_process_instance(orch, process_id)
-                status = response.get('status').get('status')
-                details = response.get('status').get('details')
-                if status == constants.FAILED:
-                    MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-                  
-        
-    MSA_API.task_success('Access-list deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
+            access_lists_dict['acl_name'] = acl_name
+            data['access_lists'].append(access_lists_dict.copy())
+    
 
+    #execute 'Access_List_Management' process 'Add_ACL' 1 times
+    if data['access_lists'] and isinstance(data, dict) and acl_name:
+        service_ext_ref = context.get('acl_service_instance').get('external_ref')
+        #execute service by ref.
+        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, ADD_PROCESS_NAME, data)
+        response = json.loads(orch.content)
+        service_id = response.get('serviceId').get('id')
+        process_id = response.get('processId').get('id')
+        #get service process details.
+        response = get_process_instance(orch, process_id)
+        status = response.get('status').get('status')
+        details = response.get('status').get('details')
+        if status == constants.FAILED:
+            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+              
+    
+    MSA_API.task_success('Access-list deleted successfully to the device ' + device_ref + ' (#' + str(service_id) + ')', context, True)
 MSA_API.task_success('No Access-list to be deleted in the device.', context, True)

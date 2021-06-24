@@ -22,11 +22,12 @@ from msa_sdk.msa_api import MSA_API
  
 
 dev_var = Variables()
-dev_var.add('interface_name', var_type='String')
-dev_var.add('direction', var_type='String')
-dev_var.add('policy_name', var_type='String')
+dev_var.add('service_policy.0.interface_name', var_type='String')
+dev_var.add('service_policy.0.direction', var_type='String')
+dev_var.add('service_policy.0.policy_name', var_type='String')
 
 context = Variables.task_call(dev_var)
+
 
 def is_order_op_success(response):
     # check if response if not empty
@@ -46,12 +47,10 @@ obmf = Order(device_id)
 #Execute ADD method of StaticRouting Microservice to add route in the device
 command = 'CREATE' # MS method corresponding on ADD Static route operation
 
-interface_name = context['interface_name'] #MS input variable value
-direction = context['direction'] #MS input variable value
-policy_name = context['policy_name'] #MS input variable value
+service_policies = context.get('service_policy')
 
 #build MS the dictionary input object 
-config = dict(object_id=interface_name, direction=direction, policy_map=policy_name)
+config = dict(service_policies=service_policies)
   
 obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
 #MS XML file name
@@ -62,11 +61,6 @@ context['ms_params'] = params
 
 #Store service Policy action
 context.update(service_policy_action='ADD_SERVICE_POLICY')
-
-is_policy_name_matched = context.get('is_policy_name_matched')
-if is_policy_name_matched == True:
-    MSA_API.task_success('Skipped, Service Policy already exist.', context, True)
-
 
 obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
 response = json.loads(obmf.content)
