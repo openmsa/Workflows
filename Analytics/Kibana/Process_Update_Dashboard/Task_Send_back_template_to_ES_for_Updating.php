@@ -169,7 +169,7 @@ $ci = curl_init();
     curl_setopt($ci, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ci, CURLOPT_FORBID_REUSE, 0);
     curl_setopt($ci, CURLOPT_CUSTOMREQUEST, 'DELETE');
-    curl_setopt($ci, CURLOPT_HTTPHEADER, array('kbn-xsrf: true','Content-Type: application/json'));
+    curl_setopt($ci, CURLOPT_HTTPHEADER, array('kbn-xsrf: true','Content-Type: application/json','Authorization: Basic c3VwZXJ1c2VyOnheWnl1R002fnU9K2ZZMkc='));
     $response2 = curl_exec($ci);
 
 
@@ -185,7 +185,7 @@ $ci = curl_init();
     curl_setopt($ci, CURLOPT_FORBID_REUSE, 0);
     curl_setopt($ci, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ci, CURLOPT_POSTFIELDS, $json_doc);
-    curl_setopt($ci, CURLOPT_HTTPHEADER, array('kbn-xsrf: true','Content-Type: application/json'));
+    curl_setopt($ci, CURLOPT_HTTPHEADER, array('kbn-xsrf: true','Content-Type: application/json','Authorization: Basic c3VwZXJ1c2VyOnheWnl1R002fnU9K2ZZMkc='));
     $response = curl_exec($ci);
 
   unlink($context['f']);
