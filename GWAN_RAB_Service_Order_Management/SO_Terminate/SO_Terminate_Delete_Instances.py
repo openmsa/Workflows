@@ -42,7 +42,7 @@ for instance_name in instance_names:
       # API /orchestration/v1/service/instance/{serviceId} : Delete service instance 
       orch.path = "/orchestration/v1/service/instance/"+str(instance_id)
 
-      orch.call_delete()
+      orch._call_delete()
       context['delete_instance_'+instance_name] = instance_id
       if orch and orch.content:
         response = json.loads(orch.content)
