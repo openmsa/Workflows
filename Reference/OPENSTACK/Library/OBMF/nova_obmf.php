@@ -33,7 +33,8 @@ function _nova_server_create ($device_id, $server_name, $networks,
 
 function _nova_server_delete ($device_id, $server) {
 
-	$array = array("servers" => $server);
+        $server_array = array();
+        $array = array("servers" => array($server => $server_array));
 	$response = execute_command_and_verify_response($device_id, CMD_DELETE, $array, "SERVER DELETE");
 	return $response;
 }
