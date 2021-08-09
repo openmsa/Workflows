@@ -1,7 +1,6 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
-# from custom.ETSI.BaseApi import BaseApi
 from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
 
 
