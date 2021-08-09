@@ -8,14 +8,13 @@ from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
 if __name__ == "__main__":
 
     dev_var = Variables()
-    dev_var.add('vnf_package_name', var_type='String')
+    dev_var.add('vnf_package_id', var_type='String')
     context = Variables.task_call(dev_var)
     
     vnfPkgApi = VnfPkgSol005('10.31.1.245', '8080')
     vnfPkgApi.set_parameters(context['mano_user'], context['mano_pass'])
-    pkg = {"userDefinedData": {"name": context['vnf_package_name']}}
-    r = vnfPkgApi.vnf_packages_post(pkg)
+    # pkg_id = 'baf9cbb6-5edf-470c-80e3-e0edb37e94ea'
+    r = vnfPkgApi.vnf_packages_vnfpkgid_delete(context['vnf_package_id'])
     
     ret = MSA_API.process_content('ENDED', f'{r}', context, True)
     print(ret)
-

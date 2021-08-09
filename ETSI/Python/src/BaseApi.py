@@ -1,5 +1,4 @@
 import json
-import time
 import requests
 import base64
 from requests.exceptions import HTTPError
@@ -15,13 +14,17 @@ class BaseApi():
         self.base_url = "http://" + hostname + ":" + port + "/ubi-etsi-mano/"
     
     def do_get(self, _url):
-        _url = self.base_url + _url
+        _url     = self.base_url + _url
         response = requests.request("GET", url=_url, headers=self.headers,
                                     data=self.payload, verify=False)
         return response
     
-    def do_post():
-        pass
+    def do_post(self, _url, _payload):
+        _url     = self.base_url + _url
+        _payload = json.dumps(_payload)
+        response = requests.request("POST", url=_url, headers=self.headers,
+                                    data=_payload, verify=False)
+        return response
     
     def do_post_return_location():
         pass
@@ -38,8 +41,11 @@ class BaseApi():
     def multipart_build_query():
         pass
     
-    def do_delete():
-        pass
+    def do_delete(self, _url):
+        _url     = self.base_url + _url
+        response = requests.request("DELETE", url=_url, headers=self.headers,
+                                    data={}, verify=False)
+        return response
 
     def set_parameters(self, username, password, data={}):        
         userpass       = f"{username}:{password}"
@@ -47,7 +53,6 @@ class BaseApi():
         self.headers   = {'Content-Type': 'application/json',
                           'Authorization': f'Basic {base64userpass}'
                           }
-        self.payload   = json.dumps(data)
     
     def check_error():
         pass
