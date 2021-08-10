@@ -53,12 +53,28 @@
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
+    <task name="Task_Enable_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF/Tasks</processPath>
+      <displayName>Enable VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF">
     <displayName>Disable VNF</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
+    <task name="Task_Disable_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF/Tasks</processPath>
+      <displayName>Disable VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_VNF">
     <displayName>Onboard VNF</displayName>

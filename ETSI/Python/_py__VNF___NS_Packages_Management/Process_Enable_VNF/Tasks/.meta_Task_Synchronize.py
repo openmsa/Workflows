@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Create_VNF_Package.py</value>
+            <value>Task_Synchronize.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1628592540846</value>
+            <value>1628611407844</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1628505583984</value>
+            <value>1628611401686</value>
         </entry>
         <entry>
             <key>TAG</key>
