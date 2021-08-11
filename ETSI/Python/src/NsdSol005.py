@@ -19,3 +19,8 @@ class NsdSol005(BaseApi):
         _url     = self.NSD_URL + "/" + _nsdinfoid
         response = self.do_delete(_url)
         return response
+
+    def ns_descriptors_nsdinfoid_nsd_file_put(self, _nsdinfoid, _content):
+        _url     = self.NSD_URL + "/" + _nsdInfoId + "/nsd_content"
+        response = self.do_put_mp(_url, _content)
+        return response
