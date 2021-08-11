@@ -8,6 +8,7 @@
     <variable displayName="" name="params." startIncrement="0" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="vnf_package_id" name="params.vnf_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="VNF Descriptor" name="params.vnf_descriptor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_New_service">
@@ -87,6 +88,34 @@
     </task>
     <task name="Task_Synchronize.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_VNF/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package">
+    <displayName>Create NS Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Create_NS_Package.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package/Tasks</processPath>
+      <displayName>Create NS Package</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package">
+    <displayName>Delete NS Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Delete_NS_Package.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package/Tasks</processPath>
+      <displayName>Delete NS Package</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>

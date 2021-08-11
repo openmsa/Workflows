@@ -13,7 +13,7 @@ if __name__ == "__main__":
     
     vnfPkgApi = VnfPkgSol005('10.31.1.245', '8080')
     vnfPkgApi.set_parameters(context['mano_user'], context['mano_pass'])
-    # pkg_id = 'baf9cbb6-5edf-470c-80e3-e0edb37e94ea'
+
     r = vnfPkgApi.vnf_packages_vnfpkgid_delete(context['vnf_package_id'])
     
     ret = MSA_API.process_content('ENDED', f'{r}', context, True)
