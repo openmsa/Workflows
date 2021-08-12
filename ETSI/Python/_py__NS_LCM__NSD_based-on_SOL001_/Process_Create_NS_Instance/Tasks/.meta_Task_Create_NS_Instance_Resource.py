@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>_py__VNF___NS_Packages_Management.xml</value>
+            <value>Task_Create_NS_Instance_Resource.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1628780699961</value>
+            <value>1628779242240</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,14 +15,18 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1628780699961</value>
+            <value>1628776278555</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
