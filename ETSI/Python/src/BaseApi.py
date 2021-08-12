@@ -59,23 +59,23 @@ class BaseApi():
                                     files=_files, verify=False)
         return response
     
-    def do_put_mp(self, _url, _content):
-        _boundary                = "----------" + hashlib.md5(str(time.time())).hexdigest()
-        _headers                 = self.headers
-        _headers['Content-Type'] = "multipart/form-data; boundary=" + _boundary
-        _fields  = {'file': _content}
-        _payload = self.multipart_build_query(_fields,_boundary)
-        response = requests.request("PUT", url=_url, headers=_headers,
-                                    data=_payload, verify=False)
-        return response
+    # def do_put_mp(self, _url, _content):
+    #     _boundary                = "----------" + hashlib.md5(str(time.time())).hexdigest()
+    #     _headers                 = self.headers
+    #     _headers['Content-Type'] = "multipart/form-data; boundary=" + _boundary
+    #     _fields  = {'file': _content}
+    #     _payload = self.multipart_build_query(_fields,_boundary)
+    #     response = requests.request("PUT", url=_url, headers=_headers,
+    #                                 data=_payload, verify=False)
+    #     return response
         
     
-    def multipart_build_query(self, _fields, _boundary):
-        _retval = ''
-        for k,v in _fields.items():
-            _retval += f"--{_boundary}\r\nContent-Disposition: form-data; name=\"{key}\"; filename=\"filename\"\r\n\r\n{value}:\r\n"
-            _retval += f"--{_boundary}--\r\n"
-        return _retval
+    # def multipart_build_query(self, _fields, _boundary):
+    #     _retval = ''
+    #     for k,v in _fields.items():
+    #         _retval += f"--{_boundary}\r\nContent-Disposition: form-data; name=\"{key}\"; filename=\"filename\"\r\n\r\n{value}:\r\n"
+    #         _retval += f"--{_boundary}--\r\n"
+    #     return _retval
     
     def do_delete(self, _url):
         _url     = self.base_url + _url

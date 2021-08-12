@@ -9,8 +9,7 @@
     <variable displayName="vnf_package_id" name="params.vnf_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="VNF Descriptor" name="params.vnf_descriptor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="nsd_package_id" name="params.nsd_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="nsd_pkg_content" name="params.nsd_pkg_content" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_pkg_content" name="params.ns_pkg_content" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_New_service">
@@ -132,6 +131,34 @@
     </task>
     <task name="Task_Synchronize.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_NSD/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD">
+    <displayName>Enable NSD</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Enable_NSD.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD/Tasks</processPath>
+      <displayName>Enable NSD</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD">
+    <displayName>Disable NSD</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Disable_NSD.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD/Tasks</processPath>
+      <displayName>Disable NSD</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>

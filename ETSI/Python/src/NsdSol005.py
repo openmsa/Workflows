@@ -20,12 +20,23 @@ class NsdSol005(BaseApi):
         response = self.do_delete(_url)
         return response
 
-    def ns_descriptors_nsdinfoid_nsd_content_put(self, _nsdinfoid, _content):
-        _url     = self.NSD_URL + "/" + _nsdInfoId + "/nsd_content"
-        response = self.do_put_mp(_url, _content)
-        return response
+    # def ns_descriptors_nsdinfoid_nsd_content_put(self, _nsdinfoid, _content):
+    #     _url     = self.NSD_URL + "/" + _nsdInfoId + "/nsd_content"
+    #     response = self.do_put_mp(_url, _content)
+    #     return response
 
     def ns_descriptors_nsdinfoid_nsd_file_put(self, _nsdinfoid, _filename):
         _url     = self.NSD_URL + "/" + _nsdinfoid + "/nsd_content"
         response = self.do_put(_url, _filename)
+        return response
+
+    def set_operational_state(self, _nsdinfoid, _state):
+        _content = {"nsdOperationalState": "DISABLED"}
+        if _state == True:
+            _content = {"operationalState": "ENABLED"}
+        return self.ns_descriptors_nsdinfoid_patch(_nsdinfoid, _content)
+
+    def ns_descriptors_nsdinfoid_patch(self, _nsdinfoid, _payload):
+        _url     = self.NSD_URL + "/" + _nsdinfoid
+        response = self.do_patch(_url, _payload)
         return response

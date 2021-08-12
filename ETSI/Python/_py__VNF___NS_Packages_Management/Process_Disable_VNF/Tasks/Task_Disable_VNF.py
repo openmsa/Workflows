@@ -14,8 +14,7 @@ if __name__ == "__main__":
 
     vnfPkgApi = VnfPkgSol005('10.31.1.245', '8080')
     vnfPkgApi.set_parameters(context['mano_user'], context['mano_pass'])
-    r = vnfPkgApi.set_operational_state(context['vnf_package_id'],
-                                        _state)
+    r = vnfPkgApi.set_operational_state(context['vnf_package_id'], _state)
 
     ret = MSA_API.process_content('ENDED', f'{r}', context, True)
     print(ret)
