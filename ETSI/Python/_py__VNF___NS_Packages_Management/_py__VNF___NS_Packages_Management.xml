@@ -46,7 +46,7 @@
       <displayName>Delete VNF</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_VNF/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -60,7 +60,7 @@
       <displayName>Enable VNF</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -74,7 +74,7 @@
       <displayName>Disable VNF</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -88,7 +88,7 @@
       <displayName>Onboard VNF</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_VNF/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -102,7 +102,7 @@
       <displayName>Create NS Package</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -116,7 +116,7 @@
       <displayName>Delete NS Package</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -130,7 +130,7 @@
       <displayName>Onboard NSD</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_NSD/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -144,7 +144,7 @@
       <displayName>Enable NSD</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
@@ -158,7 +158,7 @@
       <displayName>Disable NSD</displayName>
     </task>
     <task name="Task_Synchronize.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
       <displayName>Synchronize</displayName>
     </task>
   </process>
