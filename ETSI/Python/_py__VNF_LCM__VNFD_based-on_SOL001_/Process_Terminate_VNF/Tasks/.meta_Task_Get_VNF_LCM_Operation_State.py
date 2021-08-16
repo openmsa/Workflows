@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>_py__VNF_LCM__VNFD_based-on_SOL001_.xml</value>
+            <value>Task_Get_VNF_LCM_Operation_State.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1629149823688</value>
+            <value>1629149472350</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,11 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1629149823680</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1629149472345</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -29,12 +25,8 @@
             <value>text</value>
         </entry>
         <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>

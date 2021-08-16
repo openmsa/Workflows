@@ -18,7 +18,7 @@ class BaseApi():
     def do_get(self, _url):
         _url     = self.base_url + _url
         response = requests.request("GET", url=_url, headers=self.headers,
-                                    data=self.payload, verify=False)
+                                    data={}, verify=False)
         return response
     
     def do_post(self, _url, _payload):
@@ -27,9 +27,15 @@ class BaseApi():
         response = requests.request("POST", url=_url, headers=self.headers,
                                     data=_payload, verify=False)
         return response
-    
-    def do_post_return_location():
-        pass
+   
+    # this just duplicates do_post
+    # check https://docs.python-requests.org/en/master/user/quickstart/#response-headers 
+    def do_post_return_location(self, _url, _payload):
+        _url     = self.base_url + _url
+        _payload = json.dumps(_payload)
+        response = requests.request("POST", url=_url, headers=self.headers,
+                                    data=_payload, verify=False)
+        return response
  
     def do_patch(self, _url, _payload):
         _url     = self.base_url + _url
