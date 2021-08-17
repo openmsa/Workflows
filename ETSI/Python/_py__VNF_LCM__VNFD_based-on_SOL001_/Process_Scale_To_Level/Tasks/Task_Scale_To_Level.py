@@ -7,12 +7,25 @@ from custom.ETSI.VnfLcmSol003 import VnfLcmSol003
 if __name__ == "__main__":
 
     dev_var = Variables()
+    dev_var.add("aspect_id", type="String")
+    dev_var.add("scale_level", type="Integer")
     context = Variables.task_call(dev_var)
 
     vnfLcm = VnfLcmSol003('10.31.1.245', '8080')
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
+    
+    content = {"additionalParams": {},
+               "instantiationLevelId": "demo",
+               "scaleInfo": [
+                    {
+                      "aspectId": context["aspect_id"],
+                      "scaleLevel": int(context["scale_level"])
+                    }
+                  ]
+               }
 
-    r = vnfLcm.vnf_lcm_instantiate_vnf(context["vnf_instance_id"])
+    r = vnfLcm.vnf_lcm_scale_to_level_instance_vnf(context["vnf_instance_id"],
+                                                   content)
     
     location = r.headers['Location']
     

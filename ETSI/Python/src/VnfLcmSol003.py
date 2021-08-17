@@ -28,3 +28,13 @@ class VnfLcmSol003(BaseApi):
         _url = self.NSLCM_BASE_URL + "/" + vnf_instance_id
         response = self.do_delete(_url)
         return response
+
+    def vnf_lcm_scale_to_level_instance_vnf(self, vnf_instance_id, _payload):
+        _url = self.NSLCM_BASE_URL + "/" + vnf_instance_id + "/scale_to_level"
+        response = self.do_post_return_location(_url, _payload)
+        return response
+
+    def vnf_lcm_operate_instance_vnf(self, vnf_instance_id, _payload):
+        _url = self.NSLCM_BASE_URL + "/" + vnf_instance_id + "/operate"
+        response = self.do_post_return_location(_url, _payload)
+        return response

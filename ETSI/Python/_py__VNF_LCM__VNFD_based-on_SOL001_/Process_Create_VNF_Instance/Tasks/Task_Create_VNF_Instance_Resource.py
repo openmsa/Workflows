@@ -34,8 +34,7 @@ if __name__ == "__main__":
     r = vnfLcm.vnf_lcm_create_instance(payload)
     
     lcm_data = r.json()
-    context["vnf_lcm_op_occ_id"] = lcm_data['id']
-    context["vnf_instance_id"] = lcm_data['vnfInstanceId']
+    context["vnf_instance_id"] = lcm_data['id']
 
     ret = MSA_API.process_content('ENDED', f'{r}, {context["vnf_instance_id"]}',
                                   context, True)

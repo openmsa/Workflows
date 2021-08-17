@@ -11,8 +11,15 @@ if __name__ == "__main__":
 
     vnfLcm = VnfLcmSol003('10.31.1.245', '8080')
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
-
-    r = vnfLcm.vnf_lcm_instantiate_vnf(context["vnf_instance_id"])
+    
+    content = {
+               "additionalParams": {},
+               "changeStateTo": "STOPPED",
+               "gracefulStopTimeout": 0,
+               "stopType": "FORCEFUL"
+               }
+    
+    r = vnfLcm.vnf_lcm_operate_instance_vnf(context["vnf_instance_id"], content)
     
     location = r.headers['Location']
     

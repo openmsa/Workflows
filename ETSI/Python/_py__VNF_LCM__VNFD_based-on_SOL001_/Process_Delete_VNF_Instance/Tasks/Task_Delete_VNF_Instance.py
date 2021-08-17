@@ -12,8 +12,6 @@ if __name__ == "__main__":
     vnfLcm = VnfLcmSol003('10.31.1.245', '8080')
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
-    # stub
-    context["vnf_instance_id"] = "ae189af6-152d-4620-a4be-c727990e9627"
     r = vnfLcm.vnf_lcm_delete_instance_of_vnf(context["vnf_instance_id"])
     
     ret = MSA_API.process_content('ENDED', f'{r}', context, True)

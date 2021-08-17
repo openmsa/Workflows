@@ -64,6 +64,40 @@
       <displayName>Delete VNF Instance</displayName>
     </task>
   </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level">
+    <displayName>Scale To Level</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Scale_To_Level.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
+      <displayName>Scale To Level</displayName>
+    </task>
+    <task name="Task_Get_VNF_LCM_Operation_State.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
+      <displayName>Get VNF LCM Operation State</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Stop_VNF">
+    <displayName>Stop VNF</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Stop_VNF_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Stop_VNF/Tasks</processPath>
+      <displayName>Stop VNF Instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Start_VNF">
+    <displayName>Start VNF</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Start_VNF_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Start_VNF/Tasks</processPath>
+      <displayName>Start VNF Instance</displayName>
+    </task>
+  </process>
   <information>
     <icon/>
     <description/>
