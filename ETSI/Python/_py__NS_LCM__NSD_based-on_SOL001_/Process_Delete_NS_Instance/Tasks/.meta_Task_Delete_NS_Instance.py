@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Tasks</value>
+            <value>Task_Delete_NS_Instance.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1629212961719</value>
+            <value>1629214713307</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,14 +15,18 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1629212961711</value>
+            <value>1629214041081</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
             <key>TYPE</key>
-            <value>DIRECTORY</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>

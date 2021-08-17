@@ -30,22 +30,30 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
       <displayName>Get NS Operation Occurrence State</displayName>
     </task>
-    <task name="Task_Get_NS_Instance.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
-      <displayName>Get NS Instance</displayName>
-    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS">
     <displayName>Terminate NS</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
+    <task name="Task_Terminate_NS.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Terminate NS</displayName>
+    </task>
+    <task name="Task_Get_NS_LCM_Operation_Occurrence_State_.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Get NS LCM Operation Occurrence State </displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance">
     <displayName>Delete NS Instance</displayName>
-    <type>DELETE</type>
+    <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
+    <task name="Task_Delete_NS_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance/Tasks</processPath>
+      <displayName>Delete NS Instance</displayName>
+    </task>
   </process>
   <information>
     <icon/>
