@@ -38,9 +38,11 @@ class BaseApi():
         return response
  
     def do_patch(self, _url, _payload):
-        _url     = self.base_url + _url
-        _payload = json.dumps(_payload)
-        response = requests.request("PATCH", url=_url, headers=self.headers,
+        _url                 = self.base_url + _url
+        _headers             = self.headers
+        _headers["If-Match"] = "0"
+        _payload             = json.dumps(_payload)
+        response = requests.request("PATCH", url=_url, headers=_headers,
                                     data=_payload, verify=False)
         return response
 
