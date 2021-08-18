@@ -23,5 +23,5 @@ if __name__ == "__main__":
     
     context["vnf_lcm_op_occ_id"] = location.split("/")[-1]
     
-    ret = MSA_API.process_content('ENDED', f'{context["vnf_lcm_op_occ_id"]}', context, True)
+    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
     print(ret)

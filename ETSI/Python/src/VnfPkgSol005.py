@@ -10,6 +10,11 @@ from custom.ETSI.BaseApi import BaseApi
 class VnfPkgSol005(BaseApi):
 
     VNF_PKG_URL = "sol005/vnfpkgm/v1/vnf_packages"
+
+    def vnf_packages_get_package(self, _vnfpkgid):
+        _url     = self.VNF_PKG_URL + "/" + _vnfpkgid
+        response = self.do_get(_url)
+        return response
     
     def vnf_packages_post(self, _payload):
         response = self.do_post(self.VNF_PKG_URL, _payload)
