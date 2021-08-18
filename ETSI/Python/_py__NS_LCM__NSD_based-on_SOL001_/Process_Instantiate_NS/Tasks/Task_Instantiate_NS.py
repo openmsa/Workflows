@@ -11,16 +11,16 @@ if __name__ == "__main__":
     context = Variables.task_call(dev_var)
     
     nsLcm = NsLcmSol005('10.31.1.245', '8080')
-    nsLcm.set_parameters(context['mano_user'], context['mano_pass'])
+    nsLcm.set_parameters(context["mano_user"], context["mano_pass"])
     
     ns_instance_id = context["ns_instance"]["id"]
 
     r = nsLcm.ns_lcm_instantiate_ns(ns_instance_id)
     
-    location = r.headers['Location']
+    location = r.headers["Location"]
 
-    context['ns_lcm_op_occ_id'] = location.split("/")[-1]
+    context["ns_lcm_op_occ_id"] = location.split("/")[-1]
 
-    ret = MSA_API.process_content('ENDED', f'{context['ns_lcm_op_occ_id']}',
+    ret = MSA_API.process_content('ENDED', f'{context["ns_lcm_op_occ_id"]}',
                                   context, True)
     print(ret)

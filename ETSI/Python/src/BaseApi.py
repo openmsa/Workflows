@@ -40,10 +40,16 @@ class BaseApi():
     def do_patch(self, _url, _payload):
         _url                 = self.base_url + _url
         _headers             = self.headers
-        _headers["If-Match"] = "0"
         _payload             = json.dumps(_payload)
         response = requests.request("PATCH", url=_url, headers=_headers,
                                     data=_payload, verify=False)
+        # check the current step
+        if response.status_code == 412:
+            _etag    = json.loads(response.content)['detail'].split()[-1]
+            _headers = self.headers
+            _headers["If-Match"] = _etag
+            response = requests.request("POST", url=_url, headers=_headers,
+                                        data=_payload, verify=False)
         return response
 
     # def do_put(self, _url, _filename):

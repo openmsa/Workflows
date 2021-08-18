@@ -16,5 +16,5 @@ if __name__ == "__main__":
     nsdApi.set_parameters(context['mano_user'], context['mano_pass'])
     r = nsdApi.set_operational_state(context['ns_package_id'], _state)
 
-    ret = MSA_API.process_content('ENDED', f'{r.content}', context, True)
+    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
     print(ret)

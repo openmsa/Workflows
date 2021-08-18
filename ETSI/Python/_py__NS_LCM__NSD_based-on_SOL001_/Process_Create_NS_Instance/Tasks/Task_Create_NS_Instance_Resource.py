@@ -22,5 +22,5 @@ if __name__ == "__main__":
     
     context["ns_instance"] = r.json()
 
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content('ENDED', f'{r}, {r.content}', context, True)
     print(ret)

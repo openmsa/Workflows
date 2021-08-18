@@ -1,6 +1,6 @@
+import time
 import json
 import requests
-import base64
 from requests.exceptions import HTTPError
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -21,9 +21,9 @@ class NsLcmOpOccsSol005(BaseApi):
               "ROLLED_BACK": True 
               }
 
-    def ns_lcm_op_occs_operation_status_get(ns_lcm_op_occ_id):
+    def ns_lcm_op_occs_operation_status_get(self, ns_lcm_op_occ_id):
         _url = self.NS_LCM_PO_OCCS + "/" + ns_lcm_op_occ_id
-        response = do_get(_url)
+        response = self.do_get(_url)
         return response
 
     def ns_lcm_op_occs_completion_wait(self, ns_lcm_op_occ_id, timeout=60):

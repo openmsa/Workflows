@@ -15,17 +15,17 @@ class NsLcmSol005(BaseApi):
         response = self.do_post(self.NSLCM_URL, _payload)
         return response
 
-    def ns_lcm_instantiate_ns(ns_instance_id, _payload={}):
+    def ns_lcm_instantiate_ns(self, ns_instance_id, _payload={}):
         _url = self.NSLCM_URL + "/" + ns_instance_id + "/instantiate"
         response = self.do_post_return_location(_url, _payload)
         return response
 
-    def ns_lcm_terminate_ns(ns_instance_id, _payload={}):
+    def ns_lcm_terminate_ns(self, ns_instance_id, _payload={}):
         _url = self.NSLCM_URL + "/" + ns_instance_id + "/terminate"
         response = self.do_post_return_location(_url, _payload)
         return response
 
-    def ns_lcm_delete_instance_of_ns(ns_instance_id):
+    def ns_lcm_delete_instance_of_ns(self, ns_instance_id):
         _url = self.NSLCM_URL + "/" + ns_instance_id
         response = self.do_delete(_url)
         return response
