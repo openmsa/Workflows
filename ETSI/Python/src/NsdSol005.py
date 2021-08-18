@@ -15,6 +15,11 @@ class NsdSol005(BaseApi):
         response = self.do_post(self.NSD_URL, _payload)
         return response
 
+    def nsd_descriptors_get(self, _nsdinfoid):
+        _url     = self.NSD_URL + "/" + _nsdinfoid
+        response = self.do_get(_url)
+        return response
+
     def ns_descriptors_nsd_info_id_delete(self, _nsdinfoid):
         _url     = self.NSD_URL + "/" + _nsdinfoid
         response = self.do_delete(_url)

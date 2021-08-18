@@ -2,6 +2,7 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 from custom.ETSI.NsLcmSol005 import NsLcmSol005
+from custom.ETSI.NsdSol005 import NsdSol005
 
 
 if __name__ == "__main__":
@@ -16,11 +17,18 @@ if __name__ == "__main__":
     nsLcm = NsLcmSol005('10.31.1.245', '8080')
     nsLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
+    nsd = NsdSol005('10.31.1.245', '8080')
+    nsd.set_parameters(context['mano_user'], context['mano_pass'])
+    
+    r1 = nsd.nsd_descriptors_get(context['ns_package_id'])
+    
+    context['ns_package_id'] = r1.json()["nsdId"]
+    
     content = {"nsdId": context['ns_package_id']}
 
-    r = nsLcm.ns_lcm_create_instance(content)
+    r2 = nsLcm.ns_lcm_create_instance(content)
     
-    context["ns_instance"] = r.json()
+    context["ns_instance"] = r2.json()
 
-    ret = MSA_API.process_content('ENDED', f'{r}, {r.content}', context, True)
+    ret = MSA_API.process_content('ENDED', f'{r1}, {r2}', context, True)
     print(ret)

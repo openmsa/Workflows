@@ -4,7 +4,11 @@
     <variable displayName="mano_user" name="params.mano_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="mano_pass" name="params.mano_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.nfvo_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>ns_catalogs</class>
+      </classes>
+    </variable>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance">
@@ -15,6 +19,10 @@
     <task name="Task_Create_NS_Instance_Resource.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance/Tasks</processPath>
       <displayName>Create NS Instance Resource</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance/Tasks</processPath>
+      <displayName>Synchronize</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS">
@@ -30,6 +38,10 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
       <displayName>Get NS Operation Occurrence State</displayName>
     </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS">
     <displayName>Terminate NS</displayName>
@@ -44,6 +56,10 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
       <displayName>Get NS LCM Operation Occurrence State </displayName>
     </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance">
     <displayName>Delete NS Instance</displayName>
@@ -53,6 +69,10 @@
     <task name="Task_Delete_NS_Instance.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance/Tasks</processPath>
       <displayName>Delete NS Instance</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance/Tasks</processPath>
+      <displayName>Synchronize</displayName>
     </task>
   </process>
   <information>

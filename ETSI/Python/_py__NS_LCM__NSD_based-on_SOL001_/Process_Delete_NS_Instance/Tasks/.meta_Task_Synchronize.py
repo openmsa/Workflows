@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Create_NS_Instance_Resource.py</value>
+            <value>Task_Synchronize.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1629307706611</value>
+            <value>1629307999977</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1629307706609</value>
+            <value>1629307999967</value>
         </entry>
         <entry>
             <key>TAG</key>
