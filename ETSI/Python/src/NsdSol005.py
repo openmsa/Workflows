@@ -33,7 +33,7 @@ class NsdSol005(BaseApi):
     def set_operational_state(self, _nsdinfoid, _state):
         _content = {"nsdOperationalState": "DISABLED"}
         if _state == True:
-            _content = {"operationalState": "ENABLED"}
+            _content = {"nsdOperationalState": "ENABLED"}
         return self.ns_descriptors_nsdinfoid_patch(_nsdinfoid, _content)
 
     def ns_descriptors_nsdinfoid_patch(self, _nsdinfoid, _payload):

@@ -16,5 +16,5 @@ if __name__ == "__main__":
 
     r = vnfPkgApi.vnf_packages_vnfpkgid_delete(context['vnf_package_id'])
     
-    ret = MSA_API.process_content('ENDED', f'{r}, {r.content}', context, True)
+    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
     print(ret)
