@@ -11,7 +11,7 @@ if __name__ == "__main__":
     dev_var.add("vim_id", var_type="OBMFRef")
     context = Variables.task_call(dev_var)
     
-    nfviVim = NfviVim('10.31.1.245', '8080')
+    nfviVim = NfviVim(context['mano_ip'], context['mano_port'])
     nfviVim.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = nfviVim.nfvi_vim_delete(context["vim_id"])

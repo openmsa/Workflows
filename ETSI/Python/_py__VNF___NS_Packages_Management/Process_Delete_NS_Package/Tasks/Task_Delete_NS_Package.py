@@ -10,7 +10,7 @@ if __name__ == "__main__":
     dev_var.add('ns_package_id', var_type='String')
     context = Variables.task_call(dev_var)
     
-    nsdApi = NsdSol005('10.31.1.245', '8080')
+    nsdApi = NsdSol005(context["mano_ip"], context["mano_port"])
     nsdApi.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = nsdApi.ns_descriptors_nsd_info_id_delete(context["ns_package_id"])

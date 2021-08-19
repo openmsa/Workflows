@@ -9,7 +9,7 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call()
     
-    nsdApi = NsdSol005('10.31.1.245', '8080')
+    nsdApi = NsdSol005(context["mano_ip"], context["mano_port"])
     nsdApi.set_parameters(context['mano_user'], context['mano_pass'])
     
     data = {"userDefinedData": {}}

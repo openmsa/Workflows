@@ -9,7 +9,7 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call(dev_var)
 
-    vnfLcm = VnfLcmSol003('10.31.1.245', '8080')
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = vnfLcm.vnf_lcm_delete_instance_of_vnf(context["vnf_instance_id"])

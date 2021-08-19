@@ -1,14 +1,24 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+from msa_sdk.device import Device
 
 if __name__ == "__main__":
 
     dev_var = Variables()
     dev_var.add('device_id', var_type='Device')
-    dev_var.add('mano_user', var_type='String')
-    dev_var.add('mano_pass', var_type='Password')
-    dev_var.add('mano_port', var_type='String')
     context = Variables.task_call(dev_var)
     
-    ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
+    mano_me_id = context["device_id"][3:]
+    mano_ip    = Device(device_id=mano_me_id).management_address
+    mano_var   = Device(device_id=mano_me_id).get_configuration_variable("HTTP_PORT")
+    mano_port  = mano_var.get("value")
+    mano_user  = Device(device_id=mano_me_id).login
+    mano_pass  = Device(device_id=mano_me_id).password
+    
+    context["mano_ip"]   = mano_ip
+    context["mano_port"] = mano_port
+    context["mano_user"] = mano_user
+    context["mano_pass"] = mano_pass
+    
+    ret = MSA_API.process_content('ENDED', f'Task OK', context, True)
     print(ret)
