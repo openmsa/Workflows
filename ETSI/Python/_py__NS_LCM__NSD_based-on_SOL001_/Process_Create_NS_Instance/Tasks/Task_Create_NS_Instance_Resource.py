@@ -1,5 +1,6 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+from msa_sdk.device import Device
 
 from custom.ETSI.NsLcmSol005 import NsLcmSol005
 from custom.ETSI.NsdSol005 import NsdSol005
