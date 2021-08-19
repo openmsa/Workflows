@@ -65,8 +65,8 @@ object_name = 'policy_map'
 command = 'IMPORT'
 params = dict()
 params[object_name] = "0"
-#synchronise the given device microservice
-obmf.command_call(command, 0, params) # put 0 to not update the db
+#Import the given device microservice from the device, the MS values in the UI will be not updated
+obmf.command_call(command, 0, params)
  
 policy_map_list = context['policy_map_list']
 good_values = dict()
