@@ -215,10 +215,6 @@ CREATE_PROCESS_NAME = 'New_Service'
 ADD_PROCESS_NAME = 'Backup_Configuration_Management'
 service_instance_name = 'backup_configuration_service_instance'
 
-obmf  = Order(device_id=device_id)
-#synchronise all device microservices
-timeout = 500
-obmf.command_synchronize(timeout)
 
 #instantiate Configuration Backup Management WF.
 if not 'backup_configuration_service_instance' in context: 

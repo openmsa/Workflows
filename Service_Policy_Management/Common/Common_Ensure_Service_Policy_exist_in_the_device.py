@@ -19,8 +19,8 @@ object_name = 'service_policy'
 command = 'IMPORT'
 params = dict()
 params[object_name] = "0"
-#synchronise the given device microservice
-obmf.command_call(command, 0, params) # put 0 to not update the db
+#Import the given device microservice, the MS values in the UI will be not updated
+obmf.command_call(command, 0, params)
 
 service_policies = context['service_policy']
 bad_values = dict()

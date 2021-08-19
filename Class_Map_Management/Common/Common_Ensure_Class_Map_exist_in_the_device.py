@@ -19,8 +19,8 @@ object_name = 'class_map'
 command = 'IMPORT'
 params = dict()
 params[object_name] = "0"
-#synchronise the given device microservice
-obmf.command_call(command, 0, params) # put 0 to not update the db
+#Import the given device microservice from the device, the MS values in the UI will be not updated
+obmf.command_call(command, 0, params) 
 
 class_map_list = context['class_map_list']
 bad_values = dict()
