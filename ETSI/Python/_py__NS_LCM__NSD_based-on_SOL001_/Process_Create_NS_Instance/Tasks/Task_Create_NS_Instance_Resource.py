@@ -10,6 +10,7 @@ if __name__ == "__main__":
 
     dev_var = Variables()
     dev_var.add('nfvo_device', var_type='Device')
+    dev_var.add('vnfm_device', var_type='Device')
     dev_var.add('ns_package_id', var_type='String')
     context = Variables.task_call(dev_var)
     
@@ -33,6 +34,11 @@ if __name__ == "__main__":
     
     r1 = nsd.nsd_descriptors_get(context['ns_package_id'])
     
+    if nsd.state != "ENDED":
+        ret = MSA_API.process_content(nsd.state, f'{r1.content}', context, True)
+        print(ret)
+        exit()
+    
     context['ns_package_id'] = r1.json()["nsdId"]
     
     content = {"nsdId": context['ns_package_id']}
@@ -41,5 +47,5 @@ if __name__ == "__main__":
     
     context["ns_instance"] = r2.json()
 
-    ret = MSA_API.process_content('ENDED', f'{r1}, {r2}', context, True)
+    ret = MSA_API.process_content(nsLcm.state, f'{r1}, {r2}', context, True)
     print(ret)

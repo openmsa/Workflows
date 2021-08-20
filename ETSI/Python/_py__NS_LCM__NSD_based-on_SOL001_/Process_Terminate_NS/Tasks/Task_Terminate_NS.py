@@ -16,9 +16,16 @@ if __name__ == "__main__":
     
     r = nsLcm.ns_lcm_terminate_ns(ns_instance_id)
     
-    location = r.headers['Location']
+    if nsLcm.state != "ENDED":
+        ret = MSA_API.process_content(nsLcm.state,
+                                      f'{r.content}', context, True)
+        print(ret)
+        exit()
+    
+    location = r.headers["Location"]
     
     context["ns_lcm_op_occ_id"] = location.split("/")[-1]
     
-    ret = MSA_API.process_content('ENDED', f'{context["ns_lcm_op_occ_id"]}', context, True)
+    ret = MSA_API.process_content(nsLcm.state, f'{r}',
+                                  context, True)
     print(ret)

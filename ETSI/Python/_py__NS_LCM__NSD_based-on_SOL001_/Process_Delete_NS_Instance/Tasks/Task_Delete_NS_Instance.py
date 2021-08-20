@@ -16,5 +16,5 @@ if __name__ == "__main__":
     
     r = nsLcm.ns_lcm_delete_instance_of_ns(ns_instance_id)
     
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(nsLcm.state, f'{r}', context, True)
     print(ret)

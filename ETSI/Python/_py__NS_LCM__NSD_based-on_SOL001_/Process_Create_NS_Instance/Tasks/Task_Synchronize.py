@@ -7,12 +7,17 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call(dev_var)
 
-    device_short_id = context["nfvo_device"][3:]
+    nfvo_short_id = context["nfvo_device"][3:]
+    vnfm_short_id = context["vnfm_device"][3:]
 
-    order = Order(str(device_short_id))
-    order.command_synchronize(timeout=60)
+    order1 = Order(str(nfvo_short_id))
+    order1.command_synchronize(timeout=60)
+    
+    order2 = Order(str(vnfm_short_id))
+    order2.command_synchronize(timeout=60)
 
     ret = MSA_API.process_content('ENDED',
-        f'Device {context["nfvo_device"]} synchronized', context, True)
+        f'Devices {context["nfvo_device"]} {context["vnfm_device"]} synchronized',
+        context, True)
 
     print(ret)
