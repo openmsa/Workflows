@@ -10,11 +10,10 @@ if __name__ == "__main__":
 
     dev_var = Variables()
     dev_var.add('nfvo_device', var_type='Device')
+    dev_var.add('vnfm_device', var_type='Device')
     dev_var.add('vnf_pkg_id', var_type='OBMFRef')
     dev_var.add('vnf_instance_name', var_type='String')
     dev_var.add('vnf_instance_description', var_type='String')
-    # dev_var.add('device_manufacturer', var_type='String')
-    # dev_var.add('device_model', var_type='String')
     context = Variables.task_call(dev_var)
     
     mano_me_id = context["nfvo_device"][3:]
@@ -37,10 +36,17 @@ if __name__ == "__main__":
     
     r1 = vnfPkg.vnf_packages_get_package(context["vnf_pkg_id"])
     
+    if vnfPkg.state != "ENDED":
+        ret = MSA_API.process_content(vnfPkg.state, f'{r1}, {r2}',
+                                      context, True)
+        print(ret)
+        exit()
+        
+    
     context["vnfd_id"] = r1.json()["vnfdId"]
     
-    metadata = {"deviceManufacturer": context["device_manufacturer"],
-                "deviceModel": context["device_model"]
+    metadata = {"deviceManufacturer": "",
+                "deviceModel": ""
                 }
 
     payload = {"vnfdId": context["vnfd_id"],
@@ -54,6 +60,6 @@ if __name__ == "__main__":
     lcm_data = r2.json()
     context["vnf_instance_id"] = lcm_data['id']
 
-    ret = MSA_API.process_content('ENDED', f'{r1}, {r2}',
+    ret = MSA_API.process_content(vnfLcm.state, f'{r1}, {r2}',
                                   context, True)
     print(ret)

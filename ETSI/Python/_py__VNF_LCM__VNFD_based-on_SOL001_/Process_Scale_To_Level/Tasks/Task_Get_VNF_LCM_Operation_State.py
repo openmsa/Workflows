@@ -16,5 +16,5 @@ if __name__ == "__main__":
     
     context["operation_state"] = r.json()['operationState']
 
-    ret = MSA_API.process_content('ENDED', f'{context["operation_state"]}', context, True)
+    ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{context["operation_state"]}', context, True)
     print(ret)
