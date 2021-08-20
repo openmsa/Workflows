@@ -10,23 +10,31 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class BaseApi():
 
+    STATE = {"Informational": range(100,200),
+             "Successful":    range(200,300),
+             "Redirection":   range(300,400),
+             "Client_Error":  range(400,500),
+             "Server_Error":  range(500,600)
+             }
+
     def __init__(self, hostname, port='80'):
         self.hostname = hostname
         self.port     = port
         self.base_url = "http://" + hostname + ":" + port + "/ubi-etsi-mano/"
+        self.state    = ""
     
     def do_get(self, _url):
         _url     = self.base_url + _url
         response = requests.request("GET", url=_url, headers=self.headers,
                                     data={}, verify=False)
-        return response
+        return self.r_check(response)
     
     def do_post(self, _url, _payload):
         _url     = self.base_url + _url
         _payload = json.dumps(_payload)
         response = requests.request("POST", url=_url, headers=self.headers,
                                     data=_payload, verify=False)
-        return response
+        return self.r_check(response)
    
     # this just duplicates do_post
     # check https://docs.python-requests.org/en/master/user/quickstart/#response-headers 
@@ -35,8 +43,8 @@ class BaseApi():
         _payload = json.dumps(_payload)
         response = requests.request("POST", url=_url, headers=self.headers,
                                     data=_payload, verify=False)
-        return response
- 
+        return self.r_check(response)
+
     def do_patch(self, _url, _payload):
         _url                 = self.base_url + _url
         _headers             = self.headers
@@ -50,17 +58,7 @@ class BaseApi():
             _headers["If-Match"] = _etag
             response = requests.request("POST", url=_url, headers=_headers,
                                         data=_payload, verify=False)
-        return response
-
-    # def do_put(self, _url, _filename):
-    #     _url      = self.base_url + _url
-    #     _username = self.username
-    #     _password = self.password
-    #
-    #     dir_path = os.path.dirname(os.path.realpath(__file__))
-    #     stream = os.popen(f'{dir_path}/onboard_vnf.sh {_username} {_password} {_url} {_filename}')
-    #     plain_text = stream.read().strip("\n")
-    #     return plain_text
+        return self.r_check(response)
 
     def do_put(self, _url, _filename):
         _url               = self.base_url + _url
@@ -71,31 +69,13 @@ class BaseApi():
         _files             = {'file': ('_name', open(_filename, 'rb'))}
         response = requests.request("PUT", url=_url, headers=_headers,
                                     files=_files, verify=False)
-        return response
-    
-    # def do_put_mp(self, _url, _content):
-    #     _boundary                = "----------" + hashlib.md5(str(time.time())).hexdigest()
-    #     _headers                 = self.headers
-    #     _headers['Content-Type'] = "multipart/form-data; boundary=" + _boundary
-    #     _fields  = {'file': _content}
-    #     _payload = self.multipart_build_query(_fields,_boundary)
-    #     response = requests.request("PUT", url=_url, headers=_headers,
-    #                                 data=_payload, verify=False)
-    #     return response
-        
-    
-    # def multipart_build_query(self, _fields, _boundary):
-    #     _retval = ''
-    #     for k,v in _fields.items():
-    #         _retval += f"--{_boundary}\r\nContent-Disposition: form-data; name=\"{key}\"; filename=\"filename\"\r\n\r\n{value}:\r\n"
-    #         _retval += f"--{_boundary}--\r\n"
-    #     return _retval
+        return self.r_check(response)
     
     def do_delete(self, _url):
         _url     = self.base_url + _url
         response = requests.request("DELETE", url=_url, headers=self.headers,
                                     data={}, verify=False)
-        return response
+        return self.r_check(response)
 
     def set_parameters(self, username, password, data={}):
         self.username  = username
@@ -105,11 +85,18 @@ class BaseApi():
         self.headers   = {'Content-Type': 'application/json',
                           'Authorization': f'Basic {base64userpass}'
                           }
-    
-    def check_error(response):
-        _status = int(response.status)
-        if (_status < 200) or (_status > 299):
-            if _status == 0:
-                print(f'Error: {response}, {response.content}')
-            else:
-                print(f'MANO Error: {response}, {response.content}')
+
+    def r_check(self, _response):
+        if _response.status_code in self.STATE["Informational"]:
+            self.state = "WARNING"
+        elif _response.status_code in self.STATE["Successful"]:
+            self.state = "ENDED"
+        elif _response.status_code in self.STATE["Redirection"]:
+            self.state = "WARNING"
+        elif _response.status_code in self.STATE["Client_Error"]:
+            self.state = "WARNING"
+        elif _response.status_code in self.STATE["Server_Error"]:
+            self.state = "WARNING"
+        else:
+            self.state = "FAIL"
+        return _response

@@ -16,5 +16,5 @@ if __name__ == "__main__":
     
     r = nfviVim.nfvi_vim_delete(context["vim_id"])
     
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(f'{nfviVim.state}', f'{r}', context, True)
     print(ret)
