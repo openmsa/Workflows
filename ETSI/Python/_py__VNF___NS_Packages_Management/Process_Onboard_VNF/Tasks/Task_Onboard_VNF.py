@@ -16,5 +16,5 @@ if __name__ == "__main__":
     r = vnfPkgApi.vnf_packages_vnfpkgid_package_file_put(context['vnf_package_id'],
                                                          context['vnf_descriptor'])
 
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(vnfPkgApi.state, f'{r}', context, True)
     print(ret)

@@ -16,5 +16,5 @@ if __name__ == "__main__":
     r = nsdApi.ns_descriptors_nsdinfoid_nsd_file_put(context['ns_package_id'],
                                                      context['ns_pkg_content'])
 
-    ret = MSA_API.process_content('ENDED', f'{r}, {r.content}', context, True)
+    ret = MSA_API.process_content(nsdApi.state, f'{r}', context, True)
     print(ret)

@@ -15,5 +15,5 @@ if __name__ == "__main__":
     
     r = nsdApi.ns_descriptors_nsd_info_id_delete(context["ns_package_id"])
 
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(nsdApi.state, f'{r}', context, True)
     print(ret)

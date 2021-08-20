@@ -1,7 +1,6 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
-# from custom.ETSI.BaseApi import BaseApi
 from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
 
 
@@ -16,5 +15,5 @@ if __name__ == "__main__":
 
     r = vnfPkgApi.vnf_packages_vnfpkgid_delete(context['vnf_package_id'])
     
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(vnfPkgApi.state, f'{r}', context, True)
     print(ret)

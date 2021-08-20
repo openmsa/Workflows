@@ -16,5 +16,5 @@ if __name__ == "__main__":
 
     r = nsdApi.nsd_descriptors_post(data)
 
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(nsdApi.state, f'{r}', context, True)
     print(ret)
