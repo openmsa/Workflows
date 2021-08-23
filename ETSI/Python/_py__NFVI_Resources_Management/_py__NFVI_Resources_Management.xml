@@ -15,30 +15,32 @@
         <class>nfvi_resources</class>
       </classes>
     </variable>
+    <variable displayName="NFVO Device" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnfm_device" name="params.vnfm_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
-  <process name="Process/workflows/_py__NFVI_Resources_Management/Process_New_Service">
+  <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_New_Service">
     <displayName>New Service</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Sync_to_NFVO.py">
-      <processPath>/opt/fmc_repository/Process/workflows/_py__NFVI_Resources_Management/Process_New_Service/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_New_Service/Tasks</processPath>
       <displayName>Sync to NFVO</displayName>
     </task>
   </process>
-  <process name="Process/workflows/_py__NFVI_Resources_Management/Process_Register_VIM">
+  <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Register_VIM">
     <displayName>Register VIM</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Register_VIM_Resources.py">
-      <processPath>/opt/fmc_repository/Process/workflows/_py__NFVI_Resources_Management/Process_Register_VIM/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Register_VIM/Tasks</processPath>
       <displayName>Register VIM Resources</displayName>
     </task>
     <task name="Task_Sync_to_NFVO.py">
-      <processPath>/opt/fmc_repository/Process/workflows/_py__NFVI_Resources_Management/Process_Register_VIM/Tasks</processPath>
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Register_VIM/Tasks</processPath>
       <displayName>Sync to NFVO</displayName>
     </task>
   </process>
