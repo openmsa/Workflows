@@ -33,7 +33,8 @@ service_policies = context.get('service_policy')
 
 #build MS the dictionary input object 
 config = dict(service_policies=service_policies)
-  
+config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
+
 obj = {"":config} #object = {'':{'object_id':'Service_pol', 'direction':'in', 'policy_name':'POLAAA-555'}}
 #MS XML file name
 #ms_xml_filename = 'service_policy'

@@ -26,6 +26,8 @@ command = 'DELETE'
 class_map_list = context.get('class_map_list')
 
 config = dict(class_map_list=class_map_list)
+config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
+
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(class_map=obj)
 context['ms_params'] = params
