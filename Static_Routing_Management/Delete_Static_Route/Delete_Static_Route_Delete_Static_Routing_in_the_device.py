@@ -31,7 +31,7 @@ if static_routing:
   #build MS the dictionary input object 
   config = dict(static_routing=static_routing)
   config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
-  config['mask']= "mask"             #add mandatory field object_id, put only one default value
+  config['mask']= "mask"             #add mandatory field mask, put only one default value
 
   obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
   params = dict(static_route=obj)
