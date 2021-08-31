@@ -25,6 +25,8 @@ command = 'DELETE'
 policy_map_list = context.get('policy_map_list')
 
 config = dict(policy_map_list=policy_map_list)
+config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
+
 obj = {"":config}
 
 params = dict(policy_map=obj)

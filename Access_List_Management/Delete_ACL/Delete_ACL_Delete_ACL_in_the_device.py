@@ -22,6 +22,8 @@ command = 'DELETE' # MS method corresponding on DELETE Static route operation
 access_lists = context.get('access_lists')
 
 config = dict(access_lists=access_lists)
+config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
+
 obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
 params = dict(access_lists=obj)
 context['ms_params'] = params
