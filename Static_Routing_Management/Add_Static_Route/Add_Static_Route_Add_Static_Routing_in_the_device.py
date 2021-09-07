@@ -9,7 +9,7 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('static_routing.0.source_address', var_type='IPAddress')
+dev_var.add('static_routing.0.destination_address', var_type='IPAddress')
 dev_var.add('static_routing.0.subnet_mask', var_type='IPMask')
 dev_var.add('static_routing.0.vlan_id', var_type='String')
 dev_var.add('static_routing.0.nexthop', var_type='IPAddress')
@@ -30,7 +30,7 @@ static_routing = context.get('static_routing')
 if static_routing:
   #build MS the dictionary input object 
   config = dict(static_routing=static_routing)
-  config['source_address']= "source_address"   #add mandatory field source_address, put only one default value
+  config['destination_address']= "destination_address"   #add mandatory field destination_address, put only one default value
   config['mask']= "mask"                       #add mandatory field mask, put only one default value
 
   obj = {"":config}  
