@@ -53,14 +53,9 @@ if static_routing:
         else:
           # Set the default 'Distance' value in the Catalyst ME.
           device_rule['static_route_distance']  = '1'
+
         device_static_routes.append(device_rule)
  
-        # if distance is None or distance =='' or distance == None:
-          # distance = '1'
-        # if distance == '1' and (ret_static_route_distance == "null" or ret_static_route_distance == None):
-            # ret_static_route_distance = '1'
-        
-
   for rule in static_routing:
     #rule: {"distance": "",  "flag": "DEL",  "nexthop": "10.166.239.14",  "source_address": "10.166.156.128", "subnet_mask": "255.255.255.224",  "vlan_id": "GigabitEthernet2"}, {"distance": "","flag": "DEL","nexthop": "10.166.239.14","source_address": "10.166.174.16","subnet_mask": "255.255.255.240", "vlan_id": "GigabitEthernet2"}
     source_address = rule.get('source_address')
@@ -94,7 +89,7 @@ if (len(good_values)):
   if (len(good_values) <10):
     good_values_string =  ", ".join(good_values)
   else:
-    good_values_string =  "to many..."
+    good_values_string =  "to many to display..."
 else: 
   good_values_string =  ""
 
