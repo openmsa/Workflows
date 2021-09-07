@@ -30,10 +30,10 @@ static_routing = context.get('static_routing')
 if static_routing:
   #build MS the dictionary input object 
   config = dict(static_routing=static_routing)
-  config['object_id']= "object_id"   #add mandatory field object_id, put only one default value
-  config['mask']= "mask"             #add mandatory field mask, put only one default value
+  config['source_address']= "source_address"   #add mandatory field source_address, put only one default value
+  config['mask']= "mask"                       #add mandatory field mask, put only one default value
 
-  obj = {"":config} #object = {'':{'object_id':'192.168.1.2', 'gateway':'192.168.1.254'}}
+  obj = {"":config} 
   params = dict(static_route=obj)
 
   obmf.command_execute(command, params, timeout = 300) #execute the MS ADD static route operation
