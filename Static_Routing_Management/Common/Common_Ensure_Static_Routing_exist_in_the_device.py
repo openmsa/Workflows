@@ -5,7 +5,7 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('static_routing.0.source_address', var_type='IPAddress')
+dev_var.add('static_routing.0.destination_address', var_type='IPAddress')
 dev_var.add('static_routing.0.subnet_mask',    var_type='IPMask')
 dev_var.add('static_routing.0.vlan_id',        var_type='String')
 dev_var.add('static_routing.0.nexthop',        var_type='IPAddress')
@@ -18,7 +18,7 @@ device_id = context['device_id'][3:]
 obmf  = Order(device_id=device_id)
 
 static_routing = context['static_routing']
-good_values = dict()
+good_values = []
 object_name = 'static_route'
 
 command = 'IMPORT'
@@ -28,58 +28,74 @@ params[object_name] = "0"
 obmf.command_call(command, 0, params)   
 
 if static_routing:
+  response = json.loads(obmf.content)
+  context.update(obmf_sync_resp=response)
+
+  device_static_routes= []
+  #load all existing static route on the device
+  if 'entity' in response and 'message' in response.get('entity'):
+    message = response.get('entity').get('message')
+  else:
+    message = ''; 
+  if message:
+    #Convert message into array
+    message = json.loads(message) 
+    # "message": "{"static_route":{"16af293452008658e4a6a26994caa813":{"destination_address":"10.100.100.32","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"5e610ef59deda1f418b2939563101c1a":{"destination_address":"10.100.100.33","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"625507266441f7a5b5c261278e7a1a9a":{"destination_address":"10.100.100.34","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"8f692c4a11a97093aded03b0182a73de":{"destination_address":"10.100.100.35","mask":"255.255.255.255","vlan_id":"GigabitEthernet2
+    if message.get(object_name).values():
+      for rule in message.get(object_name).values():
+        device_rule = dict();
+        device_rule['static_route_ip']        = rule.get('destination_address')
+        device_rule['static_route_mask']      = rule.get('mask')
+        device_rule['static_route_vlan_id']   = rule.get('vlan_id')
+        device_rule['static_route_next_ho']   = rule.get('next_hop')
+        if rule.get('distance') and rule.get('distance') != "null":
+          device_rule['static_route_distance'] = rule.get('distance')
+        else:
+          # Set the default 'Distance' value in the Catalyst ME.
+          device_rule['static_route_distance']  = '1'
+
+        device_static_routes.append(device_rule)        
+
   for rule in static_routing:
-    #get microservices instance by microservice object ID.
-    object_id = rule.get('source_address')
+    #rule: {"distance": "",  "flag": "DEL",  "nexthop": "10.166.239.14",  "destination_address": "10.166.156.128", "subnet_mask": "255.255.255.224",  "vlan_id": "GigabitEthernet2"}, {"distance": "","flag": "DEL","nexthop": "10.166.239.14","destination_address": "10.166.174.16","subnet_mask": "255.255.255.240", "vlan_id": "GigabitEthernet2"}
+    destination_address = rule.get('destination_address')
     src_mask  = rule.get('subnet_mask')
     vlan_id   = rule.get('vlan_id')
     next_hop  = rule.get('nexthop')
     distance  = rule.get('distance')
    
-    #LED obmf.command_objects_instances_by_id(object_name, object_id)
-    response = json.loads(obmf.content)
-    context.update(obmf_sync_resp=response)
-
     #ensure the object inputs are in the response.
     is_static_route_matched = False
-    obj_id = object_id.replace('.', "_")
-    error = None
-    #response= {  "entity": { "commandId": 0,  "status": "OK",   "message": "{\"static_route\":{\"10_166_174_16\":{\"object_id\":\"10.166.174.16\",\"mask\":\"255.255.255.240\",\"vlan_id\":\"GigabitEthernet2\",\"next_hop\":\"10.166.239.14\",\"distance\":null}}...
-
-    message = response.get('entity').get('message')
-
+    simular_rules = []
  
-    if message:
-        #Convert message into array
-        message = json.loads(message)
-        if message.get(object_name) and obj_id in message.get(object_name):
-            sr = message.get(object_name).get(obj_id)
-            ret_static_route_ip         = sr.get('object_id')
-            ret_static_route_mask       = sr.get('mask')
-            ret_static_route_vlan_id    = sr.get('vlan_id')
-            ret_static_route_next_hop   = sr.get('next_hop')
-            ret_static_route_distance   = sr.get('distance')
-            if distance is None or distance =='' or distance == None:
-              distance = '1'
-            if distance == '1' and (ret_static_route_distance == "null" or ret_static_route_distance == None):
-                # Set the default 'Distance' value in th Catalyst ME.
-                ret_static_route_distance = '1'
-            if object_id == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
-                is_static_route_matched = True    
-            if object_id == ret_static_route_ip:
-              error = 'Found|wanted static rule with IP='+ str(ret_static_route_ip) + '|' + str(object_id) +', mask= ' + str(ret_static_route_mask) + '|' +  str(src_mask) +', vlan_id=' + str(ret_static_route_vlan_id) + '|' + str(vlan_id) + ', next_hop=' + str(ret_static_route_next_hop) + '|' + str(next_hop) +', dist='+ str(ret_static_route_distance) + '|' + str(distance)
-    #if response equals empty dictionary it means class map object is not exist in the device yet.
+    # Loop on all static routes on the device
+    for device_rule in device_static_routes:
+      ret_static_route_ip       = device_rule['static_route_ip']
+      ret_static_route_mask     = device_rule['static_route_mask'] 
+      ret_static_route_vlan_id  = device_rule['static_route_vlan_id']
+      ret_static_route_next_hop = device_rule['static_route_next_ho'] 
+      ret_static_route_distance = device_rule['static_route_distance']
+      if distance is None or distance == '' or distance == None:
+        distance = '1'
+      if destination_address == ret_static_route_ip and src_mask == ret_static_route_mask and vlan_id == ret_static_route_vlan_id and next_hop == ret_static_route_next_hop and distance == ret_static_route_distance:
+        is_static_route_matched = True
+        break    # break here
+      if destination_address == ret_static_route_ip:
+        simular_rules.append(str(ret_static_route_ip) + '|' + str(ret_static_route_mask) + '|' + str(ret_static_route_vlan_id) + '|' +  str(ret_static_route_next_hop) + '|' + str(ret_static_route_distance))
     if is_static_route_matched != True:
-      if error == None:
-        MSA_API.task_error('Static Routing with id="' + obj_id + '" does not exist in the device.', context, True)
+      wanted = 'destination_address=' + str(destination_address) +'|mask= ' + str(src_mask) +'|vlan_id=' + str(vlan_id) + '|next_hop=' + str(next_hop) +'|distance='+ str(distance)
+      if simular_rules:
+        MSA_API.task_error('Missing one Static Routing on the device: we want ('+wanted+'), but we found only on device: (' + ", ".join(simular_rules) + ')' , context, True)
       else:
-        MSA_API.task_error('Static Routing with id="' + obj_id + '" does not match exactly in the device: '+ error, context, True)
+        MSA_API.task_error('Missing one Static Routing on the device: we can not find  ('+ wanted + ')' , context, True)
 
-    good_values[obj_id]= 1    
-    #MSA_API.task_success('Static Routing with id="' + obj_id + '" exists in the device.', context, True)
+    good_values.append('src= '+str(destination_address) +'|mask= ' + str(src_mask) +'|vlan_id=' + str(vlan_id)+'...')    
 
 if (len(good_values)):
-  good_values_string =  ", ".join(good_values.keys())
+  if (len(good_values) <10):
+    good_values_string =  ", ".join(good_values)
+  else:
+    good_values_string =  "to many to display..."
 else: 
   good_values_string =  ""
 
