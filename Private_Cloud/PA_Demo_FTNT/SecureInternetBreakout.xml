@@ -204,9 +204,9 @@
       <processPath/>
       <displayName>Attach Day0 Template</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_ping_check.php">
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_wait_for_device_reachability.php">
       <processPath/>
-      <displayName>Wait for Ping</displayName>
+      <displayName>Wait VNF Device UP</displayName>
     </task>
     <task name="Task_Initial_Provisioning.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
