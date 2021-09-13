@@ -41,7 +41,7 @@ if static_routing:
     #Convert message into array
     message = json.loads(message) 
     # "message": "{"static_route":{"16af293452008658e4a6a26994caa813":{"destination_address":"10.100.100.32","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"5e610ef59deda1f418b2939563101c1a":{"destination_address":"10.100.100.33","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"625507266441f7a5b5c261278e7a1a9a":{"destination_address":"10.100.100.34","mask":"255.255.255.255","vlan_id":"GigabitEthernet2","next_hop":"10.166.129.14","distance":null},"8f692c4a11a97093aded03b0182a73de":{"destination_address":"10.100.100.35","mask":"255.255.255.255","vlan_id":"GigabitEthernet2
-    if message.get(object_name).values():
+    if message.get(object_name) and message.get(object_name).values():
       for rule in message.get(object_name).values():
         device_rule = dict();
         device_rule['static_route_ip']        = rule.get('destination_address')
