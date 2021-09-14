@@ -39,7 +39,7 @@ function _nova_server_delete ($device_id, $server) {
 	return $response;
 }
 
-function _nova_floating_ip_associate ($device_id, $server, $floating_ip_id, $fixed_address = "") {
+function _nova_floating_ip_associate ($device_id, $server, $floating_ip_id, $fixed_address = "", $image_id ="", $flavor_id ="") {
 
 	$floatingip_array = array();
 	$floatingip_array['action_arg1'] = $floating_ip_id;
@@ -48,8 +48,11 @@ function _nova_floating_ip_associate ($device_id, $server, $floating_ip_id, $fix
 	if ($fixed_address !== "") {
 		$floatingip_array['action_arg2'] = $fixed_address;
 	}
+	$floatingip_array['image_id'] = $image_id;
+	$floatingip_array['flavor_id'] = $flavor_id;
 
 	$array = array('servers' => array($server => $floatingip_array));
+
 	$response = execute_command_and_verify_response($device_id, CMD_UPDATE, $array, "SERVER FLOATING-IP ASSOCIATE");
 	return $response;
 }
