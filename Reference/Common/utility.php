@@ -23,16 +23,19 @@ date_default_timezone_set($timezone);
 /**
  * Log the message
  *
- * @param unknown $msg
+ * @param string $msg
  * @param string $filename
  */
-function logToFile($msg, $filename = PROCESS_LOGS_FILE) {
+function logToFile($msg) {
 
-	if ($filename === PROCESS_LOGS_FILE) {
-		global $context;
-		if (isset($context['SERVICEINSTANCEID'])) {
-			$filename = PROCESS_LOGS_DIRECTORY . "process-" . $context['SERVICEINSTANCEID'] . ".log";
-		}
+	$log_dir = PROCESS_LOGS_DIRECTORY;
+	if (file_exists($log_dir."processLog/")) {
+		$log_dir = $log_dir."processLog/";
+	}
+
+	global $context;
+	if (isset($context['SERVICEINSTANCEID'])) {
+		$filename = $log_dir . "process-" . $context['SERVICEINSTANCEID'] . ".log";
 	}
 	
 	$date = date('Y-m-d H:i:s');
@@ -43,6 +46,7 @@ function logToFile($msg, $filename = PROCESS_LOGS_FILE) {
     }
 	file_put_contents($filename, "$to_log\n", FILE_APPEND);
 }
+
 
 /**
  * Obtain a Lock on a file given with file-name : /opt/ubi-jentreprise/<lock_file_name>

@@ -4,8 +4,8 @@ $CURL_CMD = "/usr/bin/curl";
 $CURL_OPENSTACK = "";
 
 // Process logs file
-define('PROCESS_LOGS_DIRECTORY', '/opt/wildfly/logs/processLog/');
-define('PROCESS_LOGS_FILE', '/opt/wildfly/logs/processLog/process.log');
+define('PROCESS_LOGS_DIRECTORY', '/opt/wildfly/logs/');
+define('PROCESS_LOGS_FILE', '/opt/wildfly/logs/process.log');
 define('UBI_JENTREPRISE_DIRECTORY', '/opt/ubi-jentreprise/');
 
 // FMC Repository directories

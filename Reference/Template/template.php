@@ -60,7 +60,7 @@ $context['var_name2'] = $context['var_name2'] + 1;
  * Function prepare_json_response() takes care of Creating a Json response from inputs
  * This function definiton can be found at : /opt/fmc_repository/Process/Reference/Common/utility.php
  * NOTE : For 'wo_newparams', always pass "$context" [whether wo_status is ENDED/FAILED/WARNING to preserve it across Service Instance]
- *     -> Last argument "true" mentions whether the json_response to be Logged in the logfile : /opt/jboss/latest/logs/process.log
+ *     -> Last argument "true" mentions whether the json_response to be Logged in the logfile : /opt/wildfly/logs/process-<PROCESSINSTANCEID>.log
  *     -> If not passed, it's "false"
  *
  * The response "$ret" should be echoed from the Task "echo $ret" which is read by Orchestration Engine
