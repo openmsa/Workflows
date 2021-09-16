@@ -34,7 +34,7 @@ if (isset($context['flavor_id'])){
   $flavor_id = "";
 }
 
-$response = _nova_floating_ip_associate($openstack_device_id, $server_id, $floating_ip_address, $image_id, $flavor_id);
+$response = _nova_floating_ip_associate($openstack_device_id, $server_id, $floating_ip_address, '', $image_id, $flavor_id);
 $response = json_decode($response, true);
 if ($response['wo_status'] !== ENDED) {
 	$response = json_encode($response);
