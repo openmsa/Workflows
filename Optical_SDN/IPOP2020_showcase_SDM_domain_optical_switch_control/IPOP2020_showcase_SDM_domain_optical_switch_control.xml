@@ -1,0 +1,32 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <process name="Process/IPOP2020_showcase_SDM_domain_optical_switch_control/Optical_Switch_make_">
+    <displayName>Optical Switch make </displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Optical_Switch_make__Make.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase_SDM_domain_optical_switch_control</processPath>
+      <displayName>Make</displayName>
+    </task>
+  </process>
+  <process name="Process/IPOP2020_showcase_SDM_domain_optical_switch_control/Optical_Switch_break_">
+    <displayName>Optical Switch break </displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <task name="Optical_Switch_break__Break.py">
+      <processPath>/opt/fmc_repository/Process/IPOP2020_showcase_SDM_domain_optical_switch_control</processPath>
+      <displayName>Break</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>IPOP2020 showcase (Optical E2E automation) controlling  SDM domain optical switch control</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>IPOP2020 showcase SDM domain optical switch control</name>
+    <group/>
+  </information>
+</ObjectDefinition>

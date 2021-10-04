@@ -1,0 +1,87 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Terraform ME" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="2132021" modId="2032021"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Configuration" name="params.configuration_file" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" refDeviceIdVar="params.device_id" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>Terraform_configuration_inventory</class>
+      </classes>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process_New_Instance">
+    <displayName>Create Instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <process name="Process_Init">
+    <displayName>Init</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Init_work_directory.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Init/Tasks</processPath>
+      <displayName>Init work directory</displayName>
+    </task>
+  </process>
+  <process name="Process_Plan">
+    <displayName>Plan</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Plan_configuration.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Plan/Tasks</processPath>
+      <displayName>Plan configuration</displayName>
+    </task>
+  </process>
+  <process name="Process_Apply">
+    <displayName>Apply</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Apply_configuration.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Apply/Tasks</processPath>
+      <displayName>Apply configuration</displayName>
+    </task>
+  </process>
+  <process name="Process_Destroy">
+    <displayName>Destroy</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Destroy_configuration.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Destroy/Tasks</processPath>
+      <displayName>Destroy configuration</displayName>
+    </task>
+  </process>
+  <process name="Process_Delete">
+    <displayName>Terminate Instance</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <process name="Process/Terraform_Configuration_Management/Process_Generate_Ansible_Hosts">
+    <displayName>Generate Hosts Inventory</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Generate_Hosts_Inventory.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Generate_Ansible_Hosts/Tasks</processPath>
+      <displayName>Generate Hosts Inventory</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Terraform Configuration Management</name>
+    <group>cloud|infra</group>
+  </information>
+</ObjectDefinition>

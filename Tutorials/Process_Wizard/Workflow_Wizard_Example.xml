@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description>Tutorial</description>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Tutorial</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Workflow Wizard Example</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="a" displayOrder="0" maxLength="100" name="params.a" startIncrement="0" type="Integer"/>
+    <variable displayName="b" displayOrder="1" maxLength="100" name="params.b" startIncrement="0" type="Integer"/>
+    <variable displayName="result" displayOrder="2" maxLength="100" name="params.result" startIncrement="0" type="Integer"/>
+  </variables>  <example>    <content/>  </example>
+  
+  
+<process name="Process/Tutorials/Process_Wizard/Process_compute">
+    <visibility>5</visibility>
+    <displayName>compute</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_Task_A.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Process_Wizard/Process_compute/Tasks/</processPath>
+      <displayName>Task_A</displayName>
+    </task>
+    <task name="Task_Task_B.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Process_Wizard/Process_compute/Tasks/</processPath>
+      <displayName>Task_B</displayName>
+    </task>
+    <task name="Task_Task_Compute.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Process_Wizard/Process_compute/Tasks/</processPath>
+      <displayName>Task_Compute</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Process_Wizard/Process_delete_instance">
+    <visibility>5</visibility>
+    <displayName>delete_instance</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

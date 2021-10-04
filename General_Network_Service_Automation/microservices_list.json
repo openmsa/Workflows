@@ -1,0 +1,19 @@
+{
+  "IPAM IPv4 addresses": "ip_address",
+  "IPAM IPv4 prefixes": "prefix",
+  "IPAM Sites": "sites",
+  "IPAM Tenants": "tenants",
+  "IPAM VLANs": "vlan",
+  "IPAM VRFs": "vrf",
+  "IPAM Devices": "devices",
+  "IPAM Interfaces": "interfaces",
+  "IPAM Interface Connections": "interface_connections",
+  "IPAM Available Prefixes": "available_prefix",
+  "Router interfaces": "interfaces",
+  "Router BGP neighbours": "bgp_neighbour",
+  "Router BGP speaker": "bgp_speaker",
+  "Router VRF": "vrf",
+  "Router Prefix Filter": "prefix_filter",
+  "Router Import Connected to BGP": "import_connected_to_bgp",
+  "Router Import advertised routes by BGP": "import_advertised_routes_bgp"
+}

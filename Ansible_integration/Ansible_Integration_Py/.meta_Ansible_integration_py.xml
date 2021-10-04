@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata>
+    <map>
+        <entry>
+            <key>DISPLAYNAME</key>
+            <value>Ansible_integration_py.xml</value>
+        </entry>
+        <entry>
+            <key>DATE_MODIFICATION</key>
+            <value>1621410035791</value>
+        </entry>
+        <entry>
+            <key>REPOSITORY</key>
+            <value>Process</value>
+        </entry>
+        <entry>
+            <key>DATE_CREATION</key>
+            <value>1621410035791</value>
+        </entry>
+        <entry>
+            <key>TAG</key>
+        </entry>
+        <entry>
+            <key>TYPE</key>
+            <value>FILE</value>
+        </entry>
+        <entry>
+            <key>COMMENT</key>
+        </entry>
+    </map>
+</metadata>

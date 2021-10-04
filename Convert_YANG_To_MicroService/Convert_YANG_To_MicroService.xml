@@ -1,0 +1,67 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="yangs Directory" name="params.yangs_directory" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/opt/fmc_repository/Datafiles/YANG" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections></sections>
+      </sections>
+      <values>
+        <values displayValue="/opt/fmc_repository/Datafiles/YANG">/opt/fmc_repository/Datafiles/YANG</values>
+      </values>
+    </variable>
+    <variable displayName="yangs Extension" name="params.yangs_extension" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default=".yang" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="yang">.yang</values>
+      </values>
+    </variable>
+    <variable displayName="Select" name="params.yang_list.0.is_selected" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Yang_Main_File" name="params.yang_list.0.is_yangmainfile" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="Yang_Main_File  used to select the list of field" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="yang " name="params.yang_list.0.yang" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="XML temp file" name="params.xml_output_file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="XML temp file" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Micro Service File" name="params.micro_service_file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="Micro Service File Created" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Convert_YANG_To_MicroService/Process_create_instance">
+    <displayName>Create Converter Instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_create_instance.py">
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_MicroService/Process_create_instance/Tasks</processPath>
+      <displayName>create_instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Convert_YANG_To_MicroService/Process_convert_yang_to_microservice">
+    <displayName>Convert Yang files to MicroService</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_transform_yang_files_to_xml.py">
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_MicroService/Process_convert_yang_to_microservice/Tasks</processPath>
+      <displayName>Convert Yang files to XML</displayName>
+    </task>
+    <task name="Task_Update_XML.py">
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_MicroService/Process_convert_yang_to_microservice/Tasks</processPath>
+      <displayName>Update XML File for MS</displayName>
+    </task>
+    <task name="Task_Convert_xml_to_MicroService.py">
+      <processPath>/opt/fmc_repository/Process/Convert_YANG_To_MicroService/Process_convert_yang_to_microservice/Tasks</processPath>
+      <displayName>Convert XML to MicroService</displayName>
+    </task>
+  </process>
+  <process name="Process/Convert_YANG_To_MicroService/Process_Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>Convert Yang files into xml files</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>YANG to MicroService Converter</name>
+    <group>tool|yang</group>
+  </information>
+</ObjectDefinition>

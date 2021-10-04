@@ -1,0 +1,8 @@
+{
+	"Station VLAN management": 			 		"vlan",
+	"Station Ethernet port link status": 		"ethernet_port_link_status",
+	"Station Ethernet port settings":    		"ethernet_port_settings",
+	"Station Ethernet port VLAN configuration": "ethernet_port_vlan",
+	"Station hostname":							"hostname",
+	"IPAM VLAN management": "vlan"
+}

@@ -1,0 +1,32 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Event" name="params.rawlog" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Tutorials/alarm/Alarm_Action/Process_Execute_Process">
+    <displayName>Event Detected</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_read_event.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/alarm/Alarm_Action/Process_Execute_Process/Tasks</processPath>
+      <displayName>read_event</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/alarm/Alarm_Action/Process_Delete">
+    <displayName>Delete</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>Simple workflow to trigger from an alarm, for testing purpose</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Security Event Detection</name>
+    <group>minilab|alarm</group>
+  </information>
+</ObjectDefinition>

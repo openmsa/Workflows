@@ -1,0 +1,236 @@
+{
+	"Cisco": {
+		"OUI": ["FACE38", "FACE39"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "admin"
+		},
+                "MSA specific": {
+                	"Interface": "REDFISH",
+			"manufacture_id": 1,
+			"model_id": 12345678
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"Intel": {
+		"OUI": ["FACE40", "A4BF01"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "admin"
+		},
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 2120120,
+                        "model_id": 21201201
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 1,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"AMD": {
+		"OUI": ["00001A", "FACE41"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "admin"
+		},
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 2314123,
+                        "model_id": 73524682
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Low-Latency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 1,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 1,
+				"ProcessorPowerPolicy": 1,
+				"WorkLdConfig": 0,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 1
+			},
+			"Energy-effency": {
+				"ProcessorVmxEnable": 1,
+				"VTdSupport": 1,
+				"SRIOVEnable": 1,
+				"TurboMode": 0,
+				"EETurboDisable": 0,
+				"ProcessorHyperThreadingDisable": 0,
+				"ProcessorPowerPolicy": 0,
+				"WorkLdConfig": 2,
+				"C6Enable": 0,
+				"FanSpdCtrlProfile": 2
+			}
+		}
+	},
+	"HPE": {
+		"OUI": ["9440C9", "9640C9"],
+		"Default Credentials": {
+			"Username": "ubiqube",
+			"Password": "NewPassword123!"
+		},
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 17071301,
+                        "model_id": 17171399
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"AdminEmail": "performance@test.test"
+			},
+			"Low-Latency": {
+				"AdminEmail": "low-latency@test.test"
+			},
+			"Energy-effency": {
+                                "AdminEmail": "energy-effency@test.test"
+			}
+		}
+	},
+	"DELL": {
+		"OUI": ["F8CAB8", "F8BC12", "F8B156", "F48E38", "F40270"],
+		"Default Credentials": {
+			"Username": "root",
+			"Password": "redfish"
+		},
+                "MSA specific": {
+                        "Interface": "REDFISH",
+                        "manufacture_id": 1120120,
+                        "model_id": 11201201
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Enabled",
+				"SriovGlobalEnable": "Enabled"
+			},
+			"Low-Latency": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Disabled",
+				"SriovGlobalEnable": "Enabled"
+			},
+			"Energy-effency": {
+				"ProcTurboMode": "Enabled",
+				"ProcVirtualization": "Disabled",
+				"SriovGlobalEnable": "Disabled"
+			}
+		},
+		"Miscellaneous parameters": {
+			"JobManager": true
+		}
+	},
+	"Lanner": {
+		"OUI": ["00900B"],
+		"Default Credentials": {
+			"Username": "admin",
+			"Password": "Ub!lanner"
+		},
+                "MSA specific": {
+                        "Interface": "IPMI",
+                        "manufacture_id": 20120801,
+                        "model_id": 20120801
+                },
+		"BIOS profiles": {
+			"Performance": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			},
+			"Low-Latency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Enable"
+			},
+			"Energy-effency": {
+				"VMX": "Disable",
+				"Turbo Mode": "Enable",
+				"CPU C state": "Disable"
+			}
+		}
+	}
+}

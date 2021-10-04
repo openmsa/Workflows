@@ -1,0 +1,47 @@
+= how to install the Simple Firewall workflow
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+connect to the container 'api'
+
+----
+$ docker-compose exec api bash
+[root@msa /]# 
+----
+
+----
+# cd /opt/fmc_repository/
+----
+
+clone the Workflows repository from github.com/openmsa into OpenMSA_WF (feel free to change the target directory if you need to)
+
+----
+# git clone https://github.com/openmsa/Workflows.git OpenMSA_WF
+
+Cloning into 'OpenMSA_WF'...
+remote: Enumerating objects: 356, done.
+remote: Counting objects: 100% (356/356), done.
+remote: Compressing objects: 100% (220/220), done.
+remote: Total 3558 (delta 191), reused 243 (delta 127), pack-reused 3202
+Receiving objects: 100% (3558/3558), 964.23 KiB | 1.01 MiB/s, done.
+Resolving deltas: 100% (2199/2199), done.
+Checking connectivity... done.
+----
+
+update owner
+
+----
+[root@msa fmc_repository]# chown -R ncuser.ncuser /opt/fmc_repository/OpenMSA_WF
+----
+
+create the symlinks from the repository
+
+----
+# cd /opt/fmc_repository/Process
+# ln -s ../OpenMSA_WF/Tutorials Tutorials
+# ln -s ../OpenMSA_WF/.meta_Tutorials .meta_Tutorials 
+# chown -R ncuser.ncuser Tutorials
+# chown ncuser.ncuser .meta_Tutorials 
+----
+
+The Workflow should now be listed in the UI, under Automation, as Simple Firewall (Python)
+

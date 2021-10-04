@@ -1,0 +1,56 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Name" name="params.name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Helloworld/Process_create_instance">
+    <displayName>create instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule>true</allowSchedule>
+    <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_create_instance/Tasks/Task_init.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_create_instance</processPath>
+      <displayName>init</displayName>
+    </task>
+  </process>
+  <process name="Process/Helloworld/Process_delete_instance">
+    <displayName>delete instance</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule>false</allowSchedule>
+    <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_delete_instance/Tasks/Task_delete.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_delete_instance/Tasks/</processPath>
+      <displayName>delete</displayName>
+    </task>
+  </process>
+  <process name="Process/Helloworld/Process_print_message">
+    <displayName>print message</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule>true</allowSchedule>
+    <task name="/opt/fmc_repository/Process/Tutorials/Helloworld/Process_print_message/Tasks/Task_print.php">
+      <processPath>/opt/fmc_repository/Process/Helloworld/Process_print_message/Tasks/</processPath>
+      <displayName>print</displayName>
+    </task>
+  </process>
+  <process name="Process/Tutorials/Helloworld/Process_update_Name">
+    <displayName>update Name</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_update.php">
+      <processPath>/opt/fmc_repository/Process/Tutorials/Helloworld/Process_update_Name/Tasks</processPath>
+      <displayName>update</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Helloworld</name>
+    <group>tutorial</group>
+  </information>
+</ObjectDefinition>

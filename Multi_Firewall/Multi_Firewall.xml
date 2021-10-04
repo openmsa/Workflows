@@ -1,0 +1,90 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Paloalto Device" name="params.device_id_pa" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI172" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Synchronize with Devices</sections>
+      </sections>
+      <sdTypes>
+        <sdTypes manId="28" modId="134"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Checkpoint Device" name="params.device_id_cp" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="UBI881" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Synchronize with Checkpoint</sections>
+      </sections>
+    </variable>
+    <variable displayName="Network Name" name="params.net_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Add IP Netmask</sections>
+      </sections>
+    </variable>
+    <variable displayName="IP Address" name="params.address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Add IP Netmask</sections>
+      </sections>
+    </variable>
+    <variable displayName="Mask length" name="params.masklength" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Add IP Netmask</sections>
+      </sections>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/Multi_Firewall/Process_Setup_Network">
+    <displayName>Setup Network</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <task name="Task_Synchronize_with_Devices.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
+      <displayName>Synchronize with Palo Alto</displayName>
+    </task>
+    <task name="Task_Add_IP_Netmask.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
+      <displayName>Add IP Netmask</displayName>
+    </task>
+    <task name="Task_Synchronize_with_Checkpoint.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
+      <displayName>Synchronize with Checkpoint</displayName>
+    </task>
+    <task name="Task_Add_CP_Network.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Setup_Network/Tasks/</processPath>
+      <displayName>Add CP Network</displayName>
+    </task>
+  </process>
+  <process name="Process/Multi_Firewall/Process_Move_To_Trash">
+    <displayName>Move To Trash</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+  </process>
+  <process name="Process/Multi_Firewall/Process_Delete_Networks">
+    <displayName>Delete Networks</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <task name="Task_Delete_Checkpoint_Network.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
+      <displayName>Delete Checkpoint Network</displayName>
+    </task>
+    <task name="Task_Delete_Paloalto_Network.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
+      <displayName>Delete Paloalto Network</displayName>
+    </task>
+    <task name="Task_Synchronize_with_Palo_alto.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
+      <displayName>Synchronize with Palo alto</displayName>
+    </task>
+    <task name="Task_Synchronize_with_Checkpoint.php">
+      <processPath>/opt/fmc_repository/Process/Multi_Firewall/Process_Delete_Networks/Tasks/</processPath>
+      <displayName>Synchronize with Checkpoint</displayName>
+    </task>
+  </process>
+  <information>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <description>Multi-Firewall</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Multi-Firewall (PHP)</name>
+    <group>Security|multi-vendor</group>
+  </information>
+</ObjectDefinition>

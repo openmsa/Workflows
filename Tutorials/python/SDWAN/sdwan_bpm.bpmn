@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="PLACEHOLDER_PROCESS_ID" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start Event">
+      <bpmn:outgoing>Flow_0nzmm57</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0me4drh" name="End Event">
+      <bpmn:incoming>Flow_0cyf32n</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0nzmm57" sourceRef="StartEvent_1" targetRef="Activity_0umqtkp" />
+    <bpmn:sequenceFlow id="Flow_0u4xrgk" sourceRef="Activity_0umqtkp" targetRef="Activity_18gnh6q" />
+    <bpmn:sequenceFlow id="Flow_1x7v8g5" sourceRef="Activity_18gnh6q" targetRef="Activity_1477t5x" />
+    <bpmn:sequenceFlow id="Flow_0jug62l" sourceRef="Activity_1477t5x" targetRef="Activity_02shg1s" />
+    <bpmn:sequenceFlow id="Flow_0wttjvk" sourceRef="Activity_02shg1s" targetRef="Activity_0h74ymi" />
+    <bpmn:sequenceFlow id="Flow_12q9tl1" sourceRef="Activity_0h74ymi" targetRef="Activity_0g3lrkx" />
+    <bpmn:sequenceFlow id="Flow_0cyf32n" sourceRef="Activity_0g3lrkx" targetRef="Event_0me4drh" />
+    <bpmn:serviceTask id="Activity_0umqtkp" name="CREATE (SD-WAN Connect Branch)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_connect_branch/sdwan_connect_branch","processName":"Process/sdwan_connect_branch/CREATE","processType":"CREATE","processVariables":{"site_left":"BLR127","site_right":"BLR128","leftsubnet":"10.101.101.1","rightsubnet":"10.101.101.2","secret":"passw0rd","id":"101"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0nzmm57</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u4xrgk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_18gnh6q" name="CREATE (SD-WAN Connect Branch)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_connect_branch/sdwan_connect_branch","processName":"Process/sdwan_connect_branch/CREATE","processType":"CREATE","processVariables":{"site_left":"BLR127","site_right":"BLR129","leftsubnet":"10.102.102.1","rightsubnet":"10.102.102.1","secret":"passw0rd","id":"102"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0u4xrgk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x7v8g5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1477t5x" name="CREATE_ipsec (SD-WAN IPsec Control)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_ipsec_control/sdwan_ipsec_control","processName":"Process/sdwan_ipsec_control/CREATE_ipsec","processType":"CREATE","processVariables":{"device_id":"BLR127","id":"101"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1x7v8g5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jug62l</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_02shg1s" name="CREATE_ipsec (SD-WAN IPsec Control)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_ipsec_control/sdwan_ipsec_control","processName":"Process/sdwan_ipsec_control/CREATE_ipsec","processType":"CREATE","processVariables":{"device_id":"BLR127","id":"101"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0jug62l</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wttjvk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0h74ymi" name="CREATE_ipsec (SD-WAN IPsec Control)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_ipsec_control/sdwan_ipsec_control","processName":"Process/sdwan_ipsec_control/CREATE_ipsec","processType":"CREATE","processVariables":{"device_id":"BLR128","id":"101"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0wttjvk</bpmn:incoming>
+      <bpmn:outgoing>Flow_12q9tl1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0g3lrkx" name="CREATE_ipsec (SD-WAN IPsec Control)" camunda:type="external" camunda:topic="msa_workflow">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="workflow_data">{"ubiqubeId":"PLACEHOLDER_UBIQUBE_ID","serviceName":"Process/Tutorials/python/SDWAN/sdwan_ipsec_control/sdwan_ipsec_control","processName":"Process/sdwan_ipsec_control/CREATE_ipsec","processType":"CREATE","processVariables":{"device_id":"BLR129","id":"102"},"resumeOnFail":false}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12q9tl1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cyf32n</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:textAnnotation id="TextAnnotation_072j8tq">
+      <bpmn:text>SIte_A to Site_B ipsec configuration</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_02nyeg2" sourceRef="Activity_0umqtkp" targetRef="TextAnnotation_072j8tq" />
+    <bpmn:textAnnotation id="TextAnnotation_157piw2">
+      <bpmn:text>SIte_A to Site_C ipsec configuration</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0pmh477" sourceRef="Activity_18gnh6q" targetRef="TextAnnotation_157piw2" />
+    <bpmn:textAnnotation id="TextAnnotation_15ubxqc">
+      <bpmn:text>Site_A to Site_B ipsec UP</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0xs95wx" sourceRef="Activity_1477t5x" targetRef="TextAnnotation_15ubxqc" />
+    <bpmn:textAnnotation id="TextAnnotation_15hvcc1">
+      <bpmn:text>Site_A to Site_C ipsec UP</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1wvoe70" sourceRef="Activity_02shg1s" targetRef="TextAnnotation_15hvcc1" />
+    <bpmn:textAnnotation id="TextAnnotation_15cxvb3">
+      <bpmn:text>Site_B ipsec UP</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_16m1r3c" sourceRef="Activity_0h74ymi" targetRef="TextAnnotation_15cxvb3" />
+    <bpmn:textAnnotation id="TextAnnotation_17plfb8">
+      <bpmn:text>Site_C ipsec UP</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_169dkel" sourceRef="Activity_0g3lrkx" targetRef="TextAnnotation_17plfb8" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PLACEHOLDER_PROCESS_ID">
+      <bpmndi:BPMNShape id="TextAnnotation_072j8tq_di" bpmnElement="TextAnnotation_072j8tq">
+        <dc:Bounds x="430" y="10" width="164" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_157piw2_di" bpmnElement="TextAnnotation_157piw2">
+        <dc:Bounds x="1020" y="10" width="173" height="46" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_15ubxqc_di" bpmnElement="TextAnnotation_15ubxqc">
+        <dc:Bounds x="305" y="510" width="169" height="38" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_15hvcc1_di" bpmnElement="TextAnnotation_15hvcc1">
+        <dc:Bounds x="495" y="512" width="170" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_15cxvb3_di" bpmnElement="TextAnnotation_15cxvb3">
+        <dc:Bounds x="730" y="508" width="100" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_17plfb8_di" bpmnElement="TextAnnotation_17plfb8">
+        <dc:Bounds x="894" y="507" width="151" height="44" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0nzmm57_di" bpmnElement="Flow_0nzmm57">
+        <di:waypoint x="209" y="130" />
+        <di:waypoint x="330" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u4xrgk_di" bpmnElement="Flow_0u4xrgk">
+        <di:waypoint x="430" y="130" />
+        <di:waypoint x="920" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x7v8g5_di" bpmnElement="Flow_1x7v8g5">
+        <di:waypoint x="1020" y="130" />
+        <di:waypoint x="1100" y="130" />
+        <di:waypoint x="1100" y="260" />
+        <di:waypoint x="250" y="260" />
+        <di:waypoint x="250" y="390" />
+        <di:waypoint x="330" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jug62l_di" bpmnElement="Flow_0jug62l">
+        <di:waypoint x="430" y="390" />
+        <di:waypoint x="530" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wttjvk_di" bpmnElement="Flow_0wttjvk">
+        <di:waypoint x="630" y="390" />
+        <di:waypoint x="730" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12q9tl1_di" bpmnElement="Flow_12q9tl1">
+        <di:waypoint x="830" y="390" />
+        <di:waypoint x="920" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cyf32n_di" bpmnElement="Flow_0cyf32n">
+        <di:waypoint x="1020" y="390" />
+        <di:waypoint x="1142" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0me4drh_di" bpmnElement="Event_0me4drh">
+        <dc:Bounds x="1142" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1135" y="415" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="162" y="155" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867474976_di" bpmnElement="Activity_0umqtkp">
+        <dc:Bounds x="330" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867489918_di" bpmnElement="Activity_18gnh6q">
+        <dc:Bounds x="920" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867500534_di" bpmnElement="Activity_1477t5x">
+        <dc:Bounds x="330" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867506347_di" bpmnElement="Activity_02shg1s">
+        <dc:Bounds x="530" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867513990_di" bpmnElement="Activity_0h74ymi">
+        <dc:Bounds x="730" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1611867519412_di" bpmnElement="Activity_0g3lrkx">
+        <dc:Bounds x="920" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_02nyeg2_di" bpmnElement="Association_02nyeg2">
+        <di:waypoint x="418" y="90" />
+        <di:waypoint x="455" y="51" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0pmh477_di" bpmnElement="Association_0pmh477">
+        <di:waypoint x="1008" y="90" />
+        <di:waypoint x="1040" y="56" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0xs95wx_di" bpmnElement="Association_0xs95wx">
+        <di:waypoint x="380" y="430" />
+        <di:waypoint x="380" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1wvoe70_di" bpmnElement="Association_1wvoe70">
+        <di:waypoint x="580" y="430" />
+        <di:waypoint x="580" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_16m1r3c_di" bpmnElement="Association_16m1r3c">
+        <di:waypoint x="780" y="430" />
+        <di:waypoint x="780" y="508" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_169dkel_di" bpmnElement="Association_169dkel">
+        <di:waypoint x="970" y="430" />
+        <di:waypoint x="970" y="500" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

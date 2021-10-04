@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_name</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Tutorials</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Data provider</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Name" displayOrder="0" editable="false" maxLength="100" name="params.service_name" numberOfRowMax="0" startIncrement="0" tableSizeFix="false" type="String" visible="false"/>
+  </variables>  <example>    <content>
+      <?php?>
+    </content>  </example>
+  <process name="Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_create_instance">
+    <visibility>5</visibility>
+    <displayName>create instance</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_T1.php">
+      <processPath>/opt/fmc_repository/Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_create_instance/Tasks/</processPath>
+      <displayName>T1</displayName>
+    </task>
+  </process>
+<process name="Process/MARK-104/Tutorials/Dyn_List_Workflow_Data_Provider/Process_delete_instance">
+    <visibility>5</visibility>
+    <displayName>delete_instance</displayName>
+    <icon/>
+    <poolId>0</poolId>
+    <compensation/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

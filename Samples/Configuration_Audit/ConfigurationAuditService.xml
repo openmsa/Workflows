@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+  <information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>Audit</group>
+    <icon>/images/repository/CommandDefinition/icons/Protection.png</icon>
+    <name>Configuration Audit</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>true</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>
+  <variables frozen="0">
+    <variable displayName="Devices" displayOrder="0" maxLength="100" name="params.deviceid.0.ID" startIncrement="0" type="Device"/>
+    <variable default="loopback" displayName="Object Name" displayOrder="1" maxLength="100" name="params.CheckParams.0.ObjectName" refDeviceIdVar="params.deviceid.0.ID" startIncrement="0" type="String">
+      <classes>
+        <class>interface</class>
+        <class>route</class>
+      </classes>
+    </variable>
+    <variable default="object_id" displayName="Parameter Name" displayOrder="2" maxLength="100" name="params.CheckParams.0.ParameterName" startIncrement="0" type="String"/>
+    <variable displayName="Parameter Value" displayOrder="3" maxLength="100" name="params.CheckParams.0.ParameterValue" startIncrement="0" type="String">
+      <values>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+        <value>7</value>
+        <value>8</value>
+        <value>9</value>
+      </values>
+    </variable>
+  </variables>
+  <example>
+    <content/>
+  </example>
+  <process name="Process/CONFIGURATION_AUDIT/ConfigurationAuditService/Process_Audit">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Audit</displayName>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/CONFIGURATION_AUDIT/check_devices_parameters.php">
+      <processPath/>
+      <displayName>Check Parameters</displayName>
+    </task>
+  </process>
+  <process name="Process/CONFIGURATION_AUDIT/ConfigurationAuditService/Process_Audit_Retry">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Audit Retry</displayName>
+    <type>UPDATE</type>
+    <task name="/opt/fmc_repository/Process/CONFIGURATION_AUDIT/check_devices_parameters.php">
+      <processPath/>
+      <displayName>Check Parameters</displayName>
+    </task>
+  </process>
+</ObjectDefinition>

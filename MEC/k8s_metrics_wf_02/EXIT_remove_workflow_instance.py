@@ -1,0 +1,7 @@
+from msa_sdk.variables import Variables
+from msa_sdk.msa_api import MSA_API
+
+context = Variables.task_call()
+
+ret = MSA_API.process_content('ENDED', f'workflow removed', context, True)
+print(ret)

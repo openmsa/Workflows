@@ -1,0 +1,60 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Managed Entity for AWS" name="params.aws_device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="17010301" modId="17010301"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="Instance ID" name="params.instance_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Instance IP" name="params.instance_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="service_id" name="params.service_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="id_for_display" name="params.id_for_display" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Public_Cloud/AWS/Simple_Instance_Management/Process_onboard_instance">
+    <displayName>Onboard Instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_onboard_instance.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Simple_Instance_Management/Process_onboard_instance/Tasks</processPath>
+      <displayName>onboard_instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/AWS/Simple_Instance_Management/Process_start_instance">
+    <displayName>Start Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_start_instance.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Simple_Instance_Management/Process_start_instance/Tasks</processPath>
+      <displayName>start_instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/AWS/Simple_Instance_Management/Process_stop_instance">
+    <displayName>Stop Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_stop_instance.php">
+      <processPath>/opt/fmc_repository/Process/Public_Cloud/AWS/Simple_Instance_Management/Process_stop_instance/Tasks</processPath>
+      <displayName>stop_instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Public_Cloud/AWS/Simple_Instance_Management/Process_delete_service">
+    <displayName>Delete Service</displayName>
+    <type>DELETE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
+  <information>
+    <icon/>
+    <description>Onboards an existing instance and provides start/stop actions</description>
+    <displayField>id_for_display</displayField>
+    <serviceTaskType>php</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Simple Instance Management on AWS</name>
+    <group>training|util</group>
+  </information>
+</ObjectDefinition>

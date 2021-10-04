@@ -1,0 +1,43 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Device" name="params.device_id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+    <variable displayName="IPsec Id" name="params.id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour maxLength="0" selectorValue="" startIncrement="0"/>
+      </behaviors>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/sdwan_ipsec_control/CREATE_ipsec">
+    <displayName>CREATE_ipsec</displayName>
+    <type>CREATE</type>
+    <visibility>0</visibility>
+    <task name="CREATE_ipsec_task_01_create_process.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_ipsec_control</processPath>
+      <displayName>task_01_create_process</displayName>
+    </task>
+  </process>
+  <process name="Process/sdwan_ipsec_control/DELETE">
+    <displayName>DELETE</displayName>
+    <type>DELETE</type>
+    <visibility>0</visibility>
+    <task name="DELETE_task_01.py">
+      <processPath>/opt/fmc_repository/OpenMSA_WF/Tutorials/python/SDWAN/sdwan_ipsec_control</processPath>
+      <displayName>task_01</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>SD-WAN IPsec Control</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>SD-WAN IPsec Control</name>
+    <group>minilab|SDWAN</group>
+  </information>
+</ObjectDefinition>
