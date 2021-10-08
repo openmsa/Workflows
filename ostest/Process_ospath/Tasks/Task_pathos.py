@@ -3,7 +3,7 @@ Visit http://[YOUR_MSA_URL]/msa_sdk/ to see what you can import.
 '''
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
-
+import os.path
 '''
 List all the parameters required by the task
 
@@ -49,6 +49,7 @@ NOTE : For 'wo_newparams', always pass "context" [whether wo_status is ENDED/FAI
 The response "ret" should be echoed from the Task "print(ret)" which is read by Orchestration Engine
 In case of FAILURE/WARNING, the Task can be Terminated by calling "exit" as per Logic
 '''
+print(os.getcwd())
 ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
 print(ret)
 
