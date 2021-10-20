@@ -1,4 +1,4 @@
-# Kubernetes POD with QoS parameters
+# Kubernetes Pod with QoS parameters
 
 ## Purposes
 This is a workflow that executes terrafrom commands and uses k8s pod pattern configuration.
