@@ -88,7 +88,7 @@ if __name__ == "__main__":
         "-var='image=" + image + "' " + \
         "-var='requests={\"cpu\":\"" + requests_0_cpu + "\",\"memory\":\"" + requests_0_memory + "\"}' " + \
         "-var='limits={\"cpu\":\"" + limits_0_cpu + "\",\"memory\":\"" + limits_0_memory + "\"}' " + \
-        "-var='labels={\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
+        "-var='labels={\"pattern\":\"qos\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
         "-out t4m_plan"
 
     try:

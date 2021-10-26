@@ -11,20 +11,21 @@ if __name__ == "__main__":
     
     # (1) destroy
     
-    dir_path           = context["dir_path"]
-    config_path        = context["config_path"]
-    namespace          = context["namespace"]
-    config_context     = context["config_context"]
-    insecure           = str(context["insecure"]).lower()
-    pod_name           = context["pod_name"]
-    container_name     = context["container_name"]
-    image              = context["image"]
-    requests_0_cpu     = context["requests"][0]["cpu"]
-    requests_0_memory  = context["requests"][0]["memory"]
-    limits_0_cpu       = context["limits"][0]["cpu"]
-    limits_0_memory    = context["limits"][0]["memory"]
-    labels_0_terrafrom = context["labels"][0]["terrafrom"]
-    labels_0_app       = context["labels"][0]["app"]
+    dir_path              = context["dir_path"]
+    config_path           = context["config_path"]
+    namespace             = context["namespace"]
+    config_context        = context["config_context"]
+    insecure              = str(context["insecure"]).lower()
+    pod_name              = context["pod_name"]
+    container_name        = context["container_name"]
+    image                 = context["image"]
+    labels_0_terrafrom    = context["labels"][0]["terrafrom"]
+    labels_0_app          = context["labels"][0]["app"]
+    container_port        = context["container_port"]
+    protocol              = context["protocol"]
+    http_get_path         = context["http_get_path"]
+    http_get_port         = context["http_get_port"]
+    initial_delay_seconds = context["initial_delay_seconds"]
     
     
     t4m_options = "-var='config_path=" + config_path + "' " + \
@@ -34,9 +35,12 @@ if __name__ == "__main__":
         "-var='pod_name=" + pod_name + "' " + \
         "-var='container_name=" + container_name + "' " + \
         "-var='image=" + image + "' " + \
-        "-var='requests={\"cpu\":\"" + requests_0_cpu + "\",\"memory\":\"" + requests_0_memory + "\"}' " + \
-        "-var='limits={\"cpu\":\"" + limits_0_cpu + "\",\"memory\":\"" + limits_0_memory + "\"}' " + \
-        "-var='labels={\"pattern\":\"qos\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' "
+        "-var='labels={\"pattern\":\"liveness_check\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
+        "-var='container_port=" + container_port + "' " + \
+        "-var='protocol=" + protocol + "' " + \
+        "-var='http_get_path=" + http_get_path + "' " + \
+        "-var='http_get_port=" + http_get_port + "' " + \
+        "-var='initial_delay_seconds=" + initial_delay_seconds + "'"
 
     try:
         stream = os.popen(f'terraform -chdir="{dir_path}" destroy -auto-approve {t4m_options}')

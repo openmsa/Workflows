@@ -32,7 +32,7 @@ if __name__ == "__main__":
         "-var='deployment_name=" + deployment_name + "' " + \
         "-var='container_name=" + container_name + "' " + \
         "-var='image=" + image + "' " + \
-        "-var='labels={\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
+        "-var='labels={\"pattern\":\"rolling_update\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
         "-var='replicas=" + replicas + "' " + \
         "-var='max_surge=" + max_surge + "' " + \
         "-var='max_unavailable=" + max_unavailable + "' " + \

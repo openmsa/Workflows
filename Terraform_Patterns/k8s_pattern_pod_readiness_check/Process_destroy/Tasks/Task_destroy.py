@@ -19,12 +19,9 @@ if __name__ == "__main__":
     pod_name           = context["pod_name"]
     container_name     = context["container_name"]
     image              = context["image"]
-    requests_0_cpu     = context["requests"][0]["cpu"]
-    requests_0_memory  = context["requests"][0]["memory"]
-    limits_0_cpu       = context["limits"][0]["cpu"]
-    limits_0_memory    = context["limits"][0]["memory"]
     labels_0_terrafrom = context["labels"][0]["terrafrom"]
     labels_0_app       = context["labels"][0]["app"]
+    command            = context["command"]
     
     
     t4m_options = "-var='config_path=" + config_path + "' " + \
@@ -34,9 +31,8 @@ if __name__ == "__main__":
         "-var='pod_name=" + pod_name + "' " + \
         "-var='container_name=" + container_name + "' " + \
         "-var='image=" + image + "' " + \
-        "-var='requests={\"cpu\":\"" + requests_0_cpu + "\",\"memory\":\"" + requests_0_memory + "\"}' " + \
-        "-var='limits={\"cpu\":\"" + limits_0_cpu + "\",\"memory\":\"" + limits_0_memory + "\"}' " + \
-        "-var='labels={\"pattern\":\"qos\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' "
+        "-var='labels={\"pattern\":\"qos\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
+        "-var='command=[" + command + "]'"
 
     try:
         stream = os.popen(f'terraform -chdir="{dir_path}" destroy -auto-approve {t4m_options}')

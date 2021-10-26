@@ -13,15 +13,16 @@ if __name__ == "__main__":
     dev_var.add('namespace')
     dev_var.add('config_context')
     dev_var.add('insecure')
-    dev_var.add('deployment_name')
+    dev_var.add('pod_name')
     dev_var.add('container_name')
     dev_var.add('image')
     dev_var.add('labels.0.terrafrom')
     dev_var.add('labels.0.app')
-    dev_var.add('replicas')
-    dev_var.add('max_surge')
-    dev_var.add('max_unavailable')
-    dev_var.add('command')
+    dev_var.add('container_port')
+    dev_var.add('protocol')
+    dev_var.add('http_get_path')
+    dev_var.add('http_get_port')
+    dev_var.add('initial_delay_seconds')
     context = Variables.task_call(dev_var)
     
     # (0) pre check
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     context["work_dir"] = work_dir
     try:
         copyfile(work_dir+"/k8s-config", dir_path+"/k8s-config")
-        copyfile(work_dir+"/deployment-rollingupdate.tf", dir_path+"/deployment-rollingupdate.tf")
+        copyfile(work_dir+"/pod-liveness-check.tf", dir_path+"/pod-liveness-check.tf")
         copyfile(work_dir+"/provider.tf", dir_path+"/provider.tf")
     except Exception as e:
         ret = MSA_API.process_content('WARNING', f'CAN\'T COPY FILES: {e}', context, True)
@@ -64,33 +65,34 @@ if __name__ == "__main__":
         exit()
     
     # (4) terrafrom plan
-    config_path        = context["config_path"]
-    namespace          = context["namespace"]
-    config_context     = context["config_context"]
-    insecure           = str(context["insecure"]).lower()
-    deployment_name    = context["deployment_name"]
-    container_name     = context["container_name"]
-    image              = context["image"]
-    labels_0_terrafrom = context["labels"][0]["terrafrom"]
-    labels_0_app       = context["labels"][0]["app"]
-    replicas           = context["replicas"]
-    max_surge          = context["max_surge"]
-    max_unavailable    = context["max_unavailable"]
-    command            = context["command"]
-    
+    config_path           = context["config_path"]
+    namespace             = context["namespace"]
+    config_context        = context["config_context"]
+    insecure              = str(context["insecure"]).lower()
+    pod_name              = context["pod_name"]
+    container_name        = context["container_name"]
+    image                 = context["image"]
+    labels_0_terrafrom    = context["labels"][0]["terrafrom"]
+    labels_0_app          = context["labels"][0]["app"]
+    container_port        = context["container_port"]
+    protocol              = context["protocol"]
+    http_get_path         = context["http_get_path"]
+    http_get_port         = context["http_get_port"]
+    initial_delay_seconds = context["initial_delay_seconds"]
     
     t4m_options = "-var='config_path=" + config_path + "' " + \
         "-var='namespace=" + namespace + "' " + \
         "-var='config_context=" + config_context + "' " + \
         "-var='insecure=" + insecure + "' " + \
-        "-var='deployment_name=" + deployment_name + "' " + \
+        "-var='pod_name=" + pod_name + "' " + \
         "-var='container_name=" + container_name + "' " + \
         "-var='image=" + image + "' " + \
-        "-var='labels={\"pattern\":\"rolling_update\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
-        "-var='replicas=" + replicas + "' " + \
-        "-var='max_surge=" + max_surge + "' " + \
-        "-var='max_unavailable=" + max_unavailable + "' " + \
-        "-var='command=[" + command + "]' " + \
+        "-var='labels={\"pattern\":\"liveness_check\",\"terraform\":\"" + labels_0_terrafrom + "\",\"app\":\"" + labels_0_app + "\"}' " + \
+        "-var='container_port=" + container_port + "' " + \
+        "-var='protocol=" + protocol + "' " + \
+        "-var='http_get_path=" + http_get_path + "' " + \
+        "-var='http_get_port=" + http_get_port + "' " + \
+        "-var='initial_delay_seconds=" + initial_delay_seconds + "' " + \
         "-out t4m_plan"
 
     try:
