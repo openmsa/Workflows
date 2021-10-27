@@ -153,25 +153,26 @@ function release_file_lock ($lock_file, $mode, $process_params,
  * @return unknown|boolean
  */
 function get_vars_value($variable) {
-  global $context; 
+  global $context;
   if (isset($context['vars_ctx_values'][$variable])){
     return $context['vars_ctx_values'][$variable];
-  }else{
-    //Read only one time the full file per different needed variables and fill all values in one global variable $context['vars_ctx_values'], we don't want to put the full VARS_CTX_FILE (500 lines) into the $context variable
-    $vars_content = file_get_contents(VARS_CTX_FILE);
-    if ($vars_content) {
-      $regex = "@$variable=+(.*)@";
-      $is_result = preg_match($regex, $vars_content, $result);
-      if ($is_result) {
-        if (! isset($context['vars_ctx_values'])){
-          $context['vars_ctx_values'] = array();
-        } 
-        $context['vars_ctx_values'][$variable] = $result[1];
-        return $result[1];
-      }
-    }
-    return false;
+  } else {
+    $var = _get_variable_by_name($variable);
+    $context['vars_ctx_values'][$variable] = $var;
+    return $var;
   }
+}
+
+function _get_variable_by_name($name) {
+        $msa_rest_api = "system-admin/v1/msa_vars?name={$name}";
+        $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+        $response = perform_curl_operation($curl_cmd, "Get variable $name");
+        $response = json_decode($response, true);
+	if (isset($response['wo_newparams']['response_body'])) {
+	        $inner = json_decode($response['wo_newparams']['response_body'], true);
+		return $inner[0]['value'];
+	}
+	return null;
 }
 
 /**
