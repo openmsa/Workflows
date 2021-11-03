@@ -18,14 +18,15 @@ if __name__ == "__main__":
     dev_var.add('vim_project', var_type='String')
     context = Variables.task_call(dev_var)
     
-    nfviVim = NfviVim('10.31.1.245', '8080')
+    nfviVim = NfviVim(context["mano_ip"], context["mano_port"])
     nfviVim.set_parameters(context['mano_user'], context['mano_pass'])
 
     content = {
                "vimId": str(uuid.uuid4()),
                "vimType": context["vim_type"],
                "interfaceInfo": {
-                   "endpoint": context["interface_info"]
+                   "endpoint": context["interface_info"],
+                   "non-strict-ssl": True
                    },
                "accessInfo": {
                    "username": context["username"],
@@ -34,7 +35,7 @@ if __name__ == "__main__":
                    "projectDomain": context["project_domain"],
                    "userDomain": context["user_domain"],
                    "vim_project": context["vim_project"],
-                   "device_id": context["device_id"]
+                   "device_id": context["nfvo_device"]
                    },
                "geoloc": {
                    "lng": 45.75801,
@@ -44,7 +45,5 @@ if __name__ == "__main__":
 
     r = nfviVim.nfvi_vim_register(content)
     
-    # context['vim_id'] = r.json()['id']
-    
-    ret = MSA_API.process_content('ENDED', f'{r}', context, True)
+    ret = MSA_API.process_content(nfviVim.state, f'{r}', context, True)
     print(ret)
