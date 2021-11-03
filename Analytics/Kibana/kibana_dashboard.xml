@@ -1,12 +1,10 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Customer Id" name="params.customer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Ipaddress" name="params.ipAddress" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Port" name="params.port" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="5601" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Base Path" name="params.basePath" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="26" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="/kibana" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Index" name="params.index" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default=".kibana" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Type" name="params.type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="dashboard" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Template Name" name="params.template name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="Select available dashboards on Kibana or write the name of your created dashboard (based on the dashboard url) " groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="template_default" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Type" name="params.type" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="dashboard" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Template" name="params.template_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="Select available dashboards on Kibana or write the name of your created dashboard (based on the dashboard url) " groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="template_default" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
         <values displayValue="Default traffic overview">template_default</values>
         <values displayValue="Email overview">template_Email_Overview</values>
@@ -24,126 +22,13 @@
     <variable displayName="Searchinguri" name="params.searchingURI" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Uriputes" name="params.uriPutES" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Hash" name="params.Hash" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName=" Kibana Url" name="params.kibanaUrl" startIncrement="0" type="Link" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Kibanaport" name="params.kibanaPort" startIncrement="0" type="Integer" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName=" Kibana Url" name="params.kibanaUrl" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Kibanaport" name="params.kibanaPort" startIncrement="0" type="Integer" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="5601" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Kibanaipaddress" name="params.kibanaIpAddress" startIncrement="0" type="IpAddress" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Filter type" name="params.filterType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="- Advanced : your write all fields and their values  with operators ( OR, AND ) in Advanced filter input&#xa;- Basic : you have Basic Fitler table that you can put fields and select your operator.  Then you can decide if you want to apply your filter directly or just save it" groupSeparator="" groupDisplayName="" displayOrder="38" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Advanced" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <sections>
-        <sections>Filtering</sections>
-      </sections>
-      <values>
-        <values displayValue="Basic ">Basic </values>
-        <values displayValue="Advanced">Advanced</values>
-      </values>
-    </variable>
-    <variable displayName="Advanced filter" name="params.advancedFilter" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="Write your filter in according index fields (ex. port:&lt;50 OR protocol:UDP)" groupSeparator="" groupDisplayName="" displayOrder="39" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" default="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Advanced filter" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.advancedFilter" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="advancedFilter" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.advancedFilter" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Filtering</sections>
-      </sections>
-    </variable>
-    <variable displayName="Advancedfilterempty" name="params.advancedFilterEmpty" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="40" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Advancedfilterempty" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.advancedFilterEmpty" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="advancedFilterEmpty" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.advancedFilterEmpty" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Filtering</sections>
-      </sections>
-    </variable>
-    <variable displayName="Basicfilterempty" name="params.basicFilterEmpty" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="41" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="basicFilterEmpty" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.basicFilterEmpty" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Basicfilterempty" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.basicFilterEmpty" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Filtering</sections>
-      </sections>
-    </variable>
-    <variable displayName="Basic filter" name="params.basicFilter" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="42" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="basicFilter" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.basicFilter" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Basic filter" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.basicFilter" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Filtering</sections>
-      </sections>
-    </variable>
-    <variable displayName="Field" name="params.filter.0.field" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="50" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="field" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.field" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Field" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.field" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections></sections>
-      </sections>
-    </variable>
-    <variable displayName="Value" name="params.filter.0.value" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="51" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="value" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.value" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Value" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.value" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections></sections>
-      </sections>
-    </variable>
-    <variable displayName="Operator" name="params.filter.0.operator" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="52" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="operator" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.operator" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Operator" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.operator" selectorValue="Basic " startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections></sections>
-      </sections>
-    </variable>
-    <variable displayName="Resultbasictfilter" name="params.filter.0.resultBasictFilter" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="53" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <sections>
-        <sections></sections>
-      </sections>
-    </variable>
-    <variable displayName="Apply" name="params.filter.0.apply" startIncrement="0" type="Composite" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="54" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.filterType" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="apply" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.apply" selectorValue="Advanced" startIncrement="0" type="String"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Apply" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.filter.0.apply" selectorValue="Basic " startIncrement="0" type="Boolean"/>
-      </behaviors>
-      <sections>
-        <sections></sections>
-      </sections>
-    </variable>
-    <variable displayName="Level" name="params.levelView" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="In according your selection, the dashboard that your are going to deploy will be display in the appropriated tab" groupSeparator="" groupDisplayName="" displayOrder="143" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="service" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <sections>
-        <sections>Level View</sections>
-      </sections>
-      <values>
-        <values displayValue="Subtenant">service</values>
-        <values displayValue="ME">device</values>
-      </values>
-    </variable>
-    <variable displayName="Device Id" name="params.device_id" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="144" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.levelView" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Device Id" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.device_id" selectorValue="device" startIncrement="0" type="Device"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="device_id" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.device_id" selectorValue="service" startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Level View</sections>
-      </sections>
-    </variable>
-    <variable displayName="Device Ip" name="params.device_ip" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="177" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.levelView" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="Device Ip" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.device_ip" selectorValue="device" startIncrement="0" type="IpAddress"/>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" displayName="device_ip" displayOrder="0" maxLength="100" isMandatory="false" isUserLocked="false" name="params.device_ip" selectorValue="service" startIncrement="0" type="String"/>
-      </behaviors>
-      <sections>
-        <sections>Level View</sections>
-      </sections>
-    </variable>
   </variables>
   <example/>
   <process name="Process/Analytics/Kibana/Process_Create_Report_Dashboard">
-    <displayName>Create Dashboard</displayName>
+    <displayName>Dashboard View Enablement</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
@@ -151,33 +36,15 @@
       <processPath>/opt/fmc_repository/Process/Analytics/Kibana/Process_Create_Report_Dashboard/</processPath>
       <displayName>Search Dashboard Template Selected</displayName>
     </task>
-    <task name="Task_Send_the_new_template_to_ES.php">
-      <processPath>/opt/fmc_repository/Process/Analytics/Kibana/Process_Create_Report_Dashboard/</processPath>
-      <displayName>Send the new template to ES</displayName>
-    </task>
-  </process>
-  <process name="Process/Analytics/Kibana/Process_Delete_Dashboard">
-    <displayName>Delete Dashboard</displayName>
-    <type>UPDATE</type>
-    <visibility>5</visibility>
-    <allowSchedule/>
-    <task name="Task_Delete_Dashboard.php">
-      <processPath>/opt/fmc_repository/Process/Analytics/Kibana/Process_Delete_Dashboard/</processPath>
-      <displayName>Delete Dashboard</displayName>
-    </task>
   </process>
   <process name="Process/Analytics/Kibana/Process_Update_Dashboard">
-    <displayName>Update Dashboard</displayName>
+    <displayName>Update Dashboard View Enablement</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Search_Dashboard_Selected_for_Updating.php">
       <processPath>/opt/fmc_repository/Process/Analytics/Kibana/Process_Update_Dashboard/</processPath>
       <displayName>Search Dashboard Selected for Updating</displayName>
-    </task>
-    <task name="Task_Send_back_template_to_ES_for_Updating.php">
-      <processPath>/opt/fmc_repository/Process/Analytics/Kibana/Process_Update_Dashboard/</processPath>
-      <displayName>Send back template to ES for Updating</displayName>
     </task>
   </process>
   <process name="Process/Analytics/Kibana/Process_Delete_Instance">
