@@ -16,8 +16,8 @@
   </process>
   <information>
     <icon/>
-    <description/>
-    <displayField>service_id</displayField>
+    <description></description>
+    <displayField>addresses.0.status</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
