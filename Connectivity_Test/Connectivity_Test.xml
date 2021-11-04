@@ -8,7 +8,7 @@
     <displayName>Create connectivity test</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
-    <allowSchedule/>
+    <allowSchedule>true</allowSchedule>
     <task name="Task_register_addresses.py">
       <processPath>/opt/fmc_repository/Process/workflows/Connectivity_Test/Process_Create_connectivity_test/Tasks</processPath>
       <displayName>register addresses</displayName>
@@ -16,7 +16,7 @@
   </process>
   <information>
     <icon/>
-    <description></description>
+    <description/>
     <displayField>addresses.0.status</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
