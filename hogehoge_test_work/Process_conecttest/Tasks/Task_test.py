@@ -1,54 +1,50 @@
-'''
-Visit http://[YOUR_MSA_URL]/msa_sdk/ to see what you can import.
-'''
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+from msa_sdk.device import Device
+from msa_sdk import util
+import json
 
-'''
-List all the parameters required by the task
+# this task can be used either in a CREATE or an UPDATE process
 
-You can use var_name convention for your variables
-They will display automaticaly as "Var Name"
-The allowed types are:
-  'String', 'Boolean', 'Integer', 'Password', 'IpAddress',
-  'IpMask', 'Ipv6Address', 'Composite', 'OBMFRef', 'Device'
-
- Add as many variables as needed
-'''
+# list the variables to expose on the end used web form
 dev_var = Variables()
-dev_var.add('var_name', var_type='String')
-dev_var.add('var_name2', var_type='Integer')
-
-'''
-context => Service Context variable per Service Instance
-All the user-inputs of Tasks are automatically stored in context
-Also, any new variables should be stored in context which are used across Service Instance
-The variables stored in context can be used across all the Tasks and Processes of a particular Service
-Update context array [add/update/delete variables] as per requirement
-
-ENTER YOUR CODE HERE
-'''
+dev_var.add('addresses.0.ip')
+dev_var.add('addresses.0.status')
 context = Variables.task_call(dev_var)
-context['var_name2'] = int(context['var_name2']) + 1
 
-'''
-Format of the Task response :
-JSON format : {"wo_status":"status","wo_comment":"comment","wo_newparams":{json_body}}
-wo_status : ENDED [Green color] or FAILED [Red color] or WARNING [Orange color]
-			-> While the Task is Running [means no response returned yet], task status is RUNNING [Blue color]
-         -> When status is returned as FAILED, the Orchestration Engine stops the Process Execution from this Task
-wo_comment : Appropriate Comment to display as per the success/failure of the Task
-wo_newparams : json_body parameters returned from this Task
+# get the current process id, useful for logging message to the process log file
+process_id = context['SERVICEINSTANCEID']
 
-Function process_content() takes care of Creating a Json response from inputs
-This function definiton can be found at : http://[YOUR_MSA_URL]/msa_sdk/msa_api.html#msa_sdk.msa_api.MSA_API.process_content
-NOTE : For 'wo_newparams', always pass "context" [whether wo_status is ENDED/FAILED/WARNING to preserve it across Service Instance]
-    -> Last argument "true" mentions whether the json_response to be Logged in the logfile : /opt/jboss/latest/logs/process.log
-    -> If not passed, it's "false"
+# create a new variable Device to use the sdk function msa_sdk/device.html#msa_sdk.device.Device.ping
+device = Device()
 
-The response "ret" should be echoed from the Task "print(ret)" which is read by Orchestration Engine
-In case of FAILURE/WARNING, the Task can be Terminated by calling "exit" as per Logic
-'''
-ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
+# get the list of IP addresses registered in the UI
+# context['addresses'] contains the values entered for the array of variables "addresses"
+addresses = context['addresses']
+
+# for each IP addresses
+i=0
+for address in addresses:
+  ip = address['ip']
+
+  # call the ping function with the IP
+  # the ping function will call a function implemented in the CoreEngine: the ping will be done from the container msa_sms
+  ping_result = device.ping(ip)
+
+  # log the result in the log file process-xx.log
+  util.log_to_process_file(process_id, ping_result)
+
+  # get the JSON result as a Python object
+  ping_result_json = json.loads(ping_result)
+
+  # update the addresses with the ping status
+  num = len(context['addresses'])
+  context['addresses'][i] = {}
+  context['addresses'][i]['ip'] = ip
+  context['addresses'][i]['status'] = ping_result_json['status']
+  i += 1
+
+
+# prepare the exit status of the task
+ret = MSA_API.process_content('ENDED', 'IP addresses tested', context, True)
 print(ret)
-
