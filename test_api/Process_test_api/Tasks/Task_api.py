@@ -15,9 +15,7 @@ The allowed types are:
 
  Add as many variables as needed
 '''
-dev_var = Variables()
-dev_var.add('var_name', var_type='String')
-dev_var.add('var_name2', var_type='Integer')
+
 
 '''
 context => Service Context variable per Service Instance
@@ -28,8 +26,6 @@ Update context array [add/update/delete variables] as per requirement
 
 ENTER YOUR CODE HERE
 '''
-context = Variables.task_call(dev_var)
-context['var_name2'] = int(context['var_name2']) + 1
 
 '''
 Format of the Task response :
@@ -49,6 +45,6 @@ NOTE : For 'wo_newparams', always pass "context" [whether wo_status is ENDED/FAI
 The response "ret" should be echoed from the Task "print(ret)" which is read by Orchestration Engine
 In case of FAILURE/WARNING, the Task can be Terminated by calling "exit" as per Logic
 '''
-ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
+ret = MSA_API.process_content('ENDED', 'Task OK',, True)
 print(ret)
 
