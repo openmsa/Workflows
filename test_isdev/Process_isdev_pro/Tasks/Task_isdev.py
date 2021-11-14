@@ -39,7 +39,5 @@ context['addresses'][i]['status'] = ping_result_json['status']
 #  i += 1
 
 ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
-
-
 print(ret)
 
