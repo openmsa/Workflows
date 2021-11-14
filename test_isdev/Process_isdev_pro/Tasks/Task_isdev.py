@@ -22,7 +22,7 @@ context = Variables.task_call(dev_var)
 
 process_id = context['SERVICEINSTANCEID']
 device = Device()
-addresses = context['addresses']
+#addresses = context['addresses']
 
 #i=0
 #for address in addresses:
@@ -36,6 +36,7 @@ ping_result_json = json.loads(ping_result)
 #context['addresses'][i] = {}
 #context['addresses'][i]['ip'] = ip
 context['addresses'][i]['status'] = ping_result_json['status']
+context['status'] = ping_result_json['status']
 #  i += 1
 
 ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
