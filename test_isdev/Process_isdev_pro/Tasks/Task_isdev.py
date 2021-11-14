@@ -17,8 +17,6 @@ context['var_name2'] = int(context['var_name2']) + 1
 dev_var = Variables()
 dev_var.add('addresses.0.ip')
 dev_var.add('addresses.0.status')
-dev_var.add('addresses.1.ip')
-dev_var.add('addresses.1.status')
 context = Variables.task_call(dev_var)
 
 process_id = context['SERVICEINSTANCEID']
