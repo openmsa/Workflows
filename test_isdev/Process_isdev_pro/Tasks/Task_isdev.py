@@ -15,7 +15,7 @@ context['var_name2'] = int(context['var_name2']) + 1
 '''
 
 
-'''
+
 dev_var = Variables()
 dev_var.add('addresses.0.ip')
 dev_var.add('addresses.0.status')
@@ -30,7 +30,8 @@ i=0
 for address in addresses:
   ip = address['ip']
 
-  ping_result = device.ping(ip)
+  #ping_result = device.ping(ip)
+  ping_result = device.is_device()
   util.log_to_process_file(process_id, ping_result)
   ping_result_json = json.loads(ping_result)
   num = len(context['addresses'])
@@ -40,9 +41,7 @@ for address in addresses:
   i += 1
 
 ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
-'''
 
-ret = MSA_API.process_content('ENDED', 'Task OK', is_device() , True)
 
 print(ret)
 
