@@ -14,10 +14,8 @@ context = Variables.task_call(dev_var)
 context['var_name2'] = int(context['var_name2']) + 1
 '''
 
-
-
 dev_var = Variables()
-dev_var.add('addresses.0.ip')
+#dev_var.add('addresses.0.ip')
 dev_var.add('addresses.0.status')
 context = Variables.task_call(dev_var)
 
@@ -26,19 +24,19 @@ process_id = context['SERVICEINSTANCEID']
 device = Device()
 addresses = context['addresses']
 
-i=0
-for address in addresses:
-  ip = address['ip']
+#i=0
+#for address in addresses:
+  #ip = address['ip']
 
   #ping_result = device.ping(ip)
-  ping_result = device.is_device()
-  util.log_to_process_file(process_id, ping_result)
-  ping_result_json = json.loads(ping_result)
-  num = len(context['addresses'])
-  context['addresses'][i] = {}
-  context['addresses'][i]['ip'] = ip
-  context['addresses'][i]['status'] = ping_result_json['status']
-  i += 1
+ping_result = device.is_device()
+util.log_to_process_file(process_id, ping_result)
+ping_result_json = json.loads(ping_result)
+#num = len(context['addresses'])
+#context['addresses'][i] = {}
+#context['addresses'][i]['ip'] = ip
+context['addresses'][i]['status'] = ping_result_json['status']
+#  i += 1
 
 ret = MSA_API.process_content('ENDED', 'Task OK', context, True)
 
