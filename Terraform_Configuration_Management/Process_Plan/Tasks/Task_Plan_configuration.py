@@ -46,8 +46,12 @@ device = Device(device_id=device_id)
 configuration_file = context.get('configuration_file')
 work_directory = os.path.dirname(configuration_file)
 
+#workspace directory
+terraform_workspace_dir = work_directory
+context.update(terraform_workspace_dir=terraform_workspace_dir)
+
 #push configuration to device.
-data = dict(configuration="terraform plan " + work_directory)
+data = dict(configuration='cd ' + terraform_workspace_dir + ' && terraform plan ' + work_directory)
 
 device.push_configuration(json.dumps(data))
 response = json.loads(device.content)
@@ -62,10 +66,15 @@ context.update(device_push_conf_end_reponse=response)
 
 #parse the terrafom success operation message from response
 return_message = response.get('message')
-is_op_completed = return_message.find("Terraform will perform the following actions")
 
+is_op_completed = -1
+patterns = ['Terraform will perform the following actions','Refreshing state']
+for p in patterns: 
+    is_op_completed = return_message.find(p)
+    if is_op_completed != -1:
+        break
 if status == constants.FAILED or is_op_completed == -1:
-	ret = MSA_API.process_content(constants.FAILED, 'Terraform plan execution is failed: ' + return_message, context, True)
+	ret = MSA_API.process_content(constants.FAILED, 'Terraform plan execution is failed: ' + return_message , context, True)
 	print(ret)
 
 ret = MSA_API.process_content(constants.ENDED, 'Terraform plan is executed successfully. Now run "Apply" process. Message: ' + return_message, context, True)

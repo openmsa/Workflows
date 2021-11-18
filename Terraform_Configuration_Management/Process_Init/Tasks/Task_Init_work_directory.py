@@ -1,6 +1,7 @@
 import json
 import time
 import os
+from unicodedata import normalize
 from msa_sdk import constants
 from msa_sdk.device import Device
 from msa_sdk.variables import Variables
@@ -50,8 +51,12 @@ configuration_file = context.get('configuration_file')
 work_directory = os.path.dirname(configuration_file)
 context.update(work_directory=work_directory)
 
+#workspace directory
+terraform_workspace_dir = work_directory
+context.update(terraform_workspace_dir=terraform_workspace_dir)
+
 #push configuration to device.
-data = dict(configuration="terraform init " + work_directory)
+data = dict(configuration='cd ' + terraform_workspace_dir + ' && terraform init ' + work_directory)
 
 device.push_configuration(json.dumps(data))
 response = json.loads(device.content)
@@ -62,11 +67,13 @@ response = self_device_push_conf_status_ret(device, 60)
 
 #the status should be down
 status = response.get('status')
-context.update(device_push_conf_end_reponse=response)
+#context.update(device_push_conf_end_reponse=response)
 
 #parse the terrafom success operation message from response
 return_message = response.get('message')
 is_op_completed = return_message.find("Terraform has been successfully initialized!")
+
+message = normalize('NFKD', return_message).encode('ascii','ignore')
 
 if status == constants.FAILED or is_op_completed == -1:
 	ret = MSA_API.process_content(constants.FAILED, 'Terraform initialization is failed: ' + return_message, context, True)
@@ -74,6 +81,6 @@ if status == constants.FAILED or is_op_completed == -1:
 
 return_message = response.get('message')
 
-ret = MSA_API.process_content(constants.ENDED, 'Work directory is initial successfully. ' + return_message, context, True)
+ret = MSA_API.process_content(constants.ENDED, 'Work directory is initial successfully: ' + return_message, context, True)
 print(ret)
 

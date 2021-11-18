@@ -102,6 +102,37 @@ function synchronize_objects_and_verify_response ($device_id, $connection_timeou
 	return $response;
 }
 
+function synchronize_objects_and_verify_response_v2($device_id, $connection_timeout = 300, $max_time = 300) {
+
+	$response = _order_command_synchronize($device_id, $connection_timeout, $max_time);
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$message = "";
+	$result = array();
+	foreach ($response['wo_newparams'] as $object) {
+		$object_newparam['wo_newparams'] = $object;
+		$response = verify_response_v2($object_newparam, $device_id, CMD_SYNCHRONIZE);
+		$response = json_decode($response, true);
+		if ($response['wo_status'] !== ENDED) {
+			if ($message !== "") {
+				$message = "Objects Synchronized :\n$message\n";
+			}
+			$message .= $response['wo_comment'];
+			$response = prepare_json_response(FAILED, $message, array(), true);
+			return $response;
+		}
+		if (!empty($response['wo_comment'])) {
+			$message .= $response['wo_comment'] . "\n";
+		}
+		$result = array_merge($result, $response['wo_newparams']);
+	}
+	$response = prepare_json_response(ENDED, "Objects Synchronization successful for the device $device_id", $result, true);
+	return $response;
+}
+
 function verify_response($response, $device_id, $command_name, $comment = '') {
 
 	if ($command_name !== CMD_SYNCHRONIZE) {
@@ -154,6 +185,52 @@ function verify_response($response, $device_id, $command_name, $comment = '') {
 	}
 	return $response;
 }
+
+function verify_response_v2($response, $device_id, $command_name, $comment = '') {
+
+	if ($command_name !== CMD_SYNCHRONIZE) {
+		$response = json_decode($response, true);
+		if ($response['wo_status'] !== ENDED) {
+			$response = json_encode($response);
+			return $response;
+		}
+	}
+	$status = $response['wo_newparams']['status'];
+	logToFile("RESPONSE STATUS : $status");
+	$message = $response['wo_newparams']['message'];
+
+	$wo_newparams = array();
+	if ($status !== STATUS_OK || $message === null) {
+		if ($comment !== "") {
+			logToFile("$comment FAILED.");
+		}
+		$fail_message = "OBMF Operation $command_name Failed.";
+		if ($message === null) {
+			$fail_message .= "\nPlease ensure all of the following conditions are met before running the Process again :";
+			$fail_message .= "\n1] The Device $device_id is UP and able to perform OBMF operations from MSA";
+			$fail_message .= "\n2] The Object is attached to the Device $device_id";
+			if ($command_name !==  CMD_SYNCHRONIZE) {
+				$fail_message .= "\n3] The attached Object definition has $command_name operation defined";
+			}
+		}
+		/*
+		 * else if (strpos($message, 'Local command failed') !== false
+					|| strpos($message, 'device unreachable') !== false
+					|| strpos($message, 'Connection refused') !== false
+					|| strpos($message, 'Command failed on the device') !== false) {
+		*/
+		else {
+			$fail_message = $message . "\n" . $fail_message;
+		}
+		$response = prepare_json_response(FAILED, $fail_message, $wo_newparams, true);
+		return $response;
+	}
+
+	$response = prepare_json_response(ENDED, "$comment completed successfully", $message, true);
+
+	return $response;
+}
+
 
 /**
  * Generate Configuration and Verify Response
@@ -914,5 +991,7 @@ function msa_execute_service_by_reference_and_wait_for_completion ($external_ref
   		$context[$service_name][$service_id]['context'] = $response['wo_newparams'];
 	}
 }
+
+
 
 ?>

@@ -15,14 +15,14 @@ device_id = context['device_id']
 # extract the database ID
 devicelongid = device_id[3:]
 
-# build the Microservice JSON params for IMPORT
+# build the Microservice JSON params
 #{"Gateway":"0"}
 #micro_service_vars_array = {"object_id":object_id}
 object_parameters = {}
 
 OBJECT_PARAMETERS
 
-# call the CREATE for simple_firewall MS for each device
+# call the CREATE for the specified MS for each device
 order = Order(devicelongid)
 order.command_execute('CMD_NAME', object_parameters)
 

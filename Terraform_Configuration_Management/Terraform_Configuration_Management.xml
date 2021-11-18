@@ -12,17 +12,28 @@
     </variable>
   </variables>
   <example/>
-  <process name="Process/Terraform_Configuration_Management/Process_New_Instance">
+  <process name="Process_New_Instance">
     <displayName>Create Instance</displayName>
     <type>CREATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
-    <task name="Task_Init_work_directory.py">
-      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Init/Tasks</processPath>
-      <displayName>Init work directory</displayName>
+    <task name="Task_Init.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_New_Instance/Tasks
+      </processPath>
+      <displayName>Create new instance</displayName>
     </task>
   </process>
-  <process name="Process/Terraform_Configuration_Management/Process_Init">
+  <process name="Process_Copy">
+    <displayName>Copy files to TF server</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Copy_work_directory.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Copy/Tasks</processPath>
+      <displayName>Copy TF files from MSA to Terraform server</displayName>
+    </task>
+  </process>
+  <process name="Process_Init">
     <displayName>Init</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
@@ -32,7 +43,7 @@
       <displayName>Init work directory</displayName>
     </task>
   </process>
-  <process name="Process/Terraform_Configuration_Management/Process_Plan">
+  <process name="Process_Plan">
     <displayName>Plan</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
@@ -42,7 +53,7 @@
       <displayName>Plan configuration</displayName>
     </task>
   </process>
-  <process name="Process/Terraform_Configuration_Management/Process_Apply">
+  <process name="Process_Apply">
     <displayName>Apply</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
@@ -52,7 +63,7 @@
       <displayName>Apply configuration</displayName>
     </task>
   </process>
-  <process name="Process/Terraform_Configuration_Management/Process_Destroy">
+  <process name="Process_Destroy">
     <displayName>Destroy</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
@@ -62,11 +73,21 @@
       <displayName>Destroy configuration</displayName>
     </task>
   </process>
-  <process name="Process/Terraform_Configuration_Management/Process_">
+  <process name="Process_Delete">
     <displayName>Terminate Instance</displayName>
     <type>DELETE</type>
     <visibility>5</visibility>
     <allowSchedule/>
+  </process>
+  <process name="Process/Terraform_Configuration_Management/Process_Generate_Ansible_Hosts">
+    <displayName>Generate Hosts Inventory</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Generate_Hosts_Inventory.py">
+      <processPath>/opt/fmc_repository/Process/Terraform_Configuration_Management/Process_Generate_Ansible_Hosts/Tasks</processPath>
+      <displayName>Generate Hosts Inventory</displayName>
+    </task>
   </process>
   <information>
     <icon/>

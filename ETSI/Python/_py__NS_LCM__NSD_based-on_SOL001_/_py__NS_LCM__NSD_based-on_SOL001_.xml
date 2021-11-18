@@ -1,0 +1,87 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="" name="params." startIncrement="0" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnfm_device" name="params.vnfm_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.nfvo_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>ns_catalogs</class>
+      </classes>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance">
+    <displayName>Create NS Instance</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Create_NS_Instance_Resource.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance/Tasks</processPath>
+      <displayName>Create NS Instance Resource</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS">
+    <displayName>Instantiate NS</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Instantiate_NS.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Instantiate NS</displayName>
+    </task>
+    <task name="Task_Get_NS_Operation_Occurrence_State.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Get NS Operation Occurrence State</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS">
+    <displayName>Terminate NS</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Terminate_NS.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Terminate NS</displayName>
+    </task>
+    <task name="Task_Get_NS_LCM_Operation_Occurrence_State_.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Get NS LCM Operation Occurrence State </displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance">
+    <displayName>Delete NS Instance</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Delete_NS_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance/Tasks</processPath>
+      <displayName>Delete NS Instance</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>[py] NS LCM (NSD based-on SOL001)</name>
+    <group>ETSI|PYTHON|NS</group>
+  </information>
+</ObjectDefinition>

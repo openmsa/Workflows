@@ -15,7 +15,7 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 
 	global $CURL_CMD, $context;
 	
-	$HTTP_HOST = "msa_api"; // get_vars_value(WEB_NODE_PRIV_IP)"";
+	$HTTP_HOST = "localhost"; // get_vars_value(WEB_NODE_PRIV_IP)"";
 	$HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
 	$USERNAME = "ncroot";
 	//$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);

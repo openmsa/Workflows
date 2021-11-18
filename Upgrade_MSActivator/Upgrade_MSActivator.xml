@@ -1,0 +1,49 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="Host" name="params.host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="IP of the target machine" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Username" name="params.username" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="SSH Username of the target machine" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Password" name="params.password" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="SSH password of the target machine" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Quickstart Directory" name="params.quickstartDir" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="Path of the quickstart directory on the target machine" groupSeparator="" groupDisplayName="" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/Upgrade_MSActivator/Process_Backup">
+    <displayName>Backup</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_backup.py">
+      <processPath>/opt/fmc_repository/Process/workflows/Upgrade_MSActivator/Process_Backup/Tasks</processPath>
+      <displayName>backup</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Upgrade_MSActivator/Process_Pull_Latest_Config">
+    <displayName>Pull Latest Config</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_pullconfig.py">
+      <processPath>/opt/fmc_repository/Process/workflows/Upgrade_MSActivator/Process_Pull_Latest_Config/Tasks</processPath>
+      <displayName>pullconfig</displayName>
+    </task>
+  </process>
+  <process name="Process/workflows/Upgrade_MSActivator/Process_Run_Docker_Compose">
+    <displayName>Run Docker Compose</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_rundockercompose.py">
+      <processPath>/opt/fmc_repository/Process/workflows/Upgrade_MSActivator/Process_Run_Docker_Compose/Tasks</processPath>
+      <displayName>rundockercompose</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>Upgrades the MSActivator to the latest version</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Upgrade MSActivator</name>
+    <group/>
+  </information>
+</ObjectDefinition>

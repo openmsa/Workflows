@@ -1,0 +1,182 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName=" Vnf Package Name" name="params.vnf_package_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="mano_user" name="params.mano_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="mano_pass" name="params.mano_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="mano_port" name="params.mano_port" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnf_package_id" name="params.vnf_package_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.nfvo_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>vnf_catalogs</class>
+      </classes>
+    </variable>
+    <variable displayName="VNF Descriptor" name="params.vnf_descriptor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_package_id" name="params.ns_package_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.nfvo_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>ns_catalogs</class>
+      </classes>
+    </variable>
+    <variable displayName="ns_pkg_content" name="params.ns_pkg_content" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_New_service">
+    <displayName>New service</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Sync_to_NFVO.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_New_service/Tasks</processPath>
+      <displayName>Sync to NFVO</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package">
+    <displayName>Create VNF Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Create_VNF_Package.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Create VNF Package</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_VNF">
+    <displayName>Delete VNF Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Delete_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_VNF/Tasks</processPath>
+      <displayName>Delete VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF">
+    <displayName>Enable VNF</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Enable_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF/Tasks</processPath>
+      <displayName>Enable VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF">
+    <displayName>Disable VNF</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Disable_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF/Tasks</processPath>
+      <displayName>Disable VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_VNF">
+    <displayName>Onboard VNF</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Onboard_VNF.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_VNF/Tasks</processPath>
+      <displayName>Onboard VNF</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package">
+    <displayName>Create NS Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Create_NS_Package.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_NS_Package/Tasks</processPath>
+      <displayName>Create NS Package</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package">
+    <displayName>Delete NS Package</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Delete_NS_Package.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Delete_NS_Package/Tasks</processPath>
+      <displayName>Delete NS Package</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_NSD">
+    <displayName>Onboard NSD</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Onboard_NSD.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Onboard_NSD/Tasks</processPath>
+      <displayName>Onboard NSD</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD">
+    <displayName>Enable NSD</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Enable_NSD.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_NSD/Tasks</processPath>
+      <displayName>Enable NSD</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD">
+    <displayName>Disable NSD</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Disable_NSD.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_NSD/Tasks</processPath>
+      <displayName>Disable NSD</displayName>
+    </task>
+    <task name="Task_Synchronize.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Create_VNF_Package/Tasks</processPath>
+      <displayName>Synchronize</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>[py] VNF / NS Packages Management</name>
+    <group>ETSI|Python|VNF|NS</group>
+  </information>
+</ObjectDefinition>

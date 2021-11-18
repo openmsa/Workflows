@@ -198,15 +198,15 @@
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_create.php">
       <processPath/>
-      <displayName>Create Managed Entity in MSA</displayName>
+      <displayName>Create VNF Managed Entity in MSA</displayName>
     </task>
     <task name="/opt/fmc_repository/Process/Reference/MSActivator/DeviceConfiguration/Task_msa_attach_files_to_device.php">
       <processPath/>
       <displayName>Attach Day0 Template</displayName>
     </task>
-    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_ping_check.php">
-      <processPath/>
-      <displayName>Wait for Ping</displayName>
+    <task name="Reference/MSActivator/Device/Task_msa_device_connect_with_ssh_OK.php">
+      <processPath>/opt/fmc_repository/Process/</processPath>
+      <displayName>Wait VNF reachable with ssh from MSA</displayName>
     </task>
     <task name="Task_Initial_Provisioning.php">
       <processPath>/opt/fmc_repository/Process/Private_Cloud/PA_Demo_FTNT/Process_DeployVNF/Tasks/</processPath>
