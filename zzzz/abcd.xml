@@ -1,0 +1,26 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="id" name="params.devices.0.id" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/workflows/zzzz/Process_test">
+    <displayName>test</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_testest.py">
+      <processPath>/opt/fmc_repository/Process/workflows/zzzz/Process_test/Tasks</processPath>
+      <displayName>testest</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>zzzz</description>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>zzzz</name>
+    <group/>
+  </information>
+</ObjectDefinition>
