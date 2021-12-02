@@ -14,6 +14,12 @@
       <displayName>register addresses</displayName>
     </task>
   </process>
+  <process name="Process/workflows/Connectivity_Test/Process_test">
+    <displayName>test</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+  </process>
   <information>
     <icon/>
     <description/>
