@@ -6,9 +6,11 @@ from msa_sdk.order import Order
 dev_var = Variables()
 context = Variables.task_call()
 
+ms_sdwan_ipsec_start = {context['id']: {"object_id": context['id']}}
+
 try:
-  order = Order(context['short_device_id'])
-  order.command_execute('DELETE', {"sdwan_ipsec_start": context['id']})
+    order = Order(context['short_device_id'])
+    order.command_execute('DELETE', {"sdwan_ipsec_start": ms_sdwan_ipsec_start})
 except Exception as e:
     ret = MSA_API.process_content('FAILED',
                                   f'ERROR: {str(e)}',
