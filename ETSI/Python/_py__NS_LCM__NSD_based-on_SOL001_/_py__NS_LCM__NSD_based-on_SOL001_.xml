@@ -42,6 +42,26 @@
       <displayName>Synchronize</displayName>
     </task>
   </process>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-out_NS">
+    <displayName>Scale-out NS</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Scale-out_NS_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-out_NS/Tasks</processPath>
+      <displayName>Scale-out NS Instance</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-in_NS">
+    <displayName>Scale-in NS</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Scale-in_NS_Instance.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-in_NS/Tasks</processPath>
+      <displayName>Scale-in NS Instance</displayName>
+    </task>
+  </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS">
     <displayName>Terminate NS</displayName>
     <type>UPDATE</type>
