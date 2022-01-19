@@ -20,6 +20,11 @@ class NsLcmSol005(BaseApi):
         response = self.do_post_return_location(_url, _payload)
         return response
 
+    def ns_lcm_scale_ns(self, ns_instance_id, _payload={}):
+        _url = self.NSLCM_URL + "/" + ns_instance_id + "/scale"
+        response = self.do_post_return_location(_url, _payload)
+        return response
+
     def ns_lcm_terminate_ns(self, ns_instance_id, _payload={}):
         _url = self.NSLCM_URL + "/" + ns_instance_id + "/terminate"
         response = self.do_post_return_location(_url, _payload)
