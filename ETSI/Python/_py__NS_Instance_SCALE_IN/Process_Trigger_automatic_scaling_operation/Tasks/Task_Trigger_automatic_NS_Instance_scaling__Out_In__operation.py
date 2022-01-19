@@ -71,24 +71,11 @@ if __name__ == "__main__":
     service_ext_ref = ''
     
     #Prepare the NS LCM WF scale out input parameter as API body.
-    #{"nsInstantiationLevel": "string","nsScaleInfo": [{"nsScalingAspectId": "string","nsScaleLevelId": "string"}]}
-    scaleNsToLevelData = dict()
     
-    nsInstantiationLevel = "1" # e.g: "1", "2" #TODO: set default value
-    nsScalingAspectId = "1" #TODO: set default value
-    nsScaleLevelId = "1" #TODO: set default value
+    aspectId = "1" #TODO: set default value
+    numberOfSteps = "1" #TODO: set default value
     
-    scaleNsToLevelData.update(nsInstantiationLevel=nsInstantiationLevel)
-    
-    nsScaleInfo = list()
-    nsScaleInfo_element = dict()
-    nsScaleInfo_element.update(nsScalingAspectId=nsScalingAspectId)
-    nsScaleInfo_element.update(nsScaleLevelId=nsScaleLevelId)
-    nsScaleInfo.append(nsScaleInfo_element.copy())
-    
-    scaleNsToLevelData.update(nsScaleInfo=nsScaleInfo)
-    
-    data = dict(scaleNsToLevelData=scaleNsToLevelData)
+    data = dict(aspectId=aspectId, numberOfSteps=numberOfSteps)
     
     if isinstance(data, dict):
         try:
