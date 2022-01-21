@@ -35,9 +35,9 @@ if __name__ == "__main__":
     vnfPkg.set_parameters(context['mano_user'], context['mano_pass'])
     
     r1 = vnfPkg.vnf_packages_get_package(context["vnf_pkg_id"])
-    
+
     if vnfPkg.state != "ENDED":
-        ret = MSA_API.process_content(vnfPkg.state, f'{r1}, {r2}',
+        ret = MSA_API.process_content(vnfPkg.state, f'{r1}',
                                       context, True)
         print(ret)
         exit()
