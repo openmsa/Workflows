@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>_py__NS_LCM__NSD_based-on_SOL001_.xml</value>
+            <value>Task_Get_NS_LCM_Operation_Occurrence_State.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1642587461177</value>
+            <value>1642587426807</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,26 +15,18 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1642587461161</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1642587426805</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
             <key>FILE_TYPE</key>
-            <value>unknown</value>
-        </entry>
-        <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
+            <value>text</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
