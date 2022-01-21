@@ -14,6 +14,9 @@ if __name__ == "__main__":
     dev_var.add('vnf_pkg_id', var_type='OBMFRef')
     dev_var.add('vnf_instance_name', var_type='String')
     dev_var.add('vnf_instance_description', var_type='String')
+    dev_var.add('is_vnf_instance_exist', var_type='Boolean')
+    dev_var.add('vnf_instance_id', var_type='String')
+    dev_var.add('ns_service_instance_ref', var_type='String')
     context = Variables.task_call(dev_var)
     
     mano_me_id = context["nfvo_device"][3:]
@@ -27,9 +30,22 @@ if __name__ == "__main__":
     context["mano_port"] = mano_port
     context["mano_user"] = mano_user
     context["mano_pass"] = mano_pass
-
+    
+    #Create VNF Instance resources.
     vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
+    
+    #Create VNF LCM service instance of an existing VNF Instance.
+    if context.get('is_vnf_instance_exist') == True:
+        vnf_instance_id = context.get('vnf_instance_id')
+        
+        r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
+        
+        ret = MSA_API.process_content(vnfLcm.state, f'VNF LCM service instance is created for VNF instance id: {vnf_instance_id}.',
+                                      context, True)
+        print(ret)
+        exit()
+    
     
     vnfPkg = VnfPkgSol005(context["mano_ip"], context["mano_port"])
     vnfPkg.set_parameters(context['mano_user'], context['mano_pass'])
@@ -42,7 +58,6 @@ if __name__ == "__main__":
         print(ret)
         exit()
         
-    
     context["vnfd_id"] = r1.json()["vnfdId"]
     
     metadata = {"deviceManufacturer": "",
