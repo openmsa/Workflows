@@ -15,7 +15,7 @@ if __name__ == "__main__":
     r = vnfLcm.vnf_lcm_instantiate_vnf(context["vnf_instance_id"])
     
     location = r.headers['Location']
-    
+
     context["vnf_lcm_op_occ_id"] = location.split("/")[-1]
     
     ret = MSA_API.process_content(vnfLcm.state, f'{r}', context, True)

@@ -38,3 +38,7 @@ class VnfLcmSol003(BaseApi):
         _url = self.NSLCM_BASE_URL + "/" + vnf_instance_id + "/operate"
         response = self.do_post_return_location(_url, _payload)
         return response
+    def vnf_lcm_get_vnf_instance_details(self, vnf_instance_id):
+        _url = self.NSLCM_BASE_URL + "/" + vnf_instance_id
+        response = self.do_get(_url)
+        return response
