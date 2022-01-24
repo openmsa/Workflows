@@ -41,3 +41,20 @@ class VnfLcmOpOccsSol003(BaseApi):
                 continue 
 
         return vnf_lcm_op_occs
+
+    '''
+    Get vnf_lcm_op_occs_id based on vnf_lcm_instance_id.
+    '''
+    def vnf_lcm_op_occs_operation_status_get(self, vnf_lcm_instance_id):
+        _url = self.VNF_LCM_OP_OCCS_URL
+        response = self.do_get(_url)
+
+        vnf_lcm_op_occ_id = ''
+
+        for vnf_lcm_op_occs in response.json():
+            vnf_instance_id = vnf_lcm_op_occs['vnfInstanceId']
+            if vnf_instance_id == vnf_lcm_instance_id:
+                vnf_lcm_op_occ_id = vnf_lcm_op_occs['id']
+
+        return vnf_lcm_op_occ_id
+

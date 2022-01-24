@@ -1,5 +1,6 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
+from msa_sdk import constants
 
 from custom.ETSI.VnfLcmOpOccsSol003 import VnfLcmOpOccsSol003
 
@@ -8,6 +9,9 @@ if __name__ == "__main__":
 
     dev_var = Variables()
     context = Variables.task_call(dev_var)
+    
+    if context.get('is_vnf_instance_exist') == True:
+        MSA_API.task_success('Task execution is completed.', context)
 
     vnfLcmOpOccs = VnfLcmOpOccsSol003(context["mano_ip"], context["mano_port"])
     vnfLcmOpOccs.set_parameters(context['mano_user'], context['mano_pass'])
