@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Delete_NS_Instance.py</value>
+            <value>Task_Delete_VNF_LCM_Service_Instances.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1643101873425</value>
+            <value>1643014009582</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1643101873393</value>
+            <value>1643014009579</value>
         </entry>
         <entry>
             <key>TAG</key>
