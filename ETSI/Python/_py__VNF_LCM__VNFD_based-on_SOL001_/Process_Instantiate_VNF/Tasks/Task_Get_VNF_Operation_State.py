@@ -19,6 +19,9 @@ if __name__ == "__main__":
     vnf_lcm_op_occ_id = context.get('vnf_lcm_op_occ_id')
     operation_state = ''
     
+    if operation_state == "FAILED":
+        MSA_API.task_error('The VNF Instantiation operation is ' + operation_state + '.', context, True)
+    
     if 'vnf_lcm_op_occ_id' in context and vnf_lcm_op_occ_id:
         r = vnfLcmOpOccs.vnf_lcm_op_occs_completion_wait(vnf_lcm_op_occ_id)
         

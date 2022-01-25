@@ -21,6 +21,8 @@ if __name__ == "__main__":
     
     r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
     
+    #MSA_API.task_error('DEBUG = ' + json.dumps(r.json()), context)
+    
     context.update(vnf_instance_details=r.json())
         
     vnfResourcesList = r.json()["instantiatedVnfInfo"]["vnfcResourceInfo"]

@@ -34,3 +34,9 @@ class NsLcmSol005(BaseApi):
         _url = self.NSLCM_URL + "/" + ns_instance_id
         response = self.do_delete(_url)
         return response
+
+    def ns_lcm_get_ns_instance_details(self, ns_instance_id):
+        _url = self.NSLCM_URL + "/" + ns_instance_id
+        response = self.do_get(_url)
+        return response
+
