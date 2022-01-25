@@ -1,6 +1,7 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 from msa_sdk.device import Device
+from msa_sdk import constants
 
 from custom.ETSI.VnfLcmSol003 import VnfLcmSol003
 from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     dev_var.add('ns_service_instance_ref', var_type='String')
     context = Variables.task_call(dev_var)
     
-    mano_me_id = context["nfvo_device"][3:]
+    mano_me_id = context["vnfm_device"][3:]
     mano_ip    = Device(device_id=mano_me_id).management_address
     mano_var   = Device(device_id=mano_me_id).get_configuration_variable("HTTP_PORT")
     mano_port  = mano_var.get("value")
@@ -31,6 +32,18 @@ if __name__ == "__main__":
     context["mano_user"] = mano_user
     context["mano_pass"] = mano_pass
     
+    nfvo_mano_me_id = context["nfvo_device"][3:]
+    nfvo_mano_ip    = Device(device_id=nfvo_mano_me_id).management_address
+    nfvo_mano_var   = Device(device_id=nfvo_mano_me_id).get_configuration_variable("HTTP_PORT")
+    nfvo_mano_port  = nfvo_mano_var.get("value")
+    nfvo_mano_user  = Device(device_id=nfvo_mano_me_id).login
+    nfvo_mano_pass  = Device(device_id=nfvo_mano_me_id).password
+    
+    context["nfvo_mano_ip"]   = nfvo_mano_ip
+    context["nfvo_mano_port"] = nfvo_mano_port
+    context["nfvo_mano_user"] = nfvo_mano_user
+    context["nfvo_mano_pass"] = nfvo_mano_pass
+    
     #Create VNF Instance resources.
     vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
@@ -39,16 +52,10 @@ if __name__ == "__main__":
     if context.get('is_vnf_instance_exist') == True:
         vnf_instance_id = context.get('vnf_instance_id')
         
-        r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
-        
-        ret = MSA_API.process_content(vnfLcm.state, f'VNF LCM service instance is created for VNF instance id: {vnf_instance_id}.',
-                                      context, True)
-        print(ret)
-        exit()
+        MSA_API.task_success('VNF LCM service instance is created for VNF instance id: {vnf_instance_id}.', context)
     
-    
-    vnfPkg = VnfPkgSol005(context["mano_ip"], context["mano_port"])
-    vnfPkg.set_parameters(context['mano_user'], context['mano_pass'])
+    vnfPkg = VnfPkgSol005(context["nfvo_mano_ip"], context["nfvo_mano_port"])
+    vnfPkg.set_parameters(context['nfvo_mano_user'], context['nfvo_mano_pass'])
     
     r1 = vnfPkg.vnf_packages_get_package(context["vnf_pkg_id"])
 
