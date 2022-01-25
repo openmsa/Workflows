@@ -1,3 +1,5 @@
+import json
+from msa_sdk import constants
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
@@ -21,7 +23,11 @@ if __name__ == "__main__":
     
     r = vnfLcm.vnf_lcm_operate_instance_vnf(context["vnf_instance_id"], content)
     
-    location = r.headers['Location']
+    location = ''
+    try:
+        location = r.headers['Location']
+    except:
+        MSA_API.task_error('Start VNF Instance message: ' + json.dumps(r.json()), context)
     
     context["vnf_lcm_op_occ_id"] = location.split("/")[-1]
     

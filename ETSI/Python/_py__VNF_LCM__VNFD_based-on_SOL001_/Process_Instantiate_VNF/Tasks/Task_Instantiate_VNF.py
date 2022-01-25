@@ -1,7 +1,8 @@
 import sys
+import json
+from msa_sdk import constants
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
-from msa_sdk import constants
 
 from custom.ETSI.VnfLcmSol003 import VnfLcmSol003
 from custom.ETSI.VnfLcmOpOccsSol003 import VnfLcmOpOccsSol003
@@ -20,7 +21,11 @@ if __name__ == "__main__":
 
         r = vnfLcm.vnf_lcm_instantiate_vnf(context["vnf_instance_id"], content)
     
-        location = r.headers['Location']
+        location = ''
+        try:
+            location = r.headers['Location']
+        except:
+            MSA_API.task_error('Instantiate VNF message: ' + json.dumps(r.json()), context)
         
         context["vnf_lcm_op_occ_id"] = location.split("/")[-1]
         
