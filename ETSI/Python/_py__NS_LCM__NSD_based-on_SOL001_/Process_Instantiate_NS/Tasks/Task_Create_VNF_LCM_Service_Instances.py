@@ -72,7 +72,7 @@ if __name__ == "__main__":
     service_ext_ref = ''
     
     #List of VNF 
-    vnf_lcm_services_dict = dict()
+    vnf_lcm_services_list = list()
     
     #For each VNF part of the NS Instance, create VNF LCM service instance.
     for index, vnfInstance in enumerate(vnfInstance_list):
@@ -99,8 +99,8 @@ if __name__ == "__main__":
                 service_id = response.get('serviceId').get('id')
                 service_ext_ref = response.get('serviceId').get('serviceExternalReference')
                 #Store service_instance_id of VNF_LCM_workflow in context.
-                service_data = {'vnf_instance_id': vnf_instance_id, 'service_id': service_id, 'service_ext_ref': service_ext_ref}
-                vnf_lcm_services_dict.update(service_data)
+                service_data = {'vnf_instance_id': vnf_instance_id, 'service_id': str(service_id), 'service_ext_ref': service_ext_ref}
+                vnf_lcm_services_list.append(service_data.copy())
             else:
                 MSA_API.task_error('Missing service id return by orchestration operation.', context, True) 
         else:
@@ -120,6 +120,6 @@ if __name__ == "__main__":
         if status == constants.FAILED:
             MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
     
-    context['vnf_lcm_services_dict'] = vnf_lcm_services_dict
+    context['vnf_lcm_services_list'] = vnf_lcm_services_list
     
     MSA_API.task_success( 'VNF LCM service instances are created successfully.', context, True)
