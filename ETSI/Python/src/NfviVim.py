@@ -18,4 +18,8 @@ class NfviVim(BaseApi):
         _url = self.VIM_URL + "/" + _vimId
         response = self.do_delete(_url)
         return response
-        
+
+    def nfvi_vim_get(self):
+        _url = self.VIM_URL
+        response = self.do_get(_url)
+        return response
