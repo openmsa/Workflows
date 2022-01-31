@@ -72,8 +72,8 @@ if __name__ == "__main__":
     
     #Prepare the NS LCM WF scale out input parameter as API body.
     
-    aspectId = "1" #TODO: set default value
-    numberOfSteps = "1" #TODO: set default value
+    aspectId = "aspect" #this value is defined in the NS Descriptor (.csar file).
+    numberOfSteps = "1" #Default value.
     
     data = dict(aspectId=aspectId, numberOfSteps=numberOfSteps)
     
