@@ -14,15 +14,16 @@ if __name__ == "__main__":
 
     r = nsLcmOpOccsInfo.ns_lcm_op_occs_completion_wait(context["ns_lcm_op_occ_id"])
     
-    if nsLcmOpOccsInfo.state != "ENDED":
-        ret = MSA_API.process_content(nsLcmOpOccsInfo.state,
-                                      f'{r.content}', context, True)
-        print(ret)
-        exit()
-    
     context["ns_lcm_op_occs"] = r.json()
     operationState = context["ns_lcm_op_occs"]["operationState"]
-
-    ret = MSA_API.process_content(nsLcmOpOccsInfo.state,
-                                  f'{operationState}', context, True)
-    print(ret)
+    
+    if operationState == "FAILED":
+        MSA_API.task_error('The NS Scale-out operation is ' + operationState + '.', context, True)
+    
+    #Get VNFs details
+    if 'resourceChanges' in operationState:
+        resourceChanges = operationState.get('resourceChanges')
+        affectedVnfs = resourceChanges.get('affectedVnfs')
+        context.update(affectedVnfs=affectedVnfs)
+        
+    MSA_API.task_success('The NS Scale-out operation is ' + operationState + '.', context, True)

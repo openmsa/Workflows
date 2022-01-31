@@ -12,7 +12,7 @@ if __name__ == "__main__":
     nsLcm = NsLcmSol005(context["mano_ip"], context["mano_port"])
     nsLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
-    ns_instance_id = context["ns_instance"]["id"]
+    ns_instance_id = context.get("ns_instance_id")
     
     r = nsLcm.ns_lcm_terminate_ns(ns_instance_id)
     

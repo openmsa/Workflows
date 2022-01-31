@@ -13,6 +13,7 @@
     <variable displayName="nsScaleLevelId" name="params.nsScaleLevelId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="aspectId" name="params.aspectId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="numberOfSteps" name="params.numberOfSteps" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_instance_name" name="params.ns_instance_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance">
@@ -45,6 +46,10 @@
     <task name="Task_Synchronize.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
       <displayName>Synchronize</displayName>
+    </task>
+    <task name="Task_Create_VNF_LCM_Service_Instances.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Create VNF LCM Service Instances</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-out_NS">
@@ -99,6 +104,10 @@
     <task name="Task_Synchronize.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
       <displayName>Synchronize</displayName>
+    </task>
+    <task name="Task_Delete_VNF_LCM_Service_Instances.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Delete VNF LCM Service Instances</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance">

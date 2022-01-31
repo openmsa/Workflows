@@ -14,14 +14,13 @@ if __name__ == "__main__":
     nsLcm = NsLcmSol005(context["mano_ip"], context["mano_port"])
     nsLcm.set_parameters(context["mano_user"], context["mano_pass"])
     
-    ns_instance_id = context["ns_instance"]["id"]
+    ns_instance_id = context["ns_instance_id"]
     
     #scale-out payload.
     payload = dict()
     
-    scaleNsToLevelData.update(nsInstantiationLevel=nsInstantiationLevel)
-    
     numberOfSteps = int(context.get('numberOfSteps'))
+    aspectId = context.get('aspectId')
     scaleNsByStepsData = dict(scalingDirection="SCALE_OUT", aspectId=aspectId, numberOfSteps=numberOfSteps)
     
     scaleNsData = dict()
