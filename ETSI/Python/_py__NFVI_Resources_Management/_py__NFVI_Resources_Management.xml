@@ -10,6 +10,11 @@
         <sdTypes manId="14020603" modId="16051904"/>
       </sdTypes>
     </variable>
+    <variable displayName="vnfm_device" name="params.vnfm_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="17010304" modId="17010306"/>
+      </sdTypes>
+    </variable>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_New_Service">
@@ -36,6 +41,20 @@
       <displayName>Sync to NFVO</displayName>
     </task>
   </process>
+  <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Subscribe_VNFM_to_NFVO">
+    <displayName>Subscribe VNFM and NFVO</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_VNFM_subscription_to_NFVO.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Subscribe_VNFM_to_NFVO/Tasks</processPath>
+      <displayName>VNFM subscription to NFVO</displayName>
+    </task>
+    <task name="Task_NFVO_subscription_to_VNFM.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Subscribe_VNFM_to_NFVO/Tasks</processPath>
+      <displayName>NFVO subscription to VNFM</displayName>
+    </task>
+  </process>
   <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Delete_VIM">
     <displayName>Delete VIM</displayName>
     <type>UPDATE</type>
@@ -57,7 +76,7 @@
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
-    <name>[py] NFVI Resources Management</name>
+    <name>[py] MANO &amp; NFVI Resources Management</name>
     <group>ETSI|PYTHON|VNFM|VIM</group>
   </information>
 </ObjectDefinition>
