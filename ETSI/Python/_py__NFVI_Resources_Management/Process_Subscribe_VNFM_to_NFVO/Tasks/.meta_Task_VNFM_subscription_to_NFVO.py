@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Register_VIM_Resources.py</value>
+            <value>Task_VNFM_subscription_to_NFVO.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1643185989760</value>
+            <value>1643706446315</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1643185989748</value>
+            <value>1643706446313</value>
         </entry>
         <entry>
             <key>TAG</key>

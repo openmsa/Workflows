@@ -49,7 +49,7 @@ if __name__ == "__main__":
                "vimId": str(uuid.uuid4()),
                "vimType": vim_type,
                "interfaceInfo": {
-                   "endpoint": vim_username
+                   "endpoint": endpoint
                    },
                "accessInfo": {
                    "username": vim_username,
