@@ -37,6 +37,57 @@ def get_process_instance(orch, process_id, timeout = 600, interval=5):
 
     return response
 
+'''
+
+'''
+def _create_service_instance(vnf_lcm_services_list, SERVICE_NAME, VNF_LCM_CREATE_PROCESS_NAME, data):
+    orch.execute_service(SERVICE_NAME, VNF_LCM_CREATE_PROCESS_NAME, data)
+    response = json.loads(orch.content)
+    context['response'] = response
+    process_id = response.get('processId').get('id')
+    #get service process details.
+    response = get_process_instance(orch, process_id)
+    status = response.get('status').get('status')
+    details = response.get('status').get('details')
+    
+    if status == constants.ENDED:
+        if 'serviceId' in response:
+            service_id = response.get('serviceId').get('id')
+            service_ext_ref = response.get('serviceId').get('serviceExternalReference')
+            #Store service_instance_id of VNF_LCM_workflow in context.
+            service_data = {'vnf_instance_id': vnf_instance_id, 'service_id': str(service_id), 'service_ext_ref': service_ext_ref}
+            vnf_lcm_services_list.append(service_data.copy())
+            
+            return service_ext_ref
+        else:
+            MSA_API.task_error('Missing service id return by orchestration operation.', context, True) 
+    else:
+        MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+ 
+'''
+'''
+def _execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, data):
+    orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, data)
+    response = json.loads(orch.content)
+    context.update(nslcm_response=response)
+    service_id = response.get('serviceId').get('id')
+    process_id = response.get('processId').get('id')
+    
+    #get service process details.
+    response = get_process_instance(orch, process_id)
+    status = response.get('status').get('status')
+    details = response.get('status').get('details')
+    if status == constants.FAILED:
+        MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
+
+'''
+'''
+def _is_vnflcm_service_instance_exist(vnf_instance_id, vnf_lcm_services_list):
+    for index, vnf_lcm_services_dict in enumerate(vnf_lcm_services_list):
+        if vnf_instance_id == vnf_lcm_services_dict.get('vnf_instance_id'):
+            return True
+    return False
+        
 if __name__ == "__main__":
 
     dev_var = Variables()
@@ -68,11 +119,15 @@ if __name__ == "__main__":
     
     context.update(vnfInstance_list=vnfInstance_list)
     
-    service_id = ''
+    #Service external ref init.
     service_ext_ref = ''
     
-    #List of VNF 
+    #List of VNF LCM service instances.
     vnf_lcm_services_list = list()
+    if 'vnf_lcm_services_list' in context:
+        vnf_lcm_services_list = context.get('vnf_lcm_services_list')
+    else:
+        context['vnf_lcm_services_list'] = vnf_lcm_services_list
     
     #For each VNF part of the NS Instance, create VNF LCM service instance.
     for index, vnfInstance in enumerate(vnfInstance_list):
@@ -84,42 +139,16 @@ if __name__ == "__main__":
         vnf_instance_id = vnfInstance['id']
         vnf_pkg_id = vnfInstance['vnfPkgId']
         
-        data = dict(nfvo_device=nfvo_device, vnfm_device=vnfm_device, vnf_pkg_id=vnf_pkg_id, vnf_instance_id=vnf_instance_id, ns_service_instance_ref=ns_service_instance_ref, is_vnf_instance_exist=True)
-        orch.execute_service(SERVICE_NAME, VNF_LCM_CREATE_PROCESS_NAME, data)
-        response = json.loads(orch.content)
-        context['response'] = response
-        process_id = response.get('processId').get('id')
-        #get service process details.
-        response = get_process_instance(orch, process_id)
-        status = response.get('status').get('status')
-        details = response.get('status').get('details')
+        #check if vnf_instance corresponding VNF LCM service instance exists, if not create it.
+        is_vnflcm_service_instance = _is_vnflcm_service_instance_exist(vnf_instance_id, vnf_lcm_services_list)
+        if is_vnflcm_service_instance == False:
+            #VNF LCM service instance creation inputs data.
+            data = dict(nfvo_device=nfvo_device, vnfm_device=vnfm_device, vnf_pkg_id=vnf_pkg_id, vnf_instance_id=vnf_instance_id, ns_service_instance_ref=ns_service_instance_ref, is_vnf_instance_exist=True)
+            #Create VNF LCM service instance.
+            service_ext_ref = _create_service_instance(vnf_lcm_services_list, SERVICE_NAME, VNF_LCM_CREATE_PROCESS_NAME, data)
+    	
+            #Execute VNF Instantiate (as existing VNFi) process of VNF LCM workflow.
+            data = dict()
+            _execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, data)
         
-        if status == constants.ENDED:
-            if 'serviceId' in response:
-                service_id = response.get('serviceId').get('id')
-                service_ext_ref = response.get('serviceId').get('serviceExternalReference')
-                #Store service_instance_id of VNF_LCM_workflow in context.
-                service_data = {'vnf_instance_id': vnf_instance_id, 'service_id': str(service_id), 'service_ext_ref': service_ext_ref}
-                vnf_lcm_services_list.append(service_data.copy())
-            else:
-                MSA_API.task_error('Missing service id return by orchestration operation.', context, True) 
-        else:
-            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-    
-        #Execute VNF Instantiate (as existing VNFi) process of VNF LCM workflow.
-        orch.execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, dict())
-        response = json.loads(orch.content)
-        context.update(nslcm_response=response)
-        service_id = response.get('serviceId').get('id')
-        process_id = response.get('processId').get('id')
-        
-        #get service process details.
-        response = get_process_instance(orch, process_id)
-        status = response.get('status').get('status')
-        details = response.get('status').get('details')
-        if status == constants.FAILED:
-            MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-    
-    context['vnf_lcm_services_list'] = vnf_lcm_services_list
-    
     MSA_API.task_success( 'VNF LCM service instances are created successfully.', context, True)
