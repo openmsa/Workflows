@@ -67,32 +67,63 @@ def _get_vim_external_network(conn):
     return external_network
 
 '''
+Ensure the list of the addresses is available.
+'''
+def _isinstance_is_list(addresses, conn, timeout = 60, interval=5):
+    addr_list = ''
+    
+    global_timeout = time.time() + timeout
+    while True:
+        #Get openstack tenant external networks.
+        external_network = _get_vim_external_network(conn)
+        addr_list = addresses.get(external_network)
+        
+        if isinstance(addr_list, list) or time.time() > global_timeout:
+            break
+        time.sleep(interval)
+
+    return addr_list
+
+'''
+Get external IP addresse from external network object.
+'''
+def _get_ip_address_from_network(addresses, conn):
+    #Exeternal network list of addresses
+    addr_list = _isinstance_is_list(addresses, conn)
+    
+    for index, address in enumerate(addr_list):
+        if address.get('addr'):
+            server_ip_addr = address.get('addr')
+            return server_ip_addr
+            
+    return ''
+    
+'''
 Get VNFC resource (VDU) instance public IP address.
 '''
-def _get_vnfc_resource_public_ip_address(nfvo_device, vim_id, server_id):
+def _get_vnfc_resource_public_ip_address(nfvo_device, vim_id, server_id, timeout=60, interval=5):
     
     server_ip_addr = ''
     
     #Get openstack authenfication
     conn = _get_vim_connection_auth(nfvo_device, vim_id)
     
-    #Get openstack tenant external networks.
-    external_network = _get_vim_external_network(conn)
-    
     #Get VDU (server instance) details.
-    servers = conn.compute.servers()
-    for server in servers:
-        if server.id == server_id:
-            addresses = server.addresses
+    servers = {}
+    global_timeout = time.time() + timeout
+    while True:
+        #Get VDU (server instance) details.
+        servers = conn.compute.servers()
+        #if servers is not a empty dictionnary.
+        if bool(servers) == True or time.time() > global_timeout:
+            for server in servers:
+                if server.id == server_id:
+                    addresses = server.addresses
+                    server_ip_addr = _get_ip_address_from_network(addresses, conn)
+            break
+        time.sleep(interval)
             
-            time.sleep(10)
-            for index, address in enumerate(addresses.get(external_network)):
-                if address.get('addr'):
-                    server_ip_addr = address.get('addr')
-                    break
-                                        
     return server_ip_addr
-
 
 dev_var = Variables()
 context = Variables.task_call(dev_var)
@@ -124,9 +155,6 @@ if __name__ == "__main__":
         #openstack server instance ID.
         vnfResourceId = vnfR["computeResource"]["resourceId"]
         vim_connection_id = vnfR["computeResource"]['vimConnectionId']
-    
-        ## get VDU details (@IP, Hostname).
-        #TODO: create VIM SDK to call Openstack API servers resources.
         
         #Customer ID
         customer_id = subtenant_ext_ref[4:]
@@ -136,7 +164,12 @@ if __name__ == "__main__":
         model_id='14020601'
         #default IP address
         nfvo_device_ref = context.get('nfvo_device')
-        management_address = _get_vnfc_resource_public_ip_address(nfvo_device_ref, vim_connection_id, vnfResourceId)
+        management_address = ''
+        try:
+            management_address = _get_vnfc_resource_public_ip_address(nfvo_device_ref, vim_connection_id, vnfResourceId)
+        except TypeError:
+            management_address = _get_vnfc_resource_public_ip_address(nfvo_device_ref, vim_connection_id, vnfResourceId)
+        
         if not management_address:
             management_address = '1.1.1.1'
         
@@ -171,4 +204,3 @@ if __name__ == "__main__":
     context.update(vnf_me_list=vnf_me_list)
 
     MSA_API.task_success('The VNF managed entities are created.', context)
-

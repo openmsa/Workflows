@@ -88,7 +88,7 @@
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Delete_VNF_Instance">
     <displayName>Delete VNF Instance</displayName>
-    <type>UPDATE</type>
+    <type>DELETE</type>
     <visibility>5</visibility>
     <allowSchedule/>
     <task name="Task_Delete_VNF_Instance.py">
