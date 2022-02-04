@@ -12,6 +12,7 @@ dev_var = Variables()
 dev_var.add('vnfd_name', var_type='String')
 dev_var.add('vnfd_contents', var_type='String')
 dev_var.add('vnfd_csar_file', var_type='String')
+dev_var.add('service_instance_name', var_type='String')
 context = Variables.task_call(dev_var)
 
 def zipdir(path, ziph):
@@ -23,15 +24,8 @@ def zipdir(path, ziph):
             ziph.write(file_path, file_path[rootlen:])
             
 if __name__ == '__main__':
-    #get uuid from context.
-    uuid_gen = context.get('uuid_gen')
-
-    vnfd_name = uuid_gen
-    if 'vnfd_name' in context:
-        name = context.get('vnfd_name')
-        if name:
-            vnfd_name = name + '_' + uuid_gen
-
+    #get 'vnfd_name' from context.
+    vnfd_name = context.get('vnfd_name_uuid')
     vnfd_directory_tobuild = '/opt/fmc_repository/Datafiles/NFV/VNFD/' + vnfd_name
 
     #Archive VNFD_Directory as CSAR
@@ -45,5 +39,9 @@ if __name__ == '__main__':
     
     #Delete nsd_directory tmp
     shutil.rmtree(vnfd_directory_tobuild)
+    
+    #Set service_instance_name.
+    service_instance_name = context.get('SERVICEINSTANCEID') + '_' + vnfd_name
+    context.update(service_instance_name=service_instance_name)
 
     MSA_API.task_success('VNFD TOSCA Sol001 meta was created successfully.', context, True)
