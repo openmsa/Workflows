@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Create_VNFD_TOSCA_Metadata.py</value>
+            <value>Task_Create_VNFD_Definition.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1629880359244</value>
+            <value>1643992228468</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1629814614143</value>
+            <value>1643992228466</value>
         </entry>
         <entry>
             <key>TAG</key>

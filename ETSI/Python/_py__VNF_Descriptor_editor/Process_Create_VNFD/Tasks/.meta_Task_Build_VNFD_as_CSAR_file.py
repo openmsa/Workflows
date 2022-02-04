@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Create_NSD_Definition_schema.py</value>
+            <value>Task_Build_VNFD_as_CSAR_file.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1643975590069</value>
+            <value>1643990103635</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1643975590067</value>
+            <value>1643990103633</value>
         </entry>
         <entry>
             <key>TAG</key>

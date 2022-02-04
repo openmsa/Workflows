@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Process_Delete_NSD_TOSCA_file</value>
+            <value>Task_Delete_VNF_Descriptor_CSAR_file.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1629811287686</value>
+            <value>1643984580135</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,14 +15,18 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1629811287682</value>
+            <value>1643984580129</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
+            <key>FILE_TYPE</key>
+            <value>text</value>
+        </entry>
+        <entry>
             <key>TYPE</key>
-            <value>DIRECTORY</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
