@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>_py__NFVI_Resources_Management.xml</value>
+            <value>Task_Scale-in_VNF_Instance.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1643882409508</value>
+            <value>1643909192497</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,26 +15,18 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1643882409500</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1643909192494</value>
         </entry>
         <entry>
             <key>TAG</key>
         </entry>
         <entry>
             <key>FILE_TYPE</key>
-            <value>unknown</value>
-        </entry>
-        <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
+            <value>text</value>
         </entry>
         <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>

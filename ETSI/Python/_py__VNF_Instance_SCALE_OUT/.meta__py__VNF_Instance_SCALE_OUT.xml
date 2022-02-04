@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>_py__NFVI_Resources_Management.xml</value>
+            <value>_py__VNF_Instance_SCALE_OUT.xml</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1643882409508</value>
+            <value>1643962491552</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1643882409500</value>
+            <value>1643962491546</value>
         </entry>
         <entry>
             <key>MODEL</key>
@@ -26,7 +26,7 @@
         </entry>
         <entry>
             <key>FILE_TYPE</key>
-            <value>unknown</value>
+            <value>text</value>
         </entry>
         <entry>
             <key>MANUFACTURER</key>
