@@ -42,7 +42,7 @@
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NFVI_Resources_Management/Process_Subscribe_VNFM_to_NFVO">
-    <displayName>Subscribe VNFM and NFVO</displayName>
+    <displayName>Register VNFM and NFVO</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
