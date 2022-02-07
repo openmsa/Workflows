@@ -22,6 +22,10 @@ if __name__ == "__main__":
     vnfm_port  = vnfm_var.get("value")
     vnfm_username  = Device(device_id=vnfm_me_id).login
     vnfm_password  = Device(device_id=vnfm_me_id).password
+    vnfm_var   = Device(device_id=vnfm_me_id).get_configuration_variable("CAPABILITIES")
+    vnfm_capabilities  = vnfm_var.get("value")
+    vnfm_var   = Device(device_id=vnfm_me_id).get_configuration_variable("SOL003_VERSION")
+    vnfm_sol003_version  = vnfm_var.get("value")
     
     #Set NFVO access infos.
     nfvo_mano_me_ref = context["nfvo_device"]
@@ -43,13 +47,16 @@ if __name__ == "__main__":
     authType = ['BASIC']
     
     #NFVO SOL003 version.
-    vnfm_sol003_version = '2.6.1'
+    if not vnfm_sol003_version:
+        vnfm_sol003_version = '2.6.1'
     
     #NFVO capabilities.
-    capabilities = ['100:ubi-v2.6.1']
+    if not vnfm_capabilities:
+        capabilities = ['100:ubi-v2.6.1']
+    capabilities = [vnfm_capabilities]
     
     #vnfn name var.
-    vnfm_name = 'vnfm-1'
+    vnfm_name = 'vnfm-' + capabilities[0]
     
     content = {
                 "name": vnfm_name,

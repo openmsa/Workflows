@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_VNFM_subscription_to_NFVO.py</value>
+            <value>Task_Delete_NS_Descriptor_CSAR_file.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1644229397083</value>
+            <value>1643991362044</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1644229397081</value>
+            <value>1643991362042</value>
         </entry>
         <entry>
             <key>TAG</key>
