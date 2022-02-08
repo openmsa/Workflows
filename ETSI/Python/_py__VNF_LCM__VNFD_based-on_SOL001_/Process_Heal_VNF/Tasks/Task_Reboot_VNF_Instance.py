@@ -8,7 +8,6 @@ from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
 dev_var = Variables()
-dev_var.add('vim_device', var_type='Device')
 context = Variables.task_call(dev_var)
 
 if __name__ == "__main__":
@@ -19,7 +18,7 @@ if __name__ == "__main__":
     server_object_id = context["vnfResourceId"]
 
     #get device_id from context
-    device_id = context['vim_device'][3:]
+    device_id = context['vim_me_id']
 
     #Initiate Order object with the device_id
     obmf = Order(device_id)

@@ -8,16 +8,12 @@ import openstack
 
 from custom.ETSI.NfviVim import NfviVim
 from custom.ETSI.VnfLcmSol003 import VnfLcmSol003
-from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
 
 
-'''
-WIP - Use Openstacksdk to wait until server status is active
-
-Get VIM connection.
+# Get VIM connection.
 
 def _get_vim_connection_auth(nfvo_device, vim_id):
-    #Openstack Authification Connection.
+    #Openstack Authentification Connection.
     conn = ''
     
     #NFVO Info.
@@ -56,22 +52,38 @@ def _get_vim_connection_auth(nfvo_device, vim_id):
                 auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=user_domain_id)
                 conn = openstack.connection.Connection(region_name='RegionOne', auth=auth, compute_api_version='2',identity_interface ='public')
     return conn
+
 '''
+Wait for the server status to become active.
+'''
+def _wait_for_server_to_be_active(nfvo_device, vim_id, server):
+	conn = _get_vim_connection_auth(nfvo_device, vim_id)
+	server_obj = conn.compute.get_server(server)
+	return conn.compute.wait_for_server(server_obj, status='ACTIVE', failures=None, interval=2, wait=120)
+
 
 dev_var = Variables()
 context = Variables.task_call(dev_var)
 
-subtenant_ext_ref = context['UBIQUBEID']
-vnf_service_instance_ref = context.get('SERVICEINSTANCEREFERENCE')
-
 if __name__ == "__main__":
-    
-    ## Get list of VNFC vdu.
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
-    vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
-    
-    r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
-    
-    # MSA_API.task_error('DEBUG = ' + json.dumps(r.json()), context)
+	
+	nfvo_device_ref = context.get('nfvo_device')
+	
+	## Get list of VNFC vdu.
+	vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+	vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
+	
+	r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
+	
+	vnfResourcesList = r.json()["instantiatedVnfInfo"]["vnfcResourceInfo"]
+	
+	vnfServerStatus = ""
+	
+	for index, vnfR in enumerate(vnfResourcesList):
+		#openstack server instance ID.
+		vnfResourceId = vnfR["computeResource"]["resourceId"]
+		vim_connection_id = vnfR["computeResource"]['vimConnectionId']
+		response = _wait_for_server_to_be_active(nfvo_device_ref, vim_connection_id, vnfResourceId)
+		vnfServerStatus = response.get("status")
 
-    MSA_API.task_success('The VNF managed entities are created.', context)
+	MSA_API.task_success('The VNF instance is now ' + vnfServerStatus, context)

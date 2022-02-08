@@ -17,7 +17,7 @@
     <variable displayName="device_manufaturer" name="params.device_manufaturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="device_model" name="params.device_model" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="device_manufacturer" name="params.device_manufacturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Openstack VIM" name="params.vim_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Openstack VIM" name="params.vim_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="Openstack VIM" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes manId="14020603" modId="16051904"/>
       </sdTypes>
@@ -73,6 +73,10 @@
     <task name="Task_Create_VNF_Managed_Entities.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF/Tasks</processPath>
       <displayName>Create VNF Managed Entities</displayName>
+    </task>
+    <task name="Task_Resolve_VIM_Managed_Entity.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF/Tasks</processPath>
+      <displayName>Resolve VIM Managed Entity</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level">
@@ -169,6 +173,10 @@
     <task name="Task_Rebuild_VNF.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Rebuild_VNF/Tasks</processPath>
       <displayName>Rebuild VNF</displayName>
+    </task>
+    <task name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Heal_VNF/Tasks/Task_Wait_for_status_to_be_active.py">
+      <processPath></processPath>
+      <displayName>Wait for status to be active</displayName>
     </task>
     <task name="Task_Sync_VIM.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Rebuild_VNF/Tasks</processPath>

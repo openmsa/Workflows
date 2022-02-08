@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Sync_VIM.py</value>
+            <value>Task_Resolve_VIM_Managed_Entity.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1644341154001</value>
+            <value>1644340397799</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1644341153989</value>
+            <value>1644340397796</value>
         </entry>
         <entry>
             <key>TAG</key>

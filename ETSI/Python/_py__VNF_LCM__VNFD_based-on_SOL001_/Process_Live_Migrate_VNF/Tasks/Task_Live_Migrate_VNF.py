@@ -20,7 +20,7 @@ if __name__ == "__main__":
     server_object_id = context["vnfResourceId"]
 
     #get device_id from context
-    device_id = context['vim_device'][3:]
+    device_id = context['vim_me_id']
 
     #Initiate Order object with the device_id
     obmf = Order(device_id)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     config = dict()
     action = 'Server Action'
     server_action = "Live Migrate"
-    block_migration = "True"
+    block_migration = "False"
     disk_over_commit = "False"
     config.update(action=action)
     config.update(server_action=server_action)
