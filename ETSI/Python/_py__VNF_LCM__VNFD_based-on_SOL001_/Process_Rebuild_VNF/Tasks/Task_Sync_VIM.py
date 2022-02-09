@@ -7,13 +7,13 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call(dev_var)
 
-    vim_short_id = context["vim_me_id"]
+    vim_short_id = context['vim_device'][3:]
 
     order1 = Order(str(vim_short_id))
     order1.command_synchronize(timeout=60)
     
     ret = MSA_API.process_content('ENDED',
-        f'Devices {context["vim_me_id"]} synchronized',
+        f'Devices {context["vim_device"]} synchronized',
         context, True)
 
     print(ret)

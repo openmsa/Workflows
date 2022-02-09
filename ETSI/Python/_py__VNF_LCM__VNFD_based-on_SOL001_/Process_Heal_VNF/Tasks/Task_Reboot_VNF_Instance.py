@@ -18,7 +18,7 @@ if __name__ == "__main__":
     server_object_id = context["vnfResourceId"]
 
     #get device_id from context
-    device_id = context['vim_me_id']
+    device_id = context['vim_device'][3:]
 
     #Initiate Order object with the device_id
     obmf = Order(device_id)

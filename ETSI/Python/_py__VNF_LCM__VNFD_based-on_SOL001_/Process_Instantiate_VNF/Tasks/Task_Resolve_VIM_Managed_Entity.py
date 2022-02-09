@@ -43,8 +43,8 @@ if __name__ == "__main__":
 		meObject = Device(customer_id = customer_id, device_id = device_id)
 		meObject.read()
 		if ((meObject.management_address == auth_url_ip) and (meObject.password == password) and (meObject.get_configuration_variable("TENANT_ID").get("value") == project_id) and (meObject.get_configuration_variable("USER_DOMAIN_ID").get("value") == user_domain_id)):
-			context['vim_me_id'] = meObject.device_id
-			vim_me_id = context['vim_me_id']
+			vim_me_id = meObject.device_id
+			context['vim_device'] = subtenant_ext_ref[:3] + str(vim_me_id)
 			break
 	
 	if vim_me_id:
