@@ -7,7 +7,7 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call(dev_var)
 
-    vim_short_id = context["vim_device"][3:]
+    vim_short_id = context['vim_device'][3:]
 
     order1 = Order(str(vim_short_id))
     order1.command_synchronize(timeout=60)

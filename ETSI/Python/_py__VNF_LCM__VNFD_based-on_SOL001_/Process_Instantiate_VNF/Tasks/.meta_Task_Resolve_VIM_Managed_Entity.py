@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Live_Migrate_VNF.py</value>
+            <value>Task_Resolve_VIM_Managed_Entity.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1644397794819</value>
+            <value>1644397564666</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1644397794814</value>
+            <value>1644397564664</value>
         </entry>
         <entry>
             <key>TAG</key>

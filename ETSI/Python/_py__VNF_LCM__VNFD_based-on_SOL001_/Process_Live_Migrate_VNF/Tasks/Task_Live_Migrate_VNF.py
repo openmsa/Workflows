@@ -31,7 +31,7 @@ if __name__ == "__main__":
     config = dict()
     action = 'Server Action'
     server_action = "Live Migrate"
-    block_migration = "True"
+    block_migration = "False"
     disk_over_commit = "False"
     config.update(action=action)
     config.update(server_action=server_action)
