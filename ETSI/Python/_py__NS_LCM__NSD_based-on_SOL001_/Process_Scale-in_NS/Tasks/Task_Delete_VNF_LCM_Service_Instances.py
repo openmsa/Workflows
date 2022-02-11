@@ -107,7 +107,7 @@ if __name__ == "__main__":
                 details = response.get('status').get('details')
                 if status == constants.FAILED:
                     MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
-        #Remove vnf lcm service instance object from list.
-        vnf_lcm_services_list.remove(vnf_lcm_service)
+            #Remove vnf lcm service instance object from list.
+            vnf_lcm_services_list.remove(vnf_lcm_service)
         
     MSA_API.task_success('VNF LCM services instances are deleted.', context, True)
