@@ -147,8 +147,8 @@ if __name__ == "__main__":
             #Create VNF LCM service instance.
             service_ext_ref = _create_service_instance(vnf_lcm_services_list, SERVICE_NAME, VNF_LCM_CREATE_PROCESS_NAME, data)
     	
-            #Execute VNF Instantiate (as existing VNFi) process of VNF LCM workflow.
-            data = dict()
-            _execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, data)
+        #Execute VNF Instantiate (as existing VNFi) process of VNF LCM workflow.
+        data = dict()
+        _execute_service_by_reference(ubiqube_id, service_ext_ref, SERVICE_NAME, VNF_LCM_INSTANTIATE_PROCESS_NAME, data)
         
     MSA_API.task_success( 'VNF LCM service instances are created successfully.', context, True)
