@@ -26,7 +26,7 @@ if __name__ == "__main__":
         context["operation_state"] = operation_state
         
     if operation_state == "FAILED":
-        MSA_API.task_error('The VNF scale operation is ' + operation_state + '.', context, True)
+        MSA_API.task_error('The VNF start operation is ' + operation_state + '.', context, True)
     
     ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{operation_state}', context, True)
     print(ret)

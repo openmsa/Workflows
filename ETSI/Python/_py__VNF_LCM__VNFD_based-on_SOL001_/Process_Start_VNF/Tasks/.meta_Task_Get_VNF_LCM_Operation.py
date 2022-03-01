@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Task_Get_VNF_LCM_Operation_State.py</value>
+            <value>Task_Get_VNF_LCM_Operation.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1646087607687</value>
+            <value>1646088077541</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,7 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1646087607684</value>
+            <value>1646088077539</value>
         </entry>
         <entry>
             <key>TAG</key>

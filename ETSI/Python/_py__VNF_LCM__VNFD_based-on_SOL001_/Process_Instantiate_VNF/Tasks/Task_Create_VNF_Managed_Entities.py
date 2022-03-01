@@ -14,7 +14,7 @@ from custom.ETSI.VnfPkgSol005 import VnfPkgSol005
 '''
 Get VIM connection.
 '''
-def _get_vim_connection_auth(nfvo_device, vim_id):
+def _get_vim_connection_auth(nfvo_device, vim_id, is_user_domain=False):
     #Openstack Authification Connection.
     conn = ''
     
@@ -44,15 +44,37 @@ def _get_vim_connection_auth(nfvo_device, vim_id):
                 password = vimInfo['accessInfo']['password']
                 project_id = vimInfo['accessInfo']['projectId']
                 user_domain_id = vimInfo['accessInfo']['userDomain']
+                #
+                project_domain_id = vimInfo['accessInfo']['projectDomain']
+                #
+                region_name = 'RegionOne'
+                compute_api_version = '2'
+                identity_interface = 'public'
                 
                 context.update(auth_url=auth_url)
+                context.update(username=username)
                 context.update(password=password)
                 context.update(project_id=project_id)
                 context.update(user_domain_id=user_domain_id)
+                context.update(project_domain_id=project_domain_id)
+                #
+                context.update(region_name=region_name)
+                context.update(compute_api_version=compute_api_version)
+                context.update(identity_interface=identity_interface)
+                
+                domain_id = user_domain_id
+                domain_id_var_conf_attr = 'USER_DOMAIN_ID'
+                if is_user_domain == False:
+                    domain_id = project_domain_id
+                    domain_id_var_conf_attr = 'PROJECT_DOMAIN_ID'
+                
+                context.update(domain_id=domain_id)
+                context.update(domain_id_var_conf_attr=domain_id_var_conf_attr)
                 
                 #Get Openstack connection
-                auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=user_domain_id)
-                conn = openstack.connection.Connection(region_name='RegionOne', auth=auth, compute_api_version='2',identity_interface ='public')
+                auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=domain_id)
+                conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=True)
+                
     return conn
 
 
@@ -106,14 +128,19 @@ def _get_vnfc_resource_public_ip_address(nfvo_device, vim_id, server_id, timeout
     server_ip_addr = ''
     
     #Get openstack authenfication
-    conn = _get_vim_connection_auth(nfvo_device, vim_id)
-    
+    conn = _get_vim_connection_auth(nfvo_device, vim_id, False)
+        
     #Get VDU (server instance) details.
     servers = {}
     global_timeout = time.time() + timeout
     while True:
         #Get VDU (server instance) details.
-        servers = conn.compute.servers()
+        try:
+            servers = conn.compute.servers()
+        except:
+            conn = _get_vim_connection_auth(nfvo_device, vim_id, True)
+            servers = conn.compute.servers()
+            
         #if servers is not a empty dictionnary.
         if bool(servers) == True or time.time() > global_timeout:
             for server in servers:
@@ -142,7 +169,7 @@ if __name__ == "__main__":
     #MSA_API.task_error('DEBUG = ' + json.dumps(r.json()), context)
     
     context.update(vnf_instance_details=r.json())
-        
+    
     vnfResourcesList = r.json()["instantiatedVnfInfo"]["vnfcResourceInfo"]
     
     context.update(vnfResourcesList=vnfResourcesList)
@@ -185,7 +212,8 @@ if __name__ == "__main__":
         device_ext_ref = response.get('externalReference')
         
         #Add device_ext_ref to the VNF ME list.
-        vnf_me_list.append(device_ext_ref)
+        vnfc_dict = dict(vnf_resource_id=vnfResourceId, device_ext_ref=device_ext_ref)
+        vnf_me_list.append(vnfc_dict)
         
         #get device external reference
         device_id = response.get('id')
