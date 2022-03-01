@@ -49,6 +49,9 @@ if __name__ == "__main__":
     #Get from context VNF LCM service instances dict.
     vnf_lcm_services_list = context.get('vnf_lcm_services_list')
     
+    if not isinstance(vnf_lcm_services_list, list):
+        MSA_API.task_success('No VNF LCM services instances to be deleted.', context, True)
+    
     for index, vnf_lcm_service in enumerate(vnf_lcm_services_list):
         
         service_id = vnf_lcm_service.get('service_id')

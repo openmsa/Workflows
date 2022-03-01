@@ -97,11 +97,17 @@ if __name__ == "__main__":
     ubiqube_id = context['UBIQUBEID']
     orch = Orchestration(ubiqube_id)
     
+    #Is Multiple VNFM
+    is_multiple_vnfm = context.get('is_multiple_vnfm')
+    
     #Static Routing Management WF service name constant variable.
     SERVICE_NAME = 'Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/_py__VNF_LCM__VNFD_based-on_SOL001_'
     VNF_LCM_CREATE_PROCESS_NAME = 'Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance'
     VNF_LCM_INSTANTIATE_PROCESS_NAME = 'Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF'
     
+    if is_multiple_vnfm == 'true':
+        MSA_API.task_success( 'Skip VNF LCM service instances creation.', context, True)
+        
     #Get NS Instance details.
     nsLcm = NsLcmSol005(context["mano_ip"], context["mano_port"])
     nsLcm.set_parameters(context["mano_user"], context["mano_pass"])
