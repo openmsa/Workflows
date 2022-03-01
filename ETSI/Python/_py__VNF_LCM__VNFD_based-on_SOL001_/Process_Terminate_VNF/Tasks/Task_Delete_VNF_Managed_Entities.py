@@ -18,16 +18,17 @@ if __name__ == "__main__":
     vnf_me_list = context.get('vnf_me_list')
     
     #For each VNFC-VDU create corresponding ME's.
-    if vnf_me_list:
-        for index, device_ref in enumerate(vnf_me_list):
-            device_id = device_ref[3:]
-            #initialize Device object based-on the device id.
-            device = Device(device_id=device_id)
-            try:
-                #remove managed entity.
-                device.delete(device_ref)
-            except:
-                continue
+    if isinstance(vnf_me_list, list):
+	    for index, vnfc_dict in enumerate(vnf_me_list):
+	        device_ref = vnfc_dict.get('device_ext_ref')
+	        device_id = device_ref[3:]
+	        #initialize Device object based-on the device id.
+	        device = Device(device_id=device_id)
+	        try:
+	            #remove managed entity.
+	            device.delete(device_ref)
+	        except:
+	            continue
             
     MSA_API.task_success('The VNF managed entities are deleted.', context)
 

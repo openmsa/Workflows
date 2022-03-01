@@ -1,23 +1,32 @@
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
-from msa_sdk.order import Order
+from msa_sdk import constants
+
+from custom.ETSI.VnfLcmOpOccsSol003 import VnfLcmOpOccsSol003
+
 
 if __name__ == "__main__":
 
     dev_var = Variables()
     context = Variables.task_call(dev_var)
-
-    nfvo_short_id = context["nfvo_device"][3:]
-    vnfm_short_id = context["vnfm_device"][3:]
-
-    order1 = Order(str(nfvo_short_id))
-    order1.command_synchronize(timeout=60)
     
-    order2 = Order(str(vnfm_short_id))
-    order2.command_synchronize(timeout=60)
+    if context.get('is_vnf_instance_exist') == True:
+        MSA_API.task_success('Task execution is completed.', context)
 
-    ret = MSA_API.process_content('ENDED',
-        f'Devices {context["nfvo_device"]} {context["vnfm_device"]} synchronized',
-        context, True)
-
+    vnfLcmOpOccs = VnfLcmOpOccsSol003(context["mano_ip"], context["mano_port"])
+    vnfLcmOpOccs.set_parameters(context['mano_user'], context['mano_pass'])
+    
+    vnf_lcm_op_occ_id = context.get('vnf_lcm_op_occ_id')
+    operation_state = ''
+    
+    if 'vnf_lcm_op_occ_id' in context and vnf_lcm_op_occ_id:
+        r = vnfLcmOpOccs.vnf_lcm_op_occs_completion_wait(vnf_lcm_op_occ_id)
+        
+        operation_state = r.json()['operationState']
+        context["operation_state"] = operation_state
+        
+    if operation_state == "FAILED":
+        MSA_API.task_error('The VNF scale operation is ' + operation_state + '.', context, True)
+    
+    ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{operation_state}', context, True)
     print(ret)

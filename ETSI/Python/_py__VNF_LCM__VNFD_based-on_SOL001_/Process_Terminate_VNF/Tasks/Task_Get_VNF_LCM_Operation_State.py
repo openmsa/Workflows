@@ -15,10 +15,18 @@ if __name__ == "__main__":
 
     vnfLcmOpOccs = VnfLcmOpOccsSol003(context["mano_ip"], context["mano_port"])
     vnfLcmOpOccs.set_parameters(context['mano_user'], context['mano_pass'])
-
-    r = vnfLcmOpOccs.vnf_lcm_op_occs_completion_wait(context["vnf_lcm_op_occ_id"])
     
-    context["operation_state"] = r.json()['operationState']
-
-    ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{context["operation_state"]}', context, True)
+    vnf_lcm_op_occ_id = context.get('vnf_lcm_op_occ_id')
+    operation_state = ''
+    
+    if 'vnf_lcm_op_occ_id' in context and vnf_lcm_op_occ_id:
+        r = vnfLcmOpOccs.vnf_lcm_op_occs_completion_wait(vnf_lcm_op_occ_id)
+        
+        operation_state = r.json()['operationState']
+        context["operation_state"] = operation_state
+        
+    if operation_state == "FAILED":
+        MSA_API.task_error('The VNF Terminate operation is ' + operation_state + '.', context, True)
+    
+    ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{operation_state}', context, True)
     print(ret)

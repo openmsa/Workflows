@@ -1,66 +1,54 @@
 import json
-import time
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 from msa_sdk.device import Device
 from msa_sdk import constants
 import openstack
 
-from custom.ETSI.NfviVim import NfviVim
 from custom.ETSI.VnfLcmSol003 import VnfLcmSol003
-
 
 # Get VIM connection.
 
-def _get_vim_connection_auth(nfvo_device, vim_id):
+def _get_vim_connection_auth(nfvo_device, vim_id, is_user_domain=False):
     #Openstack Authentification Connection.
     conn = ''
     
-    #NFVO Info.
-    nfvo_mano_me_id = context["nfvo_device"][3:]
-    nfvo_mano_ip    = Device(device_id=nfvo_mano_me_id).management_address
-    nfvo_mano_var   = Device(device_id=nfvo_mano_me_id).get_configuration_variable("HTTP_PORT")
-    nfvo_mano_port  = nfvo_mano_var.get("value")
-    nfvo_mano_user  = Device(device_id=nfvo_mano_me_id).login
-    nfvo_mano_pass  = Device(device_id=nfvo_mano_me_id).password
+    auth_url = context.get('auth_url')
+    username = context.get('username')
+    password = context.get('password')
+    project_id = context.get('project_id')
+    user_domain_id = context.get('user_domain_id')
+    #
+    project_domain_id = context.get('project_domain_id')
+    #
+    region_name = context.get('region_name')
+    compute_api_version = context.get('compute_api_version')
+    identity_interface = context.get('identity_interface')
     
-    nfviVim = NfviVim(nfvo_mano_ip, nfvo_mano_port)
-    nfviVim.set_parameters(nfvo_mano_user, nfvo_mano_pass)
-    
-    #Get VIM connection info by id.
-    vim_list = nfviVim.nfvi_vim_get()
-
-    if vim_list:
-        for index, vimInfo in enumerate(vim_list.json()):
-            if vimInfo.get('vimId') == vim_id:
+    domain_id = user_domain_id
+    if is_user_domain == False:
+        domain_id = project_domain_id
+                    
+    #Get Openstack connection
+    auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=domain_id)
+    conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=True)
                 
-                context.update(vimInfo=vimInfo)
-                
-                auth_url = vimInfo['interfaceInfo']['endpoint']
-                auth_url = auth_url[:-2]
-                username = vimInfo['accessInfo']['username']
-                password = vimInfo['accessInfo']['password']
-                project_id = vimInfo['accessInfo']['projectId']
-                user_domain_id = vimInfo['accessInfo']['userDomain']
-                
-                context.update(auth_url=auth_url)
-                context.update(password=password)
-                context.update(project_id=project_id)
-                context.update(user_domain_id=user_domain_id)
-                
-                #Get Openstack connection
-                auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=user_domain_id)
-                conn = openstack.connection.Connection(region_name='RegionOne', auth=auth, compute_api_version='2',identity_interface ='public')
     return conn
 
 '''
 Wait for the server status to become active.
 '''
 def _wait_for_server_to_be_active(nfvo_device, vim_id, server):
-	conn = _get_vim_connection_auth(nfvo_device, vim_id)
-	server_obj = conn.compute.get_server(server)
-	return conn.compute.wait_for_server(server_obj, status='ACTIVE', failures=None, interval=2, wait=120)
-
+    conn = _get_vim_connection_auth(nfvo_device, vim_id, False)
+    server_obj = ''
+    try:
+        server_obj = conn.compute.get_server(server)
+        return conn.compute.wait_for_server(server_obj, status='ACTIVE', failures=None, interval=2, wait=120)
+    except Exception as e:
+        conn = _get_vim_connection_auth(nfvo_device, vim_id, True)
+        server_obj = conn.compute.get_server(server)
+        return conn.compute.wait_for_server(server_obj, status='ACTIVE', failures=None, interval=2, wait=120)
+    return ''
 
 dev_var = Variables()
 context = Variables.task_call(dev_var)

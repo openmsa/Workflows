@@ -2,8 +2,16 @@
   <variables frozen="0">
     <variable displayName="MANO user" name="params.mano_user" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="mano_pass" name="params.mano_pass" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="vnfm_device" name="params.vnfm_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="nfvo_device" name="params.nfvo_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="17010303" modId="17010305"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="vnfm_device" name="params.vnfm_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="17010304" modId="17010306"/>
+      </sdTypes>
+    </variable>
     <variable displayName="Aspect ID" name="params.aspect_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="scale_level" name="params.scale_level" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="vnf_pkg_id" name="params.vnf_pkg_id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.nfvo_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -12,8 +20,8 @@
       </classes>
     </variable>
     <variable displayName="vnfd_id" name="params.vnfd_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="vnf_instance_name" name="params.vnf_instance_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="vnf_instance_description" name="params.vnf_instance_description" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnf_instance_name" name="params.vnf_instance_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnf_instance_description" name="params.vnf_instance_description" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="device_manufaturer" name="params.device_manufaturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="device_model" name="params.device_model" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="device_manufacturer" name="params.device_manufacturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
@@ -27,9 +35,9 @@
         <class>images</class>
       </classes>
     </variable>
-    <variable displayName="is_vnf_instance_exist" name="params.is_vnf_instance_exist" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="vnf_instance_id" name="params.vnf_instance_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="ns_service_instance_ref" name="params.ns_service_instance_ref" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="is_vnf_instance_exist" name="params.is_vnf_instance_exist" startIncrement="0" type="Boolean" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vnf_instance_id" name="params.vnf_instance_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ns_service_instance_ref" name="params.ns_service_instance_ref" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="aspectId" name="params.aspectId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="numberOfSteps" name="params.numberOfSteps" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Destination Host (Hypervisor)" name="params.host" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" refDeviceIdVar="params.vim_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
@@ -79,24 +87,6 @@
       <displayName>Resolve VIM Managed Entity</displayName>
     </task>
   </process>
-  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level">
-    <displayName>Scale To Level</displayName>
-    <type>UPDATE</type>
-    <visibility>5</visibility>
-    <allowSchedule/>
-    <task name="Task_Scale_To_Level.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
-      <displayName>Scale To Level</displayName>
-    </task>
-    <task name="Task_Get_VNF_LCM_Operation_State.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
-      <displayName>Get VNF LCM Operation State</displayName>
-    </task>
-    <task name="Task_Sync_to_NFVO_and_VNFM.py">
-      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks</processPath>
-      <displayName>Sync to NFVO and VNFM</displayName>
-    </task>
-  </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF">
     <displayName>Scale-out VNF</displayName>
     <type>UPDATE</type>
@@ -113,6 +103,10 @@
     <task name="Task_Sync_to_NFVO_and_VNFM.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF/Tasks</processPath>
       <displayName>Sync to NFVO and VNFM</displayName>
+    </task>
+    <task name="Task_Create_VNF_Managed_Entities.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF/Tasks</processPath>
+      <displayName>Create VNF Managed Entities</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF">
@@ -132,6 +126,28 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF/Tasks</processPath>
       <displayName>Sync to NFVO and VNFM</displayName>
     </task>
+    <task name="Task_Delete_VNF_Managed_Entities.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF/Tasks</processPath>
+      <displayName>Delete VNF Managed Entities</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level">
+    <displayName>Scale To Level</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Scale_To_Level.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
+      <displayName>Scale To Level</displayName>
+    </task>
+    <task name="Task_Get_VNF_LCM_Operation_State.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level/Tasks</processPath>
+      <displayName>Get VNF LCM Operation State</displayName>
+    </task>
+    <task name="Task_Sync_to_NFVO_and_VNFM.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks</processPath>
+      <displayName>Sync to NFVO and VNFM</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Stop_VNF">
     <displayName>Stop VNF</displayName>
@@ -141,6 +157,10 @@
     <task name="Task_Stop_VNF_Instance.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Stop_VNF/Tasks</processPath>
       <displayName>Stop VNF Instance</displayName>
+    </task>
+    <task name="Task_Get_VNF_LCM_Operation_State.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Stop_VNF/Tasks</processPath>
+      <displayName>Get VNF LCM Operation State</displayName>
     </task>
     <task name="Task_Sync_to_NFVO_and_VNFM.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks</processPath>
@@ -155,6 +175,10 @@
     <task name="Task_Start_VNF_Instance.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Start_VNF/Tasks</processPath>
       <displayName>Start VNF Instance</displayName>
+    </task>
+    <task name="Task_Get_VNF_LCM_Operation.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Start_VNF/Tasks</processPath>
+      <displayName>Get VNF LCM Operation</displayName>
     </task>
     <task name="Task_Sync_to_NFVO_and_VNFM.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks</processPath>
@@ -188,10 +212,6 @@
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
-    <task name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Rebuild_VNF/Tasks/Task_Get_VNF_Server_Id.py">
-      <processPath></processPath>
-      <displayName>Get VNF Server Id</displayName>
-    </task>
     <task name="Task_Reboot_VNF_Instance.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Heal_VNF/Tasks</processPath>
       <displayName>Reboot VNF Instance</displayName>
