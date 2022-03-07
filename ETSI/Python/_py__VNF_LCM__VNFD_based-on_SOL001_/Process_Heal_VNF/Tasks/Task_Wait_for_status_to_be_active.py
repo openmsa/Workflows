@@ -31,7 +31,7 @@ def _get_vim_connection_auth(nfvo_device, vim_id, is_user_domain=False):
                     
     #Get Openstack connection
     auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=domain_id)
-    conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=True)
+    conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=False)
                 
     return conn
 

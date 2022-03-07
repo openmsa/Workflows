@@ -36,7 +36,7 @@ def _get_vim_connection_auth(nfvo_device, vim_id, is_user_domain=False):
                     
     #Get Openstack connection
     auth = dict(auth_url=auth_url, username=username, password=password, project_id=project_id, user_domain_id=domain_id)
-    conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=True)
+    conn = openstack.connection.Connection(region_name=region_name, auth=auth, compute_api_version=compute_api_version, identity_interface=identity_interface, verify=False)
                 
     return conn
 
@@ -109,7 +109,14 @@ def _get_vnfc_resource_public_ip_address(nfvo_device, vim_id, server_id, timeout
             for server in servers:
                 if server.id == server_id:
                     addresses = server.addresses
-                    server_ip_addr = _get_ip_address_from_network(addresses, conn)
+                    for network_name, iface_list in addresses.items():
+                        if "mgmt" in network_name.lower() or "management" in network_name.lower():
+                            if iface_list[0]:
+                                server_ip_addr = iface_list[0].get('addr')
+                                break
+                    #If there is management network identified by the network name.
+                    if not server_ip_addr:
+                        server_ip_addr = _get_ip_address_from_network(addresses, conn)
             break
         time.sleep(interval)
             

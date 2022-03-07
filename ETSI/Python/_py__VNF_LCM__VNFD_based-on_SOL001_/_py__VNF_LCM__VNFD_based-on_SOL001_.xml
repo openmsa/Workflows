@@ -234,6 +234,10 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Live_Migrate_VNF/Tasks</processPath>
       <displayName>Live Migrate VNF</displayName>
     </task>
+    <task name="Task_Wait_for_status_to_be_active.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Heal_VNF/Tasks</processPath>
+      <displayName>Wait for status to be active</displayName>
+    </task>
     <task name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks/Task_Sync_to_NFVO_and_VNFM.py">
       <processPath></processPath>
       <displayName>Sync to NFVO and VNFM</displayName>
