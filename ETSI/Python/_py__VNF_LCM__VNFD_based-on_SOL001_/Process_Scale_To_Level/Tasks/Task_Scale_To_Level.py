@@ -11,7 +11,7 @@ if __name__ == "__main__":
     dev_var.add("scale_level", var_type="Integer")
     context = Variables.task_call(dev_var)
 
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     content = {"additionalParams": {},

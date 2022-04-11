@@ -72,7 +72,7 @@ if __name__ == "__main__":
     
     #Prepare the VNF LCM WF scale out input parameter as API body.
     
-    aspectId = "vsrx" #this value is defined in the VNF Descriptor (.csar file).
+    aspectId = "vsrx_vnfc" #this value is defined in the VNF Descriptor (.csar file).
     numberOfSteps = "1" #Default value.
     
     data = dict(aspectId=aspectId, numberOfSteps=numberOfSteps)

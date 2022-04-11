@@ -52,6 +52,8 @@ if __name__ == "__main__":
     dev_var.add('customer_id', var_type='String')
     dev_var.add('device_id', var_type='Device')
     dev_var.add('rawlog', var_type='String')
+    dev_var.add('aspect', var_type='String')
+    dev_var.add('scale_level', var_type='String')
     context = Variables.task_call(dev_var)
     
     #Get device id (router) from context.
@@ -72,8 +74,8 @@ if __name__ == "__main__":
     
     #Prepare the NS LCM WF scale out input parameter as API body.
     
-    aspectId = "aspect" #this value is defined in the NS Descriptor (.csar file).
-    numberOfSteps = "1" #Default value.
+    aspectId = context['aspect'] #this value is defined in the NS Descriptor (.csar file).
+    numberOfSteps = context['scale_level'] #Default value.
     
     data = dict(aspectId=aspectId, numberOfSteps=numberOfSteps)
     

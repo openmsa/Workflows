@@ -72,7 +72,7 @@ if __name__ == "__main__":
     
     #Prepare the NS LCM WF scale out input parameter as API body.
     
-    aspectId = "aspect" #this value is defined in the NS Descriptor (.csar file).
+    aspectId = "vsrx" #this value is defined in the NS Descriptor (.csar file).
     numberOfSteps = "1" #Default value.
     
     data = dict(aspectId=aspectId, numberOfSteps=numberOfSteps)

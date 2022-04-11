@@ -58,7 +58,7 @@
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Enable_VNF">
-    <displayName>Enable VNF</displayName>
+    <displayName>Enable VNF Package</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>
@@ -72,7 +72,7 @@
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF___NS_Packages_Management/Process_Disable_VNF">
-    <displayName>Disable VNF</displayName>
+    <displayName>Disable VNF Package</displayName>
     <type>UPDATE</type>
     <visibility>5</visibility>
     <allowSchedule/>

@@ -13,7 +13,7 @@ if __name__ == "__main__":
     if context.get('is_vnf_instance_exist') == True:
         MSA_API.task_success('Task execution is completed.', context)
 
-    vnfLcmOpOccs = VnfLcmOpOccsSol003(context["mano_ip"], context["mano_port"])
+    vnfLcmOpOccs = VnfLcmOpOccsSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcmOpOccs.set_parameters(context['mano_user'], context['mano_pass'])
     
     vnf_lcm_op_occ_id = context.get('vnf_lcm_op_occ_id')
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         operation_state = r.json()['operationState']
         context["operation_state"] = operation_state
         
-    if operation_state == "FAILED":
+    if operation_state == "FAILED" or operation_state == "FAILED_TEMP":
         MSA_API.task_error('The VNF Instantiation operation is ' + operation_state + '.', context, True)
     
     ret = MSA_API.process_content(vnfLcmOpOccs.state, f'{operation_state}', context, True)

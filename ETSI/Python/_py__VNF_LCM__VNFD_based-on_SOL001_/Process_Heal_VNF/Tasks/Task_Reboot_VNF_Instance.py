@@ -17,7 +17,7 @@ if __name__ == "__main__":
     reboot_type = "HARD"
     
     #Get VNF instance (server instance id - openstack)
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])

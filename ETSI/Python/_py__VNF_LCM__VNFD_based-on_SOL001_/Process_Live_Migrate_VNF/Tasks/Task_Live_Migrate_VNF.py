@@ -35,7 +35,7 @@ def _get_hypervisor_hostname_by_id(order_object, vim_me_id, host_id):
 
 dev_var = Variables()
 dev_var.add('vim_device', var_type='Device')
-dev_var.add('host', var_type='OBMFRef')
+dev_var.add('host', var_type='String')
 context = Variables.task_call(dev_var)
 
 if __name__ == "__main__":
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     host_id = context.get('host')
     
     #Get VNF instance (server instance id - openstack)
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])

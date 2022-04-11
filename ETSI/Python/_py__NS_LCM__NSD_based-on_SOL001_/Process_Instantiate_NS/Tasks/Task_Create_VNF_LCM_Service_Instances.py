@@ -118,7 +118,7 @@ if __name__ == "__main__":
         context.update(ns_instance_details=r.json())
         
         ns_instance_details = r.json()
-        context.update(ns_instance_DEBUGn = r.json())
+        context.update(ns_instance_details = r.json())
         vnfInstance_list = ns_instance_details["vnfInstance"]
         
         context.update(vnfInstance_list=vnfInstance_list)

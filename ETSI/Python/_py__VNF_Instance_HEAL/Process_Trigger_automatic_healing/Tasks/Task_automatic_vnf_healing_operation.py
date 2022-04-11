@@ -96,4 +96,4 @@ if __name__ == "__main__":
         if status == constants.FAILED:
             MSA_API.task_error('Execute service operation is failed: ' + details + ' (#' + str(service_id) + ')', context, True)
         
-    MSA_API.task_success( 'VNF Instance SCALE_OUT operation is successfully executed.', context, True)
+    MSA_API.task_success( 'VNF Instance HEAL operation is successfully executed.', context, True)

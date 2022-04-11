@@ -20,6 +20,11 @@ vnf_service_instance_ref = context.get('SERVICEINSTANCEREFERENCE')
 
 if __name__ == "__main__":
 	
+	if "is_third_party_vnfm" in context:
+		is_third_party_vnfm = context.get('is_third_party_vnfm')
+		if is_third_party_vnfm == 'true':
+			MSA_API.task_success('Skip for 3rd party VNFM.', context)
+	
 	#Get VIM infos.
 	auth_url = context.get('auth_url')
 	password = context.get('password')

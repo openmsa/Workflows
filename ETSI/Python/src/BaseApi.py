@@ -17,10 +17,10 @@ class BaseApi():
              "Server_Error":  range(500,600)
              }
 
-    def __init__(self, hostname, port='80'):
+    def __init__(self, hostname, port='80', roo_url='/ubi-etsi-mano/'):
         self.hostname = hostname
         self.port     = port
-        self.base_url = "http://" + hostname + ":" + port + "/ubi-etsi-mano/"
+        self.base_url = "http://" + hostname + ":" + port + roo_url
         self.state    = ""
     
     def do_get(self, _url):

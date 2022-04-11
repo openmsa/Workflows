@@ -158,6 +158,42 @@ def _get_vnfc_resource_public_ip_address(nfvo_device, vim_id, server_id, timeout
         time.sleep(interval)
             
     return server_ip_addr
+#----------------------------
+def _get_vnfc_resource_ip_addresses(nfvo_device, vim_id, server_id, timeout=60, interval=5):
+    
+    #server_ip_addr = ''
+    ip_list=[]
+    #Get openstack authenfication
+    conn = _get_vim_connection_auth(nfvo_device, vim_id, False)
+        
+    #Get VDU (server instance) details.
+    servers = {}
+    global_timeout = time.time() + timeout
+    while True:
+        #Get VDU (server instance) details.
+        try:
+            servers = conn.compute.servers()
+        except:
+            conn = _get_vim_connection_auth(nfvo_device, vim_id, True)
+            servers = conn.compute.servers()
+            
+        #if servers is not a empty dictionnary.
+        if bool(servers) == True or time.time() > global_timeout:
+            for server in servers:
+                if server.id == server_id:
+                    addresses = server.addresses
+                    for network_name, iface_list in addresses.items():
+                        for ip_addr in iface_list:
+                        	ip_a=ip_addr.get('addr')
+                        	ip_list.append(ip_a)
+            break
+        time.sleep(interval)
+            
+    return ip_list
+#----------------------------
+
+
+
 
 dev_var = Variables()
 context = Variables.task_call(dev_var)
@@ -166,9 +202,14 @@ subtenant_ext_ref = context['UBIQUBEID']
 vnf_service_instance_ref = context.get('SERVICEINSTANCEREFERENCE')
 
 if __name__ == "__main__":
+
+    if "is_third_party_vnfm" in context:
+            is_third_party_vnfm = context.get('is_third_party_vnfm')
+            if is_third_party_vnfm == 'true':
+                MSA_API.task_success('Skip for 3rd party VNFM.', context)
     
     ## Get list of VNFC vdu.
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
@@ -178,7 +219,10 @@ if __name__ == "__main__":
     context.update(vnf_instance_details=r.json())
     
     vnfResourcesList = r.json()["instantiatedVnfInfo"]["vnfcResourceInfo"]
-    
+    #vnfName = context['vnf_instance_name']
+#---------------------------------------------
+    nfvo_device_ref = context.get('nfvo_device')
+#---------------------------------------------
     context.update(vnfResourcesList=vnfResourcesList)
     
     #VNF Managed Entities.
@@ -189,30 +233,48 @@ if __name__ == "__main__":
         #openstack server instance ID.
         vnfResourceId = vnfR["computeResource"]["resourceId"]
         vim_connection_id = vnfR["computeResource"]['vimConnectionId']
+        #Save vim_connection_id in the context.
+        context.update(vim_connection_id=vim_connection_id)
         
+        conx = _get_vim_connection_auth(nfvo_device_ref, vim_connection_id, False)
+        serv = conx.compute.get_server(vnfResourceId)
+        img=serv.image.id
+        img_name=conx.image.get_image(img).name
+#-----------------------------------------------------------
         #Customer ID
         customer_id = subtenant_ext_ref[4:]
         #Kubernetes_generic manufacturer_id
-        manufacturer_id='14020601'
+        #manufacturer_id='14020601'
         #Kubernetes_generic model_id
-        model_id='14020601'
+        #model_id='14020601'
         #default IP address
+        if "vsrx" in img_name.lower():
+        	manufacturer_id='18'
+        	model_id='121'
+        else:
+        	manufacturer_id='17'
+        	model_id='15031001'
         nfvo_device_ref = context.get('nfvo_device')
         management_address = ''
         try:
             management_address = _get_vnfc_resource_public_ip_address(nfvo_device_ref, vim_connection_id, vnfResourceId)
         except TypeError:
             management_address = _get_vnfc_resource_public_ip_address(nfvo_device_ref, vim_connection_id, vnfResourceId)
-        
+#---------------------------------------
+        try:
+            addr_list = _get_vnfc_resource_ip_addresses(nfvo_device_ref, vim_connection_id, vnfResourceId)
+        except TypeError:
+            addr_list = _get_vnfc_resource_ip_addresses(nfvo_device_ref, vim_connection_id, vnfResourceId)
+#---------------------------------------
         if not management_address:
             management_address = '1.1.1.1'
         
         #Kubernetes adaptor does not use the password and login of ME.
-        password = 'fake38passwOrd'
+        password = 'ipcore123'
         management_port='22'
         name = vnf_service_instance_ref + '_VNFC_' + vnfResourceId
         #Create Device
-        device = Device(customer_id=customer_id, name=name, manufacturer_id=manufacturer_id, model_id=model_id, login='admin', password=password, password_admin=password, management_address=management_address, management_port=management_port, device_external="", log_enabled=True, log_more_enabled=True, mail_alerting=False, reporting=True, snmp_community='ubiqube', device_id="")
+        device = Device(customer_id=customer_id, name=name, manufacturer_id=manufacturer_id, model_id=model_id, login='ipcore', password=password, password_admin=password, management_address=management_address, management_port=management_port, device_external="", log_enabled=True, log_more_enabled=True, mail_alerting=False, reporting=True, snmp_community='ubiqube', device_id="")
         response = device.create()
         context.update(device=response)
         #get device external reference
@@ -234,7 +296,30 @@ if __name__ == "__main__":
                 
         #add VNF LCM service instance REF:
         device.create_configuration_variable('vnflcm_wf_service_instance_ref', vnf_service_instance_ref)
-        
+#--------------------------------------------------------------
+        uri=''
+        #add config variables, attach suitable config templates and do initial provisioning
+        if "vsrx" in img_name.lower():
+        	device.create_configuration_variable('HOST_NAME', img_name+str(device_id))
+        	if len(addr_list) > 1:
+        		if addr_list[1]:
+        			device.create_configuration_variable('SECOND_INT_IP', addr_list[1])
+        		if len(addr_list) > 2:
+        			if addr_list[2]:
+        				device.create_configuration_variable('THIRD_INT_IP', addr_list[2])
+        	#using the device id for priority as it always increases
+        	#hence any time the first VNF created will have a low numeric vlaue for priority
+        	priority=device_id%250
+        	device.create_configuration_variable('PRIORITY', priority)
+        	uri = {"uri": "Configuration/demo/vsrx_day0_standalone"}
+        	uris = []
+        	uris.append(uri)
+        	device.attach_files(uris, 'PRE_CONFIG')
+        	#sleep for some time so that the VNF is reachable from MSA
+        	time.sleep(30)
+        	device.initial_provisioning()
+        	time.sleep(10)
+#--------------------------------------------------------------
     #Store vnf_me_list in the context.
     context.update(vnf_me_list=vnf_me_list)
 

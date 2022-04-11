@@ -142,7 +142,7 @@ if __name__ == "__main__":
     
     ## Get list of VNFC vdu.
     #time.sleep(60)
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], context['mano_base_url'])
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     r = vnfLcm.vnf_lcm_get_vnf_instance_details(context["vnf_instance_id"])
@@ -152,7 +152,9 @@ if __name__ == "__main__":
     context.update(vnf_instance_details=r.json())
     
     vnfResourcesList = r.json()["instantiatedVnfInfo"]["vnfcResourceInfo"]
-    
+#---------------------------------------------------    
+    vnfName =  context["vnf_instance_name"]
+#---------------------------------------------------    
     context.update(vnfResourcesList=vnfResourcesList)
     
     #VNF Managed Entities.
@@ -175,10 +177,16 @@ if __name__ == "__main__":
             #Customer ID
             customer_id = subtenant_ext_ref[4:]
             #Kubernetes_generic manufacturer_id
-            manufacturer_id='14020601'
+            #manufacturer_id='14020601'
             #Kubernetes_generic model_id
-            model_id='14020601'
+            #model_id='14020601'
             #default IP address
+            if "vsrx" in vnfName.lower():
+            	manufacturer_id='18'
+            	model_id='121'
+            else:
+            	manufacturer_id='17'
+            	model_id='15031001'
             nfvo_device_ref = context.get('nfvo_device')
             management_address = ''
             try:
@@ -190,11 +198,11 @@ if __name__ == "__main__":
                 management_address = '1.1.1.1'
             
             #Kubernetes adaptor does not use the password and login of ME.
-            password = 'fake38passwOrd'
+            password = 'ipcore123'
             management_port='22'
             name = vnf_service_instance_ref + '_VNFC_' + vnfResourceId
             #Create Device
-            device = Device(customer_id=customer_id, name=name, manufacturer_id=manufacturer_id, model_id=model_id, login='admin', password=password, password_admin=password, management_address=management_address, management_port=management_port, device_external="", log_enabled=True, log_more_enabled=True, mail_alerting=False, reporting=True, snmp_community='ubiqube', device_id="")
+            device = Device(customer_id=customer_id, name=name, manufacturer_id=manufacturer_id, model_id=model_id, login='ipcore', password=password, password_admin=password, management_address=management_address, management_port=management_port, device_external="", log_enabled=True, log_more_enabled=True, mail_alerting=False, reporting=True, snmp_community='ubiqube', device_id="")
             response = device.create()
             context.update(device=response)
             #get device external reference

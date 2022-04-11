@@ -22,9 +22,9 @@
     <variable displayName="vnfd_id" name="params.vnfd_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="vnf_instance_name" name="params.vnf_instance_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="vnf_instance_description" name="params.vnf_instance_description" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="device_manufaturer" name="params.device_manufaturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="device_model" name="params.device_model" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="device_manufacturer" name="params.device_manufacturer" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="device_manufaturer" name="params.device_manufaturer" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="device_model" name="params.device_model" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="device_manufacturer" name="params.device_manufacturer" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="null" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Openstack VIM" name="params.vim_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes manId="14020603" modId="16051904"/>
@@ -45,6 +45,32 @@
         <class>hosts</class>
       </classes>
     </variable>
+    <variable displayName="Total CPU" name="params.vnf_totale_cpu" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Overall Resources</sections>
+      </sections>
+    </variable>
+    <variable displayName="Total Disk" name="params.vnf_totale_disk" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Overall Resources</sections>
+      </sections>
+    </variable>
+    <variable displayName="Total Memory" name="params.vnf_totale_memory" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="23" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sections>
+        <sections>Overall Resources</sections>
+      </sections>
+    </variable>
+    <variable displayName="VNFC Name" name="params.vnfc_flavor.0.vnfc_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="24" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="CPU" name="params.vnfc_flavor.0.cpu" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Memory in MB" name="params.vnfc_flavor.0.memory" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="26" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Disk in GB" name="params.vnfc_flavor.0.disk" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="27" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="HOST Id" name="params.vnfc_flavor.0.host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="28" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ImageRef" name="params.vnfc_flavor.0.image" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="29" increment="0" refServiceURI="" refDeviceIdVar="params.vim_device" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>images</class>
+      </classes>
+    </variable>
+    <variable displayName="Revision ID" name="params.revision_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="30" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance">
@@ -86,6 +112,14 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF/Tasks</processPath>
       <displayName>Resolve VIM Managed Entity</displayName>
     </task>
+    <task name="Task_Configure_Address_Pair.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF/Tasks</processPath>
+      <displayName>Configure Address Pair</displayName>
+    </task>
+    <task name="Task_Synchronize_with_VIM.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Instantiate_VNF/Tasks</processPath>
+      <displayName>Synchronize with VIM</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF">
     <displayName>Scale-out VNF</displayName>
@@ -108,6 +142,10 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF/Tasks</processPath>
       <displayName>Create VNF Managed Entities</displayName>
     </task>
+    <task name="Task_Sync_with_VIM.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-out_VNF/Tasks</processPath>
+      <displayName>Sync with VIM</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF">
     <displayName>Scale-in VNF</displayName>
@@ -129,6 +167,10 @@
     <task name="Task_Delete_VNF_Managed_Entities.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF/Tasks</processPath>
       <displayName>Delete VNF Managed Entities</displayName>
+    </task>
+    <task name="Task_Sync_with_VIM.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale-in_VNF/Tasks</processPath>
+      <displayName>Sync with VIM</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Scale_To_Level">
@@ -260,6 +302,10 @@
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Create_VNF_Instance/Tasks</processPath>
       <displayName>Sync to NFVO and VNFM</displayName>
     </task>
+    <task name="Task_Clean_up_servers.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Terminate_VNF/Tasks</processPath>
+      <displayName>Clean up servers</displayName>
+    </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Delete_VNF_Instance">
     <displayName>Delete VNF Instance</displayName>
@@ -279,10 +325,50 @@
       <displayName>Delete VNF Managed Entities</displayName>
     </task>
   </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Syncronize_with_VIM">
+    <displayName>Syncronize with VIM</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_mytest.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Syncronize_with_VIM/Tasks</processPath>
+      <displayName>mytest</displayName>
+    </task>
+  </process>
+  <process name="Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update">
+    <displayName>Software Update</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Backup_VNF_Configuration.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Backup VNF Configuration</displayName>
+    </task>
+    <task name="Task_Shutdown_VNFCs.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Shutdown VNFCs</displayName>
+    </task>
+    <task name="Task_Detach_Ports.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Detach Ports</displayName>
+    </task>
+    <task name="Task_Recreate_new_VNFCs.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Recreate new VNFCs</displayName>
+    </task>
+    <task name="Task_Restore_VNF_Configuration.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Restore VNF Configuration</displayName>
+    </task>
+    <task name="Task_Update_servers.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__VNF_LCM__VNFD_based-on_SOL001_/Process_Software_Update/Tasks</processPath>
+      <displayName>Update servers</displayName>
+    </task>
+  </process>
   <information>
     <icon/>
     <description/>
-    <displayField>service_id</displayField>
+    <displayField>vnf_instance_name</displayField>
     <serviceTaskType>python</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>

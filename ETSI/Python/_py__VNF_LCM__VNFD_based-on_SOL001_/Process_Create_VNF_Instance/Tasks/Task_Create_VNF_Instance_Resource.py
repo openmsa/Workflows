@@ -27,6 +27,19 @@ if __name__ == "__main__":
     mano_user  = Device(device_id=mano_me_id).login
     mano_pass  = Device(device_id=mano_me_id).password
     
+    #--------------------- 3rd party S-VFNM ---------------
+    mano_var   = Device(device_id=mano_me_id).get_configuration_variable("BASE_URL_MS")
+    mano_base_url  = mano_var.get("value")
+    context["mano_base_url"] = mano_base_url
+    
+    try:
+        is_third_party_vnfm   = Device(device_id=mano_me_id).get_configuration_variable("IS_THIRD_PARTY_VNFM")
+        is_third_party_vnfm  = is_third_party_vnfm.get("value")
+        context["is_third_party_vnfm"] = is_third_party_vnfm
+    except:
+        pass
+    #---------------------------------------------
+    
     context["mano_ip"]   = mano_ip
     context["mano_port"] = mano_port
     context["mano_user"] = mano_user
@@ -45,7 +58,7 @@ if __name__ == "__main__":
     context["nfvo_mano_pass"] = nfvo_mano_pass
     
     #Create VNF Instance resources.
-    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"])
+    vnfLcm = VnfLcmSol003(context["mano_ip"], context["mano_port"], mano_base_url)
     vnfLcm.set_parameters(context['mano_user'], context['mano_pass'])
     
     #Create VNF LCM service instance of an existing VNF Instance.
@@ -66,13 +79,28 @@ if __name__ == "__main__":
         exit()
         
     context["vnfd_id"] = r1.json()["vnfdId"]
+    var_check = r1.json()["operationalState"]
+    if var_check != 'ENABLED':
+    	 MSA_API.task_error('VNF package is '+var_check, context)
     
+    '''
     metadata = {"deviceManufacturer": "",
                 "deviceModel": ""
                 }
+    '''            
+    vnfd_id = context["vnfd_id"]
+    
+    #--------------------- 3rd party S-VFNM ---------------
+    metadata = {"onboardedVnfPkgInfoId": context["vnf_pkg_id"]}
+    
+    if "is_third_party_vnfm" in context:
+        is_third_party_vnfm = context.get('is_third_party_vnfm')
+        if is_third_party_vnfm == 'true':
+            vnfd_id = context["vnf_pkg_id"]
+    #---------------------------------------------
 
-    payload = {"vnfdId": context["vnfd_id"],
-               "vnfInstanceName": "",
+    payload = {"vnfdId": vnfd_id,
+               "vnfInstanceName": context["vnf_instance_name"],
                "vnfInstanceDescription": "",
                "metadata": metadata
                }

@@ -9,7 +9,7 @@ from custom.ETSI.BaseApi import BaseApi
 
 class VnfLcmOpOccsSol003(BaseApi):
 
-    VNF_LCM_OP_OCCS_URL = "sol003/vnflcm/v1/vnf_lcm_op_occs"
+    VNF_LCM_OP_OCCS_URL = "vnflcm/v1/vnf_lcm_op_occs"
 
     STATUS = {"STARTING": False,
               "PROCESSING": False,

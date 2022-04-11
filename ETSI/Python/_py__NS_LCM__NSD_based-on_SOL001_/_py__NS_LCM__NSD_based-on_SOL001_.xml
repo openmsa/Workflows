@@ -22,6 +22,23 @@
     <variable displayName="numberOfSteps" name="params.numberOfSteps" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="ns_instance_name" name="params.ns_instance_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="is multiple vnfm" name="params.is_multiple_vnfm" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="is_cnf" name="params.is_cnf" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="k8s_me_ref" name="params.k8s_me_ref" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="20060101" modId="20060101"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="deployments_file" name="params.deployments_file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="/opt/fmc_repository/Datafiles/NFV/CNFD/freeradius-k8s/01-deployment.yml">/opt/fmc_repository/Datafiles/NFV/CNFD/freeradius-k8s/01-deployment.yml</values>
+      </values>
+    </variable>
+    <variable displayName="service_file" name="params.service_file" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <values>
+        <values displayValue="/opt/fmc_repository/Datafiles/NFV/CNFD/freeradius-k8s/02-services.yml">/opt/fmc_repository/Datafiles/NFV/CNFD/freeradius-k8s/02-services.yml</values>
+      </values>
+    </variable>
+    <variable displayName="NS Instance details" name="params.ns_instance_details" startIncrement="0" type="Code" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Create_NS_Instance">
@@ -58,6 +75,10 @@
     <task name="Task_Create_VNF_LCM_Service_Instances.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
       <displayName>Create VNF LCM Service Instances</displayName>
+    </task>
+    <task name="Task_Instantiate_CNF_Resources.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Instantiate_NS/Tasks</processPath>
+      <displayName>Instantiate CNF Resources</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Scale-out_NS">
@@ -124,6 +145,10 @@
     <task name="Task_Delete_VNF_LCM_Service_Instances.py">
       <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
       <displayName>Delete VNF LCM Service Instances</displayName>
+    </task>
+    <task name="Task_Terminate_CNF_Resources.py">
+      <processPath>/opt/fmc_repository/Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Terminate_NS/Tasks</processPath>
+      <displayName>Terminate CNF Resources</displayName>
     </task>
   </process>
   <process name="Process/Telekom_Malaysia/_py__NS_LCM__NSD_based-on_SOL001_/Process_Delete_NS_Instance">
