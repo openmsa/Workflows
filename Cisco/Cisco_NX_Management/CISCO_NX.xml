@@ -1,0 +1,51 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="CISCO NX Device" name="params.cisco_nx_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="1" modId="22032401"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="intialization_input" name="params.intialization_input" startIncrement="0" type="Code" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example/>
+  <process name="Process/Cisco/Cisco_NX_Management/Process_Manage_Device">
+    <displayName>Manage Device</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Select_Device.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Manage_Device/Tasks</processPath>
+      <displayName>Select Device</displayName>
+    </task>
+  </process>
+  <process name="Process/Cisco/Cisco_NX_Management/Process_Reload_Device">
+    <displayName>Reload Device</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Reload.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Reload_Device/Tasks</processPath>
+      <displayName>Reload</displayName>
+    </task>
+  </process>
+  <process name="Process/Cisco/Cisco_NX_Management/Process_Initialization">
+    <displayName>Initialization</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Initialize_Device.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Initialization/Tasks</processPath>
+      <displayName>Initialize Device</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>WF for managing CISCO NX device operations such as device reload and device initialization</description>
+    <displayField>cisco_nx_device</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>CISCO NX Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>
