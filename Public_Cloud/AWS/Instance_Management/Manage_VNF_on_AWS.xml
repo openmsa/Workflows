@@ -1,16 +1,16 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="AWS Region" name="params.AwsDeviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes manId="17010301" modId="17010301"/>
       </sdTypes>
     </variable>
-    <variable displayName="Deviceid" name="params.deviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Deviceid" name="params.deviceId" startIncrement="0" type="Device" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes/>
       </sdTypes>
     </variable>
-    <variable displayName="Image ID" name="params.ImageId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Image ID" name="params.ImageId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" default="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
         <values displayValue="CENTOS7CLEAN [London]">ami-0856d6bfdba0132c9</values>
         <values displayValue="CENTOS7CLEAN [Ireland]">ami-0019f18ee3d4157d3</values>
@@ -20,7 +20,7 @@
         <values displayValue="Ubuntu [Ireland]">ami-08bac620dc84221eb</values>
       </values>
     </variable>
-    <variable displayName="Instance Type" name="params.InstanceType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="t2.small" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Instance Type" name="params.InstanceType" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="t2.small" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Instantiate VNFC</sections>
       </sections>
@@ -30,28 +30,28 @@
         <values>t2.medium</values>
       </values>
     </variable>
-    <variable displayName="Security Group" name="params.security_group" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="6" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="sg-032da9f74527acf71 " isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Security Group" name="params.security_group" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="6" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" default="sg-032da9f74527acf71 " isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>security_groups</class>
       </classes>
     </variable>
-    <variable displayName="Instance Id" name="params.InstanceId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Instance Id" name="params.InstanceId" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="7" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Instantiate VNFC</sections>
       </sections>
     </variable>
-    <variable displayName="Subnet ID" name="params.SubnetId" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="8" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" default="subnet-a7e3edcf" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Subnet ID" name="params.SubnetId" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="8" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" default="subnet-a7e3edcf" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <classes>
         <class>subnets</class>
       </classes>
     </variable>
-    <variable displayName="Managed Device Name" name="params.managed_device_name" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Managed Device Name" name="params.managed_device_name" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="9" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="Key Name" name="params.KeyName" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="The SSH key pair to use when launching the instance" groupSeparator="" groupDisplayName="" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="14020601" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Key Name" name="params.KeyName" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="The SSH key pair to use when launching the instance" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="21" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Manufacturer Id" name="params.manufacturer_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="10" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="14020601" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
@@ -60,7 +60,7 @@
         <values displayValue="Linux">14020601</values>
       </values>
     </variable>
-    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="14020601" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Model Id" name="params.model_id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="11" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="14020601" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
@@ -69,28 +69,28 @@
         <values displayValue="Generic">14020601</values>
       </values>
     </variable>
-    <variable displayName="Device Ip Address" name="params.device_ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Device Ip Address" name="params.device_ip_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="12" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="Login" name="params.login" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="centos" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Login" name="params.login" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="13" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="centos" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="Initial Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Initial Password" name="params.password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="14" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="New Password" name="params.new_password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="Ubiqube2021" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="New Password" name="params.new_password" startIncrement="0" type="Password" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="15" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="Ubiqube2021" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
     </variable>
-    <variable displayName="Subtenant" name="params.customer_id" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Snmp Community" name="params.snmp_community" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="ubiqube" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Subtenant" name="params.customer_id" startIncrement="0" type="Customer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="16" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Snmp Community" name="params.snmp_community" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="17" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="ubiqube" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Create matching MSA device</sections>
       </sections>
@@ -98,7 +98,7 @@
         <values displayValue="ubiqube">ubiqube</values>
       </values>
     </variable>
-    <variable displayName="Network interfaces ID" name="params.NetworkInterfaces.0.Id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="18" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Network interfaces ID" name="params.NetworkInterfaces.0.Id" startIncrement="0" type="OBMFRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="18" increment="0" refServiceURI="" refDeviceIdVar="params.AwsDeviceId" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Manage VNFCi network interfaces</sections>
       </sections>
@@ -106,12 +106,12 @@
         <class>network_interfaces</class>
       </classes>
     </variable>
-    <variable displayName="Force" name="params.force" startIncrement="0" type="Boolean" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Force" name="params.force" startIncrement="0" type="Boolean" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="22" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Stop VNFCi</sections>
       </sections>
     </variable>
-    <variable displayName="Deployment Setting Reference" name="params.conf_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" default="LINUX_FW" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Deployment Setting Reference" name="params.conf_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="25" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="true" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="LINUX_FW" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>Attach Configuration</sections>
       </sections>
@@ -120,12 +120,12 @@
         <values>LINUX_FW</values>
       </values>
     </variable>
-    <variable displayName="Monitoring Profile Reference" name="params.mon_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="Monitoring Profile Reference" name="params.mon_profile_reference" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <values>
         <values>LINUX_MON</values>
       </values>
     </variable>
-    <variable displayName="service_id" name="params.service_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="service_id" name="params.service_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="20" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Public_Cloud/AWS/Process_New_service">
