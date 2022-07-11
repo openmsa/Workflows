@@ -10,6 +10,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class BaseApi():
 
+    headers =  {}
     STATE = {"Informational": range(100,200),
              "Successful":    range(200,300),
              "Redirection":   range(300,400),
@@ -17,12 +18,13 @@ class BaseApi():
              "Server_Error":  range(500,600)
              }
 
-    def __init__(self, hostname, port='80'):
+    def __init__(self, hostname, port='80', sol_version='2.6.1'):
         self.hostname = hostname
         self.port     = port
         self.base_url = "http://" + hostname + ":" + port + "/ubi-etsi-mano/"
         self.state    = ""
-    
+        self.sol_version    = sol_version 
+
     def do_get(self, _url):
         _url     = self.base_url + _url
         response = requests.request("GET", url=_url, headers=self.headers,
@@ -79,12 +81,15 @@ class BaseApi():
 
     def set_parameters(self, username, password, data={}):
         self.username  = username
-        self.password  = password        
+        self.password  = password
         userpass       = f"{username}:{password}"
         base64userpass = base64.b64encode(userpass.encode()).decode()
-        self.headers   = {'Content-Type': 'application/json',
-                          'Authorization': f'Basic {base64userpass}'
-                          }
+        #self.headers   = {'Content-Type': 'application/json',
+        #                  'Authorization': f'Basic {base64userpass}'
+        #                  }
+        authorization = f'Basic {base64userpass}'
+        self.headers['Content-Type'] = 'application/json'
+        self.headers.update(Authorization=authorization)
 
     def r_check(self, _response):
         if _response.status_code in self.STATE["Informational"]:

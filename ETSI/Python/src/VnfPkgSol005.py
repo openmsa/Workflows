@@ -5,11 +5,31 @@ from requests.exceptions import HTTPError
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from custom.ETSI.BaseApi import BaseApi
+from custom.ETSI.ManoProtocolsVersion import ManoProtocolsVersion
 
 
 class VnfPkgSol005(BaseApi):
 
-    VNF_PKG_URL = "sol005/vnfpkgm/v1/vnf_packages"
+    NFV_API_PROTOCOL = "sol005"
+    NFV_RESOURCE_FRAGMENT = "vnfpkgm"
+    VNF_PKG_URL = NFV_API_PROTOCOL + "/" + NFV_RESOURCE_FRAGMENT + "/v1/vnf_packages"
+
+
+    def __init__(self, hostname, port, sol_version):
+       super().__init__(hostname, port, sol_version)
+       
+       _mano_proto_version_obj = ManoProtocolsVersion()
+       data = _mano_proto_version_obj.get_fragment_versions(self.NFV_API_PROTOCOL, self.sol_version, self.NFV_RESOURCE_FRAGMENT)
+       if 'fragment_version' in data:
+           self.fragment_version = data.get('fragment_version')
+           
+       if 'header_version' in data:
+           self.header_version = data.get('header_version')
+
+       #update request header object by adding the header_version.
+       self.headers.update(version=self.header_version)
+
+       self.VNF_PKG_URL = self.NFV_API_PROTOCOL + "/" + self.NFV_RESOURCE_FRAGMENT + "/v" + self.fragment_version + "/vnf_packages"
 
     def vnf_packages_get_package(self, _vnfpkgid):
         _url     = self.VNF_PKG_URL + "/" + _vnfpkgid
