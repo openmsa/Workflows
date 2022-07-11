@@ -20,5 +20,10 @@ if __name__ == "__main__":
     context["mano_user"] = mano_user
     context["mano_pass"] = mano_pass
     
+    #Get SOL005 version.
+    sol005_version_var   = Device(device_id=mano_me_id).get_configuration_variable("SOL005_VERSION")
+    sol005_version  = sol005_version_var.get("value")
+    context.update(sol005_version=sol005_version)
+    
     ret = MSA_API.process_content('ENDED', f'Task OK', context, True)
     print(ret)
