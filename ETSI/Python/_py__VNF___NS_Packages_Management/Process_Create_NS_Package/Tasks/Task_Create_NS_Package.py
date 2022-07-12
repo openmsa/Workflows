@@ -1,3 +1,4 @@
+import json
 from msa_sdk.variables import Variables
 from msa_sdk.msa_api import MSA_API
 
@@ -9,12 +10,16 @@ if __name__ == "__main__":
     dev_var = Variables()
     context = Variables.task_call()
     
-    nsdApi = NsdSol005(context["mano_ip"], context["mano_port"])
+    #Get SOL00X version from context.
+    sol_version = context.get('sol005_version')
+    
+    nsdApi = NsdSol005(context["mano_ip"], context["mano_port"], sol_version)
     nsdApi.set_parameters(context['mano_user'], context['mano_pass'])
     
     data = {"userDefinedData": {}}
 
     r = nsdApi.nsd_descriptors_post(data)
-
-    ret = MSA_API.process_content(nsdApi.state, f'{r}', context, True)
+    
+    r_details = r.json().get('detail')
+    ret = MSA_API.process_content(nsdApi.state, f'{r}' + ': ' + r_details, context, True)
     print(ret)
