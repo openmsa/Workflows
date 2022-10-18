@@ -3,11 +3,11 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>CISCO_NX.xml</value>
+            <value>Task_Install_Firmware.py</value>
         </entry>
         <entry>
             <key>DATE_MODIFICATION</key>
-            <value>1666073633511</value>
+            <value>1666073632414</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,11 +15,7 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1666073633505</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
+            <value>1666073632412</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -29,12 +25,8 @@
             <value>text</value>
         </entry>
         <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
-        </entry>
-        <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>COMMENT</key>
