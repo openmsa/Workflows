@@ -1,11 +1,14 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="CISCO NX Device" name="params.cisco_nx_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+    <variable displayName="CISCO NX Device" name="params.cisco_nx_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sdTypes>
         <sdTypes manId="1" modId="22032401"/>
       </sdTypes>
     </variable>
-    <variable displayName="intialization_input" name="params.intialization_input" startIncrement="0" type="Code" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="intialization_input" name="params.intialization_input" startIncrement="0" type="Code" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="firmware_location" name="params.firmware_location" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="device_destination_path" name="params.device_destination_path" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrf" name="params.vrf" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Cisco/Cisco_NX_Management/Process_Manage_Device">
@@ -36,6 +39,30 @@
     <task name="Task_Initialize_Device.py">
       <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Initialization/Tasks</processPath>
       <displayName>Initialize Device</displayName>
+    </task>
+  </process>
+  <process name="Process/Cisco/Cisco_NX_Management/Process_Download_Firmware">
+    <displayName>Download Firmware</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Download_Firmware.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Download_Firmware/Tasks</processPath>
+      <displayName>Download Firmware</displayName>
+    </task>
+  </process>
+  <process name="Process/Cisco/Cisco_NX_Management/Process_Install_Firmware">
+    <displayName>Install Firmware</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Copy_Running_Config.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Install_Firmware/Tasks</processPath>
+      <displayName>Copy Running Config</displayName>
+    </task>
+    <task name="Task_Install_Firmware.py">
+      <processPath>/opt/fmc_repository/Process/Cisco/Cisco_NX_Management/Process_Install_Firmware/Tasks</processPath>
+      <displayName>Install Firmware</displayName>
     </task>
   </process>
   <information>
