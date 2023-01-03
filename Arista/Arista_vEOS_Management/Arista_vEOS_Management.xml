@@ -1,0 +1,45 @@
+<ObjectDefinition>
+  <variables frozen="0">
+    <variable displayName="arista_eos_device" name="params.arista_eos_device" startIncrement="0" type="Device" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <sdTypes>
+        <sdTypes manId="25052022" modId="25052022"/>
+      </sdTypes>
+    </variable>
+    <variable displayName="firmware_file" name="params.firmware_file" startIncrement="0" type="File" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="true" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <repositories>
+        <repositories>Datafiles</repositories>
+      </repositories>
+    </variable>
+  </variables>
+  <example/>
+  <process name="Process/Arista/Arista_vEOS_Management/Process_Select_ME">
+    <displayName>Select Arist vEOS ME</displayName>
+    <type>CREATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Select_ME.py">
+      <processPath>/opt/fmc_repository/Process/Arista/Arista_vEOS_Management/Process_Select_ME/Tasks</processPath>
+      <displayName>Select ME</displayName>
+    </task>
+  </process>
+  <process name="Process/Arista/Arista_vEOS_Management/Process_Install_Firmware">
+    <displayName>Install Firmware</displayName>
+    <type>UPDATE</type>
+    <visibility>5</visibility>
+    <allowSchedule/>
+    <task name="Task_Install_Firmware.py">
+      <processPath>/opt/fmc_repository/Process/Arista/Arista_vEOS_Management/Process_Install_Firmware/Tasks</processPath>
+      <displayName>Install Firmware</displayName>
+    </task>
+  </process>
+  <information>
+    <icon/>
+    <description>Workflow to manage vEOS operations like firmware upgrading, reload etc.</description>
+    <displayField>arista_eos_device</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Arista vEOS Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>
