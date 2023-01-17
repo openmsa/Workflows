@@ -73,6 +73,19 @@ function _repository_add_customer ($uri) {
 }
 
 /**
+ * curl -u ncroot:ubiqube  -XPOST 'http://MSA_IP/ubi-api-rest/repository/comment?uri={file_uri}&comment={comment}'
+ */
+function _repository_file_update_comment ($file_uri, $comment) {
+
+	$encoded_comment = urlencode($comment);
+	$encoded_uri = urlencode($file_uri);
+	$msa_rest_api = "repository/comment?uri={$encoded_uri}&comment={$encoded_comment}";
+	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "UPDATE REPOSITORY FILE COMMENT");
+	return $response;
+}
+
+/**
  * curl -u ncroot:NCROOT_PWD  -XDELETE "http://localhost:10080/ubi-api-rest/repository/customer?uri={uri}"
  */
 function _repository_remove_customer ($uri) {
@@ -209,6 +222,24 @@ function _repository_list_files ($uri) {
 	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
 	return $response;
 }
+
+/**
+ * curl -u ncroot:ubiqube  -XGET 'http://MSA_IP/ubi-api-rest/repository/meta_value?uri={file_uri}&meta_key={meta_key}'
+ */
+function _repository_read_meta_value ($file_uri, $meta_key) {
+
+	$msa_rest_api = "repository/meta_value?uri={$file_uri}&meta_key={$meta_key}";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "READ REPOSITORY META FILE KEY VALUE");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
 
 /**
  * curl -u ncroot:NCROOT_PWD  -XGET "http://localhost:10080/ubi-api-rest/repository/v2/resource/workflow?uri={uri}"

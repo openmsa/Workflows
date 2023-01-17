@@ -8,10 +8,16 @@ require_once COMMON_DIR . 'curl_performer.php';
  */
 function _email_send ($from, $to, $subject = "", $content = "", $cc = "", $bcc = "") {
 
-        $msa_rest_api = "email/send?from={$from}&to={$to}&subject={$subject}&cc={$cc}&bcc={$bcc}";
-        $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $content);
-        $response = perform_curl_operation($curl_cmd, "SEND EMAIL");
-        return $response;
+	$subject = urlencode($subject);
+	$msa_rest_api = "email/send?from={$from}&to={$to}&subject={$subject}&cc={$cc}&bcc={$bcc}";
+	$email_content = "";
+	if ($content !== "") {
+		$email_content = array('content' => $content);
+		$email_content = json_encode($email_content);
+	}
+	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $email_content);
+	$response = perform_curl_operation($curl_cmd, "SEND EMAIL");
+	return $response;
 }
 
 ?>

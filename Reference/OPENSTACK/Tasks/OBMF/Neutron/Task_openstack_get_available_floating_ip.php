@@ -14,8 +14,7 @@ check_mandatory_param('openstack_device_id');
 check_mandatory_param('floating_ip_network');
 check_mandatory_param('tenant');
 
-$openstack_device_id = $context['openstack_device_id'];
-$openstack_device_id = preg_replace('/\D/', '', $openstack_device_id);
+$openstack_device_id = substr($context['openstack_device_id'], 3);
 $floating_ip_network = $context['floating_ip_network'];
 $floating_ip_tenant = $context['tenant'];
 

@@ -13,14 +13,12 @@ require_once COMMON_DIR . 'utility.php';
 function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "",
 										$connection_timeout = 60, $max_time = 60) {
 
-	global $CURL_CMD, $context;
+	global $CURL_CMD;
 	
-	$HTTP_HOST = "localhost"; // get_vars_value(WEB_NODE_PRIV_IP)"";
-	$HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
+	$HTTP_HOST = get_vars_value(WEB_NODE_PRIV_IP);
+	$HTTP_PORT = get_vars_value(WEB_NODE_HTTP_PORT);
 	$USERNAME = "ncroot";
-	//$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
-	$password = "ubiqube"; //shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
-	$auth_token = $context['TOKEN'];
+	$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
 
 	if (strpos($msa_rest_api, "?") !== false) {
 		list($uri, $data) = explode("?", $msa_rest_api);
@@ -34,11 +32,27 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 				$encoded_data .= "&";
 			}
 		}
-		$uri_encoded = encode_uri($uri);
+		$ait = new ArrayIterator(explode("/", $uri));
+		$cit = new CachingIterator($ait);
+		$uri_encoded = "";
+		foreach ($cit as $uri_path) {
+			$uri_encoded .= rawurlencode($uri_path);
+			if ($cit->hasNext()) {
+				$uri_encoded .= "/";
+			}
+		}
 		$url = "'http://{$HTTP_HOST}:{$HTTP_PORT}/ubi-api-rest/{$uri_encoded}?{$encoded_data}'";
 	}
 	else {
-		$uri_encoded = encode_uri($msa_rest_api);
+		$ait = new ArrayIterator(explode("/", $msa_rest_api));
+		$cit = new CachingIterator($ait);
+		$uri_encoded = "";
+		foreach ($cit as $uri_path) {
+			$uri_encoded .= rawurlencode($uri_path);
+			if ($cit->hasNext()) {
+				$uri_encoded .= "/";
+			}
+		}
 		$url = "'http://{$HTTP_HOST}:{$HTTP_PORT}/ubi-api-rest/{$uri_encoded}'";
 	}
 
@@ -46,11 +60,18 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 	if (strpos($json_body, "@") === 0) {
 		$content_type = "*/*";
 	}
-	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -H \"Authorization: Bearer $auth_token\" --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
+	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -u {$USERNAME}:\$p --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
 	if ($json_body !== "") {
-		$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
+		if (is_json($json_body)) {
+			$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
+		}
+		else {
+		    $json_body = preg_replace("/'/",'', $json_body ); //remove '
+		    $curl_cmd .= ' -d '.escapeshellarg($json_body);
+		}
 	}
 	logToFile("Curl Request : $curl_cmd\n");
+	$curl_cmd = "p=$(" . ENCP_SCRIPT .  " '{$NCROOT_PASSWORD}');{$curl_cmd}";
 	return $curl_cmd;
 }
 
@@ -416,32 +437,9 @@ function perform_curl_operation ($curl_cmd, $operation = "") {
 		$wo_newparams['response_raw_headers'] = $result;
 		logToFile("Curl Response :\n$result\n");
 	}
-
+	
 	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $wo_newparams);
 	return $response;
-}
-
-function process_rest_reponse($output_array) {
-    foreach ($output_array as $line) {
-        logToFile('line .......:-----' . $line);
-    	if (strpos($line, 'Authorization:') !== false) {
-    		return $line;
-    	}
-    }
-    return 'no_token';
-}
-
-function encode_uri($uri) {
-    $ait = new ArrayIterator(explode("/", $uri));
-	$cit = new CachingIterator($ait);
-	$encoded_uri = "";
-	foreach ($cit as $uri_path) {
-		$encoded_uri .= rawurlencode($uri_path);
-		if ($cit->hasNext()) {
-			$encoded_uri .= "/";
-		}
-	}
-	return $encoded_uri;
 }
 
 ?>

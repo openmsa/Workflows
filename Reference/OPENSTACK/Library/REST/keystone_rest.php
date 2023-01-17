@@ -2,7 +2,7 @@
 
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/utility.php';
 
-#export TEST_TOKEN=`curl -si 'http://ct-int-vip:25357/v3/auth/tokens' -X OP_POST -H 'Accept: application/json' 
+#export TEST_TOKEN=`curl -si 'http://xxxxxx/v3/auth/tokens' -X OP_POST -H 'Accept: application/json' 
 #-H 'Content-type: application/json' 
 #-d '{'auth': {'identity': {'methods': ['password'], 'password': {'user': {'domain': {'name': 'Default'}, 
 #'name': 'abc', 'password': 'abc'}}},  'scope': {'project': {'domain': {'name': 'Default'}, 
@@ -11,13 +11,11 @@ function _keystone_project_scoped_token_get ($keystone_endpoint, $userdomain, $u
 									$scopedomain, $projectname) {
 	
 	$array = array();
-	//$array['domain'] = array('id' => $userdomain);
-	$array['domain'] = array('name' => $userdomain);
+	$array['domain'] = array('id' => $userdomain);
 	$array['user'] = array('domain' => $array['domain'], 'name' => $username, 'password' => $password);
 	$array['password'] = array('user' => $array['user']);
 
-	//$array['domain'] = array('id' => $scopedomain);
-	$array['domain'] = array('name' => $scopedomain);
+	$array['domain'] = array('id' => $scopedomain);
 	$array['project'] = array('domain' => $array['domain'], 'id' => $projectname);
 	$array['scope'] = array('project' => $array['project']);
 	
@@ -32,7 +30,7 @@ function _keystone_project_scoped_token_get ($keystone_endpoint, $userdomain, $u
 	return $response;
 }
 
-#export ADMIN_TOKEN=`curl -si -X OP_POST http://ct-int-vip:25357/v3/auth/tokens -H "Accept: application/json" 
+#export ADMIN_TOKEN=`curl -si -X OP_POST http://xxxxxxxxxx/v3/auth/tokens -H "Accept: application/json" 
 #-H "Content-type: application/json" -d '{"auth": {"identity": {"methods": ["password"], 
 #"password": {"user": {"domain": {"name": "dmnAdmin"}, "name": "usrDmnAdmin", "password": "xxxxxxxx"}}},  
 #"scope": {"domain":  {"name": "Default"}}}}' | grep X-Subject-Token | awk '{print $2}' | sed 's/\r//'`;echo $ADMIN_TOKEN
@@ -57,7 +55,7 @@ function _keystone_domain_scoped_token_get ($keystone_endpoint, $userdomain, $us
 	return $response;
 }
 
-#curl -si 'http://10.1.144.111:35357/v2.0/tokens' -H "Content-type: application/json" 
+#curl -si 'http://xxxxxxxxxxxxxxx/v2.0/tokens' -H "Content-type: application/json" 
 #-d '{ "auth": {"tenantId": "1234", "passwordCredentials" : {"username": "admin", "password": "admin123"}}}'
 function _keystone_v2_token_get ($keystone_endpoint, $username, $password, $tenant_id) {
 
@@ -79,7 +77,7 @@ function _keystone_v2_token_get ($keystone_endpoint, $username, $password, $tena
 	return $response;
 }
 
-#curl -i -X OP_POST http://ct-int-vip:25357/v3/users -H "X-Auth-Token: ${ADMIN_TOKEN}" -H "Accept: application/json" 
+#curl -i -X OP_POST http://xxxxxxxxxxx/v3/users -H "X-Auth-Token: ${ADMIN_TOKEN}" -H "Accept: application/json" 
 #-H "Content-type: application/json" -d 
 #'{"user": {"domain_id": "v2AccessDomain", "enabled": true,"name": "abc"}}'
 function _keystone_user_create ($keystone_endpoint, $auth_token, $domain_id, $name, $enabled = "true") {
@@ -104,7 +102,7 @@ function _keystone_user_create ($keystone_endpoint, $auth_token, $domain_id, $na
 	return $response;
 }
 
-#url -i -X PATCH http://ct-int-vip:25357/v3/users/c02b1913b277410784c6956e24360141 -H "X-Auth-Token: ${ADMIN_TOKEN}" 
+#url -i -X PATCH http://xxxxxxxx/v3/users/c02b1913b277410784c6956e24360141 -H "X-Auth-Token: ${ADMIN_TOKEN}" 
 #-H "Accept: application/json" -H "Content-type: application/json" -d '{"user": {"password": "abc"}}'
 function _keystone_user_password_update ($keystone_endpoint, $auth_token, $user_id, $password) {
 	
@@ -125,7 +123,7 @@ function _keystone_user_password_update ($keystone_endpoint, $auth_token, $user_
 	return $response;
 }
 
-#curl -i -X OP_POST http://ct-int-vip:25357/v3/projects -H "X-Auth-Token: ${ADMIN_TOKEN}" -H "Accept: application/json" 
+#curl -i -X OP_POST http://xxxxxxxxx/v3/projects -H "X-Auth-Token: ${ADMIN_TOKEN}" -H "Accept: application/json" 
 #-H "Content-type: application/json" -d 
 #'{"project": {"enabled": true, "domain_id": "v2AccessDomain", "description": null,"name": "abc"}}'
 function _keystone_project_create ($keystone_endpoint, $auth_token, $domain_id, $name, $enabled = "true", $description = "") {
@@ -150,7 +148,7 @@ function _keystone_project_create ($keystone_endpoint, $auth_token, $domain_id, 
 	return $response;
 }
 
-#curl -i -X OP_PUT http://ct-int-vip:25357/v3/projects/${PJID}/users/$USERID/roles/$ROLEID -H "X-Auth-Token: ${ADMIN_TOKEN}" 
+#curl -i -X OP_PUT http://xxxxxxxxxxx/v3/projects/${PJID}/users/$USERID/roles/$ROLEID -H "X-Auth-Token: ${ADMIN_TOKEN}" 
 #-H "Accept: application/json" -H "Content-type: application/json"
 function _keystone_user_role_add ($keystone_endpoint, $auth_token, $tenant_id, $user_id, $role_id) {
 

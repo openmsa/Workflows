@@ -20,6 +20,8 @@ require_once LIBRARY_DIR . 'openstack_function.php';
 require_once LIBRARY_DIR . 'customer_rest.php';
 require_once LIBRARY_DIR . 'operator_rest.php';
 require_once LIBRARY_DIR . 'widget_portal_rest.php';
+require_once LIBRARY_DIR . 'asset_rest.php';
+require_once LIBRARY_DIR . '../constants.php';
 
 /**
  * Import objects for a device
@@ -82,6 +84,7 @@ function synchronize_objects_and_verify_response ($device_id, $connection_timeou
 		return $response;
 	}
 	$message = "";
+	$wo_newparams = array();
 	foreach ($response['wo_newparams'] as $object) {
 		$object_newparam['wo_newparams'] = $object;
 		$response = verify_response($object_newparam, $device_id, CMD_SYNCHRONIZE);
@@ -177,6 +180,7 @@ function verify_response($response, $device_id, $command_name, $comment = '') {
 	}
 	else {
 		if ($command_name === CMD_SYNCHRONIZE) {
+		    $wo_newparams = json_decode($message, true);
 			$obj_name = substr($message, 2);
 			$obj_name = substr($obj_name, 0, strpos($obj_name, "\""));
 			$message = $obj_name;
@@ -526,7 +530,7 @@ function wait_for_provisioning_completion ($device_id, $process_params, $sleep_t
  * @param unknown $process_params
  * @return mixed|unknown
  */
-function wait_for_pushconfig_completion ($device_id, $process_params, $ignore_messages = array(), $timeout = PUSH_CONFIG_TIMEOUT) {
+function wait_for_pushconfig_completion ($device_id, $process_params, $ignore_messages = array(), $timeout = PUSH_CONFIG_TIMEOUT, $upd_task_execution = true) {
 
 	$wo_newparams = array();
 	$status = '';
@@ -558,7 +562,9 @@ function wait_for_pushconfig_completion ($device_id, $process_params, $ignore_me
 		else {
 			$wo_comment_print = $wo_comment;
 		}
-		update_asynchronous_task_details($process_params, $check_pushconfig_status_message . $wo_comment_print);
+	        if ($upd_task_execution) {
+			update_asynchronous_task_details($process_params, $check_pushconfig_status_message . $wo_comment_print);
+		}
 		if ($status === ENDED) {
 			break;
 		}
@@ -722,6 +728,7 @@ function wait_for_ssh_status ($ip_address, $port_no = SSH_DEFAULT_PORT_NO, $proc
 
 /**
  * Execute a shell cmd and wait for a particular output string
+ * If the $expected_output_string is empty, we are waiting the output of the command is empty (used for stop ping monitoring, the device should be disaspear from sdlist)
  *
  * @param unknown $cmd
  * @param unknown $expected_output_string
@@ -747,9 +754,15 @@ function execute_linux_command_and_wait_for_output ($cmd, $expected_output_strin
 		}
 		logToFile("Command : $cmd");
 		logToFile("Output : $output");
-		sleep(LINUX_CMD_OUTPUT_CHECK_SLEEP);
+		if ($total_sleeptime>0) {
+		  sleep(LINUX_CMD_OUTPUT_CHECK_SLEEP);
+		}else{
+		  //the first times, we sleep only 1 seconde to have the time to see the display
+		  sleep(1);  
+		}	
 		$total_sleeptime += LINUX_CMD_OUTPUT_CHECK_SLEEP;
 		$wo_comment = "Command : $cmd\nOutput : $output\n";
+		$wo_comment = preg_replace('#Forti(\w+)\S+#','Device', $wo_comment);  //Replace the Word "Forti*" with Device
 		update_asynchronous_task_details($process_params, $check_cmd_output_message . $wo_comment);
 		if ($total_sleeptime > $timeout) {
 			$wo_comment .= "The expected output string was not available in the command output within $timeout seconds.\nHence, Ending the Process as Failure.";
@@ -798,9 +811,17 @@ function wait_for_process_completion ($process_id, $process_params, $sleep_time 
   //In processTaskStatus we don't see all available tasks before all tasks are finished, there are filled one after one when they are finished individually.
   //We want write into logs the running task and each task already ended. 
   
+  if ($process_status!== ENDED){
+    update_asynchronous_task_details($process_params, implode('',$update_async_task_details) );
+    //wait $sleep_time secondes before to check the status
+    sleep($sleep_time);
+  }  
+
   while ($process_status === RUNNING) { //status of the whole tasks, it will be ended when all tasks are ended.
     $response = _orchestration_get_process_instance($process_id);
     $response = json_decode($response, true);
+    logToFile(debug_dump($response , "msa_common.php process_id=$process_id, sleep_time=$sleep_time _orchestration_get_process_instance22=\n"));
+
     if ($response['wo_status'] !== ENDED) {
       $response = json_encode($response);
       return $response;
@@ -833,18 +854,13 @@ function wait_for_process_completion ($process_id, $process_params, $sleep_time 
         $tasks_already_displayed[$order][$order_status]=1;
       }  
     } 
-    $update_async_task_details_string='';
-    foreach ($update_async_task_details as $detail){
-      $update_async_task_details_string .= $detail;
-    }       
-    update_asynchronous_task_details($process_params, $update_async_task_details_string);
+    update_asynchronous_task_details($process_params, implode('',$update_async_task_details));
     
     if ($process_status!== ENDED){
       sleep($sleep_time);
     }    
   }
     
-  //$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $wo_newparams);
   $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']);
   return $response;
 }
@@ -992,6 +1008,57 @@ function msa_execute_service_by_reference_and_wait_for_completion ($external_ref
 	}
 }
 
+/**
+ * Poll Device Backup Status and wait for it's completion
+ *
+ * @param unknown $device_id
+ * @param unknown $process_params
+ * @return mixed|unknown
+ */
+function wait_for_backup_completion ($device_id, $process_params, $timeout = DEVICE_BACKUP_TIMEOUT) {
 
+	$wo_newparams = array();
+	$status = '';
+	$wo_comment = "";
+	$total_sleeptime = 0;
+	$check_backup_status_message = "Checking Device $device_id Backup Status (every " . DEVICE_BACKUP_CHECK_SLEEP . " seconds";
+	$check_backup_status_message .= ", timeout = $timeout seconds) :\n";
+	while ($status !== ENDED) {
+
+		$response = _device_get_backup_status_by_device_id($device_id);
+		$response = json_decode($response, true);
+		if ($response['wo_status'] !== ENDED) {
+			$response = json_encode($response);
+			return $response;
+		}
+		$status = $response['wo_newparams']['status'];
+		$message = $response['wo_newparams']['message'];
+		$revision_id = $response['wo_newparams']['revisionId'];
+		logToFile("BACKUP STATUS : $status");
+		logToFile("BACKUP MESSAGE : $message");
+		logToFile("BACKUP REVISION ID : $revision_id");
+
+		$wo_comment = "Backup Status : " . $status;
+		$wo_comment .= "\nBackup Message : $message\n";
+		$wo_comment .= "\nBackup Revision Id : $revision_id\n";
+		update_asynchronous_task_details($process_params, $check_backup_status_message . $wo_comment);
+		if ($status === ENDED) {
+			break;
+		}
+		else if ($status === FAILED) {
+			$response = prepare_json_response(FAILED, $message, $wo_newparams, true);
+			return $response;
+		}
+		sleep(DEVICE_BACKUP_CHECK_SLEEP);
+		$total_sleeptime += DEVICE_BACKUP_CHECK_SLEEP;
+		if ($total_sleeptime > $timeout) {
+			$wo_comment .= "The Device $device_id Backup could not be completed within $timeout seconds.\nHence, Ending the Process as Failure.";
+			$response = prepare_json_response(FAILED, $wo_comment, $wo_newparams, true);
+			return $response;
+		}
+	}
+	$response = prepare_json_response(ENDED, $wo_comment, $wo_newparams);
+	return $response;
+}
 
 ?>

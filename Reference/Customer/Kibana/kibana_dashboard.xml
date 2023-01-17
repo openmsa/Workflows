@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>dashboardName</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group>Dashboard</group>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Deploy Dashboard</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Customer Id" displayOrder="0" isMandatory="true" isUserLocked="true" maxLength="100" name="params.customer_id" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false"/>
+    <variable displayName="Ipaddress" displayOrder="1" isMandatory="true" isUserLocked="true" maxLength="100" name="params.ipAddress" numberOfRowMax="0" startIncrement="0" type="IpAddress" visible="false"/>
+    <variable default="5601" displayName="Port" displayOrder="2" isMandatory="true" isUserLocked="true" maxLength="100" name="params.port" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false"/>
+    <variable default=".kibana" displayName="Index" displayOrder="3" isMandatory="true" isUserLocked="true" maxLength="100" name="params.index" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable default="dashboard" displayName="Type" displayOrder="4" isMandatory="true" maxLength="100" name="params.type" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable default="template_default" displayName="Template Name" displayOrder="5" isMandatory="true" maxLength="100" name="params.template name" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Default traffic overview">template_default</value>
+        <value displayValue="Email overview">template_Email_Overview</value>
+        <value displayValue="WEB traffic">template_WEB</value>
+        <value displayValue="USER traffic">template_USER</value>
+        <value displayValue="URL information">template_URL</value>
+        <value displayValue="Netflow TOP 20 Application Name/Bytes/IP/Port">template_NF_BYTES_IP_PORT</value>
+        <value displayValue="Event and Alarm">template_Event_Alarm</value>
+        <value displayValue="Event and Alarm Rule">template_Event_Alarm_Rule</value>
+        <value displayValue="Events Per Traffic">template_Events_Per_Traffic</value>
+        <value displayValue="Netflow Counter">template_NF_Counter</value>
+      </values>
+      <description>Select available dashboards on Kibana or write the name of your created dashboard (based on the dashboard url) </description>
+    </variable>
+    <variable displayName="Dashboard Name" displayOrder="6" isMandatory="true" maxLength="100" name="params.dashboardName" numberOfRowMax="0" startIncrement="0" type="String">
+      <description>Name of your duplicated dashbaoard from your selected dashboard template</description>
+    </variable>
+    <variable displayName="Searchinguri" displayOrder="7" maxLength="100" name="params.searchingURI" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Uriputes" displayOrder="8" maxLength="100" name="params.uriPutES" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName="Hash" displayOrder="19" isMandatory="true" isUserLocked="true" maxLength="100" name="params.Hash" numberOfRowMax="0" startIncrement="0" type="String" visible="false"/>
+    <variable displayName=" Kibana Url" displayOrder="20" isUserLocked="true" maxLength="100" name="params.kibanaUrl" numberOfRowMax="0" startIncrement="0" type="Link"/>
+    <variable displayName="Kibanaport" displayOrder="21" maxLength="100" name="params.kibanaPort" numberOfRowMax="0" startIncrement="0" type="Integer" visible="false"/>
+    <variable displayName="Kibanaipaddress" displayOrder="22" maxLength="100" name="params.kibanaIpAddress" numberOfRowMax="0" startIncrement="0" type="IpAddress" visible="false"/>
+    <variable default="Advanced" displayName="Filter type" displayOrder="38" editable="false" isMandatory="true" maxLength="100" name="params.filterType" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Basic ">Basic </value>
+        <value displayValue="Advanced">Advanced</value>
+      </values>
+      <sections>
+        <section>Filtering</section>
+      </sections>
+      <description>- Advanced : your write all fields and their values  with operators ( OR, AND ) in Advanced filter input
+
+- Basic : you have Basic Fitler table that you can put fields and select your operator.  Then you can decide if you want to apply your filter directly or just save it</description>
+    </variable>
+    <variable displayName="Advanced filter" displayOrder="39" maxLength="100" name="params.advancedFilter" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite">
+      <sections>
+        <section>Filtering</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Advanced filter" displayOrder="0" maxLength="100" name="params.advancedFilter" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String">
+          <sections>
+            <section>Filtering</section>
+          </sections>
+        </behavior>
+        <behavior displayName="advancedFilter" displayOrder="0" maxLength="100" name="params.advancedFilter" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String" visible="false"/>
+      </behaviors>
+      <description>Write your filter in according index fields (ex. port:&lt;50 OR protocol:UDP)</description>
+    </variable>
+    <variable displayName="Advancedfilterempty" displayOrder="40" isUserLocked="true" maxLength="100" name="params.advancedFilterEmpty" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Filtering</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Advancedfilterempty" displayOrder="0" isUserLocked="true" maxLength="100" name="params.advancedFilterEmpty" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>Filtering</section>
+          </sections>
+        </behavior>
+        <behavior displayName="advancedFilterEmpty" displayOrder="0" maxLength="100" name="params.advancedFilterEmpty" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Basicfilterempty" displayOrder="41" isUserLocked="true" maxLength="100" name="params.basicFilterEmpty" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Filtering</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="basicFilterEmpty" displayOrder="0" maxLength="100" name="params.basicFilterEmpty" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Basicfilterempty" displayOrder="0" isUserLocked="true" maxLength="100" name="params.basicFilterEmpty" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>Filtering</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Basic filter" displayOrder="42" isMandatory="true" isUserLocked="true" maxLength="100" name="params.basicFilter" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite">
+      <sections>
+        <section>Filtering</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="basicFilter" displayOrder="0" maxLength="100" name="params.basicFilter" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false"/>
+        <behavior displayName="Basic filter" displayOrder="0" isMandatory="true" maxLength="100" name="params.basicFilter" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String">
+          <sections>
+            <section>Filtering</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Field" displayOrder="50" isMandatory="true" maxLength="100" name="params.filter.0.field" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Basic Filter</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="field" displayOrder="0" maxLength="100" name="params.filter.0.field" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>filter</section>
+          </sections>
+        </behavior>
+        <behavior displayName="Field" displayOrder="0" isMandatory="true" maxLength="100" name="params.filter.0.field" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String">
+          <sections>
+            <section>Basic Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Value" displayOrder="51" isMandatory="true" maxLength="100" name="params.filter.0.value" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Basic Filter</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="value" displayOrder="0" maxLength="100" name="params.filter.0.value" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>filter</section>
+          </sections>
+        </behavior>
+        <behavior displayName="Value" displayOrder="0" isMandatory="true" maxLength="100" name="params.filter.0.value" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String">
+          <sections>
+            <section>Basic Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Operator" displayOrder="52" isMandatory="true" maxLength="100" name="params.filter.0.operator" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Basic Filter</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="operator" displayOrder="0" maxLength="100" name="params.filter.0.operator" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>filter</section>
+          </sections>
+        </behavior>
+        <behavior default="&amp;&amp;" displayName="Operator" displayOrder="0" editable="false" isMandatory="true" maxLength="100" name="params.filter.0.operator" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="String">
+          <values>
+            <value displayValue="AND">&amp;&amp;</value>
+            <value displayValue="OR">||</value>
+          </values>
+          <sections>
+            <section>Basic Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable displayName="Resultbasictfilter" displayOrder="53" isMandatory="true" maxLength="100" name="params.filter.0.resultBasictFilter" numberOfRowMax="0" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Basic Filter</section>
+      </sections>
+    </variable>
+    <variable displayName="Apply" displayOrder="54" isMandatory="true" maxLength="100" name="params.filter.0.apply" numberOfRowMax="0" selector="params.filterType" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Basic Filter</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="apply" displayOrder="0" maxLength="100" name="params.filter.0.apply" numberOfRowMax="0" selectorValue="Advanced" startIncrement="0" type="String" visible="false">
+          <sections>
+            <section>filter</section>
+          </sections>
+        </behavior>
+        <behavior default="false" displayName="Apply" displayOrder="0" isMandatory="true" maxLength="100" name="params.filter.0.apply" numberOfRowMax="0" selectorValue="Basic " startIncrement="0" type="Boolean">
+          <sections>
+            <section>Basic Filter</section>
+          </sections>
+        </behavior>
+      </behaviors>
+    </variable>
+    <variable default="service" displayName="Level" displayOrder="143" editable="false" isMandatory="true" maxLength="100" name="params.levelView" numberOfRowMax="0" startIncrement="0" type="String">
+      <values>
+        <value displayValue="Customer">service</value>
+        <value displayValue="Device">device</value>
+      </values>
+      <sections>
+        <section>Level View</section>
+      </sections>
+      <description>In according your selection, the dashboard that your are going to deploy will be display in the appropriated tab</description>
+    </variable>
+    <variable displayName="Device Id" displayOrder="144" maxLength="100" name="params.device_id" numberOfRowMax="0" selector="params.levelView" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Level View</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Device Id" displayOrder="0" isMandatory="true" keepOnImport="true" maxLength="100" name="params.device_id" numberOfRowMax="0" selectorValue="device" startIncrement="0" type="Device">
+          <sections>
+            <section>Device View</section>
+          </sections>
+        </behavior>
+        <behavior displayName="device_id" displayOrder="0" maxLength="100" name="params.device_id" numberOfRowMax="0" selectorValue="service" startIncrement="0" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+    <variable displayName="Device Ip" displayOrder="177" maxLength="100" name="params.device_ip" numberOfRowMax="0" selector="params.levelView" startIncrement="0" type="Composite" visible="false">
+      <sections>
+        <section>Level View</section>
+      </sections>
+      <behaviors>
+        <behavior displayName="Device Ip" displayOrder="0" isUserLocked="true" maxLength="100" name="params.device_ip" numberOfRowMax="0" selectorValue="device" startIncrement="0" type="IpAddress" visible="false">
+          <sections>
+            <section>Device View</section>
+          </sections>
+        </behavior>
+        <behavior displayName="device_ip" displayOrder="0" maxLength="100" name="params.device_ip" numberOfRowMax="0" selectorValue="service" startIncrement="0" type="String" visible="false"/>
+      </behaviors>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/Reference/Customer/Kibana/Process_Create_Report_Dashboard">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Create Dashboard</displayName>
+    <type>CREATE</type>
+    
+    
+    
+  <task name="Task_Search_Dashboard_Template_Selected.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Customer/Kibana/Process_Create_Report_Dashboard/</processPath>
+      <displayName>Search Dashboard Template Selected</displayName>
+    </task>
+    <task name="Task_Send_the_new_template_to_ES.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Customer/Kibana/Process_Create_Report_Dashboard/</processPath>
+      <displayName>Send the new template to ES</displayName>
+    </task>
+  <compensation/>
+  </process>
+  <process name="Process/Reference/Customer/Kibana/Process_Delete_Dashboard">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Delete Dashboard</displayName>
+    <type>DELETE</type>
+    <task name="Task_Delete_Dashboard.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Customer/Kibana/Process_Delete_Dashboard/</processPath>
+      <displayName>Delete Dashboard</displayName>
+    </task>
+  <compensation/>
+  </process>
+  <process name="Process/Reference/Customer/Kibana/Process_Update_Dashboard">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Update Dashboard</displayName>
+    <type>UPDATE</type>
+    
+    
+    
+  <task name="Task_Search_Dashboard_Selected_for_Updating.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Customer/Kibana/Process_Update_Dashboard/</processPath>
+      <displayName>Search Dashboard Selected for Updating</displayName>
+    </task>
+    <task name="Task_Send_back_template_to_ES_for_Updating.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Customer/Kibana/Process_Update_Dashboard/</processPath>
+      <displayName>Send back template to ES for Updating</displayName>
+    </task>
+  <compensation/>
+  </process>
+</ObjectDefinition>

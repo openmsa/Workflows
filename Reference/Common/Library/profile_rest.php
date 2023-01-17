@@ -90,6 +90,51 @@ function _profile_configuration_delete_by_id ($customer_id, $profile_id) {
 	return $response;
 }
 
+
+/**
+ * Create new Monitoring profile
+ * 
+ * /usr/bin/curl -isw 'HTTP_CODE=%{http_code}' -u ncroot:$PWD --connect-timeout 60 --max-time 60 -H "Content-Type: application/json" -X POST 'http://127.0.0.1:80/ubi-api-rest/profile/v1/create' -d '{"actorId": "46", "customerId": "56", "externalReference": "MON",  "name": "MON", "type": "M"}'
+ *
+ * the output :
+ * "id": 0, "prefix": "string", "ubiId": "string", "name": "string", "externalReference": "string",  "operatorId": 0, "displayName": "string", "displayNameForJsps": "string", "type": "string",  "profileType": "string", "customerId": 0
+ */
+
+function _profile_monitoring_create ($manager_id, $customer_id, $monitoring_profile_reference,  $monitoring_profile_reference){
+  
+  $msa_rest_api = "profile/v1/create"; 
+  $param= array ("actorId"           => $manager_id,
+                 "customerId"        => $customer_id,
+                 "externalReference" => $monitoring_profile_reference,
+                 "name"              => $monitoring_profile_reference,
+                 "type"              => 'M'   ); 
+  $json =   json_encode($param);
+  $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json);
+  $response = perform_curl_operation($curl_cmd, "Create new Monitory Profil $monitoring_profile_reference to operator ");
+  return $response;
+}
+
+
+
+/**
+ * Attach Monitoring profile to customer by external reference
+ * /usr/bin/curl -isw 'HTTP_CODE=%{http_code}' -u ncroot:$p --connect-timeout 60 --max-time 60 -H "Content-Type: application/json" -X POST 'http://127.0.0.1:80/ubi-api-rest/profile/v1/ecl2_0v2-80/attach/M80'
+ * output {
+    "wo_status": "ENDED",
+    "wo_comment": "The monitoring profile M80 is attached to ecl2_0v2-80.\n",
+    "wo_newparams": {................
+ * 
+ */
+
+function _profile_monitoring_attach_to_customer ($customer_ext_reference,$monitoring_profile_reference){
+  
+  $msa_rest_api = "profile/v1/$customer_ext_reference/attach/$monitoring_profile_reference";
+  $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api);
+  $response = perform_curl_operation($curl_cmd, "Attach monitoring profile $monitoring_profile_reference to $customer_ext_reference");
+  return $response;
+}
+
+
 /**
  * Export Monitoring Profile
  * 

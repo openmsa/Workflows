@@ -32,6 +32,7 @@ if ($response['wo_status'] !== ENDED) {
 $token_id = $response['wo_newparams']['access']['token']['id'];
 $endpoints = $response['wo_newparams']['access']['serviceCatalog'];
 $context['token_id'] = $token_id;
+$context['token_id_expire'] = time() +  OPENSTACK_TOKEN_ID_EXPIRE_SEC; // expire in 5 minutes
 $context['endpoints'] = seperate_endpoints_v2($endpoints);
 $response = prepare_json_response(ENDED, "Token created successfully.\nToken Id : $token_id", $context, true);
 echo $response;

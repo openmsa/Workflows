@@ -19,6 +19,7 @@ define('REPORT_DIRECTORY', 'Reports');
 define('DOCUMENTATION_DIRECTORY', 'Documentation');
 
 // Filepaths and variable to get the ncroot password
+define('VARS_CTX_FILE', '/opt/configurator/vars.ubiqube.net.ctx');
 define('WEB_NODE_PRIV_IP', 'UBI_VSOC_SES_PRIVIP');
 define('WEB_NODE_PUB_IP', 'UBI_VSOC_SES_PUBIP');
 define('WEB_NODE_HTTP_PORT', 'UBI_VSOC_SES_PORT');
