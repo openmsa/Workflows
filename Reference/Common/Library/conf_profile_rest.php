@@ -1,12 +1,7 @@
 <?php
 
 require_once COMMON_DIR . 'curl_performer.php';
-
-function _conf_profile_create22 ($customer_id, $conf_profile_name ) {
-  $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, 'TEST OK');
-  return $response;        
-}              
-        
+ 
 /**
  * Create configuration profile / Deployment setting
  *   curl -u   -XPOST http://localhost:80/ubi-api-rest/conf-profile/v2/{$customer_id}
@@ -20,15 +15,13 @@ function _conf_profile_create ($customer_id, $conf_profile_name, $manufacturer_i
   $array = array('name' => $conf_profile_name,
       'externalReference'       => $conf_profile_external_reference,
       'vendor'                  => array( "id" => $manufacturer_id),
-      'modelId'                 => array( "id" => $model_id  ),
+      'model'                   => array( "id" => $model_id  ),
       'comment'                 => $comment,
       'microserviceUris'        => $microserviceUris,
       'templateUris'            => $templateUris,
       'attachedManagedEntities' => $attachedManagedEntities
       );
- 
-  $response = prepare_json_response(FAILED, ENDED_SUCCESSFULLY, json_encode($array));
-  return $response;
+           
  
   $json = json_encode($array);
   $msa_rest_api = "conf-profile/v2/{$customer_id}";
