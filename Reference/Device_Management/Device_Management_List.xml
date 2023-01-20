@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Device Management List</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Total Number Of Devices" displayOrder="4" isUserLocked="true" maxLength="100" name="params.total_of_devices" startIncrement="0" type="String">
+      <sections>
+        <section>Get Device List</section>
+      </sections>
+    </variable>
+    <variable displayName="File" displayOrder="6" isUserLocked="true" maxLength="100" name="params.file" startIncrement="0" type="String">
+      <sections>
+        <section>Get Device List</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+<process name="Process/Reference/Device_Management/Process_Get_Device_List">
+    <visibility>5</visibility>
+    <displayName>Get Device List</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    <task name="Task_Get_Device_List.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Management/Process_Get_Device_List/Tasks/</processPath>
+      <displayName>Get Device List</displayName>
+    </task>
+  <compensation/>
+  </process>
+<process name="Process/Reference/Device_Management/Process_Move_to_Trash">
+    <visibility>5</visibility>
+    <displayName>Move to Trash</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <compensation/>
+  </process>
+<process name="Process/Reference/Device_Management/Process_Update_Device_List">
+    <visibility>5</visibility>
+    <displayName>Update Device List</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_Update_Device_List.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Management/Process_Update_Device_List/Tasks/</processPath>
+      <displayName>Update Device List</displayName>
+    </task>
+  <compensation/>
+  </process>
+</ObjectDefinition>

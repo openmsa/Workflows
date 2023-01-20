@@ -2,8 +2,8 @@
 
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/utility.php';
 
-#curl -i http://10.1.144.111:8774/v2/ebd239c789994f3a88d6da7083098851/flavors -X POST 
-#-H "X-Auth-Token:fb7317fa0c3c43949ccbe9de55dfba85" -H "Accept: application/json" -H "Content-type: application/json"
+#curl -i http://xxxxx:8774/v2/ebd239c789994f3a88d6da7083098851/flavors -X POST 
+#-H "X-Auth-Token:yyyyy" -H "Accept: application/json" -H "Content-type: application/json"
 # -d '{"flavor" :{ "name":"test-flavor2","ram":1024,"vcpus":2,"disk":10,"os-flavor-access:is_public": false}}'
 function _nova_flavor_create ($nova_endpoint, $auth_token, $tenant_id, $ram, $vcpus, $disk, $name = "", $is_public = false) {
 	
@@ -31,13 +31,13 @@ function _nova_flavor_create ($nova_endpoint, $auth_token, $tenant_id, $ram, $vc
 }
 
 
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
+#curl -i http://xxxx:28774/v2/${PJID}/servers -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
 #-H "Accept: application/json" -H "Content-Type: application/json" -d 
-#'{ "server": { "availability_zone": "ote-lab1","flavorRef": "120","imageRef":"6a0de364-7fef-4e02-9e6e-2b4d3bead6fd",
+#'{ "server": { "availability_zone": "ote-lab1","flavorRef": "120","imageRef":"xxx",
 #"max_count": 1,"min_count": 1,"name": "vyatta_other_tenant_07",
-#"networks":[{"uuid":"a4000cdf-835b-4ec0-942d-a456a3b4f495","port_id":"7dceafe1-ef96-4047-b717-dc354eb48ea2"}]}}'
+#"networks":[{"uuid":"a4000cdf-835b-4ec0-942d-a456a3b4f495","port_id":"xxxx"}]}}'
 function _nova_server_create ($nova_endpoint, $auth_token, $name, $flavor, $image, 
-							$networks, $availability_zone = "", $user_data = "", 
+							$networks, $availability_zone = "", $user_data = "", $config_drive = "", 
 							$security_groups = array(), $min_count = 1, $max_count = 1) {
 
 	$array = array();
@@ -45,12 +45,15 @@ function _nova_server_create ($nova_endpoint, $auth_token, $name, $flavor, $imag
 	$array['flavorRef'] = $flavor;
 	$array['imageRef'] = $image;
 	$array['networks'] = $networks;
-	if ($availability_zone !== "") {
+	if (!empty($availability_zone)) {
 		$array['availability_zone'] = $availability_zone;
 	}
-	if ($user_data !== "") {
+	if (!empty($user_data)) {
 		$array['user_data'] = $user_data;
 	}
+	if (!empty($config_drive)) {
+                $array['config_drive'] = $config_drive;
+        }
 	if (!empty($security_groups)) {
 		$array['security_groups'] = $security_groups;
 	}
@@ -73,9 +76,9 @@ function _nova_server_create ($nova_endpoint, $auth_token, $name, $flavor, $imag
 	return $response;
 }
 
-#curl -g -i -X PUT http://10.31.1.13:8774/v2/5b57e85c3a4e4cc3ae81ea2a503e1d6e/servers/d4e139f8-2cd2-4519-9e3c-32fb6d22fadd 
+#curl -g -i -X PUT http://xxxx:8774/v2/ c3ae81ea2a503e1d6e/servers/ 2cd2-4519-9e3c-32fb6d22fadd 
 #-H "User-Agent: python-novaclient" -H "Content-Type: application/json" -H "Accept: application/json" 
-#-H "X-Auth-Token: 1dbf7ef4000d44f98348cf828a5f4448" -d '{"server": {"name": "cirros"}}'
+#-H "X-Auth-Token: xxxx" -d '{"server": {"name": "cirros"}}'
 function _nova_server_update_name ($nova_endpoint, $auth_token, $server_id, $server_name) {
 
 	$array = array();
@@ -96,8 +99,8 @@ function _nova_server_update_name ($nova_endpoint, $auth_token, $server_id, $ser
 	return $response;
 }
 
-#curl -g -i -X DELETE http://10.31.1.13:8774/v2/689b343425824ee3a491a05d01f628e3/servers/bc7d8f1e-a479-483b-85a5-a85db9eb60a4 
-#-H "User-Agent: python-novaclient" -H "Accept: application/json" -H "X-Auth-Token: {SHA1}30ff76ffd347c2dda6389a46a9206250eeb14422"
+#curl -g -i -X DELETE http://xxxx:8774/v2/689b343425824ee3a491a05d01f628e3/servers/xxxxxxxxxx0a4 
+#-H "User-Agent: python-novaclient" -H "Accept: application/json" -H "X-Auth-Token: {SHA1}xxx"
 function _nova_server_delete ($nova_endpoint, $auth_token, $server_id) {
 
 	$openstack_rest_api = "{$nova_endpoint}/servers/{$server_id}";
@@ -107,7 +110,7 @@ function _nova_server_delete ($nova_endpoint, $auth_token, $server_id) {
 	return $response;
 }
 
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/1234/action -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
+#curl -i http://xxxxxx:28774/v2/${PJID}/servers/1234/action -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
 #-H "Accept: application/json" -H "Content-Type: application/json" -d '{"resize": {"flavorRef": "120"}}'
 function _nova_server_resize ($nova_endpoint, $auth_token, $server_id, $resize_flavor_id) {
 	
@@ -137,10 +140,10 @@ function _nova_server_resize_confirm ($nova_endpoint, $auth_token, $server_id) {
 	return $response;
 }
 
-#curl -g -i -X POST http://10.31.1.13:8774/v2/689b343425824ee3a491a05d01f628e3/servers/
-#43ef02a3-d596-4969-9139-09d39f1c95e5/action -H "User-Agent: python-novaclient" 
+#curl -g -i -X POST http://xxxxxxxxx:8774/v2/689b343425824ee3a491a05d01f628e3/servers/
+# -9139-09d39f1c95e5/action -H "User-Agent: python-novaclient" 
 #-H "Content-Type: application/json" -H "Accept: application/json" 
-#-H "X-Auth-Token: {SHA1}8d1fe213446613da45441bd53596c852e00913ef" -d '{"reboot": {"type": "SOFT"}}'
+#-H "X-Auth-Token: {SHA1} 45441bd53596c852e00913ef" -d '{"reboot": {"type": "SOFT"}}'
 function _nova_server_reboot ($nova_endpoint, $auth_token, $server_id, $type = "SOFT") {
 
 	$array = array();
@@ -154,9 +157,9 @@ function _nova_server_reboot ($nova_endpoint, $auth_token, $server_id, $type = "
 	return $response;
 }
 
-#curl -i 'http://10.31.1.123:8774/v2/e470fd6ea0834192ab05c17930bee22c/servers/362b95bf-da62-4c52-b39a-547aa79b78ee/action'
+#curl -i 'http://xxxxxxxx:8774/v2/e470fd6ea0834192ab05c17930bee22c/servers/-4c52-b39a-547aa79b78ee/action'
 # -X POST -H "Accept: application/json" -H "Content-Type: application/json" -H "User-Agent: python-novaclient" 
-#-H "X-Auth-Project-Id: ntt" -H "X-Auth-Token: {SHA1}eecb49db110434af8a563c44718e6d1a25e1d613" -d '{"os-start": null}'
+#-H "X-Auth-Project-Id: ntt" -H "X-Auth-Token: {SHA1}63c44718e6d1a25e1d613" -d '{"os-start": null}'
 function _nova_server_start ($nova_endpoint, $auth_token, $server_id) {
 
 	$array = array();
@@ -181,9 +184,9 @@ function _nova_server_stop ($nova_endpoint, $auth_token, $server_id) {
 	return $response;
 }
 
-#curl -g -i -X POST http://10.31.1.13:8774/v2/fe268fd218aa42868063b7cf34855899/servers/
+#curl -g -i -X POST http://xxxxxx:8774/v2/868063b7cf34855899/servers/
 #46b85ef3-caad-4749-8e72-70939fbfd086/action -H "User-Agent: python-novaclient" -H "Content-Type: application/json" 
-#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}6bfc24a82d845208fcf652dd24622f95b5ca532d" 
+#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}5208fcf652dd24622f95b5ca532d" 
 #-d '{"addSecurityGroup": {"name": "secgrp_vnf_demo"}}'
 function _nova_add_security_group ($nova_endpoint, $auth_token, $server_id, $security_group) {
 
@@ -198,9 +201,9 @@ function _nova_add_security_group ($nova_endpoint, $auth_token, $server_id, $sec
 	return $response;
 }
 
-#curl -g -i -X POST http://10.31.1.13:8774/v2/fe268fd218aa42868063b7cf34855899/servers/
+#curl -g -i -X POST http://xxxxxxx:8774/v2/42868063b7cf34855899/servers/
 #46b85ef3-caad-4749-8e72-70939fbfd086/action -H "User-Agent: python-novaclient" -H "Content-Type: application/json" 
-#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}33a8df4a62d6b9e3537d178e8fa43d789f48cc5a" 
+#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}9e3537d178e8fa43d789f48cc5a" 
 #-d '{"addFloatingIp": {"fixed_address": "192.168.2.7", "address": "10.30.19.27"}}'
 function _nova_floating_ip_associate ($nova_endpoint, $auth_token, $server_id, $floatingip_address, 
 									$fixed_address = "") {
@@ -219,9 +222,9 @@ function _nova_floating_ip_associate ($nova_endpoint, $auth_token, $server_id, $
 	return $response;
 }
 
-#curl -g -i -X POST http://10.31.1.13:8774/v2/fe268fd218aa42868063b7cf34855899/servers/
+#curl -g -i -X POST http://xxxxxxxxx:8774/v2/8aa42868063b7cf34855899/servers/
 #46b85ef3-caad-4749-8e72-70939fbfd086/action -H "User-Agent: python-novaclient" -H "Content-Type: application/json" 
-#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}df2bf9bb8cd667d0eee6f4e2cd8addbd79446a7c" 
+#-H "Accept: application/json" -H "X-Auth-Token: {SHA1}667d0eee6f4e2cd8addbd79446a7c" 
 #-d '{"removeFloatingIp": {"address": "10.30.19.27"}}'
 function _nova_floating_ip_disassociate ($nova_endpoint, $auth_token, $server_id, $floatingip_address) {
 
@@ -236,11 +239,11 @@ function _nova_floating_ip_disassociate ($nova_endpoint, $auth_token, $server_id
 	return $response;
 }
 
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/${SVID}/os-interface -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/servers/${SVID}/os-interface -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
 #-H "Accept: application/json" -H "Content-Type: application/json" -d '{"interfaceAttachment":{"port_id":"1234"}}'
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/${SVID}/os-interface -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/servers/${SVID}/os-interface -X POST -H "X-Auth-Token: ${TEST_TOKEN}" 
 #-H "Accept: application/json" -H "Content-Type: application/json" -d 
-#'{"interfaceAttachment":{"net_id":"3b49fd97-caab-40ef-9fa6-4073d1639e7c","fixed_ips":[{"ip_address":"192.168.101.2"}]}}'
+#'{"interfaceAttachment":{"net_id":"ef-9fa6-4073d1639e7c","fixed_ips":[{"ip_address":"192.168.101.2"}]}}'
 function _nova_interface_attach ($nova_endpoint, $auth_token, $server_id, $port_id = "",
 								$network_id = "", $fixed_ips = array()) {
 									
@@ -269,7 +272,7 @@ function _nova_interface_attach ($nova_endpoint, $auth_token, $server_id, $port_
 	return $response;
 }
 
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/${SVID}/os-interface/12345 -X DELETE -H "X-Auth-Token: 
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/servers/${SVID}/os-interface/12345 -X DELETE -H "X-Auth-Token: 
 #${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json" 
 function _nova_interface_detach ($nova_endpoint, $auth_token, $server_id, $port_id) {
 		
@@ -280,9 +283,9 @@ function _nova_interface_detach ($nova_endpoint, $auth_token, $server_id, $port_
 	return $response;
 }
 
-#curl -i 'http://10.31.1.125:8774/v2/5fd116d488644b84bd57fca22fb02587/servers/44916e9c-5f3e-4e2b-ae89-48f7b5c2d821/action' -X POST 
+#curl -i 'http://xxxxxxxxx:8774/v2/6d488644b84bd57fca22fb02587/servers/f3e-4e2b-ae89-48f7b5c2d821/action' -X POST 
 #-H "Accept: application/json" -H "Content-Type: application/json" -H "User-Agent: python-novaclient" -H "X-Auth-Project-Id: NTTCom" 
-#-H "X-Auth-Token: {SHA1}d4563d73b930b0e7bd37c17ab078887da0a64dd4" -d '{"os-getVNCConsole": {"type": "novnc"}}'
+#-H "X-Auth-Token: {SHA1}930b0e7bd37c17ab078887da0a64dd4" -d '{"os-getVNCConsole": {"type": "novnc"}}'
 # <console-type>  Type of vnc console ("novnc" or "xvpvnc").
 function _nova_get_vnc_console ($nova_endpoint, $auth_token, $server_id, $console_type) {
 
@@ -303,10 +306,10 @@ function _nova_get_vnc_console ($nova_endpoint, $auth_token, $server_id, $consol
 	return $response;
 }
 
-#curl -i -k https://10.1.144.116/v2/abcd/servers/abcd/os-volume_attachments -X POST 
+#curl -i -k https://xxxxxxxxxv2/abcd/servers/abcd/os-volume_attachments -X POST 
 #-H "X-Auth-Token:42946664fc6e41e392bb7ee51a9160b9" -H "Accept: application/json" 
 #-H "Content-Type: application/json" 
-#-d '{"volumeAttachment":{"volumeId":"b009c52c-97bd-4da4-916c-b2d4c90a85f4"}}'
+#-d '{"volumeAttachment":{"volumeId":"d-4da4-916c-b2d4c90a85f4"}}'
 function _nova_volume_attach ($nova_endpoint, $auth_token, $server_id, $volume_id, $device = null) {
 		
 	$array = array();
@@ -327,7 +330,7 @@ function _nova_volume_attach ($nova_endpoint, $auth_token, $server_id, $volume_i
 	return $response;
 }
 
-#curl -i -k https://10.1.144.116/v2/abcd/servers/abcd/os-volume_attachments/sdasd -X DELETE 
+#curl -i -k https://xxxxxxxxxv2/abcd/servers/abcd/os-volume_attachments/sdasd -X DELETE 
 #-H "X-Auth-Token:f16eb9820b4941879379e166e93e27c7" -H "Accept: application/json" 
 #-H "Content-Type: application/json" 
 function _nova_volume_detach ($nova_endpoint, $auth_token, $server_id, $volume_id) {
@@ -339,4 +342,122 @@ function _nova_volume_detach ($nova_endpoint, $auth_token, $server_id, $volume_i
 	return $response;
 }
 
-?>
+/**
+* VNF Live migration from hostA to hostX of the Openstack VIM.
+*
+* curl --tlsv1.2 -i -sw 'HTTP_CODE=%{http_code}' --connect-timeout 50 --max-time 50 -X POST -H "X-Auth-Token: gAAAAABdel44SS-FrqBKUdIEthbnsIH-R9cXfO307WcU3bz47fjJw1rxqLdaN4P08uw9U9P1UcB-9Qg-NAk3_FvmXD71tHmyyWYje-m2D1GFxF5WtuGZ3S0n7TsbkeIBLOoJt6bUQ45O0X9qrq9CAJtBWBoDr-SvKMrIup0nAOvlt0e09h_UINo" -H "Content-Type: application/json" -k 'http://xxxxxxxxx:8774/v2.1/df1f081bf2d345099e6bb53f6b9407ff/servers/22b555e1-2fe2-45d6-ace1-e5cad4d34db5/action' -d '{
+    "os-migrateLive": {
+        "host": "openstack2.ubiqube.com",
+        "block_migration": "false",
+		"disk_over_commit": false
+    }
+}'
+**/
+function _nova_os_migration_live($nova_endpoint, $auth_token, $server_id, $host, $block_migration = "false", $disk_over_commit = "false")
+{
+	$array = array();
+	$array['host'] = $host;
+	$array['block_migration'] = $block_migration;
+	$array['disk_over_commit'] = $disk_over_commit;
+	$os_migrate_live_array = array(
+		'os-migrateLive' => $array
+	);
+	$json = json_encode($os_migrate_live_array);
+
+	$openstack_rest_api = "{$nova_endpoint}/servers/{$server_id}/action";
+	$curl_cmd = create_openstack_operation_request(OP_POST, $openstack_rest_api, $auth_token, $json);
+	$response = perform_curl_operation($curl_cmd, "SERVER LIVE MIGRATION");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		return json_encode($response);
+	}
+	return prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response);
+}
+
+/*
+ * {
+ * "evacuate": {
+ * "host": "b419863b7d814906a68fb31703c0dbd6",
+ * "adminPass": "MySecretPass",
+ * "onSharedStorage": "False"
+ * }
+ * }
+ */
+function _nova_os_evacuate($nova_endpoint, $auth_token, $server_id, $host)
+{
+	$array = array();
+	$array['onSharedStorage'] = "False";
+	$os_evacuate_array = array(
+		'evacuate' => $array
+	);
+	$json = json_encode($os_evacuate_array);
+
+	$openstack_rest_api = "{$nova_endpoint}/servers/{$server_id}/action";
+	$curl_cmd = create_openstack_operation_request(OP_POST, $openstack_rest_api, $auth_token, $json);
+	$response = perform_curl_operation($curl_cmd, "SERVER EVACUATE");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		return json_encode($response);
+	}
+
+	return  prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response);
+}
+
+
+/**
+* GET VIM hosts list (hypervisors).
+*
+* curl --tlsv1.2 -i -sw 'HTTP_CODE=%{http_code}' --connect-timeout 50 --max-time 50 -X GET -H "X-Auth-Token: gAAAAABdel44SS-FrqBKUdIEthbnsIH-R9cXfO307WcU3bz47fjJw1rxqLdaN4P08uw9U9P1UcB-9Qg-NAk3_FvmXD71tHmyyWYje-m2D1GFxF5WtuGZ3S0n7TsbkeIBLOoJt6bUQ45O0X9qrq9CAJtBWBoDr-SvKMrIup0nAOvlt0e09h_UINo" -H "Content-Type: application/json" -k 'http://xxxxxxxxx:8774/v2.1/os-hypervisors'
+*
+**/
+function _nova_os_hypervisors($nova_endpoint, $auth_token)
+{
+	$openstack_rest_api = "{$nova_endpoint}/os-hypervisors";
+	$curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+	$response = perform_curl_operation($curl_cmd, "GET OS HYPERVISORS");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		return json_encode($response);
+	}
+	return prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+}
+
+
+	/**
+* GET VIM hosts list (hypervisors).
+*
+* curl --tlsv1.2 -i -sw 'HTTP_CODE=%{http_code}' --connect-timeout 50 --max-time 50 -X GET -H "X-Auth-Token: gAAAAABdel44SS-FrqBKUdIEthbnsIH-R9cXfO307WcU3bz47fjJw1rxqLdaN4P08uw9U9P1UcB-9Qg-NAk3_FvmXD71tHmyyWYje-m2D1GFxF5WtuGZ3S0n7TsbkeIBLOoJt6bUQ45O0X9qrq9CAJtBWBoDr-SvKMrIup0nAOvlt0e09h_UINo" -H "Content-Type: application/json" -k 'http://xxxxxxxxx:8774/v2.1/os-hypervisors'
+*
+**/
+function _nova_os_hypervisors_list_detail($nova_endpoint, $auth_token)
+{
+	$openstack_rest_api = "{$nova_endpoint}/os-hypervisors/detail";
+	$curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+	$response = perform_curl_operation($curl_cmd, "GET OS HYPERVISORS DETAIL");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		return json_encode($response);
+	}
+	return prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+}
+
+
+/**
+* GET VIM host details by ID.
+*
+* curl --tlsv1.2 -i -sw 'HTTP_CODE=%{http_code}' --connect-timeout 50 --max-time 50 -X GET -H "X-Auth-Token: gAAAAABdel44SS-FrqBKUdIEthbnsIH-R9cXfO307WcU3bz47fjJw1rxqLdaN4P08uw9U9P1UcB-9Qg-NAk3_FvmXD71tHmyyWYje-m2D1GFxF5WtuGZ3S0n7TsbkeIBLOoJt6bUQ45O0X9qrq9CAJtBWBoDr-SvKMrIup0nAOvlt0e09h_UINo" -H "Content-Type: application/json" -k 'http://xxxxxxxxx:8774/v2.1/os-hypervisors/8'
+*
+**/
+function _nova_os_hypervisor_details_by_id($nova_endpoint, $auth_token, $hypervisor_id)
+{
+	$openstack_rest_api = "{$nova_endpoint}/os-hypervisors/{$hypervisor_id}";
+	$curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+	$response = perform_curl_operation($curl_cmd, "GET OS HYPERVISORS DETAILS");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		return json_encode($response);
+	}
+	return prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']);
+}
+
+

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <allowLaunchOnFailedProcess>true</allowLaunchOnFailedProcess>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Device Data File</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Device" displayOrder="4" isMandatory="true" maxLength="100" name="params.device" startIncrement="0" type="Device">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="User" displayOrder="5" isMandatory="true" maxLength="100" name="params.user" startIncrement="0" type="String">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="Src File" displayOrder="7" isMandatory="true" maxLength="100" name="params.src_file" startIncrement="0" type="String">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="Dst File Path" displayOrder="8" isMandatory="true" maxLength="100" name="params.dst_file" startIncrement="0" type="String">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="File To Delete" displayOrder="11" maxLength="100" name="params.file_to_delete" startIncrement="0" type="String">
+      <sections>
+        <section>Deletion</section>
+      </sections>
+    </variable>
+    <variable displayName="Password" displayOrder="29" isMandatory="true" maxLength="100" name="params.password" startIncrement="0" type="Password">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="Device Ip" displayOrder="41" isUserLocked="true" maxLength="100" name="params.device_ip" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>Sending</section>
+      </sections>
+    </variable>
+    <variable displayName="File" displayOrder="56" isUserLocked="true" maxLength="100" name="params.file" startIncrement="0" type="String">
+      <sections>
+        <section>Sening</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/Reference/Device_Data_File/Process_Send_File">
+    <visibility>5</visibility>
+    <displayName>Send File</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>CREATE</type>
+    
+    
+    
+  <task name="Task_File_Found.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Send_File/Tasks/</processPath>
+      <displayName>File Found</displayName>
+    </task>
+    <task name="Task_File_Sent.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Send_File/Tasks/</processPath>
+      <displayName>File Sent</displayName>
+    </task>
+  </process>
+  <process name="Process/Reference/Device_Data_File/Process_Update">
+    <visibility>5</visibility>
+    <displayName>Update</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  
+    
+    
+  <task name="Task_File_Found.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Update/Tasks/</processPath>
+      <displayName>File Found</displayName>
+    </task>
+    <task name="Task_File_Sent.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Update/Tasks/</processPath>
+      <displayName>File Sent</displayName>
+    </task>
+  </process>
+  <process name="Process/Reference/Device_Data_File/Process_Delete_File">
+    <visibility>5</visibility>
+    <displayName>Delete File</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  <task name="Task_File_Found.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Delete_File/Tasks/</processPath>
+      <displayName>File Found</displayName>
+    </task>
+    <task name="Task_File_Deleted.php">
+      <processPath>/opt/fmc_repository/Process/Reference/Device_Data_File/Process_Delete_File/Tasks/</processPath>
+      <displayName>File Deleted</displayName>
+    </task>
+  </process>
+  <process name="Process/Reference/Device_Data_File/Process_Delete_The_Instance">
+    <visibility>5</visibility>
+    <displayName>Delete The Instance</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

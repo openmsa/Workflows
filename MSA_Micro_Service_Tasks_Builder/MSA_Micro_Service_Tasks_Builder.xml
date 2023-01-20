@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>SERVICEINSTANCEREFERENCE</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>MSA Operator</group>
+    <icon>/images/repository/CommandDefinition/icons/web cluster.jpg</icon>
+    <name>MSA Micro service Tasks Buider</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>true</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable default="FORTINET/FortigateWAF/ECL2.0/Networking/Interface.xml" cols="100" displayName="Micro Service Path" displayOrder="0" maxLength="100" name="params.msa_micro_service_path" isMandatory="true" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Micro Service</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/MSA_Micro_Service_Tasks_Builder/Process_Create_Micro_Service_Tasks">
+    <icon/>
+    <visibility>3</visibility>
+    <displayName>Create MSA Micro service Tasks</displayName>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/MSA_Micro_Service_Tasks_Builder/Process_Create_Micro_Service_Tasks/Tasks/MSA/Task_create_msa_workflow_tasks_for_micro_services.php">
+      <processPath/>
+      <displayName>Create MSA Micro service Tasks</displayName>
+    </task>
+  </process>
+  <process name="Process/MSA_Micro_Service_Tasks_Builder/Process_Refresh_Micro_Service_Tasks/">
+    <icon/>
+    <visibility>3</visibility>
+    <displayName>Refresh MSA Micro service Tasks</displayName>
+    <type>UPDATE</type>
+    <task name="/opt/fmc_repository/Process/MSA_Micro_Service_Tasks_Builder/Process_Create_Micro_Service_Tasks/Tasks/MSA/Task_create_msa_workflow_tasks_for_micro_services.php">
+      <processPath/>
+      <displayName>Refresh MSA Micro service Tasks</displayName>
+    </task>
+  </process>
+  <process name="Process/MSA_Micro_Service_Tasks_Builder/Process_Delete_Workflow_Instance">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

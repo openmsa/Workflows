@@ -58,8 +58,12 @@ function msa_micro_service_variables_to_workflow_variables ($micro_service_uri) 
 	$micro_service_variables = $object_definition->ObjectDefinition->variables;
 	*/
 	
-	$xml = simplexml_load_file(MICRO_SERVICES_HOME_DIR . $micro_service_uri);
-	$micro_service_defition = json_decode(json_encode($xml), true);
+	if (preg_match("/^CommandDefinition/", $micro_service_uri, $match)){
+  		$xml = simplexml_load_file(FMC_REPOSITORY_DIRECTORY . $micro_service_uri);
+	}else{
+  		$xml = simplexml_load_file(MICRO_SERVICES_HOME_DIR . $micro_service_uri);
+	}	
+    $micro_service_defition = json_decode(json_encode($xml), true);
 	$variables = $micro_service_defition['variables']['variable'];
 	
 	$micro_service_variables = array();
@@ -408,7 +412,11 @@ function msa_micro_service_variables_to_workflow_variables_with_mapping ($micro_
 
 function msa_micro_service_information_to_workflow_variables ($micro_service_uri) {
     $micro_service_information = array();
-    $xml = simplexml_load_file(MICRO_SERVICES_HOME_DIR . $micro_service_uri);
+    if (preg_match("/^CommandDefinition/", $micro_service_uri, $match)){
+  		$xml = simplexml_load_file(FMC_REPOSITORY_DIRECTORY . $micro_service_uri);
+	}else{
+  		$xml = simplexml_load_file(MICRO_SERVICES_HOME_DIR . $micro_service_uri);
+	}
     $micro_service_defition = json_decode(json_encode($xml), true);
     $micro_service_information = $micro_service_defition['information'];
 
