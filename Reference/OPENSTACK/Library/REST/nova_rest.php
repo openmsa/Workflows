@@ -159,7 +159,7 @@ function _nova_server_reboot ($nova_endpoint, $auth_token, $server_id, $type = "
 
 #curl -i 'http://xxxxxxxx:8774/v2/e470fd6ea0834192ab05c17930bee22c/servers/-4c52-b39a-547aa79b78ee/action'
 # -X POST -H "Accept: application/json" -H "Content-Type: application/json" -H "User-Agent: python-novaclient" 
-#-H "X-Auth-Project-Id: ntt" -H "X-Auth-Token: {SHA1}63c44718e6d1a25e1d613" -d '{"os-start": null}'
+#-H "X-Auth-Project-Id: " -H "X-Auth-Token: {SHA1}63c44718e6d1a25e1d613" -d '{"os-start": null}'
 function _nova_server_start ($nova_endpoint, $auth_token, $server_id) {
 
 	$array = array();
@@ -284,7 +284,7 @@ function _nova_interface_detach ($nova_endpoint, $auth_token, $server_id, $port_
 }
 
 #curl -i 'http://xxxxxxxxx:8774/v2/6d488644b84bd57fca22fb02587/servers/f3e-4e2b-ae89-48f7b5c2d821/action' -X POST 
-#-H "Accept: application/json" -H "Content-Type: application/json" -H "User-Agent: python-novaclient" -H "X-Auth-Project-Id: NTTCom" 
+#-H "Accept: application/json" -H "Content-Type: application/json" -H "User-Agent: python-novaclient" -H "X-Auth-Project-Id:  " 
 #-H "X-Auth-Token: {SHA1}930b0e7bd37c17ab078887da0a64dd4" -d '{"os-getVNCConsole": {"type": "novnc"}}'
 # <console-type>  Type of vnc console ("novnc" or "xvpvnc").
 function _nova_get_vnc_console ($nova_endpoint, $auth_token, $server_id, $console_type) {
