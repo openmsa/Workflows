@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>Default</group>
+    <icon>/images/repository/CommandDefinition/icons/ServerPool.png</icon>
+    <name>Cirros Heat</name>
+    <order>10000</order>
+    <readVariableVisibility>1</readVariableVisibility>
+    <visibility>0</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName=" VIM ID" displayOrder="0" maxLength="100" name="params.vimid" startIncrement="0" type="Device">
+      <sections>
+        <section>VIM </section>
+      </sections>
+    </variable>
+    <variable displayName=" Stack ID" displayOrder="1" maxLength="100" name="params.stackid" startIncrement="0" type="String">
+      <sections>
+        <section>VIM </section>
+      </sections>
+    </variable>
+    <variable default="demo" displayName=" Stack Name" displayOrder="2" maxLength="100" name="params.stackname" startIncrement="0" type="String">
+      <sections>
+        <section>VIM </section>
+      </sections>
+    </variable>
+    <variable default="http://10.31.1.14/heat/LINUX/simpleCirrosHeat.yaml" displayName=" Stack URL" displayOrder="3" maxLength="100" name="params.stackURL" startIncrement="0" type="String">
+      <sections>
+        <section>VIM </section>
+      </sections>
+    </variable>
+    <variable default="m1.small" displayName=" Flavor" displayOrder="4" maxLength="100" name="params.flavor" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="cirros-0.3.4-x86_64-uec" displayName=" Image" displayOrder="5" maxLength="100" name="params.image" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="private" displayName=" Management Network" displayOrder="6" maxLength="100" name="params.management_network_name" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="public" displayName=" Public Network" displayOrder="7" maxLength="100" name="params.public_net" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="10.0.0.69" displayName=" Private IP " displayOrder="19" maxLength="100" name="params.privateIpVnf" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable displayName=" Customer ID" displayOrder="30" maxLength="100" name="params.customer_id" startIncrement="0" type="Integer">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="cirros_VNF" displayName=" Device Name" displayOrder="31" maxLength="100" name="params.managed_device_name" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="14020601" displayName=" Manufacturer Id" displayOrder="32" maxLength="100" name="params.manufacturer_id" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="14020601" displayName=" Model Id" displayOrder="33" maxLength="100" name="params.model_id" startIncrement="0" type="Integer" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable displayName=" Device IP" displayOrder="34" maxLength="100" name="params.device_ip_address" startIncrement="0" type="String">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="cirros" displayName=" Login" displayOrder="35" maxLength="100" name="params.login" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="cubswin:)" displayName=" Password" displayOrder="36" maxLength="100" name="params.password" startIncrement="0" type="Password" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable default="cubswin:)" displayName=" Password Admin" displayOrder="37" maxLength="100" name="params.password_admin" startIncrement="0" type="Password" visible="false">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+    <variable displayName=" Device ID" displayOrder="40" maxLength="100" name="params.device_id" startIncrement="0" type="Device">
+      <sections>
+        <section>VNF </section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content>repository.uploader.Process.default</content>  </example>
+<process name="Process/Reference/Heat/Process_Deploy">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Deploy</displayName>
+    <type>CREATE</type>
+    
+  <task name="/opt/fmc_repository/Process/Reference/Heat/TaskLaunchStack.php">
+      <processPath/>
+      <displayName>Launch Heat Template</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/Heat/getFloatingIp.php">
+      <processPath/>
+      <displayName>Get Floating IP</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_create.php">
+      <processPath/>
+      <displayName>Create VNF in MSActivator</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_mark_device_as_provisioned.php">
+      <processPath/>
+      <displayName>Provisione VNF</displayName>
+    </task>
+  </process>
+  <process name="Process/Reference/Heat/Process_Undeploy">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Undeploy</displayName>
+    <type>DELETE</type>
+    
+  <task name="/opt/fmc_repository/Process/Reference/Heat/TaskRemoveStack.php">
+      <processPath/>
+      <displayName>Remove Stack</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Reference/MSActivator/Device/Task_msa_device_delete.php">
+      <processPath/>
+      <displayName>Remove VNF</displayName>
+    </task>
+  </process>
+</ObjectDefinition>

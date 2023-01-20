@@ -175,6 +175,7 @@ function _get_variable_by_name($name) {
 	return null;
 }
 
+
 /**
  * Execute a shell command
  * @param unknown $cmd
@@ -542,6 +543,10 @@ function update_asynchronous_task_details($args, $details) {
 	$TASKID = $args['TASKID'];
 	$EXECNUMBER = $args['EXECNUMBER'];
 
+	$details = preg_replace ("/\"/",' ',$details);  //remove " to prevent somme error
+	$details = preg_replace ("/\'/",' ',$details);  //remove ' to prevent somme error
+	$details = preg_replace ("/\(/",' ',$details);  //remove ( to prevent somme error
+	$details = preg_replace ("/\)/",' ',$details);  //remove ) to prevent somme error
 	logToFile("UPDATE PROCESS SCRIPT DETAILS : $PROCESSINSTANCEID $TASKID $EXECNUMBER \"{$details}\"\n");
 	$response = _orchestration_update_process_script_details($PROCESSINSTANCEID, $TASKID, $EXECNUMBER, $details);
 }
