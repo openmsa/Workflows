@@ -14,12 +14,20 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 										$connection_timeout = 60, $max_time = 60) {
 
 	global $CURL_CMD, $context;
-	
-	$HTTP_HOST = "localhost"; // get_vars_value(WEB_NODE_PRIV_IP)"";
-	$HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
+
+	if (isset($context['WEB_NODE_PRIV_IP']) && isset($context['NCROOT_PASSWORD_VARIABLE']) && isset($context['WEB_NODE_HTTP_PORT']) ){
+	//for remote MSA, needed for migration
+	  $HTTP_HOST = $context['WEB_NODE_PRIV_IP']; 
+	  $password  = $context['NCROOT_PASSWORD_VARIABLE'];
+	  $HTTP_PORT = $context['WEB_NODE_HTTP_PORT'];
+	  $remote = 1;
+	}else{
+	  $HTTP_HOST = "localhost"; // get_vars_value(WEB_NODE_PRIV_IP)"";
+	  $password = "ubiqube"; //shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
+	  $HTTP_PORT = "8480";  // get_vars_value(WEB_NODE_HTTP_PORT);
+	  $remote = 0;
+	}	
 	$USERNAME = "ncroot";
-	//$NCROOT_PASSWORD = get_vars_value(NCROOT_PASSWORD_VARIABLE);
-	$password = "ubiqube"; //shell_exec(ENCP_SCRIPT . ' ' . $NCROOT_PASSWORD);
 	$auth_token = $context['TOKEN'];
 
 	if (strpos($msa_rest_api, "?") !== false) {
@@ -46,11 +54,21 @@ function create_msa_operation_request ($operation, $msa_rest_api, $json_body = "
 	if (strpos($json_body, "@") === 0) {
 		$content_type = "*/*";
 	}
-	$curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -H \"Authorization: Bearer $auth_token\" --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
+	if ($remote){
+	  $curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -u {$USERNAME}:\$p --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
+	}else{
+	  $curl_cmd = "{$CURL_CMD} -isw '\nHTTP_CODE=%{http_code}' -H \"Authorization: Bearer $auth_token\" --connect-timeout $connection_timeout --max-time $max_time -H \"Content-Type: {$content_type}\" -X {$operation} {$url}";
+	}
 	if ($json_body !== "") {
 		$curl_cmd .= " -d '" . pretty_print_json($json_body) . "'";
 	}
 	logToFile("Curl Request : $curl_cmd\n");
+	if ($remote){
+	  $curl_cmd = "p=$(" . ENCP_SCRIPT .  " '{$password}');{$curl_cmd}";
+	}
+        logToFile("Curl ecnrypt cmd= ". ENCP_SCRIPT .  " '{$password}'");
+        logToFile("Curl Request FULL: $curl_cmd\n");
+
 	return $curl_cmd;
 }
 
