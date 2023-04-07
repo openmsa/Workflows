@@ -1,0 +1,14 @@
+<ObjectDefinition>
+  <variables frozen="0"/>
+  <example/>
+  <information>
+    <icon/>
+    <description/>
+    <displayField>service_id</displayField>
+    <serviceTaskType>python</serviceTaskType>
+    <order>10000</order>
+    <visibility>5</visibility>
+    <name>Juju Application Management</name>
+    <group/>
+  </information>
+</ObjectDefinition>
