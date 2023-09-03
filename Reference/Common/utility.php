@@ -4,6 +4,7 @@ require_once COMMON_DIR . 'constants.php';
 if (file_exists('/opt/fmc_repository/Process/custom_constants.php')) {
 	include '/opt/fmc_repository/Process/custom_constants.php';
 }
+$hostname = gethostname();
 
 error_reporting(E_ALL | E_STRICT);
 $timezone = 'UTC';
@@ -27,21 +28,28 @@ date_default_timezone_set($timezone);
  * @param string $filename
  */
 function logToFile($msg, $filename = PROCESS_LOGS_FILE) {
-
+	global $hostname;
 	if ($filename === PROCESS_LOGS_FILE) {
 		global $context;
 		if (isset($context['SERVICEINSTANCEID'])) {
 			$filename = PROCESS_LOGS_DIRECTORY . "process-" . $context['SERVICEINSTANCEID'] . ".log";
 		}
 	}
-	
-	$date = date('Y-m-d H:i:s');
-	$to_log = "$date|".$context['PROCESSINSTANCEID']."|$msg";
-    if(strstr($msg, "\n")) {
-        //ending the process specific logs for pretty print json
-        $to_log .= "$date|".$context['PROCESSINSTANCEID']."--|";
-    }
-	file_put_contents($filename, "$to_log\n", FILE_APPEND);
+	$traceId = '';
+	if (array_key_exists('TRACEID', $context)) {
+		$traceId = $context['TRACEID'];
+	}
+	$spanId = '';
+	if (array_key_exists('SPANID', $context)) {
+		$tracId = $context['SPANID'];
+	}
+	$timestamp = new DateTime();
+	$date =  $timestamp->format('c');
+	$key = array_search(__FUNCTION__, array_column(debug_backtrace(), 'function'));
+	$module = debug_backtrace()[$key]['file'];
+	$header = "$date|".$context['PROCESSINSTANCEID']."|$traceId|$spanId|$module|$hostname|DEBUG";
+	$to_log = $header."\n".$msg."\n";
+		file_put_contents($filename, "$to_log\n", FILE_APPEND);
 }
 
 /**
