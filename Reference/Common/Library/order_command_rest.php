@@ -65,7 +65,8 @@ function _order_command_generate_configuration ($device_id, $command_name, $obje
 function _order_command_synchronize ($device_id, $connection_timeout = 300, $max_time = 300) {
 
 	$msa_rest_api = "ordercommand/synchronize/{$device_id}";
-	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, "", $connection_timeout, $max_time);
+	$object_parameters= '{"microServiceUris":[]}';
+	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $object_parameters, $connection_timeout, $max_time);
 	$response = perform_curl_operation($curl_cmd, "SYNCHRONIZE OBJETS");
 	$response = json_decode($response, true);
 	if ($response['wo_status'] !== ENDED) {
