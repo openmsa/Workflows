@@ -657,7 +657,7 @@ function wait_for_ping_status ($ip_address, $process_params, $status_check = STA
  * @param unknown $process_params
  * @return mixed|unknown
  */
-function wait_for_ssh_status ($ip_address, $port_no = SSH_DEFAULT_PORT_NO, $process_params,
+function wait_for_ssh_status($ip_address, $port_no = SSH_DEFAULT_PORT_NO, $process_params = null,
 		$status_check = STATUS_OK, $max_ssh_counts = MAX_SSH_COUNT) {
 
 	$wo_newparams = array();
