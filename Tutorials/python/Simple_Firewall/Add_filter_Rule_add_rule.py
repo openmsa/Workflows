@@ -17,7 +17,7 @@ process_id = context['SERVICEINSTANCEID']
 devices = context['devices']
 for device in devices:  
   # extract the database ID
-  device_db_id = device['id'][-3:]
+  device_db_id = device['id'][3:]
 
   if context['icmp'] == 'true': context['dst_port'] = 'null'
   
