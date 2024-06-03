@@ -185,27 +185,6 @@ function _orchestration_execute_service_by_instance ($ubiqube_id, $service_insta
 }
 
 /**
-	curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/orchestration/service/execute/{ubiqubeId}?serviceName={serviceName}&processName={processName} -d '
-	{
-		"var1": "val1",
-		"var2": "val2"
-	}
-	'
- */
-function _orchestration_launch_sub_process ($ubiqube_id, $service_instance, $service_name, $process_name, $json_body = "{}") {
-	$msa_rest_api = "orchestration/subprocess/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}&serviceInstance={$service_instance}";
-	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
-	$response = perform_curl_operation($curl_cmd, "EXECUTE SERVICE");
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		return $response;
-	}
-	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
-	return $response;
-}
-
-/**
  * curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/orchestration/service/execute/{externalReference}/{serviceExternalReference}?serviceName={serviceName}&processName={processName} -d '
  * {
  *   "var1": "val1",

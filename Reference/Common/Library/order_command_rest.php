@@ -77,34 +77,6 @@ function _order_command_synchronize ($device_id, $connection_timeout = 300, $max
 	return $response;
 }
 
-
-function _obmf_create($message,$deviceId){
-	return _obmf_exec($message,$deviceId,"CREATE");
-}
-
-function _obmf_delete($message,$deviceId){
-	return _obmf_exec($message,$deviceId,"DELETE");
-}
-
-function _obmf_update($message,$deviceId){
-	return _obmf_exec($message,$deviceId,"UPDATE");
-}
-
-function _obmf_import($message,$deviceId){
-	return _obmf_exec($message,$deviceId,"IMPORT");
-}
-
-function _obmf_exec($message,$deviceId,$method){
-	$jsonFile='/tmp/'.rand().'.json';
-	shell_exec('echo  '.json_encode($message).' > '.$jsonFile);
-	$cmd="/opt/ubi-jentreprise/bin/api/ordercommand/executeCommand.sh ".$deviceId." ".$method." ".$jsonFile;
-	logToFile("[OBMF_EXEC]".$cmd);
-	$res=shell_exec($cmd);
-	logToFile("[OBMF_EXEC]".$res);
-	shell_exec('rm -f '.$jsonFile);
-	return $res;
-}
-
 /**
  *
 <pre>
