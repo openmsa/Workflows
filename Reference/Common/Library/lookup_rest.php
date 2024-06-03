@@ -93,22 +93,5 @@ function _lookup_list_operator_ids ($manager_id) {
 	return $response;
 }
 
-/**
- * List SecEngine Nodes
- *
- * curl -u ncroot:ubiqube  -XGET http://localhost:10080/ubi-api-rest/lookup/sec_nodes
- */
-function _lookup_list_sec_nodes () {
-	$msa_rest_api = "lookup/sec_nodes";
-	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
-	$response = perform_curl_operation($curl_cmd, "LIST SEC NODES");
-	$response = json_decode($response, true);
-	if ($response['wo_status'] !== ENDED) {
-		$response = json_encode($response);
-		return $response;
-	}
-	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
-	return $response;
-}
 
 ?>
