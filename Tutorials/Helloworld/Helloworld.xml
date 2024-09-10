@@ -1,6 +1,6 @@
 <ObjectDefinition>
   <variables frozen="0">
-    <variable displayName="Name" name="params.name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Name" name="params.name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="true" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example/>
   <process name="Process/Helloworld/Process_create_instance">
@@ -12,6 +12,7 @@
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_create_instance</processPath>
       <displayName>init</displayName>
     </task>
+    <processConstraintsPath/>
   </process>
   <process name="Process/Helloworld/Process_delete_instance">
     <displayName>delete instance</displayName>
@@ -22,6 +23,7 @@
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_delete_instance/Tasks/</processPath>
       <displayName>delete</displayName>
     </task>
+    <processConstraintsPath/>
   </process>
   <process name="Process/Helloworld/Process_print_message">
     <displayName>print message</displayName>
@@ -32,6 +34,7 @@
       <processPath>/opt/fmc_repository/Process/Helloworld/Process_print_message/Tasks/</processPath>
       <displayName>print</displayName>
     </task>
+    <processConstraintsPath/>
   </process>
   <process name="Process/Tutorials/Helloworld/Process_update_Name">
     <displayName>update Name</displayName>
@@ -42,14 +45,17 @@
       <processPath>/opt/fmc_repository/Process/Tutorials/Helloworld/Process_update_Name/Tasks</processPath>
       <displayName>update</displayName>
     </task>
+    <processConstraintsPath/>
   </process>
   <information>
     <icon>/images/eclipseIcons/page_obj.gif</icon>
     <description/>
     <displayField>service_id</displayField>
-    <serviceTaskType>php</serviceTaskType>
     <order>10000</order>
     <visibility>5</visibility>
+    <wfConstraintsPath></wfConstraintsPath>
+    <serviceTaskType>php</serviceTaskType>
+    <processToAssociateToTrashIcon>delete instance</processToAssociateToTrashIcon>
     <name>Helloworld</name>
     <group>tutorial</group>
   </information>
