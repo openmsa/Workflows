@@ -14,7 +14,7 @@ use Aws\Ec2\Ec2Client;
  */
 function list_args()
 {
-  create_var_def('AwsDeviceId', 'Device');
+  create_var_def('AwsDeviceId');
 }
 
 check_mandatory_param("AwsDeviceId");
