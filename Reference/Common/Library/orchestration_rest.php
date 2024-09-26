@@ -19,6 +19,24 @@ function _orchestration_list_service_instances ($ubiqube_id) {
 	return $response;
 }
 
+
+/** list_service_instances for MSA in v15_3
+ * curl -u ncroot:ubiqube  -XGET http://localhost:10080/ubi-api-rest/orchestration/{ubiqubeId}/service/instance
+ */
+function _orchestration_list_service_instances_v15_3 ($ubiqube_id) {
+	// $msa_rest_api = "orchestration/{$ubiqube_id}/service/instance";
+	$msa_rest_api = "orchestration/service/instance/{$ubiqube_id}";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "LIST SERVICE INSTANCES");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
 /**
  * curl -u ncroot:ubiqube  -XGET http://localhost:10080/ubi-api-rest/orchestration/{ubiqubeId}/service/instance/{serviceId}
  */
@@ -98,12 +116,38 @@ function _orchestration_update_service_variable ($service_id, $variable_name, $v
 	return $response;
 }
 
+
+/**
+ * curl -u ncroot:ubiqube  -XDELETE http://localhost:10080/ubi-api-rest/orchestration/v1/services/{$service_id}/service-variables/{$variable_name}
+ */
+function _orchestration_delete_service_context_variable ($service_id, $variable_name) {
+  #DELETE GIVEN VARIABLE IN THE CONTEXT FOR GIVENT SERVICE ID. 
+  # Rq one array is store in the context in many variables like tab.niv1.niv2  pour $context['tab']['niv1']['niv2'], so we have to delete all variables names to delete the array.
+	$msa_rest_api = "orchestration/v1/services/{$service_id}/service-variables/{$variable_name}";
+	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "DELETE GIVEN VARIABLE IN CONTEXT FOR GIVENT SERVICE ID");
+	return $response;
+}
+
+
 /**
  * curl -u ncroot:ubiqube  -XDELETE http://localhost:10080/ubi-api-rest/orchestration/{ubiqubeId}/service/instance/{serviceId}
  */
 function _orchestration_delete_service_instance_by_id ($ubiqube_id, $service_id) {
 
 	$msa_rest_api = "orchestration/{$ubiqube_id}/service/instance/{$service_id}";
+	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "DELETE SERVICE INSTANCE BY SERVICE ID");
+	return $response;
+}
+
+
+/** Delete instance in V15.3
+ * curl -u ncroot:ubiqube  -XDELETE http://localhost:10080/ubi-api-rest/orchestration//service/instance/{ubiqubeId}/{serviceId}
+ */
+function _orchestration_delete_service_instance_by_id_v15_3 ($ubiqube_id, $service_id) {
+
+	$msa_rest_api = "orchestration/service/instance/{$ubiqube_id}/{$service_id}";
 	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "DELETE SERVICE INSTANCE BY SERVICE ID");
 	return $response;
@@ -136,7 +180,7 @@ function _orchestration_list_process_instance ($ubiqube_id, $service_name, $proc
  */
 function _orchestration_execute_service ($ubiqube_id, $service_name, $process_name, $json_body = "{}") {
 
-	$msa_rest_api = "orchestration/service/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}";
+	$msa_rest_api = "orchestration/service/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}&serviceInstance=0";
 	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
 	$response = perform_curl_operation($curl_cmd, "EXECUTE SERVICE");
 	$response = json_decode($response, true);
@@ -148,18 +192,26 @@ function _orchestration_execute_service ($ubiqube_id, $service_name, $process_na
 	return $response;
 }
 
+/**
+	curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/orchestration/process/execute/{ubiqubeId}/{serviceId}?processName={processName} -d '
+	{
+		"var1": "val1",
+		"var2": "val2"
+	}
+	'
+ */
 function _orchestration_launch_process_instance ($ubiqube_id, $service_id, $process_name, $json_body = "") {
 
-        $msa_rest_api = "orchestration/process/execute/{$ubiqube_id}/{$service_id}?processName={$process_name}";
-        $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
-        $response = perform_curl_operation($curl_cmd, "LAUNCH PROCESS INSTANCE");
-        $response = json_decode($response, true);
-        if ($response['wo_status'] !== ENDED) {
-                $response = json_encode($response);
-                return $response;
-        }
-        $response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
-        return $response;
+	$msa_rest_api = "orchestration/process/execute/{$ubiqube_id}/{$service_id}?processName={$process_name}";
+	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
+	$response = perform_curl_operation($curl_cmd, "LAUNCH PROCESS INSTANCE");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
 }
 
 
@@ -193,7 +245,7 @@ function _orchestration_execute_service_by_instance ($ubiqube_id, $service_insta
 	'
  */
 function _orchestration_launch_sub_process ($ubiqube_id, $service_instance, $service_name, $process_name, $json_body = "{}") {
-	$msa_rest_api = "orchestration/subprocess/execute/{$ubiqube_id}?serviceName={$service_name}&processName={$process_name}&serviceInstance={$service_instance}";
+	$msa_rest_api = "orchestration/process/execute/{$ubiqube_id}/{$service_instance}?processName={$process_name}";
 	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
 	$response = perform_curl_operation($curl_cmd, "EXECUTE SERVICE");
 	$response = json_decode($response, true);
@@ -303,6 +355,31 @@ function _orchestration_service_detach ($ubiqube_id, $service_uri) {
 	$msa_rest_api = "orchestration/{$ubiqube_id}/service/detach?uri={$service_uri}";
 	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "DETACH SERVICE FROM CUSTOMER");
+	return $response;
+}
+/**
+ * curl -u ncroot:ubiqube  -X POST http://localhost:10080/ubi-api-rest/orchestration/{ubiqubeId}/service/instance/search -d
+ *   {
+ *   "services_to_search":{
+ *   "service_name" : "Process/Reference/Sampe/Firewall",
+ *   "service_name" : "Process/UBI/Test_Management/Test_Management"
+ *   },
+ *   "service_instance_id":"12345",
+ *   "service_external_reference":"MSASID12345",
+ *   "process_instance_id":"1234",
+ *   "service_execution_status":"Running",
+ *   "service_variables":{
+ *   "ipaddress":"1.2.3.4",
+ *  "mask":"255.255.255.0",
+ *   "deviceId":"MSA123"
+ *   }
+ *   }
+ */
+function _orchestration_service_search ($ubiqube_id, $json_body = "{}") {
+
+	$msa_rest_api = "orchestration/{$ubiqube_id}/service/instance/search";
+	$curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api, $json_body);
+	$response = perform_curl_operation($curl_cmd, "RUN WORKFLOW SEARCH");
 	return $response;
 }
 

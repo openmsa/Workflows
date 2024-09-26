@@ -111,4 +111,30 @@ function _lookup_list_sec_nodes () {
 	return $response;
 }
 
+/**
+ * Get SecEngine Node by Device Id
+ *
+ * curl -u ncroot:ubiqube  -XGET http://localhost:10080/ubi-api-rest/lookup/v1/sec-node-by-device-id/{device_id}  
+ *       "ipV6Mask": "64",
+ *        "id": 1,
+ *        "haStatusSecNode": 1,
+ *        "haStatusRepNode": 0,
+ *        "name": "ACS",
+ *        "logAddress": "10.31.1.5",
+ *        "smsAddress": "127.0.0.1",
+ *        "alive": true
+ */
+function _lookup_get_sec_node_by_device_id ($device_id) {
+	$msa_rest_api = "lookup/v1/sec-node-by-device-id/{$device_id}";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "GET SEC NODE BY DEVICE ID");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
 ?>

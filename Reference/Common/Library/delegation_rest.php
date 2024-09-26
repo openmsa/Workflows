@@ -16,6 +16,25 @@ function _delegation_profile_create ($operator_prefix, $name) {
 }
 
 /**
+ * Get the list of delegations for the given operator
+ * 
+ *  //curl -u ncroot:NCROOT_PWD -H 'Accept: application/json' -XGET http://localhost/ubi-api-rest/delegation/v1/operator/prefix/MSA/profile?namePattern=MSAResMgr
+ *
+ */
+function _delegation_profile_read_by_name ($operator_prefix, $delegation_profile_name) {
+
+  if (empty($delegation_profile_name)){
+    //it will return all delegations profiles for the given operator
+    $delegation_profile_name = "*";  
+  }
+  $msa_rest_api = "delegation/v1/operator/prefix/{$operator_prefix}/profile?namePattern={$delegation_profile_name}";
+  $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+  $response = perform_curl_operation($curl_cmd, "GET DELEGATION PROFILE");
+  return $response;
+}
+
+
+/**
  * Delete Delegation Profile by Id
  *
  * curl -u ncroot:NCROOT_PWD  -XDELETE "http://localhost:10080/ubi-api-rest/delegation/{id}"

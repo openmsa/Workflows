@@ -75,6 +75,24 @@ function _manager_read_by_id ($manager_id) {
 }
 
 /**
+ * curl -u ncroot:Ub1qub3  -XGET http://localhost:80/ubi-api-rest/lookup/managers
+ *
+ */
+function _get_all_manager () {
+
+	$msa_rest_api = "lookup/managers";
+	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
+	$response = perform_curl_operation($curl_cmd, "GET ALL MANAGERS");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
+/**
  <pre>
  curl -u ncroot:ubiqube  -X GET http://localhost:8080/ubi-api-rest/user/reference/ADMIN_MAN
  </pre>
@@ -114,15 +132,30 @@ function _manager_read_by_login ($manager_login) {
 
 /**
  * Attach Customers to Manager
- *
+ *    $manager_reference
+ *    $customer_references should be a php array like ["customerReference": "ABC", "customerReference": "XYZ"]
  * curl -u ncroot:ubiqube  -XPUT http://localhost:10080/ubi-api-rest/user/manager/{managerReference}/customers/attach -d '["customerReference": "ABC", "customerReference": "XYZ"]'
  */
 function _manager_attach_customers ($manager_reference, $customer_references) {
-	$msa_rest_api = "user/manager/{$manager_reference}/customers/attach";
-	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api, $customer_references);
-	$response = perform_curl_operation($curl_cmd, "ATTACH CUSTOMERS TO MANAGER");
-	return $response;
+  $msa_rest_api = "user/manager/{$manager_reference}/customers/attach";
+  $json =  '['.json_encode($customer_references).']';
+  $curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api, $json);
+  $response = perform_curl_operation($curl_cmd, "ATTACH CUSTOMERS TO MANAGER");
+  return $response;
 }
+
+
+/**
+ * For the given manager, set the given delegationId to the given customer
+ * curl -u ncroot:ubiqube  -XPUT -XPUT "http://MSA_IP/ubi-api-rest/delegation/{delegationId}/{managerId}/{customerId}" 
+ */
+function _manager_set_delegation_to_customer ($delegationId, $managerId, $customerId) {
+  $msa_rest_api = "delegation/{$delegationId}/{$managerId}/{$customerId}";
+  $curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
+  $response = perform_curl_operation($curl_cmd, "For MANAGER set the delegation for the given customer");
+  return $response;
+}
+
 
 /**
  * Detach Customers from Manager
@@ -148,4 +181,15 @@ function _manager_update_password ($manager_id, $password) {
 	return $response;
 }
 
+/**
+* Update Manager Delegation Profile
+* 
+* curl -X PUT "https://10.30.18.222/user/v1/updateManagerDelegationProfile?managerId=111&delegationProfile=122&callerLogin=ddd" -H "accept: application/json"
+**/
+function _manager_update_delegation_profile ($manager_id, $delegation_profile_id, $caller_login) {
+        $msa_rest_api = "user/v1/updateManagerDelegationProfile?managerId={$manager_id}&delegationProfile={$delegation_profile_id}&callerLogin={$caller_login}";
+        $curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
+        $response = perform_curl_operation($curl_cmd, "UPDATE MANAGER DELEGATION PROFILE");
+        return $response;
+}
 ?>
