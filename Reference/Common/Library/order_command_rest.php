@@ -185,7 +185,7 @@ foreach ($object_names as $object_name) {
  * @return unknown
  */
 function _obmf_get_object_variables($deviceId, $objectName, $objectId, $connection_timeout = 300, $max_time = 300){
-  $msa_rest_api = "ordercommand/objects/{$deviceId}/{$objectName}/{$objectId}";
+  $msa_rest_api = "ordercommand/objects/{$deviceId}/{$objectName}/object?id={$objectId}";
   $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api, "", $connection_timeout, $max_time);
   $response = perform_curl_operation($curl_cmd, "GET OBJECT VARIABLES");
   $response = json_decode($response, true);
