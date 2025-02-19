@@ -121,7 +121,6 @@ lrwxrwxrwx 1 ncuser ncuser  23 Mar 23 08:19 Analytics -> ../OpenMSA_WF/Analytics
 lrwxrwxrwx 1 ncuser ncuser  33 Mar 23 08:19 Ansible_integration -> ../OpenMSA_WF/Ansible_integration
 lrwxrwxrwx 1 ncuser ncuser  29 Mar 23 08:19 BIOS_Automation -> ../OpenMSA_WF/BIOS_Automation
 drwxr-xr-x 5 ncuser ncuser  97 Mar 26 09:41 Helloworld
-lrwxrwxrwx 1 ncuser ncuser  48 Mar 23 08:19 Manage_Device_Conf_Variables -> ../OpenMSA_WF/Utils/Manage_Device_Conf_Variables
 lrwxrwxrwx 1 ncuser ncuser  27 Mar 23 08:19 Private_Cloud -> ../OpenMSA_WF/Private_Cloud
 lrwxrwxrwx 1 ncuser ncuser  26 Mar 23 08:19 Public_Cloud -> ../OpenMSA_WF/Public_Cloud
 drwxr-xr-x 5 ncuser ncuser 110 Mar 23 08:19 PythonReference
