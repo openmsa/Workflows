@@ -4,11 +4,11 @@
       <behaviors>
         <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
           <compositeKey>false</compositeKey>
-          <codeLanguage/>
+          <codeLanguage></codeLanguage>
           <defaultValueLong/>
           <description></description>
-          <displayNameHeader/>
-          <fullDisplayName/>
+          <displayNameHeader></displayNameHeader>
+          <fullDisplayName></fullDisplayName>
           <groupDisplayName></groupDisplayName>
           <groupSeparator></groupSeparator>
           <isGrouped>false</isGrouped>
@@ -17,23 +17,25 @@
           <keepOnImport>false</keepOnImport>
           <mandatoryArray>false</mandatoryArray>
           <onlyDetailView>false</onlyDetailView>
-          <refDeviceIdVar/>
+          <refDeviceIdVar></refDeviceIdVar>
           <refServiceURI></refServiceURI>
           <isSearchable>false</isSearchable>
-          <selector/>
+          <selector></selector>
           <isUniqueGlobal>false</isUniqueGlobal>
         </behaviour>
       </behaviors>
     </variable>
+    <variable displayName="elt2" name="params.devices.0.A.0.elt2" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="6" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="elt1" name="params.devices.0.A.0.elt1" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="Rule ID" name="params.id" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="Firewall rule ID" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
         <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
           <compositeKey>false</compositeKey>
-          <codeLanguage/>
+          <codeLanguage></codeLanguage>
           <defaultValueLong/>
           <description></description>
-          <displayNameHeader/>
-          <fullDisplayName/>
+          <displayNameHeader></displayNameHeader>
+          <fullDisplayName></fullDisplayName>
           <groupDisplayName></groupDisplayName>
           <groupSeparator></groupSeparator>
           <isGrouped>false</isGrouped>
@@ -42,49 +44,49 @@
           <keepOnImport>false</keepOnImport>
           <mandatoryArray>false</mandatoryArray>
           <onlyDetailView>false</onlyDetailView>
-          <refDeviceIdVar/>
+          <refDeviceIdVar></refDeviceIdVar>
           <refServiceURI></refServiceURI>
           <isSearchable>false</isSearchable>
-          <selector/>
+          <selector></selector>
+          <isUniqueGlobal>false</isUniqueGlobal>
+        </behaviour>
+      </behaviors>
+    </variable>
+    <variable displayName="Source IP" name="params.src_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="source IP address to block" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="2.3.4.5" isMandatory="true" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <behaviors>
+        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
+          <compositeKey>false</compositeKey>
+          <codeLanguage></codeLanguage>
+          <defaultValueLong/>
+          <description></description>
+          <displayNameHeader></displayNameHeader>
+          <fullDisplayName></fullDisplayName>
+          <groupDisplayName></groupDisplayName>
+          <groupSeparator></groupSeparator>
+          <isGrouped>false</isGrouped>
+          <increment>0</increment>
+          <isCompositeKey>false</isCompositeKey>
+          <keepOnImport>false</keepOnImport>
+          <mandatoryArray>false</mandatoryArray>
+          <onlyDetailView>false</onlyDetailView>
+          <refDeviceIdVar></refDeviceIdVar>
+          <refServiceURI></refServiceURI>
+          <isSearchable>false</isSearchable>
+          <selector></selector>
           <isUniqueGlobal>false</isUniqueGlobal>
         </behaviour>
       </behaviors>
     </variable>
     <variable displayName="ICMP" name="params.icmp" startIncrement="0" type="Boolean" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" default="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="Source IP" name="params.src_ip" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="source IP address to block" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="1" refServiceURI="" refDeviceIdVar="" keepOnImport="false" editable="true" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" isCompositeKey="false" default="" isMandatory="true" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
-      <behaviors>
-        <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="true" visible="true" maxLength="0" isMandatory="false" isUserLocked="false" selectorValue="" startIncrement="0" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
-          <compositeKey>false</compositeKey>
-          <codeLanguage/>
-          <defaultValueLong/>
-          <description></description>
-          <displayNameHeader/>
-          <fullDisplayName/>
-          <groupDisplayName></groupDisplayName>
-          <groupSeparator></groupSeparator>
-          <isGrouped>false</isGrouped>
-          <increment>0</increment>
-          <isCompositeKey>false</isCompositeKey>
-          <keepOnImport>false</keepOnImport>
-          <mandatoryArray>false</mandatoryArray>
-          <onlyDetailView>false</onlyDetailView>
-          <refDeviceIdVar/>
-          <refServiceURI></refServiceURI>
-          <isSearchable>false</isSearchable>
-          <selector/>
-          <isUniqueGlobal>false</isUniqueGlobal>
-        </behaviour>
-      </behaviors>
-    </variable>
     <variable displayName="Destination port" name="params.dst_port" startIncrement="0" type="Composite" mandatoryArray="false" visible="true" description="Destination port to block" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" selector="params.icmp" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <behaviors>
         <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="false" visible="false" displayName="Destination port" displayOrder="0" maxLength="0" isMandatory="false" isUserLocked="false" name="params.dst_port" selectorValue="true" startIncrement="0" type="String" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
           <compositeKey>false</compositeKey>
-          <codeLanguage/>
+          <codeLanguage></codeLanguage>
           <defaultValueLong/>
           <description></description>
-          <displayNameHeader/>
-          <fullDisplayName/>
+          <displayNameHeader></displayNameHeader>
+          <fullDisplayName></fullDisplayName>
           <groupDisplayName></groupDisplayName>
           <groupSeparator></groupSeparator>
           <isGrouped>false</isGrouped>
@@ -93,19 +95,19 @@
           <keepOnImport>false</keepOnImport>
           <mandatoryArray>false</mandatoryArray>
           <onlyDetailView>false</onlyDetailView>
-          <refDeviceIdVar/>
+          <refDeviceIdVar></refDeviceIdVar>
           <refServiceURI></refServiceURI>
           <isSearchable>false</isSearchable>
-          <selector/>
+          <selector></selector>
           <isUniqueGlobal>false</isUniqueGlobal>
         </behaviour>
         <behaviour arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" editable="false" visible="true" displayName="Destination port" displayOrder="0" maxLength="0" isMandatory="true" isUserLocked="false" name="params.dst_port" selectorValue="false" startIncrement="0" type="String" localVarToFilter="" remoteVarToFilter="" uniqueItemsInDropDownList="false">
           <compositeKey>false</compositeKey>
-          <codeLanguage/>
+          <codeLanguage></codeLanguage>
           <defaultValueLong/>
           <description></description>
-          <displayNameHeader/>
-          <fullDisplayName/>
+          <displayNameHeader></displayNameHeader>
+          <fullDisplayName></fullDisplayName>
           <groupDisplayName></groupDisplayName>
           <groupSeparator></groupSeparator>
           <isGrouped>false</isGrouped>
@@ -114,10 +116,10 @@
           <keepOnImport>false</keepOnImport>
           <mandatoryArray>false</mandatoryArray>
           <onlyDetailView>false</onlyDetailView>
-          <refDeviceIdVar/>
+          <refDeviceIdVar></refDeviceIdVar>
           <refServiceURI></refServiceURI>
           <isSearchable>false</isSearchable>
-          <selector/>
+          <selector></selector>
           <isUniqueGlobal>false</isUniqueGlobal>
         </behaviour>
       </behaviors>
@@ -133,7 +135,7 @@
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>Select Devices</displayName>
     </task>
-    <processConstraintsPath/>
+    <processConstraintsPath></processConstraintsPath>
   </process>
   <process name="Process/Tutorials/python/Simple_Firewall/Add_filter_Rule">
     <displayName>Add Filter Rule</displayName>
@@ -144,7 +146,7 @@
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>add rule</displayName>
     </task>
-    <processConstraintsPath/>
+    <processConstraintsPath></processConstraintsPath>
   </process>
   <process name="Process/Tutorials/python/Simple_Firewall/Delete_Service">
     <displayName>Delete Service</displayName>
@@ -155,7 +157,7 @@
       <processPath>/opt/fmc_repository/Process/Tutorials/python/Simple_Firewall</processPath>
       <displayName>delete service</displayName>
     </task>
-    <processConstraintsPath/>
+    <processConstraintsPath></processConstraintsPath>
   </process>
   <information>
     <icon/>
@@ -163,9 +165,9 @@
     <displayField>service_id</displayField>
     <order>10000</order>
     <visibility>5</visibility>
-    <wfConstraintsPath/>
+    <wfConstraintsPath></wfConstraintsPath>
     <serviceTaskType>python</serviceTaskType>
-    <processToAssociateToTrashIcon/>
+    <processToAssociateToTrashIcon>Delete Service</processToAssociateToTrashIcon>
     <name>Simple Firewall (Python)</name>
     <group>minilab|Firewall</group>
   </information>

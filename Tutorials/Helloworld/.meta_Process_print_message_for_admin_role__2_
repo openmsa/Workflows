@@ -3,25 +3,15 @@
     <map>
         <entry>
             <key>TYPE</key>
-            <value>UPLOAD</value>
+            <value>DIRECTORY</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
             <value>Process</value>
         </entry>
         <entry>
-            <key>TAG</key>
-        </entry>
-        <entry>
-            <key>FILE_TYPE</key>
-            <value>text</value>
-        </entry>
-        <entry>
-            <key>COMMENT</key>
-        </entry>
-        <entry>
             <key>DISPLAYNAME</key>
-            <value>Create_Firewall_Service_Select_Devices.py</value>
+            <value>Process_print_message_for_admin_role__2_</value>
         </entry>
     </map>
 </metadata>

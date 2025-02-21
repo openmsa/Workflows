@@ -3,19 +3,11 @@
     <map>
         <entry>
             <key>TYPE</key>
-            <value>FILE</value>
+            <value>UPLOAD</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
             <value>Process</value>
-        </entry>
-        <entry>
-            <key>MODEL</key>
-            <value>0</value>
-        </entry>
-        <entry>
-            <key>MANUFACTURER</key>
-            <value>0</value>
         </entry>
         <entry>
             <key>FILE_TYPE</key>
@@ -23,7 +15,7 @@
         </entry>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>Simple_Firewall.xml</value>
+            <value>Task_task2.php</value>
         </entry>
     </map>
 </metadata>
