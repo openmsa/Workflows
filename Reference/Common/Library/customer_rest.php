@@ -189,7 +189,7 @@ function _customer_delete_configuration_variable ($customer_reference, $name) {
  */
 function _customer_attach_profile ($customer_reference, $profile_reference) {
 
-	$msa_rest_api = "customer/reference/{$customer_reference}/attach?profile={$profile_reference}";
+	$msa_rest_api = "customer/{$customer_reference}/attach?profile={$profile_reference}";
 	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "ATTACH A PROFILE TO CUSTOMER");
 	return $response;
@@ -202,7 +202,7 @@ function _customer_attach_profile ($customer_reference, $profile_reference) {
  */
 function _customer_detach_profile ($customer_reference, $profile_reference) {
 
-	$msa_rest_api = "customer/reference/{$customer_reference}/detach?profile={$profile_reference}";
+	$msa_rest_api = "customer/{$customer_reference}/detach?profile={$profile_reference}";
 	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "DETACH A PROFILE FROM CUSTOMER");
 	return $response;

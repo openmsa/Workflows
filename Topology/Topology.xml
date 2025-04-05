@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>
+	<information>
+    <description/>
+    <displayField>service_id</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <executionMode>TRANSACTION</executionMode>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Topology</name>
+    <order>10000</order>
+    <poolId>0</poolId>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>true</showVariables>
+    <visibility>5</visibility>
+  </information>
+	<variables frozen="0">
+    <variable default="L3" displayName="view_name" displayOrder="0" maxLength="100" name="params.view_name" startIncrement="0" type="String"/>
+    <variable default="SNMP" displayName="view_type" displayOrder="0" maxLength="100" name="params.view_type" startIncrement="0" type="String"/>
+    <variable displayName="Name" displayOrder="1" maxLength="100" name="params.Nodes.0.name" startIncrement="0" type="String"/>
+    <variable displayName="Node Id" displayOrder="1" maxLength="100" name="params.Nodes.0.object_id" startIncrement="0" type="String"/>
+    <variable displayName="Color" displayOrder="2" maxLength="100" name="params.Nodes.0.color" startIncrement="0" type="String"/>
+    <variable displayName="Description" displayOrder="2" maxLength="100" name="params.Nodes.0.description" startIncrement="0" type="String"/>
+    <variable displayName="X" displayOrder="3" maxLength="100" name="params.Nodes.0.x" onlyDetailView="true" startIncrement="0" type="String"/>
+    <variable displayName="Y" displayOrder="3" maxLength="100" name="params.Nodes.0.y" onlyDetailView="true" startIncrement="0" type="String"/>
+    <variable displayName="Cluster Id" displayOrder="4" maxLength="100" name="params.Nodes.0.cluster_id" startIncrement="0" type="String"/>
+    <variable displayName="Visibility" displayOrder="4" maxLength="100" name="params.Nodes.0.hidden" startIncrement="0" type="String"/>
+    <variable displayName="Image" displayOrder="4" maxLength="100" name="params.Nodes.0.image" startIncrement="0" type="String"/>
+    <variable displayName="Subtype" displayOrder="4" maxLength="100" name="params.Nodes.0.subtype" startIncrement="0" type="String"/>
+    <variable displayName="Primary Key" displayOrder="5" maxLength="100" name="params.Nodes.0.primary_key" startIncrement="0" type="String" visible="false"/>
+  </variables>
+	<example>
+		<content/>
+	</example>
+	<process name="Process/Topology/Process_Create_View">
+		<visibility>5</visibility>
+		<displayName>Create</displayName>
+		<icon/>
+		<allowSchedule>false</allowSchedule>
+		<type>CREATE</type>
+		<task name="Task_Create.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Create_View/Tasks/
+			</processPath>
+			<displayName>Create</displayName>
+		</task>
+		<task name="Task_Manage_New.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Update_View/Tasks/
+			</processPath>
+			<displayName>Manage_New</displayName>
+		</task>
+	<compensation/>
+    <poolId>0</poolId>
+  </process>
+	<process name="Process/Topology/Process_Update_View">
+		<visibility>5</visibility>
+		<displayName>Update</displayName>
+		<icon/>
+		<allowSchedule>false</allowSchedule>
+		<type>UPDATE</type>
+		<task name="Task_Update.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Update_View/Tasks/
+			</processPath>
+			<displayName>Update</displayName>
+		</task>
+		<task name="Task_Manage_New.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Update_View/Tasks/
+			</processPath>
+			<displayName>Manage_New</displayName>
+		</task>
+	<compensation/>
+    <poolId>0</poolId>
+  </process>
+	<process name="Process/Topology/Process_Delete_View">
+		<visibility>5</visibility>
+		<displayName>Delete</displayName>
+		<icon/>
+		<allowSchedule>false</allowSchedule>
+		<type>DELETE</type>
+	<compensation/>
+    <poolId>0</poolId>
+  </process>
+	<process name="Process/Topology/Process_Call_For_Device">
+		<icon/>
+		<visibility>0</visibility>
+		<allowSchedule>false</allowSchedule>
+		<displayName>Device Polling</displayName>
+		<type>UPDATE</type>
+		<task name="Task_Call_For_Device.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Call_For_Device/Tasks/
+			</processPath>
+			<displayName>Call Service</displayName>
+		</task>
+	<compensation/>
+    <poolId>0</poolId>
+  </process>
+	<process name="Process/Topology/Process_Save_View">
+		<icon/>
+		<visibility>0</visibility>
+		<allowSchedule>false</allowSchedule>
+		<displayName>Save</displayName>
+		<type>UPDATE</type>
+		<task name="Task_Save.php">
+			<processPath>/opt/fmc_repository/Process/Topology/Process_Save_View/Tasks/
+			</processPath>
+			<displayName>Save</displayName>
+		</task>
+	<compensation/>
+    <poolId>0</poolId>
+  </process>
+</ObjectDefinition>

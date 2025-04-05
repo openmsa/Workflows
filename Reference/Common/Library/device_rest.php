@@ -70,7 +70,7 @@ function _device_create ($customer_id, $device_name, $manufacturer_id,
 function _device_delete ($device_id) {
 
 	$msa_rest_api = "device/id/{$device_id}";
-	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api, "", 300, 300);  
 	$response = perform_curl_operation($curl_cmd, "DELETE DEVICE BY ID");
 	return $response;
 }
@@ -84,7 +84,7 @@ function _device_delete ($device_id) {
 function _device_delete_by_reference ($device_reference) {
 
 	$msa_rest_api = "device/reference/{$device_reference}";
-	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api);
+	$curl_cmd = create_msa_operation_request(OP_DELETE, $msa_rest_api, "", 300, 300);  
 	$response = perform_curl_operation($curl_cmd, "DELETE DEVICE BY REFERENCE");
 	return $response;
 }
@@ -140,7 +140,9 @@ function _device_read_by_id ($device_id) {
 }
 
 /**
- * curl -u ncroot:ubiqube  -X GET http://localhost:8080/ubi-api-rest/device/reference/DEVICE_REF1234
+ <pre>
+ curl -u ncroot:ubiqube  -X GET http://localhost:8080/ubi-api-rest/device/reference/DEVICE_REF1234
+ </pre>
  *
  * @param unknown $device_reference
  * @return Ambigous <unknown, mixed>
@@ -249,6 +251,11 @@ function _device_set_maintenance_mode ($device_id, $enable = "true") {
  */
   
 function _device_set_maintenance_mode_v15_3 ($device_id, $enable = "true") {
+  if (isset($enable) && ($enable === true|| $enable ==='true' ||  $enable == 1 )){
+    $enable = 'true';  //we should put a string 'true' or 'false' into request, 1 ou 0  don't work
+  }else{
+    $enable = 'false';
+  }
   $msa_rest_api = "device/maintenance/{$device_id}?enable={$enable}";
   $curl_cmd = create_msa_operation_request(OP_POST, $msa_rest_api);
   $response = perform_curl_operation($curl_cmd, "SET DEVICE MAINTENANCE MODE on MSA v15.3");
