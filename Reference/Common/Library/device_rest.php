@@ -195,7 +195,7 @@ function _device_set_hostname_by_id ($device_id, $hostname) {
  * @param  $device_id
  */
 function _device_get_nature_by_id ($device_id) {
-	$msa_rest_api = "device/v1/nature/{$device_id}";
+	$msa_rest_api = "device/v1/nature/device/{$device_id}";
 	$curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
 	$response = perform_curl_operation($curl_cmd, "READ DEVICE NATURE BY ID");
 	$response = json_decode($response, true);
@@ -486,17 +486,6 @@ function _device_update_credentials ($device_id, $login, $password) {
 	return $response;
 }
 
-
-function _device_do_update_firmware ($device_id) {
-	logToFile('[device_rest][do_update_firmware] update firmware on '.$device_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/device/doFirmwareUpdateByDeviceId.sh '.$device_id;
-	logToFile("[device_rest][do_update_firmware]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][do_update_firmware] ".$res);
-	return $res;
-}
-
-
 /**
  * REST endpoint available in MSA NB : Update the firmware by rest
  * Put $option='REST-API' to run the firmware update on the device via rest API. CLI by default 
@@ -511,16 +500,6 @@ function _device_do_update_firmware_rest ($device_id, $option='') {
   $response = perform_curl_operation($curl_cmd, "Run Device FIRMWARE UPDATE");
   return $response;
 } 
-
-
-function _device_check_update_firmware ($device_id) {
-	logToFile('[device_rest][check_update_firmware] update firmware on '.$device_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/device/getFirmwareUpdateStatusByDeviceId.sh '.$device_id;
-	logToFile("[device_rest][check_update_firmware]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][check_update_firmware] ".$res);
-	return $res;
-}
 
 /**
  * REST endpoint available in MSA NB : Get the update firmware status by rest
@@ -537,43 +516,6 @@ function _device_check_update_firmware_rest ($device_id) {
   return $response;
 }
 
-
-function _device_create_configure_variable ($device_id, $variablename, $variablevalue) {
-	logToFile('[device_rest][create_configure_variable] Add variable '.$variablename.' ('.$variablevalue.') to '.$device_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/deviceconfigurationvariable/createConfigurationVariable.sh '.$device_id.' '.$variablename.' '.$variablevalue;
-	logToFile("[device_rest][create_configure_variable]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][create_configure_variable] ".$res);
-	return $res;
-}
-
-function _device_rollback_do_backup ($device_id) {
-	logToFile('[device_rest][rollback_do_backup] Backup device '.$device_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/rollback/doBackup.sh '.$device_id;
-	logToFile("[device_rest][rollback_do_backup]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][rollback_do_backup] ".$res);
-	return $res;
-}
-
-function _device_rollback_list_revision ($device_id) {
-	logToFile('[device_rest][rollback_list_revision] List revision for device '.$device_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/rollback/doListRevisions.sh '.$device_id;
-	logToFile("[device_rest][rollback_list_revision]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][rollback_list_revision] ".$res);
-	return $res;
-}
-
-function _device_rollback_do_restore ($device_id, $revision_id) {
-	logToFile('[device_rest][rollback_do_restore] Restore device '.$device_id.' using revision '.$revision_id);
-	$api_cmd='/opt/ubi-jentreprise/bin/api/rollback/doRestore.sh '.$device_id.' '.$revision_id;
-	logToFile("[device_rest][rollback_do_restore]  -> ".$api_cmd);
-	$res=shell_exec($api_cmd);
-	logToFile("[device_rest][rollback_do_restore] ".$res);
-	return $res;
-}
-
 /**
  * Get devices list  by customer  (customerId integer)
  *
@@ -585,7 +527,7 @@ function _device_rollback_do_restore ($device_id, $revision_id) {
  *     $response
  */
 function _device_get_by_customer ($customerId) {
-    $msa_rest_api = "lookup/v1/customers/{$customerId}/devices";
+    $msa_rest_api = "lookup/v1/customer/{$customerId}/devices";
     $curl_cmd = create_msa_operation_request(OP_GET, $msa_rest_api);
     $response = perform_curl_operation($curl_cmd, "GET DEVICES BY CUSTOMER");
     return $response;
