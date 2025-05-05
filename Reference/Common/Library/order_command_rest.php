@@ -28,6 +28,31 @@ function _order_command_execute ($device_id, $command_name, $object_parameters, 
 }
 
 /**
+ * REST endpoint available in MSA NB
+ * ex:
+ curl -u ncroot:ubiqube -XPUT http://localhost:10080/ubi-api-rest/ordercommand/store/configuration/657/UPDATE -d '{
+ "deviceId": 657,
+ "commandName": "UPDATE",
+ "objectParameters": {
+ "subnet": "mySubnet"
+ }
+ }'
+ */
+function _order_command_store_configuration ($device_id, $command_name, $object_parameters, $connection_timeout = 60, $max_time = 60) {
+	
+	$msa_rest_api = "ordercommand/store/configuration/{$device_id}/{$command_name}";
+	$curl_cmd = create_msa_operation_request(OP_PUT, $msa_rest_api, $object_parameters);
+	$response = perform_curl_operation($curl_cmd, "STORE CONFIGURATION");
+	$response = json_decode($response, true);
+	if ($response['wo_status'] !== ENDED) {
+		$response = json_encode($response);
+		return $response;
+	}
+	$response = prepare_json_response(ENDED, ENDED_SUCCESSFULLY, $response['wo_newparams']['response_body']);
+	return $response;
+}
+
+/**
  <pre>
  curl -u ncroot:ubiqube  -XPOST http://localhost:10080/ubi-api-rest/ordercommand/get/configuration/657/UPDATE -d '{
  "syslogd": {
@@ -62,7 +87,7 @@ function _order_command_generate_configuration ($device_id, $command_name, $obje
  * @param unknown $device_id
  * @return unknown
  */
-function _order_command_synchronize ($device_id, $connection_timeout = 300, $max_time = 300) {
+function _order_command_synchronize ($device_id, $connection_timeout = OBJECTS_SYNCHRONIZATION_CONNECTION_TIMEOUT, $max_time = OBJECTS_SYNCHRONIZATION_MAX_TIME) {
 
 	$msa_rest_api = "ordercommand/synchronize/{$device_id}";
 	$object_parameters= '{"microServiceUris":[]}';

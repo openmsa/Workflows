@@ -1,4 +1,13 @@
 <?php 
+// CURL options
+$OS_CURL_VERBOSE = "-v";
+$OS_CURL_RETRY_COUNT = "--retry 3";
+$OS_CURL_RETRY_DELAY = "--retry-delay 10";
+$OS_CURL_RETRY_MAX_TIME = "--retry-max-time 180";
+define('OS_CURL_MAX_TIME',  120);
+define('OS_CURL_CONNECTION_TIMEOUT', 120);
+define('OS_CURL_MAXIMUM_TIME', 120);
+define('OPENSTACK_TOKEN_ID_EXPIRE_SEC', 300);   // in sec, put one negative value to get a new token for each openstack request
 
 // Keystone Service names
 define('NOVA', 'nova');
@@ -52,15 +61,15 @@ define('VOLUME_ERROR_EXTENDING', 'error_extending');
 
 // Poll Sleep params
 define('SERVER_STATUS_CHECK_SLEEP', 10);
-define('PORT_STATUS_CHECK_SLEEP', 5);
+define('PORT_STATUS_CHECK_SLEEP', 10);
 define('VOLUME_STATUS_CHECK_SLEEP', 10);
 
 // Status Change Timeout
 define('SERVER_STATUS_CHANGE_TIMEOUT', 600);
-define('PORT_STATUS_CHANGE_TIMEOUT', 180);
+define('PORT_STATUS_CHANGE_TIMEOUT', 600);
 define('VOLUME_STATUS_CHANGE_TIMEOUT', 600);
 
 // Status Change Retry Interval
 define('SERVER_STATUS_CHANGE_RETRY_INTERVAL', 180);
 
-?>
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>SERVICEINSTANCEREFERENCE</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group/>
+    <icon>/images/eclipseIcons/page_obj.gif</icon>
+    <name>Cisco_ZTD_Service</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>false</showDetailedServiceInstances>
+    <showProcessExecConsole>false</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>5</visibility>
+  </information>  <variables frozen="0">
+    <variable displayName="Src Ip" displayOrder="1" maxLength="100" name="params.src_ip" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Instantiate</section>
+      </sections>
+    </variable>
+    <variable displayName="Serialnum" displayOrder="2" maxLength="100" name="params.serialnum" startIncrement="0" type="String" visible="false">
+      <sections>
+        <section>Instantiate</section>
+      </sections>
+    </variable>
+    <variable displayName="Hostname" displayOrder="4" maxLength="100" name="params.hostname" onlyDetailView="true" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable displayName="Mgmt Ip" displayOrder="5" maxLength="100" name="params.mgmt_ip" startIncrement="0" type="IpAddress">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable default="255.255.255.255" displayName="Mgmt Mask" displayOrder="6" maxLength="100" name="params.mgmt_mask" startIncrement="0" type="IpMask" visible="false">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable default="false" displayName="Enable Ztd" displayOrder="8" maxLength="100" name="params.enable_ztd" startIncrement="0" type="Boolean">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable displayName="Login" displayOrder="9" maxLength="100" name="params.login" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable displayName="Password" displayOrder="10" maxLength="100" name="params.password" startIncrement="0" type="Password">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable displayName="Password Admin" displayOrder="11" maxLength="100" name="params.password_admin" startIncrement="0" type="Password">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+    <variable displayName="Device Id" displayOrder="12" keepOnImport="true" maxLength="165" name="params.device_id" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Device</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content>
+      <?php?>
+    </content>  </example>
+  <process name="Process/Cisco_ZTD_service/Process_ZTD_Request">
+    <visibility>5</visibility>
+    <displayName>ZTD Request</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>SET</type>
+    <task name="Task_Instantiate.php">
+      <processPath>/opt/fmc_repository/Process/Cisco_ZTD_service/Process_ZTD_Request/Tasks/</processPath>
+      <displayName>Instantiate</displayName>
+    </task>
+  </process>
+<process name="Process/Cisco_ZTD_service/Process_Validate_ZTD">
+    <visibility>5</visibility>
+    <displayName>Validate ZTD</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+  
+  <task name="Task_Verify_Request.php">
+      <processPath>/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Validate_ZTD/Tasks/</processPath>
+      <displayName>Verify Request</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Provision/Tasks/Task_Provision.php">
+      <processPath/>
+      <displayName>Provision</displayName>
+    </task>
+  </process>
+<process name="Process/Cisco_ZTD_service/Process_delete">
+    <visibility>5</visibility>
+    <displayName>delete</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>DELETE</type>
+  <task name="Task_Remove_lock.php">
+      <processPath>/opt/fmc_repository/Process/Cisco_ZTD_service/Process_delete/Tasks/</processPath>
+      <displayName>Remove lock</displayName>
+    </task>
+  </process>
+<process name="Process/Cisco_ZTD_service/Process_Create_Device">
+    <visibility>5</visibility>
+    <displayName>Create Device</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    
+  <task name="Task_Create_MSA_Device.php">
+      <processPath>/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Create_Device/Tasks/</processPath>
+      <displayName>Create MSA Device</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Provision/Tasks/Task_Provision.php">
+      <processPath/>
+      <displayName>Provision</displayName>
+    </task>
+  </process>
+  
+<process name="Process/Cisco_ZTD_service/Process_Enable_ZTD">
+    <visibility>5</visibility>
+    <displayName>Enable ZTD</displayName>
+    <icon/>
+    <allowSchedule>false</allowSchedule>
+    <type>UPDATE</type>
+    <task name="Task_Enable_ZTD.php">
+      <processPath>/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Enable_ZTD/Tasks/</processPath>
+      <displayName>Enable ZTD</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/Cisco_ZTD_service/Process_Provision/Tasks/Task_Provision.php">
+      <processPath/>
+      <displayName>Provision</displayName>
+    </task>
+  </process>
+</ObjectDefinition>

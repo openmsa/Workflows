@@ -2,8 +2,8 @@
 
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/utility.php';
 
-#curl -i -k https://10.1.144.119/v2/abcde/volumes -X POST 
-#-H "X-Auth-Token:42946664fc6e41e392bb7ee51a9160b9" -H "Accept: application/json" 
+#curl -i -k https://xxxxx/v2/abcde/volumes -X POST 
+#-H "X-Auth-Token:yyyyy" -H "Accept: application/json" 
 #-H "Content-Type: application/json" -d '{"volume":{"name":"abc","size":40,
 #"availability_zone":"nova","multiattach":"false","bootable":"fales"}}'
 function _cinder_volume_create ($cinder_endpoint, $auth_token, $name, $size, 
@@ -54,7 +54,7 @@ function _cinder_volume_update ($cinder_endpoint, $auth_token, $volume_id, $name
 	$array = array();
 	$array['name'] = $name;
 	$array['description'] = $description;
-	$array['metadata'] = $metadata;
+        //$array['metadata'] = $metadata;  //optional, prevent error with openstack juno patch
 	$array['tenant_id'] = $tenant_id;
 	
 	$volume_array = array('volume' => $array);
