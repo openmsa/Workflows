@@ -1,0 +1,42 @@
+name: 🚀 Do release.
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version (e.g., 1.2.3)'
+        required: true
+      release_next_version:
+        description: 'Next master version (e.g., 1.2.4)'
+        required: true
+
+jobs:
+  do-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - name: Export workflow inputs to ENV
+        run: |
+          echo "RELEASE_VERSION=${{ github.event.inputs.release_version }}" >> $GITHUB_ENV
+          echo "RELEASE_NEXT_VERSION=${{ github.event.inputs.release_next_version }}" >> $GITHUB_ENV
+
+      - name: Create branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git checkout -b release/${{ github.event.inputs.release_version }}
+          git push origin release/${{ github.event.inputs.release_version }}
+
+      - name: Run after-release.sh if present
+        run: |
+          if [ -f .github/after-release.sh ]; then
+            echo "🐍 Found .github/after-release.sh, running it..."
+            .github/after-release.sh
+          else
+            echo "⚠️ .github/after-release.sh not found, skipping."
+          fi
+
+      
