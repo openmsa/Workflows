@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.MSA_DOCKER_REPO_ACCESS_TOKEN }}
 
       - name: Export workflow inputs to ENV
         run: |
