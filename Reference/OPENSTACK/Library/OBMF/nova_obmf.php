@@ -16,7 +16,7 @@ function _nova_server_create ($device_id, $server_name, $networks,
 	$server_array['key'] = $key;
 	$server_array['config_drive'] = $config_drive;
 	$server_array['user_data'] = $user_data;
-	if ($availability_zone !== "") {
+	if (!empty($availability_zone)) {
 		$array['availability_zone'] = $availability_zone;
 	}
 	if (!empty($security_groups)) {

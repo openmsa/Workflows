@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ObjectDefinition>  <information>
+    <description/>
+    <displayField>SERVICEINSTANCEREFERENCE</displayField>
+    <executionDetailsVisibility>5</executionDetailsVisibility>
+    <group>MSA Operator</group>
+    <icon>/images/repository/CommandDefinition/icons/web cluster.jpg</icon>
+    <name>MSA Template Management</name>
+    <order>10000</order>
+    <readVariableVisibility>5</readVariableVisibility>
+    <showDetailedServiceInstances>true</showDetailedServiceInstances>
+    <showProcessExecConsole>true</showProcessExecConsole>
+    <showVariables>false</showVariables>
+    <visibility>3</visibility>
+  </information>  <variables frozen="0">
+    <variable default="FORTINET/FortigateVA/ECL2.0" cols="200" displayName="Templates Path" displayOrder="0" maxLength="200" name="params.msa_templates_path" isMandatory="true" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Templates</section>
+      </sections>
+    </variable>
+    <variable displayName="Templates" displayOrder="1" isUserLocked="true" maxLength="500" name="params.msa_templates.0.uri" startIncrement="0" type="String">
+      <sections>
+        <section>MSA Templates</section>
+      </sections>
+    </variable>
+    <variable displayName="Customers UBIqube Id" displayOrder="2" isMandatory="true" maxLength="100" name="params.workflow_customers.0.ubiqube_id" startIncrement="0" type="Customer">
+      <sections>
+        <section>MSA Template -> Workflow Customers</section>
+      </sections>
+    </variable>
+  </variables>  <example>    <content/>  </example>
+  <process name="Process/MSA_Template_Management/Process_Create_Workflow">
+    <icon/>
+    <visibility>3</visibility>
+    <displayName>Create MSA Template Workflow</displayName>
+    <type>CREATE</type>
+    <task name="/opt/fmc_repository/Process/MSA_Template_Management/Process_Create_Workflow/Tasks/MSA/Task_import_msa_templates.php">
+      <processPath/>
+      <displayName>Fetch MSA Templates</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/MSA_Template_Management/Process_Create_Workflow/Tasks/MSA/Task_create_msa_workflows_from_msa_templates.php">
+      <processPath/>
+      <displayName>Create MSA Workflow from MSA Templates</displayName>
+    </task>
+  </process>
+  <process name="Process/MSA_Template_Management/Process_Refresh_Workflow">
+    <icon/>
+    <visibility>3</visibility>
+    <displayName>Refresh MSA Template Workflow</displayName>
+    <type>UPDATE</type>
+    <task name="/opt/fmc_repository/Process/MSA_Template_Management/Process_Create_Workflow/Tasks/MSA/Task_import_msa_templates.php">
+      <processPath/>
+      <displayName>Fetch MSA Templates</displayName>
+    </task>
+    <task name="/opt/fmc_repository/Process/MSA_Template_Management/Process_Create_Workflow/Tasks/MSA/Task_create_msa_workflows_from_msa_templates.php">
+      <processPath/>
+      <displayName>Create MSA Workflow from MSA Templates</displayName>
+    </task>
+  </process>
+  <process name="Process/MSA_Template_Management/Process_Clean_Workflow">
+    <icon/>
+    <visibility>3</visibility>
+    <displayName>Clean MSA Template Workflow</displayName>
+    <type>UPDATE</type>
+    <task name="/opt/fmc_repository/Process/MSA_Template_Management/Process_Clean_Workflow/Tasks/MSA/Task_clean_msa_workflows.php">
+      <processPath/>
+      <displayName>Clean MSA Workflow for MSA Templates</displayName>
+    </task>
+  </process>
+  <process name="Process/MSA_Template_Management/Process_Delete_Workflow_Instance">
+    <icon/>
+    <visibility>5</visibility>
+    <displayName>Move To Trash</displayName>
+    <type>DELETE</type>
+  </process>
+</ObjectDefinition>

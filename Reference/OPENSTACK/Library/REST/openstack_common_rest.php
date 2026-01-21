@@ -4,8 +4,9 @@ require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/nova_
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/cinder_rest.php';
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/neutron_rest.php';
 require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/keystone_rest.php';
+require_once '/opt/fmc_repository/Process/Reference/OPENSTACK/Library/REST/glance_rest.php';
 
-#curl -i http://ot1-contrail-int-vip:9696/v2.0/subnets.json -X GET -H "X-Auth-Token: ${TEST_TOKEN}"
+#curl -i http://xxxxxxxxx:9696/v2.0/subnets.json -X GET -H "X-Auth-Token: ${TEST_TOKEN}"
 #-H "Accept: application/json" -H "Content-Type: application/json"
 function object_get ($object_name, $auth_token, $openstack_rest_api) {
 
@@ -20,7 +21,7 @@ function object_get ($object_name, $auth_token, $openstack_rest_api) {
 	return $response;
 }
 
-#curl -i http://ot1-contrail-int-vip:9696/v2.0/networks/12345 -X DELETE -H "X-Auth-Token:
+#curl -i http://xxxxxxxxx:9696/v2.0/networks/12345 -X DELETE -H "X-Auth-Token:
 #${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json"
 function object_delete ($object_name, $auth_token, $openstack_rest_api) {
 
@@ -97,10 +98,18 @@ function wait_for_server_status ($nova_endpoint, $auth_token, $server_id, $statu
 		}
 		if ($server_status === ERROR) {
 			logToFile("SERVER CREATION/ACTION FAILED.");
-			$message = $response['fault']['message'];
-			$code = $response['fault']['code'];
-			$details = $response['fault']['details'];
-			$wo_comment = "Server Status : $server_status\nMessage : $message\nCODE : $code\nDetails: $details";
+			if (isset($response['fault']) && is_array($response['fault']) && isset($response['fault']['message']) && isset($response['fault']['code'])){
+			  $message = $response['fault']['message'];
+			  $code = $response['fault']['code'];
+			  if (isset($response['fault']['details']) && !empty($response['fault']['details'])) {
+			    $details = $response['fault']['details'];
+			  } else {
+			    $details = '';
+			  }
+			  $wo_comment = "Server Status : $server_status\nMessage : $message\nCODE : $code\nDetails: $details";
+			}else{
+			  $wo_comment = "Server Status : $server_status";
+			}
 			$response = prepare_json_response(FAILED, $wo_comment, $wo_newparams, true);
 			return $response;
 		}
@@ -489,7 +498,7 @@ function get_server_interface_details ($auth_token, $nova_endpoint, $neutron_end
 	return $response;
 }
 
-#curl -g -i -X GET http://10.31.1.13:9696/v2.0/ports.json?device_id=fa477dec-b343-4f60-a13d-0fc250d5055e
+#curl -g -i -X GET http://xxxxxxxxx:9696/v2.0/ports.json?device_id=fa477dec-b343-4f60-a13d-0fc250d5055e
 #-H "User-Agent: python-neutronclient" -H "Accept: application/json" -H "X-Auth-Token: {SHA1}74ae9bf825ea9d16061f66518d0b9effa78f0785"
 function router_interface_list ($neutron_endpoint, $auth_token, $router_id) {
 
@@ -570,6 +579,17 @@ function get_port_id_from_subnet_and_ip_address ($auth_token, $neutron_endpoint,
 	return $response;
 }
 
+/**
+*
+* GET subnet ids from network.
+*
+*
+*/
+function get_subnet_ids_from_network($auth_token, $neutron_endpoint, $network)
+{
+	$response = object_get("networks", $auth_token, "{$neutron_endpoint}/v2.0/networks/{$network}");
+	return json_decode($response, true);
+}
 /**
  * Get Subnet details from network and IP address
  *
@@ -781,11 +801,11 @@ function remove_all_router_interfaces ($auth_token, $neutron_endpoint, $router) 
 	$index = 0;
 	foreach ($router_interfaces as $router_interface) {
 
-		$device_owner = $router_interfaces['device_owner'];
+		$device_owner = $router_interface['device_owner'];
 		$device_id = $router_interface['device_id'];
 		if ($device_owner === "network:router_interface" && $device_id === $router) {
-			$response = _neutron_router_interface_delete($neutron_endpoint, $auth_token, $router, $subnet_id);
 			$subnet_id = $router_interface['fixed_ips'][0]['subnet_id'];
+			_neutron_router_interface_delete($neutron_endpoint, $auth_token, $router, $subnet_id);
 			$router_interface_subnets[$index]['subnet_id'] = $subnet_id;
 			$ip_address = $router_interface['fixed_ips'][0]['ip_address'];
 			$subnet_gateway_ips[$index++]['ip_address'] = $ip_address;
@@ -813,7 +833,7 @@ function _list_stacks_resources ($stacks_endpoint, $auth_token, $stack_name, $st
         return $response;
 }
 
-#curl -i http://ct-int-vip:28774/v2/${PJID}/servers/${server_id} -X GET -H "X-Auth-Token:
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/servers/${server_id} -X GET -H "X-Auth-Token:
 #${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json"
 function _nova_get_server_details ($nova_endpoint, $auth_token, $server_id) {
 
@@ -821,6 +841,29 @@ function _nova_get_server_details ($nova_endpoint, $auth_token, $server_id) {
         $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
 
         $response = perform_curl_operation($curl_cmd, "SERVER GET DETAILS");
+        return $response;
+}
+
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/flavors/${flavor_id} -X GET -H "X-Auth-Token:
+#${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json"
+function _nova_get_flavor_details ($nova_endpoint, $auth_token, $flavor_id) {
+
+        $openstack_rest_api = "{$nova_endpoint}/flavors/{$flavor_id}";
+        $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+
+        $response = perform_curl_operation($curl_cmd, "FLAVOR GET DETAILS");
+        return $response;
+}
+
+
+#curl -i http://xxxxxxxxx:28774/v2/${PJID}/flavors/detail -X GET -H "X-Auth-Token:
+#${TEST_TOKEN}" -H "Accept: application/json" -H "Content-Type: application/json"
+function _nova_get_flavors_with_details ($nova_endpoint, $auth_token) {
+
+        $openstack_rest_api = "{$nova_endpoint}/flavors/detail";
+        $curl_cmd = create_openstack_operation_request(OP_GET, $openstack_rest_api, $auth_token);
+
+        $response = perform_curl_operation($curl_cmd, "FLAVORS GET LIST WITH DETAILS");
         return $response;
 }
 
